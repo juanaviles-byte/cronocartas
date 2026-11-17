@@ -1,0 +1,178 @@
+/* Cronocartas — estilos base.
+   Pocas cajas y bordes, jerarquía clara, espacio en blanco, movimiento solo cuando informa. */
+:root {
+  --fondo: #15181d;
+  --fondo-2: #1d2128;
+  --tinta: #f2eee6;
+  --tenue: #9aa3ad;
+  --acento: #e9c46a;
+  --peligro: #e76f51;
+  --ok: #7bc47f;
+  --radio: 10px;
+  --fuente: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", sans-serif;
+}
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body { margin: 0; height: 100%; background: var(--fondo); color: var(--tinta); font-family: var(--fuente); }
+body { overscroll-behavior: none; user-select: none; -webkit-user-select: none; }
+button { font: inherit; color: inherit; cursor: pointer; border: 0; background: none; touch-action: manipulation; }
+button:disabled { opacity: .35; cursor: default; }
+.cargando { display: grid; place-items: center; height: 100dvh; color: var(--tenue); font-size: 1.2rem; }
+
+/* ---------- Botones ---------- */
+.boton-principal, .boton-secundario {
+  min-height: 48px; padding: 0 22px; border-radius: 999px; font-weight: 700; font-size: 1rem;
+}
+.boton-principal { background: var(--acento); color: #1b1b1b; }
+.boton-secundario { background: rgba(255,255,255,.08); }
+.boton-principal.grande, .boton-secundario.grande { min-height: 60px; font-size: 1.15rem; width: 100%; }
+.enlace, .volver { color: var(--tenue); padding: 10px 0; min-height: 44px; }
+.volver { font-size: 1rem; }
+
+/* ---------- Pantallas de menú ---------- */
+.pantalla { max-width: 960px; margin: 0 auto; padding: max(24px, env(safe-area-inset-top)) 24px 40px; min-height: 100dvh; }
+.pantalla h1 { font-size: 2rem; margin: 8px 0 24px; letter-spacing: -.01em; }
+.pantalla h2 { font-size: 1rem; color: var(--tenue); font-weight: 600; text-transform: uppercase; letter-spacing: .08em; margin: 28px 0 12px; }
+.inicio { display: flex; flex-direction: column; justify-content: center; gap: 40px; max-width: 520px; }
+.portada .marca { font-size: clamp(2.6rem, 8vw, 4.2rem); font-weight: 800; letter-spacing: -.03em; line-height: 1; }
+.portada .marca::after { content: ""; display: block; width: 64px; height: 6px; margin-top: 14px; border-radius: 3px;
+  background: linear-gradient(90deg, #B83A26, #B9850F, #2C64A8, #6E43A6, #2B7D52); }
+.portada .lema { color: var(--tenue); font-size: 1.1rem; margin: 14px 0 0; }
+.menu-principal { display: grid; gap: 12px; }
+.pie { display: flex; justify-content: space-between; align-items: center; color: var(--tenue); font-size: .85rem; }
+.opciones { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.opcion { min-width: 120px; min-height: 72px; padding: 12px 18px; border-radius: var(--radio); background: var(--fondo-2);
+  display: flex; flex-direction: column; align-items: flex-start; justify-content: center; text-align: left; }
+.opcion b { font-size: 1.2rem; }
+.opcion span { color: var(--tenue); font-size: .9rem; }
+.opcion.elegida { background: var(--tinta); color: #15181d; }
+.opcion.elegida span { color: #444; }
+.opciones.cursos .opcion { min-width: 88px; }
+.etiqueta { width: 100%; color: var(--tenue); font-size: .9rem; }
+.preparar .boton-principal.grande { margin-top: 36px; max-width: 420px; }
+.nota { color: var(--tenue); }
+
+/* ---------- Cartas ---------- */
+.carta { position: relative; border-radius: var(--radio); overflow: hidden; background: #f7f3ea; color: #1d1d1f; flex: none; }
+.carta .arte svg, .carta .arte img { width: 100%; height: 100%; display: block; object-fit: cover; }
+.carta.comunidad::after { content: "★"; position: absolute; top: 4px; right: 6px; color: var(--acento); text-shadow: 0 1px 2px #000; }
+
+/* mini: mano y mesa. Su alto se define con --ch en cada zona */
+.carta-mini { --ch: 110px; height: var(--ch); width: calc(var(--ch) * .72); font-size: calc(var(--ch) * .085); display: flex; flex-direction: column;
+  box-shadow: 0 2px 8px rgba(0,0,0,.35); transition: transform .15s ease; }
+.carta-mini .arte { height: 52%; background: var(--c); }
+.carta-mini .mini-nombre { padding: .35em .45em 0; font-weight: 700; line-height: 1.1; flex: 1; overflow: hidden; overflow-wrap: anywhere; hyphens: auto; }
+.carta-mini .mini-tipo { padding: 0 .45em .45em; font-size: .8em; color: #666; }
+.carta-mini .mini-vida { padding: 0 .45em .35em; display: flex; align-items: center; gap: .4em; }
+.carta-mini .mini-vida b { font-size: 1.35em; color: var(--c); }
+.carta-mini .barra { flex: 1; height: .45em; border-radius: 1em; background: #ddd; overflow: hidden; }
+.carta-mini .barra span { display: block; height: 100%; background: var(--peligro); }
+.carta-mini .mini-saber { position: absolute; top: .4em; left: .4em; display: flex; gap: .2em; }
+.carta-mini .etapa { position: absolute; top: .4em; right: .4em; background: rgba(0,0,0,.55); color: #fff; border-radius: 1em; padding: 0 .45em; font-weight: 800; }
+.carta-mini .sello { position: absolute; top: 34%; left: 0; right: 0; text-align: center; background: rgba(233,196,106,.95); color: #1b1b1b; font-weight: 800; font-size: .8em; }
+.pip { display: inline-block; width: .7em; height: .7em; border-radius: 50%; background: var(--acento); box-shadow: 0 0 0 .12em rgba(0,0,0,.35); margin-right: .15em; }
+.carta-mini.usable { box-shadow: 0 0 0 3px var(--acento), 0 2px 8px rgba(0,0,0,.35); }
+.carta-mini.usable:active, .carta-mini:active { transform: scale(.96); }
+.dorso { background: repeating-linear-gradient(45deg, #2a3040, #2a3040 6px, #313848 6px, #313848 12px); display: grid; place-items: center; color: rgba(255,255,255,.35); font-weight: 800; }
+
+/* normal y grande: colección y detalle */
+.carta-normal, .carta-grande { display: flex; flex-direction: column; padding: 12px; gap: 8px; }
+.carta-normal { width: 210px; font-size: 13px; }
+.carta-grande { width: min(86vw, 340px); font-size: 15px; max-height: calc(100dvh - 140px); overflow: auto; }
+.carta .cabeza { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.carta .nombre { font-weight: 800; font-size: 1.15em; line-height: 1.15; }
+.carta .res { font-weight: 800; font-size: 1.4em; color: var(--c); white-space: nowrap; }
+.carta .res small { font-size: .5em; color: #777; margin-right: 2px; }
+.carta-normal .arte, .carta-grande .arte { position: relative; aspect-ratio: 16 / 10; border-radius: 8px; overflow: hidden; background: var(--c); }
+.saber-en-mesa { position: absolute; left: 8px; bottom: 8px; }
+.carta .linea { display: flex; gap: 6px; flex-wrap: wrap; }
+.chip { background: var(--c); color: #fff; border-radius: 999px; padding: 2px 10px; font-size: .8em; font-weight: 700; }
+.chip.claro { background: #e6dfd0; color: #333; }
+.acciones { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.acciones li { display: grid; grid-template-columns: auto 1fr auto; gap: 8px; align-items: center; padding: 4px 0; }
+.acciones li b { font-size: 1.25em; }
+.pie-prot { display: flex; justify-content: space-between; color: #555; font-size: .85em; }
+.efecto { margin: 0; font-weight: 600; }
+.dato { margin: 0; color: #333; line-height: 1.35; font-size: .95em; border-left: 3px solid var(--c); padding-left: 8px; }
+.ref { color: #777; font-size: .78em; display: flex; flex-direction: column; gap: 2px; }
+.ref .autor { color: #8a6d1f; font-weight: 700; }
+
+.coleccion .grilla-cartas { display: flex; flex-wrap: wrap; gap: 14px; }
+.titulo-unidad { color: var(--tinta) !important; text-transform: none !important; letter-spacing: 0 !important; font-size: 1.1rem !important; }
+
+/* ---------- Capa de detalle y avisos ---------- */
+.capa { position: fixed; inset: 0; background: rgba(8,10,14,.72); display: grid; place-items: center; z-index: 50; animation: aparecer .15s ease; }
+.capa.girado .panel-carta { transform: rotate(180deg); }
+.panel-carta { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+.panel-carta .botones, .final .botones { display: flex; flex-direction: column; gap: 8px; width: min(86vw, 340px); }
+.aviso-doble { display: flex; flex-direction: column; gap: 4vh; align-items: center; }
+.panel-aviso { background: var(--fondo-2); border-radius: 16px; padding: 18px 22px; max-width: min(92vw, 640px); }
+.panel-aviso.girado { transform: rotate(180deg); }
+.titulo-sabias { color: var(--acento); font-weight: 800; font-size: 1.3rem; margin-bottom: 10px; }
+.sabias-fila { display: flex; gap: 16px; align-items: center; margin-bottom: 14px; }
+.sabias-fila .carta-mini { --ch: 120px; }
+.sabias-texto p { margin: 4px 0; line-height: 1.35; }
+.sabias-texto small { color: var(--tenue); }
+.titulo-final { font-size: 2rem; font-weight: 800; }
+.aprendido ul { padding-left: 18px; margin: 8px 0 16px; color: #cfd5dc; }
+.aprendido li { margin: 4px 0; }
+@keyframes aparecer { from { opacity: 0; } to { opacity: 1; } }
+
+/* ---------- Mesa ---------- */
+.pantalla-mesa { height: 100dvh; overflow: hidden; }
+.mesa { --centro: 52px; height: 100dvh; display: flex; flex-direction: column; background: radial-gradient(ellipse at center, #1f242c 0%, #14171c 70%); }
+.lado { --lado: calc((100dvh - var(--centro)) / 2); height: var(--lado); display: flex; flex-direction: column; padding: 8px 14px; gap: 6px; transition: background .3s; }
+.lado.girado { transform: rotate(180deg); }
+.modo-ia .lado-B, .modo-tutorial .lado-B { flex-direction: column-reverse; }
+.lado.activo-turno { background: rgba(233,196,106,.045); }
+.campo { flex: 0 0 56%; display: flex; align-items: center; gap: 14px; min-height: 0; }
+.zona-activo { position: relative; }
+.zona-activo .carta-mini { --ch: calc(var(--lado) * .52); }
+.zona-activo .hueco, .reserva .hueco { border: 1.5px dashed rgba(255,255,255,.15); border-radius: var(--radio); color: rgba(255,255,255,.25);
+  display: grid; place-items: center; font-size: .8rem; }
+.zona-activo .hueco { height: calc(var(--lado) * .52); width: calc(var(--lado) * .52 * .72); }
+.acciones-activo { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.boton-accion { display: grid; grid-template-columns: auto 1fr auto; gap: 8px; align-items: center; min-height: 44px; padding: 0 12px; border-radius: 10px;
+  background: rgba(255,255,255,.08); text-align: left; font-size: .9rem; max-width: 230px; }
+.boton-accion:not(:disabled) { background: var(--tinta); color: #15181d; }
+.boton-accion b { font-size: 1.05rem; }
+.reserva { display: flex; gap: 8px; margin-left: auto; }
+.reserva .carta-mini { --ch: calc(var(--lado) * .36); }
+.reserva .hueco { height: calc(var(--lado) * .36); width: calc(var(--lado) * .36 * .72); }
+.marcador { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; min-width: 92px; }
+.nombre-jugador { font-weight: 800; }
+.activo-turno .nombre-jugador { color: var(--acento); }
+.hitos { display: flex; gap: 5px; }
+.hitos i { width: 16px; height: 16px; border-radius: 50%; border: 2px solid var(--acento); }
+.hitos i.si { background: var(--acento); }
+.cuentas { color: var(--tenue); font-size: .8rem; }
+.fila-mano { flex: 1; display: flex; align-items: center; gap: 12px; min-height: 0; }
+.mano { flex: 1; display: flex; gap: 6px; overflow-x: auto; overflow-y: hidden; padding: 4px 2px; scrollbar-width: none; }
+.mano .carta-mini { --ch: calc(var(--lado) * .34); }
+.controles { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; min-width: 150px; }
+.pista { color: var(--acento); font-size: .85rem; text-align: right; }
+.pista.suave { color: var(--tenue); max-width: 260px; }
+.centro { height: var(--centro); display: flex; align-items: center; gap: 14px; padding: 0 14px; border-top: 1px solid rgba(255,255,255,.05); border-bottom: 1px solid rgba(255,255,255,.05); }
+.lugar-en-juego { color: var(--tinta); font-weight: 700; font-size: .9rem; min-height: 44px; max-width: 30%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.lugar-en-juego span { color: var(--tenue); font-weight: 400; margin-right: 4px; }
+.aviso-turno { font-weight: 800; color: var(--acento); white-space: nowrap; }
+.registro { flex: 1; color: #cfd5dc; font-size: .9rem; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.registro.nuevo { animation: aparecer .35s ease; }
+.boton-menu { color: var(--tenue); min-height: 44px; padding: 0 12px; }
+.numero-danio { position: absolute; top: 30%; left: 50%; transform: translateX(-50%); font-size: 2rem; font-weight: 900; color: var(--peligro);
+  text-shadow: 0 2px 6px rgba(0,0,0,.6); animation: subir 1.1s ease forwards; pointer-events: none; }
+@keyframes subir { from { opacity: 1; transform: translate(-50%, 0); } to { opacity: 0; transform: translate(-50%, -40px); } }
+.entrenador { position: fixed; left: 50%; top: 8px; transform: translateX(-50%); width: min(92vw, 640px); background: #22303f; border-radius: 12px;
+  padding: 10px 16px; font-size: .95rem; line-height: 1.35; z-index: 20; box-shadow: 0 6px 18px rgba(0,0,0,.35); }
+
+/* Vertical: la mesa se reorganiza un poco */
+@media (orientation: portrait) {
+  .zona-activo .carta-mini { --ch: min(calc(var(--lado) * .4), 30vw); }
+  .zona-activo .hueco { height: min(calc(var(--lado) * .4), 30vw); width: calc(min(calc(var(--lado) * .4), 30vw) * .72); }
+  .reserva .carta-mini { --ch: min(calc(var(--lado) * .24), 15vw); }
+  .reserva .hueco { height: min(calc(var(--lado) * .24), 15vw); width: calc(min(calc(var(--lado) * .24), 15vw) * .72); }
+  .mano .carta-mini { --ch: min(calc(var(--lado) * .3), 20vw); }
+  .boton-accion { max-width: 160px; font-size: .82rem; }
+  .marcador { min-width: 64px; }
+  .controles { min-width: 120px; }
+}
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }

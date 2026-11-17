@@ -105,5 +105,8 @@ export async function cargarCurso(curso, { comunidad = [] } = {}) {
     fetch('data/aula.json').then(r => r.json()),
   ]);
   const extra = comunidad.filter(c => validarCarta(c).length === 0);
-  return { curso, unidades: m.unidades, cartas: [...m.cartas, ...extra], aula: a.cartas };
+  const cartas = [...m.cartas, ...extra];
+  const nombres = new Map(cartas.map(c => [c.id, c.nombre]));
+  for (const c of cartas) if (c.evolucionaDe) c.baseNombre = nombres.get(c.evolucionaDe);
+  return { curso, unidades: m.unidades, cartas, aula: a.cartas };
 }
