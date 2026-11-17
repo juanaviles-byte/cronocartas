@@ -1,6 +1,6 @@
 // Mesa de juego: cara a cara en la misma tablet, contra la tablet o tutorial.
 // Solo dibuja y traduce toques en jugadas; las reglas viven en motor.js.
-import { crearPartida, jugadasValidas, aplicarJugada } from '../motor.js';
+import { crearPartida, jugadasValidas, aplicarJugada, busquedaDe } from '../motor.js';
 import { elegirJugada } from '../ia.js';
 import { armarMazo } from '../mazos.js';
 import { cargarCursoCompleto } from './datos.js';
@@ -209,22 +209,23 @@ export async function montarMesa(contenedor, opciones) {
   // ---------- Toques ----------
   function tocarEnMano(j, entrada) {
     const validas = jugadasValidas(estado).filter(v => v.uid === entrada.uid);
-    const ef = entrada.carta.efecto;
-    if (ef && ef.tipo === 'buscarProtagonista' && validas.some(v => v.tipo === 'jugar')) {
+    const b = busquedaDe(entrada.carta.efecto);
+    if (b && validas.some(v => v.tipo === 'jugar')) {
       // Una búsqueda: primero se muestran las cartas y se elige.
-      return verCarta(entrada.carta, j, [{ texto: 'Jugar esta carta', alElegir: () => elegirBusqueda(j, entrada, ef.n || 3) }]);
+      return verCarta(entrada.carta, j, [{ texto: 'Jugar esta carta', alElegir: () => elegirBusqueda(j, entrada, b) }]);
     }
     verCarta(entrada.carta, j, validas.map(v => ({ jugada: v, texto: textoJugada(v, j) })));
   }
 
-  function elegirBusqueda(j, entrada, n) {
+  function elegirBusqueda(j, entrada, { n, cartaTipo }) {
+    const QUE = { protagonista: 'el Protagonista', lugar: 'el Lugar', acontecimiento: 'el Acontecimiento', cualquiera: 'la carta' };
     const tope = estado.jugadores[j].mazo.slice(0, n);
     const validas = jugadasValidas(estado).filter(v => v.tipo === 'jugar' && v.uid === entrada.uid);
     const capa = h('div', `capa${girado(j) ? ' girado' : ''}`);
     const panel = h('div', 'panel-carta panel-elegir');
     const hayProt = validas.some(v => v.eleccion);
     panel.appendChild(h('div', 'titulo-sabias', `${esc(entrada.carta.nombre)}: las ${tope.length} primeras cartas de tu mazo`));
-    panel.appendChild(h('p', 'nota', hayProt ? 'Toca el Protagonista que quieres llevar a tu mano. Las demás van al fondo del mazo.' : 'No hay Protagonistas entre estas cartas. Vuelven al fondo del mazo.'));
+    panel.appendChild(h('p', 'nota', hayProt ? `Toca ${QUE[cartaTipo]} que quieres llevar a tu mano. Las demás van al fondo del mazo.` : 'No hay ninguna carta de ese tipo entre estas. Vuelven al fondo del mazo.'));
     const fila = h('div', 'elegir-cartas');
     let elegida = null;
     const confirmar = h('button', 'boton-principal', hayProt ? 'Elige una carta' : 'Seguir');
@@ -272,7 +273,10 @@ export async function montarMesa(contenedor, opciones) {
     switch (v.tipo) {
       case 'colocar': return yo.activo ? 'Colocar en la reserva' : 'Colocar como activo';
       case 'bajar': return 'Bajar a la reserva';
-      case 'jugar': return 'Jugar esta carta';
+      case 'jugar': {
+        const r = v.eleccion && yo.reserva.find(x => x.uid === v.eleccion);
+        return r ? `Cambiar tu activo por ${esc(r.carta.nombre)}` : 'Jugar esta carta';
+      }
       case 'evolucionar': {
         const obj = [yo.activo, ...yo.reserva].find(p => p && p.uid === v.objetivo);
         return `Evolucionar ${obj ? esc(obj.carta.nombre) : ''}`;

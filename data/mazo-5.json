@@ -10,24 +10,14 @@
   {
    "id": "CC-5-U1-001",
    "nombre": "Cristóbal Colón",
-   "tipo": "protagonista",
+   "tipo": "personaje",
    "curso": 5,
    "unidad": 1,
-   "dimension": "Territorio",
-   "resistencia": 70,
-   "retirada": 1,
-   "acciones": [
-    {
-     "nombre": "Rumbo al oeste",
-     "costo": 1,
-     "danio": 20
-    },
-    {
-     "nombre": "Tierra a la vista",
-     "costo": 2,
-     "danio": 40
-    }
-   ],
+   "efecto": {
+    "tipo": "buscar",
+    "n": 5,
+    "cartaTipo": "lugar"
+   },
    "dato": "En 1492 llegó a América navegando hacia el oeste, cuando buscaba una nueva ruta hacia Asia.",
    "oa": "OA 1",
    "emblema": "barco"
@@ -35,19 +25,12 @@
   {
    "id": "CC-5-U1-002",
    "nombre": "Hernando de Magallanes",
-   "tipo": "protagonista",
+   "tipo": "personaje",
    "curso": 5,
    "unidad": 1,
-   "dimension": "Territorio",
-   "resistencia": 60,
-   "retirada": 1,
-   "acciones": [
-    {
-     "nombre": "Cruzar el estrecho",
-     "costo": 2,
-     "danio": 40
-    }
-   ],
+   "efecto": {
+    "tipo": "retiroGratis"
+   },
    "dato": "Su expedición (1519-1522) encontró el paso entre el Atlántico y el Pacífico. Juan Sebastián Elcano la terminó.",
    "oa": "OA 1",
    "emblema": "mapa"
@@ -55,24 +38,13 @@
   {
    "id": "CC-5-U1-003",
    "nombre": "Pedro de Valdivia",
-   "tipo": "protagonista",
+   "tipo": "personaje",
    "curso": 5,
    "unidad": 1,
-   "dimension": "Politica",
-   "resistencia": 80,
-   "retirada": 1,
-   "acciones": [
-    {
-     "nombre": "Fundar ciudad",
-     "costo": 1,
-     "danio": 10
-    },
-    {
-     "nombre": "Expedición",
-     "costo": 3,
-     "danio": 60
-    }
-   ],
+   "efecto": {
+    "tipo": "buscarProtagonista",
+    "n": 3
+   },
    "dato": "Fundó Santiago del Nuevo Extremo en 1541, a los pies del cerro Huelén, hoy cerro Santa Lucía.",
    "oa": "OA 2",
    "emblema": "escudo"
@@ -80,19 +52,12 @@
   {
    "id": "CC-5-U1-004",
    "nombre": "Inés de Suárez",
-   "tipo": "protagonista",
+   "tipo": "personaje",
    "curso": 5,
    "unidad": 1,
-   "dimension": "Sociedad",
-   "resistencia": 70,
-   "retirada": 1,
-   "acciones": [
-    {
-     "nombre": "Defender Santiago",
-     "costo": 2,
-     "danio": 40
-    }
-   ],
+   "efecto": {
+    "tipo": "proteger"
+   },
    "dato": "Llegó a Chile con Valdivia y participó en la defensa de Santiago durante el ataque de 1541.",
    "oa": "OA 2",
    "emblema": "casa"
@@ -139,6 +104,51 @@
    "dato": "Desde Sevilla, la Corona española controlaba el comercio y los viajes hacia América.",
    "oa": "OA 3",
    "emblema": "ancla"
+  },
+  {
+   "id": "CC-5-U1-008",
+   "nombre": "Hueste conquistadora",
+   "tipo": "protagonista",
+   "curso": 5,
+   "unidad": 1,
+   "dimension": "Politica",
+   "resistencia": 70,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Expedición",
+     "costo": 1,
+     "danio": 20
+    },
+    {
+     "nombre": "Avanzar",
+     "costo": 2,
+     "danio": 40
+    }
+   ],
+   "dato": "Grupo de soldados y colonos que acompañaba a un conquistador; muchas veces ellos mismos pagaban la expedición.",
+   "oa": "OA 2",
+   "emblema": "escudo"
+  },
+  {
+   "id": "CC-5-U1-009",
+   "nombre": "Pueblo diaguita",
+   "tipo": "protagonista",
+   "curso": 5,
+   "unidad": 1,
+   "dimension": "Cultura",
+   "resistencia": 70,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Cerámica",
+     "costo": 2,
+     "danio": 40
+    }
+   ],
+   "dato": "Pueblo del Norte Chico conocido por su cerámica pintada con figuras geométricas.",
+   "oa": "OA 4",
+   "emblema": "sol"
   },
   {
    "id": "CC-5-U2-001",
@@ -189,19 +199,13 @@
   {
    "id": "CC-5-U2-003",
    "nombre": "Lautaro",
-   "tipo": "protagonista",
+   "tipo": "personaje",
    "curso": 5,
    "unidad": 2,
-   "dimension": "Politica",
-   "resistencia": 70,
-   "retirada": 1,
-   "acciones": [
-    {
-     "nombre": "Estrategia",
-     "costo": 2,
-     "danio": 40
-    }
-   ],
+   "efecto": {
+    "tipo": "bonusDanio",
+    "n": 30
+   },
    "dato": "Joven mapuche que conoció la forma de combatir española y la usó para resistir la Conquista.",
    "oa": "OA 7",
    "emblema": "escudo"

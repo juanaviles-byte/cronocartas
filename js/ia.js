@@ -41,16 +41,23 @@ export function elegirJugada(estado, jugador) {
   const util = deTipo('jugar').find(j => {
     const c = carta(j.uid);
     if (c.tipo === 'lugar') return false;
-    const t = c.efecto?.tipo;
+    const t = (Array.isArray(c.efecto) ? c.efecto[0] : c.efecto)?.tipo;
     if (t === 'curar') return yo.activo.danio >= 20;
+    if (t === 'curarTodos') return [yo.activo, ...yo.reserva].some(p => p.danio >= 20);
+    if (t === 'retiroGratis') return yo.activo.danio * 2 >= yo.activo.carta.resistencia;
     if (t === 'anularLugar') return estado.lugar?.carta.efecto?.dimension === otro.activo?.carta.dimension;
     return true;
   });
   if (util) {
-    // En una búsqueda, toma el Protagonista de mayor valor.
+    // Si hay que elegir: en una búsqueda, la carta de mayor valor; al cambiar de activo, el más sano.
     const opciones = deTipo('jugar').filter(j => j.uid === util.uid && j.eleccion);
     if (opciones.length) {
-      const valor = j => valorBase(yo.mazo.find(c => c.uid === j.eleccion).carta);
+      const valor = j => {
+        const enMazo = yo.mazo.find(c => c.uid === j.eleccion);
+        if (enMazo) return valorBase(enMazo.carta);
+        const r = yo.reserva.find(x => x.uid === j.eleccion);   // cambio de activo: el más sano
+        return r ? r.carta.resistencia - r.danio : 0;
+      };
       return opciones.reduce((m, j) => (valor(j) > valor(m) ? j : m));
     }
     return util;

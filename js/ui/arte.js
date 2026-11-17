@@ -7,6 +7,7 @@ export const COLORES = {
   Sociedad: '#2C64A8',
   Cultura: '#6E43A6',
   Territorio: '#2B7D52',
+  personaje: '#9A5B2E',
   acontecimiento: '#4E5964',
   lugar: '#2F7178',
   aula: '#1D3557',
@@ -45,6 +46,7 @@ const E = {
   estrella: '<path d="M50 16 L59 40 L84 40 L64 55 L72 80 L50 64 L28 80 L36 55 L16 40 L41 40 Z"/>',
   engranaje: '<circle cx="50" cy="50" r="14"/><path d="M50 18 V30 M50 70 V82 M18 50 H30 M70 50 H82 M27 27 L36 36 M64 64 L73 73 M27 73 L36 64 M64 36 L73 27"/><circle cx="50" cy="50" r="24"/>',
   ola: '<path d="M12 46 Q24 34 36 46 T60 46 T84 46"/><path d="M12 60 Q24 48 36 60 T60 60 T84 60"/><path d="M12 74 Q24 62 36 74 T60 74 T84 74"/>',
+  medalla: '<path d="M36 14 L44 40 M64 14 L56 40"/><circle cx="50" cy="60" r="22"/><path d="M50 48 L54 57 L63 58 L56 64 L58 73 L50 68 L42 73 L44 64 L37 58 L46 57 Z"/>',
   ancla: '<circle cx="50" cy="24" r="7"/><path d="M50 31 V80 M36 42 H64"/><path d="M22 60 Q26 80 50 80 Q74 80 78 60"/>',
 };
 
@@ -57,6 +59,7 @@ export const TEMAS = {
   Sociedad:       { base: '#2C64A8', claro: '#B9D3F2', oscuro: '#173E6E', papel: '#EAF2FC', icono: 'personas' },
   Cultura:        { base: '#7344B0', claro: '#D6C3F0', oscuro: '#45246F', papel: '#F3EDFB', icono: 'pluma' },
   Territorio:     { base: '#2B8152', claro: '#B5E0C4', oscuro: '#16502F', papel: '#E8F6EC', icono: 'montana' },
+  personaje:      { base: '#9A5B2E', claro: '#EBC9A3', oscuro: '#5A3216', papel: '#FBF0E4', icono: 'medalla' },
   acontecimiento: { base: '#56626E', claro: '#CDD5DC', oscuro: '#2E363E', papel: '#F1F4F6', icono: 'pergamino' },
   lugar:          { base: '#23807F', claro: '#B2E3E0', oscuro: '#11504F', papel: '#E6F6F5', icono: 'mapa' },
   aula:           { base: '#1D3557', claro: '#E9C46A', oscuro: '#0F1E33', papel: '#F6F1E3', icono: 'libro' },

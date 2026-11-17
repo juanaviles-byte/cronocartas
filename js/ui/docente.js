@@ -134,8 +134,8 @@ export async function vistaDocente({ volver }) {
         const cs = d.cartas.filter(x => x.unidad === i + 1);
         const oas = [...new Set(cs.map(x => x.oa))].sort((a, b) => parseInt(a.slice(3)) - parseInt(b.slice(3)));
         const dims = [...new Set(cs.filter(x => x.dimension).map(x => NOMBRE_DIMENSION[x.dimension]))];
-        const tipos = ['protagonista', 'acontecimiento', 'lugar'].map(tp => cs.filter(x => x.tipo === tp).length);
-        tb.appendChild(h('tr', '', `<td><b>U${i + 1}</b> ${esc(u)}</td><td>${tipos[0]} prot. · ${tipos[1]} acont. · ${tipos[2]} lugar</td><td>${oas.join(', ')}</td><td>${dims.join(', ')}</td>`));
+        const tipos = ['protagonista', 'personaje', 'acontecimiento', 'lugar'].map(tp => cs.filter(x => x.tipo === tp).length);
+        tb.appendChild(h('tr', '', `<td><b>U${i + 1}</b> ${esc(u)}</td><td>${tipos[0]} prot. · ${tipos[1]} pers. · ${tipos[2]} acont. · ${tipos[3]} lugar</td><td>${esc(oas.join(', '))}</td><td>${esc(dims.join(', '))}</td>`));
       });
       t.appendChild(tb);
       sec.appendChild(t);

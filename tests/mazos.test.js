@@ -43,13 +43,13 @@ test('validarCarta detecta dimensión mal escrita', () => {
   assert.ok(validarCarta(c).length > 0);
 });
 
-test('armarMazo devuelve 20 con la proporción 12/4/2/2', () => {
-  assert.deepEqual(COMPOSICION, { protagonista: 12, acontecimiento: 4, lugar: 2, aula: 2 });
+test('armarMazo devuelve 20 con la proporción 11/3/3/1/2', () => {
+  assert.deepEqual(COMPOSICION, { protagonista: 11, personaje: 3, acontecimiento: 3, lugar: 1, aula: 2 });
   for (const m of CURSOS) for (let s = 1; s <= 20; s++) {
     const mazo = armarMazo(m.cartas, AULA, crearRng(s));
     assert.equal(mazo.length, 20);
     const n = t => mazo.filter(c => c.tipo === t).length;
-    assert.deepEqual([n('protagonista'), n('acontecimiento'), n('lugar'), n('aula')], [12, 4, 2, 2]);
+    assert.deepEqual([n('protagonista'), n('personaje'), n('acontecimiento'), n('lugar'), n('aula')], [11, 3, 3, 1, 2]);
   }
 });
 
@@ -86,5 +86,25 @@ test('200 partidas IA vs IA por curso con mazos reales terminan', () => {
       g[e.ganador]++;
     }
     assert.ok(g.A >= 60 && g.B >= 60, `equilibrio curso ${m.curso}: ${JSON.stringify(g)}`);
+  }
+});
+
+test('cada curso tiene al menos 3 Personajes con efecto válido y al menos 12 Protagonistas', () => {
+  for (const m of CURSOS) {
+    const pj = m.cartas.filter(c => c.tipo === 'personaje');
+    assert.ok(pj.length >= 3, `personajes ${m.curso}`);
+    assert.ok(m.cartas.filter(c => c.tipo === 'protagonista').length >= 12, `protagonistas ${m.curso}`);
+    for (const c of pj) assert.deepEqual(validarCarta(c), [], c.id);
+  }
+});
+
+test('las personas históricas ya no son Protagonistas', () => {
+  const personas = ['Cristóbal Colón', 'Hernando de Magallanes', 'Pedro de Valdivia', 'Inés de Suárez', 'Lautaro', "Bernardo O'Higgins",
+    'José Miguel Carrera', 'Javiera Carrera', 'Andrés Bello', 'Gabriela Mistral', 'Leonardo da Vinci', 'Martín Lutero', 'Bartolomé de las Casas', 'Montesquieu'];
+  const todas = CURSOS.flatMap(m => m.cartas);
+  for (const nombre of personas) {
+    const c = todas.find(x => x.nombre === nombre);
+    assert.ok(c, nombre);
+    assert.equal(c.tipo, 'personaje', nombre);
   }
 });

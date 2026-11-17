@@ -10,24 +10,14 @@
   {
    "id": "CC-8-U1-001",
    "nombre": "Leonardo da Vinci",
-   "tipo": "protagonista",
+   "tipo": "personaje",
    "curso": 8,
    "unidad": 1,
-   "dimension": "Cultura",
-   "resistencia": 80,
-   "retirada": 1,
-   "acciones": [
-    {
-     "nombre": "Bocetos",
-     "costo": 1,
-     "danio": 20
-    },
-    {
-     "nombre": "Genio renacentista",
-     "costo": 3,
-     "danio": 60
-    }
-   ],
+   "efecto": {
+    "tipo": "buscar",
+    "n": 5,
+    "cartaTipo": "cualquiera"
+   },
    "dato": "Artista e inventor del Renacimiento; representa la confianza en la capacidad humana para crear y conocer.",
    "oa": "OA 1",
    "emblema": "pluma"
@@ -35,17 +25,16 @@
   {
    "id": "CC-8-U1-002",
    "nombre": "Martín Lutero",
-   "tipo": "protagonista",
+   "tipo": "personaje",
    "curso": 8,
    "unidad": 1,
-   "dimension": "Sociedad",
-   "resistencia": 70,
-   "retirada": 1,
-   "acciones": [
+   "efecto": [
     {
-     "nombre": "95 tesis",
-     "costo": 2,
-     "danio": 40
+     "tipo": "anularLugar"
+    },
+    {
+     "tipo": "robar",
+     "n": 1
     }
    ],
    "dato": "En 1517 publicó sus 95 tesis criticando a la Iglesia, lo que dio inicio a la Reforma protestante.",
@@ -149,19 +138,13 @@
   {
    "id": "CC-8-U2-001",
    "nombre": "Bartolomé de las Casas",
-   "tipo": "protagonista",
+   "tipo": "personaje",
    "curso": 8,
    "unidad": 2,
-   "dimension": "Sociedad",
-   "resistencia": 80,
-   "retirada": 1,
-   "acciones": [
-    {
-     "nombre": "Denunciar abusos",
-     "costo": 2,
-     "danio": 40
-    }
-   ],
+   "efecto": {
+    "tipo": "curar",
+    "n": 40
+   },
    "dato": "Fraile que denunció los abusos contra los indígenas y defendió su dignidad humana.",
    "oa": "OA 17",
    "emblema": "pluma"
@@ -289,19 +272,12 @@
   {
    "id": "CC-8-U3-001",
    "nombre": "Montesquieu",
-   "tipo": "protagonista",
+   "tipo": "personaje",
    "curso": 8,
    "unidad": 3,
-   "dimension": "Politica",
-   "resistencia": 70,
-   "retirada": 1,
-   "acciones": [
-    {
-     "nombre": "Separar poderes",
-     "costo": 2,
-     "danio": 40
-    }
-   ],
+   "efecto": {
+    "tipo": "moverSaberTodo"
+   },
    "dato": "Propuso separar el poder del Estado en ejecutivo, legislativo y judicial.",
    "oa": "OA 14",
    "emblema": "balanza"

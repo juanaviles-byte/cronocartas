@@ -7,17 +7,24 @@ import { NOMBRE_DIMENSION } from '../mazos.js';
 import { esc, pips } from '../html.js';
 
 const DEBIL_ANTE = Object.fromEntries(Object.entries(VENTAJA).map(([a, b]) => [b, a]));
-const ETIQUETA = { acontecimiento: 'Acontecimiento', lugar: 'Lugar', aula: 'Aula · MBE' };
+const ETIQUETA = { personaje: 'Personaje', acontecimiento: 'Acontecimiento', lugar: 'Lugar', aula: 'Aula · MBE' };
+const NOMBRE_BUSQUEDA = { lugar: 'un Lugar', protagonista: 'un Protagonista', acontecimiento: 'un Acontecimiento', cualquiera: 'la carta que quieras' };
 
 export const nombreDim = d => NOMBRE_DIMENSION[d] || d;
 
 export function textoEfecto(ef) {
   if (!ef) return '';
+  if (Array.isArray(ef)) return ef.map(textoEfecto).join(' Luego, ').replace(/ Luego, (\w)/g, (m, l) => ` Luego, ${l.toLowerCase()}`);
   switch (ef.tipo) {
+    case 'buscar': return `Mira las ${ef.n || 3} primeras cartas de tu mazo y toma ${NOMBRE_BUSQUEDA[ef.cartaTipo] || 'una carta'}. El resto va al fondo.`;
+    case 'retiroGratis': return 'Cambia tu activo por un Protagonista de tu reserva, sin pagar retirada.';
+    case 'saberExtra': return `Tu activo recibe ${ef.n || 1} de Saber extra.`;
+    case 'curarTodos': return `Todos tus Protagonistas recuperan ${ef.n} de resistencia.`;
+    case 'moverSaberTodo': return 'Pasa todo el Saber de un Protagonista de tu reserva a tu activo.';
     case 'robar': return `Roba ${ef.n} carta${ef.n > 1 ? 's' : ''}.`;
     case 'curar': return `Tu activo recupera ${ef.n} de resistencia.`;
     case 'proteger': return 'Tu activo no recibe daño hasta tu próximo turno.';
-    case 'bonusDanio': return `Tu próxima acción hace +${ef.n} de daño.`;
+    case 'bonusDanio': return ef.dimension ? `Si tu activo es de ${nombreDim(ef.dimension)}, su próxima acción hace +${ef.n} de daño.` : `Tu próxima acción hace +${ef.n} de daño.`;
     case 'moverSaber': return 'Pasa 1 de Saber de tu reserva a tu activo.';
     case 'anularLugar': return 'Quita el Lugar en juego.';
     case 'robarPorReserva': return 'Roba 1 carta por cada Protagonista en tu reserva.';

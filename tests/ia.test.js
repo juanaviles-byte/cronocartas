@@ -46,3 +46,15 @@ test('la IA elige en una búsqueda el Protagonista de mayor valor', async () => 
   assert.equal(j.tipo, 'jugar');
   assert.equal(j.eleccion, 'q1');
 });
+
+test('la IA usa el cambio de activo gratis solo si su activo está muy dañado, y elige al más sano', async () => {
+  const { mesa, prot } = await import('./ayudas.js');
+  const pj = { id: 'PJ-M', nombre: 'Magallanes', tipo: 'personaje', efecto: { tipo: 'retiroGratis' }, dato: 'x', emblema: 'barco' };
+  const e = mesa({ activoA: prot('Politica', 80), activoB: prot('Cultura'), reservaA: [prot('Sociedad', 60), prot('Cultura', 100)], manoA: [pj] });
+  e.jugadores.A.saberPendiente = 0;
+  assert.notEqual(elegirJugada(e, 'A').tipo, 'jugar');
+  e.jugadores.A.activo.danio = 60;
+  const j = elegirJugada(e, 'A');
+  assert.equal(j.tipo, 'jugar');
+  assert.equal(j.eleccion, e.jugadores.A.reserva[1].uid);
+});

@@ -56,19 +56,13 @@
   {
    "id": "CC-6-U1-003",
    "nombre": "Bernardo O'Higgins",
-   "tipo": "protagonista",
+   "tipo": "personaje",
    "curso": 6,
    "unidad": 1,
-   "dimension": "Politica",
-   "resistencia": 80,
-   "retirada": 1,
-   "acciones": [
-    {
-     "nombre": "Director Supremo",
-     "costo": 2,
-     "danio": 40
-    }
-   ],
+   "efecto": {
+    "tipo": "saberExtra",
+    "n": 1
+   },
    "dato": "Tras la victoria de Chacabuco, fue Director Supremo de Chile entre 1817 y 1823.",
    "oa": "OA 2",
    "emblema": "estrella"
@@ -76,24 +70,13 @@
   {
    "id": "CC-6-U1-004",
    "nombre": "José Miguel Carrera",
-   "tipo": "protagonista",
+   "tipo": "personaje",
    "curso": 6,
    "unidad": 1,
-   "dimension": "Cultura",
-   "resistencia": 70,
-   "retirada": 1,
-   "acciones": [
-    {
-     "nombre": "Primera bandera",
-     "costo": 1,
-     "danio": 20
-    },
-    {
-     "nombre": "Aurora de Chile",
-     "costo": 2,
-     "danio": 40
-    }
-   ],
+   "efecto": {
+    "tipo": "robar",
+    "n": 2
+   },
    "dato": "En su gobierno se creó una de las primeras banderas nacionales y se publicó la Aurora de Chile (1812).",
    "oa": "OA 2",
    "emblema": "pluma"
@@ -101,19 +84,12 @@
   {
    "id": "CC-6-U1-005",
    "nombre": "Javiera Carrera",
-   "tipo": "protagonista",
+   "tipo": "personaje",
    "curso": 6,
    "unidad": 1,
-   "dimension": "Sociedad",
-   "resistencia": 70,
-   "retirada": 1,
-   "acciones": [
-    {
-     "nombre": "Causa patriota",
-     "costo": 2,
-     "danio": 40
-    }
-   ],
+   "efecto": {
+    "tipo": "robarPorReserva"
+   },
    "dato": "Patriota destacada de la Independencia; según la tradición, bordó una de las primeras banderas chilenas.",
    "oa": "OA 2",
    "emblema": "estrella"
@@ -148,21 +124,35 @@
    "emblema": "montana"
   },
   {
-   "id": "CC-6-U2-001",
-   "nombre": "Andrés Bello",
+   "id": "CC-6-U1-008",
+   "nombre": "Ejército de los Andes",
    "tipo": "protagonista",
    "curso": 6,
-   "unidad": 2,
-   "dimension": "Cultura",
+   "unidad": 1,
+   "dimension": "Territorio",
    "resistencia": 80,
    "retirada": 1,
    "acciones": [
     {
-     "nombre": "Código Civil",
+     "nombre": "Cruce de los Andes",
      "costo": 2,
      "danio": 40
     }
    ],
+   "dato": "Ejército formado en Mendoza por José de San Martín que en 1817 cruzó la cordillera para liberar Chile.",
+   "oa": "OA 2",
+   "emblema": "montana"
+  },
+  {
+   "id": "CC-6-U2-001",
+   "nombre": "Andrés Bello",
+   "tipo": "personaje",
+   "curso": 6,
+   "unidad": 2,
+   "efecto": {
+    "tipo": "robar",
+    "n": 3
+   },
    "dato": "Redactó el Código Civil de Chile y fue el primer rector de la Universidad de Chile (1843).",
    "oa": "OA 4",
    "emblema": "libro"
@@ -283,24 +273,13 @@
   {
    "id": "CC-6-U3-001",
    "nombre": "Gabriela Mistral",
-   "tipo": "protagonista",
+   "tipo": "personaje",
    "curso": 6,
    "unidad": 3,
-   "dimension": "Cultura",
-   "resistencia": 80,
-   "retirada": 1,
-   "acciones": [
-    {
-     "nombre": "Poesía",
-     "costo": 1,
-     "danio": 20
-    },
-    {
-     "nombre": "Premio Nobel",
-     "costo": 3,
-     "danio": 60
-    }
-   ],
+   "efecto": {
+    "tipo": "curarTodos",
+    "n": 20
+   },
    "dato": "Profesora y poeta chilena. En 1945 fue la primera persona latinoamericana en ganar el Nobel de Literatura.",
    "oa": "OA 7",
    "emblema": "pluma"
@@ -469,7 +448,7 @@
    "tipo": "protagonista",
    "curso": 6,
    "unidad": 4,
-   "dimension": "Territorio",
+   "dimension": "Cultura",
    "resistencia": 70,
    "retirada": 1,
    "acciones": [

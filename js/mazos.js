@@ -3,9 +3,19 @@
 import { DIMENSIONES } from './motor.js';
 import { barajar } from './rng.js';
 
-export const COMPOSICION = { protagonista: 12, acontecimiento: 4, lugar: 2, aula: 2 };
-export const TIPOS = ['protagonista', 'acontecimiento', 'lugar', 'aula'];
-export const EFECTOS = ['robar', 'curar', 'proteger', 'bonusDanio', 'moverSaber', 'anularLugar', 'robarPorReserva', 'buscarProtagonista'];
+export const COMPOSICION = { protagonista: 11, personaje: 3, acontecimiento: 3, lugar: 1, aula: 2 };
+export const TIPOS = ['protagonista', 'personaje', 'acontecimiento', 'lugar', 'aula'];
+export const EFECTOS = ['robar', 'curar', 'proteger', 'bonusDanio', 'moverSaber', 'anularLugar', 'robarPorReserva', 'buscarProtagonista',
+  'buscar', 'retiroGratis', 'saberExtra', 'curarTodos', 'moverSaberTodo'];
+const TIPOS_BUSQUEDA = ['protagonista', 'lugar', 'acontecimiento', 'cualquiera'];
+
+function efectoValido(ef) {
+  if (Array.isArray(ef)) return ef.length > 0 && ef.every(efectoValido);
+  if (!ef || !EFECTOS.includes(ef.tipo)) return false;
+  if (ef.tipo === 'buscar' && !TIPOS_BUSQUEDA.includes(ef.cartaTipo)) return false;
+  if (ef.dimension && !DIMENSIONES.includes(ef.dimension)) return false;
+  return true;
+}
 
 export const NOMBRE_DIMENSION = { Politica: 'Política', Economia: 'Economía', Sociedad: 'Sociedad', Cultura: 'Cultura', Territorio: 'Territorio' };
 
@@ -27,8 +37,8 @@ export function validarCarta(c) {
       if (!(a.danio >= 0)) e.push(`${id}: daño inválido`);
     }
   }
-  if (c.tipo === 'acontecimiento' || c.tipo === 'aula') {
-    if (!c.efecto || !EFECTOS.includes(c.efecto.tipo)) e.push(`${id}: efecto desconocido "${c.efecto && c.efecto.tipo}"`);
+  if (c.tipo === 'acontecimiento' || c.tipo === 'aula' || c.tipo === 'personaje') {
+    if (!efectoValido(c.efecto)) e.push(`${id}: efecto desconocido o mal escrito`);
   }
   if (c.tipo === 'lugar') {
     if (!c.efecto || c.efecto.tipo !== 'bonusDimension' || !DIMENSIONES.includes(c.efecto.dimension)) e.push(`${id}: el lugar necesita bonusDimension con una dimensión válida`);
@@ -89,6 +99,7 @@ export function armarMazo(cartas, aula, rng) {
 
   const mazo = [
     ...elegidos,
+    ...tomar(cartas.filter(c => c.tipo === 'personaje'), COMPOSICION.personaje, rng),
     ...tomar(cartas.filter(c => c.tipo === 'acontecimiento'), COMPOSICION.acontecimiento, rng),
     ...tomar(cartas.filter(c => c.tipo === 'lugar'), COMPOSICION.lugar, rng),
     ...tomar(aula, COMPOSICION.aula, rng),

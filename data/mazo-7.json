@@ -273,6 +273,21 @@
    "emblema": "ola"
   },
   {
+   "id": "CC-7-U2-008",
+   "nombre": "Pericles",
+   "tipo": "personaje",
+   "curso": 7,
+   "unidad": 2,
+   "efecto": {
+    "tipo": "bonusDanio",
+    "n": 40,
+    "dimension": "Politica"
+   },
+   "dato": "Gobernó Atenas en el siglo V a.C., la época de mayor esplendor de su democracia.",
+   "oa": "OA 6",
+   "emblema": "columna"
+  },
+  {
    "id": "CC-7-U3-001",
    "nombre": "Señor feudal",
    "tipo": "protagonista",
@@ -423,6 +438,20 @@
    "emblema": "libro"
   },
   {
+   "id": "CC-7-U3-008",
+   "nombre": "Carlomagno",
+   "tipo": "personaje",
+   "curso": 7,
+   "unidad": 3,
+   "efecto": {
+    "tipo": "buscarProtagonista",
+    "n": 3
+   },
+   "dato": "Rey de los francos coronado emperador en el año 800; reunió gran parte de Europa occidental.",
+   "oa": "OA 9",
+   "emblema": "corona"
+  },
+  {
    "id": "CC-7-U4-001",
    "nombre": "Mayas",
    "tipo": "protagonista",
@@ -555,6 +584,20 @@
    "dato": "Red de caminos de miles de kilómetros que llegaba hasta la zona central del actual Chile.",
    "oa": "OA 14",
    "emblema": "mapa"
+  },
+  {
+   "id": "CC-7-U4-008",
+   "nombre": "Pachacútec",
+   "tipo": "personaje",
+   "curso": 7,
+   "unidad": 4,
+   "efecto": {
+    "tipo": "saberExtra",
+    "n": 1
+   },
+   "dato": "Inca que en el siglo XV transformó el Cusco y comenzó la gran expansión del Tawantinsuyu.",
+   "oa": "OA 14",
+   "emblema": "sol"
   }
  ]
 }

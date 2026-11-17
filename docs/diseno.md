@@ -236,3 +236,23 @@ Cada mazo lleva hasta 2 cartas Aula.
      - código de la carta y OA al pie.
    - Las Etapa 2 llevan una miniatura de la carta de la que vienen.
    - **Prompt para las ilustraciones:** se entregó al docente un prompt maestro, con arte original sin texto, formato 4:3 y paleta según el tipo.
+
+## 13. Personajes (aprobado el 17 nov 2026)
+
+- **Nuevo tipo de carta: Personaje** (color cobre o bronce). Son las personas históricas reales, que dejan de ser Protagonistas. Se juega **1 Personaje por turno**. Su efecto es inmediato, refleja lo que esa persona hizo en la historia, y la carta va al descarte.
+- Las 5 dimensiones quedan para lo colectivo: pueblos, civilizaciones, grupos sociales e instituciones.
+- **Personajes:**
+  - 5°: Colón, Magallanes, Valdivia, Inés de Suárez y Lautaro.
+  - 6°: O'Higgins, J. M. Carrera, Javiera Carrera, Bello y Gabriela Mistral.
+  - 7° (nuevos): Pericles, Carlomagno y Pachacútec.
+  - 8°: Leonardo da Vinci, Lutero, Bartolomé de las Casas y Montesquieu.
+- **Protagonistas colectivos nuevos:** Hueste conquistadora y Pueblo diaguita (5°), y Ejército de los Andes (6°).
+- **Mazo de 20 cartas:** 11 Protagonistas, 3 Personajes, 3 Acontecimientos, 1 Lugar y 2 Aula.
+- **Efectos nuevos:**
+  - buscar un Lugar o cualquier carta;
+  - cambiar el activo sin pagar retirada;
+  - +1 Saber;
+  - curar a todos los Protagonistas;
+  - pasar todo el Saber de un Protagonista de la reserva al activo;
+  - bonificación de daño solo para una dimensión;
+  - efectos dobles (quitar el Lugar y robar).

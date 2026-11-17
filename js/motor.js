@@ -25,7 +25,7 @@ const esBase = c => c.tipo === 'protagonista' && !c.evolucionaDe;
 
 function nuevoJugador() {
   return { mazo: [], mano: [], activo: null, reserva: [], descarte: [], hitos: 0,
-    saberPendiente: 0, aulaUsada: false, retiroUsado: false, listo: false };
+    saberPendiente: 0, aulaUsada: false, personajeUsado: false, retiroUsado: false, listo: false };
 }
 
 function robar(jug, n = 1) {
@@ -101,6 +101,8 @@ export function jugadasValidas(e) {
       }
     } else if (t === 'aula') {
       if (!yo.aulaUsada && efectoAplicable(e, j, c.carta.efecto)) js.push(...jugadasDeCarta(yo, c));
+    } else if (t === 'personaje') {
+      if (!yo.personajeUsado && efectoAplicable(e, j, c.carta.efecto)) js.push(...jugadasDeCarta(yo, c));
     } else if (t === 'lugar') {
       js.push({ tipo: 'jugar', uid: c.uid });
     } else if (t === 'acontecimiento') {
@@ -121,20 +123,40 @@ export function jugadasValidas(e) {
   return js;
 }
 
-// Una búsqueda ofrece una jugada por cada Protagonista que se puede tomar.
+const listaEfectos = ef => (Array.isArray(ef) ? ef : ef ? [ef] : []);
+
+// Normaliza las búsquedas: buscarProtagonista es buscar con cartaTipo 'protagonista'.
+export function busquedaDe(ef) {
+  for (const x of listaEfectos(ef)) {
+    if (x.tipo === 'buscarProtagonista') return { n: x.n || 3, cartaTipo: 'protagonista' };
+    if (x.tipo === 'buscar') return { n: x.n || 3, cartaTipo: x.cartaTipo || 'cualquiera' };
+  }
+  return null;
+}
+const sirve = (carta, cartaTipo) => cartaTipo === 'cualquiera' || carta.tipo === cartaTipo;
+
+// Las cartas que piden elegir (búsquedas, cambio de activo) ofrecen una jugada por opción.
 function jugadasDeCarta(yo, c) {
   const ef = c.carta.efecto;
-  if (ef && ef.tipo === 'buscarProtagonista') {
-    const tope = yo.mazo.slice(0, ef.n || 3).filter(x => x.carta.tipo === 'protagonista');
+  const b = busquedaDe(ef);
+  if (b) {
+    const tope = yo.mazo.slice(0, b.n).filter(x => sirve(x.carta, b.cartaTipo));
     if (tope.length) return tope.map(x => ({ tipo: 'jugar', uid: c.uid, eleccion: x.uid }));
   }
+  if (listaEfectos(ef).some(x => x.tipo === 'retiroGratis')) return yo.reserva.map(r => ({ tipo: 'jugar', uid: c.uid, eleccion: r.uid }));
   return [{ tipo: 'jugar', uid: c.uid }];
 }
 
 function efectoAplicable(e, j, ef) {
   if (!ef) return false;
+  if (Array.isArray(ef)) return ef.length > 0 && ef.every(x => efectoAplicable(e, j, x));
   const yo = e.jugadores[j];
   switch (ef.tipo) {
+    case 'buscar': return yo.mazo.length > 0;
+    case 'retiroGratis': return yo.reserva.length > 0;
+    case 'curarTodos': return enMesa(yo).some(p => p.danio > 0);
+    case 'moverSaberTodo': return yo.reserva.some(r => r.saber > 0);
+    case 'bonusDanio': return !ef.dimension || yo.activo.carta.dimension === ef.dimension;
     case 'anularLugar': return !!e.lugar;
     case 'moverSaber': return yo.reserva.some(r => r.saber > 0);
     case 'curar': return yo.activo.danio > 0;
@@ -213,6 +235,7 @@ export function aplicarJugada(estadoEntrada, jugada) {
         ev.push({ tipo: 'lugar', jugador: j, carta: c.carta });
       } else {
         if (c.carta.tipo === 'aula') yo.aulaUsada = true;
+        if (c.carta.tipo === 'personaje') yo.personajeUsado = true;
         aplicarEfecto(e, j, c.carta.efecto, ev, jugada.eleccion);
         yo.descarte.push(c);
         ev.push({ tipo: 'efecto', jugador: j, carta: c.carta });
@@ -243,8 +266,25 @@ export function aplicarJugada(estadoEntrada, jugada) {
 }
 
 function aplicarEfecto(e, j, ef, ev, eleccion) {
+  if (Array.isArray(ef)) { for (const x of ef) aplicarEfecto(e, j, x, ev, eleccion); return; }
   const yo = e.jugadores[j];
   switch (ef.tipo) {
+    case 'saberExtra': yo.activo.saber += ef.n || 1; break;
+    case 'curarTodos': for (const p of enMesa(yo)) p.danio = Math.max(0, p.danio - ef.n); break;
+    case 'moverSaberTodo': {
+      const origen = yo.reserva.filter(r => r.saber > 0).sort((a, b) => b.saber - a.saber)[0];
+      yo.activo.saber += origen.saber;
+      origen.saber = 0;
+      break;
+    }
+    case 'retiroGratis': {
+      const k = yo.reserva.findIndex(r => r.uid === eleccion);
+      const viejo = yo.activo;
+      yo.activo = yo.reserva[k];
+      yo.reserva[k] = viejo;
+      ev.push({ tipo: 'retirar', jugador: j, carta: yo.activo.carta });
+      break;
+    }
     case 'robar': robar(yo, ef.n); break;
     case 'robarPorReserva': robar(yo, yo.reserva.length); break;
     case 'curar': yo.activo.danio = Math.max(0, yo.activo.danio - ef.n); break;
@@ -262,6 +302,7 @@ function aplicarEfecto(e, j, ef, ev, eleccion) {
       yo.activo.saber += 1;
       break;
     }
+    case 'buscar':
     case 'buscarProtagonista': {
       const n = ef.n || 3;
       const tope = yo.mazo.slice(0, n);
@@ -329,6 +370,7 @@ function iniciarTurno(e, ev) {
   if (e.numeroTurno === 0) e.numeroTurno = 1;
   for (const p of enMesa(yo)) p.protegido = false;
   yo.aulaUsada = false;
+  yo.personajeUsado = false;
   yo.retiroUsado = false;
   yo.saberPendiente = 1;
   const robadas = robar(yo, 1);

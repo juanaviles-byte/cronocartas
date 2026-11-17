@@ -36,7 +36,8 @@ Las ilustraciones se generan con un prompt maestro: arte original, sin texto, fo
 
 ## Reglas en breve
 
-- Cada jugador usa un mazo de 20 cartas, armado al azar con las cartas de su curso: 12 Protagonistas, 4 Acontecimientos, 2 Lugares y 2 cartas Aula.
+- Cada jugador usa un mazo de 20 cartas, armado al azar con las cartas de su curso: 11 Protagonistas, 3 Personajes, 3 Acontecimientos, 1 Lugar y 2 cartas Aula.
+- **Personajes** (color bronce): personas históricas reales. Se juega 1 por turno, su efecto es inmediato y refleja lo que esa persona hizo (por ejemplo, Colón busca un Lugar y Gabriela Mistral cura a todos tus Protagonistas). Las 5 dimensiones quedan para pueblos, civilizaciones, grupos e instituciones.
 - Cada uno pone 1 Protagonista **activo** y hasta 3 en la **reserva**.
 - En cada turno se roba 1 carta y se recibe 1 de **Saber** para dárselo a un Protagonista.
 - Las acciones necesitan Saber, pero no lo gastan. Retirarse sí cuesta Saber.
@@ -63,7 +64,7 @@ Las cartas están en `data/mazo-5.json` … `data/mazo-8.json` y las cartas Aula
 }
 ```
 
-- `tipo`: `protagonista`, `acontecimiento` o `lugar`.
+- `tipo`: `protagonista`, `personaje`, `acontecimiento` o `lugar`. Los Personajes, Acontecimientos y Aula llevan `efecto` (puede ser una lista de dos efectos).
 - `dimension`: `Politica`, `Economia`, `Sociedad`, `Cultura` o `Territorio` (sin tildes).
 - `evolucionaDe`: solo para cartas Etapa 2; lleva el `id` de la carta base.
 - `emblema`: uno de los íconos de `js/ui/arte.js` (`corona`, `moneda`, `personas`, `pergamino`, `montana`, `barco`, `templo`, `escudo`, `libro`, `columna`, `piramide`, `campana`, `pluma`, `mapa`, `urna`, `balanza`, `tren`, `volcan`, `arbol`, `sol`, `maiz`, `casa`, `estrella`, `engranaje`, `ola`, `ancla`).

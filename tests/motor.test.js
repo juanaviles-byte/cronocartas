@@ -328,3 +328,84 @@ test('una elección que no está entre las 3 primeras es inválida', () => {
   const e = mesaBusqueda([acont({ tipo: 'robar', n: 1 }), acont({ tipo: 'robar', n: 1 }), acont({ tipo: 'robar', n: 1 }), prot('Sociedad')]);
   assert.throws(() => aplicarJugada(e, { tipo: 'jugar', uid: 'Am0', eleccion: 'q3' }), /jugada inválida/);
 });
+
+// ---- Personajes ----
+const personaje = (efecto, extra = {}) => ({ id: extra.id || `PJ${Math.random().toString(36).slice(2, 7)}`, nombre: 'Personaje', tipo: 'personaje', curso: 5, unidad: 1, efecto, dato: 'Dato.', oa: 'OA 1', emblema: 'medalla', ...extra });
+
+test('solo se puede jugar 1 Personaje por turno', () => {
+  let e = mesa({ activoA: prot('Politica'), activoB: prot('Cultura'), manoA: [personaje({ tipo: 'robar', n: 1 }), personaje({ tipo: 'robar', n: 1 })] });
+  e = jugar(e, { tipo: 'jugar', uid: 'Am0' }).estado;
+  assert.ok(!jugadasValidas(e).some(j => j.tipo === 'jugar' && j.uid === 'Am1'));
+  e = jugar(jugar(e, { tipo: 'pasar' }).estado, { tipo: 'pasar' }).estado;
+  assert.ok(jugadasValidas(e).some(j => j.tipo === 'jugar' && j.uid === 'Am1'));
+});
+
+test('buscar un Lugar ofrece solo los Lugares entre las primeras 5', () => {
+  const e = mesa({ activoA: prot('Politica'), activoB: prot('Cultura'), manoA: [personaje({ tipo: 'buscar', n: 5, cartaTipo: 'lugar' })] });
+  const L = lugar({ tipo: 'bonusDimension', dimension: 'Politica', n: 10 });
+  e.jugadores.A.mazo = [prot('Sociedad'), acont({ tipo: 'robar', n: 1 }), prot('Cultura'), L, prot('Politica'), lugar({ tipo: 'bonusDimension', dimension: 'Cultura', n: 10 })]
+    .map((c, i) => ({ uid: `q${i}`, carta: c }));
+  assert.deepEqual(jugadasValidas(e).filter(j => j.tipo === 'jugar').map(j => j.eleccion), ['q3']);
+  const r = jugar(e, { tipo: 'jugar', uid: 'Am0', eleccion: 'q3' }).estado;
+  assert.ok(r.jugadores.A.mano.some(c => c.carta.id === L.id));
+});
+
+test('buscar cualquier carta permite elegir cualquiera de las primeras', () => {
+  const e = mesa({ activoA: prot('Politica'), activoB: prot('Cultura'), manoA: [personaje({ tipo: 'buscar', n: 5, cartaTipo: 'cualquiera' })] });
+  e.jugadores.A.mazo = [acont({ tipo: 'robar', n: 1 }), prot('Cultura')].map((c, i) => ({ uid: `q${i}`, carta: c }));
+  assert.deepEqual(jugadasValidas(e).filter(j => j.tipo === 'jugar').map(j => j.eleccion), ['q0', 'q1']);
+});
+
+test('retiroGratis cambia el activo por el elegido sin gastar Saber', () => {
+  const e = mesa({ activoA: prot('Politica'), activoB: prot('Cultura'), reservaA: [prot('Sociedad'), prot('Territorio')], manoA: [personaje({ tipo: 'retiroGratis' })] });
+  e.jugadores.A.activo.saber = 2;
+  const destino = e.jugadores.A.reserva[1].uid, viejo = e.jugadores.A.activo.uid;
+  assert.equal(jugadasValidas(e).filter(j => j.tipo === 'jugar').length, 2);
+  const r = jugar(e, { tipo: 'jugar', uid: 'Am0', eleccion: destino }).estado;
+  assert.equal(r.jugadores.A.activo.uid, destino);
+  assert.ok(r.jugadores.A.reserva.some(x => x.uid === viejo && x.saber === 2));
+});
+
+test('retiroGratis sin reserva no se puede jugar', () => {
+  const e = mesa({ activoA: prot('Politica'), activoB: prot('Cultura'), manoA: [personaje({ tipo: 'retiroGratis' })] });
+  assert.ok(!jugadasValidas(e).some(j => j.tipo === 'jugar'));
+});
+
+test('saberExtra suma Saber al activo', () => {
+  const e = mesa({ activoA: prot('Politica'), activoB: prot('Cultura'), manoA: [personaje({ tipo: 'saberExtra', n: 1 })] });
+  assert.equal(jugar(e, { tipo: 'jugar', uid: 'Am0' }).estado.jugadores.A.activo.saber, 1);
+});
+
+test('curarTodos cura al activo y a la reserva', () => {
+  const e = mesa({ activoA: prot('Politica'), activoB: prot('Cultura'), reservaA: [prot('Sociedad')], manoA: [personaje({ tipo: 'curarTodos', n: 20 })] });
+  e.jugadores.A.activo.danio = 30; e.jugadores.A.reserva[0].danio = 10;
+  const r = jugar(e, { tipo: 'jugar', uid: 'Am0' }).estado;
+  assert.equal(r.jugadores.A.activo.danio, 10);
+  assert.equal(r.jugadores.A.reserva[0].danio, 0);
+});
+
+test('moverSaberTodo pasa todo el Saber del de la reserva que más tiene', () => {
+  const e = mesa({ activoA: prot('Politica'), activoB: prot('Cultura'), reservaA: [prot('Sociedad'), prot('Cultura')], manoA: [personaje({ tipo: 'moverSaberTodo' })] });
+  e.jugadores.A.reserva[0].saber = 1; e.jugadores.A.reserva[1].saber = 3;
+  const r = jugar(e, { tipo: 'jugar', uid: 'Am0' }).estado;
+  assert.equal(r.jugadores.A.activo.saber, 3);
+  assert.equal(r.jugadores.A.reserva[1].saber, 0);
+});
+
+test('bonusDanio con dimensión solo se juega si el activo es de esa dimensión', () => {
+  const pj = personaje({ tipo: 'bonusDanio', n: 40, dimension: 'Politica' });
+  const si = mesa({ activoA: prot('Politica'), activoB: prot('Cultura'), manoA: [pj] });
+  const no = mesa({ activoA: prot('Economia'), activoB: prot('Cultura'), manoA: [pj] });
+  assert.ok(jugadasValidas(si).some(j => j.tipo === 'jugar'));
+  assert.ok(!jugadasValidas(no).some(j => j.tipo === 'jugar'));
+});
+
+test('un efecto doble aplica ambos efectos y exige que los dos sirvan', () => {
+  const pj = personaje([{ tipo: 'anularLugar' }, { tipo: 'robar', n: 1 }]);
+  const sinLugar = mesa({ activoA: prot('Politica'), activoB: prot('Cultura'), manoA: [pj] });
+  assert.ok(!jugadasValidas(sinLugar).some(j => j.tipo === 'jugar'));
+  const e = mesa({ activoA: prot('Politica'), activoB: prot('Cultura'), manoA: [pj], lugarEnJuego: lugar({ tipo: 'bonusDimension', dimension: 'Cultura', n: 10 }) });
+  const r = jugar(e, { tipo: 'jugar', uid: 'Am0' }).estado;
+  assert.equal(r.lugar, null);
+  assert.equal(r.jugadores.A.mano.length, 1);
+});
