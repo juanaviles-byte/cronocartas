@@ -127,11 +127,11 @@ test('moverSaber pasa 1 saber de la reserva al activo', () => {
   assert.equal(r.jugadores.A.reserva[0].saber, 1);
 });
 
-test('buscarProtagonista toma el primer protagonista de las 3 primeras cartas del mazo', () => {
+test('buscarProtagonista toma el protagonista elegido entre las 3 primeras cartas del mazo', () => {
   const e = mesa({ activoA: prot('Politica'), activoB: prot('Cultura'), manoA: [aula({ tipo: 'buscarProtagonista', n: 3 })] });
   const P = prot('Territorio', 70, undefined, { id: 'BUSCADO' });
   e.jugadores.A.mazo = [{ uid: 'q1', carta: acont({ tipo: 'robar', n: 1 }) }, { uid: 'q2', carta: P }, { uid: 'q3', carta: acont({ tipo: 'robar', n: 1 }) }, { uid: 'q4', carta: prot('Politica') }];
-  const r = jugar(e, { tipo: 'jugar', uid: 'Am0' }).estado;
+  const r = jugar(e, { tipo: 'jugar', uid: 'Am0', eleccion: 'q2' }).estado;
   assert.ok(r.jugadores.A.mano.some(c => c.carta.id === 'BUSCADO'));
   assert.equal(r.jugadores.A.mazo.length, 3);
 });
@@ -282,4 +282,49 @@ test('el motor funciona sin structuredClone (Chrome antiguo)', async () => {
     const e = crearPartida({ mazoA: mazoSimple(), mazoB: mazoSimple(), semilla: 4 });
     assert.doesNotThrow(() => aplicarJugada(e, jugadasValidas(e)[0]));
   } finally { globalThis.structuredClone = original; }
+});
+
+// ---- v1.1: búsqueda visible con elección ----
+function mesaBusqueda(mazo) {
+  const e = mesa({ activoA: prot('Politica'), activoB: prot('Cultura'), manoA: [aula({ tipo: 'buscarProtagonista', n: 3 })] });
+  e.jugadores.A.mazo = mazo.map((c, i) => ({ uid: `q${i}`, carta: c }));
+  return e;
+}
+
+test('buscarProtagonista ofrece una jugada por cada Protagonista entre las 3 primeras', () => {
+  const e = mesaBusqueda([acont({ tipo: 'robar', n: 1 }), prot('Sociedad'), prot('Cultura'), prot('Territorio')]);
+  const js = jugadasValidas(e).filter(j => j.tipo === 'jugar');
+  assert.deepEqual(js.map(j => j.eleccion), ['q1', 'q2']);
+});
+
+test('elegir el segundo Protagonista lo lleva a la mano y el resto va al fondo en orden', () => {
+  const P1 = prot('Sociedad', 60, undefined, { id: 'P-UNO' }), P2 = prot('Cultura', 60, undefined, { id: 'P-DOS' });
+  const e = mesaBusqueda([acont({ tipo: 'robar', n: 1 }, { id: 'E-0' }), P1, P2, prot('Territorio', 60, undefined, { id: 'P-RESTO' })]);
+  const { estado, eventos } = aplicarJugada(e, { tipo: 'jugar', uid: 'Am0', eleccion: 'q2' });
+  assert.ok(estado.jugadores.A.mano.some(c => c.carta.id === 'P-DOS'));
+  assert.deepEqual(estado.jugadores.A.mazo.map(c => c.carta.id), ['P-RESTO', 'E-0', 'P-UNO']);
+  const rev = eventos.find(ev => ev.tipo === 'revelar');
+  assert.equal(rev.cartas.length, 3);
+  assert.equal(rev.tomada.id, 'P-DOS');
+});
+
+test('sin Protagonistas entre las 3 primeras se ven y vuelven al fondo', () => {
+  const e = mesaBusqueda([acont({ tipo: 'robar', n: 1 }, { id: 'E-1' }), acont({ tipo: 'robar', n: 1 }, { id: 'E-2' }), acont({ tipo: 'robar', n: 1 }, { id: 'E-3' }), prot('Politica', 60, undefined, { id: 'P-4' })]);
+  const js = jugadasValidas(e).filter(j => j.tipo === 'jugar');
+  assert.deepEqual(js, [{ tipo: 'jugar', uid: 'Am0' }]);
+  const { estado, eventos } = aplicarJugada(e, js[0]);
+  assert.deepEqual(estado.jugadores.A.mazo.map(c => c.carta.id), ['P-4', 'E-1', 'E-2', 'E-3']);
+  assert.equal(eventos.find(ev => ev.tipo === 'revelar').tomada, null);
+});
+
+test('búsqueda con solo 2 cartas en el mazo no se bloquea', () => {
+  const e = mesaBusqueda([prot('Sociedad', 60, undefined, { id: 'P-A' }), acont({ tipo: 'robar', n: 1 })]);
+  const r = aplicarJugada(e, { tipo: 'jugar', uid: 'Am0', eleccion: 'q0' }).estado;
+  assert.ok(r.jugadores.A.mano.some(c => c.carta.id === 'P-A'));
+  assert.equal(r.jugadores.A.mazo.length, 1);
+});
+
+test('una elección que no está entre las 3 primeras es inválida', () => {
+  const e = mesaBusqueda([acont({ tipo: 'robar', n: 1 }), acont({ tipo: 'robar', n: 1 }), acont({ tipo: 'robar', n: 1 }), prot('Sociedad')]);
+  assert.throws(() => aplicarJugada(e, { tipo: 'jugar', uid: 'Am0', eleccion: 'q3' }), /jugada inválida/);
 });

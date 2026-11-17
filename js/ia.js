@@ -46,7 +46,15 @@ export function elegirJugada(estado, jugador) {
     if (t === 'anularLugar') return estado.lugar?.carta.efecto?.dimension === otro.activo?.carta.dimension;
     return true;
   });
-  if (util) return util;
+  if (util) {
+    // En una búsqueda, toma el Protagonista de mayor valor.
+    const opciones = deTipo('jugar').filter(j => j.uid === util.uid && j.eleccion);
+    if (opciones.length) {
+      const valor = j => valorBase(yo.mazo.find(c => c.uid === j.eleccion).carta);
+      return opciones.reduce((m, j) => (valor(j) > valor(m) ? j : m));
+    }
+    return util;
+  }
   // 6. Retirarse si el activo está por caer y hay alguien sano en reserva.
   const pagable = deTipo('accion');
   const restante = yo.activo.carta.resistencia - yo.activo.danio;

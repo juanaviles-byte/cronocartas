@@ -100,9 +100,11 @@ export function jugadasValidas(e) {
         }
       }
     } else if (t === 'aula') {
-      if (!yo.aulaUsada && efectoAplicable(e, j, c.carta.efecto)) js.push({ tipo: 'jugar', uid: c.uid });
-    } else if (t === 'acontecimiento' || t === 'lugar') {
-      if (t === 'lugar' || efectoAplicable(e, j, c.carta.efecto)) js.push({ tipo: 'jugar', uid: c.uid });
+      if (!yo.aulaUsada && efectoAplicable(e, j, c.carta.efecto)) js.push(...jugadasDeCarta(yo, c));
+    } else if (t === 'lugar') {
+      js.push({ tipo: 'jugar', uid: c.uid });
+    } else if (t === 'acontecimiento') {
+      if (efectoAplicable(e, j, c.carta.efecto)) js.push(...jugadasDeCarta(yo, c));
     }
   }
   if (yo.saberPendiente > 0) for (const p of enMesa(yo)) js.push({ tipo: 'asignarSaber', destino: p.uid });
@@ -117,6 +119,16 @@ export function jugadasValidas(e) {
   }
   js.push({ tipo: 'pasar' });
   return js;
+}
+
+// Una búsqueda ofrece una jugada por cada Protagonista que se puede tomar.
+function jugadasDeCarta(yo, c) {
+  const ef = c.carta.efecto;
+  if (ef && ef.tipo === 'buscarProtagonista') {
+    const tope = yo.mazo.slice(0, ef.n || 3).filter(x => x.carta.tipo === 'protagonista');
+    if (tope.length) return tope.map(x => ({ tipo: 'jugar', uid: c.uid, eleccion: x.uid }));
+  }
+  return [{ tipo: 'jugar', uid: c.uid }];
 }
 
 function efectoAplicable(e, j, ef) {
@@ -134,7 +146,7 @@ function efectoAplicable(e, j, ef) {
 
 function mismaJugada(a, b) {
   return a.tipo === b.tipo && a.uid === b.uid && a.objetivo === b.objetivo &&
-    a.destino === b.destino && a.reemplazo === b.reemplazo && a.indice === b.indice;
+    a.destino === b.destino && a.reemplazo === b.reemplazo && a.indice === b.indice && a.eleccion === b.eleccion;
 }
 
 export function aplicarJugada(estadoEntrada, jugada) {
@@ -201,7 +213,7 @@ export function aplicarJugada(estadoEntrada, jugada) {
         ev.push({ tipo: 'lugar', jugador: j, carta: c.carta });
       } else {
         if (c.carta.tipo === 'aula') yo.aulaUsada = true;
-        aplicarEfecto(e, j, c.carta.efecto, ev);
+        aplicarEfecto(e, j, c.carta.efecto, ev, jugada.eleccion);
         yo.descarte.push(c);
         ev.push({ tipo: 'efecto', jugador: j, carta: c.carta });
       }
@@ -230,7 +242,7 @@ export function aplicarJugada(estadoEntrada, jugada) {
   return { estado: e, eventos: ev };
 }
 
-function aplicarEfecto(e, j, ef, ev) {
+function aplicarEfecto(e, j, ef, ev, eleccion) {
   const yo = e.jugadores[j];
   switch (ef.tipo) {
     case 'robar': robar(yo, ef.n); break;
@@ -251,13 +263,14 @@ function aplicarEfecto(e, j, ef, ev) {
       break;
     }
     case 'buscarProtagonista': {
-      const tope = yo.mazo.slice(0, ef.n || 3);
-      const k = tope.findIndex(c => c.carta.tipo === 'protagonista');
-      const resto = yo.mazo.slice(ef.n || 3);
-      if (k >= 0) {
-        yo.mano.push(tope.splice(k, 1)[0]);
-      }
-      yo.mazo = [...resto, ...tope];
+      const n = ef.n || 3;
+      const tope = yo.mazo.slice(0, n);
+      const vistas = tope.map(c => c.carta);
+      const k = eleccion ? tope.findIndex(c => c.uid === eleccion) : -1;
+      const tomada = k >= 0 ? tope.splice(k, 1)[0] : null;
+      if (tomada) yo.mano.push(tomada);
+      yo.mazo = [...yo.mazo.slice(n), ...tope];
+      ev.push({ tipo: 'revelar', jugador: j, cartas: vistas, tomada: tomada ? tomada.carta : null });
       break;
     }
   }

@@ -36,3 +36,13 @@ test('200 partidas IA vs IA terminan con ganador en menos de 400 jugadas', () =>
     assert.ok(estado.ganador === 'A' || estado.ganador === 'B');
   }
 });
+
+test('la IA elige en una búsqueda el Protagonista de mayor valor', async () => {
+  const { mesa, prot, aula } = await import('./ayudas.js');
+  const e = mesa({ activoA: prot('Politica'), activoB: prot('Cultura'), manoA: [aula({ tipo: 'buscarProtagonista', n: 3 })], reservaA: [prot('Sociedad'), prot('Sociedad')] });
+  e.jugadores.A.mazo = [{ uid: 'q0', carta: prot('Sociedad', 50) }, { uid: 'q1', carta: prot('Cultura', 110) }, { uid: 'q2', carta: prot('Cultura', 60) }];
+  e.jugadores.A.saberPendiente = 0;
+  const j = elegirJugada(e, 'A');
+  assert.equal(j.tipo, 'jugar');
+  assert.equal(j.eleccion, 'q1');
+});
