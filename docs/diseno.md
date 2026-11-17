@@ -213,3 +213,26 @@ Cada mazo lleva hasta 2 cartas Aula.
 - Las cartas Aula y sus efectos.
 - PIN docente en vez de cuentas.
 - Exportar e importar con código de texto en la versión 1.
+
+---
+
+## 12. Versión 1.1 (aprobada el 17 nov 2026)
+
+1. **Planificación y búsquedas visibles.** Las cartas con el efecto "buscar Protagonista" (Planificación, Fundación de ciudades, Quipu) muestran las 3 primeras cartas del mazo. El jugador elige qué Protagonista tomar y el resto va al fondo del mazo. Si no hay ninguno, las ve igual y vuelven al fondo. El rival automático toma el de mayor valor.
+2. **Editor de cartas (solo docente, con PIN).** Es una pestaña "Editar cartas" en el panel.
+   - Se puede cambiar el nombre, el dato, la resistencia, las acciones y el emblema de cualquier carta oficial o Aula, y subirle una imagen.
+   - Los textos se guardan en la tablet. Las imágenes van en el almacenamiento grande de la tablet (IndexedDB), reducidas a 640×480 JPEG.
+   - "Restaurar original" deshace la edición.
+   - **Exportar ediciones** descarga un archivo `.json` (con imágenes) e **Importar ediciones** lo carga en otra tablet. Al importar se aceptan solo campos conocidos y valores válidos.
+   - En el futuro, las imágenes se pueden integrar al repositorio (campo `imagen` en el JSON del mazo).
+3. **Diseño de carta inspirado en el TCG de Pokémon.**
+   - **Marco de color completo según el tipo:** Política roja, Economía dorada, Sociedad azul, Cultura morada, Territorio verde. Los Acontecimientos van en gris pizarra, los Lugares en turquesa y las cartas Aula en azul marino con dorado.
+   - **Estructura:**
+     - nombre arriba y resistencia con el ícono de la dimensión;
+     - ventana de ilustración 4:3;
+     - acciones con íconos de Saber;
+     - debilidad (×2) y retirada;
+     - dato en un recuadro aparte;
+     - código de la carta y OA al pie.
+   - Las Etapa 2 llevan una miniatura de la carta de la que vienen.
+   - **Prompt para las ilustraciones:** se entregó al docente un prompt maestro, con arte original sin texto, formato 4:3 y paleta según el tipo.
