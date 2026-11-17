@@ -14,7 +14,7 @@ function archivos(dir) {
 test('sw.js guarda en caché todos los archivos de la app', () => {
   const sw = readFileSync(join(raiz, 'sw.js'), 'utf8');
   const lista = JSON.parse(sw.match(/const ARCHIVOS = (\[[\s\S]*?\]);/)[1]);
-  const esperados = ['./', 'index.html', 'manifest.webmanifest', ...['js', 'css', 'data', 'icons'].flatMap(archivos)];
+  const esperados = ['./', 'index.html', 'manifest.webmanifest', ...['js', 'css', 'data', 'icons', 'img'].flatMap(archivos)];
   for (const f of esperados) assert.ok(lista.includes(f), `falta ${f} en sw.js`);
   for (const f of lista) if (f !== './') assert.ok(statSync(join(raiz, f)).isFile(), `sobra ${f} en sw.js`);
 });

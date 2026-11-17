@@ -71,15 +71,17 @@ function tomar(grupo, n, rng) {
   return out;
 }
 
-export function armarMazo(cartas, aula, rng) {
+// Con { unidad } el mazo refuerza esa unidad: primero entran sus cartas.
+export function armarMazo(cartas, aula, rng, { unidad = null } = {}) {
   const porId = new Map(cartas.map(c => [c.id, c]));
-  const prot = barajar(cartas.filter(c => c.tipo === 'protagonista'), rng);
+  const primeroUnidad = lista => (unidad ? [...barajar(lista.filter(c => c.unidad === unidad), rng), ...barajar(lista.filter(c => c.unidad !== unidad), rng)] : barajar(lista, rng));
+  const prot = primeroUnidad(cartas.filter(c => c.tipo === 'protagonista'));
   const elegidos = [];
   const ya = new Set();
   const meter = c => { elegidos.push(c); ya.add(c.id); };
 
-  // Primero asegura una carta base por unidad, para mezclar las 4 unidades.
-  for (const u of [...new Set(prot.map(c => c.unidad))]) {
+  // Sin unidad elegida, asegura una carta base por unidad, para mezclar las 4.
+  if (!unidad) for (const u of [...new Set(prot.map(c => c.unidad))]) {
     const b = prot.find(c => c.unidad === u && !c.evolucionaDe && !ya.has(c.id));
     if (b && elegidos.length < COMPOSICION.protagonista) meter(b);
   }
@@ -97,16 +99,37 @@ export function armarMazo(cartas, aula, rng) {
   const bases = prot.filter(c => !c.evolucionaDe);
   while (elegidos.length < COMPOSICION.protagonista && bases.length) elegidos.push(...tomar(bases, 1, rng));
 
+  const deTipo = t => {
+    const grupo = cartas.filter(c => c.tipo === t);
+    if (!unidad) return tomar(grupo, COMPOSICION[t], rng);
+    const propias = barajar(grupo.filter(c => c.unidad === unidad), rng).slice(0, COMPOSICION[t]);
+    const resto = grupo.filter(c => c.unidad !== unidad);
+    return [...propias, ...tomar(resto.length ? resto : grupo, COMPOSICION[t] - propias.length, rng)];
+  };
   const mazo = [
     ...elegidos,
-    ...tomar(cartas.filter(c => c.tipo === 'personaje'), COMPOSICION.personaje, rng),
-    ...tomar(cartas.filter(c => c.tipo === 'acontecimiento'), COMPOSICION.acontecimiento, rng),
-    ...tomar(cartas.filter(c => c.tipo === 'lugar'), COMPOSICION.lugar, rng),
+    ...deTipo('personaje'),
+    ...deTipo('acontecimiento'),
+    ...deTipo('lugar'),
     ...tomar(aula, COMPOSICION.aula, rng),
   ];
   // Completa con protagonistas base si faltan acontecimientos o lugares.
   while (mazo.length < 20 && bases.length) mazo.push(...tomar(bases, 1, rng));
   return mazo;
+}
+
+export const REGLAS_TABLERO = ['bonusDimension', 'reduccionDanio', 'retiroGratis', 'personajeRoba', 'saberPorHito', 'aulaDoble', 'curarInicioTurno'];
+
+export function validarTablero(t) {
+  const e = [];
+  const id = (t && t.id) || '(sin id)';
+  if (!t || !t.id || !t.nombre) e.push(`${id}: falta id o nombre`);
+  const r = t && t.regla;
+  if (!r || !REGLAS_TABLERO.includes(r.tipo)) e.push(`${id}: regla desconocida`);
+  else if (r.tipo === 'bonusDimension' && !DIMENSIONES.includes(r.dimension)) e.push(`${id}: dimensión desconocida`);
+  if (!t || typeof t.imagen !== 'string' || !/^img\/tableros\/[\w-]+\.jpg$/.test(t.imagen)) e.push(`${id}: imagen inválida`);
+  if (!t || !Array.isArray(t.lugares)) e.push(`${id}: lugares debe ser una lista`);
+  return e;
 }
 
 // Solo en el navegador: carga los JSON, aplica las ediciones del docente

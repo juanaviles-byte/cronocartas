@@ -409,3 +409,62 @@ test('un efecto doble aplica ambos efectos y exige que los dos sirvan', () => {
   assert.equal(r.lugar, null);
   assert.equal(r.jugadores.A.mano.length, 1);
 });
+
+// ---- Ola 1: reglas de tablero ----
+function conTablero(regla, opciones) {
+  const e = mesa(opciones);
+  e.tablero = { id: 'T-x', regla };
+  return e;
+}
+
+test('crearPartida guarda el tablero', () => {
+  const e = crearPartida({ mazoA: mazoSimple(), mazoB: mazoSimple(), semilla: 1, tablero: { id: 'T-7-3', regla: { tipo: 'reduccionDanio', n: 10 } } });
+  assert.equal(e.tablero.id, 'T-7-3');
+});
+
+test('tablero bonusDimension suma a la dimensión indicada', () => {
+  const e = conTablero({ tipo: 'bonusDimension', dimension: 'Politica', n: 10 }, { activoA: prot('Politica', 60, [{ nombre: 'X', costo: 1, danio: 20 }]), activoB: prot('Cultura', 200) });
+  e.jugadores.A.activo.saber = 1;
+  assert.equal(jugar(e, { tipo: 'accion', indice: 0 }).estado.jugadores.B.activo.danio, 30);
+});
+
+test('tablero reduccionDanio resta daño sin bajar de 0', () => {
+  const e = conTablero({ tipo: 'reduccionDanio', n: 10 }, { activoA: prot('Politica', 60, [{ nombre: 'X', costo: 1, danio: 30 }, { nombre: 'Y', costo: 1, danio: 0 }]), activoB: prot('Cultura', 200) });
+  e.jugadores.A.activo.saber = 1;
+  assert.equal(jugar(e, { tipo: 'accion', indice: 0 }).estado.jugadores.B.activo.danio, 20);
+  assert.equal(jugar(e, { tipo: 'accion', indice: 1 }).estado.jugadores.B.activo.danio, 0);
+});
+
+test('tablero retiroGratis permite retirarse sin Saber y no lo gasta', () => {
+  const e = conTablero({ tipo: 'retiroGratis' }, { activoA: prot('Politica'), activoB: prot('Cultura'), reservaA: [prot('Sociedad')] });
+  const j = jugadasValidas(e).find(x => x.tipo === 'retirar');
+  assert.ok(j);
+  const r = jugar(e, j).estado;
+  assert.equal(r.jugadores.A.reserva[0].saber, 0);
+});
+
+test('tablero personajeRoba: jugar un Personaje roba 1 carta extra', () => {
+  const pj = { id: 'PJ1', nombre: 'P', tipo: 'personaje', efecto: { tipo: 'saberExtra', n: 1 }, dato: 'x', emblema: 'medalla' };
+  const e = conTablero({ tipo: 'personajeRoba', n: 1 }, { activoA: prot('Politica'), activoB: prot('Cultura'), manoA: [pj] });
+  assert.equal(jugar(e, { tipo: 'jugar', uid: 'Am0' }).estado.jugadores.A.mano.length, 1);
+});
+
+test('tablero saberPorHito: ganar un Hito da +1 Saber al activo', () => {
+  const e = conTablero({ tipo: 'saberPorHito', n: 1 }, { activoA: prot('Politica', 60, [{ nombre: 'X', costo: 1, danio: 50 }]), activoB: prot('Cultura', 50), reservaB: [prot('Sociedad')] });
+  e.jugadores.A.activo.saber = 1;
+  assert.equal(jugar(e, { tipo: 'accion', indice: 0 }).estado.jugadores.A.activo.saber, 2);
+});
+
+test('tablero aulaDoble permite 2 cartas Aula por turno, no 3', () => {
+  let e = conTablero({ tipo: 'aulaDoble' }, { activoA: prot('Politica'), activoB: prot('Cultura'), manoA: [aula({ tipo: 'robar', n: 1 }), aula({ tipo: 'robar', n: 1 }), aula({ tipo: 'robar', n: 1 })] });
+  e = jugar(e, { tipo: 'jugar', uid: 'Am0' }).estado;
+  assert.ok(jugadasValidas(e).some(j => j.tipo === 'jugar' && j.uid === 'Am1'));
+  e = jugar(e, { tipo: 'jugar', uid: 'Am1' }).estado;
+  assert.ok(!jugadasValidas(e).some(j => j.tipo === 'jugar' && j.uid === 'Am2'));
+});
+
+test('tablero curarInicioTurno cura al activo al empezar su turno', () => {
+  const e = conTablero({ tipo: 'curarInicioTurno', n: 10 }, { activoA: prot('Politica'), activoB: prot('Cultura') });
+  e.jugadores.B.activo.danio = 30;
+  assert.equal(jugar(e, { tipo: 'pasar' }).estado.jugadores.B.activo.danio, 20);
+});

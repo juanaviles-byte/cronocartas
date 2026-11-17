@@ -1,0 +1,251 @@
+{
+ "tableros": [
+  {
+   "id": "T-5-1",
+   "curso": 5,
+   "unidad": 1,
+   "nombre": "Cubierta de la carabela",
+   "lema": "Rumbo a lo desconocido",
+   "textoRegla": "Al jugar un Personaje, robas 1 carta.",
+   "regla": {
+    "tipo": "personajeRoba",
+    "n": 1
+   },
+   "imagen": "img/tableros/T-5-1.jpg",
+   "lugares": []
+  },
+  {
+   "id": "T-5-2",
+   "curso": 5,
+   "unidad": 2,
+   "nombre": "Plaza colonial",
+   "lema": "Encuentro de culturas",
+   "textoRegla": "Los Protagonistas de Sociedad hacen +10 de daño.",
+   "regla": {
+    "tipo": "bonusDimension",
+    "dimension": "Sociedad",
+    "n": 10
+   },
+   "imagen": "img/tableros/T-5-2.jpg",
+   "lugares": []
+  },
+  {
+   "id": "T-5-3",
+   "curso": 5,
+   "unidad": 3,
+   "nombre": "Zonas naturales de Chile",
+   "lema": "Un territorio diverso",
+   "textoRegla": "Los Protagonistas de Territorio hacen +10 de daño.",
+   "regla": {
+    "tipo": "bonusDimension",
+    "dimension": "Territorio",
+    "n": 10
+   },
+   "imagen": "img/tableros/T-5-3.jpg",
+   "lugares": [
+    "CC-5-U3-006",
+    "CC-6-U1-007"
+   ]
+  },
+  {
+   "id": "T-5-4",
+   "curso": 5,
+   "unidad": 4,
+   "nombre": "Mesa comunitaria",
+   "lema": "Comunidad organizada",
+   "textoRegla": "Al inicio de tu turno, tu activo recupera 10.",
+   "regla": {
+    "tipo": "curarInicioTurno",
+    "n": 10
+   },
+   "imagen": "img/tableros/T-5-4.jpg",
+   "lugares": [
+    "CC-6-U4-006"
+   ]
+  },
+  {
+   "id": "T-6-1",
+   "curso": 6,
+   "unidad": 1,
+   "nombre": "Sala del Cabildo",
+   "lema": "Primeros pasos de la autonomía",
+   "textoRegla": "Cada Hito que ganas da +1 Saber a tu activo.",
+   "regla": {
+    "tipo": "saberPorHito",
+    "n": 1
+   },
+   "imagen": "img/tableros/T-6-1.jpg",
+   "lugares": []
+  },
+  {
+   "id": "T-6-2",
+   "curso": 6,
+   "unidad": 2,
+   "nombre": "Pampa salitrera",
+   "lema": "El oro blanco",
+   "textoRegla": "Los Protagonistas de Economía hacen +10 de daño.",
+   "regla": {
+    "tipo": "bonusDimension",
+    "dimension": "Economia",
+    "n": 10
+   },
+   "imagen": "img/tableros/T-6-2.jpg",
+   "lugares": []
+  },
+  {
+   "id": "T-6-3",
+   "curso": 6,
+   "unidad": 3,
+   "nombre": "Escuela pública",
+   "lema": "Educar a todo un país",
+   "textoRegla": "Puedes jugar 2 cartas Aula por turno.",
+   "regla": {
+    "tipo": "aulaDoble"
+   },
+   "imagen": "img/tableros/T-6-3.jpg",
+   "lugares": [
+    "CC-5-U4-006"
+   ]
+  },
+  {
+   "id": "T-6-4",
+   "curso": 6,
+   "unidad": 4,
+   "nombre": "Chile y sus regiones",
+   "lema": "Organización democrática",
+   "textoRegla": "Los Protagonistas de Política hacen +10 de daño.",
+   "regla": {
+    "tipo": "bonusDimension",
+    "dimension": "Politica",
+    "n": 10
+   },
+   "imagen": "img/tableros/T-6-4.jpg",
+   "lugares": []
+  },
+  {
+   "id": "T-7-1",
+   "curso": 7,
+   "unidad": 1,
+   "nombre": "Creciente Fértil",
+   "lema": "Tierras que alimentan",
+   "textoRegla": "Al inicio de tu turno, tu activo recupera 10.",
+   "regla": {
+    "tipo": "curarInicioTurno",
+    "n": 10
+   },
+   "imagen": "img/tableros/T-7-1.jpg",
+   "lugares": [
+    "CC-7-U1-006"
+   ]
+  },
+  {
+   "id": "T-7-2",
+   "curso": 7,
+   "unidad": 2,
+   "nombre": "El Ágora",
+   "lema": "La palabra en la plaza",
+   "textoRegla": "Los Protagonistas de Política hacen +10 de daño.",
+   "regla": {
+    "tipo": "bonusDimension",
+    "dimension": "Politica",
+    "n": 10
+   },
+   "imagen": "img/tableros/T-7-2.jpg",
+   "lugares": [
+    "CC-7-U2-007"
+   ]
+  },
+  {
+   "id": "T-7-3",
+   "curso": 7,
+   "unidad": 3,
+   "nombre": "Castillo feudal",
+   "lema": "Tras las murallas",
+   "textoRegla": "Todo daño se reduce en 10.",
+   "regla": {
+    "tipo": "reduccionDanio",
+    "n": 10
+   },
+   "imagen": "img/tableros/T-7-3.jpg",
+   "lugares": []
+  },
+  {
+   "id": "T-7-4",
+   "curso": 7,
+   "unidad": 4,
+   "nombre": "Tenochtitlan",
+   "lema": "Ciudad sobre el lago",
+   "textoRegla": "Retirarse no cuesta Saber.",
+   "regla": {
+    "tipo": "retiroGratis"
+   },
+   "imagen": "img/tableros/T-7-4.jpg",
+   "lugares": []
+  },
+  {
+   "id": "T-8-1",
+   "curso": 8,
+   "unidad": 1,
+   "nombre": "Taller renacentista",
+   "lema": "El ser humano al centro",
+   "textoRegla": "Los Protagonistas de Cultura hacen +10 de daño.",
+   "regla": {
+    "tipo": "bonusDimension",
+    "dimension": "Cultura",
+    "n": 10
+   },
+   "imagen": "img/tableros/T-8-1.jpg",
+   "lugares": []
+  },
+  {
+   "id": "T-8-2",
+   "curso": 8,
+   "unidad": 2,
+   "nombre": "Puerto atlántico",
+   "lema": "Dos mundos conectados",
+   "textoRegla": "Al jugar un Personaje, robas 1 carta.",
+   "regla": {
+    "tipo": "personajeRoba",
+    "n": 1
+   },
+   "imagen": "img/tableros/T-8-2.jpg",
+   "lugares": [
+    "CC-5-U1-007",
+    "CC-6-U2-007",
+    "CC-8-U2-007"
+   ]
+  },
+  {
+   "id": "T-8-3",
+   "curso": 8,
+   "unidad": 3,
+   "nombre": "Salón ilustrado",
+   "lema": "Las luces de la razón",
+   "textoRegla": "Puedes jugar 2 cartas Aula por turno.",
+   "regla": {
+    "tipo": "aulaDoble"
+   },
+   "imagen": "img/tableros/T-8-3.jpg",
+   "lugares": [
+    "CC-8-U3-007"
+   ]
+  },
+  {
+   "id": "T-8-4",
+   "curso": 8,
+   "unidad": 4,
+   "nombre": "Una región de Chile",
+   "lema": "Sociedad y territorio",
+   "textoRegla": "Los Protagonistas de Territorio hacen +10 de daño.",
+   "regla": {
+    "tipo": "bonusDimension",
+    "dimension": "Territorio",
+    "n": 10
+   },
+   "imagen": "img/tableros/T-8-4.jpg",
+   "lugares": [
+    "CC-8-U4-005"
+   ]
+  }
+ ]
+}

@@ -256,3 +256,18 @@ Cada mazo lleva hasta 2 cartas Aula.
   - pasar todo el Saber de un Protagonista de la reserva al activo;
   - bonificación de daño solo para una dimensión;
   - efectos dobles (quitar el Lugar y robar).
+
+## 14. Ola 1: tableros temáticos, modo unidad y sensación de juego (aprobada el 17 nov 2026)
+
+- **16 tableros**, uno por unidad (`img/tableros/T-<curso>-<unidad>.jpg`, recortados de los collages del docente). Cada uno tiene una **regla de tablero**:
+  - **5°:** U1 Carabela (al jugar un Personaje, robas 1); U2 Plaza colonial (Sociedad +10); U3 Zonas naturales (Territorio +10); U4 Mesa comunitaria (al inicio de tu turno, tu activo recupera 10).
+  - **6°:** U1 Cabildo de 1810 (cada Hito da +1 Saber a tu activo); U2 Pampa salitrera (Economía +10); U3 Escuela pública (2 cartas Aula por turno); U4 Chile y sus regiones (Política +10).
+  - **7°:** U1 Creciente Fértil (al inicio de tu turno, tu activo recupera 10); U2 Ágora (Política +10); U3 Castillo feudal (todo daño −10); U4 Tenochtitlan (retirarse no cuesta Saber).
+  - **8°:** U1 Taller renacentista (Cultura +10); U2 Puerto atlántico (al jugar un Personaje, robas 1); U3 Salón ilustrado (2 cartas Aula por turno); U4 Región (Territorio +10).
+- **Al preparar la partida** se elige el tablero (o "Sorpresa"). La opción **"Reforzar esta unidad"** incluye en el mazo todas las cartas de la unidad del tablero y completa con el resto del curso.
+- **Los Lugares cambian el fondo** cuando hay un tablero que les corresponde (por ejemplo, Mar Mediterráneo → Ágora). La regla sigue siendo la del tablero elegido.
+- **Sensación de juego:**
+  - animaciones: carta que entra, embestida y temblor, carta "archivada" en sepia, Hito como sello de lacre, aviso de turno;
+  - sonidos sintetizados y vibración, ambos se pueden apagar;
+  - se respeta "reducir movimiento".
+- **Nota de contenido:** el tablero del Cabildo (T-6-1) muestra la bandera actual, de 1817. Queda pendiente regenerarlo.
