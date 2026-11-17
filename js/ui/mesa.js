@@ -6,7 +6,8 @@ import { armarMazo } from '../mazos.js';
 import { cargarCursoCompleto } from './datos.js';
 import { crearRng } from '../rng.js';
 import { almacen, CLAVES } from '../almacen.js';
-import { renderCarta } from './carta.js';
+import { renderCarta, textoParaLeer } from './carta.js';
+import { botonEscuchar, leer, detener } from './voz.js';
 import { esc, pips } from '../html.js';
 import { sonidos, sonidoActivo, alternarSonido } from './sonido.js';
 import { hacerArrastrable } from './arrastre.js';
@@ -39,6 +40,7 @@ export async function montarMesa(contenedor, opciones) {
     semilla: opciones.semilla ?? Math.floor(Math.random() * 1e9),
     hitosParaGanar: opciones.hitosParaGanar || ajustes.hitosParaGanar || 3,
     sabias: ajustes.sabias !== false,
+    leerSabias: !!ajustes.leerSabias,
     tablero: opciones.tablero || 'azar',
     reforzar: !!opciones.reforzar,
   };
@@ -424,8 +426,9 @@ export async function montarMesa(contenedor, opciones) {
       b.onclick = () => { capa.remove(); if (o.alElegir) o.alElegir(); else jugar(o.jugada); };
       botones.appendChild(b);
     }
+    botones.appendChild(botonEscuchar(() => textoParaLeer(carta)));
     const cerrar = h('button', 'boton-secundario', opciones.length ? 'Cancelar' : 'Cerrar');
-    cerrar.onclick = () => capa.remove();
+    cerrar.onclick = () => { detener(); capa.remove(); };
     botones.appendChild(cerrar);
     panel.appendChild(botones);
     capa.appendChild(panel);
@@ -458,6 +461,7 @@ export async function montarMesa(contenedor, opciones) {
       if (ev.tipo === 'ventaja') { sonidos.ventaja(); registrar(`<b>¡Ventaja ×2!</b> ${FRASES_VENTAJA[ev.de]}`); }
       if (ev.tipo === 'protegido') sonidos.protegido();
       if (ev.tipo === 'hito') sonidos.hito();
+      if (ev.tipo === 'conexion') { sonidos.conexion(); avisoConexion(ev); registrar(`¡Conexión histórica! <b>${esc(ev.causa.nombre)}</b> → <b>${esc(ev.efecto.nombre)}</b>: +1 Saber`); }
       if (ev.tipo === 'danio') {
         sonidos.ataque();
         embestida(ev.jugador);
@@ -466,7 +470,7 @@ export async function montarMesa(contenedor, opciones) {
       }
       if (ev.tipo === 'protegido') registrar(`<b>${esc(ev.carta.nombre)}</b> estaba protegido: no recibe daño`);
       if (ev.tipo === 'evolucion') registrar(`<b>${esc(ev.de.nombre)}</b> evoluciona en <b>${esc(ev.a.nombre)}</b>`);
-      if (ev.tipo === 'efecto' && !eventos.some(x => x.tipo === 'revelar')) registrar(`${nombres[ev.jugador]}: <b>${esc(ev.carta.nombre)}</b>`);
+      if (ev.tipo === 'efecto' && !eventos.some(x => x.tipo === 'revelar' || x.tipo === 'conexion')) registrar(`${nombres[ev.jugador]}: <b>${esc(ev.carta.nombre)}</b>`);
       if (ev.tipo === 'lugar') registrar(`Nuevo lugar: <b>${esc(ev.carta.nombre)}</b>`);
       if (ev.tipo === 'revelar') registrar(`${nombres[ev.jugador]}: se miraron ${ev.cartas.length} cartas del mazo${ev.tomada ? ` y se tomó <b>${esc(ev.tomada.nombre)}</b>` : ', sin Protagonistas'}`);
       if (ev.tipo === 'caida') {
@@ -500,6 +504,14 @@ export async function montarMesa(contenedor, opciones) {
     zona.appendChild(fantasma);
     await esperar(900);
     fantasma.remove();
+  }
+
+  function avisoConexion(ev) {
+    const a = h('div', `aviso-conexion${girado(ev.jugador) ? ' girado' : ''}`,
+      `<div class="titulo">¡Conexión histórica!</div><div class="cadena">${esc(ev.causa.nombre)}<span>→</span>${esc(ev.efecto.nombre)}</div>` +
+      `<p>${esc(ev.texto)}</p><div class="premio">+1 Saber para tu activo</div>`);
+    raiz.appendChild(a);
+    setTimeout(() => a.remove(), 2700);
   }
 
   function anunciarTurno(j) {
@@ -543,8 +555,13 @@ export async function montarMesa(contenedor, opciones) {
       const b = h('button', 'boton-principal', 'Seguir');
       c.appendChild(b);
       const capa = dobleCara(c);
-      capa.querySelectorAll('button').forEach(x => { x.onclick = () => { capa.remove(); resolve(); }; });
+      const texto = '¿Sabías que? ' + carta.nombre + '. ' + carta.dato;   // texto plano para la voz
+      capa.querySelectorAll('.boton-principal').forEach(x => {
+        x.parentNode.insertBefore(botonEscuchar(() => texto), x);
+        x.onclick = () => { detener(); capa.remove(); resolve(); };
+      });
       raiz.appendChild(capa);
+      if (config.leerSabias) leer(texto);
     });
   }
 

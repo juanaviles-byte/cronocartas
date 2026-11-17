@@ -12,6 +12,31 @@ const NOMBRE_BUSQUEDA = { lugar: 'un Lugar', protagonista: 'un Protagonista', ac
 
 export const nombreDim = d => NOMBRE_DIMENSION[d] || d;
 
+export function textoHabilidad(h) {
+  if (!h) return '';
+  switch (h.tipo) {
+    case 'resistente': return `Recibe ${h.n} menos de daño.`;
+    case 'fuerzaReserva': return `+${h.n} de daño por cada Protagonista en tu reserva.`;
+    case 'sanador': return `Si es tu activo, recupera ${h.n} al inicio de tu turno.`;
+    case 'inspirador': return 'Al entrar en juego, robas 1 carta.';
+    case 'saberAlEntrar': return `Entra en juego con ${h.n || 1} de Saber.`;
+    default: return '';
+  }
+}
+
+// Texto para leer la carta en voz alta.
+export function textoParaLeer(c) {
+  const partes = [c.nombre];
+  if (c.tipo === 'protagonista') partes.push(`Protagonista de ${nombreDim(c.dimension)}, resistencia ${c.resistencia}.`);
+  else partes.push(`${ETIQUETA[c.tipo] || ''}.`);
+  // Texto plano para la voz (no se inserta como HTML).
+  if (c.habilidad) partes.push('Habilidad ' + c.habilidad.nombre + ': ' + textoHabilidad(c.habilidad));
+  if (c.tipo === 'protagonista') c.acciones.forEach(a => partes.push('Acción ' + a.nombre + ': necesita ' + a.costo + ' de Saber y hace ' + a.danio + ' de daño.'));
+  else if (c.efecto || c.texto) partes.push(c.texto || textoEfecto(c.efecto));
+  partes.push(c.dato);
+  return partes.join(' ');
+}
+
 export function textoEfecto(ef) {
   if (!ef) return '';
   if (Array.isArray(ef)) return ef.map(textoEfecto).join(' Luego, ').replace(/ Luego, (\w)/g, (m, l) => ` Luego, ${l.toLowerCase()}`);
@@ -78,6 +103,7 @@ export function renderCarta(carta, { tamano = 'normal', instancia = null, unidad
         ${instancia?.bonus ? `<div class="sello">+${esc(instancia.bonus)}</div>` : ''}
       </div>
       <div class="m-pie">
+        ${carta.habilidad ? '<span class="m-hab" title="Tiene habilidad">◆</span>' : ''}
         ${esProt ? `<b class="m-res">${esc(vida)}</b>${instancia && instancia.danio ? `<span class="barra"><span style="width:${(vida / res) * 100}%"></span></span>` : ''}`
                  : `<span class="m-tipo">${ETIQUETA[carta.tipo]}</span>`}
         ${iconoTipo(claveTipo, 16)}
@@ -108,9 +134,12 @@ export function renderCarta(carta, { tamano = 'normal', instancia = null, unidad
       </div>`;
   }
 
+  const hab = carta.habilidad ? `<div class="habilidad"><small>Habilidad</small><b>${esc(carta.habilidad.nombre)}:</b> ${esc(textoHabilidad(carta.habilidad))}</div>` : '';
+  const conex = (carta.conexiones || []).filter(x => x.causaNombre).map(x => esc(x.causaNombre));
+  const lineaConex = conex.length && tamano === 'grande' ? `<div class="conexiones-carta"><small>Conexión histórica</small>Si ya jugaste <b>${conex.join('</b> o <b>')}</b>, tu activo gana +1 Saber.</div>` : '';
   let cuerpo;
   if (esProt) {
-    cuerpo = `
+    cuerpo = hab + `
       <div class="acciones">${carta.acciones.map(a => `
         <div class="accion"><span class="costo">${pips(a.costo)}</span><span class="an">${esc(a.nombre)}</span><b>${esc(a.danio)}</b></div>`).join('')}
       </div>
@@ -122,6 +151,7 @@ export function renderCarta(carta, { tamano = 'normal', instancia = null, unidad
   } else {
     cuerpo = `<div class="efecto"><small>Efecto</small>${esc(carta.texto || textoEfecto(carta.efecto))}</div>`;
   }
+  cuerpo += lineaConex;
 
   el.innerHTML = `
     <div class="marco">

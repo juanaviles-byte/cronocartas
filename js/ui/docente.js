@@ -241,6 +241,16 @@ export async function vistaDocente({ volver }) {
     }
     s.appendChild(o3); zona.appendChild(s);
 
+    s = h('section', 'paso'); s.appendChild(h('h2', '', 'Leer en voz alta el "¿Sabías que…?"'));
+    s.appendChild(h('p', 'nota', 'La tablet lee el dato automáticamente cuando cae una carta. Siempre está el botón "Escuchar" en cada carta.'));
+    const o5 = h('div', 'opciones');
+    for (const [val, t] of [[false, 'Solo con el botón'], [true, 'Leer automáticamente']]) {
+      const b = h('button', `opcion chica${!!a.leerSabias === val ? ' elegida' : ''}`, t);
+      b.onclick = () => guardar({ leerSabias: val });
+      o5.appendChild(b);
+    }
+    s.appendChild(o5); zona.appendChild(s);
+
     s = h('section', 'paso'); s.appendChild(h('h2', '', 'Otros'));
     const o4 = h('div', 'opciones');
     const borrarPartida = h('button', 'boton-secundario', 'Borrar partida guardada');

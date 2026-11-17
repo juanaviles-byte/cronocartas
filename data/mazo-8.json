@@ -39,7 +39,13 @@
    ],
    "dato": "En 1517 publicó sus 95 tesis criticando a la Iglesia, lo que dio inicio a la Reforma protestante.",
    "oa": "OA 2",
-   "emblema": "pergamino"
+   "emblema": "pergamino",
+   "conexiones": [
+    {
+     "causa": "CC-8-U1-006",
+     "texto": "La imprenta difundió las 95 tesis por toda Europa."
+    }
+   ]
   },
   {
    "id": "CC-8-U1-003",
@@ -85,7 +91,12 @@
    "dato": "El rey concentraba el poder y lo ejercía con funcionarios, impuestos y ejércitos profesionales.",
    "oa": "OA 3",
    "emblema": "corona",
-   "evolucionaDe": "CC-8-U1-003"
+   "evolucionaDe": "CC-8-U1-003",
+   "habilidad": {
+    "nombre": "Poder concentrado",
+    "tipo": "resistente",
+    "n": 10
+   }
   },
   {
    "id": "CC-8-U1-005",
@@ -133,7 +144,13 @@
    },
    "dato": "Galileo y otros científicos usaron la observación y la experimentación para conocer la naturaleza.",
    "oa": "OA 2",
-   "emblema": "estrella"
+   "emblema": "estrella",
+   "conexiones": [
+    {
+     "causa": "CC-8-U1-006",
+     "texto": "La imprenta hizo circular rápido los nuevos descubrimientos."
+    }
+   ]
   },
   {
    "id": "CC-8-U2-001",
@@ -147,7 +164,13 @@
    },
    "dato": "Fraile que denunció los abusos contra los indígenas y defendió su dignidad humana.",
    "oa": "OA 17",
-   "emblema": "pluma"
+   "emblema": "pluma",
+   "conexiones": [
+    {
+     "causa": "CC-8-U2-002",
+     "texto": "Los abusos de la conquista llevaron a Las Casas a denunciarlos."
+    }
+   ]
   },
   {
    "id": "CC-8-U2-002",
@@ -218,7 +241,12 @@
    "dato": "Los dueños de haciendas formaron una elite que mantuvo su poder durante los siglos XIX y XX.",
    "oa": "OA 13",
    "emblema": "corona",
-   "evolucionaDe": "CC-8-U2-003"
+   "evolucionaDe": "CC-8-U2-003",
+   "habilidad": {
+    "nombre": "Tierras y rentas",
+    "tipo": "sanador",
+    "n": 10
+   }
   },
   {
    "id": "CC-8-U2-005",
@@ -300,7 +328,13 @@
    ],
    "dato": "Hijos de españoles nacidos en América que querían más participación en el gobierno.",
    "oa": "OA 16",
-   "emblema": "personas"
+   "emblema": "personas",
+   "conexiones": [
+    {
+     "causa": "CC-8-U3-006",
+     "texto": "La independencia de EE. UU. inspiró a los criollos americanos."
+    }
+   ]
   },
   {
    "id": "CC-8-U3-003",
@@ -326,7 +360,18 @@
    "dato": "Tras las independencias, la mayoría de los nuevos países eligió la república como forma de gobierno.",
    "oa": "OA 16",
    "emblema": "estrella",
-   "evolucionaDe": "CC-8-U3-002"
+   "evolucionaDe": "CC-8-U3-002",
+   "conexiones": [
+    {
+     "causa": "CC-8-U3-001",
+     "texto": "Las nuevas repúblicas adoptaron la separación de poderes."
+    }
+   ],
+   "habilidad": {
+    "nombre": "Soberanía popular",
+    "tipo": "fuerzaReserva",
+    "n": 10
+   }
   },
   {
    "id": "CC-8-U3-004",
@@ -351,7 +396,17 @@
    ],
    "dato": "Reunieron el saber de su época en la Enciclopedia para difundir el uso de la razón.",
    "oa": "OA 14",
-   "emblema": "libro"
+   "emblema": "libro",
+   "conexiones": [
+    {
+     "causa": "CC-8-U1-006",
+     "texto": "La Enciclopedia llegó a muchos lectores gracias a la imprenta."
+    }
+   ],
+   "habilidad": {
+    "nombre": "Difundir las luces",
+    "tipo": "inspirador"
+   }
   },
   {
    "id": "CC-8-U3-005",
@@ -364,7 +419,13 @@
    },
    "dato": "La Declaración de 1789, en la Revolución francesa, proclamó que todos nacen libres e iguales en derechos.",
    "oa": "OA 18",
-   "emblema": "pergamino"
+   "emblema": "pergamino",
+   "conexiones": [
+    {
+     "causa": "CC-8-U3-004",
+     "texto": "Las ideas ilustradas inspiraron la Declaración de 1789."
+    }
+   ]
   },
   {
    "id": "CC-8-U3-006",

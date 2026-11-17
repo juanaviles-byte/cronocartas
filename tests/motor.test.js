@@ -468,3 +468,76 @@ test('tablero curarInicioTurno cura al activo al empezar su turno', () => {
   e.jugadores.B.activo.danio = 30;
   assert.equal(jugar(e, { tipo: 'pasar' }).estado.jugadores.B.activo.danio, 20);
 });
+
+// ---- Ola 2: conexiones y habilidades ----
+test('conexión: bajar una carta cuya causa está en tu descarte da +1 Saber al activo', () => {
+  const causa = acont({ tipo: 'robar', n: 1 }, { id: 'IMPRENTA' });
+  const efecto = prot('Sociedad', 60, undefined, { id: 'LUTERO', conexiones: [{ causa: 'IMPRENTA', texto: 'La imprenta difundió las 95 tesis.' }] });
+  const e = mesa({ activoA: prot('Politica'), activoB: prot('Cultura'), manoA: [efecto] });
+  e.jugadores.A.descarte = [{ uid: 'd1', carta: causa }];
+  const { estado, eventos } = jugar(e, { tipo: 'bajar', uid: 'Am0' });
+  assert.equal(estado.jugadores.A.activo.saber, 1);
+  const c = eventos.find(x => x.tipo === 'conexion');
+  assert.equal(c.causa.id, 'IMPRENTA');
+  assert.equal(c.efecto.id, 'LUTERO');
+  assert.match(c.texto, /95 tesis/);
+});
+
+test('conexión: la causa puede estar en tu mesa o ser el Lugar en juego', () => {
+  const efecto = acont({ tipo: 'robar', n: 1 }, { id: 'E-MERC', conexiones: [{ causa: 'L-MED', texto: 'x' }, { causa: 'P-X', texto: 'y' }] });
+  const L = lugar({ tipo: 'bonusDimension', dimension: 'Economia', n: 10 }); L.id = 'L-MED';
+  const e = mesa({ activoA: prot('Politica'), activoB: prot('Cultura'), manoA: [efecto], lugarEnJuego: L });
+  assert.equal(jugar(e, { tipo: 'jugar', uid: 'Am0' }).estado.jugadores.A.activo.saber, 1);
+  const e2 = mesa({ activoA: prot('Politica'), activoB: prot('Cultura'), reservaA: [prot('Sociedad', 60, undefined, { id: 'P-X' })], manoA: [efecto] });
+  assert.equal(jugar(e2, { tipo: 'jugar', uid: 'Am0' }).estado.jugadores.A.activo.saber, 1);
+});
+
+test('conexión: sin la causa no hay bonus, y varias causas dan un solo bonus', () => {
+  const efecto = acont({ tipo: 'robar', n: 1 }, { conexiones: [{ causa: 'NO-ESTA', texto: 'x' }] });
+  const e = mesa({ activoA: prot('Politica'), activoB: prot('Cultura'), manoA: [efecto] });
+  const r = jugar(e, { tipo: 'jugar', uid: 'Am0' });
+  assert.equal(r.estado.jugadores.A.activo.saber, 0);
+  assert.ok(!r.eventos.some(x => x.tipo === 'conexion'));
+  const doble = acont({ tipo: 'robar', n: 1 }, { conexiones: [{ causa: 'C1', texto: 'a' }, { causa: 'C2', texto: 'b' }] });
+  const e2 = mesa({ activoA: prot('Politica'), activoB: prot('Cultura'), manoA: [doble] });
+  e2.jugadores.A.descarte = [{ uid: 'x1', carta: acont({ tipo: 'robar', n: 1 }, { id: 'C1' }) }, { uid: 'x2', carta: acont({ tipo: 'robar', n: 1 }, { id: 'C2' }) }];
+  assert.equal(jugar(e2, { tipo: 'jugar', uid: 'Am0' }).estado.jugadores.A.activo.saber, 1);
+});
+
+test('conexión al evolucionar: la causa en el descarte cuenta', () => {
+  const base = prot('Sociedad', 60, undefined, { id: 'BASE' });
+  const evo = prot('Politica', 100, undefined, { id: 'EVO', evolucionaDe: 'BASE', conexiones: [{ causa: 'MONT', texto: 'separación de poderes' }] });
+  const e = mesa({ activoA: base, activoB: prot('Cultura'), manoA: [evo] });
+  e.jugadores.A.descarte = [{ uid: 'm', carta: acont({ tipo: 'robar', n: 1 }, { id: 'MONT' }) }];
+  const r = jugar(e, { tipo: 'evolucionar', uid: 'Am0', objetivo: e.jugadores.A.activo.uid });
+  assert.ok(r.eventos.some(x => x.tipo === 'conexion'));
+});
+
+test('habilidad resistente reduce el daño recibido', () => {
+  const e = mesa({ activoA: prot('Politica', 60, [{ nombre: 'X', costo: 1, danio: 30 }]), activoB: prot('Cultura', 100, undefined, { habilidad: { nombre: 'Disciplina', tipo: 'resistente', n: 10 } }) });
+  e.jugadores.A.activo.saber = 1;
+  assert.equal(jugar(e, { tipo: 'accion', indice: 0 }).estado.jugadores.B.activo.danio, 20);
+});
+
+test('habilidad fuerzaReserva suma daño por cada Protagonista en la reserva', () => {
+  const e = mesa({ activoA: prot('Sociedad', 60, [{ nombre: 'X', costo: 1, danio: 20 }], { habilidad: { nombre: 'Ayni', tipo: 'fuerzaReserva', n: 10 } }),
+    activoB: prot('Politica', 200), reservaA: [prot('Cultura'), prot('Cultura')] });
+  e.jugadores.A.activo.saber = 1;
+  assert.equal(jugar(e, { tipo: 'accion', indice: 0 }).estado.jugadores.B.activo.danio, 40);
+});
+
+test('habilidad sanador cura al activo al inicio de su turno', () => {
+  const e = mesa({ activoA: prot('Politica'), activoB: prot('Cultura', 80, undefined, { habilidad: { nombre: 'Cosechas', tipo: 'sanador', n: 10 } }) });
+  e.jugadores.B.activo.danio = 30;
+  assert.equal(jugar(e, { tipo: 'pasar' }).estado.jugadores.B.activo.danio, 20);
+});
+
+test('habilidad inspirador roba 1 carta al entrar en juego', () => {
+  const e = mesa({ activoA: prot('Politica'), activoB: prot('Cultura'), manoA: [prot('Cultura', 70, undefined, { habilidad: { nombre: 'Preguntar', tipo: 'inspirador' } })] });
+  assert.equal(jugar(e, { tipo: 'bajar', uid: 'Am0' }).estado.jugadores.A.mano.length, 1);
+});
+
+test('habilidad saberAlEntrar hace que entre con Saber (también al evolucionar)', () => {
+  const e = mesa({ activoA: prot('Politica'), activoB: prot('Cultura'), manoA: [prot('Territorio', 80, undefined, { habilidad: { nombre: 'Avanzada', tipo: 'saberAlEntrar', n: 1 } })] });
+  assert.equal(jugar(e, { tipo: 'bajar', uid: 'Am0' }).estado.jugadores.A.reserva[0].saber, 1);
+});

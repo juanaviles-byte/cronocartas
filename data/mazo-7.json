@@ -51,7 +51,18 @@
    "dato": "Con la agricultura y la domesticación de animales, los grupos humanos se volvieron sedentarios.",
    "oa": "OA 2",
    "emblema": "casa",
-   "evolucionaDe": "CC-7-U1-001"
+   "evolucionaDe": "CC-7-U1-001",
+   "conexiones": [
+    {
+     "causa": "CC-7-U1-006",
+     "texto": "La agricultura comenzó en las tierras de la Creciente Fértil."
+    }
+   ],
+   "habilidad": {
+    "nombre": "Cosechas",
+    "tipo": "sanador",
+    "n": 10
+   }
   },
   {
    "id": "CC-7-U1-003",
@@ -96,7 +107,13 @@
    ],
    "dato": "En Mesopotamia crearon una de las primeras escrituras: la escritura cuneiforme.",
    "oa": "OA 4",
-   "emblema": "pergamino"
+   "emblema": "pergamino",
+   "conexiones": [
+    {
+     "causa": "CC-7-U1-005",
+     "texto": "Los sumerios usaron la escritura para registrar cuentas y leyes."
+    }
+   ]
   },
   {
    "id": "CC-7-U1-005",
@@ -145,7 +162,13 @@
    ],
    "dato": "En Atenas los ciudadanos votaban en la Asamblea, pero mujeres, esclavos y extranjeros no participaban.",
    "oa": "OA 6",
-   "emblema": "urna"
+   "emblema": "urna",
+   "conexiones": [
+    {
+     "causa": "CC-7-U2-008",
+     "texto": "Pericles impulsó la participación de los ciudadanos de Atenas."
+    }
+   ]
   },
   {
    "id": "CC-7-U2-002",
@@ -170,7 +193,12 @@
    ],
    "dato": "Ejército organizado y disciplinado que permitió a Roma extender su territorio.",
    "oa": "OA 7",
-   "emblema": "escudo"
+   "emblema": "escudo",
+   "habilidad": {
+    "nombre": "Disciplina",
+    "tipo": "resistente",
+    "n": 10
+   }
   },
   {
    "id": "CC-7-U2-003",
@@ -241,7 +269,17 @@
    ],
    "dato": "Pensadores como Sócrates, Platón y Aristóteles buscaron explicar el mundo con la razón.",
    "oa": "OA 8",
-   "emblema": "columna"
+   "emblema": "columna",
+   "conexiones": [
+    {
+     "causa": "CC-7-U2-001",
+     "texto": "El debate en la polis estimuló el pensamiento filosófico."
+    }
+   ],
+   "habilidad": {
+    "nombre": "Preguntar",
+    "tipo": "inspirador"
+   }
   },
   {
    "id": "CC-7-U2-006",
@@ -355,7 +393,13 @@
    ],
    "dato": "En los monasterios se copiaban libros a mano, lo que conservó gran parte del saber antiguo.",
    "oa": "OA 9",
-   "emblema": "libro"
+   "emblema": "libro",
+   "conexiones": [
+    {
+     "causa": "CC-7-U2-005",
+     "texto": "Los monjes copiaron y conservaron obras de los filósofos antiguos."
+    }
+   ]
   },
   {
    "id": "CC-7-U3-004",
@@ -375,7 +419,13 @@
    ],
    "dato": "Desde el siglo XI el comercio revivió y los mercaderes viajaban por ferias y rutas.",
    "oa": "OA 12",
-   "emblema": "moneda"
+   "emblema": "moneda",
+   "conexiones": [
+    {
+     "causa": "CC-7-U2-007",
+     "texto": "El comercio europeo revivió por las rutas del Mediterráneo."
+    }
+   ]
   },
   {
    "id": "CC-7-U3-005",
@@ -435,7 +485,13 @@
    },
    "dato": "En los siglos XI y XII surgieron las primeras universidades, como las de Bolonia y París.",
    "oa": "OA 12",
-   "emblema": "libro"
+   "emblema": "libro",
+   "conexiones": [
+    {
+     "causa": "CC-7-U3-003",
+     "texto": "El saber conservado en los monasterios llegó a las universidades."
+    }
+   ]
   },
   {
    "id": "CC-7-U3-008",
@@ -514,7 +570,12 @@
    ],
    "dato": "Comunidad familiar andina que trabajaba la tierra en conjunto y se ayudaba mutuamente.",
    "oa": "OA 14",
-   "emblema": "personas"
+   "emblema": "personas",
+   "habilidad": {
+    "nombre": "Trabajo comunitario",
+    "tipo": "fuerzaReserva",
+    "n": 10
+   }
   },
   {
    "id": "CC-7-U4-004",
@@ -540,7 +601,18 @@
    "dato": "Unió un enorme territorio con una red de caminos y una administración centralizada en el Cusco.",
    "oa": "OA 14",
    "emblema": "corona",
-   "evolucionaDe": "CC-7-U4-003"
+   "evolucionaDe": "CC-7-U4-003",
+   "conexiones": [
+    {
+     "causa": "CC-7-U4-008",
+     "texto": "Pachacútec inició la gran expansión del Imperio inca."
+    }
+   ],
+   "habilidad": {
+    "nombre": "Administración",
+    "tipo": "saberAlEntrar",
+    "n": 1
+   }
   },
   {
    "id": "CC-7-U4-005",
@@ -554,7 +626,13 @@
    },
    "dato": "Sistema de cuerdas con nudos que los incas usaban para registrar cantidades.",
    "oa": "OA 14",
-   "emblema": "pergamino"
+   "emblema": "pergamino",
+   "conexiones": [
+    {
+     "causa": "CC-7-U4-004",
+     "texto": "La administración inca registraba sus cuentas en quipus."
+    }
+   ]
   },
   {
    "id": "CC-7-U4-006",

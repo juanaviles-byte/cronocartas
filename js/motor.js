@@ -128,6 +128,32 @@ const regla = (e, tipo) => (e.tablero && e.tablero.regla && e.tablero.regla.tipo
 const limiteAula = e => (regla(e, 'aulaDoble') ? 2 : 1);
 const costoRetirada = (e, inst) => (regla(e, 'retiroGratis') ? 0 : (inst.carta.retirada ?? 1));
 
+const habilidad = (inst, tipo) => (inst && inst.carta.habilidad && inst.carta.habilidad.tipo === tipo ? inst.carta.habilidad : null);
+
+// Conexión causa → consecuencia: si la causa está en tu mesa, tu descarte o es el Lugar en juego,
+// tu activo recibe +1 Saber. Solo un bonus por carta.
+function revisarConexion(e, j, carta, ev) {
+  if (!Array.isArray(carta.conexiones) || !carta.conexiones.length) return;
+  const yo = e.jugadores[j];
+  const presentes = [...yo.descarte.map(c => c.carta), ...enMesa(yo).map(p => p.carta), ...(e.lugar ? [e.lugar.carta] : [])];
+  for (const cx of carta.conexiones) {
+    const causa = presentes.find(c => c.id === cx.causa && c !== carta);
+    if (causa) {
+      if (yo.activo) yo.activo.saber += 1;
+      ev.push({ tipo: 'conexion', jugador: j, causa, efecto: carta, texto: cx.texto });
+      return;
+    }
+  }
+}
+
+// Al entrar un Protagonista a la mesa (bajar o evolucionar).
+function alEntrar(e, j, inst) {
+  const yo = e.jugadores[j];
+  const s = habilidad(inst, 'saberAlEntrar');
+  if (s) inst.saber += s.n || 1;
+  if (habilidad(inst, 'inspirador')) robar(yo, 1);
+}
+
 const listaEfectos = ef => (Array.isArray(ef) ? ef : ef ? [ef] : []);
 
 // Normaliza las búsquedas: buscarProtagonista es buscar con cartaTipo 'protagonista'.
@@ -212,8 +238,11 @@ export function aplicarJugada(estadoEntrada, jugada) {
     }
     case 'bajar': {
       const c = sacarDeMano(jugada.uid);
-      yo.reserva.push(instancia(c, e.numeroTurno));
+      const inst = instancia(c, e.numeroTurno);
+      yo.reserva.push(inst);
       ev.push({ tipo: 'bajar', jugador: j, carta: c.carta });
+      alEntrar(e, j, inst);
+      revisarConexion(e, j, c.carta, ev);
       break;
     }
     case 'evolucionar': {
@@ -224,6 +253,8 @@ export function aplicarJugada(estadoEntrada, jugada) {
       obj.carta = c.carta;
       obj.turnoEntrada = e.numeroTurno;
       ev.push({ tipo: 'evolucion', jugador: j, de: anterior, a: c.carta });
+      alEntrar(e, j, obj);
+      revisarConexion(e, j, c.carta, ev);
       break;
     }
     case 'asignarSaber': {
@@ -239,6 +270,7 @@ export function aplicarJugada(estadoEntrada, jugada) {
         e.lugar = { uid: c.uid, carta: c.carta, duenio: j };
         ev.push({ tipo: 'lugar', jugador: j, carta: c.carta });
       } else {
+        revisarConexion(e, j, c.carta, ev);
         if (c.carta.tipo === 'aula') { yo.aulaCuenta = (yo.aulaCuenta || 0) + 1; yo.aulaUsada = true; }
         if (c.carta.tipo === 'personaje') {
           yo.personajeUsado = true;
@@ -337,6 +369,8 @@ function resolverAccion(e, j, indice, ev) {
     const bt = regla(e, 'bonusDimension');
     if (bt && bt.dimension === atk.carta.dimension) danio += bt.n;
     danio += atk.bonus;
+    const fr = habilidad(atk, 'fuerzaReserva');
+    if (fr) danio += fr.n * yo.reserva.length;
     const ventaja = VENTAJA[atk.carta.dimension] === def.carta.dimension;
     if (ventaja) {
       danio *= 2;
@@ -344,6 +378,8 @@ function resolverAccion(e, j, indice, ev) {
     }
     const muro = regla(e, 'reduccionDanio');
     if (muro) danio = Math.max(0, danio - muro.n);
+    const res = habilidad(def, 'resistente');
+    if (res) danio = Math.max(0, danio - res.n);
     if (def.protegido) {
       def.protegido = false;
       ev.push({ tipo: 'protegido', jugador: rival(j), carta: def.carta });
@@ -389,6 +425,8 @@ function iniciarTurno(e, ev) {
   yo.personajeUsado = false;
   const cura = regla(e, 'curarInicioTurno');
   if (cura && yo.activo) yo.activo.danio = Math.max(0, yo.activo.danio - cura.n);
+  const san = habilidad(yo.activo, 'sanador');
+  if (san) yo.activo.danio = Math.max(0, yo.activo.danio - san.n);
   yo.retiroUsado = false;
   yo.saberPendiente = 1;
   const robadas = robar(yo, 1);

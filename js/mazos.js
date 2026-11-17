@@ -17,6 +17,8 @@ function efectoValido(ef) {
   return true;
 }
 
+export const HABILIDADES = ['resistente', 'fuerzaReserva', 'sanador', 'inspirador', 'saberAlEntrar'];
+
 export const NOMBRE_DIMENSION = { Politica: 'Política', Economia: 'Economía', Sociedad: 'Sociedad', Cultura: 'Cultura', Territorio: 'Territorio' };
 
 export function validarCarta(c) {
@@ -37,6 +39,10 @@ export function validarCarta(c) {
       if (!(a.danio >= 0)) e.push(`${id}: daño inválido`);
     }
   }
+  if (c.habilidad && (!HABILIDADES.includes(c.habilidad.tipo) || !c.habilidad.nombre)) e.push(`${id}: habilidad desconocida`);
+  if (c.conexiones && (!Array.isArray(c.conexiones) || c.conexiones.some(x => !x || typeof x.causa !== 'string' || typeof x.texto !== 'string'))) {
+    e.push(`${id}: conexiones mal formadas`);
+  }
   if (c.tipo === 'acontecimiento' || c.tipo === 'aula' || c.tipo === 'personaje') {
     if (!efectoValido(c.efecto)) e.push(`${id}: efecto desconocido o mal escrito`);
   }
@@ -55,6 +61,9 @@ export function validarMazo(cartas) {
     ids.set(c.id, c);
   }
   for (const c of cartas) {
+    for (const x of Array.isArray(c.conexiones) ? c.conexiones : []) {
+      if (x && typeof x.causa === 'string' && !ids.has(x.causa)) e.push(`${c.id}: su conexión apunta a ${x.causa}, que no existe`);
+    }
     if (!c.evolucionaDe) continue;
     const base = ids.get(c.evolucionaDe);
     if (!base) e.push(`${c.id}: evoluciona de ${c.evolucionaDe}, que no existe`);
@@ -143,6 +152,9 @@ export async function cargarCurso(curso, { comunidad = [], ediciones = {}, image
   const extra = comunidad.filter(c => validarCarta(c).length === 0);
   const cartas = [...aplicarEdiciones(m.cartas, ediciones, imagenes), ...extra];
   const porId = new Map(cartas.map(c => [c.id, c]));
+  for (const c of cartas) if (Array.isArray(c.conexiones)) {
+    c.conexiones = c.conexiones.map(x => ({ ...x, causaNombre: porId.get(x.causa)?.nombre }));
+  }
   for (const c of cartas) if (c.evolucionaDe && porId.get(c.evolucionaDe)) {
     const b = porId.get(c.evolucionaDe);
     Object.assign(c, { baseNombre: b.nombre, baseEmblema: b.emblema, baseDimension: b.dimension });

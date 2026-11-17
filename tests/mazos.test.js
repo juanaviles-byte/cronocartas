@@ -108,3 +108,22 @@ test('las personas históricas ya no son Protagonistas', () => {
     assert.equal(c.tipo, 'personaje', nombre);
   }
 });
+
+test('cada curso tiene al menos 5 conexiones históricas y 4 habilidades válidas', () => {
+  for (const m of CURSOS) {
+    const cx = m.cartas.flatMap(c => (c.conexiones || []).map(x => ({ ...x, de: c.id })));
+    assert.ok(cx.length >= 5, `conexiones ${m.curso}: ${cx.length}`);
+    for (const x of cx) {
+      assert.ok(m.cartas.some(c => c.id === x.causa), `${x.de} → causa ${x.causa}`);
+      assert.ok(x.texto.length >= 15 && x.texto.length <= 140, `${x.de} texto`);
+    }
+    assert.ok(m.cartas.filter(c => c.habilidad).length >= 4, `habilidades ${m.curso}`);
+  }
+});
+
+test('validarCarta detecta habilidades desconocidas y conexiones mal formadas', () => {
+  const c = structuredClone(CURSOS[2].cartas.find(c => c.tipo === 'protagonista'));
+  assert.ok(validarCarta({ ...c, habilidad: { nombre: 'X', tipo: 'volar' } }).length > 0);
+  assert.ok(validarCarta({ ...c, conexiones: [{ causa: 5 }] }).length > 0);
+  assert.ok(validarMazo([...CURSOS[2].cartas.filter(x => x.id !== c.id), { ...c, conexiones: [{ causa: 'NO-EXISTE', texto: 'una explicación larga' }] }]).some(e => e.includes('NO-EXISTE')));
+});

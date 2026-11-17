@@ -1,6 +1,7 @@
 // Navegación de Cronocartas por #hash: #inicio #jugar #mesa #tutorial #coleccion #banco #docente
 import { montarMesa, cargarTableros } from './mesa.js';
-import { renderCarta } from './carta.js';
+import { renderCarta, textoParaLeer } from './carta.js';
+import { botonEscuchar, detener } from './voz.js';
 import { cargarCursoCompleto } from './datos.js';
 import { almacen, CLAVES } from '../almacen.js';
 import { esc } from '../html.js';
@@ -162,7 +163,8 @@ function cartaClicable(c, unidades) {
     const capa = h('div', 'capa');
     const panel = h('div', 'panel-carta');
     panel.appendChild(renderCarta(c, { tamano: 'grande', unidades }));
-    const b = boton('Cerrar', 'boton-secundario', () => capa.remove());
+    panel.appendChild(botonEscuchar(() => textoParaLeer(c)));
+    const b = boton('Cerrar', 'boton-secundario', () => { detener(); capa.remove(); });
     panel.appendChild(b);
     capa.appendChild(panel);
     capa.onclick = ev => { if (ev.target === capa) capa.remove(); };

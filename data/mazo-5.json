@@ -20,7 +20,13 @@
    },
    "dato": "En 1492 llegó a América navegando hacia el oeste, cuando buscaba una nueva ruta hacia Asia.",
    "oa": "OA 1",
-   "emblema": "barco"
+   "emblema": "barco",
+   "conexiones": [
+    {
+     "causa": "CC-5-U1-005",
+     "texto": "Los avances en navegación hicieron posible el viaje de 1492."
+    }
+   ]
   },
   {
    "id": "CC-5-U1-002",
@@ -33,7 +39,13 @@
    },
    "dato": "Su expedición (1519-1522) encontró el paso entre el Atlántico y el Pacífico. Juan Sebastián Elcano la terminó.",
    "oa": "OA 1",
-   "emblema": "mapa"
+   "emblema": "mapa",
+   "conexiones": [
+    {
+     "causa": "CC-5-U1-001",
+     "texto": "Tras Colón, otros buscaron un paso hacia Asia navegando al oeste."
+    }
+   ]
   },
   {
    "id": "CC-5-U1-003",
@@ -47,7 +59,13 @@
    },
    "dato": "Fundó Santiago del Nuevo Extremo en 1541, a los pies del cerro Huelén, hoy cerro Santa Lucía.",
    "oa": "OA 2",
-   "emblema": "escudo"
+   "emblema": "escudo",
+   "conexiones": [
+    {
+     "causa": "CC-5-U1-008",
+     "texto": "Valdivia llegó a Chile al mando de su hueste."
+    }
+   ]
   },
   {
    "id": "CC-5-U1-004",
@@ -88,7 +106,13 @@
    },
    "dato": "Los españoles fundaron ciudades como Santiago, La Serena y Concepción para quedarse y expandirse.",
    "oa": "OA 2",
-   "emblema": "casa"
+   "emblema": "casa",
+   "conexiones": [
+    {
+     "causa": "CC-5-U1-003",
+     "texto": "Valdivia fundó Santiago y otras ciudades para asentar la conquista."
+    }
+   ]
   },
   {
    "id": "CC-5-U1-007",
@@ -128,7 +152,12 @@
    ],
    "dato": "Grupo de soldados y colonos que acompañaba a un conquistador; muchas veces ellos mismos pagaban la expedición.",
    "oa": "OA 2",
-   "emblema": "escudo"
+   "emblema": "escudo",
+   "habilidad": {
+    "nombre": "Avanzada",
+    "tipo": "saberAlEntrar",
+    "n": 1
+   }
   },
   {
    "id": "CC-5-U1-009",
@@ -194,7 +223,12 @@
    "dato": "En la Colonia surgió una sociedad mestiza, mezcla de culturas, que es una base del Chile actual.",
    "oa": "OA 6",
    "emblema": "personas",
-   "evolucionaDe": "CC-5-U2-001"
+   "evolucionaDe": "CC-5-U2-001",
+   "habilidad": {
+    "nombre": "Mestizaje",
+    "tipo": "fuerzaReserva",
+    "n": 10
+   }
   },
   {
    "id": "CC-5-U2-003",
@@ -208,7 +242,13 @@
    },
    "dato": "Joven mapuche que conoció la forma de combatir española y la usó para resistir la Conquista.",
    "oa": "OA 7",
-   "emblema": "escudo"
+   "emblema": "escudo",
+   "conexiones": [
+    {
+     "causa": "CC-5-U1-003",
+     "texto": "Lautaro conoció la forma de combatir española sirviendo a Valdivia."
+    }
+   ]
   },
   {
    "id": "CC-5-U2-004",
@@ -233,7 +273,13 @@
    ],
    "dato": "Chile dependía de España: solo podía comerciar con la metrópoli, lo que se llama monopolio comercial.",
    "oa": "OA 6",
-   "emblema": "moneda"
+   "emblema": "moneda",
+   "conexiones": [
+    {
+     "causa": "CC-5-U1-007",
+     "texto": "El comercio con América pasaba por el puerto de Sevilla."
+    }
+   ]
   },
   {
    "id": "CC-5-U2-005",
@@ -331,7 +377,12 @@
    ],
    "dato": "Tiene fiordos, canales, hielos y clima frío. Es la zona menos poblada de Chile.",
    "oa": "OA 9",
-   "emblema": "montana"
+   "emblema": "montana",
+   "habilidad": {
+    "nombre": "Clima extremo",
+    "tipo": "resistente",
+    "n": 10
+   }
   },
   {
    "id": "CC-5-U3-004",
@@ -351,7 +402,13 @@
    ],
    "dato": "El cobre es un recurso no renovable y el principal producto que Chile vende al mundo.",
    "oa": "OA 10",
-   "emblema": "engranaje"
+   "emblema": "engranaje",
+   "conexiones": [
+    {
+     "causa": "CC-5-U3-001",
+     "texto": "El Norte Grande concentra grandes yacimientos de cobre."
+    }
+   ]
   },
   {
    "id": "CC-5-U3-005",
@@ -445,7 +502,12 @@
    "dato": "Juntas de vecinos, fundaciones y voluntariados: personas que se organizan para lograr metas comunes.",
    "oa": "OA 19",
    "emblema": "personas",
-   "evolucionaDe": "CC-5-U4-002"
+   "evolucionaDe": "CC-5-U4-002",
+   "habilidad": {
+    "nombre": "Ayuda mutua",
+    "tipo": "sanador",
+    "n": 10
+   }
   },
   {
    "id": "CC-5-U4-004",
@@ -479,7 +541,13 @@
    },
    "dato": "Un proyecto con plan y presupuesto puede resolver un problema de la escuela, como el gasto de agua.",
    "oa": "OA 18",
-   "emblema": "engranaje"
+   "emblema": "engranaje",
+   "conexiones": [
+    {
+     "causa": "CC-5-U4-002",
+     "texto": "Una directiva organizada puede impulsar proyectos para la escuela."
+    }
+   ]
   },
   {
    "id": "CC-5-U4-006",

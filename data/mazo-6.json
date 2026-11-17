@@ -25,7 +25,13 @@
    ],
    "dato": "Buscaba que Chile se gobernara a sí mismo: primero con más autonomía y luego con independencia total.",
    "oa": "OA 2",
-   "emblema": "escudo"
+   "emblema": "escudo",
+   "conexiones": [
+    {
+     "causa": "CC-6-U1-006",
+     "texto": "El Cabildo de 1810 inició el camino hacia la autonomía."
+    }
+   ]
   },
   {
    "id": "CC-6-U1-002",
@@ -51,7 +57,12 @@
    "dato": "En 1818 se proclamó la Independencia de Chile, y la batalla de Maipú la consolidó ese mismo año.",
    "oa": "OA 2",
    "emblema": "estrella",
-   "evolucionaDe": "CC-6-U1-001"
+   "evolucionaDe": "CC-6-U1-001",
+   "habilidad": {
+    "nombre": "Soberanía",
+    "tipo": "resistente",
+    "n": 10
+   }
   },
   {
    "id": "CC-6-U1-003",
@@ -65,7 +76,13 @@
    },
    "dato": "Tras la victoria de Chacabuco, fue Director Supremo de Chile entre 1817 y 1823.",
    "oa": "OA 2",
-   "emblema": "estrella"
+   "emblema": "estrella",
+   "conexiones": [
+    {
+     "causa": "CC-6-U1-008",
+     "texto": "Con el Ejército de los Andes, O'Higgins triunfó en Chacabuco."
+    }
+   ]
   },
   {
    "id": "CC-6-U1-004",
@@ -141,7 +158,12 @@
    ],
    "dato": "Ejército formado en Mendoza por José de San Martín que en 1817 cruzó la cordillera para liberar Chile.",
    "oa": "OA 2",
-   "emblema": "montana"
+   "emblema": "montana",
+   "habilidad": {
+    "nombre": "Cruce planificado",
+    "tipo": "saberAlEntrar",
+    "n": 1
+   }
   },
   {
    "id": "CC-6-U2-001",
@@ -200,7 +222,13 @@
    ],
    "dato": "Tras la Guerra del Pacífico, Chile incorporó Tarapacá y Antofagasta, regiones ricas en salitre.",
    "oa": "OA 6",
-   "emblema": "engranaje"
+   "emblema": "engranaje",
+   "conexiones": [
+    {
+     "causa": "CC-6-U2-006",
+     "texto": "El ferrocarril llevaba el salitre de la pampa a los puertos."
+    }
+   ]
   },
   {
    "id": "CC-6-U2-004",
@@ -226,7 +254,12 @@
    "dato": "La riqueza del salitre trajo también la cuestión social: malas condiciones de vida y trabajo de obreros.",
    "oa": "OA 6",
    "emblema": "personas",
-   "evolucionaDe": "CC-6-U2-003"
+   "evolucionaDe": "CC-6-U2-003",
+   "habilidad": {
+    "nombre": "Organización obrera",
+    "tipo": "fuerzaReserva",
+    "n": 10
+   }
   },
   {
    "id": "CC-6-U2-005",
@@ -302,7 +335,13 @@
    ],
    "dato": "Durante el siglo XX más personas pudieron votar, estudiar y participar en la vida pública.",
    "oa": "OA 7",
-   "emblema": "personas"
+   "emblema": "personas",
+   "conexiones": [
+    {
+     "causa": "CC-6-U3-005",
+     "texto": "Con el voto femenino, las mujeres pasaron a elegir presidente y parlamentarios."
+    }
+   ]
   },
   {
    "id": "CC-6-U3-003",
@@ -328,7 +367,12 @@
    "dato": "El plebiscito de 1988 abrió el camino al retorno de la democracia en 1990.",
    "oa": "OA 8",
    "emblema": "urna",
-   "evolucionaDe": "CC-6-U3-002"
+   "evolucionaDe": "CC-6-U3-002",
+   "habilidad": {
+    "nombre": "Reencuentro",
+    "tipo": "sanador",
+    "n": 10
+   }
   },
   {
    "id": "CC-6-U3-004",
@@ -348,7 +392,13 @@
    ],
    "dato": "En el siglo XX creció la clase media gracias al acceso a la educación y a nuevos empleos.",
    "oa": "OA 7",
-   "emblema": "casa"
+   "emblema": "casa",
+   "conexiones": [
+    {
+     "causa": "CC-6-U3-006",
+     "texto": "Más educación permitió que creciera la clase media."
+    }
+   ]
   },
   {
    "id": "CC-6-U3-005",

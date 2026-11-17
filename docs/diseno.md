@@ -271,3 +271,20 @@ Cada mazo lleva hasta 2 cartas Aula.
   - sonidos sintetizados y vibración, ambos se pueden apagar;
   - se respeta "reducir movimiento".
 - **Nota de contenido:** el tablero del Cabildo (T-6-1) muestra la bandera actual, de 1817. Queda pendiente regenerarlo.
+
+## 15. Ola 2: conexiones históricas, habilidades y lectura en voz alta (aprobada el 17 nov 2026)
+
+- **Arrastrar y soltar** (agregado antes de la Ola 2): las cartas se arrastran con mouse, dedo o touchpad.
+  - Desde la mano: un Protagonista se suelta en el activo o la reserva; una Etapa 2, sobre su carta base; las demás cartas, en tu lado de la mesa.
+  - Desde la reserva: un Protagonista se arrastra al activo para retirarse o promoverse.
+  - Tocar una carta sigue mostrando su detalle.
+- **Conexiones causa → consecuencia.** Una carta puede declarar `conexiones: [{causa, texto}]`. Al jugarla, bajarla o evolucionar hacia ella, si la carta causa está en tu mesa, en tu descarte o es el Lugar en juego, tu activo recibe **+1 Saber** y se muestra "¡Conexión histórica!" con la explicación. Cada curso tiene entre 5 y 7 conexiones, de su propio contenido.
+- **Habilidades de los Protagonistas** (`habilidad`), unas 4 por curso, sobre todo en las Etapa 2:
+  - `resistente` (recibe −n de daño);
+  - `fuerzaReserva` (+n de daño por cada Protagonista en tu reserva);
+  - `sanador` (si es tu activo, recupera n al inicio de tu turno);
+  - `inspirador` (al entrar en juego, robas 1 carta);
+  - `saberAlEntrar` (entra con n de Saber).
+- **Lectura en voz alta** con la voz de la tablet, en español y sin internet si la tablet tiene voces instaladas.
+  - Botón "Escuchar" en el detalle de cada carta, en la colección y en el "¿Sabías que…?".
+  - Ajuste docente: leer automáticamente el "¿Sabías que…?".

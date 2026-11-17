@@ -65,5 +65,6 @@ export const sonidos = {
   caida: () => { tono(330, 0.5, { tipo: 'sawtooth', vol: 0.06, hasta: 110 }); vibrar([40, 30, 40]); },
   hito: () => { tono(660, 0.6, { vol: 0.14 }); tono(990, 0.6, { vol: 0.08, desde: 0.05 }); vibrar([80, 40, 80]); },   // campana
   turno: () => tono(440, 0.12, { vol: 0.06 }),
+  conexion: () => [392, 523, 659].forEach((f, i) => tono(f, 0.25, { tipo: 'sine', vol: 0.1, desde: i * 0.09 })),
   victoria: () => [523, 659, 784, 1046].forEach((f, i) => tono(f, 0.35, { tipo: 'triangle', vol: 0.12, desde: i * 0.12 })),
 };

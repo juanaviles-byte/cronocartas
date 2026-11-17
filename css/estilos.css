@@ -355,3 +355,25 @@ button:disabled { opacity: .35; cursor: default; }
 .destino-encima { outline: 3px solid var(--acento); outline-offset: 4px; box-shadow: 0 0 22px rgba(233,196,106,.45); }
 .lado.destino-encima { outline-offset: -6px; background: rgba(233,196,106,.08); }
 .reserva.destino-posible, .zona-activo.destino-posible { min-width: 60px; }
+
+/* ---------- Ola 2 ---------- */
+.carta .habilidad { background: linear-gradient(90deg, #3a2a05, #5b4410); color: #ffe7a3; border-radius: 6px; padding: 5px 8px; font-size: .86em; line-height: 1.25; }
+.carta .habilidad small, .carta .conexiones-carta small { display: block; font-size: .72em; text-transform: uppercase; letter-spacing: .08em; font-weight: 800; opacity: .85; }
+.carta .conexiones-carta { background: rgba(255,255,255,.88); border-left: 4px solid #E9C46A; border-radius: 6px; padding: 5px 8px; font-size: .82em; color: #333; }
+.carta .conexiones-carta small { color: #8a6d1f; }
+.carta-mini .m-hab { color: #ffe7a3; text-shadow: 0 0 4px #000; font-size: .9em; }
+.boton-escuchar { display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
+.aviso-conexion { position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 45; pointer-events: none; width: min(92vw, 560px);
+  background: linear-gradient(135deg, #1d2b3f, #2c3e57); border: 2px solid #E9C46A; border-radius: 16px; padding: 14px 20px; text-align: center;
+  box-shadow: 0 12px 40px rgba(0,0,0,.6); animation: conexion 2.6s ease forwards; }
+.aviso-conexion.girado { transform: translate(-50%, -50%) rotate(180deg); }
+.aviso-conexion .titulo { color: #E9C46A; font-weight: 900; font-size: 1.2rem; letter-spacing: .02em; }
+.aviso-conexion .cadena { font-weight: 800; margin: 6px 0 4px; font-size: 1.05rem; }
+.aviso-conexion .cadena span { color: #E9C46A; margin: 0 8px; }
+.aviso-conexion p { margin: 0; color: #dbe3ec; line-height: 1.35; }
+.aviso-conexion .premio { margin-top: 6px; color: #b8f0bb; font-weight: 700; font-size: .9rem; }
+@keyframes conexion { 0% { opacity: 0; transform: translate(-50%, -40%) scale(.9); } 12% { opacity: 1; transform: translate(-50%, -50%) scale(1); } 85% { opacity: 1; } 100% { opacity: 0; } }
+.aviso-conexion.girado { animation-name: conexion-g; }
+@keyframes conexion-g { 0% { opacity: 0; } 12% { opacity: 1; } 85% { opacity: 1; } 100% { opacity: 0; } }
+.panel-carta .boton-escuchar, .sabias .boton-escuchar { width: 100%; }
+.sabias .boton-escuchar { margin-bottom: 8px; }
