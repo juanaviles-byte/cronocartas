@@ -20,6 +20,7 @@ const ARCHIVOS = [
   "js/ediciones.js",
   "js/html.js",
   "js/ia.js",
+  "js/imagenes.js",
   "js/mazos.js",
   "js/motor.js",
   "js/pin.js",
@@ -28,7 +29,9 @@ const ARCHIVOS = [
   "js/ui/arte.js",
   "js/ui/banco.js",
   "js/ui/carta.js",
+  "js/ui/datos.js",
   "js/ui/docente.js",
+  "js/ui/editor.js",
   "js/ui/mesa.js",
   "manifest.webmanifest"
 ];

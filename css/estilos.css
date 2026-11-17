@@ -229,3 +229,10 @@ button:disabled { opacity: .35; cursor: default; }
   .lado { --lado: calc((100dvh - var(--centro)) / 2); }
   .carta-grande { max-height: calc(100dvh - 140px); }
 }
+
+/* ---------- Editor de cartas ---------- */
+.editor { display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 24px; max-height: 92vh; overflow: auto; width: min(96vw, 960px); max-width: none; }
+.editor-vista { position: sticky; top: 0; display: flex; flex-direction: column; gap: 10px; align-items: center; }
+.emblemas .opcion.chica { padding: 6px 10px; }
+.carta.editada { box-shadow: 0 0 0 3px var(--acento); }
+@media (max-width: 860px) { .editor { grid-template-columns: 1fr; } .editor-vista { position: static; order: -1; } }

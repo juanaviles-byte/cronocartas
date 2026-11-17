@@ -1,7 +1,7 @@
 // Navegación de Cronocartas por #hash: #inicio #jugar #mesa #tutorial #coleccion #banco #docente
 import { montarMesa } from './mesa.js';
 import { renderCarta } from './carta.js';
-import { cargarCurso } from '../mazos.js';
+import { cargarCursoCompleto } from './datos.js';
 import { almacen, CLAVES } from '../almacen.js';
 import { esc } from '../html.js';
 
@@ -108,7 +108,7 @@ const vistas = {
       pestanas.appendChild(b);
     }
     v.appendChild(pestanas);
-    const datos = await cargarCurso(curso, { comunidad: almacen.cartasComunidad(curso) });
+    const datos = await cargarCursoCompleto(curso);
     datos.unidades.forEach((u, i) => {
       v.appendChild(h('h2', 'titulo-unidad', `Unidad ${i + 1} · ${u}`));
       const grilla = h('div', 'grilla-cartas');

@@ -54,7 +54,7 @@ export async function vistaDocente({ volver }) {
     cuerpo.innerHTML = '';
     const tabs = h('div', 'opciones pestanas');
     const pendientes = almacen.listarPropuestas({ estado: 'pendiente' }).length;
-    for (const [k, t] of [['propuestas', `Banco de ideas${pendientes ? ` (${pendientes})` : ''}`], ['cobertura', 'Cobertura OA y MBE'], ['compartir', 'Mover cartas'], ['ajustes', 'Ajustes']]) {
+    for (const [k, t] of [['propuestas', `Banco de ideas${pendientes ? ` (${pendientes})` : ''}`], ['editar', 'Editar cartas'], ['cobertura', 'Cobertura OA y MBE'], ['compartir', 'Mover cartas'], ['ajustes', 'Ajustes']]) {
       const b = h('button', `opcion chica${pestana === k ? ' elegida' : ''}`, t);
       b.onclick = () => { pestana = k; panel(); };
       tabs.appendChild(b);
@@ -62,7 +62,7 @@ export async function vistaDocente({ volver }) {
     cuerpo.appendChild(tabs);
     const zona = h('div', 'zona-docente');
     cuerpo.appendChild(zona);
-    ({ propuestas, cobertura, compartir, ajustes })[pestana](zona);
+    ({ propuestas, editar, cobertura, compartir, ajustes })[pestana](zona);
   }
 
   // ---------- Propuestas ----------
@@ -111,6 +111,12 @@ export async function vistaDocente({ volver }) {
       fila.appendChild(lado);
       zona.appendChild(fila);
     }
+  }
+
+  // ---------- Editar cartas oficiales ----------
+  async function editar(zona) {
+    const { pestanaEditar } = await import('./editor.js');
+    await pestanaEditar(zona);
   }
 
   // ---------- Cobertura ----------

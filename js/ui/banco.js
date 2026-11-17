@@ -20,7 +20,7 @@ function nuevaCarta() {
   };
 }
 
-export async function comprimirImagen(archivo, max = 360) {
+export async function comprimirImagen(archivo, max = 360, calidad = 0.7) {
   const url = URL.createObjectURL(archivo);
   try {
     const img = await new Promise((ok, mal) => { const i = new Image(); i.onload = () => ok(i); i.onerror = mal; i.src = url; });
@@ -28,7 +28,7 @@ export async function comprimirImagen(archivo, max = 360) {
     const c = document.createElement('canvas');
     c.width = Math.round(img.width * escala); c.height = Math.round(img.height * escala);
     c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
-    return c.toDataURL('image/jpeg', 0.7);
+    return c.toDataURL('image/jpeg', calidad);
   } finally { URL.revokeObjectURL(url); }
 }
 

@@ -2,7 +2,8 @@
 // Solo dibuja y traduce toques en jugadas; las reglas viven en motor.js.
 import { crearPartida, jugadasValidas, aplicarJugada } from '../motor.js';
 import { elegirJugada } from '../ia.js';
-import { armarMazo, cargarCurso } from '../mazos.js';
+import { armarMazo } from '../mazos.js';
+import { cargarCursoCompleto } from './datos.js';
 import { crearRng } from '../rng.js';
 import { almacen, CLAVES } from '../almacen.js';
 import { renderCarta } from './carta.js';
@@ -32,11 +33,7 @@ export async function montarMesa(contenedor, opciones) {
   const nombres = { A: contraIA ? 'Tú' : 'Jugador 1', B: contraIA ? 'Tablet' : 'Jugador 2' };
 
   contenedor.innerHTML = '<div class="cargando">Barajando…</div>';
-  const comunidad = c => almacen.cartasComunidad(c);
-  const [datosA, datosB] = await Promise.all([
-    cargarCurso(config.cursoA, { comunidad: comunidad(config.cursoA) }),
-    cargarCurso(config.cursoB, { comunidad: comunidad(config.cursoB) }),
-  ]);
+  const [datosA, datosB] = await Promise.all([cargarCursoCompleto(config.cursoA), cargarCursoCompleto(config.cursoB)]);
   const unidadesDe = { [config.cursoA]: datosA.unidades, [config.cursoB]: datosB.unidades };
 
   let estado = opciones.estado;

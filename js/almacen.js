@@ -1,7 +1,7 @@
 // Todo lo que se guarda en la tablet pasa por aquí.
 // Si el almacenamiento falla (lleno o bloqueado), el juego sigue funcionando.
 
-export const CLAVES = { banco: 'cc.banco', ajustes: 'cc.ajustes', partida: 'cc.partida', pin: 'cc.pin' };
+export const CLAVES = { banco: 'cc.banco', ajustes: 'cc.ajustes', partida: 'cc.partida', pin: 'cc.pin', ediciones: 'cc.ediciones' };
 
 export function crearAlmacen(storage) {
   const memoria = new Map();
