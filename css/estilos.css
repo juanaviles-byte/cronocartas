@@ -403,3 +403,32 @@ button:disabled { opacity: .35; cursor: default; }
 @keyframes conexion-g { 0% { opacity: 0; } 12% { opacity: 1; } 85% { opacity: 1; } 100% { opacity: 0; } }
 .panel-carta .boton-escuchar, .sabias .boton-escuchar { width: 100%; }
 .sabias .boton-escuchar { margin-bottom: 8px; }
+
+/* ---------- Saber visible ---------- */
+.carta-mini .mini-saber { left: .35em; bottom: calc(var(--ch) * .255); display: flex; align-items: center; gap: .2em; padding: .08em .45em .08em .15em;
+  background: rgba(10,12,16,.85); border: .1em solid #E9C46A; border-radius: 1em; color: #FFE6A3; font-size: 1em; line-height: 1.1; }
+.carta-mini .mini-saber .pip { width: .95em; height: .95em; margin: 0; }
+.carta-mini .mini-saber.cero { opacity: .55; }
+.mini-saber.gana { animation: saber-gana .9s ease-out; }
+.mini-saber.pierde { animation: saber-pierde .7s ease-out; }
+@keyframes saber-gana { 0% { transform: scale(1); } 30% { transform: scale(1.5); box-shadow: 0 0 14px 4px #E9C46A; } 100% { transform: scale(1); } }
+@keyframes saber-pierde { 0%, 100% { transform: none; } 30% { transform: scale(.8); filter: grayscale(1); } }
+.myl-saber { flex-direction: row; align-items: center; gap: .2em; background: rgba(10,12,16,.85); border: .1em solid #E9C46A; border-radius: 1em;
+  padding: .1em .45em .1em .2em; color: #FFE6A3; font-weight: 900; }
+.numero-saber { position: absolute; left: 50%; top: 28%; transform: translateX(-50%); z-index: 20; pointer-events: none; white-space: nowrap;
+  color: #FFE6A3; font-weight: 900; font-size: 1.15rem; text-shadow: 0 0 6px #000, 0 0 14px #E9C46A; animation: subir-saber 1.35s ease-out forwards; }
+.numero-saber.menos { color: #ffb4a2; text-shadow: 0 0 6px #000; }
+@keyframes subir-saber { 0% { opacity: 0; transform: translate(-50%, 12px) scale(.8); } 20% { opacity: 1; transform: translate(-50%, 0) scale(1.15); }
+  100% { opacity: 0; transform: translate(-50%, -44px) scale(1); } }
+.carta-mini.pide-saber { animation: pide-saber 1.3s ease-in-out infinite; }
+@keyframes pide-saber { 0%, 100% { box-shadow: 0 0 0 3px #E9C46A, 0 0 6px 2px rgba(233,196,106,.4); }
+  50% { box-shadow: 0 0 0 3px #fff3c4, 0 0 22px 7px rgba(233,196,106,.9); } }
+.saber-activo { color: #FFE6A3; font-size: .82rem; text-shadow: 0 1px 3px rgba(0,0,0,.9); display: flex; align-items: center; gap: 4px; }
+.saber-activo b { font-size: 1.05rem; }
+.boton-accion .pip.vacia { background: transparent; box-shadow: inset 0 0 0 .13em #E9C46A; }
+.boton-accion .an { display: flex; flex-direction: column; line-height: 1.15; text-align: left; }
+.boton-accion small.falta { font-size: .7rem; color: #ffb4a2; font-weight: 700; }
+.pista-saber { display: flex; align-items: center; gap: 6px; justify-content: flex-end; font-weight: 700; color: #FFE6A3; animation: latido 1.6s ease-in-out infinite; }
+@keyframes latido { 50% { opacity: .65; } }
+.banner-turno small { display: flex; align-items: center; justify-content: center; gap: 6px; font-size: .45em; color: #FFE6A3; margin-top: 4px; }
+@media (prefers-reduced-motion: reduce) { .carta-mini.pide-saber, .pista-saber, .mini-saber.gana, .mini-saber.pierde { animation: none; } .carta-mini.pide-saber { box-shadow: 0 0 0 3px #E9C46A; } }

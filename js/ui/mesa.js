@@ -107,8 +107,42 @@ export async function montarMesa(contenedor, opciones) {
     if (uidsAntes) raiz.querySelectorAll('.campo [data-uid]').forEach(e => { if (!uidsAntes.has(e.dataset.uid)) e.classList.add('entra'); });
     uidsAntes = ahora;
     hitosAntes = { A: estado.jugadores.A.hitos, B: estado.jugadores.B.hitos };
+    marcarSaber();
     activarArrastre();
     programarIA();
+  }
+
+  // ---------- Saber visible ----------
+  // Compara el Saber de cada Protagonista con el dibujo anterior y muestra "+1 Saber" donde cambió.
+  let saberAntes = null;
+  function marcarSaber() {
+    const ahora = {};
+    for (const j of ['A', 'B']) {
+      const yo = estado.jugadores[j];
+      for (const p of [yo.activo, ...yo.reserva]) if (p) ahora[p.uid] = p.saber;
+      const humano = !(contraIA && j === 'B');
+      if (humano && estado.turno === j && estado.fase === 'turno' && yo.saberPendiente > 0) {
+        raiz.querySelectorAll(`.lado-${j} .campo .carta-mini[data-uid]`).forEach(el => el.classList.add('pide-saber'));
+      }
+    }
+    if (saberAntes) {
+      for (const [uid, n] of Object.entries(ahora)) {
+        const d = n - (saberAntes[uid] ?? 0);
+        if (d) flotarSaber(uid, d);
+      }
+    }
+    saberAntes = ahora;
+  }
+  function flotarSaber(uid, d) {
+    const el = raiz.querySelector(`.campo [data-uid="${CSS.escape(uid)}"]`);
+    if (!el) return;
+    const insignia = el.querySelector('.mini-saber');
+    if (insignia) { insignia.classList.remove('gana'); void insignia.offsetWidth; insignia.classList.add(d > 0 ? 'gana' : 'pierde'); }
+    if (d > 0) sonidos.saber();
+    if (sinMovimiento()) return;
+    const n = h('div', `numero-saber${d < 0 ? ' menos' : ''}`, `${d > 0 ? '+' : '−'}${Math.abs(d)} Saber`);
+    el.appendChild(n);
+    setTimeout(() => n.remove(), 1400);
   }
 
   // ---------- Arrastrar y soltar ----------
@@ -240,9 +274,16 @@ export async function montarMesa(contenedor, opciones) {
     const acciones = h('div', 'acciones-activo');
     if (yo.activo && yo.activo.carta.acciones) {
       const validas = esMiTurno && humano ? jugadasValidas(estado) : [];
+      const tiene = yo.activo.saber;
+      acciones.appendChild(h('div', 'saber-activo', `<span class="pip"></span> Tu activo tiene <b>${esc(tiene)}</b> de Saber`));
       yo.activo.carta.acciones.forEach((a, indice) => {
         const ok = validas.some(v => v.tipo === 'accion' && v.indice === indice);
-        const b = h('button', 'boton-accion', `<span class="costo">${pips(a.costo)}</span><span>${esc(a.nombre)}</span><b>${esc(a.danio)}</b>`);
+        const falta = Math.max(0, a.costo - tiene);
+        const costo = Array.from({ length: a.costo }, (_, i) => `<span class="pip${i < tiene ? '' : ' vacia'}"></span>`).join('');
+        const primerTurno = estado.numeroTurno <= 1 && esMiTurno;
+        const nota = falta ? `<small class="falta">Falta ${falta} de Saber</small>`
+          : primerTurno ? '<small class="falta">No se ataca en el primer turno</small>' : '';
+        const b = h('button', `boton-accion${falta ? ' sin-saber' : ''}`, `<span class="costo">${costo}</span><span class="an">${esc(a.nombre)}${nota}</span><b>${esc(a.danio)}</b>`);
         b.disabled = !ok;
         b.onclick = () => jugar({ tipo: 'accion', indice });
         acciones.appendChild(b);
@@ -289,7 +330,7 @@ export async function montarMesa(contenedor, opciones) {
     const controles = h('div', 'controles');
     if (esMiTurno && humano) {
       const validas = jugadasValidas(estado);
-      if (estado.fase === 'turno' && yo.saberPendiente > 0) controles.appendChild(h('div', 'pista', `Tienes ${pips(yo.saberPendiente)} Saber: toca un Protagonista`));
+      if (estado.fase === 'turno' && yo.saberPendiente > 0) controles.appendChild(h('div', 'pista pista-saber', `<span class="pip"></span> Ganaste 1 de Saber este turno: toca un Protagonista para dárselo`));
       if (estado.fase === 'preparacion') {
         const listo = validas.find(v => v.tipo === 'listo');
         const b = h('button', 'boton-principal', 'Listo');
@@ -461,6 +502,11 @@ export async function montarMesa(contenedor, opciones) {
       if (ev.tipo === 'ventaja') { sonidos.ventaja(); registrar(`<b>¡Ventaja ×2!</b> ${FRASES_VENTAJA[ev.de]}`); }
       if (ev.tipo === 'protegido') sonidos.protegido();
       if (ev.tipo === 'hito') sonidos.hito();
+      if (ev.tipo === 'saber') {
+        const yo = estado.jugadores[ev.jugador];
+        const p = [yo.activo, ...yo.reserva].find(x => x && x.uid === ev.destino);
+        if (p) registrar(`${esc(p.carta.nombre)} recibe 1 de Saber (ahora tiene ${esc(p.saber)})`);
+      }
       if (ev.tipo === 'conexion') { sonidos.conexion(); avisoConexion(ev); registrar(`¡Conexión histórica! <b>${esc(ev.causa.nombre)}</b> → <b>${esc(ev.efecto.nombre)}</b>: +1 Saber`); }
       if (ev.tipo === 'danio') {
         sonidos.ataque();
@@ -517,7 +563,8 @@ export async function montarMesa(contenedor, opciones) {
   function anunciarTurno(j) {
     if (sinMovimiento()) return;
     const texto = contraIA ? (j === 'A' ? 'Tu turno' : 'Turno de la Tablet') : `Turno de ${nombres[j]}`;
-    const b = h('div', `banner-turno${girado(j) ? ' girado' : ''}`, esc(texto));
+    const extra = estado.jugadores[j].saberPendiente > 0 ? '<small><span class="pip"></span> +1 de Saber para repartir</small>' : '';
+    const b = h('div', `banner-turno${girado(j) ? ' girado' : ''}`, esc(texto) + extra);
     raiz.appendChild(b);
     setTimeout(() => b.remove(), 1100);
   }

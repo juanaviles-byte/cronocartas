@@ -107,7 +107,7 @@ export function renderCarta(carta, { tamano = 'normal', instancia = null, unidad
       <div class="m-disco">${iconoTipo(claveTipo, 40)}</div>
       ${esProt ? `<div class="m-res${instancia && instancia.danio ? ' herido' : ''}">${esc(vida)}</div>` : ''}
       ${carta.evolucionaDe ? '<div class="etapa">2</div>' : ''}
-      ${instancia ? `<div class="mini-saber">${pips(instancia.saber)}</div>` : ''}
+      ${esProt && instancia ? `<div class="mini-saber${instancia.saber ? '' : ' cero'}" title="Saber"><span class="pip"></span><b>${esc(instancia.saber)}</b></div>` : ''}
       ${instancia?.protegido ? '<div class="sello">Protegido</div>' : ''}
       ${instancia?.bonus ? `<div class="sello">+${esc(instancia.bonus)}</div>` : ''}
       <div class="m-banda">
@@ -150,7 +150,7 @@ export function renderCarta(carta, { tamano = 'normal', instancia = null, unidad
       ${esProt ? `<div class="myl-res">${esc(vida)}${instancia && instancia.danio ? `<small>/${esc(res)}</small>` : ''}</div>`
                : carta.tipo === 'personaje' ? `<div class="myl-res myl-res-pj" title="1 por turno">${ICONO_PERSONAJE_DERECHA}</div>` : ''}
       ${carta.evolucionaDe ? '<div class="myl-etapa">Etapa 2</div>' : ''}
-      ${instancia ? `<div class="myl-saber">${pips(instancia.saber)}</div>` : ''}
+      ${esProt && instancia ? `<div class="myl-saber" title="Saber"><span class="pip"></span><b>${esc(instancia.saber)}</b></div>` : ''}
       <div class="myl-nombre ${claseN}"><span>${esc(carta.nombre)}</span></div>
       <div class="myl-frase">${esc(fraseDe(carta))}</div>
       ${sello ? `<div class="myl-sello">${sello}</div>` : ''}

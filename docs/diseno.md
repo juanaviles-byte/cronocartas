@@ -303,3 +303,9 @@ La ilustración manda: ocupa a sangre los 2/3 superiores de la carta. Cada eleme
 - **Carta pequeña (mano y mesa):** ilustración, disco de tipo, Resistencia, y el nombre en una banda inferior.
 - Todas las medidas usan una unidad de carta (`--u` = ancho/20), así la carta se ve igual a cualquier tamaño.
 - Prueba visual (QA) que mide en pantalla que ninguna zona choque con otra ni corte su texto, en las 3 resoluciones de tablet.
+
+### 16.1 Saber visible
+- Cada Protagonista en la mesa muestra su Saber como número (moneda dorada + cifra), también cuando es 0.
+- Junto al activo: "Tu activo tiene N de Saber" y cada acción muestra sus monedas llenas (las que tiene) y vacías (las que faltan), con "Falta N de Saber" o "No se ataca en el primer turno".
+- Al ganar o perder Saber (asignación, conexión, efectos, retirada) sube un "+1 Saber" / "−1 Saber" sobre la carta, con sonido; el registro lo dice.
+- Mientras tienes Saber por repartir, tus Protagonistas brillan y el cartel del turno avisa "+1 de Saber para repartir".
