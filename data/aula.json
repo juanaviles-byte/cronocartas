@@ -16,7 +16,8 @@
     "estandar": 3,
     "nombre": "Planificación de la enseñanza"
    },
-   "emblema": "mapa"
+   "emblema": "mapa",
+   "frase": "Preparar la enseñanza para que todos aprendan."
   },
   {
    "id": "CC-A-E5",
@@ -33,7 +34,8 @@
     "estandar": 5,
     "nombre": "Ambiente respetuoso y organizado"
    },
-   "emblema": "casa"
+   "emblema": "casa",
+   "frase": "Una sala donde todos se sienten seguros."
   },
   {
    "id": "CC-A-E6",
@@ -50,7 +52,8 @@
     "estandar": 6,
     "nombre": "Desarrollo personal y social"
    },
-   "emblema": "personas"
+   "emblema": "personas",
+   "frase": "Aprender también es crecer como persona."
   },
   {
    "id": "CC-A-E7",
@@ -68,7 +71,8 @@
     "estandar": 7,
     "nombre": "Estrategias de enseñanza para el logro de aprendizajes profundos"
    },
-   "emblema": "estrella"
+   "emblema": "estrella",
+   "frase": "Comprender de verdad, no solo memorizar."
   },
   {
    "id": "CC-A-E8",
@@ -85,7 +89,8 @@
     "estandar": 8,
     "nombre": "Estrategias para el desarrollo de habilidades del pensamiento"
    },
-   "emblema": "balanza"
+   "emblema": "balanza",
+   "frase": "Preguntar, comparar y argumentar."
   },
   {
    "id": "CC-A-E9",
@@ -103,7 +108,8 @@
     "estandar": 9,
     "nombre": "Evaluación y retroalimentación para el aprendizaje"
    },
-   "emblema": "pluma"
+   "emblema": "pluma",
+   "frase": "Saber cómo voy y cómo mejorar."
   },
   {
    "id": "CC-A-E12",
@@ -120,7 +126,8 @@
     "estandar": 12,
     "nombre": "Compromiso con el mejoramiento continuo de la comunidad escolar"
    },
-   "emblema": "personas"
+   "emblema": "personas",
+   "frase": "Aprendemos más cuando trabajamos juntos."
   }
  ]
 }

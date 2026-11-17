@@ -26,7 +26,8 @@
      "causa": "CC-5-U1-005",
      "texto": "Los avances en navegación hicieron posible el viaje de 1492."
     }
-   ]
+   ],
+   "frase": "En 1492 llegó a América buscando una ruta hacia Asia."
   },
   {
    "id": "CC-5-U1-002",
@@ -45,7 +46,8 @@
      "causa": "CC-5-U1-001",
      "texto": "Tras Colón, otros buscaron un paso hacia Asia navegando al oeste."
     }
-   ]
+   ],
+   "frase": "Su expedición halló el paso entre el Atlántico y el Pacífico."
   },
   {
    "id": "CC-5-U1-003",
@@ -65,7 +67,8 @@
      "causa": "CC-5-U1-008",
      "texto": "Valdivia llegó a Chile al mando de su hueste."
     }
-   ]
+   ],
+   "frase": "Fundó Santiago del Nuevo Extremo en 1541."
   },
   {
    "id": "CC-5-U1-004",
@@ -78,7 +81,8 @@
    },
    "dato": "Llegó a Chile con Valdivia y participó en la defensa de Santiago durante el ataque de 1541.",
    "oa": "OA 2",
-   "emblema": "casa"
+   "emblema": "casa",
+   "frase": "Defendió Santiago durante el ataque de 1541."
   },
   {
    "id": "CC-5-U1-005",
@@ -92,7 +96,8 @@
    },
    "dato": "Barcos más livianos, la brújula y el astrolabio hicieron posibles los grandes viajes de descubrimiento.",
    "oa": "OA 1",
-   "emblema": "barco"
+   "emblema": "barco",
+   "frase": "Barcos livianos y nuevos instrumentos hicieron posibles los grandes viajes."
   },
   {
    "id": "CC-5-U1-006",
@@ -112,7 +117,8 @@
      "causa": "CC-5-U1-003",
      "texto": "Valdivia fundó Santiago y otras ciudades para asentar la conquista."
     }
-   ]
+   ],
+   "frase": "Santiago, La Serena, Concepción: ciudades para quedarse."
   },
   {
    "id": "CC-5-U1-007",
@@ -127,7 +133,8 @@
    },
    "dato": "Desde Sevilla, la Corona española controlaba el comercio y los viajes hacia América.",
    "oa": "OA 3",
-   "emblema": "ancla"
+   "emblema": "ancla",
+   "frase": "Desde aquí, la Corona controlaba el comercio con América."
   },
   {
    "id": "CC-5-U1-008",
@@ -153,6 +160,7 @@
    "dato": "Grupo de soldados y colonos que acompañaba a un conquistador; muchas veces ellos mismos pagaban la expedición.",
    "oa": "OA 2",
    "emblema": "escudo",
+   "frase": "Soldados y colonos que seguían a un conquistador.",
    "habilidad": {
     "nombre": "Avanzada",
     "tipo": "saberAlEntrar",
@@ -177,7 +185,8 @@
    ],
    "dato": "Pueblo del Norte Chico conocido por su cerámica pintada con figuras geométricas.",
    "oa": "OA 4",
-   "emblema": "sol"
+   "emblema": "sol",
+   "frase": "Pueblo del Norte Chico conocido por su cerámica pintada con figuras geométricas."
   },
   {
    "id": "CC-5-U2-001",
@@ -197,7 +206,8 @@
    ],
    "dato": "Durante la Conquista convivieron y se mezclaron españoles, indígenas y, más tarde, africanos.",
    "oa": "OA 6",
-   "emblema": "personas"
+   "emblema": "personas",
+   "frase": "Dos mundos que convivieron y se mezclaron."
   },
   {
    "id": "CC-5-U2-002",
@@ -224,6 +234,7 @@
    "oa": "OA 6",
    "emblema": "personas",
    "evolucionaDe": "CC-5-U2-001",
+   "frase": "La mezcla de culturas que dio origen al Chile actual.",
    "habilidad": {
     "nombre": "Mestizaje",
     "tipo": "fuerzaReserva",
@@ -248,7 +259,8 @@
      "causa": "CC-5-U1-003",
      "texto": "Lautaro conoció la forma de combatir española sirviendo a Valdivia."
     }
-   ]
+   ],
+   "frase": "Aprendió la forma de combatir española para resistirla."
   },
   {
    "id": "CC-5-U2-004",
@@ -279,7 +291,8 @@
      "causa": "CC-5-U1-007",
      "texto": "El comercio con América pasaba por el puerto de Sevilla."
     }
-   ]
+   ],
+   "frase": "Chile solo podía comerciar con España."
   },
   {
    "id": "CC-5-U2-005",
@@ -299,7 +312,8 @@
    ],
    "dato": "La iglesia de San Francisco, en Santiago, fue construida en la Colonia y sigue en pie hasta hoy.",
    "oa": "OA 8",
-   "emblema": "campana"
+   "emblema": "campana",
+   "frase": "La iglesia de San Francisco sigue en pie desde la Colonia."
   },
   {
    "id": "CC-5-U2-006",
@@ -312,7 +326,8 @@
    },
    "dato": "En 1641 españoles y mapuches acordaron la paz y reconocieron el río Biobío como frontera.",
    "oa": "OA 7",
-   "emblema": "pergamino"
+   "emblema": "pergamino",
+   "frase": "1641: paz entre españoles y mapuches en el Biobío."
   },
   {
    "id": "CC-5-U3-001",
@@ -332,7 +347,8 @@
    ],
    "dato": "Tiene el desierto de Atacama, uno de los más secos del mundo, y grandes yacimientos de cobre.",
    "oa": "OA 9",
-   "emblema": "sol"
+   "emblema": "sol",
+   "frase": "Desierto de Atacama y grandes yacimientos de cobre."
   },
   {
    "id": "CC-5-U3-002",
@@ -357,7 +373,8 @@
    ],
    "dato": "De clima mediterráneo, concentra la mayor parte de la población y de la agricultura del país.",
    "oa": "OA 9",
-   "emblema": "maiz"
+   "emblema": "maiz",
+   "frase": "Clima mediterráneo y la mayor parte de la población."
   },
   {
    "id": "CC-5-U3-003",
@@ -378,6 +395,7 @@
    "dato": "Tiene fiordos, canales, hielos y clima frío. Es la zona menos poblada de Chile.",
    "oa": "OA 9",
    "emblema": "montana",
+   "frase": "Tiene fiordos, canales, hielos y clima frío. Es la zona menos poblada de Chile.",
    "habilidad": {
     "nombre": "Clima extremo",
     "tipo": "resistente",
@@ -408,7 +426,8 @@
      "causa": "CC-5-U3-001",
      "texto": "El Norte Grande concentra grandes yacimientos de cobre."
     }
-   ]
+   ],
+   "frase": "Recurso no renovable y principal exportación de Chile."
   },
   {
    "id": "CC-5-U3-005",
@@ -421,7 +440,8 @@
    },
    "dato": "Chile es un país sísmico: construir edificios antisísmicos ayuda a proteger a la comunidad.",
    "oa": "OA 12",
-   "emblema": "casa"
+   "emblema": "casa",
+   "frase": "En un país sísmico, construir bien protege vidas."
   },
   {
    "id": "CC-5-U3-006",
@@ -436,7 +456,8 @@
    },
    "dato": "Recorre Chile de norte a sur y forma su frontera oriental. Allí nacen muchos ríos del país.",
    "oa": "OA 9",
-   "emblema": "montana"
+   "emblema": "montana",
+   "frase": "Recorre Chile de norte a sur y forma su frontera oriental."
   },
   {
    "id": "CC-5-U4-001",
@@ -456,7 +477,8 @@
    ],
    "dato": "Todas las personas tienen derechos, sin importar su etnia, sexo, lugar de nacimiento u otras características.",
    "oa": "OA 13",
-   "emblema": "balanza"
+   "emblema": "balanza",
+   "frase": "Todas las personas tienen derechos, sin excepción."
   },
   {
    "id": "CC-5-U4-002",
@@ -476,7 +498,8 @@
    ],
    "dato": "Elegir una directiva implica escoger personas idóneas y entender las responsabilidades de cada cargo.",
    "oa": "OA 17",
-   "emblema": "urna"
+   "emblema": "urna",
+   "frase": "Elegir bien y entender las responsabilidades del cargo."
   },
   {
    "id": "CC-5-U4-003",
@@ -503,6 +526,7 @@
    "oa": "OA 19",
    "emblema": "personas",
    "evolucionaDe": "CC-5-U4-002",
+   "frase": "Personas que se organizan para lograr metas comunes.",
    "habilidad": {
     "nombre": "Ayuda mutua",
     "tipo": "sanador",
@@ -527,7 +551,8 @@
    ],
    "dato": "El Estado debe asegurar que las personas ejerzan sus derechos, como la educación y la salud.",
    "oa": "OA 14",
-   "emblema": "columna"
+   "emblema": "columna",
+   "frase": "Debe asegurar derechos como la educación y la salud."
   },
   {
    "id": "CC-5-U4-005",
@@ -547,7 +572,8 @@
      "causa": "CC-5-U4-002",
      "texto": "Una directiva organizada puede impulsar proyectos para la escuela."
     }
-   ]
+   ],
+   "frase": "Un buen plan puede resolver un problema de la escuela."
   },
   {
    "id": "CC-5-U4-006",
@@ -562,7 +588,8 @@
    },
    "dato": "Es un espacio para aprender a convivir: respetar acuerdos, escuchar y buscar soluciones pacíficas.",
    "oa": "OA 16",
-   "emblema": "libro"
+   "emblema": "libro",
+   "frase": "Aquí aprendemos a convivir y a resolver conflictos en paz."
   }
  ]
 }
