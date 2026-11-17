@@ -255,11 +255,16 @@ export async function vistaDocente({ volver }) {
     const o4 = h('div', 'opciones');
     const borrarPartida = h('button', 'boton-secundario', 'Borrar partida guardada');
     borrarPartida.onclick = () => { almacen.borrar(CLAVES.partida); borrarPartida.textContent = 'Partida borrada'; };
+    const reiniciarAlbum = h('button', 'boton-secundario', 'Reiniciar el álbum de esta tablet');
+    reiniciarAlbum.onclick = () => {
+      if (!reiniciarAlbum.dataset.confirmar) { reiniciarAlbum.dataset.confirmar = '1'; reiniciarAlbum.textContent = 'Toca otra vez: se borran las cartas descubiertas y las insignias'; return; }
+      almacen.borrar(CLAVES.album); reiniciarAlbum.textContent = 'Álbum reiniciado';
+    };
     const cambiarPin = h('button', 'boton-secundario', 'Cambiar PIN');
     cambiarPin.onclick = () => { almacen.borrar(CLAVES.pin); desbloqueado = false; pantallaPin(); };
     const salir = h('button', 'enlace', 'Cerrar panel');
     salir.onclick = () => { desbloqueado = false; location.hash = '#inicio'; };
-    o4.append(borrarPartida, cambiarPin, salir);
+    o4.append(borrarPartida, reiniciarAlbum, cambiarPin, salir);
     s.appendChild(o4); zona.appendChild(s);
   }
 

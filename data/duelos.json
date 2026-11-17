@@ -1,29 +1,185 @@
 {
  "duelos": [
-  {"id": "D-5-1", "curso": 5, "nombre": "La Conquista de Chile", "tablero": "T-5-1", "bandos": [
-   {"id": "conquistadores", "nombre": "Conquistadores", "lema": "Explorar, conquistar y fundar", "color": "#A23B2C", "emblema": "escudo",
-    "nucleo": ["Hueste conquistadora", "Pedro de Valdivia", "Inés de Suárez", "Cristóbal Colón", "Fundación de ciudades", "Carabela y brújula", "Puerto de Sevilla"]},
-   {"id": "originarios", "nombre": "Pueblos originarios", "lema": "Resistir y defender su tierra", "color": "#2F7A4A", "emblema": "sol",
-    "nucleo": ["Pueblo mapuche", "Pueblo diaguita", "Lautaro", "Parlamento de Quilín", "Cordillera de los Andes"]}]},
-  {"id": "D-6-1", "curso": 6, "nombre": "La Independencia", "tablero": "T-6-1", "bandos": [
-   {"id": "patriotas", "nombre": "Patriotas", "lema": "Que Chile se gobierne a sí mismo", "color": "#1F5FA8", "emblema": "estrella",
-    "nucleo": ["Bando patriota", "Chile independiente", "Ejército de los Andes", "Bernardo O'Higgins", "José Miguel Carrera", "Javiera Carrera", "Cabildo abierto de 1810", "Cordillera de los Andes"]},
-   {"id": "realistas", "nombre": "Realistas", "lema": "Fieles al rey de España", "color": "#8E2430", "emblema": "corona",
-    "nucleo": ["Ejército realista", "Reconquista española"]}]},
-  {"id": "D-7-2", "curso": 7, "nombre": "Grecia y Roma", "tablero": "T-7-2", "bandos": [
-   {"id": "grecia", "nombre": "Grecia", "lema": "La polis, la razón y la democracia", "color": "#2C6FB0", "emblema": "columna",
-    "nucleo": ["Ciudadano ateniense", "Filósofos griegos", "Pericles", "Juegos Olímpicos"]},
-   {"id": "roma", "nombre": "Roma", "lema": "Leyes, legiones y caminos", "color": "#9C2B2B", "emblema": "escudo",
-    "nucleo": ["República romana", "Imperio romano", "Legión romana", "Mar Mediterráneo"]}]},
-  {"id": "D-7-4", "curso": 7, "nombre": "Mesoamérica y los Andes", "tablero": "T-7-4", "bandos": [
-   {"id": "mesoamerica", "nombre": "Mesoamérica", "lema": "Ciudades de maíz y piedra", "color": "#2E8B6E", "emblema": "sol",
-    "nucleo": ["Mayas", "Aztecas", "Cultivo del maíz"]},
-   {"id": "andes", "nombre": "Los Andes", "lema": "Comunidad, caminos y quipus", "color": "#B5751F", "emblema": "montana",
-    "nucleo": ["Ayllu", "Imperio inca", "Pachacútec", "Quipu", "Camino del Inca"]}]},
-  {"id": "D-8-1", "curso": 8, "nombre": "Absolutismo e Ilustración", "tablero": "T-8-3", "bandos": [
-   {"id": "absolutismo", "nombre": "Absolutismo", "lema": "Todo el poder en el rey", "color": "#7A3E9D", "emblema": "corona",
-    "nucleo": ["Reyes del siglo XV", "Monarquía absoluta", "Tesorero mercantilista"]},
-   {"id": "ilustracion", "nombre": "Ilustración", "lema": "La razón, los derechos y la libertad", "color": "#C08A1E", "emblema": "libro",
-    "nucleo": ["Enciclopedistas", "Montesquieu", "Derechos del Hombre", "Salones ilustrados", "Criollos", "Repúblicas americanas", "Independencia de EE. UU."]}]}
+  {
+   "id": "D-5-1",
+   "curso": 5,
+   "nombre": "La Conquista de Chile",
+   "tablero": "T-5-1",
+   "bandos": [
+    {
+     "id": "conquistadores",
+     "nombre": "Conquistadores",
+     "lema": "Explorar, conquistar y fundar",
+     "color": "#A23B2C",
+     "emblema": "escudo",
+     "nucleo": [
+      "Hueste conquistadora",
+      "Pedro de Valdivia",
+      "Inés de Suárez",
+      "Cristóbal Colón",
+      "Fundación de ciudades",
+      "Carabela y brújula",
+      "Puerto de Sevilla"
+     ]
+    },
+    {
+     "id": "originarios",
+     "nombre": "Pueblos originarios",
+     "lema": "Resistir y defender su tierra",
+     "color": "#2F7A4A",
+     "emblema": "sol",
+     "nucleo": [
+      "Pueblo mapuche",
+      "Pueblo diaguita",
+      "Lautaro",
+      "Parlamento de Quilín",
+      "Cordillera de los Andes"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "D-6-1",
+   "curso": 6,
+   "nombre": "La Independencia",
+   "tablero": "T-6-1",
+   "bandos": [
+    {
+     "id": "patriotas",
+     "nombre": "Patriotas",
+     "lema": "Que Chile se gobierne a sí mismo",
+     "color": "#1F5FA8",
+     "emblema": "estrella",
+     "nucleo": [
+      "Bando patriota",
+      "Chile independiente",
+      "Ejército de los Andes",
+      "Bernardo O'Higgins",
+      "José Miguel Carrera",
+      "Javiera Carrera",
+      "Cabildo abierto de 1810",
+      "Cordillera de los Andes"
+     ]
+    },
+    {
+     "id": "realistas",
+     "nombre": "Realistas",
+     "lema": "Fieles al rey de España",
+     "color": "#8E2430",
+     "emblema": "corona",
+     "nucleo": [
+      "Ejército realista",
+      "Reconquista española"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "D-7-2",
+   "curso": 7,
+   "nombre": "Grecia y Roma",
+   "tablero": "T-7-2",
+   "bandos": [
+    {
+     "id": "grecia",
+     "nombre": "Grecia",
+     "lema": "La polis, la razón y la democracia",
+     "color": "#2C6FB0",
+     "emblema": "columna",
+     "nucleo": [
+      "Ciudadano ateniense",
+      "Filósofos griegos",
+      "Pericles",
+      "Juegos Olímpicos"
+     ]
+    },
+    {
+     "id": "roma",
+     "nombre": "Roma",
+     "lema": "Leyes, legiones y caminos",
+     "color": "#9C2B2B",
+     "emblema": "escudo",
+     "nucleo": [
+      "República romana",
+      "Imperio romano",
+      "Legión romana",
+      "Mar Mediterráneo"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "D-7-4",
+   "curso": 7,
+   "nombre": "Mesoamérica y los Andes",
+   "tablero": "T-7-4",
+   "bandos": [
+    {
+     "id": "mesoamerica",
+     "nombre": "Mesoamérica",
+     "lema": "Ciudades de maíz y piedra",
+     "color": "#2E8B6E",
+     "emblema": "sol",
+     "nucleo": [
+      "Mayas",
+      "Aztecas",
+      "Cultivo del maíz",
+      "Calendario maya",
+      "Tenochtitlan",
+      "Moctezuma II"
+     ]
+    },
+    {
+     "id": "andes",
+     "nombre": "Los Andes",
+     "lema": "Comunidad, caminos y quipus",
+     "color": "#B5751F",
+     "emblema": "montana",
+     "nucleo": [
+      "Ayllu",
+      "Imperio inca",
+      "Pachacútec",
+      "Quipu",
+      "Camino del Inca"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "D-8-1",
+   "curso": 8,
+   "nombre": "Absolutismo e Ilustración",
+   "tablero": "T-8-3",
+   "bandos": [
+    {
+     "id": "absolutismo",
+     "nombre": "Absolutismo",
+     "lema": "Todo el poder en el rey",
+     "color": "#7A3E9D",
+     "emblema": "corona",
+     "nucleo": [
+      "Reyes del siglo XV",
+      "Monarquía absoluta",
+      "Tesorero mercantilista",
+      "Luis XIV",
+      "Palacio de Versalles"
+     ]
+    },
+    {
+     "id": "ilustracion",
+     "nombre": "Ilustración",
+     "lema": "La razón, los derechos y la libertad",
+     "color": "#C08A1E",
+     "emblema": "libro",
+     "nucleo": [
+      "Enciclopedistas",
+      "Montesquieu",
+      "Derechos del Hombre",
+      "Salones ilustrados",
+      "Independencia de EE. UU."
+     ]
+    }
+   ]
+  }
  ]
 }

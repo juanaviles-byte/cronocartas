@@ -336,6 +336,7 @@ La ilustración manda: ocupa a sangre los 2/3 superiores de la carta. Cada eleme
 - Cada bando tiene un **núcleo** de cartas propias que siempre entran a su mazo (los Protagonistas del núcleo, con su base si son Etapa 2). El resto del mazo se completa con cartas del curso, **sin** las del núcleo rival.
 - El duelo usa el tablero de la unidad correspondiente.
 - Cartas nuevas para que ambos bandos existan: Pueblo mapuche (5°), Ejército realista y Reconquista española (6°). Van al final de su unidad: los códigos existentes no cambian.
+- Ajuste de equilibrio (simulación de 400 partidas por duelo): se agregaron Calendario maya, Tenochtitlan y Moctezuma II (7°) y Luis XIV y Palacio de Versalles (8°). Aztecas ("Ciudad sobre el lago": −10 de daño recibido) y Mayas ("Astrónomos": entra con 1 Saber) ganan una habilidad. Criollos y Repúblicas americanas salen del núcleo de Ilustración (corresponden más a la Independencia), así que quedan libres para ambos bandos. Resultado: cada bando gana entre el 45% y el 55%.
 - Datos en `data/duelos.json`.
 
 ### 17.4 Álbum de colección

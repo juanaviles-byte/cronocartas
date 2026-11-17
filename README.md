@@ -23,6 +23,23 @@ Escuela Gabriela Mistral · Mostazal.
   - **Exportar ediciones** descarga un archivo `.json` (con imágenes). **Importar ediciones** lo carga en otra tablet.
 - **Nuevo diseño de carta estilo TCG:** marco de color según el tipo, ventana de ilustración 4:3, acciones con íconos de Saber, debilidad ×2, retirada, dato y código de carta.
 
+## Novedades v1.3 (Ola 3)
+
+- **Cartas estilo Mitos y Leyendas:** la ilustración ocupa 2/3 de la carta, con el nombre en vertical y una frase corta sobre la imagen. Al tocar la carta se lee el dato completo.
+- **Saber visible:** cada Protagonista muestra su Saber como número. Cada acción dice cuánto Saber falta, y aparece "+1 Saber" al ganarlo.
+- **Línea de tiempo** (se puede desactivar al crear la partida): los Personajes y Acontecimientos con fecha se ordenan en una línea de tiempo de cada jugador. Desde la segunda carta, el jugador elige dónde va. Si acierta, su activo gana +1 de Saber; si no, la carta queda en su lugar correcto y se muestra el año.
+- **Rival con niveles:** Aprendiz, Historiador y Cronista. En simulación, Cronista le gana a Historiador en el 72% de las partidas, e Historiador a Aprendiz en el 85%.
+- **Duelos temáticos:** cada jugador toma un bando con su núcleo de cartas propias, y el resto del mazo sale del curso. Los duelos son:
+  - 5°: Conquistadores vs. Pueblos originarios
+  - 6°: Patriotas vs. Realistas
+  - 7°: Grecia vs. Roma, y Mesoamérica vs. Los Andes
+  - 8°: Absolutismo vs. Ilustración
+
+  En simulación, cada bando gana entre el 45% y el 55% de las partidas.
+- **Cartas nuevas:** Pueblo mapuche (5°); Ejército realista y Reconquista española (6°); Calendario maya, Tenochtitlan y Moctezuma II (7°); Luis XIV y Palacio de Versalles (8°). Aztecas y Mayas ganan una habilidad.
+- **Álbum** (en *Colección y álbum*): cada tablet recuerda qué cartas aparecieron boca arriba en una partida. Completar una unidad da su insignia. El docente puede reiniciarlo desde su panel.
+- **Torneo** para el día de juegos: el docente escribe los participantes y se sortea una llave de eliminación directa. Cada partida se juega en la tablet ("Jugar aquí", y el ganador se anota solo) o se anota a mano.
+
 ### Ilustraciones con IA
 
 Las ilustraciones se generan con un prompt maestro: arte original, sin texto, formato 4:3 (1024×768) y paleta según el tipo de carta. Política es roja, Economía dorada, Sociedad azul, Cultura morada, Territorio verde, Acontecimiento gris pizarra, Lugar turquesa y Aula azul marino con dorado. Cada imagen se sube con el editor, o se integra al repositorio como `img/cartas/<código>.jpg`, agregando `"imagen": "img/cartas/<código>.jpg"` a la carta en su JSON.

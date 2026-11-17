@@ -176,6 +176,48 @@
    }
   },
   {
+   "id": "CC-8-U1-008",
+   "nombre": "Luis XIV",
+   "tipo": "personaje",
+   "curso": 8,
+   "unidad": 1,
+   "efecto": {
+    "tipo": "bonusDanio",
+    "n": 40,
+    "dimension": "Politica"
+   },
+   "dato": "Rey de Francia entre 1643 y 1715, símbolo de la monarquía absoluta; se le atribuye la frase «El Estado soy yo».",
+   "oa": "OA 3",
+   "emblema": "corona",
+   "conexiones": [
+    {
+     "causa": "CC-8-U1-004",
+     "texto": "Luis XIV llevó la monarquía absoluta a su máxima expresión."
+    }
+   ],
+   "frase": "Rey de Francia (1643–1715), símbolo de la monarquía absoluta.",
+   "fecha": {
+    "anio": 1643,
+    "texto": "1643–1715"
+   }
+  },
+  {
+   "id": "CC-8-U1-009",
+   "nombre": "Palacio de Versalles",
+   "tipo": "lugar",
+   "curso": 8,
+   "unidad": 1,
+   "efecto": {
+    "tipo": "bonusDimension",
+    "dimension": "Politica",
+    "n": 10
+   },
+   "dato": "Palacio construido por Luis XIV; fue el centro del poder y de la vida de la corte en la Francia absolutista.",
+   "oa": "OA 3",
+   "emblema": "casa",
+   "frase": "Centro del poder y de la corte en la Francia absolutista."
+  },
+  {
    "id": "CC-8-U2-001",
    "nombre": "Bartolomé de las Casas",
    "tipo": "personaje",

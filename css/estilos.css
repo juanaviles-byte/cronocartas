@@ -432,3 +432,74 @@ button:disabled { opacity: .35; cursor: default; }
 @keyframes latido { 50% { opacity: .65; } }
 .banner-turno small { display: flex; align-items: center; justify-content: center; gap: 6px; font-size: .45em; color: #FFE6A3; margin-top: 4px; }
 @media (prefers-reduced-motion: reduce) { .carta-mini.pide-saber, .pista-saber, .mini-saber.gana, .mini-saber.pierde { animation: none; } .carta-mini.pide-saber { box-shadow: 0 0 0 3px #E9C46A; } }
+
+/* ---------- Ola 3 ---------- */
+.reloj { display: inline-block; width: 1em; height: 1em; border-radius: 50%; border: .14em solid currentColor; position: relative; vertical-align: -.15em; }
+.reloj::after { content: ""; position: absolute; left: 45%; top: 18%; width: .1em; height: 35%; background: currentColor; box-shadow: .12em .22em 0 -.02em currentColor; }
+.medalla { display: inline-block; width: 1.4em; height: 1.4em; border-radius: 50%; vertical-align: middle;
+  background: radial-gradient(circle at 35% 30%, #fff3c4, #E9C46A 55%, #a77d14); box-shadow: 0 0 0 .12em #fff, 0 .1em .3em rgba(0,0,0,.5); }
+
+/* Bandos de los duelos temáticos */
+.bando { background: var(--bando); color: #fff; font-weight: 800; font-size: .78rem; padding: 3px 10px; border-radius: 999px; text-shadow: 0 1px 2px rgba(0,0,0,.5);
+  box-shadow: 0 1px 4px rgba(0,0,0,.5); }
+.bando-opcion { border-left: 8px solid var(--bando); }
+.bando-opcion.elegida { background: var(--bando); color: #fff; }
+.bando-opcion.elegida span { color: #f1f1f1; }
+.opciones.niveles .opcion, .opciones.bandos .opcion { max-width: 260px; }
+
+/* Línea de tiempo */
+.linea-mini { background: rgba(10,12,16,.75); color: #FFE6A3; border: 1px solid rgba(233,196,106,.6); border-radius: 999px; padding: 4px 10px; font-size: .74rem;
+  font-weight: 700; display: flex; align-items: center; gap: 5px; white-space: nowrap; }
+.capa-linea.girado .panel-linea { transform: rotate(180deg); }
+.panel-linea { background: #F6F1E3; color: #2a2520; border-radius: 16px; padding: 18px 20px; width: min(94vw, 900px); max-height: 88vh; overflow: auto;
+  box-shadow: 0 10px 40px rgba(0,0,0,.6); display: flex; flex-direction: column; gap: 10px; }
+.titulo-linea { font-weight: 900; font-size: 1.25rem; color: #6b4e12; display: flex; align-items: center; gap: 8px; }
+.pregunta-linea { margin: 0; font-size: 1.05rem; }
+.linea-huecos { display: flex; flex-wrap: wrap; align-items: stretch; gap: 8px; padding: 10px 0; position: relative; }
+.hito-linea { background: #fff; color: #2a2520; border: 2px solid #c9b78b; border-radius: 10px; padding: 8px 10px; min-width: 110px; max-width: 170px; display: flex; flex-direction: column; gap: 2px; }
+.hito-linea b { color: #8a5a00; font-size: 1rem; }
+.hito-linea span { font-size: .85rem; line-height: 1.2; }
+.hueco-linea { min-width: 64px; min-height: 64px; border-radius: 10px; border: 3px dashed #c08a1e; background: rgba(233,196,106,.15); color: #8a5a00; font-weight: 900; }
+.hueco-linea:active { background: rgba(233,196,106,.5); }
+.panel-linea .nota { color: #6b5a2e; margin: 0; }
+.panel-linea .boton-secundario { align-self: flex-end; background: #2a2520; color: #fff; }
+.aviso-linea.casi .titulo { color: #ffb4a2; }
+.final .linea-final { margin: 6px 0; }
+.final .linea-huecos { padding: 4px 0; }
+.final .hito-linea { min-width: 90px; padding: 5px 8px; }
+
+/* Álbum */
+.insignia-nueva { display: flex; align-items: center; gap: 8px; justify-content: center; font-weight: 800; color: #FFE6A3; margin: 6px 0; animation: saber-gana 1.2s ease-out; }
+.album-final { color: #FFE6A3; font-weight: 700; }
+.insignias { display: flex; flex-wrap: wrap; gap: 10px; margin: 8px 0 4px; }
+.insignia { display: grid; grid-template-columns: auto 1fr; column-gap: 8px; align-items: center; background: var(--fondo-2); border: 1px solid rgba(233,196,106,.5);
+  border-radius: 12px; padding: 8px 12px; }
+.insignia .medalla { grid-row: span 2; }
+.insignia small { color: var(--tenue); }
+.avance { color: var(--acento); font-weight: 800; margin-left: 6px; }
+.barra-album { height: 8px; border-radius: 999px; background: rgba(255,255,255,.08); overflow: hidden; margin: -4px 0 12px; max-width: 520px; }
+.barra-album span { display: block; height: 100%; background: linear-gradient(90deg, #a77d14, #E9C46A); }
+.carta.por-descubrir { background: repeating-linear-gradient(45deg, #2a3040, #2a3040 8px, #313848 8px, #313848 16px); border: 3px solid #3b4357;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; color: rgba(255,255,255,.45); box-shadow: none; }
+.carta.por-descubrir span { font-size: 4rem; font-weight: 900; }
+
+/* Torneo */
+.form-torneo { display: flex; flex-direction: column; gap: 6px; max-width: 760px; }
+.participantes { width: 100%; max-width: 520px; font: inherit; font-size: 1rem; padding: 10px 12px; border-radius: 10px; border: 1px solid #3b4357; background: var(--fondo-2); color: var(--tinta); }
+.form-torneo .error { color: #ffb4a2; min-height: 1.2em; }
+.rondas { display: flex; gap: 18px; overflow-x: auto; padding: 8px 0 16px; align-items: flex-start; }
+.ronda { display: flex; flex-direction: column; gap: 12px; min-width: 210px; }
+.ronda h3 { margin: 0; color: var(--acento); font-size: .95rem; text-transform: uppercase; letter-spacing: .06em; }
+.partida-torneo { background: var(--fondo-2); border-radius: 12px; padding: 8px; display: flex; flex-direction: column; gap: 4px; border: 1px solid #2f3644; }
+.partida-torneo.jugada { opacity: .8; }
+.jugador-llave { padding: 6px 8px; border-radius: 8px; background: rgba(255,255,255,.04); font-weight: 700; overflow-wrap: anywhere; }
+.jugador-llave.gano { background: rgba(233,196,106,.25); color: #FFE6A3; }
+.jugador-llave.vacio { color: var(--tenue); font-weight: 500; font-style: italic; }
+.acciones-llave { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+.acciones-llave button { min-height: 40px; padding: 0 12px; font-size: .85rem; }
+.bando-llave { color: var(--tenue); }
+.campeon { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 16px; border-radius: 16px; margin: 8px 0;
+  background: radial-gradient(circle at 50% 0, rgba(233,196,106,.35), transparent 70%), var(--fondo-2); border: 1px solid rgba(233,196,106,.6); }
+.campeon .medalla { width: 3rem; height: 3rem; }
+.campeon b { font-size: 1.8rem; color: #FFE6A3; }
+.coleccion > .opciones + .opciones { margin-top: 10px; }

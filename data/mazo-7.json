@@ -573,7 +573,12 @@
    "dato": "Crearon un calendario muy preciso y una escritura con glifos.",
    "oa": "OA 15",
    "emblema": "sol",
-   "frase": "Crearon un calendario muy preciso y una escritura con glifos."
+   "frase": "Crearon un calendario muy preciso y una escritura con glifos.",
+   "habilidad": {
+    "nombre": "Astrónomos",
+    "tipo": "saberAlEntrar",
+    "n": 1
+   }
   },
   {
    "id": "CC-7-U4-002",
@@ -594,7 +599,12 @@
    "dato": "Fundaron Tenochtitlan sobre un lago y cultivaban en chinampas, islas artificiales.",
    "oa": "OA 13",
    "emblema": "piramide",
-   "frase": "Tenochtitlan sobre un lago y cultivos en chinampas."
+   "frase": "Tenochtitlan sobre un lago y cultivos en chinampas.",
+   "habilidad": {
+    "nombre": "Ciudad sobre el lago",
+    "tipo": "resistente",
+    "n": 10
+   }
   },
   {
    "id": "CC-7-U4-003",
@@ -729,6 +739,68 @@
    "fecha": {
     "anio": 1438,
     "texto": "siglo XV"
+   }
+  },
+  {
+   "id": "CC-7-U4-009",
+   "nombre": "Calendario maya",
+   "tipo": "acontecimiento",
+   "curso": 7,
+   "unidad": 4,
+   "efecto": {
+    "tipo": "robar",
+    "n": 2
+   },
+   "dato": "Los mayas observaron los astros y crearon calendarios muy precisos para organizar la agricultura y las ceremonias.",
+   "oa": "OA 15",
+   "emblema": "sol",
+   "conexiones": [
+    {
+     "causa": "CC-7-U4-001",
+     "texto": "Los mayas crearon su calendario observando los astros."
+    }
+   ],
+   "frase": "Calendarios precisos para la agricultura y las ceremonias."
+  },
+  {
+   "id": "CC-7-U4-010",
+   "nombre": "Tenochtitlan",
+   "tipo": "lugar",
+   "curso": 7,
+   "unidad": 4,
+   "efecto": {
+    "tipo": "bonusDimension",
+    "dimension": "Territorio",
+    "n": 10
+   },
+   "dato": "Capital de los mexicas, fundada en 1325 sobre un islote del lago Texcoco y unida a tierra firme por calzadas.",
+   "oa": "OA 13",
+   "emblema": "piramide",
+   "frase": "Capital mexica fundada en 1325 sobre un islote del lago Texcoco."
+  },
+  {
+   "id": "CC-7-U4-011",
+   "nombre": "Moctezuma II",
+   "tipo": "personaje",
+   "curso": 7,
+   "unidad": 4,
+   "efecto": {
+    "tipo": "saberExtra",
+    "n": 1
+   },
+   "dato": "Gobernante mexica de Tenochtitlan cuando llegaron los españoles a México, en 1519.",
+   "oa": "OA 13",
+   "emblema": "corona",
+   "conexiones": [
+    {
+     "causa": "CC-7-U4-010",
+     "texto": "Moctezuma gobernaba desde Tenochtitlan, la capital mexica."
+    }
+   ],
+   "frase": "Gobernaba Tenochtitlan cuando llegaron los españoles (1519).",
+   "fecha": {
+    "anio": 1519,
+    "texto": "1519"
    }
   }
  ]
