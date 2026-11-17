@@ -127,3 +127,10 @@ test('validarCarta detecta habilidades desconocidas y conexiones mal formadas', 
   assert.ok(validarCarta({ ...c, conexiones: [{ causa: 5 }] }).length > 0);
   assert.ok(validarMazo([...CURSOS[2].cartas.filter(x => x.id !== c.id), { ...c, conexiones: [{ causa: 'NO-EXISTE', texto: 'una explicación larga' }] }]).some(e => e.includes('NO-EXISTE')));
 });
+
+test('toda carta tiene una frase corta (≤ 80 letras) para mostrar sobre la ilustración', () => {
+  for (const c of [...CURSOS.flatMap(m => m.cartas), ...AULA]) {
+    assert.equal(typeof c.frase, 'string', c.id);
+    assert.ok(c.frase.length >= 10 && c.frase.length <= 80, `${c.id}: ${c.frase.length}`);
+  }
+});

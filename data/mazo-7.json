@@ -25,7 +25,8 @@
    ],
    "dato": "En el Paleolítico los grupos humanos eran nómades y vivían de la caza y la recolección.",
    "oa": "OA 1",
-   "emblema": "arbol"
+   "emblema": "arbol",
+   "frase": "Nómades que vivían de la caza y la recolección."
   },
   {
    "id": "CC-7-U1-002",
@@ -58,6 +59,7 @@
      "texto": "La agricultura comenzó en las tierras de la Creciente Fértil."
     }
    ],
+   "frase": "Con la agricultura, los grupos se volvieron sedentarios.",
    "habilidad": {
     "nombre": "Cosechas",
     "tipo": "sanador",
@@ -82,7 +84,8 @@
    ],
    "dato": "Su civilización creció a orillas del río Nilo, cuyas crecidas fertilizaban la tierra.",
    "oa": "OA 4",
-   "emblema": "piramide"
+   "emblema": "piramide",
+   "frase": "Una civilización nacida a orillas del Nilo."
   },
   {
    "id": "CC-7-U1-004",
@@ -113,7 +116,8 @@
      "causa": "CC-7-U1-005",
      "texto": "Los sumerios usaron la escritura para registrar cuentas y leyes."
     }
-   ]
+   ],
+   "frase": "En Mesopotamia crearon una de las primeras escrituras: la escritura cuneiforme."
   },
   {
    "id": "CC-7-U1-005",
@@ -127,7 +131,8 @@
    },
    "dato": "Permitió llevar registros, cuentas y leyes. Con ella comienza la historia escrita.",
    "oa": "OA 3",
-   "emblema": "pluma"
+   "emblema": "pluma",
+   "frase": "Con ella comienza la historia escrita."
   },
   {
    "id": "CC-7-U1-006",
@@ -142,7 +147,8 @@
    },
    "dato": "Zona en forma de media luna, de Mesopotamia al Nilo, donde surgieron la agricultura y las primeras ciudades.",
    "oa": "OA 2",
-   "emblema": "ola"
+   "emblema": "ola",
+   "frase": "De Mesopotamia al Nilo: aquí nació la agricultura."
   },
   {
    "id": "CC-7-U2-001",
@@ -168,7 +174,8 @@
      "causa": "CC-7-U2-008",
      "texto": "Pericles impulsó la participación de los ciudadanos de Atenas."
     }
-   ]
+   ],
+   "frase": "Votaba en la Asamblea; no todos podían hacerlo."
   },
   {
    "id": "CC-7-U2-002",
@@ -194,6 +201,7 @@
    "dato": "Ejército organizado y disciplinado que permitió a Roma extender su territorio.",
    "oa": "OA 7",
    "emblema": "escudo",
+   "frase": "Ejército organizado y disciplinado que permitió a Roma extender su territorio.",
    "habilidad": {
     "nombre": "Disciplina",
     "tipo": "resistente",
@@ -218,7 +226,8 @@
    ],
    "dato": "Roma se gobernó con un Senado y dos cónsules, elegidos cada año para que nadie concentrara el poder.",
    "oa": "OA 17",
-   "emblema": "columna"
+   "emblema": "columna",
+   "frase": "Un Senado y dos cónsules elegidos cada año."
   },
   {
    "id": "CC-7-U2-004",
@@ -244,7 +253,8 @@
    "dato": "Llegó a rodear todo el Mediterráneo y difundió el latín y el derecho romano.",
    "oa": "OA 7",
    "emblema": "corona",
-   "evolucionaDe": "CC-7-U2-003"
+   "evolucionaDe": "CC-7-U2-003",
+   "frase": "Llegó a rodear todo el Mediterráneo y difundió el latín y el derecho romano."
   },
   {
    "id": "CC-7-U2-005",
@@ -276,6 +286,7 @@
      "texto": "El debate en la polis estimuló el pensamiento filosófico."
     }
    ],
+   "frase": "Sócrates, Platón y Aristóteles: pensar con la razón.",
    "habilidad": {
     "nombre": "Preguntar",
     "tipo": "inspirador"
@@ -293,7 +304,8 @@
    },
    "dato": "Nacieron en la antigua Grecia, en Olimpia, y hoy se siguen celebrando en todo el mundo.",
    "oa": "OA 8",
-   "emblema": "estrella"
+   "emblema": "estrella",
+   "frase": "Nacieron en Olimpia y aún se celebran."
   },
   {
    "id": "CC-7-U2-007",
@@ -308,7 +320,8 @@
    },
    "dato": "Espacio de circulación e intercambio que unió a fenicios, griegos y romanos.",
    "oa": "OA 5",
-   "emblema": "ola"
+   "emblema": "ola",
+   "frase": "Espacio de circulación e intercambio que unió a fenicios, griegos y romanos."
   },
   {
    "id": "CC-7-U2-008",
@@ -323,7 +336,8 @@
    },
    "dato": "Gobernó Atenas en el siglo V a.C., la época de mayor esplendor de su democracia.",
    "oa": "OA 6",
-   "emblema": "columna"
+   "emblema": "columna",
+   "frase": "Gobernó Atenas en el siglo V a.C., la época de mayor esplendor de su democracia."
   },
   {
    "id": "CC-7-U3-001",
@@ -348,7 +362,8 @@
    ],
    "dato": "Recibía tierras a cambio de fidelidad y ayuda militar; a cambio protegía a quienes vivían en ellas.",
    "oa": "OA 10",
-   "emblema": "escudo"
+   "emblema": "escudo",
+   "frase": "Tierras a cambio de fidelidad y protección."
   },
   {
    "id": "CC-7-U3-002",
@@ -368,7 +383,8 @@
    ],
    "dato": "La mayoría de la población vivía en el campo y trabajaba las tierras del señor.",
    "oa": "OA 10",
-   "emblema": "maiz"
+   "emblema": "maiz",
+   "frase": "La mayoría de la población vivía en el campo y trabajaba las tierras del señor."
   },
   {
    "id": "CC-7-U3-003",
@@ -399,7 +415,8 @@
      "causa": "CC-7-U2-005",
      "texto": "Los monjes copiaron y conservaron obras de los filósofos antiguos."
     }
-   ]
+   ],
+   "frase": "Copiaba libros a mano y conservó el saber antiguo."
   },
   {
    "id": "CC-7-U3-004",
@@ -425,7 +442,8 @@
      "causa": "CC-7-U2-007",
      "texto": "El comercio europeo revivió por las rutas del Mediterráneo."
     }
-   ]
+   ],
+   "frase": "Desde el siglo XI, el comercio revivió en ferias y rutas."
   },
   {
    "id": "CC-7-U3-005",
@@ -451,7 +469,8 @@
    "dato": "Los habitantes de los burgos, dedicados al comercio y a los oficios, formaron un nuevo grupo social.",
    "oa": "OA 12",
    "emblema": "casa",
-   "evolucionaDe": "CC-7-U3-004"
+   "evolucionaDe": "CC-7-U3-004",
+   "frase": "Comerciantes y artesanos de los burgos."
   },
   {
    "id": "CC-7-U3-006",
@@ -471,7 +490,8 @@
    ],
    "dato": "En la península ibérica, la cultura islámica aportó avances en matemáticas, medicina y astronomía.",
    "oa": "OA 11",
-   "emblema": "estrella"
+   "emblema": "estrella",
+   "frase": "Matemáticas, medicina y astronomía en la península ibérica."
   },
   {
    "id": "CC-7-U3-007",
@@ -491,7 +511,8 @@
      "causa": "CC-7-U3-003",
      "texto": "El saber conservado en los monasterios llegó a las universidades."
     }
-   ]
+   ],
+   "frase": "Bolonia y París: el saber se reúne en universidades."
   },
   {
    "id": "CC-7-U3-008",
@@ -505,7 +526,8 @@
    },
    "dato": "Rey de los francos coronado emperador en el año 800; reunió gran parte de Europa occidental.",
    "oa": "OA 9",
-   "emblema": "corona"
+   "emblema": "corona",
+   "frase": "Emperador en el año 800; unió gran parte de Europa."
   },
   {
    "id": "CC-7-U4-001",
@@ -530,7 +552,8 @@
    ],
    "dato": "Crearon un calendario muy preciso y una escritura con glifos.",
    "oa": "OA 15",
-   "emblema": "sol"
+   "emblema": "sol",
+   "frase": "Crearon un calendario muy preciso y una escritura con glifos."
   },
   {
    "id": "CC-7-U4-002",
@@ -550,7 +573,8 @@
    ],
    "dato": "Fundaron Tenochtitlan sobre un lago y cultivaban en chinampas, islas artificiales.",
    "oa": "OA 13",
-   "emblema": "piramide"
+   "emblema": "piramide",
+   "frase": "Tenochtitlan sobre un lago y cultivos en chinampas."
   },
   {
    "id": "CC-7-U4-003",
@@ -571,6 +595,7 @@
    "dato": "Comunidad familiar andina que trabajaba la tierra en conjunto y se ayudaba mutuamente.",
    "oa": "OA 14",
    "emblema": "personas",
+   "frase": "La comunidad andina que trabajaba unida.",
    "habilidad": {
     "nombre": "Trabajo comunitario",
     "tipo": "fuerzaReserva",
@@ -608,6 +633,7 @@
      "texto": "Pachacútec inició la gran expansión del Imperio inca."
     }
    ],
+   "frase": "Caminos y administración desde el Cusco.",
    "habilidad": {
     "nombre": "Administración",
     "tipo": "saberAlEntrar",
@@ -632,7 +658,8 @@
      "causa": "CC-7-U4-004",
      "texto": "La administración inca registraba sus cuentas en quipus."
     }
-   ]
+   ],
+   "frase": "Sistema de cuerdas con nudos que los incas usaban para registrar cantidades."
   },
   {
    "id": "CC-7-U4-006",
@@ -646,7 +673,8 @@
    },
    "dato": "Fue la base de la alimentación en Mesoamérica y hoy lo seguimos comiendo en toda América.",
    "oa": "OA 16",
-   "emblema": "maiz"
+   "emblema": "maiz",
+   "frase": "Base de la alimentación de Mesoamérica."
   },
   {
    "id": "CC-7-U4-007",
@@ -661,7 +689,8 @@
    },
    "dato": "Red de caminos de miles de kilómetros que llegaba hasta la zona central del actual Chile.",
    "oa": "OA 14",
-   "emblema": "mapa"
+   "emblema": "mapa",
+   "frase": "Miles de kilómetros de caminos, hasta el actual Chile."
   },
   {
    "id": "CC-7-U4-008",
@@ -675,7 +704,8 @@
    },
    "dato": "Inca que en el siglo XV transformó el Cusco y comenzó la gran expansión del Tawantinsuyu.",
    "oa": "OA 14",
-   "emblema": "sol"
+   "emblema": "sol",
+   "frase": "Transformó el Cusco y expandió el Tawantinsuyu."
   }
  ]
 }

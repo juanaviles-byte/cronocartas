@@ -288,3 +288,18 @@ Cada mazo lleva hasta 2 cartas Aula.
 - **Lectura en voz alta** con la voz de la tablet, en español y sin internet si la tablet tiene voces instaladas.
   - Botón "Escuchar" en el detalle de cada carta, en la colección y en el "¿Sabías que…?".
   - Ajuste docente: leer automáticamente el "¿Sabías que…?".
+
+## 16. Diseño de cartas estilo Mitos y Leyendas
+
+La ilustración manda: ocupa a sangre los 2/3 superiores de la carta. Cada elemento tiene su zona propia y ninguna se monta sobre otra.
+
+- **Esquina superior izquierda:** disco con el ícono de la dimensión o del tipo, y debajo la categoría (Política, Personaje, Acontecimiento…).
+- **Esquina superior derecha:** círculo dorado con la Resistencia (o "1×" en los Personajes: uno por turno).
+- **Nombre vertical** a la izquierda, sobre la ilustración, en una franja que empieza bajo la categoría y termina en el borde de la imagen. Su tamaño de letra depende del largo del nombre (4 tamaños).
+- **Frase corta** (máx. 80 letras) en cursiva sobre la parte baja de la ilustración. Toda carta tiene `frase` en los datos; el dato histórico completo se lee al tocar la carta, en una ficha bajo la carta grande.
+- **Sello de curso** (5°, 6°, 7°, 8°; o el dominio MBE en las cartas de Aula) en el borde entre imagen y texto.
+- **Pergamino de texto:** habilidad en negrita, acciones con Saber y daño, o el efecto, y la línea de Conexión. El tamaño de letra se elige por largo y por número de renglones (4 tamaños).
+- **Pie:** debilidad ×2 y retirada (Protagonistas) o código; a la derecha el OA o el estándar MBE.
+- **Carta pequeña (mano y mesa):** ilustración, disco de tipo, Resistencia, y el nombre en una banda inferior.
+- Todas las medidas usan una unidad de carta (`--u` = ancho/20), así la carta se ve igual a cualquier tamaño.
+- Prueba visual (QA) que mide en pantalla que ninguna zona choque con otra ni corte su texto, en las 3 resoluciones de tablet.

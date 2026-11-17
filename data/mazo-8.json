@@ -20,7 +20,8 @@
    },
    "dato": "Artista e inventor del Renacimiento; representa la confianza en la capacidad humana para crear y conocer.",
    "oa": "OA 1",
-   "emblema": "pluma"
+   "emblema": "pluma",
+   "frase": "Artista e inventor: la confianza del Renacimiento en el ser humano."
   },
   {
    "id": "CC-8-U1-002",
@@ -45,7 +46,8 @@
      "causa": "CC-8-U1-006",
      "texto": "La imprenta difundió las 95 tesis por toda Europa."
     }
-   ]
+   ],
+   "frase": "1517: sus 95 tesis iniciaron la Reforma protestante."
   },
   {
    "id": "CC-8-U1-003",
@@ -65,7 +67,8 @@
    ],
    "dato": "Los reyes comenzaron a concentrar el poder, que en la Edad Media estaba repartido entre los señores.",
    "oa": "OA 3",
-   "emblema": "corona"
+   "emblema": "corona",
+   "frase": "Los reyes comenzaron a concentrar el poder."
   },
   {
    "id": "CC-8-U1-004",
@@ -92,6 +95,7 @@
    "oa": "OA 3",
    "emblema": "corona",
    "evolucionaDe": "CC-8-U1-003",
+   "frase": "Todo el poder en el rey: funcionarios, impuestos y ejércitos.",
    "habilidad": {
     "nombre": "Poder concentrado",
     "tipo": "resistente",
@@ -116,7 +120,8 @@
    ],
    "dato": "El mercantilismo medía la riqueza de un reino por el oro y la plata que acumulaba.",
    "oa": "OA 4",
-   "emblema": "moneda"
+   "emblema": "moneda",
+   "frase": "La riqueza de un reino se medía en oro y plata."
   },
   {
    "id": "CC-8-U1-006",
@@ -130,7 +135,8 @@
    },
    "dato": "Hacia 1450, la imprenta de Gutenberg permitió imprimir libros en serie y difundir ideas más rápido.",
    "oa": "OA 2",
-   "emblema": "libro"
+   "emblema": "libro",
+   "frase": "Hacia 1450, libros impresos en serie."
   },
   {
    "id": "CC-8-U1-007",
@@ -150,7 +156,8 @@
      "causa": "CC-8-U1-006",
      "texto": "La imprenta hizo circular rápido los nuevos descubrimientos."
     }
-   ]
+   ],
+   "frase": "Observar y experimentar para conocer la naturaleza."
   },
   {
    "id": "CC-8-U2-001",
@@ -170,7 +177,8 @@
      "causa": "CC-8-U2-002",
      "texto": "Los abusos de la conquista llevaron a Las Casas a denunciarlos."
     }
-   ]
+   ],
+   "frase": "Denunció los abusos contra los indígenas."
   },
   {
    "id": "CC-8-U2-002",
@@ -195,7 +203,8 @@
    ],
    "dato": "Avanzaron rápido gracias a alianzas con pueblos indígenas, armas de acero, caballos y epidemias.",
    "oa": "OA 6",
-   "emblema": "escudo"
+   "emblema": "escudo",
+   "frase": "Alianzas, acero, caballos y epidemias."
   },
   {
    "id": "CC-8-U2-003",
@@ -215,7 +224,8 @@
    ],
    "dato": "Gran propiedad rural que fue el centro de la economía del Chile colonial.",
    "oa": "OA 13",
-   "emblema": "casa"
+   "emblema": "casa",
+   "frase": "Gran propiedad rural que fue el centro de la economía del Chile colonial."
   },
   {
    "id": "CC-8-U2-004",
@@ -242,6 +252,7 @@
    "oa": "OA 13",
    "emblema": "corona",
    "evolucionaDe": "CC-8-U2-003",
+   "frase": "Dueños de haciendas que mantuvieron su poder.",
    "habilidad": {
     "nombre": "Tierras y rentas",
     "tipo": "sanador",
@@ -266,7 +277,8 @@
    ],
    "dato": "El fracaso de la conquista de Arauco originó una frontera con comercio, parlamentos y conflictos.",
    "oa": "OA 12",
-   "emblema": "mapa"
+   "emblema": "mapa",
+   "frase": "En Arauco: comercio, parlamentos y conflictos."
   },
   {
    "id": "CC-8-U2-006",
@@ -280,7 +292,8 @@
    },
    "dato": "Iglesias, música y ceremonias barrocas expresaron la religiosidad de la sociedad colonial.",
    "oa": "OA 9",
-   "emblema": "campana"
+   "emblema": "campana",
+   "frase": "Iglesias, música y ceremonias de la Colonia."
   },
   {
    "id": "CC-8-U2-007",
@@ -295,7 +308,8 @@
    },
    "dato": "En los siglos XVII y XVIII fue la gran ruta del comercio entre Europa, África y América.",
    "oa": "OA 10",
-   "emblema": "barco"
+   "emblema": "barco",
+   "frase": "La gran ruta entre Europa, África y América."
   },
   {
    "id": "CC-8-U3-001",
@@ -308,7 +322,8 @@
    },
    "dato": "Propuso separar el poder del Estado en ejecutivo, legislativo y judicial.",
    "oa": "OA 14",
-   "emblema": "balanza"
+   "emblema": "balanza",
+   "frase": "Propuso separar el poder del Estado en ejecutivo, legislativo y judicial."
   },
   {
    "id": "CC-8-U3-002",
@@ -334,7 +349,8 @@
      "causa": "CC-8-U3-006",
      "texto": "La independencia de EE. UU. inspiró a los criollos americanos."
     }
-   ]
+   ],
+   "frase": "Nacidos en América, querían participar en el gobierno."
   },
   {
    "id": "CC-8-U3-003",
@@ -367,6 +383,7 @@
      "texto": "Las nuevas repúblicas adoptaron la separación de poderes."
     }
    ],
+   "frase": "Tras las independencias, la mayoría eligió la república.",
    "habilidad": {
     "nombre": "Soberanía popular",
     "tipo": "fuerzaReserva",
@@ -403,6 +420,7 @@
      "texto": "La Enciclopedia llegó a muchos lectores gracias a la imprenta."
     }
    ],
+   "frase": "Reunieron el saber de su época para difundir la razón.",
    "habilidad": {
     "nombre": "Difundir las luces",
     "tipo": "inspirador"
@@ -425,7 +443,8 @@
      "causa": "CC-8-U3-004",
      "texto": "Las ideas ilustradas inspiraron la Declaración de 1789."
     }
-   ]
+   ],
+   "frase": "1789: todos nacen libres e iguales en derechos."
   },
   {
    "id": "CC-8-U3-006",
@@ -439,7 +458,8 @@
    },
    "dato": "En 1776 las trece colonias declararon su independencia de Gran Bretaña e inspiraron a otros pueblos.",
    "oa": "OA 15",
-   "emblema": "estrella"
+   "emblema": "estrella",
+   "frase": "1776: las trece colonias se independizan."
   },
   {
    "id": "CC-8-U3-007",
@@ -454,7 +474,8 @@
    },
    "dato": "Lugares de reunión donde se discutían las nuevas ideas de la Ilustración.",
    "oa": "OA 14",
-   "emblema": "pluma"
+   "emblema": "pluma",
+   "frase": "Lugares de reunión donde se discutían las nuevas ideas de la Ilustración."
   },
   {
    "id": "CC-8-U4-001",
@@ -474,7 +495,8 @@
    ],
    "dato": "Región de suelos fértiles y clima mediterráneo, clave para la agricultura de Chile.",
    "oa": "OA 20",
-   "emblema": "maiz"
+   "emblema": "maiz",
+   "frase": "Suelos fértiles y clima mediterráneo."
   },
   {
    "id": "CC-8-U4-002",
@@ -494,7 +516,8 @@
    ],
    "dato": "Región con poca población y difícil conexión, unida al resto del país por la Carretera Austral.",
    "oa": "OA 21",
-   "emblema": "montana"
+   "emblema": "montana",
+   "frase": "Poca población, unida al país por la Carretera Austral."
   },
   {
    "id": "CC-8-U4-003",
@@ -519,7 +542,8 @@
    ],
    "dato": "Concentra gran parte de la minería del cobre de Chile.",
    "oa": "OA 20",
-   "emblema": "engranaje"
+   "emblema": "engranaje",
+   "frase": "Concentra gran parte de la minería del cobre de Chile."
   },
   {
    "id": "CC-8-U4-004",
@@ -539,7 +563,8 @@
    ],
    "dato": "En Rapa Nui se conserva una lengua y una cultura polinésica propias; los moái son su símbolo.",
    "oa": "OA 20",
-   "emblema": "ola"
+   "emblema": "ola",
+   "frase": "Lengua y cultura polinésica; los moái son su símbolo."
   },
   {
    "id": "CC-8-U4-005",
@@ -554,7 +579,8 @@
    },
    "dato": "Camino de más de mil kilómetros que conecta las localidades del sur de Chile.",
    "oa": "OA 21",
-   "emblema": "mapa"
+   "emblema": "mapa",
+   "frase": "Camino de más de mil kilómetros que conecta las localidades del sur de Chile."
   }
  ]
 }

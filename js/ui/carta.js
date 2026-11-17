@@ -84,83 +84,92 @@ function aplicarTema(el, carta) {
   el.style.setProperty('--c-papel', t.papel);
 }
 
+// Clases de tamaño según el largo del texto: así nada se monta sobre nada.
+const claseNombre = n => (n.length <= 14 ? 'n1' : n.length <= 20 ? 'n2' : n.length <= 26 ? 'n3' : 'n4');
+const claseCategoria = t => (t.length <= 10 ? 'k1' : 'k2');
+const fraseDe = c => c.frase || (c.dato && c.dato.length > 80 ? c.dato.slice(0, 77).replace(/\s+\S*$/, '') + '…' : c.dato || '');
+const ICONO_PERSONAJE_DERECHA = '1×';
+
 export function renderCarta(carta, { tamano = 'normal', instancia = null, unidades = null } = {}) {
-  const el = document.createElement('div');
-  el.className = `carta carta-${tamano} tipo-${carta.tipo}${carta.comunidad ? ' comunidad' : ''}`;
-  aplicarTema(el, carta);
   const esProt = carta.tipo === 'protagonista';
   const res = carta.resistencia;
   const vida = instancia ? Math.max(0, res - instancia.danio) : res;
   const claveTipo = esProt ? carta.dimension : carta.tipo;
+  const categoria = esProt ? nombreDim(carta.dimension) : ETIQUETA[carta.tipo];
+
+  const el = document.createElement('div');
+  el.className = `carta carta-${tamano} tipo-${carta.tipo}${carta.comunidad ? ' comunidad' : ''}`;
+  aplicarTema(el, carta);
 
   if (tamano === 'mini') {
     el.innerHTML = `
-      <div class="m-cab"><span class="m-nombre">${esc(carta.nombre)}</span></div>
-      <div class="m-ventana">${imagenDe(carta)}
-        ${instancia ? `<div class="mini-saber">${pips(instancia.saber)}</div>` : ''}
-        ${carta.evolucionaDe ? '<div class="etapa">2</div>' : ''}
-        ${instancia?.protegido ? '<div class="sello">Protegido</div>' : ''}
-        ${instancia?.bonus ? `<div class="sello">+${esc(instancia.bonus)}</div>` : ''}
-      </div>
-      <div class="m-pie">
+      <div class="m-ventana">${imagenDe(carta)}</div>
+      <div class="m-disco">${iconoTipo(claveTipo, 40)}</div>
+      ${esProt ? `<div class="m-res${instancia && instancia.danio ? ' herido' : ''}">${esc(vida)}</div>` : ''}
+      ${carta.evolucionaDe ? '<div class="etapa">2</div>' : ''}
+      ${instancia ? `<div class="mini-saber">${pips(instancia.saber)}</div>` : ''}
+      ${instancia?.protegido ? '<div class="sello">Protegido</div>' : ''}
+      ${instancia?.bonus ? `<div class="sello">+${esc(instancia.bonus)}</div>` : ''}
+      <div class="m-banda">
         ${carta.habilidad ? '<span class="m-hab" title="Tiene habilidad">◆</span>' : ''}
-        ${esProt ? `<b class="m-res">${esc(vida)}</b>${instancia && instancia.danio ? `<span class="barra"><span style="width:${(vida / res) * 100}%"></span></span>` : ''}`
-                 : `<span class="m-tipo">${ETIQUETA[carta.tipo]}</span>`}
-        ${iconoTipo(claveTipo, 16)}
+        <span class="m-nombre">${esc(carta.nombre)}</span>
+        ${esProt && instancia && instancia.danio ? `<span class="barra"><span style="width:${(vida / res) * 100}%"></span></span>` : ''}
       </div>`;
     return el;
   }
 
-  const unidad = carta.unidad && unidades ? unidades[carta.unidad - 1] : null;
-  const franja = carta.mbe
-    ? `Dominio ${esc(carta.mbe.dominio)} · Estándar ${esc(carta.mbe.estandar)}: ${esc(carta.mbe.nombre)}`
-    : `${carta.curso ? `${esc(carta.curso)}° básico` : ''}${carta.unidad ? ` · Unidad ${esc(carta.unidad)}${unidad ? `: ${esc(unidad)}` : ''}` : ''}`;
-
-  let cabeza;
+  // Recuadro de texto (pergamino)
+  const partes = [];
+  if (carta.evolucionaDe && carta.baseNombre) partes.push(`<div class="t-evo">Evoluciona de ${esc(carta.baseNombre)}</div>`);
+  if (carta.habilidad) partes.push(`<div class="t-linea"><b>${esc(carta.habilidad.nombre)}.</b> ${esc(textoHabilidad(carta.habilidad))}</div>`);
   if (esProt) {
-    cabeza = `
-      <div class="cab${carta.evolucionaDe ? ' con-base' : ''}">
-        ${miniaturaBase(carta)}
-        ${carta.evolucionaDe ? `<div class="etapa-previa" title="Viene de ${esc(carta.baseNombre || '')}"><span>Etapa 2</span>${carta.baseNombre ? `<small>de ${esc(carta.baseNombre)}</small>` : ''}</div>` : '<div class="etapa-previa"><span>Básico</span></div>'}
-        <div class="nombre">${esc(carta.nombre)}</div>
-        <div class="res"><small>RES</small>${instancia ? `${esc(vida)}<small>/${esc(res)}</small>` : esc(res)}${iconoTipo(claveTipo, 26)}</div>
-      </div>`;
+    partes.push(carta.acciones.map(a => `<div class="t-accion"><span class="t-costo">${pips(a.costo)}</span><span class="t-an">${esc(a.nombre)}</span><b>${esc(a.danio)}</b></div>`).join(''));
   } else {
-    cabeza = `
-      <div class="cab cab-apoyo">
-        <div class="etiqueta-apoyo">${ETIQUETA[carta.tipo]}</div>
-        <div class="nombre">${esc(carta.nombre)}</div>
-        ${iconoTipo(claveTipo, 26)}
-      </div>`;
+    partes.push(`<div class="t-linea"><b>${carta.tipo === 'personaje' ? 'Personaje.' : 'Efecto.'}</b> ${esc(carta.texto || textoEfecto(carta.efecto))}</div>`);
   }
-
-  const hab = carta.habilidad ? `<div class="habilidad"><small>Habilidad</small><b>${esc(carta.habilidad.nombre)}:</b> ${esc(textoHabilidad(carta.habilidad))}</div>` : '';
   const conex = (carta.conexiones || []).filter(x => x.causaNombre).map(x => esc(x.causaNombre));
-  const lineaConex = conex.length && tamano === 'grande' ? `<div class="conexiones-carta"><small>Conexión histórica</small>Si ya jugaste <b>${conex.join('</b> o <b>')}</b>, tu activo gana +1 Saber.</div>` : '';
-  let cuerpo;
-  if (esProt) {
-    cuerpo = hab + `
-      <div class="acciones">${carta.acciones.map(a => `
-        <div class="accion"><span class="costo">${pips(a.costo)}</span><span class="an">${esc(a.nombre)}</span><b>${esc(a.danio)}</b></div>`).join('')}
-      </div>
-      <div class="pie-tcg">
-        <span><small>Débil ante</small> ${iconoTipo(DEBIL_ANTE[carta.dimension], 18)} <b>×2</b></span>
-        <span><small>Dimensión</small> ${esc(nombreDim(carta.dimension))}</span>
-        <span><small>Retirada</small> ${pips(carta.retirada ?? 1)}</span>
-      </div>`;
-  } else {
-    cuerpo = `<div class="efecto"><small>Efecto</small>${esc(carta.texto || textoEfecto(carta.efecto))}</div>`;
-  }
-  cuerpo += lineaConex;
+  if (conex.length) partes.push(`<div class="t-conexion"><b>Conexión:</b> ${conex.join(' o ')} → +1 Saber</div>`);
+  // Cada renglón ocupa espacio aunque sea corto: se suman letras y renglones.
+  const renglones = (carta.evolucionaDe ? 1 : 0) + (carta.habilidad ? 1 : 0) + (esProt ? carta.acciones.length : 1) + (conex.length ? 1 : 0);
+  const largoTexto = partes.join('').replace(/<[^>]+>/g, '').length + renglones * 12;
+  const claseTexto = renglones >= 5 ? 'tx4' : largoTexto <= 90 ? 'tx1' : largoTexto <= 120 ? 'tx2' : 'tx3';
 
-  el.innerHTML = `
-    <div class="marco">
-      ${cabeza}
-      <div class="ventana">${imagenDe(carta)}${instancia ? `<div class="saber-en-mesa">${pips(instancia.saber)}</div>` : ''}</div>
-      <div class="franja">${franja}</div>
-      ${cuerpo}
-      <div class="dato">${esc(carta.dato)}</div>
-      <div class="pie-codigo"><span>${esc(carta.id || '')}${carta.oa ? ` · ${esc(carta.oa)}` : ''}</span>${carta.comunidad ? `<span class="autor">★ ${esc(carta.autor || 'Estudiante')}</span>` : ''}</div>
+  const unidad = carta.unidad && unidades ? unidades[carta.unidad - 1] : null;
+  const claseN = claseNombre(carta.nombre);   // n1–n4 según el largo del nombre
+  const refPie = carta.oa || (carta.mbe ? 'MBE ' + carta.mbe.dominio + '·' + carta.mbe.estandar : '');
+  const pie = esProt
+    ? `<span>Débil ${iconoTipo(DEBIL_ANTE[carta.dimension], 14)}×2 · Retirada ${pips(carta.retirada ?? 1)}</span><span>${esc(carta.oa || '')}</span>`
+    : `<span>${esc(carta.id || '')}</span><span>${esc(refPie)}</span>`;
+  const sello = carta.curso ? `${esc(carta.curso)}°` : carta.mbe ? esc(carta.mbe.dominio) : '';
+
+  const tarjeta = `
+    <div class="myl">
+      <div class="myl-arte">${imagenDe(carta)}</div>
+      <div class="myl-disco">${iconoTipo(claveTipo, 64)}</div>
+      <div class="myl-cat ${claseCategoria(categoria)}">${esc(categoria)}</div>
+      ${esProt ? `<div class="myl-res">${esc(vida)}${instancia && instancia.danio ? `<small>/${esc(res)}</small>` : ''}</div>`
+               : carta.tipo === 'personaje' ? `<div class="myl-res myl-res-pj" title="1 por turno">${ICONO_PERSONAJE_DERECHA}</div>` : ''}
+      ${carta.evolucionaDe ? '<div class="myl-etapa">Etapa 2</div>' : ''}
+      ${instancia ? `<div class="myl-saber">${pips(instancia.saber)}</div>` : ''}
+      <div class="myl-nombre ${claseN}"><span>${esc(carta.nombre)}</span></div>
+      <div class="myl-frase">${esc(fraseDe(carta))}</div>
+      ${sello ? `<div class="myl-sello">${sello}</div>` : ''}
+      <div class="myl-texto ${claseTexto}">${partes.join('')}</div>
+      <div class="myl-pie">${pie}</div>
+      ${carta.comunidad ? `<div class="myl-autor">★ ${esc(carta.autor || 'Estudiante')}</div>` : ''}
     </div>`;
-  return el;
+
+  if (tamano !== 'grande') { el.innerHTML = tarjeta; return el; }
+
+  // Grande: la carta y, debajo, el dato completo (el que no cabe sobre la imagen).
+  el.innerHTML = tarjeta;
+  const envoltura = document.createElement('div');
+  envoltura.className = 'carta-grande-envoltura';
+  envoltura.appendChild(el);
+  const ficha = document.createElement('div');
+  ficha.className = 'ficha-dato';
+  ficha.innerHTML = `<small>Dato histórico</small><p>${esc(carta.dato)}</p>
+    <div class="ficha-ref">${carta.curso ? `${esc(carta.curso)}° básico` : ''}${unidad ? ` · Unidad ${esc(carta.unidad)}: ${esc(unidad)}` : ''}${carta.oa ? ` · ${esc(carta.oa)}` : ''}${carta.mbe ? `Marco para la Buena Enseñanza · Dominio ${esc(carta.mbe.dominio)} · Estándar ${esc(carta.mbe.estandar)}: ${esc(carta.mbe.nombre)}` : ''}</div>`;
+  envoltura.appendChild(ficha);
+  return envoltura;
 }
