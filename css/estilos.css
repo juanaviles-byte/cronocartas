@@ -54,7 +54,7 @@ button:disabled { opacity: .35; cursor: default; }
 /* ---------- Cartas ---------- */
 .carta { position: relative; border-radius: var(--radio); overflow: hidden; background: #f7f3ea; color: #1d1d1f; flex: none; }
 .carta .arte svg, .carta .arte img { width: 100%; height: 100%; display: block; object-fit: cover; }
-.carta.comunidad::after { content: "★"; position: absolute; top: 4px; right: 6px; color: var(--acento); text-shadow: 0 1px 2px #000; }
+.carta.comunidad::after { content: "★"; position: absolute; bottom: 4px; right: 8px; color: var(--acento); text-shadow: 0 1px 2px #000; }
 
 /* mini: mano y mesa. Su alto se define con --ch en cada zona */
 .carta-mini { --ch: 110px; height: var(--ch); width: calc(var(--ch) * .72); font-size: calc(var(--ch) * .085); display: flex; flex-direction: column;
@@ -176,3 +176,51 @@ button:disabled { opacity: .35; cursor: default; }
   .controles { min-width: 120px; }
 }
 @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+
+/* ---------- Banco de ideas y panel docente ---------- */
+.opcion.chica { min-height: 48px; min-width: 0; padding: 8px 16px; font-weight: 600; }
+.banco-cuerpo { display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 32px; align-items: start; }
+.banco-vista { position: sticky; top: 16px; display: flex; flex-direction: column; gap: 12px; align-items: center; }
+.paso { margin-bottom: 8px; }
+.paso .nota { margin: 8px 0 0; }
+.campo-texto, .campo-rango { display: flex; flex-direction: column; gap: 6px; margin: 12px 0; color: var(--tenue); font-size: .9rem; }
+.campo-texto input, .campo-texto textarea, .docente input, .codigo, .editar-dato {
+  font: inherit; font-size: 1rem; color: var(--tinta); background: var(--fondo-2); border: 0; border-radius: 10px; padding: 12px 14px; min-height: 48px; width: 100%; }
+.campo-texto textarea, .editar-dato { min-height: 90px; resize: vertical; }
+.campo-rango b { color: var(--tinta); }
+.campo-rango input { width: 100%; accent-color: var(--acento); height: 32px; }
+.accion-edit { padding: 8px 0 8px 14px; border-left: 3px solid rgba(255,255,255,.12); margin: 12px 0; }
+.subtitulo { font-weight: 700; }
+.poder { width: 100%; max-width: 340px; }
+.poder-texto { font-weight: 700; }
+.poder-barra { height: 10px; border-radius: 5px; background: var(--fondo-2); overflow: hidden; margin: 6px 0; }
+.poder-barra span { display: block; height: 100%; background: var(--ok); transition: width .2s; }
+.poder.excedido .poder-barra span { background: var(--peligro); }
+.poder small { color: var(--tenue); }
+.archivo { display: inline-flex; align-items: center; position: relative; overflow: hidden; }
+.archivo input { position: absolute; inset: 0; opacity: 0; }
+.mensaje { margin-top: 12px; min-height: 1em; }
+.mensaje.error { color: #ffb4a2; }
+.mensaje.ok { color: var(--ok); }
+.mensaje ul { margin: 6px 0; padding-left: 20px; }
+.mis-cartas { margin-top: 40px; }
+.item-propuesta { display: flex; flex-direction: column; gap: 8px; }
+.estado { font-weight: 700; font-size: .9rem; }
+.estado-pendiente { color: var(--acento); }
+.estado-aprobada { color: var(--ok); }
+.estado-devuelta { color: #ffb4a2; }
+.estado-descartada { color: var(--tenue); }
+.comentario { margin: 0; color: #ffd6c9; max-width: 210px; }
+.lienzo canvas { width: min(84vw, 480px); height: auto; border-radius: 10px; touch-action: none; background: #f7f3ea; }
+.lienzo { display: flex; flex-direction: column; gap: 12px; }
+.color { width: 44px; height: 44px; border-radius: 50%; }
+.pestanas { margin-bottom: 24px; }
+.fila-propuesta { display: flex; gap: 24px; padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,.06); flex-wrap: wrap; }
+.acciones-propuesta { flex: 1; min-width: 260px; display: flex; flex-direction: column; gap: 10px; }
+.tabla { width: 100%; border-collapse: collapse; font-size: .92rem; }
+.tabla th { text-align: left; color: var(--tenue); font-weight: 600; padding: 8px 10px 8px 0; }
+.tabla td { padding: 10px 10px 10px 0; border-top: 1px solid rgba(255,255,255,.06); vertical-align: top; }
+.codigo { min-height: 110px; margin: 12px 0; font-family: ui-monospace, monospace; font-size: .8rem; word-break: break-all; }
+.pin { max-width: 320px; display: flex; flex-direction: column; gap: 12px; }
+.pin input { font-size: 1.6rem; letter-spacing: .5em; text-align: center; }
+@media (max-width: 900px) { .banco-cuerpo { grid-template-columns: 1fr; } .banco-vista { position: static; order: -1; } }

@@ -115,3 +115,8 @@ test('importar descarta cartas inválidas y conserva las válidas', () => {
   assert.equal(r.cartas.length, 1);
   assert.equal(r.errores.length, 1);
 });
+
+test('importar conserva el estado de cada propuesta', () => {
+  const r = importarCartas(exportarCartas([propuesta({ estado: 'aprobada' }), propuesta({ id: 'X2', estado: 'pendiente' })]));
+  assert.deepEqual(r.cartas.map(c => c.estado), ['aprobada', 'pendiente']);
+});

@@ -50,6 +50,10 @@ const E = {
 
 export const EMBLEMAS = Object.keys(E);
 
+export function iconoEmblema(nombre) {
+  return `<svg viewBox="0 0 100 100" width="32" height="32" aria-label="${nombre}"><g fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">${E[nombre] || E.estrella}</g></svg>`;
+}
+
 export function arteCarta(carta) {
   const color = colorCarta(carta);
   const emblema = E[carta.emblema] || E.estrella;
