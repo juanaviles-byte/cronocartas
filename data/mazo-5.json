@@ -1,0 +1,496 @@
+{
+ "curso": 5,
+ "unidades": [
+  "Viajes de descubrimiento y conquista",
+  "La Colonia en Chile",
+  "Zonas naturales de Chile",
+  "Derechos, deberes y participación"
+ ],
+ "cartas": [
+  {
+   "id": "CC-5-U1-001",
+   "nombre": "Cristóbal Colón",
+   "tipo": "protagonista",
+   "curso": 5,
+   "unidad": 1,
+   "dimension": "Territorio",
+   "resistencia": 70,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Rumbo al oeste",
+     "costo": 1,
+     "danio": 20
+    },
+    {
+     "nombre": "Tierra a la vista",
+     "costo": 2,
+     "danio": 40
+    }
+   ],
+   "dato": "En 1492 llegó a América navegando hacia el oeste, cuando buscaba una nueva ruta hacia Asia.",
+   "oa": "OA 1",
+   "emblema": "barco"
+  },
+  {
+   "id": "CC-5-U1-002",
+   "nombre": "Hernando de Magallanes",
+   "tipo": "protagonista",
+   "curso": 5,
+   "unidad": 1,
+   "dimension": "Territorio",
+   "resistencia": 60,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Cruzar el estrecho",
+     "costo": 2,
+     "danio": 40
+    }
+   ],
+   "dato": "Su expedición (1519-1522) encontró el paso entre el Atlántico y el Pacífico. Juan Sebastián Elcano la terminó.",
+   "oa": "OA 1",
+   "emblema": "mapa"
+  },
+  {
+   "id": "CC-5-U1-003",
+   "nombre": "Pedro de Valdivia",
+   "tipo": "protagonista",
+   "curso": 5,
+   "unidad": 1,
+   "dimension": "Politica",
+   "resistencia": 80,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Fundar ciudad",
+     "costo": 1,
+     "danio": 10
+    },
+    {
+     "nombre": "Expedición",
+     "costo": 3,
+     "danio": 60
+    }
+   ],
+   "dato": "Fundó Santiago del Nuevo Extremo en 1541, a los pies del cerro Huelén, hoy cerro Santa Lucía.",
+   "oa": "OA 2",
+   "emblema": "escudo"
+  },
+  {
+   "id": "CC-5-U1-004",
+   "nombre": "Inés de Suárez",
+   "tipo": "protagonista",
+   "curso": 5,
+   "unidad": 1,
+   "dimension": "Sociedad",
+   "resistencia": 70,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Defender Santiago",
+     "costo": 2,
+     "danio": 40
+    }
+   ],
+   "dato": "Llegó a Chile con Valdivia y participó en la defensa de Santiago durante el ataque de 1541.",
+   "oa": "OA 2",
+   "emblema": "casa"
+  },
+  {
+   "id": "CC-5-U1-005",
+   "nombre": "Carabela y brújula",
+   "tipo": "acontecimiento",
+   "curso": 5,
+   "unidad": 1,
+   "efecto": {
+    "tipo": "robar",
+    "n": 2
+   },
+   "dato": "Barcos más livianos, la brújula y el astrolabio hicieron posibles los grandes viajes de descubrimiento.",
+   "oa": "OA 1",
+   "emblema": "barco"
+  },
+  {
+   "id": "CC-5-U1-006",
+   "nombre": "Fundación de ciudades",
+   "tipo": "acontecimiento",
+   "curso": 5,
+   "unidad": 1,
+   "efecto": {
+    "tipo": "buscarProtagonista",
+    "n": 3
+   },
+   "dato": "Los españoles fundaron ciudades como Santiago, La Serena y Concepción para quedarse y expandirse.",
+   "oa": "OA 2",
+   "emblema": "casa"
+  },
+  {
+   "id": "CC-5-U1-007",
+   "nombre": "Puerto de Sevilla",
+   "tipo": "lugar",
+   "curso": 5,
+   "unidad": 1,
+   "efecto": {
+    "tipo": "bonusDimension",
+    "dimension": "Economia",
+    "n": 10
+   },
+   "dato": "Desde Sevilla, la Corona española controlaba el comercio y los viajes hacia América.",
+   "oa": "OA 3",
+   "emblema": "ancla"
+  },
+  {
+   "id": "CC-5-U2-001",
+   "nombre": "Españoles e indígenas",
+   "tipo": "protagonista",
+   "curso": 5,
+   "unidad": 2,
+   "dimension": "Sociedad",
+   "resistencia": 60,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Encuentro",
+     "costo": 1,
+     "danio": 20
+    }
+   ],
+   "dato": "Durante la Conquista convivieron y se mezclaron españoles, indígenas y, más tarde, africanos.",
+   "oa": "OA 6",
+   "emblema": "personas"
+  },
+  {
+   "id": "CC-5-U2-002",
+   "nombre": "Sociedad mestiza",
+   "tipo": "protagonista",
+   "curso": 5,
+   "unidad": 2,
+   "dimension": "Sociedad",
+   "resistencia": 100,
+   "retirada": 2,
+   "acciones": [
+    {
+     "nombre": "Nuevas costumbres",
+     "costo": 2,
+     "danio": 50
+    },
+    {
+     "nombre": "Raíces comunes",
+     "costo": 3,
+     "danio": 70
+    }
+   ],
+   "dato": "En la Colonia surgió una sociedad mestiza, mezcla de culturas, que es una base del Chile actual.",
+   "oa": "OA 6",
+   "emblema": "personas",
+   "evolucionaDe": "CC-5-U2-001"
+  },
+  {
+   "id": "CC-5-U2-003",
+   "nombre": "Lautaro",
+   "tipo": "protagonista",
+   "curso": 5,
+   "unidad": 2,
+   "dimension": "Politica",
+   "resistencia": 70,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Estrategia",
+     "costo": 2,
+     "danio": 40
+    }
+   ],
+   "dato": "Joven mapuche que conoció la forma de combatir española y la usó para resistir la Conquista.",
+   "oa": "OA 7",
+   "emblema": "escudo"
+  },
+  {
+   "id": "CC-5-U2-004",
+   "nombre": "Mercader colonial",
+   "tipo": "protagonista",
+   "curso": 5,
+   "unidad": 2,
+   "dimension": "Economia",
+   "resistencia": 60,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Monopolio",
+     "costo": 1,
+     "danio": 20
+    },
+    {
+     "nombre": "Flota de Indias",
+     "costo": 2,
+     "danio": 30
+    }
+   ],
+   "dato": "Chile dependía de España: solo podía comerciar con la metrópoli, lo que se llama monopolio comercial.",
+   "oa": "OA 6",
+   "emblema": "moneda"
+  },
+  {
+   "id": "CC-5-U2-005",
+   "nombre": "Patrimonio colonial",
+   "tipo": "protagonista",
+   "curso": 5,
+   "unidad": 2,
+   "dimension": "Cultura",
+   "resistencia": 70,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Herencia viva",
+     "costo": 2,
+     "danio": 40
+    }
+   ],
+   "dato": "La iglesia de San Francisco, en Santiago, fue construida en la Colonia y sigue en pie hasta hoy.",
+   "oa": "OA 8",
+   "emblema": "campana"
+  },
+  {
+   "id": "CC-5-U2-006",
+   "nombre": "Parlamento de Quilín",
+   "tipo": "acontecimiento",
+   "curso": 5,
+   "unidad": 2,
+   "efecto": {
+    "tipo": "proteger"
+   },
+   "dato": "En 1641 españoles y mapuches acordaron la paz y reconocieron el río Biobío como frontera.",
+   "oa": "OA 7",
+   "emblema": "pergamino"
+  },
+  {
+   "id": "CC-5-U3-001",
+   "nombre": "Norte Grande",
+   "tipo": "protagonista",
+   "curso": 5,
+   "unidad": 3,
+   "dimension": "Territorio",
+   "resistencia": 80,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Sol del desierto",
+     "costo": 2,
+     "danio": 40
+    }
+   ],
+   "dato": "Tiene el desierto de Atacama, uno de los más secos del mundo, y grandes yacimientos de cobre.",
+   "oa": "OA 9",
+   "emblema": "sol"
+  },
+  {
+   "id": "CC-5-U3-002",
+   "nombre": "Zona Central",
+   "tipo": "protagonista",
+   "curso": 5,
+   "unidad": 3,
+   "dimension": "Economia",
+   "resistencia": 70,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Cosecha",
+     "costo": 1,
+     "danio": 20
+    },
+    {
+     "nombre": "Valle fértil",
+     "costo": 2,
+     "danio": 40
+    }
+   ],
+   "dato": "De clima mediterráneo, concentra la mayor parte de la población y de la agricultura del país.",
+   "oa": "OA 9",
+   "emblema": "maiz"
+  },
+  {
+   "id": "CC-5-U3-003",
+   "nombre": "Zona Austral",
+   "tipo": "protagonista",
+   "curso": 5,
+   "unidad": 3,
+   "dimension": "Territorio",
+   "resistencia": 90,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Hielos y fiordos",
+     "costo": 3,
+     "danio": 50
+    }
+   ],
+   "dato": "Tiene fiordos, canales, hielos y clima frío. Es la zona menos poblada de Chile.",
+   "oa": "OA 9",
+   "emblema": "montana"
+  },
+  {
+   "id": "CC-5-U3-004",
+   "nombre": "Minería del cobre",
+   "tipo": "protagonista",
+   "curso": 5,
+   "unidad": 3,
+   "dimension": "Economia",
+   "resistencia": 70,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Extraer",
+     "costo": 2,
+     "danio": 40
+    }
+   ],
+   "dato": "El cobre es un recurso no renovable y el principal producto que Chile vende al mundo.",
+   "oa": "OA 10",
+   "emblema": "engranaje"
+  },
+  {
+   "id": "CC-5-U3-005",
+   "nombre": "Construcción antisísmica",
+   "tipo": "acontecimiento",
+   "curso": 5,
+   "unidad": 3,
+   "efecto": {
+    "tipo": "proteger"
+   },
+   "dato": "Chile es un país sísmico: construir edificios antisísmicos ayuda a proteger a la comunidad.",
+   "oa": "OA 12",
+   "emblema": "casa"
+  },
+  {
+   "id": "CC-5-U3-006",
+   "nombre": "Cordillera de los Andes",
+   "tipo": "lugar",
+   "curso": 5,
+   "unidad": 3,
+   "efecto": {
+    "tipo": "bonusDimension",
+    "dimension": "Territorio",
+    "n": 10
+   },
+   "dato": "Recorre Chile de norte a sur y forma su frontera oriental. Allí nacen muchos ríos del país.",
+   "oa": "OA 9",
+   "emblema": "montana"
+  },
+  {
+   "id": "CC-5-U4-001",
+   "nombre": "Sujeto de derechos",
+   "tipo": "protagonista",
+   "curso": 5,
+   "unidad": 4,
+   "dimension": "Sociedad",
+   "resistencia": 80,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Igual dignidad",
+     "costo": 2,
+     "danio": 40
+    }
+   ],
+   "dato": "Todas las personas tienen derechos, sin importar su etnia, sexo, lugar de nacimiento u otras características.",
+   "oa": "OA 13",
+   "emblema": "balanza"
+  },
+  {
+   "id": "CC-5-U4-002",
+   "nombre": "Directiva de curso",
+   "tipo": "protagonista",
+   "curso": 5,
+   "unidad": 4,
+   "dimension": "Politica",
+   "resistencia": 60,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Votación",
+     "costo": 1,
+     "danio": 20
+    }
+   ],
+   "dato": "Elegir una directiva implica escoger personas idóneas y entender las responsabilidades de cada cargo.",
+   "oa": "OA 17",
+   "emblema": "urna"
+  },
+  {
+   "id": "CC-5-U4-003",
+   "nombre": "Organización comunitaria",
+   "tipo": "protagonista",
+   "curso": 5,
+   "unidad": 4,
+   "dimension": "Politica",
+   "resistencia": 100,
+   "retirada": 2,
+   "acciones": [
+    {
+     "nombre": "Unir fuerzas",
+     "costo": 2,
+     "danio": 50
+    },
+    {
+     "nombre": "Meta común",
+     "costo": 3,
+     "danio": 70
+    }
+   ],
+   "dato": "Juntas de vecinos, fundaciones y voluntariados: personas que se organizan para lograr metas comunes.",
+   "oa": "OA 19",
+   "emblema": "personas",
+   "evolucionaDe": "CC-5-U4-002"
+  },
+  {
+   "id": "CC-5-U4-004",
+   "nombre": "Estado de Chile",
+   "tipo": "protagonista",
+   "curso": 5,
+   "unidad": 4,
+   "dimension": "Politica",
+   "resistencia": 80,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Garantizar derechos",
+     "costo": 2,
+     "danio": 40
+    }
+   ],
+   "dato": "El Estado debe asegurar que las personas ejerzan sus derechos, como la educación y la salud.",
+   "oa": "OA 14",
+   "emblema": "columna"
+  },
+  {
+   "id": "CC-5-U4-005",
+   "nombre": "Proyecto escolar",
+   "tipo": "acontecimiento",
+   "curso": 5,
+   "unidad": 4,
+   "efecto": {
+    "tipo": "curar",
+    "n": 30
+   },
+   "dato": "Un proyecto con plan y presupuesto puede resolver un problema de la escuela, como el gasto de agua.",
+   "oa": "OA 18",
+   "emblema": "engranaje"
+  },
+  {
+   "id": "CC-5-U4-006",
+   "nombre": "La escuela",
+   "tipo": "lugar",
+   "curso": 5,
+   "unidad": 4,
+   "efecto": {
+    "tipo": "bonusDimension",
+    "dimension": "Sociedad",
+    "n": 10
+   },
+   "dato": "Es un espacio para aprender a convivir: respetar acuerdos, escuchar y buscar soluciones pacíficas.",
+   "oa": "OA 16",
+   "emblema": "libro"
+  }
+ ]
+}

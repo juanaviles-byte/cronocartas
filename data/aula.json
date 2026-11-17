@@ -1,0 +1,126 @@
+{
+ "cartas": [
+  {
+   "id": "CC-A-E3",
+   "nombre": "Planificación",
+   "tipo": "aula",
+   "efecto": {
+    "tipo": "buscarProtagonista",
+    "n": 3
+   },
+   "texto": "Mira las 3 primeras cartas de tu mazo y toma un Protagonista.",
+   "dato": "Marco para la Buena Enseñanza 2021 · Dominio A: Preparación del proceso de enseñanza y aprendizaje. Estándar 3: Planificación de la enseñanza.",
+   "mbe": {
+    "dominio": "A",
+    "nombreDominio": "Preparación del proceso de enseñanza y aprendizaje",
+    "estandar": 3,
+    "nombre": "Planificación de la enseñanza"
+   },
+   "emblema": "mapa"
+  },
+  {
+   "id": "CC-A-E5",
+   "nombre": "Ambiente respetuoso",
+   "tipo": "aula",
+   "efecto": {
+    "tipo": "proteger"
+   },
+   "texto": "Tu Protagonista activo no recibe daño hasta tu próximo turno.",
+   "dato": "Marco para la Buena Enseñanza 2021 · Dominio B: Creación de un ambiente propicio para el aprendizaje. Estándar 5: Ambiente respetuoso y organizado.",
+   "mbe": {
+    "dominio": "B",
+    "nombreDominio": "Creación de un ambiente propicio para el aprendizaje",
+    "estandar": 5,
+    "nombre": "Ambiente respetuoso y organizado"
+   },
+   "emblema": "casa"
+  },
+  {
+   "id": "CC-A-E6",
+   "nombre": "Desarrollo personal y social",
+   "tipo": "aula",
+   "efecto": {
+    "tipo": "moverSaber"
+   },
+   "texto": "Pasa 1 de Saber de tu reserva a tu Protagonista activo.",
+   "dato": "Marco para la Buena Enseñanza 2021 · Dominio B: Creación de un ambiente propicio para el aprendizaje. Estándar 6: Desarrollo personal y social.",
+   "mbe": {
+    "dominio": "B",
+    "nombreDominio": "Creación de un ambiente propicio para el aprendizaje",
+    "estandar": 6,
+    "nombre": "Desarrollo personal y social"
+   },
+   "emblema": "personas"
+  },
+  {
+   "id": "CC-A-E7",
+   "nombre": "Aprendizaje profundo",
+   "tipo": "aula",
+   "efecto": {
+    "tipo": "bonusDanio",
+    "n": 20
+   },
+   "texto": "Tu próxima acción hace 20 de daño extra.",
+   "dato": "Marco para la Buena Enseñanza 2021 · Dominio C: Enseñanza para el aprendizaje de todos/as los/as estudiantes. Estándar 7: Estrategias de enseñanza para el logro de aprendizajes profundos.",
+   "mbe": {
+    "dominio": "C",
+    "nombreDominio": "Enseñanza para el aprendizaje de todos/as los/as estudiantes",
+    "estandar": 7,
+    "nombre": "Estrategias de enseñanza para el logro de aprendizajes profundos"
+   },
+   "emblema": "estrella"
+  },
+  {
+   "id": "CC-A-E8",
+   "nombre": "Pensamiento crítico",
+   "tipo": "aula",
+   "efecto": {
+    "tipo": "anularLugar"
+   },
+   "texto": "Quita el Lugar que esté en juego.",
+   "dato": "Marco para la Buena Enseñanza 2021 · Dominio C: Enseñanza para el aprendizaje de todos/as los/as estudiantes. Estándar 8: Estrategias para el desarrollo de habilidades del pensamiento.",
+   "mbe": {
+    "dominio": "C",
+    "nombreDominio": "Enseñanza para el aprendizaje de todos/as los/as estudiantes",
+    "estandar": 8,
+    "nombre": "Estrategias para el desarrollo de habilidades del pensamiento"
+   },
+   "emblema": "balanza"
+  },
+  {
+   "id": "CC-A-E9",
+   "nombre": "Retroalimentación",
+   "tipo": "aula",
+   "efecto": {
+    "tipo": "curar",
+    "n": 30
+   },
+   "texto": "Tu Protagonista activo recupera 30 de resistencia.",
+   "dato": "Marco para la Buena Enseñanza 2021 · Dominio C: Enseñanza para el aprendizaje de todos/as los/as estudiantes. Estándar 9: Evaluación y retroalimentación para el aprendizaje.",
+   "mbe": {
+    "dominio": "C",
+    "nombreDominio": "Enseñanza para el aprendizaje de todos/as los/as estudiantes",
+    "estandar": 9,
+    "nombre": "Evaluación y retroalimentación para el aprendizaje"
+   },
+   "emblema": "pluma"
+  },
+  {
+   "id": "CC-A-E12",
+   "nombre": "Trabajo colaborativo",
+   "tipo": "aula",
+   "efecto": {
+    "tipo": "robarPorReserva"
+   },
+   "texto": "Roba 1 carta por cada Protagonista en tu reserva.",
+   "dato": "Marco para la Buena Enseñanza 2021 · Dominio D: Responsabilidades profesionales. Estándar 12: Compromiso con el mejoramiento continuo de la comunidad escolar.",
+   "mbe": {
+    "dominio": "D",
+    "nombreDominio": "Responsabilidades profesionales",
+    "estandar": 12,
+    "nombre": "Compromiso con el mejoramiento continuo de la comunidad escolar"
+   },
+   "emblema": "personas"
+  }
+ ]
+}

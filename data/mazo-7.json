@@ -1,0 +1,560 @@
+{
+ "curso": 7,
+ "unidades": [
+  "Primeras sociedades y civilizaciones",
+  "La Antigüedad clásica",
+  "La Edad Media",
+  "Civilizaciones americanas"
+ ],
+ "cartas": [
+  {
+   "id": "CC-7-U1-001",
+   "nombre": "Cazadores-recolectores",
+   "tipo": "protagonista",
+   "curso": 7,
+   "unidad": 1,
+   "dimension": "Territorio",
+   "resistencia": 60,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Recolectar",
+     "costo": 1,
+     "danio": 20
+    }
+   ],
+   "dato": "En el Paleolítico los grupos humanos eran nómades y vivían de la caza y la recolección.",
+   "oa": "OA 1",
+   "emblema": "arbol"
+  },
+  {
+   "id": "CC-7-U1-002",
+   "nombre": "Aldea neolítica",
+   "tipo": "protagonista",
+   "curso": 7,
+   "unidad": 1,
+   "dimension": "Economia",
+   "resistencia": 100,
+   "retirada": 2,
+   "acciones": [
+    {
+     "nombre": "Domesticar",
+     "costo": 2,
+     "danio": 50
+    },
+    {
+     "nombre": "Cosecha",
+     "costo": 3,
+     "danio": 70
+    }
+   ],
+   "dato": "Con la agricultura y la domesticación de animales, los grupos humanos se volvieron sedentarios.",
+   "oa": "OA 2",
+   "emblema": "casa",
+   "evolucionaDe": "CC-7-U1-001"
+  },
+  {
+   "id": "CC-7-U1-003",
+   "nombre": "Egipcios",
+   "tipo": "protagonista",
+   "curso": 7,
+   "unidad": 1,
+   "dimension": "Territorio",
+   "resistencia": 80,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Crecida del Nilo",
+     "costo": 2,
+     "danio": 40
+    }
+   ],
+   "dato": "Su civilización creció a orillas del río Nilo, cuyas crecidas fertilizaban la tierra.",
+   "oa": "OA 4",
+   "emblema": "piramide"
+  },
+  {
+   "id": "CC-7-U1-004",
+   "nombre": "Sumerios",
+   "tipo": "protagonista",
+   "curso": 7,
+   "unidad": 1,
+   "dimension": "Cultura",
+   "resistencia": 70,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Cuneiforme",
+     "costo": 1,
+     "danio": 20
+    },
+    {
+     "nombre": "Primeras leyes",
+     "costo": 2,
+     "danio": 40
+    }
+   ],
+   "dato": "En Mesopotamia crearon una de las primeras escrituras: la escritura cuneiforme.",
+   "oa": "OA 4",
+   "emblema": "pergamino"
+  },
+  {
+   "id": "CC-7-U1-005",
+   "nombre": "Invención de la escritura",
+   "tipo": "acontecimiento",
+   "curso": 7,
+   "unidad": 1,
+   "efecto": {
+    "tipo": "robar",
+    "n": 2
+   },
+   "dato": "Permitió llevar registros, cuentas y leyes. Con ella comienza la historia escrita.",
+   "oa": "OA 3",
+   "emblema": "pluma"
+  },
+  {
+   "id": "CC-7-U1-006",
+   "nombre": "Creciente Fértil",
+   "tipo": "lugar",
+   "curso": 7,
+   "unidad": 1,
+   "efecto": {
+    "tipo": "bonusDimension",
+    "dimension": "Territorio",
+    "n": 10
+   },
+   "dato": "Zona entre los ríos Tigris y Éufrates donde surgieron la agricultura y las primeras ciudades.",
+   "oa": "OA 2",
+   "emblema": "ola"
+  },
+  {
+   "id": "CC-7-U2-001",
+   "nombre": "Ciudadano ateniense",
+   "tipo": "protagonista",
+   "curso": 7,
+   "unidad": 2,
+   "dimension": "Politica",
+   "resistencia": 70,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Votar en la Asamblea",
+     "costo": 2,
+     "danio": 40
+    }
+   ],
+   "dato": "En Atenas los ciudadanos votaban en la Asamblea, pero mujeres, esclavos y extranjeros no participaban.",
+   "oa": "OA 6",
+   "emblema": "urna"
+  },
+  {
+   "id": "CC-7-U2-002",
+   "nombre": "Legión romana",
+   "tipo": "protagonista",
+   "curso": 7,
+   "unidad": 2,
+   "dimension": "Territorio",
+   "resistencia": 80,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Formación",
+     "costo": 1,
+     "danio": 20
+    },
+    {
+     "nombre": "Calzadas",
+     "costo": 3,
+     "danio": 60
+    }
+   ],
+   "dato": "Ejército organizado y disciplinado que permitió a Roma extender su territorio.",
+   "oa": "OA 7",
+   "emblema": "escudo"
+  },
+  {
+   "id": "CC-7-U2-003",
+   "nombre": "República romana",
+   "tipo": "protagonista",
+   "curso": 7,
+   "unidad": 2,
+   "dimension": "Politica",
+   "resistencia": 60,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Senado",
+     "costo": 1,
+     "danio": 20
+    }
+   ],
+   "dato": "Roma se gobernó con cónsules y un Senado; los cargos duraban un año.",
+   "oa": "OA 17",
+   "emblema": "columna"
+  },
+  {
+   "id": "CC-7-U2-004",
+   "nombre": "Imperio romano",
+   "tipo": "protagonista",
+   "curso": 7,
+   "unidad": 2,
+   "dimension": "Territorio",
+   "resistencia": 110,
+   "retirada": 2,
+   "acciones": [
+    {
+     "nombre": "Romanización",
+     "costo": 2,
+     "danio": 50
+    },
+    {
+     "nombre": "Derecho romano",
+     "costo": 3,
+     "danio": 70
+    }
+   ],
+   "dato": "Llegó a rodear todo el Mediterráneo y difundió el latín y el derecho romano.",
+   "oa": "OA 7",
+   "emblema": "corona",
+   "evolucionaDe": "CC-7-U2-003"
+  },
+  {
+   "id": "CC-7-U2-005",
+   "nombre": "Filósofos griegos",
+   "tipo": "protagonista",
+   "curso": 7,
+   "unidad": 2,
+   "dimension": "Cultura",
+   "resistencia": 70,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Preguntar",
+     "costo": 1,
+     "danio": 20
+    },
+    {
+     "nombre": "Razonar",
+     "costo": 2,
+     "danio": 40
+    }
+   ],
+   "dato": "Pensadores como Sócrates, Platón y Aristóteles buscaron explicar el mundo con la razón.",
+   "oa": "OA 8",
+   "emblema": "columna"
+  },
+  {
+   "id": "CC-7-U2-006",
+   "nombre": "Juegos Olímpicos",
+   "tipo": "acontecimiento",
+   "curso": 7,
+   "unidad": 2,
+   "efecto": {
+    "tipo": "bonusDanio",
+    "n": 20
+   },
+   "dato": "Nacieron en la antigua Grecia, en Olimpia, y hoy se siguen celebrando en todo el mundo.",
+   "oa": "OA 8",
+   "emblema": "estrella"
+  },
+  {
+   "id": "CC-7-U2-007",
+   "nombre": "Mar Mediterráneo",
+   "tipo": "lugar",
+   "curso": 7,
+   "unidad": 2,
+   "efecto": {
+    "tipo": "bonusDimension",
+    "dimension": "Economia",
+    "n": 10
+   },
+   "dato": "Espacio de circulación e intercambio que unió a fenicios, griegos y romanos.",
+   "oa": "OA 5",
+   "emblema": "ola"
+  },
+  {
+   "id": "CC-7-U3-001",
+   "nombre": "Señor feudal",
+   "tipo": "protagonista",
+   "curso": 7,
+   "unidad": 3,
+   "dimension": "Politica",
+   "resistencia": 80,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Fidelidad",
+     "costo": 1,
+     "danio": 20
+    },
+    {
+     "nombre": "Castillo",
+     "costo": 3,
+     "danio": 60
+    }
+   ],
+   "dato": "Recibía tierras a cambio de fidelidad y ayuda militar; a cambio protegía a quienes vivían en ellas.",
+   "oa": "OA 10",
+   "emblema": "escudo"
+  },
+  {
+   "id": "CC-7-U3-002",
+   "nombre": "Campesino medieval",
+   "tipo": "protagonista",
+   "curso": 7,
+   "unidad": 3,
+   "dimension": "Sociedad",
+   "resistencia": 70,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Trabajar la tierra",
+     "costo": 2,
+     "danio": 40
+    }
+   ],
+   "dato": "La mayoría de la población vivía en el campo y trabajaba las tierras del señor.",
+   "oa": "OA 10",
+   "emblema": "maiz"
+  },
+  {
+   "id": "CC-7-U3-003",
+   "nombre": "Monje copista",
+   "tipo": "protagonista",
+   "curso": 7,
+   "unidad": 3,
+   "dimension": "Cultura",
+   "resistencia": 60,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Copiar a mano",
+     "costo": 1,
+     "danio": 20
+    },
+    {
+     "nombre": "Conservar el saber",
+     "costo": 2,
+     "danio": 40
+    }
+   ],
+   "dato": "En los monasterios se copiaban libros a mano, lo que conservó gran parte del saber antiguo.",
+   "oa": "OA 9",
+   "emblema": "libro"
+  },
+  {
+   "id": "CC-7-U3-004",
+   "nombre": "Mercader medieval",
+   "tipo": "protagonista",
+   "curso": 7,
+   "unidad": 3,
+   "dimension": "Economia",
+   "resistencia": 60,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Ferias",
+     "costo": 1,
+     "danio": 20
+    }
+   ],
+   "dato": "Desde el siglo XII el comercio revivió y los mercaderes viajaban por ferias y rutas.",
+   "oa": "OA 12",
+   "emblema": "moneda"
+  },
+  {
+   "id": "CC-7-U3-005",
+   "nombre": "Burguesía",
+   "tipo": "protagonista",
+   "curso": 7,
+   "unidad": 3,
+   "dimension": "Economia",
+   "resistencia": 100,
+   "retirada": 2,
+   "acciones": [
+    {
+     "nombre": "Gremios",
+     "costo": 2,
+     "danio": 50
+    },
+    {
+     "nombre": "Ciudades libres",
+     "costo": 3,
+     "danio": 70
+    }
+   ],
+   "dato": "Los habitantes de los burgos, dedicados al comercio y a los oficios, formaron un nuevo grupo social.",
+   "oa": "OA 12",
+   "emblema": "casa",
+   "evolucionaDe": "CC-7-U3-004"
+  },
+  {
+   "id": "CC-7-U3-006",
+   "nombre": "Sabios de al-Ándalus",
+   "tipo": "protagonista",
+   "curso": 7,
+   "unidad": 3,
+   "dimension": "Cultura",
+   "resistencia": 70,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Álgebra",
+     "costo": 2,
+     "danio": 40
+    }
+   ],
+   "dato": "En la península ibérica, la cultura islámica aportó avances en matemáticas, medicina y astronomía.",
+   "oa": "OA 11",
+   "emblema": "estrella"
+  },
+  {
+   "id": "CC-7-U3-007",
+   "nombre": "Primeras universidades",
+   "tipo": "acontecimiento",
+   "curso": 7,
+   "unidad": 3,
+   "efecto": {
+    "tipo": "robar",
+    "n": 2
+   },
+   "dato": "En los siglos XI y XII surgieron las primeras universidades, como las de Bolonia y París.",
+   "oa": "OA 12",
+   "emblema": "libro"
+  },
+  {
+   "id": "CC-7-U4-001",
+   "nombre": "Mayas",
+   "tipo": "protagonista",
+   "curso": 7,
+   "unidad": 4,
+   "dimension": "Cultura",
+   "resistencia": 70,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Calendario",
+     "costo": 1,
+     "danio": 20
+    },
+    {
+     "nombre": "Glifos",
+     "costo": 2,
+     "danio": 40
+    }
+   ],
+   "dato": "Crearon un calendario muy preciso y una escritura con glifos.",
+   "oa": "OA 15",
+   "emblema": "sol"
+  },
+  {
+   "id": "CC-7-U4-002",
+   "nombre": "Aztecas",
+   "tipo": "protagonista",
+   "curso": 7,
+   "unidad": 4,
+   "dimension": "Territorio",
+   "resistencia": 80,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Chinampas",
+     "costo": 2,
+     "danio": 40
+    }
+   ],
+   "dato": "Fundaron Tenochtitlan sobre un lago y cultivaban en chinampas, islas artificiales.",
+   "oa": "OA 13",
+   "emblema": "piramide"
+  },
+  {
+   "id": "CC-7-U4-003",
+   "nombre": "Ayllu",
+   "tipo": "protagonista",
+   "curso": 7,
+   "unidad": 4,
+   "dimension": "Sociedad",
+   "resistencia": 60,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Trabajo comunitario",
+     "costo": 1,
+     "danio": 20
+    }
+   ],
+   "dato": "Comunidad familiar andina que trabajaba la tierra en conjunto y se ayudaba mutuamente.",
+   "oa": "OA 14",
+   "emblema": "personas"
+  },
+  {
+   "id": "CC-7-U4-004",
+   "nombre": "Imperio inca",
+   "tipo": "protagonista",
+   "curso": 7,
+   "unidad": 4,
+   "dimension": "Politica",
+   "resistencia": 110,
+   "retirada": 2,
+   "acciones": [
+    {
+     "nombre": "Qhapaq Ñan",
+     "costo": 2,
+     "danio": 50
+    },
+    {
+     "nombre": "Administración",
+     "costo": 3,
+     "danio": 70
+    }
+   ],
+   "dato": "Unió un enorme territorio con una red de caminos y una administración centralizada en el Cusco.",
+   "oa": "OA 14",
+   "emblema": "corona",
+   "evolucionaDe": "CC-7-U4-003"
+  },
+  {
+   "id": "CC-7-U4-005",
+   "nombre": "Quipu",
+   "tipo": "acontecimiento",
+   "curso": 7,
+   "unidad": 4,
+   "efecto": {
+    "tipo": "buscarProtagonista",
+    "n": 3
+   },
+   "dato": "Sistema de cuerdas con nudos que los incas usaban para registrar cantidades.",
+   "oa": "OA 14",
+   "emblema": "pergamino"
+  },
+  {
+   "id": "CC-7-U4-006",
+   "nombre": "Cultivo del maíz",
+   "tipo": "acontecimiento",
+   "curso": 7,
+   "unidad": 4,
+   "efecto": {
+    "tipo": "curar",
+    "n": 30
+   },
+   "dato": "Fue la base de la alimentación en Mesoamérica y hoy lo seguimos comiendo en toda América.",
+   "oa": "OA 16",
+   "emblema": "maiz"
+  },
+  {
+   "id": "CC-7-U4-007",
+   "nombre": "Camino del Inca",
+   "tipo": "lugar",
+   "curso": 7,
+   "unidad": 4,
+   "efecto": {
+    "tipo": "bonusDimension",
+    "dimension": "Politica",
+    "n": 10
+   },
+   "dato": "Red de caminos de miles de kilómetros que llegaba hasta la zona central del actual Chile.",
+   "oa": "OA 14",
+   "emblema": "mapa"
+  }
+ ]
+}

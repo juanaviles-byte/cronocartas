@@ -1,0 +1,523 @@
+{
+ "curso": 8,
+ "unidades": [
+  "Humanismo, Reforma y Estado moderno",
+  "Choque de dos mundos y Colonia",
+  "Ilustración, revolución e independencia",
+  "Sociedad y territorio: la región"
+ ],
+ "cartas": [
+  {
+   "id": "CC-8-U1-001",
+   "nombre": "Leonardo da Vinci",
+   "tipo": "protagonista",
+   "curso": 8,
+   "unidad": 1,
+   "dimension": "Cultura",
+   "resistencia": 80,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Bocetos",
+     "costo": 1,
+     "danio": 20
+    },
+    {
+     "nombre": "Genio renacentista",
+     "costo": 3,
+     "danio": 60
+    }
+   ],
+   "dato": "Artista e inventor del Renacimiento; representa la confianza en la capacidad humana para crear y conocer.",
+   "oa": "OA 1",
+   "emblema": "pluma"
+  },
+  {
+   "id": "CC-8-U1-002",
+   "nombre": "Martín Lutero",
+   "tipo": "protagonista",
+   "curso": 8,
+   "unidad": 1,
+   "dimension": "Sociedad",
+   "resistencia": 70,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "95 tesis",
+     "costo": 2,
+     "danio": 40
+    }
+   ],
+   "dato": "En 1517 publicó sus 95 tesis criticando a la Iglesia, lo que dio inicio a la Reforma protestante.",
+   "oa": "OA 2",
+   "emblema": "pergamino"
+  },
+  {
+   "id": "CC-8-U1-003",
+   "nombre": "Reyes del siglo XV",
+   "tipo": "protagonista",
+   "curso": 8,
+   "unidad": 1,
+   "dimension": "Politica",
+   "resistencia": 60,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Reunir reinos",
+     "costo": 1,
+     "danio": 20
+    }
+   ],
+   "dato": "Los reyes comenzaron a concentrar el poder, que en la Edad Media estaba repartido entre los señores.",
+   "oa": "OA 3",
+   "emblema": "corona"
+  },
+  {
+   "id": "CC-8-U1-004",
+   "nombre": "Monarquía absoluta",
+   "tipo": "protagonista",
+   "curso": 8,
+   "unidad": 1,
+   "dimension": "Politica",
+   "resistencia": 110,
+   "retirada": 2,
+   "acciones": [
+    {
+     "nombre": "Ejército real",
+     "costo": 2,
+     "danio": 50
+    },
+    {
+     "nombre": "Burocracia",
+     "costo": 3,
+     "danio": 70
+    }
+   ],
+   "dato": "El rey concentraba el poder y lo ejercía con funcionarios, impuestos y ejércitos profesionales.",
+   "oa": "OA 3",
+   "emblema": "corona",
+   "evolucionaDe": "CC-8-U1-003"
+  },
+  {
+   "id": "CC-8-U1-005",
+   "nombre": "Tesorero mercantilista",
+   "tipo": "protagonista",
+   "curso": 8,
+   "unidad": 1,
+   "dimension": "Economia",
+   "resistencia": 70,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Oro y plata",
+     "costo": 2,
+     "danio": 40
+    }
+   ],
+   "dato": "El mercantilismo medía la riqueza de un reino por el oro y la plata que acumulaba.",
+   "oa": "OA 4",
+   "emblema": "moneda"
+  },
+  {
+   "id": "CC-8-U1-006",
+   "nombre": "Imprenta",
+   "tipo": "acontecimiento",
+   "curso": 8,
+   "unidad": 1,
+   "efecto": {
+    "tipo": "robar",
+    "n": 2
+   },
+   "dato": "Hacia 1450, la imprenta de Gutenberg permitió imprimir libros en serie y difundir ideas más rápido.",
+   "oa": "OA 2",
+   "emblema": "libro"
+  },
+  {
+   "id": "CC-8-U1-007",
+   "nombre": "Revolución científica",
+   "tipo": "acontecimiento",
+   "curso": 8,
+   "unidad": 1,
+   "efecto": {
+    "tipo": "bonusDanio",
+    "n": 20
+   },
+   "dato": "Galileo y otros científicos usaron la observación y la experimentación para conocer la naturaleza.",
+   "oa": "OA 2",
+   "emblema": "estrella"
+  },
+  {
+   "id": "CC-8-U2-001",
+   "nombre": "Bartolomé de las Casas",
+   "tipo": "protagonista",
+   "curso": 8,
+   "unidad": 2,
+   "dimension": "Sociedad",
+   "resistencia": 80,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Denunciar abusos",
+     "costo": 2,
+     "danio": 40
+    }
+   ],
+   "dato": "Fraile que denunció los abusos contra los indígenas y defendió su dignidad humana.",
+   "oa": "OA 17",
+   "emblema": "pluma"
+  },
+  {
+   "id": "CC-8-U2-002",
+   "nombre": "Conquistadores",
+   "tipo": "protagonista",
+   "curso": 8,
+   "unidad": 2,
+   "dimension": "Politica",
+   "resistencia": 70,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Alianzas",
+     "costo": 1,
+     "danio": 20
+    },
+    {
+     "nombre": "Caballos y acero",
+     "costo": 2,
+     "danio": 40
+    }
+   ],
+   "dato": "Avanzaron rápido gracias a alianzas con pueblos indígenas, armas de acero, caballos y epidemias.",
+   "oa": "OA 6",
+   "emblema": "escudo"
+  },
+  {
+   "id": "CC-8-U2-003",
+   "nombre": "Hacienda colonial",
+   "tipo": "protagonista",
+   "curso": 8,
+   "unidad": 2,
+   "dimension": "Economia",
+   "resistencia": 60,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Inquilinaje",
+     "costo": 1,
+     "danio": 20
+    }
+   ],
+   "dato": "Gran propiedad rural que fue el centro de la economía del Chile colonial.",
+   "oa": "OA 13",
+   "emblema": "casa"
+  },
+  {
+   "id": "CC-8-U2-004",
+   "nombre": "Elite terrateniente",
+   "tipo": "protagonista",
+   "curso": 8,
+   "unidad": 2,
+   "dimension": "Economia",
+   "resistencia": 100,
+   "retirada": 2,
+   "acciones": [
+    {
+     "nombre": "Tierras y poder",
+     "costo": 2,
+     "danio": 50
+    },
+    {
+     "nombre": "Influencia",
+     "costo": 3,
+     "danio": 70
+    }
+   ],
+   "dato": "Los dueños de haciendas formaron una elite que mantuvo su poder durante los siglos XIX y XX.",
+   "oa": "OA 13",
+   "emblema": "corona",
+   "evolucionaDe": "CC-8-U2-003"
+  },
+  {
+   "id": "CC-8-U2-005",
+   "nombre": "Sociedad de frontera",
+   "tipo": "protagonista",
+   "curso": 8,
+   "unidad": 2,
+   "dimension": "Territorio",
+   "resistencia": 80,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Parlamentos",
+     "costo": 2,
+     "danio": 40
+    }
+   ],
+   "dato": "El fracaso de la conquista de Arauco originó una frontera con comercio, parlamentos y conflictos.",
+   "oa": "OA 12",
+   "emblema": "mapa"
+  },
+  {
+   "id": "CC-8-U2-006",
+   "nombre": "Arte barroco",
+   "tipo": "acontecimiento",
+   "curso": 8,
+   "unidad": 2,
+   "efecto": {
+    "tipo": "curar",
+    "n": 30
+   },
+   "dato": "Iglesias, música y ceremonias barrocas expresaron la religiosidad de la sociedad colonial.",
+   "oa": "OA 9",
+   "emblema": "campana"
+  },
+  {
+   "id": "CC-8-U2-007",
+   "nombre": "Océano Atlántico",
+   "tipo": "lugar",
+   "curso": 8,
+   "unidad": 2,
+   "efecto": {
+    "tipo": "bonusDimension",
+    "dimension": "Economia",
+    "n": 10
+   },
+   "dato": "En los siglos XVII y XVIII fue la gran ruta del comercio entre Europa, África y América.",
+   "oa": "OA 10",
+   "emblema": "barco"
+  },
+  {
+   "id": "CC-8-U3-001",
+   "nombre": "Montesquieu",
+   "tipo": "protagonista",
+   "curso": 8,
+   "unidad": 3,
+   "dimension": "Politica",
+   "resistencia": 70,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Separar poderes",
+     "costo": 2,
+     "danio": 40
+    }
+   ],
+   "dato": "Propuso separar el poder del Estado en ejecutivo, legislativo y judicial.",
+   "oa": "OA 14",
+   "emblema": "balanza"
+  },
+  {
+   "id": "CC-8-U3-002",
+   "nombre": "Criollos",
+   "tipo": "protagonista",
+   "curso": 8,
+   "unidad": 3,
+   "dimension": "Sociedad",
+   "resistencia": 60,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Cabildos",
+     "costo": 1,
+     "danio": 20
+    }
+   ],
+   "dato": "Hijos de españoles nacidos en América que querían más participación en el gobierno.",
+   "oa": "OA 16",
+   "emblema": "personas"
+  },
+  {
+   "id": "CC-8-U3-003",
+   "nombre": "Repúblicas americanas",
+   "tipo": "protagonista",
+   "curso": 8,
+   "unidad": 3,
+   "dimension": "Politica",
+   "resistencia": 110,
+   "retirada": 2,
+   "acciones": [
+    {
+     "nombre": "Soberanía popular",
+     "costo": 2,
+     "danio": 50
+    },
+    {
+     "nombre": "Constitución",
+     "costo": 3,
+     "danio": 70
+    }
+   ],
+   "dato": "Tras las independencias, los nuevos países eligieron la república como forma de gobierno.",
+   "oa": "OA 16",
+   "emblema": "estrella",
+   "evolucionaDe": "CC-8-U3-002"
+  },
+  {
+   "id": "CC-8-U3-004",
+   "nombre": "Enciclopedistas",
+   "tipo": "protagonista",
+   "curso": 8,
+   "unidad": 3,
+   "dimension": "Cultura",
+   "resistencia": 80,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Razón",
+     "costo": 1,
+     "danio": 20
+    },
+    {
+     "nombre": "Enciclopedia",
+     "costo": 3,
+     "danio": 60
+    }
+   ],
+   "dato": "Reunieron el saber de su época en la Enciclopedia para difundir el uso de la razón.",
+   "oa": "OA 14",
+   "emblema": "libro"
+  },
+  {
+   "id": "CC-8-U3-005",
+   "nombre": "Derechos del Hombre",
+   "tipo": "acontecimiento",
+   "curso": 8,
+   "unidad": 3,
+   "efecto": {
+    "tipo": "proteger"
+   },
+   "dato": "La Declaración de 1789, en la Revolución francesa, proclamó que todos nacen libres e iguales en derechos.",
+   "oa": "OA 18",
+   "emblema": "pergamino"
+  },
+  {
+   "id": "CC-8-U3-006",
+   "nombre": "Independencia de EE. UU.",
+   "tipo": "acontecimiento",
+   "curso": 8,
+   "unidad": 3,
+   "efecto": {
+    "tipo": "robar",
+    "n": 2
+   },
+   "dato": "En 1776 las trece colonias declararon su independencia de Inglaterra e inspiraron a otros pueblos.",
+   "oa": "OA 15",
+   "emblema": "estrella"
+  },
+  {
+   "id": "CC-8-U3-007",
+   "nombre": "Salones ilustrados",
+   "tipo": "lugar",
+   "curso": 8,
+   "unidad": 3,
+   "efecto": {
+    "tipo": "bonusDimension",
+    "dimension": "Cultura",
+    "n": 10
+   },
+   "dato": "Lugares de reunión donde se discutían las nuevas ideas de la Ilustración.",
+   "oa": "OA 14",
+   "emblema": "pluma"
+  },
+  {
+   "id": "CC-8-U4-001",
+   "nombre": "Valle Central",
+   "tipo": "protagonista",
+   "curso": 8,
+   "unidad": 4,
+   "dimension": "Territorio",
+   "resistencia": 80,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Suelos fértiles",
+     "costo": 2,
+     "danio": 40
+    }
+   ],
+   "dato": "Región de suelos fértiles y clima mediterráneo, clave para la agricultura de Chile.",
+   "oa": "OA 20",
+   "emblema": "maiz"
+  },
+  {
+   "id": "CC-8-U4-002",
+   "nombre": "Región de Aysén",
+   "tipo": "protagonista",
+   "curso": 8,
+   "unidad": 4,
+   "dimension": "Territorio",
+   "resistencia": 90,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Aislamiento",
+     "costo": 3,
+     "danio": 50
+    }
+   ],
+   "dato": "Región con poca población y difícil conexión, unida al resto del país por la Carretera Austral.",
+   "oa": "OA 21",
+   "emblema": "montana"
+  },
+  {
+   "id": "CC-8-U4-003",
+   "nombre": "Región de Antofagasta",
+   "tipo": "protagonista",
+   "curso": 8,
+   "unidad": 4,
+   "dimension": "Economia",
+   "resistencia": 70,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Cobre",
+     "costo": 1,
+     "danio": 20
+    },
+    {
+     "nombre": "Puerto minero",
+     "costo": 2,
+     "danio": 40
+    }
+   ],
+   "dato": "Concentra gran parte de la minería del cobre de Chile.",
+   "oa": "OA 20",
+   "emblema": "engranaje"
+  },
+  {
+   "id": "CC-8-U4-004",
+   "nombre": "Pueblo rapanui",
+   "tipo": "protagonista",
+   "curso": 8,
+   "unidad": 4,
+   "dimension": "Cultura",
+   "resistencia": 70,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Moái",
+     "costo": 2,
+     "danio": 40
+    }
+   ],
+   "dato": "En Rapa Nui se conserva una lengua y una cultura polinésica propias; los moái son su símbolo.",
+   "oa": "OA 20",
+   "emblema": "ola"
+  },
+  {
+   "id": "CC-8-U4-005",
+   "nombre": "Carretera Austral",
+   "tipo": "lugar",
+   "curso": 8,
+   "unidad": 4,
+   "efecto": {
+    "tipo": "bonusDimension",
+    "dimension": "Territorio",
+    "n": 10
+   },
+   "dato": "Camino de más de mil kilómetros que conecta las localidades del sur de Chile.",
+   "oa": "OA 21",
+   "emblema": "mapa"
+  }
+ ]
+}
