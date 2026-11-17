@@ -176,6 +176,6 @@ async function render() {
 window.addEventListener('hashchange', render);
 render();
 
-if ('serviceWorker' in navigator && location.protocol === 'https:') {
+if ('serviceWorker' in navigator && window.isSecureContext) {
   navigator.serviceWorker.register('sw.js').catch(() => {});
 }
