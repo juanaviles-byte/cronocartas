@@ -50,6 +50,30 @@ const E = {
 
 export const EMBLEMAS = Object.keys(E);
 
+// Paleta por tipo de carta, al estilo de los tipos de un TCG.
+export const TEMAS = {
+  Politica:       { base: '#C0392B', claro: '#F6C1B4', oscuro: '#7A1E12', papel: '#FDEDE8', icono: 'columna' },
+  Economia:       { base: '#C98A0B', claro: '#F7DE97', oscuro: '#7C5205', papel: '#FFF6DD', icono: 'moneda' },
+  Sociedad:       { base: '#2C64A8', claro: '#B9D3F2', oscuro: '#173E6E', papel: '#EAF2FC', icono: 'personas' },
+  Cultura:        { base: '#7344B0', claro: '#D6C3F0', oscuro: '#45246F', papel: '#F3EDFB', icono: 'pluma' },
+  Territorio:     { base: '#2B8152', claro: '#B5E0C4', oscuro: '#16502F', papel: '#E8F6EC', icono: 'montana' },
+  acontecimiento: { base: '#56626E', claro: '#CDD5DC', oscuro: '#2E363E', papel: '#F1F4F6', icono: 'pergamino' },
+  lugar:          { base: '#23807F', claro: '#B2E3E0', oscuro: '#11504F', papel: '#E6F6F5', icono: 'mapa' },
+  aula:           { base: '#1D3557', claro: '#E9C46A', oscuro: '#0F1E33', papel: '#F6F1E3', icono: 'libro' },
+};
+
+export function temaCarta(carta) {
+  if (carta.tipo === 'protagonista') return TEMAS[carta.dimension] || TEMAS.acontecimiento;
+  return TEMAS[carta.tipo] || TEMAS.acontecimiento;
+}
+
+// Ícono redondo de un tipo o dimensión (como el símbolo de energía de un TCG).
+export function iconoTipo(clave, tam = 22) {
+  const t = TEMAS[clave] || TEMAS.acontecimiento;
+  return `<svg class="icono-tipo" viewBox="0 0 100 100" width="${tam}" height="${tam}" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="${t.base}" stroke="#fff" stroke-width="6"/>` +
+    `<g transform="translate(18 18) scale(.64)" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">${E[t.icono]}</g></svg>`;
+}
+
 export function iconoEmblema(nombre) {
   return `<svg viewBox="0 0 100 100" width="32" height="32" aria-label="${nombre}"><g fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">${E[nombre] || E.estrella}</g></svg>`;
 }

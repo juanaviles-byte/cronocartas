@@ -89,7 +89,7 @@ export async function montarMesa(contenedor, opciones) {
     const turno = estado.fase === 'fin' ? 'Partida terminada'
       : estado.fase === 'preparacion' ? `${nombres[estado.turno]}: prepara tu mesa`
       : estado.fase === 'promover' ? `${nombres[estado.turno]}: elige un nuevo activo`
-      : `Turno de ${nombres[estado.turno]}`;
+      : (contraIA && estado.turno === 'A') ? 'Tu turno' : `Turno de ${nombres[estado.turno]}`;
     c.appendChild(h('div', `aviso-turno turno-${estado.turno}`, turno));
     c.appendChild(h('div', 'registro', ''));
     const menu = h('button', 'boton-menu', 'Menú');
@@ -208,8 +208,51 @@ export async function montarMesa(contenedor, opciones) {
 
   // ---------- Toques ----------
   function tocarEnMano(j, entrada) {
-    const opciones = jugadasValidas(estado).filter(v => v.uid === entrada.uid).map(v => ({ jugada: v, texto: textoJugada(v, j) }));
-    verCarta(entrada.carta, j, opciones);
+    const validas = jugadasValidas(estado).filter(v => v.uid === entrada.uid);
+    const ef = entrada.carta.efecto;
+    if (ef && ef.tipo === 'buscarProtagonista' && validas.some(v => v.tipo === 'jugar')) {
+      // Una búsqueda: primero se muestran las cartas y se elige.
+      return verCarta(entrada.carta, j, [{ texto: 'Jugar esta carta', alElegir: () => elegirBusqueda(j, entrada, ef.n || 3) }]);
+    }
+    verCarta(entrada.carta, j, validas.map(v => ({ jugada: v, texto: textoJugada(v, j) })));
+  }
+
+  function elegirBusqueda(j, entrada, n) {
+    const tope = estado.jugadores[j].mazo.slice(0, n);
+    const validas = jugadasValidas(estado).filter(v => v.tipo === 'jugar' && v.uid === entrada.uid);
+    const capa = h('div', `capa${girado(j) ? ' girado' : ''}`);
+    const panel = h('div', 'panel-carta panel-elegir');
+    const hayProt = validas.some(v => v.eleccion);
+    panel.appendChild(h('div', 'titulo-sabias', `${esc(entrada.carta.nombre)}: las ${tope.length} primeras cartas de tu mazo`));
+    panel.appendChild(h('p', 'nota', hayProt ? 'Toca el Protagonista que quieres llevar a tu mano. Las demás van al fondo del mazo.' : 'No hay Protagonistas entre estas cartas. Vuelven al fondo del mazo.'));
+    const fila = h('div', 'elegir-cartas');
+    let elegida = null;
+    const confirmar = h('button', 'boton-principal', hayProt ? 'Elige una carta' : 'Seguir');
+    confirmar.disabled = hayProt;
+    for (const c of tope) {
+      const el = renderCarta(c.carta, { tamano: 'mini', unidades: unidadesCarta(c.carta) });
+      el.style.setProperty('--ch', 'min(34vh, 190px)');
+      const jugada = validas.find(v => v.eleccion === c.uid);
+      if (!jugada) el.classList.add('no-elegible');
+      else el.onclick = () => {
+        elegida = jugada;
+        fila.querySelectorAll('.elegida-ahora').forEach(x => x.classList.remove('elegida-ahora'));
+        el.classList.add('elegida-ahora');
+        confirmar.disabled = false;
+        confirmar.textContent = 'Tomar ' + c.carta.nombre;   // textContent: no interpreta HTML
+      };
+      fila.appendChild(el);
+    }
+    panel.appendChild(fila);
+    const botones = h('div', 'botones');
+    confirmar.onclick = () => { capa.remove(); jugar(hayProt ? elegida : validas[0]); };
+    botones.appendChild(confirmar);
+    const cancelar = h('button', 'boton-secundario', 'Cancelar');
+    cancelar.onclick = () => capa.remove();
+    botones.appendChild(cancelar);
+    panel.appendChild(botones);
+    capa.appendChild(panel);
+    raiz.appendChild(capa);
   }
 
   function tocarEnMesa(j, inst) {
@@ -249,7 +292,7 @@ export async function montarMesa(contenedor, opciones) {
     const botones = h('div', 'botones');
     for (const o of opciones) {
       const b = h('button', 'boton-principal', o.texto);   // textoJugada ya escapa los nombres
-      b.onclick = () => { capa.remove(); jugar(o.jugada); };
+      b.onclick = () => { capa.remove(); if (o.alElegir) o.alElegir(); else jugar(o.jugada); };
       botones.appendChild(b);
     }
     const cerrar = h('button', 'boton-secundario', opciones.length ? 'Cancelar' : 'Cerrar');
@@ -288,8 +331,9 @@ export async function montarMesa(contenedor, opciones) {
       }
       if (ev.tipo === 'protegido') registrar(`<b>${esc(ev.carta.nombre)}</b> estaba protegido: no recibe daño`);
       if (ev.tipo === 'evolucion') registrar(`<b>${esc(ev.de.nombre)}</b> evoluciona en <b>${esc(ev.a.nombre)}</b>`);
-      if (ev.tipo === 'efecto') registrar(`${nombres[ev.jugador]} juega <b>${esc(ev.carta.nombre)}</b>`);
+      if (ev.tipo === 'efecto' && !eventos.some(x => x.tipo === 'revelar')) registrar(`${nombres[ev.jugador]}: <b>${esc(ev.carta.nombre)}</b>`);
       if (ev.tipo === 'lugar') registrar(`Nuevo lugar: <b>${esc(ev.carta.nombre)}</b>`);
+      if (ev.tipo === 'revelar') registrar(`${nombres[ev.jugador]}: se miraron ${ev.cartas.length} cartas del mazo${ev.tomada ? ` y se tomó <b>${esc(ev.tomada.nombre)}</b>` : ', sin Protagonistas'}`);
       if (ev.tipo === 'caida') {
         caidas.push(ev.carta);
         if (config.sabias) await sabiasQue(ev.carta, ev.jugador === 'A' ? 'B' : 'A');

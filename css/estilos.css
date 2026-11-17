@@ -51,53 +51,90 @@ button:disabled { opacity: .35; cursor: default; }
 .preparar .boton-principal.grande { margin-top: 36px; max-width: 420px; }
 .nota { color: var(--tenue); }
 
-/* ---------- Cartas ---------- */
-.carta { position: relative; border-radius: var(--radio); overflow: hidden; background: #f7f3ea; color: #1d1d1f; flex: none; }
-.carta .arte svg, .carta .arte img { width: 100%; height: 100%; display: block; object-fit: cover; }
-.carta.comunidad::after { content: "★"; position: absolute; bottom: 4px; right: 8px; color: var(--acento); text-shadow: 0 1px 2px #000; }
+/* ---------- Cartas (estilo TCG) ----------
+   --c / --c-claro / --c-oscuro / --c-papel vienen del tipo de carta (arte.js · TEMAS). */
+.carta { position: relative; flex: none; color: #1d1d1f; border-radius: 12px; background: #F2C94C;
+  padding: 4px; box-shadow: 0 2px 10px rgba(0,0,0,.4); }
+.carta svg, .carta img { display: block; }
+.carta .icono-tipo { flex: none; display: inline-block; vertical-align: middle; }
+.pip { display: inline-block; width: .8em; height: .8em; border-radius: 50%; margin-right: .15em; vertical-align: middle;
+  background: radial-gradient(circle at 35% 30%, #fff6c9, #E9C46A 45%, #a77d14); box-shadow: 0 0 0 .1em rgba(0,0,0,.35); }
 
-/* mini: mano y mesa. Su alto se define con --ch en cada zona */
-.carta-mini { --ch: 110px; height: var(--ch); width: calc(var(--ch) * .72); font-size: calc(var(--ch) * .085); display: flex; flex-direction: column;
-  box-shadow: 0 2px 8px rgba(0,0,0,.35); transition: transform .15s ease; }
-.carta-mini .arte { height: 52%; background: var(--c); }
-.carta-mini .mini-nombre { padding: .35em .45em 0; font-weight: 700; line-height: 1.1; flex: 1; overflow: hidden; overflow-wrap: anywhere; hyphens: auto; }
-.carta-mini .mini-tipo { padding: 0 .45em .45em; font-size: .8em; color: #666; }
-.carta-mini .mini-vida { padding: 0 .45em .35em; display: flex; align-items: center; gap: .4em; }
-.carta-mini .mini-vida b { font-size: 1.35em; color: var(--c); }
-.carta-mini .barra { flex: 1; height: .45em; border-radius: 1em; background: #ddd; overflow: hidden; }
-.carta-mini .barra span { display: block; height: 100%; background: var(--peligro); }
-.carta-mini .mini-saber { position: absolute; top: .4em; left: .4em; display: flex; gap: .2em; }
-.carta-mini .etapa { position: absolute; top: .4em; right: .4em; background: rgba(0,0,0,.55); color: #fff; border-radius: 1em; padding: 0 .45em; font-weight: 800; }
-.carta-mini .sello { position: absolute; top: 34%; left: 0; right: 0; text-align: center; background: rgba(233,196,106,.95); color: #1b1b1b; font-weight: 800; font-size: .8em; }
-.pip { display: inline-block; width: .7em; height: .7em; border-radius: 50%; background: var(--acento); box-shadow: 0 0 0 .12em rgba(0,0,0,.35); margin-right: .15em; }
-.carta-mini.usable { box-shadow: 0 0 0 3px var(--acento), 0 2px 8px rgba(0,0,0,.35); }
-.carta-mini.usable:active, .carta-mini:active { transform: scale(.96); }
-.dorso { background: repeating-linear-gradient(45deg, #2a3040, #2a3040 6px, #313848 6px, #313848 12px); display: grid; place-items: center; color: rgba(255,255,255,.35); font-weight: 800; }
+/* mini: mano y mesa (alto con --ch) */
+.carta-mini { --ch: 110px; height: var(--ch); width: calc(var(--ch) * .72); font-size: calc(var(--ch) * .08); padding: calc(var(--ch) * .025);
+  display: flex; flex-direction: column; transition: transform .15s ease; }
+.carta-mini > * { background: linear-gradient(160deg, var(--c-claro), var(--c)); }
+.carta-mini .m-cab { border-radius: .6em .6em 0 0; padding: .35em .45em .25em; }
+.carta-mini .m-nombre { display: block; font-weight: 800; line-height: 1.05; color: #1b1b1b; overflow: hidden; overflow-wrap: anywhere; hyphens: auto;
+  max-height: 2.15em; font-size: .95em; }
+.carta-mini .m-ventana { position: relative; flex: 1; min-height: 0; padding: 0 .35em; }
+.carta-mini .m-ventana > svg, .carta-mini .m-ventana > img { width: 100%; height: 100%; object-fit: cover; border-radius: .25em; box-shadow: 0 0 0 .12em #fff8, inset 0 0 0 1px #0003; }
+.carta-mini .m-pie { display: flex; align-items: center; gap: .3em; padding: .3em .45em .35em; border-radius: 0 0 .6em .6em; }
+.carta-mini .m-res { font-size: 1.45em; color: #fff; text-shadow: 0 1px 2px var(--c-oscuro); line-height: 1; }
+.carta-mini .m-tipo { font-size: .78em; font-weight: 700; color: #1b1b1b; flex: 1; }
+.carta-mini .m-pie .icono-tipo { margin-left: auto; width: 1.5em; height: 1.5em; }
+.carta-mini .barra { flex: 1; height: .45em; border-radius: 1em; background: rgba(255,255,255,.55); overflow: hidden; }
+.carta-mini .barra span { display: block; height: 100%; background: #E76F51; }
+.carta-mini .mini-saber { position: absolute; top: .3em; left: .6em; display: flex; gap: .15em; }
+.carta-mini .etapa { position: absolute; top: .3em; right: .6em; background: var(--c-oscuro); color: #fff; border-radius: 1em; padding: 0 .45em; font-weight: 800; font-size: .85em; }
+.carta-mini .sello { position: absolute; bottom: .3em; left: .35em; right: .35em; text-align: center; background: rgba(233,196,106,.95); color: #1b1b1b; font-weight: 800; font-size: .75em; border-radius: .3em; }
+.carta-mini.usable { box-shadow: 0 0 0 3px #fff, 0 0 14px 2px var(--acento); }
+.carta-mini:active { transform: scale(.96); }
+.dorso { background: repeating-linear-gradient(45deg, #2a3040, #2a3040 6px, #313848 6px, #313848 12px); display: grid; place-items: center;
+  color: rgba(255,255,255,.35); font-weight: 800; border: 3px solid #3b4357; }
 
-/* normal y grande: colección y detalle */
-.carta-normal, .carta-grande { display: flex; flex-direction: column; padding: 12px; gap: 8px; }
-.carta-normal { width: 210px; font-size: 13px; }
-.carta-grande { width: min(86vw, 340px); font-size: 15px; max-height: calc(100vh - 140px); overflow: auto; }
-.carta .cabeza { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
-.carta .nombre { font-weight: 800; font-size: 1.15em; line-height: 1.15; }
-.carta .res { font-weight: 800; font-size: 1.4em; color: var(--c); white-space: nowrap; }
-.carta .res small { font-size: .5em; color: #777; margin-right: 2px; }
-.carta-normal .arte, .carta-grande .arte { position: relative; aspect-ratio: 16 / 10; border-radius: 8px; overflow: hidden; background: var(--c); }
-.saber-en-mesa { position: absolute; left: 8px; bottom: 8px; }
-.carta .linea { display: flex; gap: 6px; flex-wrap: wrap; }
-.chip { background: var(--c); color: #fff; border-radius: 999px; padding: 2px 10px; font-size: .8em; font-weight: 700; }
-.chip.claro { background: #e6dfd0; color: #333; }
-.acciones { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
-.acciones li { display: grid; grid-template-columns: auto 1fr auto; gap: 8px; align-items: center; padding: 4px 0; }
-.acciones li b { font-size: 1.25em; }
-.pie-prot { display: flex; justify-content: space-between; color: #555; font-size: .85em; }
-.efecto { margin: 0; font-weight: 600; }
-.dato { margin: 0; color: #333; line-height: 1.35; font-size: .95em; border-left: 3px solid var(--c); padding-left: 8px; }
-.ref { color: #777; font-size: .78em; display: flex; flex-direction: column; gap: 2px; }
-.ref .autor { color: #8a6d1f; font-weight: 700; }
+/* normal y grande: colección, detalle y editor */
+.carta-normal { width: 230px; font-size: 12.5px; }
+.carta-grande { width: min(86vw, 350px); font-size: 14px; max-height: calc(100vh - 130px); overflow: auto; }
+.carta .marco { border-radius: 9px; padding: 8px 9px 7px; display: flex; flex-direction: column; gap: 6px;
+  background: linear-gradient(165deg, var(--c-claro) 0%, var(--c) 55%, var(--c-oscuro) 100%); min-height: calc(var(--w, 230px) * 1.32); }
+.carta-normal .marco { --w: 222px; }
+.carta-grande .marco { --w: min(84vw, 342px); }
+.carta .cab { display: grid; grid-template-columns: 1fr auto; grid-template-areas: "etapa etapa" "nombre res"; align-items: end; column-gap: 6px; color: #1b1b1b; }
+.carta .etapa-previa { grid-area: etapa; display: flex; gap: 6px; align-items: baseline; font-size: .72em; font-weight: 800; text-transform: uppercase; letter-spacing: .04em; color: rgba(0,0,0,.6); }
+.carta .etapa-previa small { text-transform: none; font-weight: 600; letter-spacing: 0; }
+.carta .nombre { grid-area: nombre; font-weight: 900; font-size: 1.3em; line-height: 1.05; }
+.carta .res { grid-area: res; display: flex; align-items: center; gap: 4px; font-weight: 900; font-size: 1.35em; color: #B3261E; white-space: nowrap; }
+.carta .res small { font-size: .5em; color: #1b1b1b; }
+.carta .cab-apoyo { grid-template-columns: 1fr auto; grid-template-areas: "etapa icono" "nombre icono"; }
+.carta .cab-apoyo .icono-tipo { grid-area: icono; }
+.carta .etiqueta-apoyo { grid-area: etapa; justify-self: start; font-size: .72em; font-weight: 800; text-transform: uppercase; letter-spacing: .06em;
+  color: #fff; background: var(--c-oscuro); border-radius: 4px; padding: 1px 7px; }
+.tipo-aula .etiqueta-apoyo { background: #E9C46A; color: #0F1E33; }
+.tipo-aula .nombre, .tipo-aula .etapa-previa { color: #fff; }
+.carta .ventana { position: relative; aspect-ratio: 4 / 3; border-radius: 4px; overflow: hidden; background: var(--c);
+  box-shadow: 0 0 0 3px #E8E3D3, 0 0 0 4px rgba(0,0,0,.25), 0 3px 8px rgba(0,0,0,.35); margin: 2px 3px 0; }
+.carta .ventana > svg, .carta .ventana > img { width: 100%; height: 100%; object-fit: cover; }
+.carta .saber-en-mesa { position: absolute; left: 6px; bottom: 6px; }
+.carta .franja { text-align: center; font-size: .72em; font-style: italic; font-weight: 600; color: #1b1b1b;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.65) 15%, rgba(255,255,255,.65) 85%, transparent); padding: 1px 6px; }
+.tipo-aula .franja { color: #0F1E33; }
+.carta .acciones { display: flex; flex-direction: column; background: var(--c-papel); border-radius: 6px; padding: 2px 8px; }
+.carta .accion { display: grid; grid-template-columns: 4.2em 1fr auto; gap: 6px; align-items: center; padding: 5px 0; }
+.carta .accion + .accion { border-top: 1px solid rgba(0,0,0,.12); }
+.carta .accion .an { font-weight: 800; }
+.carta .accion b { font-size: 1.35em; font-weight: 900; }
+.carta .pie-tcg { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; font-size: .78em; color: #fff; text-shadow: 0 1px 1px rgba(0,0,0,.35); }
+.carta .pie-tcg span { display: flex; flex-direction: column; align-items: center; gap: 1px; }
+.carta .pie-tcg span:first-child { flex-direction: row; flex-wrap: wrap; justify-content: center; column-gap: 3px; }
+.carta .pie-tcg span:first-child small { width: 100%; text-align: center; }
+.carta .pie-tcg small { font-size: .82em; opacity: .9; }
+.carta .efecto { background: var(--c-papel); border-radius: 6px; padding: 7px 9px; font-weight: 600; line-height: 1.3; }
+.carta .efecto small { display: block; font-size: .72em; text-transform: uppercase; letter-spacing: .06em; color: var(--c-oscuro); font-weight: 800; }
+.carta .dato { background: rgba(255,255,255,.88); border-radius: 6px; padding: 6px 8px; font-size: .86em; font-style: italic; line-height: 1.3;
+  border: 1px solid rgba(0,0,0,.08); color: #2a2a2a; }
+.carta .pie-codigo { display: flex; justify-content: space-between; gap: 6px; font-size: .68em; color: rgba(255,255,255,.92); text-shadow: 0 1px 1px rgba(0,0,0,.35); }
+.carta .pie-codigo .autor { font-weight: 800; color: #FFE6A3; }
+.carta.comunidad { background: linear-gradient(135deg, #F2C94C, #fff3c4, #F2C94C); }
 
-.coleccion .grilla-cartas { display: flex; flex-wrap: wrap; gap: 14px; }
+.coleccion .grilla-cartas, .zona-docente .grilla-cartas, .mis-cartas .grilla-cartas { display: flex; flex-wrap: wrap; gap: 14px; align-items: flex-start; }
 .titulo-unidad { color: var(--tinta) !important; text-transform: none !important; letter-spacing: 0 !important; font-size: 1.1rem !important; }
+
+/* Elegir carta (búsquedas) */
+.elegir-cartas { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; margin: 12px 0; }
+.elegir-cartas .carta { cursor: pointer; }
+.elegir-cartas .carta.no-elegible { opacity: .55; cursor: default; }
+.elegir-cartas .carta.elegida-ahora { box-shadow: 0 0 0 4px #fff, 0 0 18px 4px var(--acento); }
 
 /* ---------- Capa de detalle y avisos ---------- */
 .capa { position: fixed; inset: 0; background: rgba(8,10,14,.72); display: grid; place-items: center; z-index: 50; animation: aparecer .15s ease; }
@@ -236,3 +273,6 @@ button:disabled { opacity: .35; cursor: default; }
 .emblemas .opcion.chica { padding: 6px 10px; }
 .carta.editada { box-shadow: 0 0 0 3px var(--acento); }
 @media (max-width: 860px) { .editor { grid-template-columns: 1fr; } .editor-vista { position: static; order: -1; } }
+.panel-elegir { max-width: min(96vw, 760px); background: var(--fondo-2); border-radius: 16px; padding: 18px 20px; }
+.panel-elegir .nota { margin: 0; text-align: center; }
+.editor .campo-texto input, .editor .campo-texto textarea { background: #2a303a; }

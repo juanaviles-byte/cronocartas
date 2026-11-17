@@ -15,6 +15,18 @@ Escuela Gabriela Mistral · Mostazal.
 - **Panel docente (con PIN):** aprobaciones, cobertura de OA y MBE, traspaso de cartas entre tablets y ajustes.
 - **Funciona sin internet** después de abrirlo una vez.
 
+## Novedades v1.1
+
+- **Búsquedas visibles:** Planificación, Fundación de ciudades y Quipu muestran las 3 primeras cartas del mazo. El jugador elige qué Protagonista tomar.
+- **Editor de cartas** (Panel docente → *Editar cartas*): el docente puede cambiar nombre, dato, poder y emblema de cualquier carta, y subirle una imagen (formato 4:3; se reduce a 640×480).
+  - Las imágenes se guardan en el almacenamiento grande de la tablet (IndexedDB).
+  - **Exportar ediciones** descarga un archivo `.json` (con imágenes). **Importar ediciones** lo carga en otra tablet.
+- **Nuevo diseño de carta estilo TCG:** marco de color según el tipo, ventana de ilustración 4:3, acciones con íconos de Saber, debilidad ×2, retirada, dato y código de carta.
+
+### Ilustraciones con IA
+
+Las ilustraciones se generan con un prompt maestro: arte original, sin texto, formato 4:3 (1024×768) y paleta según el tipo de carta. Política es roja, Economía dorada, Sociedad azul, Cultura morada, Territorio verde, Acontecimiento gris pizarra, Lugar turquesa y Aula azul marino con dorado. Cada imagen se sube con el editor, o se integra al repositorio como `img/cartas/<código>.jpg`, agregando `"imagen": "img/cartas/<código>.jpg"` a la carta en su JSON.
+
 ## Instalar en una tablet Android
 
 1. Con internet, abre la dirección del juego en **Chrome**.
