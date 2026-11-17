@@ -2,6 +2,7 @@
 import { arteCarta, colorCarta } from './arte.js';
 import { VENTAJA } from '../motor.js';
 import { NOMBRE_DIMENSION } from '../mazos.js';
+import { esc, pips } from '../html.js';
 
 const DEBIL_ANTE = Object.fromEntries(Object.entries(VENTAJA).map(([a, b]) => [b, a]));
 const TIPO = { protagonista: 'Protagonista', acontecimiento: 'Acontecimiento', lugar: 'Lugar', aula: 'Aula · MBE' };
@@ -24,8 +25,6 @@ export function textoEfecto(ef) {
   }
 }
 
-const esc = s => String(s ?? '').replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
-const pips = n => '<i class="pip"></i>'.repeat(n);
 
 export function renderCarta(carta, { tamano = 'normal', instancia = null, unidades = null } = {}) {
   const el = document.createElement('div');
@@ -42,7 +41,7 @@ export function renderCarta(carta, { tamano = 'normal', instancia = null, unidad
       <div class="arte">${imagen}</div>
       <div class="mini-nombre">${esc(carta.nombre)}</div>
       ${carta.tipo === 'protagonista' ? `
-        <div class="mini-vida"><b>${vida}</b>${instancia && instancia.danio ? `<span class="barra"><span style="width:${(vida / res) * 100}%"></span></span>` : ''}</div>
+        <div class="mini-vida"><b>${esc(vida)}</b>${instancia && instancia.danio ? `<span class="barra"><span style="width:${(vida / res) * 100}%"></span></span>` : ''}</div>
         ${instancia ? `<div class="mini-saber">${pips(instancia.saber)}</div>` : ''}
         ${instancia?.protegido ? '<div class="sello">Protegido</div>' : ''}
         ${instancia?.bonus ? `<div class="sello">+${instancia.bonus}</div>` : ''}
@@ -59,7 +58,7 @@ export function renderCarta(carta, { tamano = 'normal', instancia = null, unidad
   let cuerpo = '';
   if (carta.tipo === 'protagonista') {
     cuerpo = `<ul class="acciones">${carta.acciones.map(a => `
-      <li><span class="costo" title="Saber necesario">${pips(a.costo)}</span><span class="an">${esc(a.nombre)}</span><b>${a.danio}</b></li>`).join('')}
+      <li><span class="costo" title="Saber necesario">${pips(a.costo)}</span><span class="an">${esc(a.nombre)}</span><b>${esc(a.danio)}</b></li>`).join('')}
     </ul>
     <div class="pie-prot"><span>Débil ante <b>${nombreDim(DEBIL_ANTE[carta.dimension])}</b></span><span>Retirada ${pips(carta.retirada ?? 1)}</span></div>`;
   } else {
@@ -69,14 +68,14 @@ export function renderCarta(carta, { tamano = 'normal', instancia = null, unidad
   el.innerHTML = `
     <div class="cabeza">
       <div class="nombre">${esc(carta.nombre)}</div>
-      ${res ? `<div class="res"><small>RES</small>${instancia ? `${vida}<small>/${res}</small>` : res}</div>` : ''}
+      ${res ? `<div class="res"><small>RES</small>${instancia ? `${esc(vida)}<small>/${esc(res)}</small>` : esc(res)}</div>` : ''}
     </div>
     <div class="arte">${imagen}${instancia ? `<div class="saber-en-mesa">${pips(instancia.saber)}</div>` : ''}</div>
     <div class="linea">${encabezado}</div>
     ${cuerpo}
     <p class="dato">${esc(carta.dato)}</p>
-    <div class="ref">${carta.mbe ? `MBE · Dominio ${carta.mbe.dominio} · Estándar ${carta.mbe.estandar}` :
-      `${carta.curso ? `${carta.curso}° básico` : ''}${unidad ? ` · U${carta.unidad} ${esc(unidad)}` : carta.unidad ? ` · Unidad ${carta.unidad}` : ''}${carta.oa ? ` · ${esc(carta.oa)}` : ''}`}
+    <div class="ref">${carta.mbe ? `MBE · Dominio ${esc(carta.mbe.dominio)} · Estándar ${esc(carta.mbe.estandar)}` :
+      `${carta.curso ? `${esc(carta.curso)}° básico` : ''}${unidad ? ` · U${carta.unidad} ${esc(unidad)}` : carta.unidad ? ` · Unidad ${esc(carta.unidad)}` : ''}${carta.oa ? ` · ${esc(carta.oa)}` : ''}`}
       ${carta.comunidad ? `<span class="autor">Creada por ${esc(carta.autor || 'estudiante')}</span>` : ''}</div>`;
   return el;
 }

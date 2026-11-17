@@ -2,16 +2,17 @@
 // (OA por unidad y MBE), mover cartas entre tablets y ajustar el juego.
 import { almacen, CLAVES } from '../almacen.js';
 import { pinValido, huellaPin, verificarPin } from '../pin.js';
-import { exportarCartas, importarCartas } from '../compartir.js';
+import { exportarCartas, importarCartas, resumenExportacion } from '../compartir.js';
+import { esc } from '../html.js';
 import { renderCarta } from './carta.js';
 import { NOMBRE_DIMENSION } from '../mazos.js';
 
 const h = (tag, cls, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; };
-const esc = s => String(s ?? '').replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
 let desbloqueado = false;
 let pestana = 'propuestas';
 
 export async function vistaDocente({ volver }) {
+  desbloqueado = false;   // cada vez que se entra al panel se pide el PIN
   const v = h('div', 'pantalla docente');
   v.appendChild(volver);
   v.appendChild(h('h1', '', 'Panel docente'));
@@ -80,9 +81,24 @@ export async function vistaDocente({ volver }) {
       const comentario = h('input'); comentario.placeholder = 'Comentario para el estudiante (para devolver)'; comentario.value = p.comentario || '';
       lado.appendChild(comentario);
       const botones = h('div', 'opciones');
-      const guardarDato = () => { if (dato.value.trim().length >= 20) almacen.guardarPropuesta({ ...almacen.listarPropuestas().find(x => x.id === p.id), dato: dato.value.trim() }); };
-      const btn = (t, cls, fn) => { const b = h('button', cls, t); b.onclick = () => { guardarDato(); fn(); panel(); }; botones.appendChild(b); };
-      if (p.estado !== 'aprobada') btn('Aprobar', 'boton-principal', () => { almacen.cambiarEstado(p.id, 'aprobada'); almacen.activarEnMazo(p.id, true); });
+      const aviso = h('div', 'mensaje', '');
+      const guardarDato = () => {
+        const nuevo = dato.value.trim();
+        if (nuevo === p.dato) return true;
+        if (nuevo.length < 20) { aviso.textContent = 'El dato corregido debe tener al menos 20 letras; no se guardó.'; aviso.className = 'mensaje error'; return false; }
+        return almacen.guardarPropuesta({ ...almacen.listarPropuestas().find(x => x.id === p.id), dato: nuevo }).ok;
+      };
+      const btn = (t, cls, fn) => {
+        const b = h('button', cls, t);
+        b.onclick = () => {
+          if (!guardarDato()) { if (!aviso.textContent) { aviso.textContent = 'No se pudo guardar el cambio en esta tablet (falta espacio).'; aviso.className = 'mensaje error'; } return; }
+          const r = fn();
+          if (r && r.ok === false) { aviso.textContent = 'No se pudo guardar el cambio en esta tablet (falta espacio).'; aviso.className = 'mensaje error'; return; }
+          panel();
+        };
+        botones.appendChild(b);
+      };
+      if (p.estado !== 'aprobada') btn('Aprobar', 'boton-principal', () => { const r = almacen.cambiarEstado(p.id, 'aprobada'); return r.ok ? almacen.activarEnMazo(p.id, true) : r; });
       if (p.estado === 'aprobada') {
         btn(p.enMazo ? 'Sacar del mazo' : 'Poner en el mazo', 'boton-secundario', () => almacen.activarEnMazo(p.id, !p.enMazo));
       }
@@ -90,6 +106,7 @@ export async function vistaDocente({ volver }) {
       if (p.estado !== 'descartada') btn('Descartar', 'enlace', () => almacen.cambiarEstado(p.id, 'descartada'));
       else btn('Eliminar', 'enlace', () => almacen.eliminarPropuesta(p.id));
       lado.appendChild(botones);
+      lado.appendChild(aviso);
       if (p.estado === 'aprobada') lado.appendChild(h('p', 'nota', p.enMazo ? 'Está en el mazo del curso: aparece en las partidas y en la colección.' : 'Aprobada, pero fuera del mazo.'));
       fila.appendChild(lado);
       zona.appendChild(fila);
@@ -123,7 +140,7 @@ export async function vistaDocente({ volver }) {
     const t = h('table', 'tabla');
     t.innerHTML = '<thead><tr><th>Carta</th><th>Dominio</th><th>Estándar</th><th>En el juego</th></tr></thead>';
     const tb = h('tbody');
-    for (const a of aula) tb.appendChild(h('tr', '', `<td><b>${esc(a.nombre)}</b></td><td>${a.mbe.dominio}: ${esc(a.mbe.nombreDominio)}</td><td>${a.mbe.estandar}. ${esc(a.mbe.nombre)}</td><td>${esc(a.texto)}</td>`));
+    for (const a of aula) tb.appendChild(h('tr', '', `<td><b>${esc(a.nombre)}</b></td><td>${esc(a.mbe.dominio)}: ${esc(a.mbe.nombreDominio)}</td><td>${esc(a.mbe.estandar)}. ${esc(a.mbe.nombre)}</td><td>${esc(a.texto)}</td>`));
     t.appendChild(tb);
     sec.appendChild(t);
     zona.appendChild(sec);
@@ -141,7 +158,10 @@ export async function vistaDocente({ volver }) {
       b.onclick = () => {
         const lista = almacen.listarPropuestas(filtro);
         area.value = lista.length ? exportarCartas(lista) : '';
-        estado.textContent = lista.length ? `${lista.length} carta(s) en el código.` : 'No hay cartas para exportar.';
+        const { sinImagen } = resumenExportacion(lista);
+        estado.innerHTML = !lista.length ? 'No hay cartas para exportar.'
+          : `${lista.length} carta(s) en el código (${Math.round(area.value.length / 1000)} mil caracteres).` +
+            (sinImagen.length ? `<br>Estas cartas viajan sin su imagen porque es muy pesada: ${sinImagen.map(esc).join(', ')}.` : '');
       };
       opciones.appendChild(b);
     };
@@ -165,15 +185,19 @@ export async function vistaDocente({ volver }) {
     const importar = h('button', 'boton-principal', 'Importar cartas');
     importar.onclick = () => {
       const r = importarCartas(entrada.value);
-      let n = 0;
+      let n = 0, repetidas = 0, sinEspacio = 0;
       const existentes = new Set(almacen.listarPropuestas().map(p => p.id));
       for (const c of r.cartas) {
-        if (existentes.has(c.id)) continue;
-        const estadoC = ['pendiente', 'aprobada', 'devuelta', 'descartada'].includes(c.estado) ? c.estado : 'pendiente';
-        if (almacen.guardarPropuesta({ ...c, estado: estadoC, enMazo: estadoC === 'aprobada' }).ok) n++;
+        if (existentes.has(c.id)) { repetidas++; continue; }
+        const g = almacen.guardarPropuesta({ ...c, enMazo: c.estado === 'aprobada' });
+        if (g.ok) n++; else sinEspacio++;
       }
-      msg.innerHTML = `${n} carta(s) importadas.${r.errores.length ? `<br>${r.errores.map(esc).join('<br>')}` : ''}`;
-      msg.className = `mensaje ${r.errores.length && !n ? 'error' : 'ok'}`;
+      const lineas = [`${n} carta(s) importadas.`];
+      if (repetidas) lineas.push(`${repetidas} ya estaban en esta tablet.`);
+      if (sinEspacio) lineas.push(`${sinEspacio} no se pudieron guardar: la tablet no tiene espacio.`);
+      lineas.push(...r.errores.map(esc));
+      msg.innerHTML = lineas.join('<br>');
+      msg.className = `mensaje ${(r.errores.length || sinEspacio) && !n ? 'error' : 'ok'}`;
     };
     imp.append(entrada, importar, msg);
     zona.appendChild(imp);

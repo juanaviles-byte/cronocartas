@@ -1,22 +1,16 @@
 // Banco de ideas: los estudiantes crean sus propias cartas.
 import { almacen } from '../almacen.js';
-import { PRESUPUESTO, puntosPoder, validarPropuesta } from '../balance.js';
+import { PRESUPUESTO, puntosPoder, validarPropuesta, EFECTOS_ESTUDIANTE as EFECTOS } from '../balance.js';
 import { DIMENSIONES } from '../motor.js';
 import { NOMBRE_DIMENSION } from '../mazos.js';
 import { EMBLEMAS, iconoEmblema } from './arte.js';
 import { renderCarta } from './carta.js';
+import { esc } from '../html.js';
 
 const h = (tag, cls, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; };
 const UNIDADES = {};
 const BORRADOR = 'cc.borrador';
 
-const EFECTOS = [
-  [{ tipo: 'robar', n: 2 }, 'Roba 2 cartas'],
-  [{ tipo: 'curar', n: 30 }, 'Recupera 30 de resistencia'],
-  [{ tipo: 'proteger' }, 'Protege a tu activo un turno'],
-  [{ tipo: 'bonusDanio', n: 20 }, 'Tu próxima acción hace +20'],
-  [{ tipo: 'buscarProtagonista', n: 3 }, 'Busca un Protagonista en tu mazo'],
-];
 
 function nuevaCarta() {
   return {
@@ -26,7 +20,7 @@ function nuevaCarta() {
   };
 }
 
-export async function comprimirImagen(archivo, max = 480) {
+export async function comprimirImagen(archivo, max = 360) {
   const url = URL.createObjectURL(archivo);
   try {
     const img = await new Promise((ok, mal) => { const i = new Image(); i.onload = () => ok(i); i.onerror = mal; i.src = url; });
@@ -34,7 +28,7 @@ export async function comprimirImagen(archivo, max = 480) {
     const c = document.createElement('canvas');
     c.width = Math.round(img.width * escala); c.height = Math.round(img.height * escala);
     c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
-    return c.toDataURL('image/jpeg', 0.8);
+    return c.toDataURL('image/jpeg', 0.7);
   } finally { URL.revokeObjectURL(url); }
 }
 
@@ -193,7 +187,7 @@ export async function vistaBanco({ volver }) {
     if (!p.imagen) delete p.imagen;
     p.estado = 'pendiente';
     const errores = validarPropuesta(p);
-    if (errores.length) return mensaje(`<b>Falta algo:</b><ul>${errores.map(e => `<li>${e}</li>`).join('')}</ul>`, true);
+    if (errores.length) return mensaje(`<b>Falta algo:</b><ul>${errores.map(e => `<li>${esc(e)}</li>`).join('')}</ul>`, true);
     const r = almacen.guardarPropuesta(p);
     if (!r.ok) {
       return mensaje(r.error === 'cuota'
@@ -220,7 +214,7 @@ export async function vistaBanco({ volver }) {
       item.appendChild(renderCarta({ ...p, comunidad: true }, { tamano: 'normal', unidades: UNIDADES[p.curso] }));
       item.appendChild(h('div', `estado estado-${p.estado}`, ESTADO[p.estado] || p.estado));
       if (p.estado === 'devuelta') {
-        if (p.comentario) item.appendChild(h('p', 'comentario', `Profesor: ${p.comentario}`));
+        if (p.comentario) item.appendChild(h('p', 'comentario', `Profesor: ${esc(p.comentario)}`));
         const ed = h('button', 'boton-secundario', 'Corregir');
         ed.onclick = () => { carta = { ...nuevaCarta(), ...p }; dibujar(); window.scrollTo({ top: 0, behavior: 'smooth' }); };
         item.appendChild(ed);
@@ -256,7 +250,7 @@ function abrirLienzo(alTerminar) {
   }
   const botones = h('div', 'opciones');
   const usar = h('button', 'boton-principal', 'Usar dibujo');
-  usar.onclick = () => { alTerminar(c.toDataURL('image/jpeg', 0.8)); capa.remove(); };
+  usar.onclick = () => { alTerminar(c.toDataURL('image/jpeg', 0.7)); capa.remove(); };
   const borrar = h('button', 'boton-secundario', 'Borrar');
   borrar.onclick = () => { ctx.fillStyle = '#f7f3ea'; ctx.fillRect(0, 0, c.width, c.height); };
   const cerrar = h('button', 'boton-secundario', 'Cancelar');

@@ -16,7 +16,7 @@ html, body { margin: 0; height: 100%; background: var(--fondo); color: var(--tin
 body { overscroll-behavior: none; user-select: none; -webkit-user-select: none; }
 button { font: inherit; color: inherit; cursor: pointer; border: 0; background: none; touch-action: manipulation; }
 button:disabled { opacity: .35; cursor: default; }
-.cargando { display: grid; place-items: center; height: 100dvh; color: var(--tenue); font-size: 1.2rem; }
+.cargando { display: grid; place-items: center; height: 100vh; height: 100dvh; color: var(--tenue); font-size: 1.2rem; }
 
 /* ---------- Botones ---------- */
 .boton-principal, .boton-secundario {
@@ -29,7 +29,7 @@ button:disabled { opacity: .35; cursor: default; }
 .volver { font-size: 1rem; }
 
 /* ---------- Pantallas de menú ---------- */
-.pantalla { max-width: 960px; margin: 0 auto; padding: max(24px, env(safe-area-inset-top)) 24px 40px; min-height: 100dvh; }
+.pantalla { max-width: 960px; margin: 0 auto; padding: max(24px, env(safe-area-inset-top)) 24px 40px; min-height: 100vh; min-height: 100dvh; }
 .pantalla h1 { font-size: 2rem; margin: 8px 0 24px; letter-spacing: -.01em; }
 .pantalla h2 { font-size: 1rem; color: var(--tenue); font-weight: 600; text-transform: uppercase; letter-spacing: .08em; margin: 28px 0 12px; }
 .inicio { display: flex; flex-direction: column; justify-content: center; gap: 40px; max-width: 520px; }
@@ -77,7 +77,7 @@ button:disabled { opacity: .35; cursor: default; }
 /* normal y grande: colección y detalle */
 .carta-normal, .carta-grande { display: flex; flex-direction: column; padding: 12px; gap: 8px; }
 .carta-normal { width: 210px; font-size: 13px; }
-.carta-grande { width: min(86vw, 340px); font-size: 15px; max-height: calc(100dvh - 140px); overflow: auto; }
+.carta-grande { width: min(86vw, 340px); font-size: 15px; max-height: calc(100vh - 140px); overflow: auto; }
 .carta .cabeza { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
 .carta .nombre { font-weight: 800; font-size: 1.15em; line-height: 1.15; }
 .carta .res { font-weight: 800; font-size: 1.4em; color: var(--c); white-space: nowrap; }
@@ -118,9 +118,9 @@ button:disabled { opacity: .35; cursor: default; }
 @keyframes aparecer { from { opacity: 0; } to { opacity: 1; } }
 
 /* ---------- Mesa ---------- */
-.pantalla-mesa { height: 100dvh; overflow: hidden; }
-.mesa { --centro: 52px; height: 100dvh; display: flex; flex-direction: column; background: radial-gradient(ellipse at center, #1f242c 0%, #14171c 70%); }
-.lado { --lado: calc((100dvh - var(--centro)) / 2); height: var(--lado); display: flex; flex-direction: column; padding: 8px 14px; gap: 6px; transition: background .3s; }
+.pantalla-mesa { height: 100vh; height: 100dvh; overflow: hidden; }
+.mesa { --centro: 52px; height: 100vh; height: 100dvh; display: flex; flex-direction: column; background: radial-gradient(ellipse at center, #1f242c 0%, #14171c 70%); }
+.lado { --lado: calc((100vh - var(--centro)) / 2); height: var(--lado); display: flex; flex-direction: column; padding: 8px 14px; gap: 6px; transition: background .3s; }
 .lado.girado { transform: rotate(180deg); }
 .modo-ia .lado-B, .modo-tutorial .lado-B { flex-direction: column-reverse; }
 .lado.activo-turno { background: rgba(233,196,106,.045); }
@@ -224,3 +224,8 @@ button:disabled { opacity: .35; cursor: default; }
 .pin { max-width: 320px; display: flex; flex-direction: column; gap: 12px; }
 .pin input { font-size: 1.6rem; letter-spacing: .5em; text-align: center; }
 @media (max-width: 900px) { .banco-cuerpo { grid-template-columns: 1fr; } .banco-vista { position: static; order: -1; } }
+
+@supports (height: 100dvh) {
+  .lado { --lado: calc((100dvh - var(--centro)) / 2); }
+  .carta-grande { max-height: calc(100dvh - 140px); }
+}

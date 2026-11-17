@@ -123,7 +123,7 @@
     "dimension": "Territorio",
     "n": 10
    },
-   "dato": "Zona entre los ríos Tigris y Éufrates donde surgieron la agricultura y las primeras ciudades.",
+   "dato": "Zona en forma de media luna, de Mesopotamia al Nilo, donde surgieron la agricultura y las primeras ciudades.",
    "oa": "OA 2",
    "emblema": "ola"
   },
@@ -188,7 +188,7 @@
      "danio": 20
     }
    ],
-   "dato": "Roma se gobernó con cónsules y un Senado; los cargos duraban un año.",
+   "dato": "Roma se gobernó con un Senado y dos cónsules, elegidos cada año para que nadie concentrara el poder.",
    "oa": "OA 17",
    "emblema": "columna"
   },
@@ -358,7 +358,7 @@
      "danio": 20
     }
    ],
-   "dato": "Desde el siglo XII el comercio revivió y los mercaderes viajaban por ferias y rutas.",
+   "dato": "Desde el siglo XI el comercio revivió y los mercaderes viajaban por ferias y rutas.",
    "oa": "OA 12",
    "emblema": "moneda"
   },

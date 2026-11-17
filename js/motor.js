@@ -19,6 +19,8 @@ export const MANO_INICIAL = 5;
 export const RESERVA_MAX = 3;
 
 const rival = j => (j === 'A' ? 'B' : 'A');
+// structuredClone no existe en Chrome antiguo (< 98); el estado es JSON puro.
+const clonar = x => (typeof structuredClone === 'function' ? structuredClone(x) : JSON.parse(JSON.stringify(x)));
 const esBase = c => c.tipo === 'protagonista' && !c.evolucionaDe;
 
 function nuevoJugador() {
@@ -139,7 +141,7 @@ export function aplicarJugada(estadoEntrada, jugada) {
   if (!jugada || !jugadasValidas(estadoEntrada).some(v => mismaJugada(v, jugada))) {
     throw new Error('jugada inválida');
   }
-  const e = structuredClone(estadoEntrada);
+  const e = clonar(estadoEntrada);
   const ev = [];
   const j = e.turno, yo = e.jugadores[j];
   const sacarDeMano = uid => yo.mano.splice(yo.mano.findIndex(c => c.uid === uid), 1)[0];

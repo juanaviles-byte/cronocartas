@@ -52,7 +52,7 @@ export function elegirJugada(estado, jugador) {
   const restante = yo.activo.carta.resistencia - yo.activo.danio;
   const retirar = deTipo('retirar');
   if (retirar.length && restante <= 20 && !pagable.length) return retirar[0];
-  // 7. La acción de mayor daño (considerando ventaja).
+  // 7. La acción de mayor daño base.
   if (pagable.length) {
     pagable.sort((a, b) => (yo.activo.carta.acciones[b.indice].danio || 0) - (yo.activo.carta.acciones[a.indice].danio || 0));
     return pagable[0];

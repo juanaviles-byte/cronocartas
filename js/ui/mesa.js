@@ -6,6 +6,7 @@ import { armarMazo, cargarCurso } from '../mazos.js';
 import { crearRng } from '../rng.js';
 import { almacen, CLAVES } from '../almacen.js';
 import { renderCarta } from './carta.js';
+import { esc, pips } from '../html.js';
 
 export const FRASES_VENTAJA = {
   Politica: 'Las decisiones políticas reordenan la economía',
@@ -16,7 +17,6 @@ export const FRASES_VENTAJA = {
 };
 
 const h = (tag, cls, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; };
-const pips = n => '<i class="pip"></i>'.repeat(n);
 
 export async function montarMesa(contenedor, opciones) {
   const ajustes = almacen.leer(CLAVES.ajustes, {}) || {};
@@ -61,9 +61,15 @@ export async function montarMesa(contenedor, opciones) {
   const girado = j => config.modo === 'caraacara' && j === 'B';
   const unidadesCarta = c => unidadesDe[c.curso] || null;
 
+  let avisoGuardar = false;
   function guardar() {
-    if (estado.fase === 'fin') almacen.borrar(CLAVES.partida);
-    else almacen.guardar(CLAVES.partida, { config, estado });
+    if (config.modo === 'tutorial') return;
+    if (estado.fase === 'fin') { almacen.borrar(CLAVES.partida); return; }
+    const r = almacen.guardar(CLAVES.partida, { version: 1, config, estado });
+    if (!r.ok && !avisoGuardar) {
+      avisoGuardar = true;
+      setTimeout(() => registrar('No hay espacio para guardar la partida: si se cierra la app, no se podrá continuar.'), 50);
+    }
   }
 
   // ---------- Dibujo ----------
@@ -80,7 +86,7 @@ export async function montarMesa(contenedor, opciones) {
   function centro() {
     const c = h('div', 'centro');
     const l = estado.lugar;
-    const lugar = h('button', 'lugar-en-juego', l ? `<span>Lugar</span> ${l.carta.nombre}` : '<span>Sin lugar en juego</span>');
+    const lugar = h('button', 'lugar-en-juego', l ? `<span>Lugar</span> ${esc(l.carta.nombre)}` : '<span>Sin lugar en juego</span>');
     if (l) lugar.onclick = () => verCarta(l.carta, estado.turno);
     c.appendChild(lugar);
     const turno = estado.fase === 'fin' ? 'Partida terminada'
@@ -117,7 +123,7 @@ export async function montarMesa(contenedor, opciones) {
       const validas = esMiTurno && humano ? jugadasValidas(estado) : [];
       yo.activo.carta.acciones.forEach((a, indice) => {
         const ok = validas.some(v => v.tipo === 'accion' && v.indice === indice);
-        const b = h('button', 'boton-accion', `<span class="costo">${pips(a.costo)}</span><span>${a.nombre}</span><b>${a.danio}</b>`);
+        const b = h('button', 'boton-accion', `<span class="costo">${pips(a.costo)}</span><span>${esc(a.nombre)}</span><b>${esc(a.danio)}</b>`);
         b.disabled = !ok;
         b.onclick = () => jugar({ tipo: 'accion', indice });
         acciones.appendChild(b);
@@ -229,12 +235,12 @@ export async function montarMesa(contenedor, opciones) {
       case 'jugar': return 'Jugar esta carta';
       case 'evolucionar': {
         const obj = [yo.activo, ...yo.reserva].find(p => p && p.uid === v.objetivo);
-        return `Evolucionar ${obj ? obj.carta.nombre : ''}`;
+        return `Evolucionar ${obj ? esc(obj.carta.nombre) : ''}`;
       }
       case 'asignarSaber': return 'Darle 1 de Saber';
       case 'retirar': return `Cambiar por el activo (cuesta ${yo.activo.carta.retirada ?? 1} Saber)`;
       case 'promover': return 'Pasar al frente como activo';
-      case 'accion': { const a = yo.activo.carta.acciones[v.indice]; return `${a.nombre} · ${a.danio} de daño`; }
+      case 'accion': { const a = yo.activo.carta.acciones[v.indice]; return `${esc(a.nombre)} · ${esc(a.danio)} de daño`; }
       default: return v.tipo;
     }
   }
@@ -245,7 +251,7 @@ export async function montarMesa(contenedor, opciones) {
     panel.appendChild(renderCarta(carta, { tamano: 'grande', instancia, unidades: unidadesCarta(carta) }));
     const botones = h('div', 'botones');
     for (const o of opciones) {
-      const b = h('button', 'boton-principal', o.texto);
+      const b = h('button', 'boton-principal', o.texto);   // textoJugada ya escapa los nombres
       b.onclick = () => { capa.remove(); jugar(o.jugada); };
       botones.appendChild(b);
     }
@@ -281,12 +287,12 @@ export async function montarMesa(contenedor, opciones) {
       if (ev.tipo === 'ventaja') registrar(`<b>¡Ventaja ×2!</b> ${FRASES_VENTAJA[ev.de]}`);
       if (ev.tipo === 'danio') {
         destello(ev.jugador === 'A' ? 'B' : 'A', ev.valor);
-        if (!eventos.some(e => e.tipo === 'ventaja')) registrar(`${ev.carta.nombre} usa <b>${ev.accion}</b>: ${ev.valor} de daño`);
+        if (!eventos.some(e => e.tipo === 'ventaja')) registrar(`${esc(ev.carta.nombre)} usa <b>${esc(ev.accion)}</b>: ${ev.valor} de daño`);
       }
-      if (ev.tipo === 'protegido') registrar(`<b>${ev.carta.nombre}</b> estaba protegido: no recibe daño`);
-      if (ev.tipo === 'evolucion') registrar(`<b>${ev.de.nombre}</b> evoluciona en <b>${ev.a.nombre}</b>`);
-      if (ev.tipo === 'efecto') registrar(`${nombres[ev.jugador]} juega <b>${ev.carta.nombre}</b>`);
-      if (ev.tipo === 'lugar') registrar(`Nuevo lugar: <b>${ev.carta.nombre}</b>`);
+      if (ev.tipo === 'protegido') registrar(`<b>${esc(ev.carta.nombre)}</b> estaba protegido: no recibe daño`);
+      if (ev.tipo === 'evolucion') registrar(`<b>${esc(ev.de.nombre)}</b> evoluciona en <b>${esc(ev.a.nombre)}</b>`);
+      if (ev.tipo === 'efecto') registrar(`${nombres[ev.jugador]} juega <b>${esc(ev.carta.nombre)}</b>`);
+      if (ev.tipo === 'lugar') registrar(`Nuevo lugar: <b>${esc(ev.carta.nombre)}</b>`);
       if (ev.tipo === 'caida') {
         caidas.push(ev.carta);
         if (config.sabias) await sabiasQue(ev.carta, ev.jugador === 'A' ? 'B' : 'A');
@@ -324,7 +330,7 @@ export async function montarMesa(contenedor, opciones) {
       c.innerHTML = `<div class="titulo-sabias">¿Sabías que…?</div>`;
       const fila = h('div', 'sabias-fila');
       fila.appendChild(renderCarta(carta, { tamano: 'mini' }));
-      fila.appendChild(h('div', 'sabias-texto', `<b>${carta.nombre}</b><p>${carta.dato}</p><small>${nombres[ganador]} gana un Hito</small>`));
+      fila.appendChild(h('div', 'sabias-texto', `<b>${esc(carta.nombre)}</b><p>${esc(carta.dato)}</p><small>${nombres[ganador]} gana un Hito</small>`));
       c.appendChild(fila);
       const b = h('button', 'boton-principal', 'Seguir');
       c.appendChild(b);
@@ -339,7 +345,7 @@ export async function montarMesa(contenedor, opciones) {
     const c = h('div', 'final');
     c.innerHTML = `<div class="titulo-final">¡Gana ${nombres[g]}!</div>
       <p>${razonFinal(g)}</p>
-      ${caidas.length ? `<div class="aprendido"><b>Lo que apareció en esta partida</b><ul>${caidas.slice(-4).map(k => `<li><b>${k.nombre}:</b> ${k.dato}</li>`).join('')}</ul></div>` : ''}`;
+      ${caidas.length ? `<div class="aprendido"><b>Lo que apareció en esta partida</b><ul>${caidas.slice(-4).map(k => `<li><b>${esc(k.nombre)}:</b> ${esc(k.dato)}</li>`).join('')}</ul></div>` : ''}`;
     const botones = h('div', 'botones');
     const otra = h('button', 'boton-principal', 'Otra partida');
     const menu = h('button', 'boton-secundario', 'Menú');

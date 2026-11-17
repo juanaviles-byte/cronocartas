@@ -17,6 +17,7 @@ const ARCHIVOS = [
   "js/almacen.js",
   "js/balance.js",
   "js/compartir.js",
+  "js/html.js",
   "js/ia.js",
   "js/mazos.js",
   "js/motor.js",
@@ -32,7 +33,8 @@ const ARCHIVOS = [
 ];
 
 self.addEventListener('install', e => {
-  e.waitUntil(caches.open(VERSION).then(c => c.addAll(ARCHIVOS)).then(() => self.skipWaiting()));
+  // cache: 'reload' evita copiar archivos viejos desde la caché HTTP del navegador.
+  e.waitUntil(caches.open(VERSION).then(c => c.addAll(ARCHIVOS.map(u => new Request(u, { cache: 'reload' })))).then(() => self.skipWaiting()));
 });
 
 self.addEventListener('activate', e => {
@@ -47,6 +49,7 @@ self.addEventListener('fetch', e => {
   e.respondWith(caches.open(VERSION).then(async cache => {
     const guardado = await cache.match(e.request, { ignoreSearch: true });
     const red = fetch(e.request).then(r => { if (r.ok) cache.put(e.request, r.clone()); return r; }).catch(() => null);
+    e.waitUntil(red);
     return guardado || (await red) || cache.match('index.html');
   }));
 });

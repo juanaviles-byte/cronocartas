@@ -10,7 +10,7 @@ function memoria() {
 }
 const propuesta = (extra = {}) => ({
   id: 'X1', nombre: 'Navegante', tipo: 'protagonista', curso: 5, unidad: 1, dimension: 'Territorio',
-  resistencia: 80, retirada: 1, acciones: [{ nombre: 'Ruta nueva', costo: 2, danio: 60 }],
+  resistencia: 80, retirada: 1, acciones: [{ nombre: 'Ruta nueva', costo: 2, danio: 50 }],
   dato: 'Magallanes cruzó el estrecho que hoy lleva su nombre en 1520.', fuente: 'Clase de Historia',
   autor: 'Sofía', emblema: 'barco', ...extra,
 });

@@ -2,7 +2,20 @@
 import { DIMENSIONES } from './motor.js';
 
 export const PRESUPUESTO = 14;
+// Daño máximo de una acción según su costo en Saber (como en los mazos oficiales).
+export const DANIO_POR_SABER = 25;
 export const TIPOS = ['protagonista', 'acontecimiento', 'lugar'];
+
+// Efectos que un estudiante puede elegir para un Acontecimiento.
+export const EFECTOS_ESTUDIANTE = [
+  [{ tipo: 'robar', n: 2 }, 'Roba 2 cartas'],
+  [{ tipo: 'curar', n: 30 }, 'Recupera 30 de resistencia'],
+  [{ tipo: 'proteger' }, 'Protege a tu activo un turno'],
+  [{ tipo: 'bonusDanio', n: 20 }, 'Tu próxima acción hace +20'],
+  [{ tipo: 'buscarProtagonista', n: 3 }, 'Busca un Protagonista en tu mazo'],
+];
+const mismoEfecto = (a, b) => !!a && !!b && a.tipo === b.tipo && (a.n ?? null) === (b.n ?? null);
+export const efectoPermitido = ef => EFECTOS_ESTUDIANTE.some(([e]) => mismoEfecto(e, ef));
 
 export function puntosPoder(carta) {
   const res = (carta.resistencia || 0) / 10;
@@ -31,9 +44,14 @@ export function validarPropuesta(p) {
       if (largo(a.nombre) < 2 || largo(a.nombre) > 22) err.push('Cada acción necesita un nombre corto.');
       if (!(a.costo >= 1 && a.costo <= 3)) err.push('El costo de una acción va de 1 a 3 de Saber.');
       if (!(a.danio >= 0 && a.danio <= 100)) err.push('El daño va de 0 a 100.');
+      else if (a.danio > (a.costo || 0) * DANIO_POR_SABER) err.push(`Con ${a.costo} de Saber, una acción puede hacer hasta ${(a.costo || 0) * DANIO_POR_SABER} de daño.`);
     }
     if (puntosPoder(p) > PRESUPUESTO) err.push(`La carta es demasiado poderosa (${puntosPoder(p)} de ${PRESUPUESTO} puntos).`);
   }
-  if ((p.tipo === 'acontecimiento' || p.tipo === 'lugar') && !(p.efecto && p.efecto.tipo)) err.push('Elige qué hace la carta.');
+  if (p.tipo === 'acontecimiento' && !efectoPermitido(p.efecto)) err.push('Elige qué hace la carta.');
+  if (p.tipo === 'lugar') {
+    if (!DIMENSIONES.includes(p.dimension)) err.push('Elige la dimensión que favorece el lugar.');
+    if (!p.efecto || p.efecto.tipo !== 'bonusDimension' || p.efecto.n !== 10 || p.efecto.dimension !== p.dimension) err.push('El lugar debe dar +10 a su dimensión.');
+  }
   return err;
 }

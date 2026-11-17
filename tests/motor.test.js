@@ -274,3 +274,12 @@ test('JSON.parse(JSON.stringify(estado)) sigue siendo jugable', () => {
   }
   assert.ok(e.jugadores.A.hitos + e.jugadores.B.hitos > 0);
 });
+
+test('el motor funciona sin structuredClone (Chrome antiguo)', async () => {
+  const original = globalThis.structuredClone;
+  globalThis.structuredClone = undefined;
+  try {
+    const e = crearPartida({ mazoA: mazoSimple(), mazoB: mazoSimple(), semilla: 4 });
+    assert.doesNotThrow(() => aplicarJugada(e, jugadasValidas(e)[0]));
+  } finally { globalThis.structuredClone = original; }
+});

@@ -3,6 +3,7 @@ import { montarMesa } from './mesa.js';
 import { renderCarta } from './carta.js';
 import { cargarCurso } from '../mazos.js';
 import { almacen, CLAVES } from '../almacen.js';
+import { esc } from '../html.js';
 
 const app = document.getElementById('app');
 let actual = null;            // vista montada (con destruir opcional)
@@ -21,7 +22,7 @@ const vistas = {
       </header>`;
     const menu = h('nav', 'menu-principal');
     const guardada = almacen.leer(CLAVES.partida, null);
-    if (guardada && guardada.estado && guardada.estado.fase !== 'fin') {
+    if (guardada && guardada.version === 1 && guardada.estado && guardada.estado.fase !== 'fin') {
       const b = boton('Continuar partida', 'boton-principal grande', () => { location.hash = '#mesa'; });
       menu.appendChild(b);
     }
@@ -83,7 +84,7 @@ const vistas = {
     const guardada = almacen.leer(CLAVES.partida, null);
     const cont = h('div', 'pantalla-mesa');
     app.replaceChildren(cont);
-    if (guardada && guardada.estado && guardada.estado.fase !== 'fin') {
+    if (guardada && guardada.version === 1 && guardada.estado && guardada.estado.fase !== 'fin') {
       return montarMesa(cont, { ...guardada.config, estado: guardada.estado });
     }
     return montarMesa(cont, { ...eleccion });
@@ -157,19 +158,23 @@ function volver() {
   return boton('← Volver', 'volver', () => { location.hash = '#inicio'; });
 }
 
+let ficha = 0;   // cada navegación tiene su ficha; una vista que llega tarde se descarta
 async function render() {
   if (actual && actual.destruir) actual.destruir();
   actual = null;
+  const mia = ++ficha;
+  document.querySelectorAll('body > .capa').forEach(c => c.remove());   // cerrar detalles abiertos de la pantalla anterior
   const nombre = (location.hash || '#inicio').slice(1);
   const vista = vistas[nombre] || vistas.inicio;
   document.body.dataset.vista = nombre;
   try {
     const r = await vista();
+    if (mia !== ficha) { if (r && r.destruir) r.destruir(); return; }
     if (r instanceof HTMLElement) { app.replaceChildren(r); actual = null; }
     else actual = r;
   } catch (e) {
     console.error(e);
-    app.replaceChildren(h('div', 'pantalla error', `<h1>Algo falló</h1><p>${String(e.message || e)}</p><p><a href="#inicio">Volver al inicio</a></p>`));
+    if (mia === ficha) app.replaceChildren(h('div', 'pantalla error', `<h1>Algo falló</h1><p>${esc(e.message || e)}</p><p><a href="#inicio">Volver al inicio</a></p>`));
   }
 }
 
@@ -177,5 +182,12 @@ window.addEventListener('hashchange', render);
 render();
 
 if ('serviceWorker' in navigator && window.isSecureContext) {
+  // Si llega una versión nueva mientras la app está abierta, se recarga una vez
+  // para no mezclar archivos viejos y nuevos.
+  const habiaControlador = !!navigator.serviceWorker.controller;
+  let recargado = false;
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    if (habiaControlador && !recargado) { recargado = true; location.reload(); }
+  });
   navigator.serviceWorker.register('sw.js').catch(() => {});
 }
