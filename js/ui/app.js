@@ -1,5 +1,5 @@
 // Navegación de Cronocartas por #hash: #inicio #jugar #mesa #tutorial #coleccion #banco #docente
-import { montarMesa } from './mesa.js';
+import { montarMesa, cargarTableros } from './mesa.js';
 import { renderCarta } from './carta.js';
 import { cargarCursoCompleto } from './datos.js';
 import { almacen, CLAVES } from '../almacen.js';
@@ -7,7 +7,7 @@ import { esc } from '../html.js';
 
 const app = document.getElementById('app');
 let actual = null;            // vista montada (con destruir opcional)
-let eleccion = { modo: 'caraacara', cursoA: 7, cursoB: 7 };
+let eleccion = { modo: 'caraacara', cursoA: 7, cursoB: 7, tablero: 'azar', reforzar: false };
 
 const h = (tag, cls, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; };
 const CURSOS = [5, 6, 7, 8];
@@ -40,7 +40,8 @@ const vistas = {
     return v;
   },
 
-  jugar() {
+  async jugar() {
+    const tableros = await cargarTableros();
     const ajustes = almacen.leer(CLAVES.ajustes, {}) || {};
     const v = h('div', 'pantalla preparar');
     v.appendChild(volver());
@@ -65,12 +66,34 @@ const vistas = {
       if (etiqueta) fila.appendChild(h('span', 'etiqueta', etiqueta));
       for (const c of CURSOS) {
         const b = h('button', `opcion curso-${c}${eleccion[k] === c ? ' elegida' : ''}`, `<b>${c}°</b><span>básico</span>`);
-        b.onclick = () => { eleccion[k] = c; if (!cruzados) eleccion.cursoB = c; render(); };
+        b.onclick = () => { eleccion[k] = c; if (!cruzados) eleccion.cursoB = c; if (k === 'cursoA') { eleccion.tablero = 'azar'; eleccion.reforzar = false; } render(); };
         fila.appendChild(b);
       }
       cursos.appendChild(fila);
     }
     v.appendChild(cursos);
+
+    // Tablero: uno por unidad del curso, o sorpresa.
+    const grupoT = h('div', 'grupo');
+    grupoT.appendChild(h('h2', '', 'Tablero'));
+    const grilla = h('div', 'tableros');
+    const sorpresa = h('button', `opcion-tablero sorpresa${eleccion.tablero === 'azar' ? ' elegida' : ''}`, '<b>Sorpresa</b><small>Un tablero al azar del curso</small>');
+    sorpresa.onclick = () => { eleccion.tablero = 'azar'; eleccion.reforzar = false; render(); };
+    grilla.appendChild(sorpresa);
+    for (const t of tableros.filter(t => t.curso === eleccion.cursoA)) {
+      const b = h('button', `opcion-tablero${eleccion.tablero === t.id ? ' elegida' : ''}`, `<b>U${t.unidad} · ${esc(t.nombre)}</b><small>${esc(t.textoRegla)}</small>`);
+      b.style.backgroundImage = `url("${t.imagen}")`;
+      b.onclick = () => { eleccion.tablero = t.id; render(); };
+      grilla.appendChild(b);
+    }
+    grupoT.appendChild(grilla);
+    if (eleccion.tablero !== 'azar') {
+      const t = tableros.find(x => x.id === eleccion.tablero);
+      const l = h('label', 'interruptor', `<input type="checkbox"${eleccion.reforzar ? ' checked' : ''}><span>Reforzar la unidad ${t ? t.unidad : ''}<small>El mazo incluye todas las cartas de esa unidad, ideal para repasar antes de una prueba.</small></span>`);
+      l.querySelector('input').onchange = ev => { eleccion.reforzar = ev.target.checked; };
+      grupoT.appendChild(l);
+    }
+    v.appendChild(grupoT);
     const empezar = boton('Empezar', 'boton-principal grande', () => {
       almacen.borrar(CLAVES.partida);
       location.hash = '#mesa';
@@ -93,7 +116,7 @@ const vistas = {
   async tutorial() {
     const cont = h('div', 'pantalla-mesa');
     app.replaceChildren(cont);
-    return montarMesa(cont, { modo: 'tutorial', cursoA: 7, cursoB: 7, semilla: 2026 });
+    return montarMesa(cont, { modo: 'tutorial', cursoA: 7, cursoB: 7, semilla: 2026, tablero: 'T-7-2' });
   },
 
   async coleccion() {

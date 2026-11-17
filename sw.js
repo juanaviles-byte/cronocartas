@@ -50,6 +50,7 @@ const ARCHIVOS = [
   "js/ui/docente.js",
   "js/ui/editor.js",
   "js/ui/mesa.js",
+  "js/ui/sonido.js",
   "manifest.webmanifest"
 ];
 

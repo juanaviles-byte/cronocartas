@@ -8,6 +8,13 @@ import { crearRng } from '../rng.js';
 import { almacen, CLAVES } from '../almacen.js';
 import { renderCarta } from './carta.js';
 import { esc, pips } from '../html.js';
+import { sonidos, sonidoActivo, alternarSonido } from './sonido.js';
+
+let TABLEROS = null;
+export async function cargarTableros() {
+  if (!TABLEROS) TABLEROS = await fetch('data/tableros.json').then(r => r.json()).then(d => d.tableros).catch(() => []);
+  return TABLEROS;
+}
 
 export const FRASES_VENTAJA = {
   Politica: 'Las decisiones políticas reordenan la economía',
@@ -16,6 +23,9 @@ export const FRASES_VENTAJA = {
   Cultura: 'Las ideas y técnicas transforman el territorio',
   Territorio: 'El territorio condiciona el poder',
 };
+
+const ICONO_SONIDO = '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a8 8 0 0 1 0 11"/></svg>';
+const ICONO_SILENCIO = '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 9v6h4l5 4V5L8 9z"/><path d="M17 9l5 6M22 9l-5 6"/></svg>';
 
 const h = (tag, cls, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; };
 
@@ -28,24 +38,34 @@ export async function montarMesa(contenedor, opciones) {
     semilla: opciones.semilla ?? Math.floor(Math.random() * 1e9),
     hitosParaGanar: opciones.hitosParaGanar || ajustes.hitosParaGanar || 3,
     sabias: ajustes.sabias !== false,
+    tablero: opciones.tablero || 'azar',
+    reforzar: !!opciones.reforzar,
   };
   const contraIA = config.modo !== 'caraacara';
   const nombres = { A: contraIA ? 'Tú' : 'Jugador 1', B: contraIA ? 'Tablet' : 'Jugador 2' };
 
   contenedor.innerHTML = '<div class="cargando">Barajando…</div>';
-  const [datosA, datosB] = await Promise.all([cargarCursoCompleto(config.cursoA), cargarCursoCompleto(config.cursoB)]);
+  const [datosA, datosB, tableros] = await Promise.all([cargarCursoCompleto(config.cursoA), cargarCursoCompleto(config.cursoB), cargarTableros()]);
   const unidadesDe = { [config.cursoA]: datosA.unidades, [config.cursoB]: datosB.unidades };
 
   let estado = opciones.estado;
   if (!estado) {
     const rng = crearRng(config.semilla);
+    // Tablero: el elegido o uno al azar del curso.
+    const delCurso = tableros.filter(t => t.curso === config.cursoA);
+    let tablero = tableros.find(t => t.id === config.tablero);
+    if (!tablero && delCurso.length) tablero = delCurso[Math.floor(rng.siguiente() * delCurso.length)];
+    config.tablero = tablero ? tablero.id : null;
+    const foco = config.reforzar && tablero ? { unidad: tablero.unidad } : {};
     estado = crearPartida({
-      mazoA: armarMazo(datosA.cartas, datosA.aula, rng),
-      mazoB: armarMazo(datosB.cartas, datosB.aula, rng),
+      mazoA: armarMazo(datosA.cartas, datosA.aula, rng, foco),
+      mazoB: armarMazo(datosB.cartas, datosB.aula, rng, foco),
       semilla: config.semilla + 1,
       hitosParaGanar: config.hitosParaGanar,
+      tablero,
     });
   }
+  const tableroActual = () => tableros.find(t => t.id === (estado.tablero && estado.tablero.id)) || null;
 
   let vivo = true;
   let ocupado = false;           // mientras se muestra un aviso o juega la IA
@@ -70,18 +90,56 @@ export async function montarMesa(contenedor, opciones) {
   }
 
   // ---------- Dibujo ----------
+  let uidsAntes = null;                 // para animar las cartas que entran a la mesa
+  let hitosAntes = { A: 0, B: 0 };      // para animar el sello del Hito nuevo
   function render() {
     if (!vivo) return;
     raiz.innerHTML = '';
+    pintarFondo();
     raiz.appendChild(lado('B'));
     raiz.appendChild(centro());
     raiz.appendChild(lado('A'));
     if (config.modo === 'tutorial') raiz.appendChild(entrenador());
+    const ahora = new Set([...raiz.querySelectorAll('.campo [data-uid]')].map(e => e.dataset.uid));
+    if (uidsAntes) raiz.querySelectorAll('.campo [data-uid]').forEach(e => { if (!uidsAntes.has(e.dataset.uid)) e.classList.add('entra'); });
+    uidsAntes = ahora;
+    hitosAntes = { A: estado.jugadores.A.hitos, B: estado.jugadores.B.hitos };
     programarIA();
+  }
+
+  // El fondo es el tablero; si el Lugar en juego tiene su propio escenario, se muestra ese.
+  function pintarFondo() {
+    const t = tableroActual();
+    const lugarId = estado.lugar && estado.lugar.carta.id;
+    const escenario = (lugarId && tableros.find(x => x.lugares.includes(lugarId))) || t;
+    // URL completa: una ruta relativa en una variable CSS se resolvería desde css/.
+    if (escenario) raiz.style.setProperty('--fondo-img', `url("${new URL(escenario.imagen, location.href).href}")`);
+    raiz.classList.toggle('con-tablero', !!escenario);
+  }
+
+  function verTablero() {
+    const t = tableroActual();
+    if (!t) return;
+    const capa = h('div', `capa${girado(estado.turno) ? ' girado' : ''}`);
+    const panel = h('div', 'panel-aviso panel-tablero');
+    panel.innerHTML = `<img src="${esc(t.imagen)}" alt=""><div class="titulo-sabias">${esc(t.nombre)}</div>
+      <p class="lema">${esc(t.lema)}</p><p><b>Regla del tablero:</b> ${esc(t.textoRegla)}</p>`;
+    const b = h('button', 'boton-principal', 'Entendido');
+    b.onclick = () => capa.remove();
+    panel.appendChild(b);
+    capa.appendChild(panel);
+    capa.onclick = ev => { if (ev.target === capa) capa.remove(); };
+    raiz.appendChild(capa);
   }
 
   function centro() {
     const c = h('div', 'centro');
+    const t = tableroActual();
+    if (t) {
+      const bt = h('button', 'tablero-en-juego', `<b>${esc(t.nombre)}</b> <span>${esc(t.textoRegla)}</span>`);
+      bt.onclick = verTablero;
+      c.appendChild(bt);
+    }
     const l = estado.lugar;
     const lugar = h('button', 'lugar-en-juego', l ? `<span>Lugar</span> ${esc(l.carta.nombre)}` : '<span>Sin lugar en juego</span>');
     if (l) lugar.onclick = () => verCarta(l.carta, estado.turno);
@@ -92,6 +150,10 @@ export async function montarMesa(contenedor, opciones) {
       : (contraIA && estado.turno === 'A') ? 'Tu turno' : `Turno de ${nombres[estado.turno]}`;
     c.appendChild(h('div', `aviso-turno turno-${estado.turno}`, turno));
     c.appendChild(h('div', 'registro', ''));
+    const son = h('button', 'boton-sonido', sonidoActivo() ? ICONO_SONIDO : ICONO_SILENCIO);
+    son.setAttribute('aria-label', 'Sonido');
+    son.onclick = () => { son.innerHTML = alternarSonido() ? ICONO_SONIDO : ICONO_SILENCIO; };
+    c.appendChild(son);
     const menu = h('button', 'boton-menu', 'Menú');
     menu.onclick = () => { location.hash = '#inicio'; };
     c.appendChild(menu);
@@ -109,6 +171,7 @@ export async function montarMesa(contenedor, opciones) {
     const zonaActivo = h('div', 'zona-activo');
     if (yo.activo) {
       const ca = renderCarta(yo.activo.carta, { tamano: 'mini', instancia: yo.activo });
+      ca.dataset.uid = yo.activo.uid;
       ca.classList.add('en-activo');
       ca.onclick = () => tocarEnMesa(j, yo.activo);
       zonaActivo.appendChild(ca);
@@ -133,6 +196,7 @@ export async function montarMesa(contenedor, opciones) {
       const r = yo.reserva[i];
       if (r) {
         const cr = renderCarta(r.carta, { tamano: 'mini', instancia: r });
+        cr.dataset.uid = r.uid;
         cr.onclick = () => tocarEnMesa(j, r);
         reserva.appendChild(cr);
       } else reserva.appendChild(h('div', 'hueco', 'Reserva'));
@@ -142,7 +206,7 @@ export async function montarMesa(contenedor, opciones) {
     const marcador = h('div', 'marcador');
     marcador.innerHTML = `
       <div class="nombre-jugador">${nombres[j]}</div>
-      <div class="hitos" title="Hitos">${[...Array(estado.hitosParaGanar)].map((_, i) => `<i class="${i < yo.hitos ? 'si' : ''}"></i>`).join('')}</div>
+      <div class="hitos" title="Hitos">${[...Array(estado.hitosParaGanar)].map((_, i) => `<i class="${i < yo.hitos ? 'si' : ''}${i < yo.hitos && i >= hitosAntes[j] ? ' nuevo' : ''}"></i>`).join('')}</div>
       <div class="cuentas">Mazo ${yo.mazo.length}</div>`;
     campo.appendChild(marcador);
     s.appendChild(campo);
@@ -282,7 +346,10 @@ export async function montarMesa(contenedor, opciones) {
         return `Evolucionar ${obj ? esc(obj.carta.nombre) : ''}`;
       }
       case 'asignarSaber': return 'Darle 1 de Saber';
-      case 'retirar': return `Cambiar por el activo (cuesta ${yo.activo.carta.retirada ?? 1} Saber)`;
+      case 'retirar': {
+        const gratis = estado.tablero && estado.tablero.regla && estado.tablero.regla.tipo === 'retiroGratis';
+        return `Cambiar por el activo (cuesta ${gratis ? 0 : (yo.activo.carta.retirada ?? 1)} Saber)`;
+      }
       case 'promover': return 'Pasar al frente como activo';
       case 'accion': { const a = yo.activo.carta.acciones[v.indice]; return `${esc(a.nombre)} · ${esc(a.danio)} de daño`; }
       default: return v.tipo;
@@ -328,8 +395,14 @@ export async function montarMesa(contenedor, opciones) {
   async function mostrarEventos(eventos) {
     ocupado = true;
     for (const ev of eventos) {
-      if (ev.tipo === 'ventaja') registrar(`<b>¡Ventaja ×2!</b> ${FRASES_VENTAJA[ev.de]}`);
+      if (['colocar', 'bajar', 'lugar', 'efecto', 'evolucion', 'retirar', 'promover'].includes(ev.tipo)) sonidos.jugar();
+      if (ev.tipo === 'turno' && estado.fase === 'turno') { sonidos.turno(); if (ev.robo) sonidos.robar(); anunciarTurno(ev.jugador); }
+      if (ev.tipo === 'ventaja') { sonidos.ventaja(); registrar(`<b>¡Ventaja ×2!</b> ${FRASES_VENTAJA[ev.de]}`); }
+      if (ev.tipo === 'protegido') sonidos.protegido();
+      if (ev.tipo === 'hito') sonidos.hito();
       if (ev.tipo === 'danio') {
+        sonidos.ataque();
+        embestida(ev.jugador);
         destello(ev.jugador === 'A' ? 'B' : 'A', ev.valor);
         if (!eventos.some(e => e.tipo === 'ventaja')) registrar(`${esc(ev.carta.nombre)} usa <b>${esc(ev.accion)}</b>: ${ev.valor} de daño`);
       }
@@ -340,11 +413,43 @@ export async function montarMesa(contenedor, opciones) {
       if (ev.tipo === 'revelar') registrar(`${nombres[ev.jugador]}: se miraron ${ev.cartas.length} cartas del mazo${ev.tomada ? ` y se tomó <b>${esc(ev.tomada.nombre)}</b>` : ', sin Protagonistas'}`);
       if (ev.tipo === 'caida') {
         caidas.push(ev.carta);
+        sonidos.caida();
+        await archivar(ev.carta, ev.jugador);
         if (config.sabias) await sabiasQue(ev.carta, ev.jugador === 'A' ? 'B' : 'A');
       }
     }
     ocupado = false;
     programarIA();
+  }
+
+  const esperar = ms => new Promise(r => setTimeout(r, ms));
+  const sinMovimiento = () => window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function embestida(atacante) {
+    const a = raiz.querySelector(`.lado-${atacante} .zona-activo .carta`);
+    const d = raiz.querySelector(`.lado-${atacante === 'A' ? 'B' : 'A'} .zona-activo .carta`);
+    if (a) { a.classList.remove('embiste'); void a.offsetWidth; a.classList.add('embiste'); }
+    if (d) { d.classList.remove('golpeado'); void d.offsetWidth; d.classList.add('golpeado'); }
+  }
+
+  // La carta derrotada se vuelve sepia y queda "archivada" un momento.
+  async function archivar(carta, duenio) {
+    const zona = raiz.querySelector(`.lado-${duenio} .zona-activo`);
+    if (!zona || sinMovimiento()) return;
+    const fantasma = renderCarta(carta, { tamano: 'mini' });
+    fantasma.classList.add('archivada');
+    fantasma.appendChild(h('div', 'sello-archivo', 'Archivada'));
+    zona.appendChild(fantasma);
+    await esperar(900);
+    fantasma.remove();
+  }
+
+  function anunciarTurno(j) {
+    if (sinMovimiento()) return;
+    const texto = contraIA ? (j === 'A' ? 'Tu turno' : 'Turno de la Tablet') : `Turno de ${nombres[j]}`;
+    const b = h('div', `banner-turno${girado(j) ? ' girado' : ''}`, esc(texto));
+    raiz.appendChild(b);
+    setTimeout(() => b.remove(), 1100);
   }
 
   function destello(jugadorObjetivo, valor) {
@@ -387,6 +492,7 @@ export async function montarMesa(contenedor, opciones) {
 
   function pantallaFinal() {
     const g = estado.ganador;
+    sonidos.victoria();
     const c = h('div', 'final');
     c.innerHTML = `<div class="titulo-final">¡Gana ${nombres[g]}!</div>
       <p>${razonFinal(g)}</p>
