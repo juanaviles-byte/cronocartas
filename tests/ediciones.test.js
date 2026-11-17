@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { aplicarEdiciones, limpiarEdicion, crearPaquete, sanearPaquete } from '../js/ediciones.js';
+import { aplicarEdiciones, limpiarEdicion, crearPaquete, sanearPaquete, extraerImagenes } from '../js/ediciones.js';
 
 const leer = f => JSON.parse(readFileSync(new URL(`../data/${f}`, import.meta.url), 'utf8'));
 const M7 = leer('mazo-7.json').cartas;
@@ -30,7 +30,7 @@ test('una edición que deja la carta inválida se ignora', () => {
 
 test('limpiarEdicion deja solo campos conocidos y tipos válidos', () => {
   const e = limpiarEdicion({ nombre: 'X'.repeat(50), tipo: 'aula', efecto: { tipo: 'robar', n: 99 }, emblema: 'nada', resistencia: '80',
-    acciones: [{ nombre: 'A', costo: 1, danio: 20, efecto: { tipo: 'curar', n: 999 } }, {}, {}] });
+    acciones: [{ nombre: 'A', costo: 1, danio: 20, efecto: { tipo: 'curar', n: 999 } }, { nombre: 'B', costo: 2, danio: 40 }, {}] });
   assert.equal(e.nombre.length, 30);
   assert.equal(e.tipo, undefined);
   assert.equal(e.efecto, undefined);
@@ -38,6 +38,24 @@ test('limpiarEdicion deja solo campos conocidos y tipos válidos', () => {
   assert.equal(e.resistencia, 80);
   assert.equal(e.acciones.length, 2);
   assert.equal(e.acciones[0].efecto, undefined);
+});
+
+test('limpiarEdicion solo acepta los valores que permite el editor', () => {
+  assert.equal(limpiarEdicion({ resistencia: 500 }).resistencia, undefined);
+  assert.equal(limpiarEdicion({ resistencia: 55 }).resistencia, undefined);
+  assert.equal(limpiarEdicion({ acciones: [{ nombre: 'A', costo: 1.5, danio: 20 }] }).acciones, undefined);
+  assert.equal(limpiarEdicion({ acciones: [{ nombre: 'A', costo: 1, danio: 1e308 }] }).acciones, undefined);
+  assert.equal(limpiarEdicion({ acciones: [{ nombre: 'A', costo: 1, danio: 25 }] }).acciones, undefined);
+  assert.equal(limpiarEdicion({ acciones: [{ nombre: '', costo: 1, danio: 20 }] }).acciones, undefined);
+  assert.deepEqual(limpiarEdicion({ acciones: [{ nombre: 'A', costo: 3, danio: 100 }] }).acciones, [{ nombre: 'A', costo: 3, danio: 100 }]);
+});
+
+test('extraerImagenes saca las imágenes de las cartas a un mapa aparte', () => {
+  const cartas = [{ id: 'A', nombre: 'a', imagen: IMG }, { id: 'B', nombre: 'b' }];
+  const r = extraerImagenes(cartas);
+  assert.deepEqual(r.mapa, { A: IMG });
+  assert.equal(r.cartas[0].imagen, undefined);
+  assert.equal(cartas[0].imagen, IMG);
 });
 
 test('paquete de ediciones ida y vuelta', () => {

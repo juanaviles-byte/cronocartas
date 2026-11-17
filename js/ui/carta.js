@@ -27,8 +27,21 @@ export function textoEfecto(ef) {
   }
 }
 
+// Imágenes por código de carta (las registra datos.js al cargar un curso).
+const IMAGENES = new Map();
+export function registrarImagenes(mapa) {
+  for (const [id, img] of Object.entries(mapa || {})) IMAGENES.set(id, img);
+}
+
 function imagenDe(carta) {
-  return carta.imagen ? `<img src="${esc(carta.imagen)}" alt="">` : arteCarta(carta);
+  const img = carta.imagen || IMAGENES.get(carta.id);
+  return img ? `<img src="${esc(img)}" alt="">` : arteCarta(carta);
+}
+
+function miniaturaBase(carta) {
+  if (!carta.evolucionaDe) return '';
+  const base = { id: carta.evolucionaDe, tipo: 'protagonista', dimension: carta.baseDimension || carta.dimension, emblema: carta.baseEmblema || 'estrella' };
+  return `<div class="miniatura-base" title="Viene de ${esc(carta.baseNombre || '')}">${imagenDe(base)}</div>`;
 }
 
 function aplicarTema(el, carta) {
@@ -73,7 +86,8 @@ export function renderCarta(carta, { tamano = 'normal', instancia = null, unidad
   let cabeza;
   if (esProt) {
     cabeza = `
-      <div class="cab">
+      <div class="cab${carta.evolucionaDe ? ' con-base' : ''}">
+        ${miniaturaBase(carta)}
         ${carta.evolucionaDe ? `<div class="etapa-previa" title="Viene de ${esc(carta.baseNombre || '')}"><span>Etapa 2</span>${carta.baseNombre ? `<small>de ${esc(carta.baseNombre)}</small>` : ''}</div>` : '<div class="etapa-previa"><span>Básico</span></div>'}
         <div class="nombre">${esc(carta.nombre)}</div>
         <div class="res"><small>RES</small>${instancia ? `${esc(vida)}<small>/${esc(res)}</small>` : esc(res)}${iconoTipo(claveTipo, 26)}</div>

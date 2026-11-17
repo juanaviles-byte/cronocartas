@@ -13,6 +13,7 @@ function abrir() {
       pet.onsuccess = () => resolve(pet.result);
       pet.onerror = () => resolve(null);
       pet.onblocked = () => resolve(null);
+      setTimeout(() => resolve(null), 2500);   // algunos navegadores nunca responden: seguir sin imágenes
     } catch { resolve(null); }
   });
   return conexion;

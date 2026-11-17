@@ -162,7 +162,7 @@ export async function pestanaEditar(zona) {
       if (!r.ok) { aviso.textContent = 'No se pudo guardar en esta tablet (falta espacio).'; aviso.className = 'mensaje error'; return; }
       if (imagenNueva) {
         const g = await guardarImagen(original.id, imagenNueva);
-        if (!g.ok) { aviso.textContent = 'Los textos se guardaron, pero la imagen no: la tablet no tiene espacio o no permite guardar imágenes.'; aviso.className = 'mensaje error'; return; }
+        if (!g.ok) { await dibujar(); aviso.textContent = 'Los textos se guardaron, pero la imagen no: la tablet no tiene espacio o no permite guardar imágenes.'; aviso.className = 'mensaje error'; return; }
       } else if (imagenNueva === null) await borrarImagen(original.id);
       capa.remove();
       await dibujar();
@@ -207,7 +207,7 @@ export async function pestanaEditar(zona) {
     await dibujar();
     const lineas = [`Importadas: ${Object.keys(r.ediciones).length} edición(es) de texto y ${imgOk} imagen(es).`];
     if (!g.ok) lineas.push('Los textos no se pudieron guardar: falta espacio.');
-    if (imgMal) lineas.push(`${imgMal} imagen(es) no se pudieron guardar: falta espacio.`);
+    if (imgMal) lineas.push(hayImagenes ? `${imgMal} imagen(es) no se pudieron guardar: falta espacio.` : `${imgMal} imagen(es) no se guardaron: este navegador no permite guardar imágenes.`);
     lineas.push(...r.avisos.map(esc));
     mensaje(lineas.join('<br>'), !g.ok || imgMal > 0);
   }

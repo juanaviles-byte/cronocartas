@@ -65,8 +65,8 @@ button:disabled { opacity: .35; cursor: default; }
   display: flex; flex-direction: column; transition: transform .15s ease; }
 .carta-mini > * { background: linear-gradient(160deg, var(--c-claro), var(--c)); }
 .carta-mini .m-cab { border-radius: .6em .6em 0 0; padding: .35em .45em .25em; }
-.carta-mini .m-nombre { display: block; font-weight: 800; line-height: 1.05; color: #1b1b1b; overflow: hidden; overflow-wrap: anywhere; hyphens: auto;
-  max-height: 2.15em; font-size: .95em; }
+.carta-mini .m-nombre { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; font-weight: 800; line-height: 1.05; color: #1b1b1b;
+  overflow: hidden; overflow-wrap: anywhere; hyphens: auto; max-height: 2.15em; font-size: .95em; }
 .carta-mini .m-ventana { position: relative; flex: 1; min-height: 0; padding: 0 .35em; }
 .carta-mini .m-ventana > svg, .carta-mini .m-ventana > img { width: 100%; height: 100%; object-fit: cover; border-radius: .25em; box-shadow: 0 0 0 .12em #fff8, inset 0 0 0 1px #0003; }
 .carta-mini .m-pie { display: flex; align-items: center; gap: .3em; padding: .3em .45em .35em; border-radius: 0 0 .6em .6em; }
@@ -276,3 +276,8 @@ button:disabled { opacity: .35; cursor: default; }
 .panel-elegir { max-width: min(96vw, 760px); background: var(--fondo-2); border-radius: 16px; padding: 18px 20px; }
 .panel-elegir .nota { margin: 0; text-align: center; }
 .editor .campo-texto input, .editor .campo-texto textarea { background: #2a303a; }
+
+.carta .cab.con-base { grid-template-columns: auto 1fr auto; grid-template-areas: "mini etapa etapa" "mini nombre res"; }
+.carta .miniatura-base { grid-area: mini; width: 2.6em; height: 2.6em; border-radius: 50%; overflow: hidden; margin-right: 6px; align-self: center;
+  box-shadow: 0 0 0 2px #fff, 0 1px 4px rgba(0,0,0,.4); }
+.carta .miniatura-base svg, .carta .miniatura-base img { width: 100%; height: 100%; object-fit: cover; }

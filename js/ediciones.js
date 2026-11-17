@@ -16,14 +16,33 @@ export function limpiarEdicion(e) {
   const out = {};
   const nombre = texto(e.nombre, 30); if (nombre && nombre.trim()) out.nombre = nombre;
   const dato = texto(e.dato, 220); if (dato && dato.trim()) out.dato = dato;
-  const res = numero(e.resistencia); if (res !== undefined) out.resistencia = res;
+  // Solo los valores que permite el editor: resistencia 50–120 de 10 en 10,
+  // costo entero 1–3, daño 0–100 de 10 en 10. Si algo no calza, ese campo no se edita.
+  const res = numero(e.resistencia);
+  if (res !== undefined && res >= 50 && res <= 120 && res % 10 === 0) out.resistencia = res;
   if (EMBLEMAS.includes(e.emblema)) out.emblema = e.emblema;
-  if (Array.isArray(e.acciones)) {
-    out.acciones = e.acciones.slice(0, 2).map(a => ({
-      nombre: texto(a && a.nombre, 22) || '', costo: numero(a && a.costo) ?? 0, danio: numero(a && a.danio) ?? -1,
+  if (Array.isArray(e.acciones) && e.acciones.length) {
+    const acciones = e.acciones.slice(0, 2).map(a => ({
+      nombre: (texto(a && a.nombre, 22) || '').trim(), costo: numero(a && a.costo), danio: numero(a && a.danio),
     }));
+    const valida = a => a.nombre && Number.isInteger(a.costo) && a.costo >= 1 && a.costo <= 3 &&
+      Number.isInteger(a.danio) && a.danio >= 0 && a.danio <= 100 && a.danio % 10 === 0;
+    if (acciones.every(valida)) out.acciones = acciones;
   }
   return out;
+}
+
+// Saca las imágenes de las cartas a un mapa aparte. Así las partidas guardadas
+// no copian imágenes pesadas en cada jugada.
+export function extraerImagenes(cartas) {
+  const mapa = {};
+  const limpias = cartas.map(c => {
+    if (!c.imagen) return c;
+    mapa[c.id] = c.imagen;
+    const { imagen, ...resto } = c;
+    return resto;
+  });
+  return { cartas: limpias, mapa };
 }
 
 export function aplicarEdiciones(cartas, ediciones = {}, imagenes = {}) {

@@ -108,7 +108,10 @@ export async function cargarCurso(curso, { comunidad = [], ediciones = {}, image
   const { aplicarEdiciones } = await import('./ediciones.js');
   const extra = comunidad.filter(c => validarCarta(c).length === 0);
   const cartas = [...aplicarEdiciones(m.cartas, ediciones, imagenes), ...extra];
-  const nombres = new Map(cartas.map(c => [c.id, c.nombre]));
-  for (const c of cartas) if (c.evolucionaDe) c.baseNombre = nombres.get(c.evolucionaDe);
+  const porId = new Map(cartas.map(c => [c.id, c]));
+  for (const c of cartas) if (c.evolucionaDe && porId.get(c.evolucionaDe)) {
+    const b = porId.get(c.evolucionaDe);
+    Object.assign(c, { baseNombre: b.nombre, baseEmblema: b.emblema, baseDimension: b.dimension });
+  }
   return { curso, unidades: m.unidades, cartas, aula: aplicarEdiciones(a.cartas, ediciones, imagenes) };
 }

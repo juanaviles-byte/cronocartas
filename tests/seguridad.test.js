@@ -26,7 +26,7 @@ test('pips limita la cantidad entre 0 y 3', () => {
 
 test('ningún texto de carta se inserta en HTML sin esc()', () => {
   const peligro = /\$\{(?![^}]*esc\()[^}]*\.(nombre|dato|accion|texto|comentario|autor|fuente|message|dominio|nombreDominio|baseNombre)\b[^}]*\}/;
-  for (const f of ['js/ui/mesa.js', 'js/ui/banco.js', 'js/ui/docente.js', 'js/ui/app.js', 'js/ui/carta.js']) {
+  for (const f of ['js/ui/mesa.js', 'js/ui/banco.js', 'js/ui/docente.js', 'js/ui/app.js', 'js/ui/carta.js', 'js/ui/editor.js']) {
     const lineas = readFileSync(new URL(`../${f}`, import.meta.url), 'utf8').split('\n');
     lineas.forEach((l, i) => assert.ok(!peligro.test(l), `${f}:${i + 1} inserta texto sin esc(): ${l.trim()}`));
   }
