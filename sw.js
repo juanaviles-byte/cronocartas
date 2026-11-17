@@ -1,11 +1,12 @@
 // Service worker de Cronocartas: guarda la app en la tablet para jugar sin internet.
 // Al publicar una mejora, sube VERSION y agrega aquí los archivos nuevos
 // (la prueba tests/sw.test.js avisa si falta alguno).
-const VERSION = 'cc-v7';
+const VERSION = 'cc-v8';
 const ARCHIVOS = [
   "./",
   "css/estilos.css",
   "data/aula.json",
+  "data/duelos.json",
   "data/mazo-5.json",
   "data/mazo-6.json",
   "data/mazo-7.json",
@@ -31,6 +32,7 @@ const ARCHIVOS = [
   "img/tableros/T-8-3.jpg",
   "img/tableros/T-8-4.jpg",
   "index.html",
+  "js/album.js",
   "js/almacen.js",
   "js/balance.js",
   "js/compartir.js",
@@ -42,6 +44,7 @@ const ARCHIVOS = [
   "js/motor.js",
   "js/pin.js",
   "js/rng.js",
+  "js/torneo.js",
   "js/ui/app.js",
   "js/ui/arrastre.js",
   "js/ui/arte.js",
@@ -52,6 +55,7 @@ const ARCHIVOS = [
   "js/ui/editor.js",
   "js/ui/mesa.js",
   "js/ui/sonido.js",
+  "js/ui/torneo.js",
   "js/ui/voz.js",
   "manifest.webmanifest"
 ];

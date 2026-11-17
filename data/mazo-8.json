@@ -21,7 +21,11 @@
    "dato": "Artista e inventor del Renacimiento; representa la confianza en la capacidad humana para crear y conocer.",
    "oa": "OA 1",
    "emblema": "pluma",
-   "frase": "Artista e inventor: la confianza del Renacimiento en el ser humano."
+   "frase": "Artista e inventor: la confianza del Renacimiento en el ser humano.",
+   "fecha": {
+    "anio": 1500,
+    "texto": "c. 1500"
+   }
   },
   {
    "id": "CC-8-U1-002",
@@ -47,7 +51,11 @@
      "texto": "La imprenta difundió las 95 tesis por toda Europa."
     }
    ],
-   "frase": "1517: sus 95 tesis iniciaron la Reforma protestante."
+   "frase": "1517: sus 95 tesis iniciaron la Reforma protestante.",
+   "fecha": {
+    "anio": 1517,
+    "texto": "1517"
+   }
   },
   {
    "id": "CC-8-U1-003",
@@ -136,7 +144,11 @@
    "dato": "Hacia 1450, la imprenta de Gutenberg permitió imprimir libros en serie y difundir ideas más rápido.",
    "oa": "OA 2",
    "emblema": "libro",
-   "frase": "Hacia 1450, libros impresos en serie."
+   "frase": "Hacia 1450, libros impresos en serie.",
+   "fecha": {
+    "anio": 1450,
+    "texto": "hacia 1450"
+   }
   },
   {
    "id": "CC-8-U1-007",
@@ -157,7 +169,53 @@
      "texto": "La imprenta hizo circular rápido los nuevos descubrimientos."
     }
    ],
-   "frase": "Observar y experimentar para conocer la naturaleza."
+   "frase": "Observar y experimentar para conocer la naturaleza.",
+   "fecha": {
+    "anio": 1610,
+    "texto": "siglo XVII"
+   }
+  },
+  {
+   "id": "CC-8-U1-008",
+   "nombre": "Luis XIV",
+   "tipo": "personaje",
+   "curso": 8,
+   "unidad": 1,
+   "efecto": {
+    "tipo": "bonusDanio",
+    "n": 40,
+    "dimension": "Politica"
+   },
+   "dato": "Rey de Francia entre 1643 y 1715, símbolo de la monarquía absoluta; se le atribuye la frase «El Estado soy yo».",
+   "oa": "OA 3",
+   "emblema": "corona",
+   "conexiones": [
+    {
+     "causa": "CC-8-U1-004",
+     "texto": "Luis XIV llevó la monarquía absoluta a su máxima expresión."
+    }
+   ],
+   "frase": "Rey de Francia (1643–1715), símbolo de la monarquía absoluta.",
+   "fecha": {
+    "anio": 1643,
+    "texto": "1643–1715"
+   }
+  },
+  {
+   "id": "CC-8-U1-009",
+   "nombre": "Palacio de Versalles",
+   "tipo": "lugar",
+   "curso": 8,
+   "unidad": 1,
+   "efecto": {
+    "tipo": "bonusDimension",
+    "dimension": "Politica",
+    "n": 10
+   },
+   "dato": "Palacio construido por Luis XIV; fue el centro del poder y de la vida de la corte en la Francia absolutista.",
+   "oa": "OA 3",
+   "emblema": "casa",
+   "frase": "Centro del poder y de la corte en la Francia absolutista."
   },
   {
    "id": "CC-8-U2-001",
@@ -178,7 +236,11 @@
      "texto": "Los abusos de la conquista llevaron a Las Casas a denunciarlos."
     }
    ],
-   "frase": "Denunció los abusos contra los indígenas."
+   "frase": "Denunció los abusos contra los indígenas.",
+   "fecha": {
+    "anio": 1542,
+    "texto": "siglo XVI"
+   }
   },
   {
    "id": "CC-8-U2-002",
@@ -293,7 +355,11 @@
    "dato": "Iglesias, música y ceremonias barrocas expresaron la religiosidad de la sociedad colonial.",
    "oa": "OA 9",
    "emblema": "campana",
-   "frase": "Iglesias, música y ceremonias de la Colonia."
+   "frase": "Iglesias, música y ceremonias de la Colonia.",
+   "fecha": {
+    "anio": 1650,
+    "texto": "siglos XVII–XVIII"
+   }
   },
   {
    "id": "CC-8-U2-007",
@@ -323,7 +389,11 @@
    "dato": "Propuso separar el poder del Estado en ejecutivo, legislativo y judicial.",
    "oa": "OA 14",
    "emblema": "balanza",
-   "frase": "Propuso separar el poder del Estado en ejecutivo, legislativo y judicial."
+   "frase": "Propuso separar el poder del Estado en ejecutivo, legislativo y judicial.",
+   "fecha": {
+    "anio": 1748,
+    "texto": "1748"
+   }
   },
   {
    "id": "CC-8-U3-002",
@@ -444,7 +514,11 @@
      "texto": "Las ideas ilustradas inspiraron la Declaración de 1789."
     }
    ],
-   "frase": "1789: todos nacen libres e iguales en derechos."
+   "frase": "1789: todos nacen libres e iguales en derechos.",
+   "fecha": {
+    "anio": 1789,
+    "texto": "1789"
+   }
   },
   {
    "id": "CC-8-U3-006",
@@ -459,7 +533,11 @@
    "dato": "En 1776 las trece colonias declararon su independencia de Gran Bretaña e inspiraron a otros pueblos.",
    "oa": "OA 15",
    "emblema": "estrella",
-   "frase": "1776: las trece colonias se independizan."
+   "frase": "1776: las trece colonias se independizan.",
+   "fecha": {
+    "anio": 1776,
+    "texto": "1776"
+   }
   },
   {
    "id": "CC-8-U3-007",

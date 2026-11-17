@@ -26,7 +26,7 @@ test('pips limita la cantidad entre 0 y 3', () => {
 
 test('ningún texto de carta se inserta en HTML sin esc()', () => {
   const peligro = /\$\{(?![^}]*esc\()[^}]*\.(nombre|dato|accion|texto|comentario|autor|fuente|message|dominio|nombreDominio|baseNombre)\b[^}]*\}/;
-  for (const f of ['js/ui/mesa.js', 'js/ui/banco.js', 'js/ui/docente.js', 'js/ui/app.js', 'js/ui/carta.js', 'js/ui/editor.js']) {
+  for (const f of ['js/ui/mesa.js', 'js/ui/banco.js', 'js/ui/docente.js', 'js/ui/app.js', 'js/ui/carta.js', 'js/ui/editor.js', 'js/ui/torneo.js']) {
     const lineas = readFileSync(new URL(`../${f}`, import.meta.url), 'utf8').split('\n');
     lineas.forEach((l, i) => assert.ok(!peligro.test(l), `${f}:${i + 1} inserta texto sin esc(): ${l.trim()}`));
   }
@@ -66,4 +66,10 @@ test('resumenExportacion avisa qué cartas pierden su imagen', () => {
 test('el daño de una acción queda limitado por su costo', () => {
   assert.ok(validarPropuesta(base({ resistencia: 50, acciones: [{ nombre: 'Golpe', costo: 1, danio: 90 }] })).length > 0);
   assert.deepEqual(validarPropuesta(base({ resistencia: 50, acciones: [{ nombre: 'Golpe', costo: 1, danio: 20 }] })), []);
+});
+
+test('la pantalla del torneo escapa cada nombre de participante', () => {
+  const src = readFileSync(new URL('../js/ui/torneo.js', import.meta.url), 'utf8');
+  const crudos = src.split('\n').filter(l => /\$\{(?![^}]*esc\()[^}]*\b(p\.a|p\.b|nombre|n|ganador)\b[^}]*\}/.test(l) && !/\$\{t\b|\$\{d\b/.test(l));
+  assert.deepEqual(crudos, []);
 });

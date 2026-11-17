@@ -2,7 +2,9 @@
 // Solo dibuja y traduce toques en jugadas; las reglas viven en motor.js.
 import { crearPartida, jugadasValidas, aplicarJugada, busquedaDe } from '../motor.js';
 import { elegirJugada } from '../ia.js';
-import { armarMazo } from '../mazos.js';
+import { armarMazo, mazoDeBando } from '../mazos.js';
+import { crearAlbum, cartasVisibles } from '../album.js';
+import { anotarGanador } from '../torneo.js';
 import { cargarCursoCompleto } from './datos.js';
 import { crearRng } from '../rng.js';
 import { almacen, CLAVES } from '../almacen.js';
@@ -11,6 +13,12 @@ import { botonEscuchar, leer, detener } from './voz.js';
 import { esc, pips } from '../html.js';
 import { sonidos, sonidoActivo, alternarSonido } from './sonido.js';
 import { hacerArrastrable } from './arrastre.js';
+
+let DUELOS = null;
+export async function cargarDuelos() {
+  if (!DUELOS) DUELOS = await fetch('data/duelos.json').then(r => r.json()).then(d => d.duelos).catch(() => []);
+  return DUELOS;
+}
 
 let TABLEROS = null;
 export async function cargarTableros() {
@@ -43,11 +51,25 @@ export async function montarMesa(contenedor, opciones) {
     leerSabias: !!ajustes.leerSabias,
     tablero: opciones.tablero || 'azar',
     reforzar: !!opciones.reforzar,
+    nivel: opciones.nivel || ajustes.nivel || 'historiador',
+    linea: opciones.modo === 'tutorial' ? false : opciones.linea !== false,
+    duelo: opciones.duelo || null,
+    bandoA: opciones.bandoA || null,
+    nombres: opciones.nombres || null,
+    torneo: opciones.torneo || null,
   };
   const contraIA = config.modo !== 'caraacara';
-  const nombres = { A: contraIA ? 'Tú' : 'Jugador 1', B: contraIA ? 'Tablet' : 'Jugador 2' };
+  // Los nombres solo se insertan en HTML: se guardan ya escapados (en el torneo los escribe el docente).
+  const crudos = config.nombres || { A: contraIA ? 'Tú' : 'Jugador 1', B: contraIA ? 'Tablet' : 'Jugador 2' };
+  const nombres = { A: esc(crudos.A), B: esc(crudos.B) };
 
   contenedor.innerHTML = '<div class="cargando">Barajando…</div>';
+  const duelo = config.duelo ? (await cargarDuelos()).find(d => d.id === config.duelo) || null : null;
+  if (duelo) { config.cursoA = duelo.curso; config.cursoB = duelo.curso; config.tablero = duelo.tablero; }
+  const bandoDe = duelo ? (() => {
+    const a = duelo.bandos.find(b => b.id === config.bandoA) || duelo.bandos[0];
+    return { A: a, B: duelo.bandos.find(b => b !== a) };
+  })() : null;
   const [datosA, datosB, tableros] = await Promise.all([cargarCursoCompleto(config.cursoA), cargarCursoCompleto(config.cursoB), cargarTableros()]);
   const unidadesDe = { [config.cursoA]: datosA.unidades, [config.cursoB]: datosB.unidades };
 
@@ -61,15 +83,17 @@ export async function montarMesa(contenedor, opciones) {
     config.tablero = tablero ? tablero.id : null;
     const foco = config.reforzar && tablero ? { unidad: tablero.unidad } : {};
     estado = crearPartida({
-      mazoA: armarMazo(datosA.cartas, datosA.aula, rng, foco),
-      mazoB: armarMazo(datosB.cartas, datosB.aula, rng, foco),
+      mazoA: bandoDe ? mazoDeBando(datosA.cartas, datosA.aula, rng, duelo, bandoDe.A.id) : armarMazo(datosA.cartas, datosA.aula, rng, foco),
+      mazoB: bandoDe ? mazoDeBando(datosB.cartas, datosB.aula, rng, duelo, bandoDe.B.id) : armarMazo(datosB.cartas, datosB.aula, rng, foco),
       semilla: config.semilla + 1,
       hitosParaGanar: config.hitosParaGanar,
       tablero,
+      lineaTiempo: config.linea,
     });
   }
   const tableroActual = () => tableros.find(t => t.id === (estado.tablero && estado.tablero.id)) || null;
 
+  const partidaNueva = !opciones.estado;
   let vivo = true;
   let ocupado = false;           // mientras se muestra un aviso o juega la IA
   let caidas = [];               // cartas caídas, para el resumen final
@@ -79,6 +103,17 @@ export async function montarMesa(contenedor, opciones) {
   contenedor.appendChild(raiz);
 
   const girado = j => config.modo === 'caraacara' && j === 'B';
+
+  // Álbum: cartas vistas boca arriba en esta partida.
+  const album = crearAlbum(almacen);
+  const cartasAlbum = [...datosA.cartas, ...(config.cursoB !== config.cursoA ? datosB.cartas : []), ...datosA.aula];
+  const nuevasPartida = new Set();
+  const insigniasPartida = [];
+  function registrarAlbum() {
+    const r = album.descubrir([...cartasVisibles(estado, contraIA ? ['A'] : ['A', 'B'])], cartasAlbum, unidadesDe);
+    r.nuevas.forEach(id => nuevasPartida.add(id));
+    insigniasPartida.push(...r.insignias);
+  }
   const unidadesCarta = c => unidadesDe[c.curso] || null;
 
   let avisoGuardar = false;
@@ -91,6 +126,10 @@ export async function montarMesa(contenedor, opciones) {
       setTimeout(() => registrar('No hay espacio para guardar la partida: si se cierra la app, no se podrá continuar.'), 50);
     }
   }
+
+  // Una partida nueva se guarda de inmediato: si la tablet se recarga antes de la primera jugada
+  // (por ejemplo, en una partida del torneo), se retoma con su configuración.
+  if (partidaNueva) guardar();
 
   // ---------- Dibujo ----------
   let uidsAntes = null;                 // para animar las cartas que entran a la mesa
@@ -108,7 +147,9 @@ export async function montarMesa(contenedor, opciones) {
     uidsAntes = ahora;
     hitosAntes = { A: estado.jugadores.A.hitos, B: estado.jugadores.B.hitos };
     marcarSaber();
+    registrarAlbum();
     activarArrastre();
+    revisarUbicar();
     programarIA();
   }
 
@@ -305,9 +346,16 @@ export async function montarMesa(contenedor, opciones) {
 
     const marcador = h('div', 'marcador');
     marcador.innerHTML = `
+      ${bandoDe ? `<div class="bando" style="--bando:${bandoDe[j].color}">${esc(bandoDe[j].nombre)}</div>` : ''}
       <div class="nombre-jugador">${nombres[j]}</div>
       <div class="hitos" title="Hitos">${[...Array(estado.hitosParaGanar)].map((_, i) => `<i class="${i < yo.hitos ? 'si' : ''}${i < yo.hitos && i >= hitosAntes[j] ? ' nuevo' : ''}"></i>`).join('')}</div>
       <div class="cuentas">Mazo ${yo.mazo.length}</div>`;
+    if (estado.lineaTiempo) {
+      const n = (yo.linea || []).length;
+      const bl = h('button', 'linea-mini', `<span class="reloj"></span> Línea de tiempo · ${n}`);
+      bl.onclick = () => verLinea(j);
+      marcador.appendChild(bl);
+    }
     campo.appendChild(marcador);
     s.appendChild(campo);
 
@@ -507,6 +555,12 @@ export async function montarMesa(contenedor, opciones) {
         const p = [yo.activo, ...yo.reserva].find(x => x && x.uid === ev.destino);
         if (p) registrar(`${esc(p.carta.nombre)} recibe 1 de Saber (ahora tiene ${esc(p.saber)})`);
       }
+      if (ev.tipo === 'linea') registrar(`<b>${esc(ev.hecho.nombre)}</b> (${esc(ev.hecho.texto)}) entra a la línea de tiempo de ${nombres[ev.jugador]}`);
+      if (ev.tipo === 'ubicar') {
+        if (ev.correcto) sonidos.conexion();
+        if (!(contraIA && ev.jugador === 'B')) avisoLinea(ev);
+        registrar(`${nombres[ev.jugador]} ubicó <b>${esc(ev.hecho.nombre)}</b> (${esc(ev.hecho.texto)}): ${ev.correcto ? '¡bien ubicada! +1 Saber' : 'quedó en su lugar correcto'}`);
+      }
       if (ev.tipo === 'conexion') { sonidos.conexion(); avisoConexion(ev); registrar(`¡Conexión histórica! <b>${esc(ev.causa.nombre)}</b> → <b>${esc(ev.efecto.nombre)}</b>: +1 Saber`); }
       if (ev.tipo === 'danio') {
         sonidos.ataque();
@@ -552,6 +606,61 @@ export async function montarMesa(contenedor, opciones) {
     fantasma.remove();
   }
 
+  // ---------- Línea de tiempo ----------
+  function revisarUbicar() {
+    const j = estado.turno, yo = estado.jugadores[j];
+    if (ocupado || estado.fase !== 'turno' || !yo.porUbicar || (contraIA && j === 'B') || raiz.querySelector('.capa-linea')) return;
+    const capa = h('div', `capa capa-linea${girado(j) ? ' girado' : ''}`);
+    const panel = h('div', 'panel-linea');
+    panel.appendChild(h('div', 'titulo-linea', '<span class="reloj"></span> Línea de tiempo'));
+    panel.appendChild(h('p', 'pregunta-linea', `¿Dónde va <b>${esc(yo.porUbicar.nombre)}</b>? Toca el hueco correcto. Si aciertas, tu activo gana +1 de Saber.`));
+    const fila = h('div', 'linea-huecos');
+    const hueco = i => {
+      const b = h('button', 'hueco-linea', 'Aquí');
+      b.onclick = () => { capa.remove(); jugar({ tipo: 'ubicar', posicion: i }); };
+      return b;
+    };
+    yo.linea.forEach((x, i) => {
+      fila.appendChild(hueco(i));
+      fila.appendChild(h('div', 'hito-linea', `<b>${esc(x.texto)}</b><span>${esc(x.nombre)}</span>`));
+    });
+    fila.appendChild(hueco(yo.linea.length));
+    panel.appendChild(fila);
+    panel.appendChild(h('p', 'nota', 'Más antiguo a la izquierda, más reciente a la derecha.'));
+    capa.appendChild(panel);
+    raiz.appendChild(capa);
+  }
+
+  function verLinea(j) {
+    const yo = estado.jugadores[j];
+    const capa = h('div', `capa capa-linea${girado(j) ? ' girado' : ''}`);
+    const panel = h('div', 'panel-linea');
+    panel.appendChild(h('div', 'titulo-linea', `<span class="reloj"></span> Línea de tiempo de ${nombres[j]}`));
+    const fila = h('div', 'linea-huecos');
+    if (!(yo.linea || []).length) fila.appendChild(h('p', 'nota', 'Todavía vacía. Los Personajes y Acontecimientos con fecha entran aquí al jugarlos.'));
+    for (const x of yo.linea || []) fila.appendChild(h('div', 'hito-linea', `<b>${esc(x.texto)}</b><span>${esc(x.nombre)}</span>`));
+    panel.appendChild(fila);
+    panel.appendChild(h('p', 'nota', `Aciertos: ${yo.aciertos || 0}`));
+    const cerrar = h('button', 'boton-secundario', 'Cerrar');
+    cerrar.onclick = () => capa.remove();
+    panel.appendChild(cerrar);
+    capa.appendChild(panel);
+    capa.onclick = ev => { if (ev.target === capa) capa.remove(); };
+    raiz.appendChild(capa);
+  }
+
+  function avisoLinea(ev) {
+    const yo = estado.jugadores[ev.jugador];
+    const antes = yo.linea[ev.posicionCorrecta - 1], despues = yo.linea[ev.posicionCorrecta + 1];
+    const donde = antes && despues ? `Va entre ${esc(antes.nombre)} y ${esc(despues.nombre)}.`
+      : antes ? `Va después de ${esc(antes.nombre)}.` : despues ? `Va antes de ${esc(despues.nombre)}.` : '';
+    const a = h('div', `aviso-conexion aviso-linea${ev.correcto ? '' : ' casi'}${girado(ev.jugador) ? ' girado' : ''}`,
+      `<div class="titulo">${ev.correcto ? '¡Bien ubicada!' : 'Casi…'}</div><div class="cadena">${esc(ev.hecho.nombre)}<span>·</span>${esc(ev.hecho.texto)}</div>` +
+      (ev.correcto ? '<div class="premio">+1 Saber para tu activo</div>' : `<p>${donde}</p>`));
+    raiz.appendChild(a);
+    setTimeout(() => a.remove(), 2700);
+  }
+
   function avisoConexion(ev) {
     const a = h('div', `aviso-conexion${girado(ev.jugador) ? ' girado' : ''}`,
       `<div class="titulo">¡Conexión histórica!</div><div class="cadena">${esc(ev.causa.nombre)}<span>→</span>${esc(ev.efecto.nombre)}</div>` +
@@ -562,9 +671,9 @@ export async function montarMesa(contenedor, opciones) {
 
   function anunciarTurno(j) {
     if (sinMovimiento()) return;
-    const texto = contraIA ? (j === 'A' ? 'Tu turno' : 'Turno de la Tablet') : `Turno de ${nombres[j]}`;
+    const texto = contraIA ? (j === 'A' ? 'Tu turno' : 'Turno de la Tablet') : `Turno de ${nombres[j]}`;   // nombres ya escapados
     const extra = estado.jugadores[j].saberPendiente > 0 ? '<small><span class="pip"></span> +1 de Saber para repartir</small>' : '';
-    const b = h('div', `banner-turno${girado(j) ? ' girado' : ''}`, esc(texto) + extra);
+    const b = h('div', `banner-turno${girado(j) ? ' girado' : ''}`, texto + extra);
     raiz.appendChild(b);
     setTimeout(() => b.remove(), 1100);
   }
@@ -616,16 +725,31 @@ export async function montarMesa(contenedor, opciones) {
     const g = estado.ganador;
     sonidos.victoria();
     const c = h('div', 'final');
+    registrarAlbum();
+    const lineas = estado.lineaTiempo ? ['A', 'B'].filter(j => (estado.jugadores[j].linea || []).length).map(j => {
+      const yo = estado.jugadores[j];
+      return `<div class="linea-final"><b>${nombres[j]}</b> · ${yo.aciertos || 0} acierto${yo.aciertos === 1 ? '' : 's'}<div class="linea-huecos">${yo.linea.map(x => `<div class="hito-linea"><b>${esc(x.texto)}</b><span>${esc(x.nombre)}</span></div>`).join('')}</div></div>`;
+    }).join('') : '';
+    const insignias = insigniasPartida.map(i => `<div class="insignia-nueva"><span class="medalla"></span> ¡Nueva insignia! ${esc(i.curso)}° · ${esc(i.nombre)}</div>`).join('');
     c.innerHTML = `<div class="titulo-final">¡Gana ${nombres[g]}!</div>
       <p>${razonFinal(g)}</p>
+      ${insignias}
+      ${nuevasPartida.size ? `<p class="album-final">Descubriste ${nuevasPartida.size} carta${nuevasPartida.size === 1 ? '' : 's'} nueva${nuevasPartida.size === 1 ? '' : 's'} para el álbum.</p>` : ''}
+      ${lineas ? `<div class="aprendido"><b>Líneas de tiempo</b>${lineas}</div>` : ''}
       ${caidas.length ? `<div class="aprendido"><b>Lo que apareció en esta partida</b><ul>${caidas.slice(-4).map(k => `<li><b>${esc(k.nombre)}:</b> ${esc(k.dato)}</li>`).join('')}</ul></div>` : ''}`;
+    if (config.torneo) {
+      try {
+        const t = almacen.leer(CLAVES.torneo, null);
+        if (t) almacen.guardar(CLAVES.torneo, anotarGanador(t, config.torneo.partida, config.nombres[g]));
+      } catch { /* la partida ya estaba anotada */ }
+    }
     const botones = h('div', 'botones');
-    const otra = h('button', 'boton-principal', 'Otra partida');
+    const otra = h('button', 'boton-principal', config.torneo ? 'Volver al torneo' : 'Otra partida');
     const menu = h('button', 'boton-secundario', 'Menú');
     botones.append(otra, menu);
     c.appendChild(botones);
     const capa = dobleCara(c);
-    capa.querySelectorAll('.boton-principal').forEach(b => { b.onclick = () => { capa.remove(); reiniciar(); }; });
+    capa.querySelectorAll('.boton-principal').forEach(b => { b.onclick = () => { if (config.torneo) { location.hash = '#torneo'; return; } capa.remove(); reiniciar(); }; });
     capa.querySelectorAll('.boton-secundario').forEach(b => { b.onclick = () => { location.hash = '#inicio'; }; });
     raiz.appendChild(capa);
   }
@@ -634,7 +758,8 @@ export async function montarMesa(contenedor, opciones) {
     const n = estado.jugadores[g].hitos;
     const perdedor = g === 'A' ? 'B' : 'A';
     if (n >= estado.hitosParaGanar) return `Consiguió ${n} Hito${n === 1 ? '' : 's'}.`;
-    return `${nombres[perdedor]} se quedó sin Protagonistas en la mesa (${n} Hito${n === 1 ? '' : 's'} conseguido${n === 1 ? '' : 's'}).`;
+    const quien = contraIA && perdedor === 'A' ? 'Te quedaste' : `${nombres[perdedor]} se quedó`;
+    return `${quien} sin Protagonistas en la mesa (${n} Hito${n === 1 ? '' : 's'} conseguido${n === 1 ? '' : 's'}).`;
   }
 
   async function reiniciar() {
@@ -649,7 +774,7 @@ export async function montarMesa(contenedor, opciones) {
     temporizador = setTimeout(async () => {
       temporizador = null;
       if (!vivo || ocupado || estado.turno !== 'B' || estado.fase === 'fin') return;
-      const j = elegirJugada(estado, 'B');
+      const j = elegirJugada(estado, 'B', { nivel: config.nivel });
       if (j) await jugar(j);
     }, 700);
   }
