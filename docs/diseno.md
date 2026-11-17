@@ -194,6 +194,7 @@ Cada mazo lleva hasta 2 cartas Aula.
 3. Banco de ideas y partidas en línea.
 4. Premios en SIU desde SIUBank.
 5. Más cartas por unidad y mazos armados por cada estudiante.
+6. **Versión nativa en Unity** (app Android propia, con animaciones, sonido y partidas en línea mediante Unity Multiplayer Services). El motor se traduce a C# y reusa los mismos mazos JSON. Las pruebas del motor actual sirven para comprobar que la versión de Unity juega igual. Unreal Engine se descartó por ser demasiado pesado para un juego 2D en tablets escolares.
 
 ## 10. Lo que queda a criterio de quien lo construye
 
