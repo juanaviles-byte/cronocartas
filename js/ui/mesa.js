@@ -9,6 +9,7 @@ import { almacen, CLAVES } from '../almacen.js';
 import { renderCarta } from './carta.js';
 import { esc, pips } from '../html.js';
 import { sonidos, sonidoActivo, alternarSonido } from './sonido.js';
+import { hacerArrastrable } from './arrastre.js';
 
 let TABLEROS = null;
 export async function cargarTableros() {
@@ -104,7 +105,63 @@ export async function montarMesa(contenedor, opciones) {
     if (uidsAntes) raiz.querySelectorAll('.campo [data-uid]').forEach(e => { if (!uidsAntes.has(e.dataset.uid)) e.classList.add('entra'); });
     uidsAntes = ahora;
     hitosAntes = { A: estado.jugadores.A.hitos, B: estado.jugadores.B.hitos };
+    activarArrastre();
     programarIA();
+  }
+
+  // ---------- Arrastrar y soltar ----------
+  // Mano → activo/reserva (bajar), → otra carta (evolucionar), → tu lado de la mesa (jugar).
+  // Reserva → activo (retirarse o promover).
+  function activarArrastre() {
+    const j = estado.turno;
+    if (estado.fase === 'fin' || (contraIA && j === 'B')) return;
+    const yo = estado.jugadores[j];
+    const lado = raiz.querySelector(`.lado-${j}`);
+    if (!lado) return;
+    const zonaActivo = lado.querySelector('.zona-activo');
+    const reserva = lado.querySelector('.reserva');
+    const validas = () => jugadasValidas(estado);
+
+    lado.querySelectorAll('.mano [data-mano]').forEach(el => {
+      const entrada = yo.mano.find(c => c.uid === el.dataset.mano);
+      if (!entrada) return;
+      hacerArrastrable(el, {
+        girado: girado(j),
+        objetivos: () => {
+          const out = new Map();
+          for (const v of validas().filter(x => x.uid === entrada.uid)) {
+            if (v.tipo === 'colocar') out.set(yo.activo ? reserva : zonaActivo, v);
+            if (v.tipo === 'bajar') out.set(reserva, v);
+            if (v.tipo === 'evolucionar') { const t = lado.querySelector(`[data-uid="${v.objetivo}"]`); if (t) out.set(t, v); }
+            if (v.tipo === 'jugar') out.set(lado, { jugarCarta: true });
+          }
+          return [...out].map(([el2, accion]) => ({ el: el2, accion }));
+        },
+        alSoltar: accion => {
+          if (accion.jugarCarta) jugarDesdeMano(j, entrada);
+          else jugar(accion);
+        },
+      });
+    });
+
+    lado.querySelectorAll('.reserva [data-uid]').forEach(el => {
+      hacerArrastrable(el, {
+        girado: girado(j),
+        objetivos: () => validas()
+          .filter(v => (v.tipo === 'retirar' && v.reemplazo === el.dataset.uid) || (v.tipo === 'promover' && v.uid === el.dataset.uid))
+          .map(v => ({ el: zonaActivo, accion: v })),
+        alSoltar: accion => jugar(accion),
+      });
+    });
+  }
+
+  // Jugar una carta soltada en la mesa: si pide elegir algo, se abre la elección.
+  function jugarDesdeMano(j, entrada) {
+    const opciones = jugadasValidas(estado).filter(v => v.tipo === 'jugar' && v.uid === entrada.uid);
+    const b = busquedaDe(entrada.carta.efecto);
+    if (b) return elegirBusqueda(j, entrada, b);
+    if (opciones.length === 1) return jugar(opciones[0]);
+    verCarta(entrada.carta, j, opciones.map(v => ({ jugada: v, texto: textoJugada(v, j) })));
   }
 
   // El fondo es el tablero; si el Lugar en juego tiene su propio escenario, se muestra ese.
@@ -218,6 +275,7 @@ export async function montarMesa(contenedor, opciones) {
     for (const c of yo.mano) {
       if (mostrar) {
         const el = renderCarta(c.carta, { tamano: 'mini' });
+        el.dataset.mano = c.uid;
         const usable = jugadasValidas(estado).some(v => v.uid === c.uid);
         if (usable) el.classList.add('usable');
         el.onclick = () => tocarEnMano(j, c);

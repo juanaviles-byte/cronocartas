@@ -341,3 +341,17 @@ button:disabled { opacity: .35; cursor: default; }
 .mesa.con-tablero .boton-accion:not(:disabled) { background: var(--tinta); }
 .mesa.con-tablero .hueco { background: rgba(10,12,16,.45); border-color: rgba(255,255,255,.22); color: rgba(255,255,255,.45); }
 .mesa.con-tablero .boton-secundario { background: rgba(10,12,16,.75); }
+
+/* ---------- Arrastrar y soltar ---------- */
+.mano .carta-mini { touch-action: pan-x; }
+.reserva .carta-mini { touch-action: none; }
+.fantasma-arrastre { position: fixed; z-index: 70; pointer-events: none; transform: translate(-50%, -50%) scale(1.08) rotate(-3deg);
+  box-shadow: 0 14px 30px rgba(0,0,0,.55), 0 0 0 3px var(--acento); transition: none; }
+.fantasma-arrastre.girado { transform: translate(-50%, -50%) scale(1.08) rotate(177deg); }
+.fantasma-arrastre.volviendo { transition: left .2s ease, top .2s ease, opacity .2s ease; opacity: 0; }
+.origen-arrastre { opacity: .3; }
+.destino-posible { outline: 2px dashed rgba(233,196,106,.75); outline-offset: 4px; border-radius: 12px; }
+.lado.destino-posible { outline-offset: -6px; }
+.destino-encima { outline: 3px solid var(--acento); outline-offset: 4px; box-shadow: 0 0 22px rgba(233,196,106,.45); }
+.lado.destino-encima { outline-offset: -6px; background: rgba(233,196,106,.08); }
+.reserva.destino-posible, .zona-activo.destino-posible { min-width: 60px; }
