@@ -28,6 +28,9 @@ export function validarCarta(c) {
   if (!c.id) e.push('Carta sin id');
   if (!c.nombre) e.push(`${id}: sin nombre`);
   if (!TIPOS.includes(c.tipo)) e.push(`${id}: tipo desconocido "${c.tipo}"`);
+  if (c.fecha !== undefined && !(c.fecha && Number.isInteger(c.fecha.anio) && typeof c.fecha.texto === 'string' && c.fecha.texto.length <= 30)) {
+    e.push(`${id}: fecha mal escrita`);
+  }
   if (!c.dato) e.push(`${id}: sin dato`);
   if (c.tipo === 'protagonista') {
     if (!DIMENSIONES.includes(c.dimension)) e.push(`${id}: dimensión desconocida "${c.dimension}"`);
@@ -81,16 +84,20 @@ function tomar(grupo, n, rng) {
 }
 
 // Con { unidad } el mazo refuerza esa unidad: primero entran sus cartas.
-export function armarMazo(cartas, aula, rng, { unidad = null } = {}) {
+export function armarMazo(todas, aula, rng, { unidad = null, nucleo = null, excluir = null } = {}) {
+  const cartas = excluir ? todas.filter(c => !excluir.has(c.id)) : todas;
   const porId = new Map(cartas.map(c => [c.id, c]));
-  const primeroUnidad = lista => (unidad ? [...barajar(lista.filter(c => c.unidad === unidad), rng), ...barajar(lista.filter(c => c.unidad !== unidad), rng)] : barajar(lista, rng));
+  // Preferidas: las del núcleo de un bando o las de la unidad elegida. Van primero; el resto, al azar.
+  const prefiere = c => (nucleo ? nucleo.has(c.id) : unidad ? c.unidad === unidad : false);
+  const enfocado = !!(nucleo || unidad);
+  const primeroUnidad = lista => (enfocado ? [...barajar(lista.filter(prefiere), rng), ...barajar(lista.filter(c => !prefiere(c)), rng)] : barajar(lista, rng));
   const prot = primeroUnidad(cartas.filter(c => c.tipo === 'protagonista'));
   const elegidos = [];
   const ya = new Set();
   const meter = c => { elegidos.push(c); ya.add(c.id); };
 
   // Sin unidad elegida, asegura una carta base por unidad, para mezclar las 4.
-  if (!unidad) for (const u of [...new Set(prot.map(c => c.unidad))]) {
+  if (!enfocado) for (const u of [...new Set(prot.map(c => c.unidad))]) {
     const b = prot.find(c => c.unidad === u && !c.evolucionaDe && !ya.has(c.id));
     if (b && elegidos.length < COMPOSICION.protagonista) meter(b);
   }
@@ -110,9 +117,9 @@ export function armarMazo(cartas, aula, rng, { unidad = null } = {}) {
 
   const deTipo = t => {
     const grupo = cartas.filter(c => c.tipo === t);
-    if (!unidad) return tomar(grupo, COMPOSICION[t], rng);
-    const propias = barajar(grupo.filter(c => c.unidad === unidad), rng).slice(0, COMPOSICION[t]);
-    const resto = grupo.filter(c => c.unidad !== unidad);
+    if (!enfocado) return tomar(grupo, COMPOSICION[t], rng);
+    const propias = barajar(grupo.filter(prefiere), rng).slice(0, COMPOSICION[t]);
+    const resto = grupo.filter(c => !prefiere(c));
     return [...propias, ...tomar(resto.length ? resto : grupo, COMPOSICION[t] - propias.length, rng)];
   };
   const mazo = [
@@ -160,4 +167,15 @@ export async function cargarCurso(curso, { comunidad = [], ediciones = {}, image
     Object.assign(c, { baseNombre: b.nombre, baseEmblema: b.emblema, baseDimension: b.dimension });
   }
   return { curso, unidades: m.unidades, cartas, aula: aplicarEdiciones(a.cartas, ediciones, imagenes) };
+}
+
+// Duelo temático: el mazo de un bando trae su núcleo y no trae el núcleo del bando rival.
+export function mazoDeBando(cartas, aula, rng, duelo, bandoId) {
+  const ids = nombres => new Set(cartas.filter(c => nombres.includes(c.nombre)).map(c => c.id));
+  const propio = duelo.bandos.find(b => b.id === bandoId);
+  const rival = duelo.bandos.find(b => b.id !== bandoId);
+  const nucleo = ids(propio.nucleo);
+  // Si una Etapa 2 está en el núcleo, su base también.
+  for (const c of cartas) if (nucleo.has(c.id) && c.evolucionaDe) nucleo.add(c.evolucionaDe);
+  return armarMazo(cartas, aula, rng, { nucleo, excluir: ids(rival.nucleo) });
 }

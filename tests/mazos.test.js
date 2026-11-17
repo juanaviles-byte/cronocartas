@@ -134,3 +134,11 @@ test('toda carta tiene una frase corta (≤ 80 letras) para mostrar sobre la ilu
     assert.ok(c.frase.length >= 10 && c.frase.length <= 80, `${c.id}: ${c.frase.length}`);
   }
 });
+
+test('validarCarta revisa la fecha: año entero y texto corto', () => {
+  const c = CURSOS[0].cartas.find(x => x.fecha);
+  assert.ok(c, 'hay cartas con fecha');
+  assert.deepEqual(validarCarta(c), []);
+  assert.ok(validarCarta({ ...c, fecha: { anio: 'x', texto: '1492' } }).length);
+  assert.ok(validarCarta({ ...c, fecha: { anio: 1492, texto: 'x'.repeat(31) } }).length);
+});

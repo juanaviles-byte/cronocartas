@@ -25,7 +25,8 @@ const esBase = c => c.tipo === 'protagonista' && !c.evolucionaDe;
 
 function nuevoJugador() {
   return { mazo: [], mano: [], activo: null, reserva: [], descarte: [], hitos: 0,
-    saberPendiente: 0, aulaUsada: false, personajeUsado: false, retiroUsado: false, listo: false };
+    saberPendiente: 0, aulaUsada: false, personajeUsado: false, retiroUsado: false, listo: false,
+    linea: [], porUbicar: null, aciertos: 0 };
 }
 
 function robar(jug, n = 1) {
@@ -46,7 +47,7 @@ function instancia(entrada, turno) {
   return { uid: entrada.uid, carta: entrada.carta, danio: 0, saber: 0, protegido: false, bonus: 0, turnoEntrada: turno };
 }
 
-export function crearPartida({ mazoA, mazoB, semilla, hitosParaGanar = 3, tablero = null }) {
+export function crearPartida({ mazoA, mazoB, semilla, hitosParaGanar = 3, tablero = null, lineaTiempo = false }) {
   const rng = rngDesdeEstado(semilla);
   const jugadores = { A: nuevoJugador(), B: nuevoJugador() };
   for (const [j, mazo] of [['A', mazoA], ['B', mazoB]]) {
@@ -68,7 +69,7 @@ export function crearPartida({ mazoA, mazoB, semilla, hitosParaGanar = 3, tabler
     }
   }
   return { fase: 'preparacion', turno: 'A', numeroTurno: 0, jugadores, lugar: null,
-    ganador: null, hitosParaGanar, rng: rng.estado, tablero: tablero ? { id: tablero.id, regla: tablero.regla || null } : null };
+    ganador: null, hitosParaGanar, rng: rng.estado, tablero: tablero ? { id: tablero.id, regla: tablero.regla || null } : null, lineaTiempo: !!lineaTiempo };
 }
 
 export function jugadasValidas(e) {
@@ -86,6 +87,9 @@ export function jugadasValidas(e) {
   if (e.fase === 'promover') {
     return yo.reserva.map(r => ({ tipo: 'promover', uid: r.uid }));
   }
+
+  // Línea de tiempo: hasta ubicar la carta, solo se puede elegir el hueco.
+  if (yo.porUbicar) return Array.from({ length: (yo.linea || []).length + 1 }, (_, posicion) => ({ tipo: 'ubicar', posicion }));
 
   const js = [];
   for (const c of yo.mano) {
@@ -129,6 +133,17 @@ const limiteAula = e => (regla(e, 'aulaDoble') ? 2 : 1);
 const costoRetirada = (e, inst) => (regla(e, 'retiroGratis') ? 0 : (inst.carta.retirada ?? 1));
 
 const habilidad = (inst, tipo) => (inst && inst.carta.habilidad && inst.carta.habilidad.tipo === tipo ? inst.carta.habilidad : null);
+
+// Línea de tiempo: los Personajes y Acontecimientos con fecha entran a la línea del jugador.
+// La primera entra sola; desde la segunda, el jugador elige el hueco (jugada 'ubicar').
+function entrarALinea(e, j, carta, ev) {
+  if (!e.lineaTiempo || !carta.fecha || !['personaje', 'acontecimiento'].includes(carta.tipo)) return;
+  const yo = e.jugadores[j];
+  yo.linea = yo.linea || [];
+  const hecho = { id: carta.id, nombre: carta.nombre, anio: carta.fecha.anio, texto: carta.fecha.texto };
+  if (!yo.linea.length) { yo.linea.push(hecho); ev.push({ tipo: 'linea', jugador: j, hecho, automatico: true }); }
+  else yo.porUbicar = hecho;
+}
 
 // Conexión causa → consecuencia: si la causa está en tu mesa, tu descarte o es el Lugar en juego,
 // tu activo recibe +1 Saber. Solo un bonus por carta.
@@ -199,7 +214,8 @@ function efectoAplicable(e, j, ef) {
 
 function mismaJugada(a, b) {
   return a.tipo === b.tipo && a.uid === b.uid && a.objetivo === b.objetivo &&
-    a.destino === b.destino && a.reemplazo === b.reemplazo && a.indice === b.indice && a.eleccion === b.eleccion;
+    a.destino === b.destino && a.reemplazo === b.reemplazo && a.indice === b.indice && a.eleccion === b.eleccion &&
+    a.posicion === b.posicion;
 }
 
 export function aplicarJugada(estadoEntrada, jugada) {
@@ -280,7 +296,21 @@ export function aplicarJugada(estadoEntrada, jugada) {
         aplicarEfecto(e, j, c.carta.efecto, ev, jugada.eleccion);
         yo.descarte.push(c);
         ev.push({ tipo: 'efecto', jugador: j, carta: c.carta });
+        entrarALinea(e, j, c.carta, ev);
       }
+      break;
+    }
+    case 'ubicar': {
+      const hecho = yo.porUbicar;
+      const linea = yo.linea;
+      const antes = linea[jugada.posicion - 1], despues = linea[jugada.posicion];
+      const correcto = (!antes || antes.anio <= hecho.anio) && (!despues || hecho.anio <= despues.anio);
+      let posicionCorrecta = linea.findIndex(x => x.anio > hecho.anio);
+      if (posicionCorrecta < 0) posicionCorrecta = linea.length;
+      linea.splice(correcto ? jugada.posicion : posicionCorrecta, 0, hecho);
+      yo.porUbicar = null;
+      if (correcto) { yo.aciertos = (yo.aciertos || 0) + 1; if (yo.activo) yo.activo.saber += 1; }
+      ev.push({ tipo: 'ubicar', jugador: j, hecho, correcto, posicion: jugada.posicion, posicionCorrecta: correcto ? jugada.posicion : posicionCorrecta });
       break;
     }
     case 'retirar': {
@@ -358,28 +388,41 @@ function aplicarEfecto(e, j, ef, ev, eleccion) {
   }
 }
 
+// Daño que haría una acción del activo de j sobre el activo rival (sin contar la protección).
+function calcularDanio(e, j, accion) {
+  const yo = e.jugadores[j], otro = e.jugadores[rival(j)];
+  const atk = yo.activo, def = otro.activo;
+  let danio = accion.danio || 0;
+  if (danio <= 0 || !def) return { danio };
+  const lugarEf = e.lugar && e.lugar.carta.efecto;
+  if (lugarEf && lugarEf.tipo === 'bonusDimension' && lugarEf.dimension === atk.carta.dimension) danio += lugarEf.n;
+  const bt = regla(e, 'bonusDimension');
+  if (bt && bt.dimension === atk.carta.dimension) danio += bt.n;
+  danio += atk.bonus;
+  const fr = habilidad(atk, 'fuerzaReserva');
+  if (fr) danio += fr.n * yo.reserva.length;
+  if (VENTAJA[atk.carta.dimension] === def.carta.dimension) danio *= 2;
+  const muro = regla(e, 'reduccionDanio');
+  if (muro) danio = Math.max(0, danio - muro.n);
+  const res = habilidad(def, 'resistente');
+  if (res) danio = Math.max(0, danio - res.n);
+  return { danio };
+}
+
+// Para el rival automático: daño de la acción `indice` del activo de j (0 si el rival está protegido).
+export function danioDeAccion(e, j, indice) {
+  const yo = e.jugadores[j], def = e.jugadores[rival(j)].activo;
+  if (!yo.activo || !def || !yo.activo.carta.acciones || !yo.activo.carta.acciones[indice]) return 0;
+  return def.protegido ? 0 : calcularDanio(e, j, yo.activo.carta.acciones[indice]).danio;
+}
+
 function resolverAccion(e, j, indice, ev) {
   const yo = e.jugadores[j], otro = e.jugadores[rival(j)];
   const atk = yo.activo, def = otro.activo;
   const accion = atk.carta.acciones[indice];
-  let danio = accion.danio || 0;
+  let danio = calcularDanio(e, j, accion).danio;
   if (danio > 0) {
-    const lugarEf = e.lugar && e.lugar.carta.efecto;
-    if (lugarEf && lugarEf.tipo === 'bonusDimension' && lugarEf.dimension === atk.carta.dimension) danio += lugarEf.n;
-    const bt = regla(e, 'bonusDimension');
-    if (bt && bt.dimension === atk.carta.dimension) danio += bt.n;
-    danio += atk.bonus;
-    const fr = habilidad(atk, 'fuerzaReserva');
-    if (fr) danio += fr.n * yo.reserva.length;
-    const ventaja = VENTAJA[atk.carta.dimension] === def.carta.dimension;
-    if (ventaja) {
-      danio *= 2;
-      ev.push({ tipo: 'ventaja', de: atk.carta.dimension, contra: def.carta.dimension });
-    }
-    const muro = regla(e, 'reduccionDanio');
-    if (muro) danio = Math.max(0, danio - muro.n);
-    const res = habilidad(def, 'resistente');
-    if (res) danio = Math.max(0, danio - res.n);
+    if (VENTAJA[atk.carta.dimension] === def.carta.dimension) ev.push({ tipo: 'ventaja', de: atk.carta.dimension, contra: def.carta.dimension });
     if (def.protegido) {
       def.protegido = false;
       ev.push({ tipo: 'protegido', jugador: rival(j), carta: def.carta });

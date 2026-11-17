@@ -132,7 +132,11 @@
    "dato": "Permitió llevar registros, cuentas y leyes. Con ella comienza la historia escrita.",
    "oa": "OA 3",
    "emblema": "pluma",
-   "frase": "Con ella comienza la historia escrita."
+   "frase": "Con ella comienza la historia escrita.",
+   "fecha": {
+    "anio": -3200,
+    "texto": "c. 3200 a.C."
+   }
   },
   {
    "id": "CC-7-U1-006",
@@ -305,7 +309,11 @@
    "dato": "Nacieron en la antigua Grecia, en Olimpia, y hoy se siguen celebrando en todo el mundo.",
    "oa": "OA 8",
    "emblema": "estrella",
-   "frase": "Nacieron en Olimpia y aún se celebran."
+   "frase": "Nacieron en Olimpia y aún se celebran.",
+   "fecha": {
+    "anio": -776,
+    "texto": "776 a.C."
+   }
   },
   {
    "id": "CC-7-U2-007",
@@ -337,7 +345,11 @@
    "dato": "Gobernó Atenas en el siglo V a.C., la época de mayor esplendor de su democracia.",
    "oa": "OA 6",
    "emblema": "columna",
-   "frase": "Gobernó Atenas en el siglo V a.C., la época de mayor esplendor de su democracia."
+   "frase": "Gobernó Atenas en el siglo V a.C., la época de mayor esplendor de su democracia.",
+   "fecha": {
+    "anio": -450,
+    "texto": "siglo V a.C."
+   }
   },
   {
    "id": "CC-7-U3-001",
@@ -512,7 +524,11 @@
      "texto": "El saber conservado en los monasterios llegó a las universidades."
     }
    ],
-   "frase": "Bolonia y París: el saber se reúne en universidades."
+   "frase": "Bolonia y París: el saber se reúne en universidades.",
+   "fecha": {
+    "anio": 1088,
+    "texto": "siglos XI–XII"
+   }
   },
   {
    "id": "CC-7-U3-008",
@@ -527,7 +543,11 @@
    "dato": "Rey de los francos coronado emperador en el año 800; reunió gran parte de Europa occidental.",
    "oa": "OA 9",
    "emblema": "corona",
-   "frase": "Emperador en el año 800; unió gran parte de Europa."
+   "frase": "Emperador en el año 800; unió gran parte de Europa.",
+   "fecha": {
+    "anio": 800,
+    "texto": "año 800"
+   }
   },
   {
    "id": "CC-7-U4-001",
@@ -705,7 +725,11 @@
    "dato": "Inca que en el siglo XV transformó el Cusco y comenzó la gran expansión del Tawantinsuyu.",
    "oa": "OA 14",
    "emblema": "sol",
-   "frase": "Transformó el Cusco y expandió el Tawantinsuyu."
+   "frase": "Transformó el Cusco y expandió el Tawantinsuyu.",
+   "fecha": {
+    "anio": 1438,
+    "texto": "siglo XV"
+   }
   }
  ]
 }

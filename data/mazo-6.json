@@ -85,7 +85,11 @@
      "texto": "Con el Ejército de los Andes, O'Higgins triunfó en Chacabuco."
     }
    ],
-   "frase": "Tras la victoria de Chacabuco, fue Director Supremo de Chile entre 1817 y 1823."
+   "frase": "Tras la victoria de Chacabuco, fue Director Supremo de Chile entre 1817 y 1823.",
+   "fecha": {
+    "anio": 1817,
+    "texto": "1817–1823"
+   }
   },
   {
    "id": "CC-6-U1-004",
@@ -100,7 +104,11 @@
    "dato": "En su gobierno se creó una de las primeras banderas nacionales y se publicó la Aurora de Chile (1812).",
    "oa": "OA 2",
    "emblema": "pluma",
-   "frase": "Primera bandera nacional y la Aurora de Chile (1812)."
+   "frase": "Primera bandera nacional y la Aurora de Chile (1812).",
+   "fecha": {
+    "anio": 1812,
+    "texto": "1812"
+   }
   },
   {
    "id": "CC-6-U1-005",
@@ -129,7 +137,11 @@
    "dato": "El 18 de septiembre de 1810 se formó la Primera Junta Nacional de Gobierno.",
    "oa": "OA 2",
    "emblema": "pergamino",
-   "frase": "El 18 de septiembre de 1810 se formó la Primera Junta Nacional de Gobierno."
+   "frase": "El 18 de septiembre de 1810 se formó la Primera Junta Nacional de Gobierno.",
+   "fecha": {
+    "anio": 1810,
+    "texto": "1810"
+   }
   },
   {
    "id": "CC-6-U1-007",
@@ -174,6 +186,57 @@
    }
   },
   {
+   "id": "CC-6-U1-009",
+   "nombre": "Ejército realista",
+   "tipo": "protagonista",
+   "curso": 6,
+   "unidad": 1,
+   "dimension": "Politica",
+   "resistencia": 80,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Lealtad al rey",
+     "costo": 1,
+     "danio": 20
+    },
+    {
+     "nombre": "Reconquista",
+     "costo": 2,
+     "danio": 40
+    }
+   ],
+   "dato": "Tropas fieles al rey de España que combatieron a los patriotas; en 1814 vencieron en la batalla de Rancagua.",
+   "oa": "OA 2",
+   "emblema": "escudo",
+   "conexiones": [
+    {
+     "causa": "CC-6-U1-010",
+     "texto": "Tras vencer en Rancagua, el ejército realista recuperó el control de Chile."
+    }
+   ],
+   "frase": "Fieles al rey de España; en 1814 vencieron en Rancagua."
+  },
+  {
+   "id": "CC-6-U1-010",
+   "nombre": "Reconquista española",
+   "tipo": "acontecimiento",
+   "curso": 6,
+   "unidad": 1,
+   "efecto": {
+    "tipo": "bonusDanio",
+    "n": 20
+   },
+   "dato": "Tras la batalla de Rancagua (1814), los realistas gobernaron Chile hasta la victoria patriota de Chacabuco (1817).",
+   "oa": "OA 2",
+   "emblema": "corona",
+   "frase": "De Rancagua (1814) a Chacabuco (1817), Chile volvió a manos realistas.",
+   "fecha": {
+    "anio": 1814,
+    "texto": "1814–1817"
+   }
+  },
+  {
    "id": "CC-6-U2-001",
    "nombre": "Andrés Bello",
    "tipo": "personaje",
@@ -186,7 +249,11 @@
    "dato": "Redactó el Código Civil de Chile y fue el primer rector de la Universidad de Chile (1843).",
    "oa": "OA 4",
    "emblema": "libro",
-   "frase": "Autor del Código Civil y primer rector de la U. de Chile."
+   "frase": "Autor del Código Civil y primer rector de la U. de Chile.",
+   "fecha": {
+    "anio": 1843,
+    "texto": "1843"
+   }
   },
   {
    "id": "CC-6-U2-002",
@@ -285,7 +352,11 @@
    "dato": "Organizó la República con un Presidente con mucho poder y rigió hasta 1925.",
    "oa": "OA 3",
    "emblema": "pergamino",
-   "frase": "Organizó la República con un Presidente con mucho poder y rigió hasta 1925."
+   "frase": "Organizó la República con un Presidente con mucho poder y rigió hasta 1925.",
+   "fecha": {
+    "anio": 1833,
+    "texto": "1833"
+   }
   },
   {
    "id": "CC-6-U2-006",
@@ -300,7 +371,11 @@
    "dato": "En el siglo XIX el ferrocarril conectó ciudades y puertos y cambió la vida de las personas.",
    "oa": "OA 4",
    "emblema": "tren",
-   "frase": "El tren conectó ciudades y puertos en el siglo XIX."
+   "frase": "El tren conectó ciudades y puertos en el siglo XIX.",
+   "fecha": {
+    "anio": 1851,
+    "texto": "1851"
+   }
   },
   {
    "id": "CC-6-U2-007",
@@ -331,7 +406,11 @@
    "dato": "Profesora y poeta chilena. En 1945 fue la primera persona latinoamericana en ganar el Nobel de Literatura.",
    "oa": "OA 7",
    "emblema": "pluma",
-   "frase": "Maestra y poeta: Premio Nobel de Literatura en 1945."
+   "frase": "Maestra y poeta: Premio Nobel de Literatura en 1945.",
+   "fecha": {
+    "anio": 1945,
+    "texto": "1945"
+   }
   },
   {
    "id": "CC-6-U3-002",
@@ -431,7 +510,11 @@
    "dato": "En 1949 las mujeres obtuvieron el derecho a votar en elecciones presidenciales y parlamentarias.",
    "oa": "OA 7",
    "emblema": "urna",
-   "frase": "1949: las mujeres votan en elecciones presidenciales."
+   "frase": "1949: las mujeres votan en elecciones presidenciales.",
+   "fecha": {
+    "anio": 1949,
+    "texto": "1949"
+   }
   },
   {
    "id": "CC-6-U3-006",
@@ -446,7 +529,11 @@
    "dato": "Desde 1920 la educación primaria fue obligatoria en Chile, lo que amplió el acceso a la educación.",
    "oa": "OA 7",
    "emblema": "libro",
-   "frase": "Desde 1920, la educación primaria es obligatoria."
+   "frase": "Desde 1920, la educación primaria es obligatoria.",
+   "fecha": {
+    "anio": 1920,
+    "texto": "1920"
+   }
   },
   {
    "id": "CC-6-U4-001",

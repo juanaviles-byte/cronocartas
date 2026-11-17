@@ -27,7 +27,11 @@
      "texto": "Los avances en navegación hicieron posible el viaje de 1492."
     }
    ],
-   "frase": "En 1492 llegó a América buscando una ruta hacia Asia."
+   "frase": "En 1492 llegó a América buscando una ruta hacia Asia.",
+   "fecha": {
+    "anio": 1492,
+    "texto": "1492"
+   }
   },
   {
    "id": "CC-5-U1-002",
@@ -47,7 +51,11 @@
      "texto": "Tras Colón, otros buscaron un paso hacia Asia navegando al oeste."
     }
    ],
-   "frase": "Su expedición halló el paso entre el Atlántico y el Pacífico."
+   "frase": "Su expedición halló el paso entre el Atlántico y el Pacífico.",
+   "fecha": {
+    "anio": 1520,
+    "texto": "1519–1522"
+   }
   },
   {
    "id": "CC-5-U1-003",
@@ -68,7 +76,11 @@
      "texto": "Valdivia llegó a Chile al mando de su hueste."
     }
    ],
-   "frase": "Fundó Santiago del Nuevo Extremo en 1541."
+   "frase": "Fundó Santiago del Nuevo Extremo en 1541.",
+   "fecha": {
+    "anio": 1541,
+    "texto": "1541"
+   }
   },
   {
    "id": "CC-5-U1-004",
@@ -82,7 +94,11 @@
    "dato": "Llegó a Chile con Valdivia y participó en la defensa de Santiago durante el ataque de 1541.",
    "oa": "OA 2",
    "emblema": "casa",
-   "frase": "Defendió Santiago durante el ataque de 1541."
+   "frase": "Defendió Santiago durante el ataque de 1541.",
+   "fecha": {
+    "anio": 1541,
+    "texto": "1541"
+   }
   },
   {
    "id": "CC-5-U1-005",
@@ -97,7 +113,11 @@
    "dato": "Barcos más livianos, la brújula y el astrolabio hicieron posibles los grandes viajes de descubrimiento.",
    "oa": "OA 1",
    "emblema": "barco",
-   "frase": "Barcos livianos y nuevos instrumentos hicieron posibles los grandes viajes."
+   "frase": "Barcos livianos y nuevos instrumentos hicieron posibles los grandes viajes.",
+   "fecha": {
+    "anio": 1450,
+    "texto": "siglo XV"
+   }
   },
   {
    "id": "CC-5-U1-006",
@@ -118,7 +138,11 @@
      "texto": "Valdivia fundó Santiago y otras ciudades para asentar la conquista."
     }
    ],
-   "frase": "Santiago, La Serena, Concepción: ciudades para quedarse."
+   "frase": "Santiago, La Serena, Concepción: ciudades para quedarse.",
+   "fecha": {
+    "anio": 1541,
+    "texto": "desde 1541"
+   }
   },
   {
    "id": "CC-5-U1-007",
@@ -260,7 +284,11 @@
      "texto": "Lautaro conoció la forma de combatir española sirviendo a Valdivia."
     }
    ],
-   "frase": "Aprendió la forma de combatir española para resistirla."
+   "frase": "Aprendió la forma de combatir española para resistirla.",
+   "fecha": {
+    "anio": 1553,
+    "texto": "1553"
+   }
   },
   {
    "id": "CC-5-U2-004",
@@ -327,7 +355,43 @@
    "dato": "En 1641 españoles y mapuches acordaron la paz y reconocieron el río Biobío como frontera.",
    "oa": "OA 7",
    "emblema": "pergamino",
-   "frase": "1641: paz entre españoles y mapuches en el Biobío."
+   "conexiones": [
+    {
+     "causa": "CC-5-U2-007",
+     "texto": "La resistencia mapuche llevó a españoles y mapuches a negociar la paz en Quilín."
+    }
+   ],
+   "frase": "1641: paz entre españoles y mapuches en el Biobío.",
+   "fecha": {
+    "anio": 1641,
+    "texto": "1641"
+   }
+  },
+  {
+   "id": "CC-5-U2-007",
+   "nombre": "Pueblo mapuche",
+   "tipo": "protagonista",
+   "curso": 5,
+   "unidad": 2,
+   "dimension": "Territorio",
+   "resistencia": 80,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Malón",
+     "costo": 1,
+     "danio": 20
+    },
+    {
+     "nombre": "Defensa del territorio",
+     "costo": 2,
+     "danio": 40
+    }
+   ],
+   "dato": "Pueblo del centro-sur de Chile que resistió la Conquista y mantuvo su autonomía al sur del Biobío durante la Colonia.",
+   "oa": "OA 7",
+   "emblema": "escudo",
+   "frase": "Resistió la Conquista y mantuvo su autonomía al sur del Biobío."
   },
   {
    "id": "CC-5-U3-001",

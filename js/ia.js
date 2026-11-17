@@ -1,11 +1,82 @@
-// Rival automático: simple, predecible y suficiente para practicar.
-import { jugadasValidas } from './motor.js';
+// Rival automático con tres niveles:
+// Aprendiz (a veces se equivoca), Historiador (reglas simples) y Cronista (simula cada jugada y elige la mejor).
+import { jugadasValidas, aplicarJugada, danioDeAccion } from './motor.js';
+import { rngDesdeEstado } from './rng.js';
+
+export const NIVELES = [
+  { id: 'aprendiz', nombre: 'Aprendiz', texto: 'Está aprendiendo: a veces se equivoca.' },
+  { id: 'historiador', nombre: 'Historiador', texto: 'Juega con reglas claras.' },
+  { id: 'cronista', nombre: 'Cronista', texto: 'Piensa cada jugada. ¡Difícil!' },
+];
 
 const valorBase = c => (c.resistencia || 0) + Math.max(0, ...(c.acciones || []).map(a => a.danio || 0));
 
-export function elegirJugada(estado, jugador) {
+export function elegirJugada(estado, jugador, { nivel = 'historiador' } = {}) {
   const js = jugadasValidas(estado);
   if (!js.length) return null;
+  if (nivel === 'aprendiz') {
+    const rng = rngDesdeEstado(((estado.rng >>> 0) ^ Math.imul(estado.numeroTurno + 1, 2654435761) ^ (js.length * 97)) >>> 0);
+    if (rng.siguiente() < 0.5) {
+      const sinPasar = js.filter(j => j.tipo !== 'pasar');
+      const lista = sinPasar.length ? sinPasar : js;
+      return lista[Math.floor(rng.siguiente() * lista.length)];
+    }
+  }
+  if (js[0].tipo === 'ubicar') return ubicarBien(estado.jugadores[jugador]);
+  if (nivel === 'cronista' && estado.fase === 'turno') return cronista(estado, jugador, js);
+  return historiador(estado, jugador, js);
+}
+
+// Línea de tiempo: el primer hueco donde la carta queda en orden.
+function ubicarBien(yo) {
+  const k = yo.linea.findIndex(x => x.anio > yo.porUbicar.anio);
+  return { tipo: 'ubicar', posicion: k < 0 ? yo.linea.length : k };
+}
+
+// ---------- Cronista ----------
+const vida = p => (p ? Math.max(0, p.carta.resistencia - p.danio) : 0);
+const enMesa = yo => [yo.activo, ...yo.reserva].filter(Boolean);
+const suma = xs => xs.reduce((a, b) => a + b, 0);
+
+function mejorGolpe(e, j, saberExtra) {
+  const atk = e.jugadores[j].activo;
+  if (!atk || !atk.carta.acciones) return 0;
+  return Math.max(0, ...atk.carta.acciones.map((a, i) => (atk.saber + saberExtra >= a.costo ? danioDeAccion(e, j, i) : 0)));
+}
+
+function evaluar(e, j) {
+  const o = j === 'A' ? 'B' : 'A';
+  if (e.fase === 'fin') return e.ganador === j ? 1e6 : -1e6;
+  const yo = e.jugadores[j], ot = e.jugadores[o];
+  let v = 1000 * (yo.hitos - ot.hitos);
+  v += suma(enMesa(yo).map(vida)) - 1.2 * suma(enMesa(ot).map(vida));
+  v += 14 * suma(enMesa(yo).map(p => p.saber)) - 8 * suma(enMesa(ot).map(p => p.saber));
+  v += 4 * yo.mano.length - 2 * ot.mano.length;
+  if (yo.activo) v += (yo.activo.bonus || 0) * 0.5 + (yo.activo.protegido ? 30 : 0);
+  const miTurno = e.turno === j && e.fase === 'turno';
+  const golpeMio = mejorGolpe(e, j, miTurno ? yo.saberPendiente : 1);
+  const golpeSuyo = mejorGolpe(e, o, miTurno ? 1 : ot.saberPendiente);
+  if (ot.activo && golpeMio >= vida(ot.activo)) v += 250;
+  if (yo.activo && golpeSuyo >= vida(yo.activo)) v -= yo.reserva.length ? 300 : 1500;
+  return v + 0.4 * golpeMio - 0.4 * golpeSuyo;
+}
+
+function cronista(e, j, js) {
+  const base = evaluar(e, j);
+  let libre = null, vLibre = -Infinity, accion = null, vAccion = -Infinity;
+  for (const jd of js) {
+    if (jd.tipo === 'pasar') continue;
+    const v = evaluar(aplicarJugada(e, jd).estado, j);
+    if (jd.tipo === 'accion') { if (v > vAccion) { vAccion = v; accion = jd; } }
+    else if (v > vLibre) { vLibre = v; libre = jd; }
+  }
+  // Primero todo lo que mejora la posición sin terminar el turno; después, la mejor acción.
+  if (libre && vLibre > base + 1) return libre;
+  return accion || { tipo: 'pasar' };
+}
+
+// ---------- Historiador ----------
+function historiador(estado, jugador, js) {
   const yo = estado.jugadores[jugador];
   const otro = estado.jugadores[jugador === 'A' ? 'B' : 'A'];
   const carta = uid => yo.mano.find(c => c.uid === uid)?.carta;

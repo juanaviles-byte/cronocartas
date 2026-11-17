@@ -309,3 +309,43 @@ La ilustración manda: ocupa a sangre los 2/3 superiores de la carta. Cada eleme
 - Junto al activo: "Tu activo tiene N de Saber" y cada acción muestra sus monedas llenas (las que tiene) y vacías (las que faltan), con "Falta N de Saber" o "No se ataca en el primer turno".
 - Al ganar o perder Saber (asignación, conexión, efectos, retirada) sube un "+1 Saber" / "−1 Saber" sobre la carta, con sonido; el registro lo dice.
 - Mientras tienes Saber por repartir, tus Protagonistas brillan y el cartel del turno avisa "+1 de Saber para repartir".
+
+## 17. Ola 3: rejugabilidad y motivación
+
+### 17.1 Línea de tiempo (pensamiento temporal)
+- Cada jugador arma su **línea de tiempo** durante la partida. Las cartas con fecha (Personajes y Acontecimientos con fecha clara, ~35 cartas) entran a la línea cuando se juegan.
+- La primera carta con fecha entra sola. Desde la segunda, **el jugador elige dónde va** (antes, entre o después de las que ya tiene). Si acierta, su activo gana **+1 Saber** ("¡Bien ubicada!"). Si se equivoca, la carta se coloca en su lugar correcto y se muestra el año: no hay castigo, se aprende.
+- Las fechas iguales cuentan como correctas en cualquier orden.
+- La línea se ve en la mesa como una franja pequeña con los años, y completa en la pantalla final.
+- Motor: `crearPartida({..., lineaTiempo: true})`. Al jugar una carta con `fecha`, queda en `porUbicar` y la única jugada válida es `{tipo: 'ubicar', posicion}` hasta resolverla. La carta igual va al descarte (las conexiones no cambian).
+- Se puede apagar al elegir partida (activada por defecto; apagada en el tutorial).
+- Fechas: campo `fecha: {anio, texto}` (años antes de Cristo en negativo). Solo se fechan cartas cuya fecha es clara y aparece o se deduce de su dato.
+
+### 17.2 Rival automático con niveles
+- **Aprendiz:** la mitad de las veces juega como el Historiador y la otra mitad hace una jugada al azar; ubica la línea de tiempo al azar.
+- **Historiador:** el rival actual; ubica bien la línea de tiempo.
+- **Cronista:** evalúa cada jugada posible simulándola (daño efectivo con ventaja, derrotas, Saber, salud de su mesa y de la del rival) y elige la mejor. Ubica bien la línea.
+- Se elige al jugar contra la tablet y queda recordado. Meta comprobada por simulación: Cronista gana a Historiador y Historiador gana a Aprendiz en la mayoría de las partidas.
+
+### 17.3 Duelos temáticos (mazos enfrentados)
+- Modo nuevo "Duelo temático": cada jugador toma un **bando** con identidad (nombre, lema, color). Duelos:
+  - 5°: Conquistadores vs. Pueblos originarios
+  - 6°: Patriotas vs. Realistas
+  - 7°: Grecia vs. Roma, y Mesoamérica vs. Andes
+  - 8°: Absolutismo vs. Ilustración
+- Cada bando tiene un **núcleo** de cartas propias que siempre entran a su mazo (los Protagonistas del núcleo, con su base si son Etapa 2). El resto del mazo se completa con cartas del curso, **sin** las del núcleo rival.
+- El duelo usa el tablero de la unidad correspondiente.
+- Cartas nuevas para que ambos bandos existan: Pueblo mapuche (5°), Ejército realista y Reconquista española (6°). Van al final de su unidad: los códigos existentes no cambian.
+- Datos en `data/duelos.json`.
+
+### 17.4 Álbum de colección
+- Cada tablet lleva un **álbum**: una carta queda "descubierta" cuando aparece boca arriba en una partida (en tu mano, en la mesa, como Lugar o en un descarte).
+- Vista "Álbum" por curso: avance por unidad (descubiertas/total). Las cartas sin descubrir se ven como dorso con "?".
+- Completar una unidad entrega una **insignia** con el nombre de la unidad. Las insignias se ven en el álbum y se celebran al final de la partida en que se ganan.
+- El docente puede reiniciar el álbum desde su panel. No se guardan nombres de estudiantes.
+
+### 17.5 Modo torneo (día de juegos)
+- El docente crea un torneo: curso, nombres de los participantes (o equipos), modo de juego (normal o duelo temático) y Hitos para ganar.
+- Llave de eliminación directa con sorteo; si el número no es potencia de 2, algunos pasan directo a la segunda ronda ("pasa directo").
+- Cada partida se juega **en la misma tablet** cara a cara ("Jugar esta partida": el ganador se anota solo) o se **anota a mano** (si se jugó en otra tablet).
+- Pantalla de campeón al final. Un torneo a la vez por tablet, guardado en la tablet; se puede borrar.
