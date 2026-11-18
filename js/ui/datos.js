@@ -6,6 +6,10 @@ import { leerImagenes } from '../imagenes.js';
 import { extraerImagenes } from '../ediciones.js';
 import { registrarImagenes } from './carta.js';
 
+// Ilustraciones que trae el juego (data/arte.json). Las que sube el docente en esta tablet tienen prioridad.
+let arteDelJuego = null;
+const cargarArte = () => (arteDelJuego ||= fetch('data/arte.json').then(r => (r.ok ? r.json() : {})).catch(() => ({})));
+
 export async function cargarCursoCompleto(curso) {
   const d = await cargarCurso(curso, {
     comunidad: almacen.cartasComunidad(curso),
@@ -14,6 +18,6 @@ export async function cargarCursoCompleto(curso) {
   });
   // Las imágenes quedan en un mapa por código de carta; las cartas no las llevan.
   const c = extraerImagenes(d.cartas), a = extraerImagenes(d.aula);
-  registrarImagenes({ ...c.mapa, ...a.mapa });
+  registrarImagenes({ ...(await cargarArte()), ...c.mapa, ...a.mapa });
   return { ...d, cartas: c.cartas, aula: a.cartas };
 }
