@@ -473,9 +473,53 @@ export async function montarMesa(contenedor, opciones) {
       c.appendChild(cr);
     }
     const menu = h('button', 'boton-menu', 'Menú');
-    menu.onclick = () => { location.hash = '#inicio'; };
+    menu.onclick = abrirMenu;
     c.appendChild(menu);
     return c;
+  }
+
+  // Menú de la partida: seguir, salir dejándola guardada, o terminarla (con confirmación).
+  function abrirMenu() {
+    if (raiz.querySelector('.menu-partida')) return;
+    const capa = h('div', `capa capa-menu${girado(estado.turno) ? ' girado' : ''}`);
+    const panel = h('div', 'panel-aviso menu-partida');
+    panel.setAttribute('role', 'dialog');
+    const cerrar = () => capa.remove();
+    const opciones = () => {
+      panel.innerHTML = '<div class="titulo-sabias">Partida en pausa</div>';
+      const seguir = h('button', 'boton-principal', 'Seguir jugando');
+      seguir.onclick = cerrar;
+      const salir = h('button', 'boton-secundario', config.torneo ? 'Volver al torneo' : 'Volver al inicio');
+      salir.appendChild(h('small', '', 'La partida queda guardada para continuar después.'));
+      salir.onclick = () => { cerrar(); location.hash = config.torneo ? '#torneo' : '#inicio'; };
+      const terminar = h('button', 'boton-secundario boton-peligro', 'Terminar partida');
+      terminar.appendChild(h('small', '', 'Se borra y no se podrá continuar.'));
+      terminar.onclick = preguntar;
+      panel.append(seguir, salir, terminar);
+      seguir.focus();
+    };
+    const preguntar = () => {
+      panel.innerHTML = '<div class="titulo-sabias">¿Terminar esta partida?</div><p>Se borra la partida en curso. No se podrá continuar.</p>';
+      const botones = h('div', 'botones');
+      const no = h('button', 'boton-secundario', 'Cancelar');
+      no.onclick = cerrar;   // vuelve directo a la partida
+      const si = h('button', 'boton-principal boton-peligro', 'Sí, terminar');
+      si.onclick = () => { cerrar(); terminarPartida(); };
+      botones.append(no, si);
+      panel.appendChild(botones);
+      no.focus();
+    };
+    opciones();
+    capa.onclick = ev => { if (ev.target === capa) cerrar(); };
+    capa.appendChild(panel);
+    raiz.appendChild(capa);
+  }
+
+  function terminarPartida() {
+    detener();
+    destruir();
+    almacen.borrar(CLAVES.partida);
+    location.hash = config.torneo ? '#torneo' : '#inicio';
   }
 
   function lado(j) {

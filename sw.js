@@ -1,7 +1,7 @@
 // Service worker de Cronocartas: guarda la app en la tablet para jugar sin internet.
 // Al publicar una mejora, sube VERSION y agrega aquí los archivos nuevos
 // (la prueba tests/sw.test.js avisa si falta alguno).
-const VERSION = 'cc-v31';
+const VERSION = 'cc-v32';
 const ARCHIVOS = [
   "./",
   "audio/cronista/accion.ogg",
@@ -372,6 +372,7 @@ const ARCHIVOS = [
   "js/ui/arte.js",
   "js/ui/banco.js",
   "js/ui/carta.js",
+  "js/ui/confirmar.js",
   "js/ui/datos.js",
   "js/ui/director.js",
   "js/ui/docente.js",

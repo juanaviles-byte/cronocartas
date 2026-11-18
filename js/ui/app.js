@@ -5,6 +5,7 @@ import { crearAlbum } from '../album.js';
 import { renderCarta, textoParaLeer } from './carta.js';
 import { botonEscucharCarta, detener } from './voz.js';
 import { cargarCursoCompleto } from './datos.js';
+import { confirmar } from './confirmar.js';
 import { almacen, CLAVES } from '../almacen.js';
 import { esc } from '../html.js';
 
@@ -28,7 +29,11 @@ const vistas = {
     const guardada = almacen.leer(CLAVES.partida, null);
     if (guardada && guardada.version === 1 && guardada.estado && guardada.estado.fase !== 'fin') {
       const b = boton('Continuar partida', 'boton-principal grande', () => { location.hash = '#mesa'; });
-      menu.appendChild(b);
+      const terminar = boton('Terminar partida guardada', 'boton-secundario boton-peligro', async () => {
+        const si = await confirmar({ titulo: '¿Terminar la partida guardada?', texto: 'Se borra la partida en curso. No se podrá continuar.', si: 'Sí, terminar' });
+        if (si) { almacen.borrar(CLAVES.partida); render(); }
+      });
+      menu.append(b, terminar);
     }
     menu.append(
       boton('Jugar', 'boton-principal grande', () => { location.hash = '#jugar'; }),
@@ -135,7 +140,12 @@ const vistas = {
     ll.querySelector('input').onchange = ev => { eleccion.linea = ev.target.checked; };
     gl.appendChild(ll);
 
-    const empezar = boton('Empezar', 'boton-principal grande', () => {
+    const empezar = boton('Empezar', 'boton-principal grande', async () => {
+      const guardada = almacen.leer(CLAVES.partida, null);
+      if (guardada && guardada.estado && guardada.estado.fase !== 'fin') {
+        const si = await confirmar({ titulo: 'Tienes una partida guardada', texto: 'Si empiezas otra, la partida guardada se pierde.', si: 'Empezar otra' });
+        if (!si) return;
+      }
       almacen.borrar(CLAVES.partida);
       partidaPendiente = { ...eleccion, duelo: eleccion.mazo === 'duelo' ? eleccion.duelo : null, nivel: (almacen.leer(CLAVES.ajustes, {}) || {}).nivel };
       location.hash = '#mesa';

@@ -807,3 +807,13 @@ button:disabled { opacity: .35; cursor: default; }
   border: 1.5px solid var(--bronce, #C9A24A); font-size: .86rem; line-height: 1.35; }
 .en-esta-mesa .titulo-mesa { font-weight: 800; font-size: .78rem; color: #7a5a1c; margin-bottom: 2px; }
 .en-esta-mesa ul { margin: 0; padding-left: 1.1em; }
+
+/* Menú de la partida y confirmaciones */
+.menu-partida, .confirmar { display: flex; flex-direction: column; gap: 10px; width: min(92vw, 380px); text-align: center; }
+.menu-partida > button { display: flex; flex-direction: column; align-items: center; gap: 2px; min-height: 52px; }
+.menu-partida > button small { font-size: .74rem; font-weight: 500; opacity: .8; }
+.menu-partida .botones, .confirmar .botones { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+.menu-partida p, .confirmar p { margin: 0; }
+.boton-peligro { border-color: #9E2B25 !important; color: #8a1f19 !important; }
+.boton-principal.boton-peligro { background: #9E2B25 !important; color: #fff !important; }
+.capa-confirmar { z-index: 80; }
