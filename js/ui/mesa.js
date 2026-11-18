@@ -918,7 +918,6 @@ export async function montarMesa(contenedor, opciones) {
     const panel = h('div', 'panel-carta');
     panel.appendChild(renderCarta(carta, { tamano: 'grande', instancia, unidades: unidadesCarta(carta) }));
     const mesaInfo = carta.tipo === 'protagonista' && estado.fase !== 'preparacion' ? danioEnMesa(carta) : null;
-    if (mesaInfo) panel.appendChild(mesaInfo);
     const botones = h('div', 'botones');
     for (const o of opciones) {
       const b = h('button', 'boton-principal', o.texto);   // textoJugada ya escapa los nombres
@@ -929,7 +928,8 @@ export async function montarMesa(contenedor, opciones) {
     const cerrar = h('button', 'boton-secundario', opciones.length ? 'Cancelar' : 'Cerrar');
     cerrar.onclick = () => { detener(); capa.remove(); };
     botones.appendChild(cerrar);
-    panel.appendChild(botones);
+    panel.appendChild(botones);            // las opciones van pegadas a la carta: siempre a mano
+    if (mesaInfo) panel.appendChild(mesaInfo);
     capa.appendChild(panel);
     capa.onclick = ev => { if (ev.target === capa) capa.remove(); };
     raiz.appendChild(capa);

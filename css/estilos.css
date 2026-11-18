@@ -817,3 +817,8 @@ button:disabled { opacity: .35; cursor: default; }
 .boton-peligro { border-color: #9E2B25 !important; color: #8a1f19 !important; }
 .boton-principal.boton-peligro { background: #9E2B25 !important; color: #fff !important; }
 .capa-confirmar { z-index: 80; }
+
+/* Si el contenido de una capa no cabe (ventana baja), la capa se desplaza; los márgenes automáticos
+   centran sin recortar el borde superior. */
+.capa { overflow-y: auto; overscroll-behavior: contain; padding: 12px 0; }
+.capa > * { margin: auto; }
