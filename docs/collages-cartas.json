@@ -17,47 +17,80 @@
    "cartas": [
     "CC-5-U1-007",
     "CC-5-U1-008",
-    "CC-5-U1-009",
-    "CC-5-U2-001",
-    "CC-5-U2-002",
-    "CC-5-U2-003"
+    "CC-8-U2-001",
+    "CC-8-U2-002",
+    "CC-8-U2-007",
+    "CC-5-U1-009"
    ]
   },
   {
    "id": "K03",
    "cartas": [
-    "CC-5-U2-004",
-    "CC-5-U2-005",
-    "CC-5-U2-006",
+    "CC-5-U2-003",
     "CC-5-U2-007",
-    "CC-5-U3-001",
-    "CC-5-U3-002"
+    "CC-6-U4-004",
+    "CC-8-U4-004",
+    "CC-5-U2-001",
+    "CC-5-U2-002"
    ]
   },
   {
    "id": "K04",
    "cartas": [
-    "CC-5-U3-003",
-    "CC-5-U3-004",
-    "CC-5-U3-005",
-    "CC-5-U3-006",
-    "CC-5-U4-001",
-    "CC-5-U4-002"
+    "CC-5-U2-004",
+    "CC-5-U2-005",
+    "CC-5-U2-006",
+    "CC-8-U2-003",
+    "CC-8-U2-004",
+    "CC-8-U2-005"
    ]
   },
   {
    "id": "K05",
    "cartas": [
+    "CC-8-U2-006",
+    "CC-5-U3-001",
+    "CC-5-U3-002",
+    "CC-5-U3-003",
+    "CC-5-U3-004",
+    "CC-5-U3-005"
+   ]
+  },
+  {
+   "id": "K06",
+   "cartas": [
+    "CC-5-U3-006",
+    "CC-6-U4-003",
+    "CC-8-U4-001",
+    "CC-8-U4-002",
+    "CC-8-U4-003",
+    "CC-8-U4-005"
+   ]
+  },
+  {
+   "id": "K07",
+   "cartas": [
+    "CC-5-U4-001",
+    "CC-5-U4-002",
     "CC-5-U4-003",
     "CC-5-U4-004",
     "CC-5-U4-005",
-    "CC-5-U4-006",
+    "CC-5-U4-006"
+   ]
+  },
+  {
+   "id": "K08",
+   "cartas": [
+    "CC-6-U4-001",
+    "CC-6-U4-002",
+    "CC-6-U4-005",
+    "CC-6-U4-006",
     "CC-6-U1-001",
     "CC-6-U1-002"
    ]
   },
   {
-   "id": "K06",
+   "id": "K09",
    "cartas": [
     "CC-6-U1-003",
     "CC-6-U1-004",
@@ -68,155 +101,122 @@
    ]
   },
   {
-   "id": "K07",
+   "id": "K10",
    "cartas": [
     "CC-6-U1-009",
     "CC-6-U1-010",
+    "CC-8-U3-002",
+    "CC-8-U3-003",
     "CC-6-U2-001",
-    "CC-6-U2-002",
-    "CC-6-U2-003",
-    "CC-6-U2-004"
-   ]
-  },
-  {
-   "id": "K08",
-   "cartas": [
-    "CC-6-U2-005",
-    "CC-6-U2-006",
-    "CC-6-U2-007",
-    "CC-6-U3-001",
-    "CC-6-U3-002",
-    "CC-6-U3-003"
-   ]
-  },
-  {
-   "id": "K09",
-   "cartas": [
-    "CC-6-U3-004",
-    "CC-6-U3-005",
-    "CC-6-U3-006",
-    "CC-6-U4-001",
-    "CC-6-U4-002",
-    "CC-6-U4-003"
-   ]
-  },
-  {
-   "id": "K10",
-   "cartas": [
-    "CC-6-U4-004",
-    "CC-6-U4-005",
-    "CC-6-U4-006",
-    "CC-7-U1-001",
-    "CC-7-U1-002",
-    "CC-7-U1-003"
+    "CC-6-U2-002"
    ]
   },
   {
    "id": "K11",
    "cartas": [
-    "CC-7-U1-004",
-    "CC-7-U1-005",
-    "CC-7-U1-006",
-    "CC-7-U2-001",
-    "CC-7-U2-002",
-    "CC-7-U2-003"
+    "CC-6-U2-003",
+    "CC-6-U2-004",
+    "CC-6-U2-005",
+    "CC-6-U2-006",
+    "CC-6-U2-007",
+    "CC-6-U3-001"
    ]
   },
   {
    "id": "K12",
    "cartas": [
-    "CC-7-U2-004",
-    "CC-7-U2-005",
-    "CC-7-U2-006",
-    "CC-7-U2-007",
-    "CC-7-U2-008",
-    "CC-7-U3-001"
+    "CC-6-U3-002",
+    "CC-6-U3-003",
+    "CC-6-U3-004",
+    "CC-6-U3-005",
+    "CC-6-U3-006",
+    "CC-7-U1-001"
    ]
   },
   {
    "id": "K13",
    "cartas": [
-    "CC-7-U3-002",
-    "CC-7-U3-003",
-    "CC-7-U3-004",
-    "CC-7-U3-005",
-    "CC-7-U3-006",
-    "CC-7-U3-007"
+    "CC-7-U1-002",
+    "CC-7-U1-003",
+    "CC-7-U1-004",
+    "CC-7-U1-005",
+    "CC-7-U1-006",
+    "CC-7-U2-001"
    ]
   },
   {
    "id": "K14",
    "cartas": [
+    "CC-7-U2-005",
+    "CC-7-U2-006",
+    "CC-7-U2-007",
+    "CC-7-U2-008",
+    "CC-7-U2-002",
+    "CC-7-U2-003"
+   ]
+  },
+  {
+   "id": "K15",
+   "cartas": [
+    "CC-7-U2-004",
+    "CC-7-U3-001",
+    "CC-7-U3-002",
+    "CC-7-U3-003",
+    "CC-7-U3-004",
+    "CC-7-U3-005"
+   ]
+  },
+  {
+   "id": "K16",
+   "cartas": [
+    "CC-7-U3-006",
+    "CC-7-U3-007",
     "CC-7-U3-008",
     "CC-7-U4-001",
+    "CC-7-U4-006",
+    "CC-7-U4-009"
+   ]
+  },
+  {
+   "id": "K17",
+   "cartas": [
     "CC-7-U4-002",
+    "CC-7-U4-010",
+    "CC-7-U4-011",
     "CC-7-U4-003",
     "CC-7-U4-004",
     "CC-7-U4-005"
    ]
   },
   {
-   "id": "K15",
-   "cartas": [
-    "CC-7-U4-006",
-    "CC-7-U4-007",
-    "CC-7-U4-008",
-    "CC-7-U4-009",
-    "CC-7-U4-010",
-    "CC-7-U4-011"
-   ]
-  },
-  {
-   "id": "K16",
-   "cartas": [
-    "CC-8-U1-001",
-    "CC-8-U1-002",
-    "CC-8-U1-003",
-    "CC-8-U1-004",
-    "CC-8-U1-005",
-    "CC-8-U1-006"
-   ]
-  },
-  {
-   "id": "K17",
-   "cartas": [
-    "CC-8-U1-007",
-    "CC-8-U1-008",
-    "CC-8-U1-009",
-    "CC-8-U2-001",
-    "CC-8-U2-002",
-    "CC-8-U2-003"
-   ]
-  },
-  {
    "id": "K18",
    "cartas": [
-    "CC-8-U2-004",
-    "CC-8-U2-005",
-    "CC-8-U2-006",
-    "CC-8-U2-007",
-    "CC-8-U3-001",
-    "CC-8-U3-002"
+    "CC-7-U4-007",
+    "CC-7-U4-008",
+    "CC-8-U1-001",
+    "CC-8-U1-002",
+    "CC-8-U1-006",
+    "CC-8-U1-007"
    ]
   },
   {
    "id": "K19",
    "cartas": [
-    "CC-8-U3-003",
-    "CC-8-U3-004",
-    "CC-8-U3-005",
-    "CC-8-U3-006",
-    "CC-8-U3-007",
-    "CC-8-U4-001"
+    "CC-8-U1-003",
+    "CC-8-U1-004",
+    "CC-8-U1-005",
+    "CC-8-U1-008",
+    "CC-8-U1-009",
+    "CC-8-U3-001"
    ]
   },
   {
    "id": "K20",
    "cartas": [
-    "CC-8-U4-002",
-    "CC-8-U4-003",
-    "CC-8-U4-004",
-    "CC-8-U4-005",
+    "CC-8-U3-004",
+    "CC-8-U3-005",
+    "CC-8-U3-006",
+    "CC-8-U3-007",
     "CC-A-E3",
     "CC-A-E5"
    ]
@@ -231,5 +231,132 @@
     "CC-A-E12"
    ]
   }
- ]
+ ],
+ "temas": {
+  "CC-5-U1-001": "conquista",
+  "CC-5-U1-002": "conquista",
+  "CC-5-U1-003": "conquista",
+  "CC-5-U1-004": "conquista",
+  "CC-5-U1-005": "conquista",
+  "CC-5-U1-006": "conquista",
+  "CC-5-U1-007": "conquista",
+  "CC-5-U1-008": "conquista",
+  "CC-8-U2-001": "conquista",
+  "CC-8-U2-002": "conquista",
+  "CC-8-U2-007": "conquista",
+  "CC-5-U1-009": "originarios",
+  "CC-5-U2-003": "originarios",
+  "CC-5-U2-007": "originarios",
+  "CC-6-U4-004": "originarios",
+  "CC-8-U4-004": "originarios",
+  "CC-5-U2-001": "colonia",
+  "CC-5-U2-002": "colonia",
+  "CC-5-U2-004": "colonia",
+  "CC-5-U2-005": "colonia",
+  "CC-5-U2-006": "colonia",
+  "CC-8-U2-003": "colonia",
+  "CC-8-U2-004": "colonia",
+  "CC-8-U2-005": "colonia",
+  "CC-8-U2-006": "colonia",
+  "CC-5-U3-001": "paisajes",
+  "CC-5-U3-002": "paisajes",
+  "CC-5-U3-003": "paisajes",
+  "CC-5-U3-004": "paisajes",
+  "CC-5-U3-005": "paisajes",
+  "CC-5-U3-006": "paisajes",
+  "CC-6-U4-003": "paisajes",
+  "CC-8-U4-001": "paisajes",
+  "CC-8-U4-002": "paisajes",
+  "CC-8-U4-003": "paisajes",
+  "CC-8-U4-005": "paisajes",
+  "CC-5-U4-001": "ciudadania",
+  "CC-5-U4-002": "ciudadania",
+  "CC-5-U4-003": "ciudadania",
+  "CC-5-U4-004": "ciudadania",
+  "CC-5-U4-005": "ciudadania",
+  "CC-5-U4-006": "ciudadania",
+  "CC-6-U4-001": "ciudadania",
+  "CC-6-U4-002": "ciudadania",
+  "CC-6-U4-005": "ciudadania",
+  "CC-6-U4-006": "ciudadania",
+  "CC-6-U1-001": "independencia",
+  "CC-6-U1-002": "independencia",
+  "CC-6-U1-003": "independencia",
+  "CC-6-U1-004": "independencia",
+  "CC-6-U1-005": "independencia",
+  "CC-6-U1-006": "independencia",
+  "CC-6-U1-007": "independencia",
+  "CC-6-U1-008": "independencia",
+  "CC-6-U1-009": "independencia",
+  "CC-6-U1-010": "independencia",
+  "CC-8-U3-002": "independencia",
+  "CC-8-U3-003": "independencia",
+  "CC-6-U2-001": "republica",
+  "CC-6-U2-002": "republica",
+  "CC-6-U2-003": "republica",
+  "CC-6-U2-004": "republica",
+  "CC-6-U2-005": "republica",
+  "CC-6-U2-006": "republica",
+  "CC-6-U2-007": "republica",
+  "CC-6-U3-001": "sigloxx",
+  "CC-6-U3-002": "sigloxx",
+  "CC-6-U3-003": "sigloxx",
+  "CC-6-U3-004": "sigloxx",
+  "CC-6-U3-005": "sigloxx",
+  "CC-6-U3-006": "sigloxx",
+  "CC-7-U1-001": "prehistoria",
+  "CC-7-U1-002": "prehistoria",
+  "CC-7-U1-003": "oriente",
+  "CC-7-U1-004": "oriente",
+  "CC-7-U1-005": "oriente",
+  "CC-7-U1-006": "oriente",
+  "CC-7-U2-001": "grecia",
+  "CC-7-U2-005": "grecia",
+  "CC-7-U2-006": "grecia",
+  "CC-7-U2-007": "grecia",
+  "CC-7-U2-008": "grecia",
+  "CC-7-U2-002": "roma",
+  "CC-7-U2-003": "roma",
+  "CC-7-U2-004": "roma",
+  "CC-7-U3-001": "medieval",
+  "CC-7-U3-002": "medieval",
+  "CC-7-U3-003": "medieval",
+  "CC-7-U3-004": "medieval",
+  "CC-7-U3-005": "medieval",
+  "CC-7-U3-006": "medieval",
+  "CC-7-U3-007": "medieval",
+  "CC-7-U3-008": "medieval",
+  "CC-7-U4-001": "mayas",
+  "CC-7-U4-006": "mayas",
+  "CC-7-U4-009": "mayas",
+  "CC-7-U4-002": "aztecas",
+  "CC-7-U4-010": "aztecas",
+  "CC-7-U4-011": "aztecas",
+  "CC-7-U4-003": "incas",
+  "CC-7-U4-004": "incas",
+  "CC-7-U4-005": "incas",
+  "CC-7-U4-007": "incas",
+  "CC-7-U4-008": "incas",
+  "CC-8-U1-001": "renacimiento",
+  "CC-8-U1-002": "renacimiento",
+  "CC-8-U1-006": "renacimiento",
+  "CC-8-U1-007": "renacimiento",
+  "CC-8-U1-003": "absolutismo",
+  "CC-8-U1-004": "absolutismo",
+  "CC-8-U1-005": "absolutismo",
+  "CC-8-U1-008": "absolutismo",
+  "CC-8-U1-009": "absolutismo",
+  "CC-8-U3-001": "ilustracion",
+  "CC-8-U3-004": "ilustracion",
+  "CC-8-U3-005": "ilustracion",
+  "CC-8-U3-006": "ilustracion",
+  "CC-8-U3-007": "ilustracion",
+  "CC-A-E3": "aula",
+  "CC-A-E5": "aula",
+  "CC-A-E6": "aula",
+  "CC-A-E7": "aula",
+  "CC-A-E8": "aula",
+  "CC-A-E9": "aula",
+  "CC-A-E12": "aula"
+ }
 }
