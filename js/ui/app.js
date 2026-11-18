@@ -65,7 +65,7 @@ const vistas = {
     grupo('¿Cómo juegan?').appendChild(opciones([['caraacara', 'Cara a cara', 'Dos jugadores en esta tablet'], ['ia', 'Contra la tablet', 'Un jugador']],
       eleccion.modo, m => { eleccion.modo = m; }));
     if (eleccion.modo === 'ia') {
-      const nivel = ajustes.nivel || 'historiador';
+      const nivel = ajustes.nivel === 'cronista' ? 'erudito' : ajustes.nivel || 'historiador';
       grupo('Nivel de la tablet').appendChild(opciones(NIVELES.map(n => [n.id, n.nombre, n.texto]), nivel,
         n => { almacen.guardar(CLAVES.ajustes, { ...(almacen.leer(CLAVES.ajustes, {}) || {}), nivel: n }); }, 'opciones niveles'));
     }

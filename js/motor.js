@@ -475,3 +475,12 @@ function iniciarTurno(e, ev) {
   const robadas = robar(yo, 1);
   ev.push({ tipo: 'turno', jugador: e.turno, numero: e.numeroTurno, robo: robadas.length });
 }
+
+// Deshacer: una jugada se puede revertir si no terminó el turno y no reveló información nueva
+// (no robó ni buscó en el mazo, no ubicó en la línea de tiempo, no atacó).
+export function jugadaReversible(antes, despues, jugada) {
+  if (['accion', 'pasar', 'ubicar', 'promover'].includes(jugada.tipo)) return false;
+  if (despues.turno !== antes.turno || despues.fase !== antes.fase) return false;
+  const j = antes.turno;
+  return despues.jugadores[j].mazo.length === antes.jugadores[j].mazo.length;
+}

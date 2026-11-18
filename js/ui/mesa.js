@@ -1,6 +1,7 @@
 // Mesa de juego: cara a cara en la misma tablet, contra la tablet o tutorial.
 // Solo dibuja y traduce toques en jugadas; las reglas viven en motor.js.
-import { crearPartida, jugadasValidas, aplicarJugada, busquedaDe } from '../motor.js';
+import { crearPartida, jugadasValidas, aplicarJugada, busquedaDe, danioDeAccion, jugadaReversible, VENTAJA } from '../motor.js';
+import { situacion, situacionDeEvento, pista } from './guia.js';
 import { elegirJugada } from '../ia.js';
 import { armarMazo, mazoDeBando } from '../mazos.js';
 import { crearAlbum, cartasVisibles } from '../album.js';
@@ -51,12 +52,13 @@ export async function montarMesa(contenedor, opciones) {
     leerSabias: !!ajustes.leerSabias,
     tablero: opciones.tablero || 'azar',
     reforzar: !!opciones.reforzar,
-    nivel: opciones.nivel || ajustes.nivel || 'historiador',
+    nivel: ({ cronista: 'erudito' })[opciones.nivel || ajustes.nivel] || opciones.nivel || ajustes.nivel || 'historiador',
     linea: opciones.modo === 'tutorial' ? false : opciones.linea !== false,
     duelo: opciones.duelo || null,
     bandoA: opciones.bandoA || null,
     nombres: opciones.nombres || null,
     torneo: opciones.torneo || null,
+    cronista: opciones.modo === 'tutorial' || ajustes.cronista !== false,
   };
   const contraIA = config.modo !== 'caraacara';
   // Los nombres solo se insertan en HTML: se guardan ya escapados (en el torneo los escribe el docente).
@@ -96,6 +98,7 @@ export async function montarMesa(contenedor, opciones) {
   const partidaNueva = !opciones.estado;
   let vivo = true;
   let ocupado = false;           // mientras se muestra un aviso o juega la IA
+  let historial = [];            // estados anteriores del turno, para Deshacer
   let caidas = [];               // cartas caídas, para el resumen final
   let temporizador = null;
   const raiz = h('div', `mesa modo-${config.modo}`);
@@ -141,7 +144,7 @@ export async function montarMesa(contenedor, opciones) {
     raiz.appendChild(lado('B'));
     raiz.appendChild(centro());
     raiz.appendChild(lado('A'));
-    if (config.modo === 'tutorial') raiz.appendChild(entrenador());
+    if (config.modo === 'tutorial') entrenador();
     const ahora = new Set([...raiz.querySelectorAll('.campo [data-uid]')].map(e => e.dataset.uid));
     if (uidsAntes) raiz.querySelectorAll('.campo [data-uid]').forEach(e => { if (!uidsAntes.has(e.dataset.uid)) e.classList.add('entra'); });
     uidsAntes = ahora;
@@ -150,6 +153,8 @@ export async function montarMesa(contenedor, opciones) {
     registrarAlbum();
     activarArrastre();
     revisarUbicar();
+    guiaProactiva();
+    dibujarGlobo();
     programarIA();
   }
 
@@ -288,6 +293,18 @@ export async function montarMesa(contenedor, opciones) {
     son.setAttribute('aria-label', 'Sonido');
     son.onclick = () => { son.innerHTML = alternarSonido() ? ICONO_SONIDO : ICONO_SILENCIO; };
     c.appendChild(son);
+    if (config.modo !== 'tutorial') {
+      const cr = h('button', `boton-guia${config.cronista ? ' encendida' : ''}`, '<img src="img/cronista/cara.jpg" alt="">');
+      cr.setAttribute('aria-label', config.cronista ? 'Apagar a La Cronista' : 'Encender a La Cronista');
+      cr.title = config.cronista ? 'La Cronista: encendida' : 'La Cronista: apagada';
+      cr.onclick = () => {
+        config.cronista = !config.cronista;
+        almacen.guardar(CLAVES.ajustes, { ...(almacen.leer(CLAVES.ajustes, {}) || {}), cronista: config.cronista });
+        if (!config.cronista) globo = null;
+        render();
+      };
+      c.appendChild(cr);
+    }
     const menu = h('button', 'boton-menu', 'Menú');
     menu.onclick = () => { location.hash = '#inicio'; };
     c.appendChild(menu);
@@ -322,9 +339,14 @@ export async function montarMesa(contenedor, opciones) {
         const falta = Math.max(0, a.costo - tiene);
         const costo = Array.from({ length: a.costo }, (_, i) => `<span class="pip${i < tiene ? '' : ' vacia'}"></span>`).join('');
         const primerTurno = estado.numeroTurno <= 1 && esMiTurno;
+        const rivalActivo = estado.jugadores[j === 'A' ? 'B' : 'A'].activo;
+        const ventaja = rivalActivo && VENTAJA[yo.activo.carta.dimension] === rivalActivo.carta.dimension;
+        const efectivo = rivalActivo && !rivalActivo.protegido ? danioDeAccion(estado, j, indice) : a.danio;
         const nota = falta ? `<small class="falta">Falta ${falta} de Saber</small>`
-          : primerTurno ? '<small class="falta">No se ataca en el primer turno</small>' : '';
-        const b = h('button', `boton-accion${falta ? ' sin-saber' : ''}`, `<span class="costo">${costo}</span><span class="an">${esc(a.nombre)}${nota}</span><b>${esc(a.danio)}</b>`);
+          : primerTurno ? '<small class="falta">No se ataca en el primer turno</small>'
+          : rivalActivo && rivalActivo.protegido ? '<small class="falta">El rival está protegido</small>' : '';
+        const marca = ventaja ? '<i class="x2" title="Ventaja: daño doble">×2</i>' : '';
+        const b = h('button', `boton-accion${falta ? ' sin-saber' : ''}${ventaja ? ' con-ventaja' : ''}`, `<span class="costo">${costo}</span><span class="an">${esc(a.nombre)}${nota}</span><b>${esc(efectivo)}${marca}</b>`);
         b.disabled = !ok;
         b.onclick = () => jugar({ tipo: 'accion', indice });
         acciones.appendChild(b);
@@ -376,6 +398,12 @@ export async function montarMesa(contenedor, opciones) {
     fila.appendChild(mano);
 
     const controles = h('div', 'controles');
+    if (humano && config.cronista) controles.appendChild(botonCronista(j));
+    if (esMiTurno && humano && historial.length && ['turno', 'preparacion'].includes(estado.fase)) {
+      const d = h('button', 'boton-secundario boton-deshacer', 'Deshacer');
+      d.onclick = deshacer;
+      controles.appendChild(d);
+    }
     if (esMiTurno && humano) {
       const validas = jugadasValidas(estado);
       if (estado.fase === 'turno' && yo.saberPendiente > 0) controles.appendChild(h('div', 'pista pista-saber', `<span class="pip"></span> Ganaste 1 de Saber este turno: toca un Protagonista para dárselo`));
@@ -388,7 +416,7 @@ export async function montarMesa(contenedor, opciones) {
         if (!listo) controles.appendChild(h('div', 'pista', 'Toca un Protagonista de tu mano'));
         else if (!yo.reserva.length) controles.appendChild(h('div', 'pista suave', 'Consejo: pon Protagonistas en la reserva. Si tu activo cae y no tienes reserva, pierdes.'));
       } else if (estado.fase === 'turno') {
-        const b = h('button', 'boton-secundario', 'Pasar turno');
+        const b = h('button', 'boton-secundario boton-pasar', 'Pasar turno');
         b.onclick = () => jugar({ tipo: 'pasar' });
         controles.appendChild(b);
       } else if (estado.fase === 'promover') {
@@ -416,7 +444,89 @@ export async function montarMesa(contenedor, opciones) {
       if (e.numeroTurno >= 7) t = '¡Ya sabes jugar! Gana quien consigue 3 <b>Hitos</b> (derrotar Protagonistas). Sigue o vuelve al menú.';
     } else if (e.fase === 'promover' && e.turno === 'A') t = 'Tu activo cayó. Elige quién de tu reserva pasa al frente.';
     else if (e.turno === 'B') t = 'Ahora juega la tablet…';
-    return h('div', 'entrenador', t);
+    // En el tutorial, La Cronista dice el paso a paso (salvo que se le haya pedido una pista).
+    if (!globo || globo.tutorial) globo = { j: 'A', expresion: 'explica', texto: t, tutorial: true };
+  }
+
+  // ---------- La Cronista (guía) ----------
+  const vistasGuia = new Set();   // lo que ya explicó en esta partida, por jugador
+  let globo = null;               // { j, expresion, texto, jugada?, auto?, tutorial? }
+  let temporizadorGlobo = null;
+  const humanoEs = j => !(contraIA && j === 'B');
+
+  function hablar(j, dicho, { auto = false } = {}) {
+    clearTimeout(temporizadorGlobo);
+    globo = { j, ...dicho, auto };
+    if (auto) temporizadorGlobo = setTimeout(() => { if (globo && globo.auto) { globo = null; dibujarGlobo(); } }, 11000);
+    dibujarGlobo();
+  }
+
+  function guiaProactiva() {
+    if (!config.cronista || config.modo === 'tutorial' || ocupado || (globo && !globo.tutorial)) return;
+    const j = estado.turno;
+    if (!humanoEs(j)) return;
+    const s = situacion(estado, j);
+    if (!s || vistasGuia.has(`${j}:${s.clave}`)) return;
+    vistasGuia.add(`${j}:${s.clave}`);
+    hablar(j, s, { auto: true });
+  }
+
+  function guiaDeEvento(ev) {
+    if (!config.cronista || config.modo === 'tutorial') return;
+    for (const j of ['A', 'B'].filter(humanoEs)) {
+      const s = situacionDeEvento(ev, j);
+      if (s && !vistasGuia.has(`${j}:${s.clave}`)) { vistasGuia.add(`${j}:${s.clave}`); hablar(j, s, { auto: true }); }
+    }
+  }
+
+  function pedirPista(j) {
+    if (globo && globo.j === j && globo.esPista) { globo = null; dibujarGlobo(); return; }   // segundo toque: cierra
+    hablar(j, { ...pista(estado, j), esPista: true });
+  }
+
+  // Elemento de la mesa que corresponde a la jugada sugerida, para resaltarlo.
+  function objetivoDe(jd) {
+    if (!jd) return [];
+    const L = `.lado-${estado.turno}`;
+    const q = sel => [...raiz.querySelectorAll(sel)];
+    switch (jd.tipo) {
+      case 'asignarSaber': return q(`${L} .campo [data-uid="${CSS.escape(jd.destino)}"]`);
+      case 'accion': return q(`${L} .boton-accion`).slice(jd.indice, jd.indice + 1);
+      case 'colocar': case 'bajar': case 'evolucionar': case 'jugar': return q(`${L} .mano [data-mano="${CSS.escape(jd.uid)}"]`);
+      case 'retirar': return q(`${L} .campo [data-uid="${CSS.escape(jd.reemplazo)}"]`);
+      case 'promover': return q(`${L} .campo [data-uid="${CSS.escape(jd.uid)}"]`);
+      case 'listo': return q(`${L} .controles .boton-principal`);
+      case 'pasar': return q(`${L} .controles .boton-pasar`);
+      default: return [];
+    }
+  }
+
+  function dibujarGlobo() {
+    raiz.querySelectorAll('.globo-cronista').forEach(g => g.remove());
+    raiz.querySelectorAll('.sugerida').forEach(g => g.classList.remove('sugerida'));
+    if (!globo || (!config.cronista && !globo.tutorial)) return;
+    const g = h('div', `globo-cronista lado-globo-${globo.j}${girado(globo.j) ? ' girado' : ''}${globo.tutorial ? ' entrenador' : ''}`);
+    const cara = ['explica', 'pista', 'celebra', 'atenta'].includes(globo.expresion) ? globo.expresion : 'explica';
+    // globo.texto viene de guia.js (nombres ya escapados con esc) o del paso a paso del tutorial (texto fijo).
+    g.innerHTML = '<img class="retrato" src="img/cronista/' + cara + '.jpg" alt="La Cronista"><div class="dice"><b class="quien">La Cronista</b><p>' + globo.texto + '</p></div>';
+    const dice = g.querySelector('.dice');
+    const acciones = h('div', 'acciones-globo');
+    acciones.appendChild(botonEscuchar(() => globo ? globo.texto.replace(/<[^>]+>/g, '') : '', 'boton-mini'));
+    if (!globo.tutorial) {
+      const ok = h('button', 'boton-mini', 'Entendido');
+      ok.onclick = ev => { ev.stopPropagation(); globo = null; dibujarGlobo(); };
+      acciones.appendChild(ok);
+    }
+    dice.appendChild(acciones);
+    raiz.appendChild(g);
+    if (globo.jugada && estado.turno === globo.j) objetivoDe(globo.jugada).forEach(el => el.classList.add('sugerida'));
+  }
+
+  function botonCronista(j) {
+    const b = h('button', 'boton-cronista', '<img src="img/cronista/cara.jpg" alt=""><span>Pista</span>');
+    b.setAttribute('aria-label', 'Pedir una pista a La Cronista');
+    b.onclick = () => pedirPista(j);
+    return b;
   }
 
   // ---------- Toques ----------
@@ -529,12 +639,26 @@ export async function montarMesa(contenedor, opciones) {
   async function jugar(jugada) {
     if (!vivo || estado.fase === 'fin') return;
     let r;
+    const antes = estado;
     try { r = aplicarJugada(estado, jugada); } catch { render(); return; }
     estado = r.estado;
+    if (humanoEs(antes.turno) && jugadaReversible(antes, estado, jugada)) historial.push(antes);
+    else historial = [];
+    if (globo && !globo.tutorial) globo = null;
     guardar();
     render();
     await mostrarEventos(r.eventos);
     if (estado.fase === 'fin') pantallaFinal();
+  }
+
+  // Deshacer: vuelve al estado anterior a la última jugada reversible del turno.
+  function deshacer() {
+    if (ocupado || !historial.length) return;
+    estado = historial.pop();
+    globo = null;
+    guardar();
+    render();
+    registrar('Se deshizo la última jugada.');
   }
 
   function registrar(texto) {
@@ -549,6 +673,7 @@ export async function montarMesa(contenedor, opciones) {
       if (ev.tipo === 'turno' && estado.fase === 'turno') { sonidos.turno(); if (ev.robo) sonidos.robar(); anunciarTurno(ev.jugador); }
       if (ev.tipo === 'ventaja') { sonidos.ventaja(); registrar(`<b>¡Ventaja ×2!</b> ${FRASES_VENTAJA[ev.de]}`); }
       if (ev.tipo === 'protegido') sonidos.protegido();
+      guiaDeEvento(ev);
       if (ev.tipo === 'hito') sonidos.hito();
       if (ev.tipo === 'saber') {
         const yo = estado.jugadores[ev.jugador];

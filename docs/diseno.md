@@ -324,8 +324,8 @@ La ilustración manda: ocupa a sangre los 2/3 superiores de la carta. Cada eleme
 ### 17.2 Rival automático con niveles
 - **Aprendiz:** la mitad de las veces juega como el Historiador y la otra mitad hace una jugada al azar; ubica la línea de tiempo al azar.
 - **Historiador:** el rival actual; ubica bien la línea de tiempo.
-- **Cronista:** evalúa cada jugada posible simulándola (daño efectivo con ventaja, derrotas, Saber, salud de su mesa y de la del rival) y elige la mejor. Ubica bien la línea.
-- Se elige al jugar contra la tablet y queda recordado. Meta comprobada por simulación: Cronista gana a Historiador y Historiador gana a Aprendiz en la mayoría de las partidas.
+- **Erudito** (antes "Cronista"; el nombre quedó para la guía): evalúa cada jugada posible simulándola (daño efectivo con ventaja, derrotas, Saber, salud de su mesa y de la del rival) y elige la mejor. Ubica bien la línea.
+- Se elige al jugar contra la tablet y queda recordado. Meta comprobada por simulación: Erudito gana a Historiador y Historiador gana a Aprendiz en la mayoría de las partidas.
 
 ### 17.3 Duelos temáticos (mazos enfrentados)
 - Modo nuevo "Duelo temático": cada jugador toma un **bando** con identidad (nombre, lema, color). Duelos:
@@ -350,3 +350,32 @@ La ilustración manda: ocupa a sangre los 2/3 superiores de la carta. Cada eleme
 - Llave de eliminación directa con sorteo; si el número no es potencia de 2, algunos pasan directo a la segunda ronda ("pasa directo").
 - Cada partida se juega **en la misma tablet** cara a cara ("Jugar esta partida": el ganador se anota solo) o se **anota a mano** (si se jugó en otra tablet).
 - Pantalla de campeón al final. Un torneo a la vez por tablet, guardado en la tablet; se puede borrar.
+
+## 18. La Cronista (guía) y ayudas de juego
+
+- **La Cronista:** personaje 100% ficticio (retrato en `img/cronista/`: explica, pista, celebra, atenta y cara). Es la guía del estudiante.
+  - **Habla sola la primera vez** que ocurre cada situación en la partida, por jugador:
+    - preparar el activo y la reserva;
+    - el primer Saber;
+    - el primer turno sin ataque;
+    - ventaja y desventaja;
+    - evolución;
+    - Personaje, Lugar y Aula en la mano;
+    - activo en peligro;
+    - acción disponible;
+    - línea de tiempo.
+
+    También ante eventos: la primera Conexión, el primer Hito, la primera carta bien ubicada y el primer Protagonista perdido. El globo se cierra solo a los 11 s o con "Entendido".
+  - **Pista a pedido** (botón "Pista" junto a los controles): sugiere la jugada que haría el rival Erudito, la explica en lenguaje simple y resalta en la mesa la carta o el botón correspondiente. En la línea de tiempo **no** da la respuesta: solo orienta con una fecha conocida.
+  - Lectura en voz alta con "Escuchar". Se apaga o enciende con su retrato en la barra central (queda recordado en la tablet).
+  - En el tutorial, La Cronista dice el paso a paso (reemplaza al antiguo cartel del entrenador).
+  - **Decisión:** "la primera vez" se cuenta por partida, no por tablet, porque varias personas usan la misma tablet.
+  - Por eso el nivel difícil del rival pasó a llamarse **Erudito**. Los ajustes guardados con el nombre antiguo se traducen solos.
+- **Ventaja visible:** cada acción muestra el daño efectivo contra el activo rival (con Lugar, tablero y habilidades) y la marca "×2" si hay ventaja. Si el rival está protegido, la acción lo dice.
+- **Deshacer:** vuelve atrás la última jugada del turno si no reveló información nueva. No se puede deshacer:
+  - atacar o pasar el turno;
+  - ubicar en la línea de tiempo;
+  - elegir un nuevo activo;
+  - robar o buscar cartas del mazo.
+
+  Motor: `jugadaReversible(antes, despues, jugada)`.
