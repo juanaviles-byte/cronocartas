@@ -1,12 +1,12 @@
 // Rival automático con tres niveles:
-// Aprendiz (a veces se equivoca), Historiador (reglas simples) y Cronista (simula cada jugada y elige la mejor).
+// Aprendiz (a veces se equivoca), Historiador (reglas simples) y Erudito (simula cada jugada y elige la mejor).
 import { jugadasValidas, aplicarJugada, danioDeAccion } from './motor.js';
 import { rngDesdeEstado } from './rng.js';
 
 export const NIVELES = [
   { id: 'aprendiz', nombre: 'Aprendiz', texto: 'Está aprendiendo: a veces se equivoca.' },
   { id: 'historiador', nombre: 'Historiador', texto: 'Juega con reglas claras.' },
-  { id: 'cronista', nombre: 'Cronista', texto: 'Piensa cada jugada. ¡Difícil!' },
+  { id: 'erudito', nombre: 'Erudito', texto: 'Piensa cada jugada. ¡Difícil!' },
 ];
 
 const valorBase = c => (c.resistencia || 0) + Math.max(0, ...(c.acciones || []).map(a => a.danio || 0));
@@ -23,7 +23,7 @@ export function elegirJugada(estado, jugador, { nivel = 'historiador' } = {}) {
     }
   }
   if (js[0].tipo === 'ubicar') return ubicarBien(estado.jugadores[jugador]);
-  if (nivel === 'cronista' && estado.fase === 'turno') return cronista(estado, jugador, js);
+  if (nivel === 'erudito' && estado.fase === 'turno') return erudito(estado, jugador, js);
   return historiador(estado, jugador, js);
 }
 
@@ -33,7 +33,7 @@ function ubicarBien(yo) {
   return { tipo: 'ubicar', posicion: k < 0 ? yo.linea.length : k };
 }
 
-// ---------- Cronista ----------
+// ---------- Erudito ----------
 const vida = p => (p ? Math.max(0, p.carta.resistencia - p.danio) : 0);
 const enMesa = yo => [yo.activo, ...yo.reserva].filter(Boolean);
 const suma = xs => xs.reduce((a, b) => a + b, 0);
@@ -61,7 +61,7 @@ function evaluar(e, j) {
   return v + 0.4 * golpeMio - 0.4 * golpeSuyo;
 }
 
-function cronista(e, j, js) {
+function erudito(e, j, js) {
   const base = evaluar(e, j);
   let libre = null, vLibre = -Infinity, accion = null, vAccion = -Infinity;
   for (const jd of js) {

@@ -28,7 +28,7 @@ Escuela Gabriela Mistral · Mostazal.
 - **Cartas estilo Mitos y Leyendas:** la ilustración ocupa 2/3 de la carta, con el nombre en vertical y una frase corta sobre la imagen. Al tocar la carta se lee el dato completo.
 - **Saber visible:** cada Protagonista muestra su Saber como número. Cada acción dice cuánto Saber falta, y aparece "+1 Saber" al ganarlo.
 - **Línea de tiempo** (se puede desactivar al crear la partida): los Personajes y Acontecimientos con fecha se ordenan en una línea de tiempo de cada jugador. Desde la segunda carta, el jugador elige dónde va. Si acierta, su activo gana +1 de Saber; si no, la carta queda en su lugar correcto y se muestra el año.
-- **Rival con niveles:** Aprendiz, Historiador y Cronista. En simulación, Cronista le gana a Historiador en el 72% de las partidas, e Historiador a Aprendiz en el 85%.
+- **Rival con niveles:** Aprendiz, Historiador y Erudito. En simulación, Erudito le gana a Historiador en el 72% de las partidas, e Historiador a Aprendiz en el 85%.
 - **Duelos temáticos:** cada jugador toma un bando con su núcleo de cartas propias, y el resto del mazo sale del curso. Los duelos son:
   - 5°: Conquistadores vs. Pueblos originarios
   - 6°: Patriotas vs. Realistas
@@ -39,6 +39,16 @@ Escuela Gabriela Mistral · Mostazal.
 - **Cartas nuevas:** Pueblo mapuche (5°); Ejército realista y Reconquista española (6°); Calendario maya, Tenochtitlan y Moctezuma II (7°); Luis XIV y Palacio de Versalles (8°). Aztecas y Mayas ganan una habilidad.
 - **Álbum** (en *Colección y álbum*): cada tablet recuerda qué cartas aparecieron boca arriba en una partida. Completar una unidad da su insignia. El docente puede reiniciarlo desde su panel.
 - **Torneo** para el día de juegos: el docente escribe los participantes y se sortea una llave de eliminación directa. Cada partida se juega en la tablet ("Jugar aquí", y el ganador se anota solo) o se anota a mano.
+
+## Novedades v1.4
+
+- **La Cronista:** una guía ficticia que acompaña al estudiante.
+  - Explica cada situación la primera vez que ocurre en la partida.
+  - Con el botón **Pista**, sugiere una jugada, dice por qué y la resalta en la mesa. En la línea de tiempo no revela la respuesta.
+  - Puede leer en voz alta, y se apaga tocando su retrato en la barra central.
+- **Ventaja visible:** cada acción muestra el daño real contra el rival y la marca ×2 cuando hay ventaja.
+- **Deshacer:** se puede volver atrás la última jugada del turno, mientras no se haya atacado ni revelado cartas nuevas.
+- El nivel difícil del rival ahora se llama **Erudito**.
 
 ### Ilustraciones con IA
 

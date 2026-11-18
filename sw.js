@@ -1,7 +1,7 @@
 // Service worker de Cronocartas: guarda la app en la tablet para jugar sin internet.
 // Al publicar una mejora, sube VERSION y agrega aquí los archivos nuevos
 // (la prueba tests/sw.test.js avisa si falta alguno).
-const VERSION = 'cc-v8';
+const VERSION = 'cc-v9';
 const ARCHIVOS = [
   "./",
   "css/estilos.css",
@@ -15,6 +15,11 @@ const ARCHIVOS = [
   "icons/icon-192.png",
   "icons/icon-512.png",
   "icons/icon.svg",
+  "img/cronista/atenta.jpg",
+  "img/cronista/cara.jpg",
+  "img/cronista/celebra.jpg",
+  "img/cronista/explica.jpg",
+  "img/cronista/pista.jpg",
   "img/tableros/T-5-1.jpg",
   "img/tableros/T-5-2.jpg",
   "img/tableros/T-5-3.jpg",
@@ -53,6 +58,7 @@ const ARCHIVOS = [
   "js/ui/datos.js",
   "js/ui/docente.js",
   "js/ui/editor.js",
+  "js/ui/guia.js",
   "js/ui/mesa.js",
   "js/ui/sonido.js",
   "js/ui/torneo.js",
