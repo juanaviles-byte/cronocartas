@@ -137,11 +137,36 @@ export async function montarMesa(contenedor, opciones) {
   // (por ejemplo, en una partida del torneo), se retoma con su configuración.
   if (partidaNueva) guardar();
 
+  // Con mouse, pasar el cursor por una carta de la mano muestra una vista previa grande encima.
+  let previa = null;
+  const quitarPrevia = () => { if (previa) { previa.remove(); previa = null; } };
+  function vistaPrevia(ev) {
+    if (ev.pointerType !== 'mouse' || document.body.classList.contains('arrastrando')) return quitarPrevia();
+    const el = ev.target.closest && ev.target.closest('.mano [data-mano]');
+    if (!el) return quitarPrevia();
+    const j = el.closest('.lado-A') ? 'A' : 'B';
+    if (!humanoEs(j) || girado(j)) return quitarPrevia();
+    const entrada = estado.jugadores[j].mano.find(c => c.uid === el.dataset.mano);
+    if (!entrada || (previa && previa.dataset.uid === entrada.uid)) return;
+    quitarPrevia();
+    previa = h('div', 'vista-previa');
+    previa.dataset.uid = entrada.uid;
+    previa.appendChild(renderCarta(entrada.carta, { tamano: 'normal' }));
+    document.body.appendChild(previa);
+    const r = el.getBoundingClientRect(), w = previa.offsetWidth, hgt = previa.offsetHeight;
+    previa.style.left = `${Math.min(Math.max(8, r.left + r.width / 2 - w / 2), innerWidth - w - 8)}px`;
+    previa.style.top = `${Math.max(8, r.top - hgt - 10)}px`;
+  }
+  raiz.addEventListener('pointerover', vistaPrevia);
+  raiz.addEventListener('pointerleave', quitarPrevia);
+  raiz.addEventListener('pointerdown', quitarPrevia, true);
+
   // ---------- Dibujo ----------
   let uidsAntes = null;                 // para animar las cartas que entran a la mesa
   let hitosAntes = { A: 0, B: 0 };      // para animar el sello del Hito nuevo
   function render() {
-    if (!vivo) return;
+    if (!vivo) return quitarPrevia();
+    quitarPrevia();
     raiz.innerHTML = '';
     pintarFondo();
     raiz.appendChild(lado('B'));
@@ -475,7 +500,8 @@ export async function montarMesa(contenedor, opciones) {
       if (estado.fase === 'turno' && yo.saberPendiente > 0) controles.appendChild(h('div', 'pista pista-saber', `<span class="pip"></span> Ganaste 1 de Saber este turno: toca un Protagonista para dárselo`));
       if (estado.fase === 'preparacion') {
         const listo = validas.find(v => v.tipo === 'listo');
-        const b = h('button', 'boton-principal', 'Listo');
+        // Desactivado, el botón dice qué falta en vez de solo apagarse.
+        const b = h('button', 'boton-principal', listo ? 'Listo' : 'Primero elige tu activo');
         b.disabled = !listo;
         b.onclick = () => jugar({ tipo: 'listo' });
         controles.appendChild(b);
@@ -605,7 +631,22 @@ export async function montarMesa(contenedor, opciones) {
     }
     dice.appendChild(acciones);
     raiz.appendChild(g);
+    acoplarGlobo(g);
     if (globo.jugada && estado.turno === globo.j) objetivoDe(globo.jugada).forEach(el => el.classList.add('sugerida'));
+  }
+
+  // Si hay espacio, el globo se acopla a la barra a la derecha del activo: así no tapa el tablero,
+  // el Lugar, el turno ni los mensajes. Si no cabe (pantalla angosta o mitad girada), queda centrado.
+  function acoplarGlobo(g) {
+    if (g.classList.contains('girado')) return;
+    const barra = raiz.querySelector('.centro'), son = raiz.querySelector('.centro .boton-sonido');
+    const activo = raiz.querySelector(`.lado-${globo.j} .zona-activo`);
+    if (!barra || !son || !activo) return;
+    const izq = activo.getBoundingClientRect().right + 14, der = son.getBoundingClientRect().left - 12;
+    if (der - izq < 280) return;
+    const b = barra.getBoundingClientRect();
+    g.classList.add('acoplado');
+    g.style.left = `${izq}px`; g.style.width = `${der - izq}px`; g.style.top = `${b.top + b.height / 2}px`;
   }
 
   function botonCronista(j) {

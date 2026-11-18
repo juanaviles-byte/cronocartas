@@ -15,6 +15,7 @@ export function hacerArrastrable(el, { objetivos, alSoltar, girado = false }) {
 
   // Las ilustraciones son <img>: sin esto, el mouse inicia el arrastre nativo de imagen y cancela el nuestro.
   el.addEventListener('dragstart', ev => ev.preventDefault());
+  el.classList.add('arrastrable');
   el.addEventListener('pointerdown', ev => {
     if (ev.button !== 0) return;
     inicio = { x: ev.clientX, y: ev.clientY, id: ev.pointerId };
@@ -63,6 +64,7 @@ export function hacerArrastrable(el, { objetivos, alSoltar, girado = false }) {
     fantasma.style.height = `${r.height}px`;
     fantasma.style.setProperty('--ch', getComputedStyle(el).getPropertyValue('--ch'));
     document.body.appendChild(fantasma);
+    document.body.classList.add('arrastrando');
     el.classList.add('origen-arrastre');
   }
 
@@ -83,6 +85,7 @@ export function hacerArrastrable(el, { objetivos, alSoltar, girado = false }) {
   function limpiar(volver) {
     lista.forEach(o => o.el.classList.remove('destino-posible', 'destino-encima'));
     el.classList.remove('origen-arrastre');
+    document.body.classList.remove('arrastrando');
     const f = fantasma;
     fantasma = null; encima = null; lista = []; arrastrando = false;
     if (!f) return;

@@ -399,3 +399,10 @@ La ilustración manda: ocupa a sangre los 2/3 superiores de la carta. Cada eleme
 - **Escenario:** al entrar un Lugar, su ilustración pasa a ser el fondo de la mesa (capa `.escena-lugar` con entrada animada, leve desenfoque y oscurecido para que las zonas se lean). Un cartel central anuncia «Nuevo escenario» con el efecto. Al salir el Lugar, vuelve el tablero. Si un Lugar no tiene ilustración, se usa su tablero asociado (comportamiento anterior).
 - **Soltar un Lugar:** además de la mitad propia de la mesa, vale soltarlo en su espacio de la barra central.
 - **Arrastre con mouse:** las ilustraciones son `<img>`; se bloquea el arrastre nativo de imágenes (`dragstart`), que cancelaba el arrastre del juego.
+
+## 21. Ajustes de interfaz (18 nov 2026)
+
+- **Globo de La Cronista acoplado:** si hay espacio a la derecha del activo (≥ 280 px; tablets de 1280 px y computadores), el globo se acopla a la barra ahí y deja visibles el tablero, el Lugar, el turno y los mensajes. En pantallas más angostas o en la mitad girada queda centrado como antes.
+- **Mouse:** las cartas arrastrables muestran el cursor de mano; al pasar el cursor por una carta de la mano aparece una vista previa grande encima. Los destinos de arrastre se iluminan más.
+- **Botón de preparación:** desactivado dice «Primero elige tu activo» y se ve como botón apagado, no transparente.
+- **Regla del tablero:** usa hasta dos líneas en vez de cortarse.
