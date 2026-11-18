@@ -90,7 +90,7 @@ function explicar(e, j, jd) {
     case 'asignarSaber': {
       const destino = [yo.activo, ...yo.reserva].find(p => p && p.uid === jd.destino);
       const siguiente = (destino.carta.acciones || []).find(a => a.costo === destino.saber + 1) || (destino.carta.acciones || []).find(a => a.costo > destino.saber);
-      if (destino === yo.activo && siguiente) return `Dale el Saber a ${n(destino.carta)}: con ${esc(destino.saber + 1)} de Saber podrá usar <b>${esc(siguiente.nombre)}</b> (${esc(siguiente.danio)} de daño).`;
+      if (destino === yo.activo && siguiente) return `Dale el Saber a ${n(destino.carta)}: con ${esc(destino.saber + 1)} de Saber podrá usar <b>${esc(siguiente.nombre)}</b> (${esc(danioDeAccion(e, j, destino.carta.acciones.indexOf(siguiente)))} de daño).`;
       if (destino === yo.activo) return `Dale el Saber a ${n(destino.carta)}, tu activo: el Saber nunca se pierde al atacar.`;
       return `Dale el Saber a ${n(destino.carta)}, de tu reserva: así estará listo para atacar cuando pase al frente.`;
     }

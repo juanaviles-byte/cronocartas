@@ -425,3 +425,10 @@ La ilustración manda: ocupa a sangre los 2/3 superiores de la carta. Cada eleme
 - **Ataque:** se levanta (brillo y sombra) → toma impulso → embiste → impacto congelado 90 ms con sacudida, destello, número grande (con «¡Ventaja ×2!» o «Protegido») y la resistencia bajando → el defensor retrocede y el atacante vuelve. Si cae: cámara lenta a sepia, sello «Archivada» y se deshace en arena.
 - **Invocación:** la carta sale de la mano (o de donde se soltó), crece en el centro con un círculo dorado en su destino y aterriza. Personajes, Acontecimientos y Aula se muestran con su efecto y se deshacen en arena. En la preparación se usa solo el vuelo corto.
 - Lo ya representado no se repite en los eventos (embestida, número de daño, archivo, vuelo de entrada). Con «reducir movimiento» no hay escena.
+
+## 25. Sintonía entre lo que dicen las cartas y lo que hace el juego (18 nov 2026)
+
+- **Auditoría automática** (`tests/sintonia.test.js`): para cada carta con efecto, cada habilidad, cada tablero, cada acción y cada debilidad, lee el número del **texto que ve el estudiante**, juega la carta en el motor y comprueba el resultado. Si alguien cambia un dato o un texto y dejan de coincidir, la prueba falla.
+- **Corrección encontrada:** las habilidades «al entrar» (Saber al entrar, robar al entrar) no se aplicaban al poner la carta en la preparación. Ahora sí.
+- **Daño explicado:** `desgloseDanio` (motor) es la única fuente del daño: parte del número impreso y anota cada cambio en el orden en que se aplica (Lugar, tablero, bonus, reserva, ×2 ventaja, reducción del tablero, resistencia). El botón de la acción muestra el impreso tachado, el real y el motivo («×2 ventaja · −10 Castillo feudal»); el detalle de la carta en juego lo explica en una lista; el botón del detalle y La Cronista usan el mismo número. Una prueba impide volver a mostrar el daño impreso como si fuera el real.
+- **Orden de cálculo (regla):** primero se suman los bonus, después la ventaja duplica todo y al final se restan las reducciones. Por eso un +10 se convierte en +20 con ventaja.

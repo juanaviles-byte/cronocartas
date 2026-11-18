@@ -234,6 +234,7 @@ export function aplicarJugada(estadoEntrada, jugada) {
       const inst = instancia(c, 0);
       if (!yo.activo) yo.activo = inst; else yo.reserva.push(inst);
       ev.push({ tipo: 'colocar', jugador: j, carta: c.carta });
+      alEntrar(e, j, inst);   // "al entrar en juego" también vale al preparar la mesa
       break;
     }
     case 'listo': {
@@ -388,25 +389,38 @@ function aplicarEfecto(e, j, ef, ev, eleccion) {
   }
 }
 
-// Daño que haría una acción del activo de j sobre el activo rival (sin contar la protección).
-function calcularDanio(e, j, accion) {
+// Desglose del daño de una acción del activo de j contra el activo rival (sin contar la protección):
+// parte del daño impreso en la carta y anota cada cambio, en el orden en que se aplica.
+// { base, pasos: [{ fuente, valor } | { fuente: 'ventaja', por: 2 }], total }
+// fuente: 'lugar' | 'tablero' | 'bonus' | 'reserva' | 'ventaja' | 'resistente'
+export function desgloseDanio(e, j, indice) {
   const yo = e.jugadores[j], otro = e.jugadores[rival(j)];
   const atk = yo.activo, def = otro.activo;
-  let danio = accion.danio || 0;
-  if (danio <= 0 || !def) return { danio };
+  const accion = atk && atk.carta.acciones && atk.carta.acciones[indice];
+  const base = (accion && accion.danio) || 0;
+  const pasos = [];
+  if (base <= 0 || !def) return { base, pasos, total: Math.max(0, base) };
+  const suma = (fuente, valor) => { if (valor) pasos.push({ fuente, valor }); };
   const lugarEf = e.lugar && e.lugar.carta.efecto;
-  if (lugarEf && lugarEf.tipo === 'bonusDimension' && lugarEf.dimension === atk.carta.dimension) danio += lugarEf.n;
+  if (lugarEf && lugarEf.tipo === 'bonusDimension' && lugarEf.dimension === atk.carta.dimension) suma('lugar', lugarEf.n);
   const bt = regla(e, 'bonusDimension');
-  if (bt && bt.dimension === atk.carta.dimension) danio += bt.n;
-  danio += atk.bonus;
+  if (bt && bt.dimension === atk.carta.dimension) suma('tablero', bt.n);
+  suma('bonus', atk.bonus);
   const fr = habilidad(atk, 'fuerzaReserva');
-  if (fr) danio += fr.n * yo.reserva.length;
-  if (VENTAJA[atk.carta.dimension] === def.carta.dimension) danio *= 2;
+  if (fr) suma('reserva', fr.n * yo.reserva.length);
+  if (VENTAJA[atk.carta.dimension] === def.carta.dimension) pasos.push({ fuente: 'ventaja', por: 2 });
+  let total = base;
+  for (const p of pasos) total = p.por ? total * p.por : total + p.valor;
   const muro = regla(e, 'reduccionDanio');
-  if (muro) danio = Math.max(0, danio - muro.n);
+  if (muro) { const q = Math.min(total, muro.n); if (q) pasos.push({ fuente: 'tablero', valor: -q }); total -= q; }
   const res = habilidad(def, 'resistente');
-  if (res) danio = Math.max(0, danio - res.n);
-  return { danio };
+  if (res) { const q = Math.min(total, res.n); if (q) pasos.push({ fuente: 'resistente', valor: -q }); total -= q; }
+  return { base, pasos, total };
+}
+
+function calcularDanio(e, j, accion) {
+  const indice = e.jugadores[j].activo.carta.acciones.indexOf(accion);
+  return { danio: desgloseDanio(e, j, indice).total };
 }
 
 // Para el rival automático: daño de la acción `indice` del activo de j (0 si el rival está protegido).

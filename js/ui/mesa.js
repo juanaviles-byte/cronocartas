@@ -1,6 +1,6 @@
 // Mesa de juego: cara a cara en la misma tablet, contra la tablet o tutorial.
 // Solo dibuja y traduce toques en jugadas; las reglas viven en motor.js.
-import { crearPartida, jugadasValidas, aplicarJugada, busquedaDe, danioDeAccion, jugadaReversible, VENTAJA } from '../motor.js';
+import { crearPartida, jugadasValidas, aplicarJugada, busquedaDe, danioDeAccion, desgloseDanio, jugadaReversible, VENTAJA } from '../motor.js';
 import { situacion, situacionDeEvento, pista } from './guia.js';
 import { elegirJugada } from '../ia.js';
 import { armarMazo, mazoDeBando } from '../mazos.js';
@@ -508,12 +508,18 @@ export async function montarMesa(contenedor, opciones) {
         const primerTurno = estado.numeroTurno <= 1 && esMiTurno;
         const rivalActivo = estado.jugadores[j === 'A' ? 'B' : 'A'].activo;
         const ventaja = rivalActivo && VENTAJA[yo.activo.carta.dimension] === rivalActivo.carta.dimension;
-        const efectivo = rivalActivo && !rivalActivo.protegido ? danioDeAccion(estado, j, indice) : a.danio;
+        // El número del botón sale del mismo cálculo que aplica el motor, y se explica si difiere del de la carta.
+        const dsg = rivalActivo ? desgloseDanio(estado, j, indice) : null;
+        const efectivo = rivalActivo && rivalActivo.protegido ? 0 : dsg ? dsg.total : a.danio;
+        const motivo = rivalActivo && rivalActivo.protegido ? 'el rival está protegido' : dsg ? textoDesglose(dsg) : '';
         const nota = falta ? `<small class="falta">Falta ${falta} de Saber</small>`
           : primerTurno ? '<small class="falta">No se ataca en el primer turno</small>'
-          : rivalActivo && rivalActivo.protegido ? '<small class="falta">El rival está protegido</small>' : '';
+          : rivalActivo && rivalActivo.protegido ? '<small class="falta">El rival está protegido</small>'
+          : efectivo !== a.danio && motivo ? `<small class="calculo">${esc(motivo)}</small>` : '';
         const marca = ventaja ? '<i class="x2" title="Ventaja: daño doble">×2</i>' : '';
-        const b = h('button', `boton-accion${falta ? ' sin-saber' : ''}${ventaja ? ' con-ventaja' : ''}`, `<span class="costo">${costo}</span><span class="an">${esc(a.nombre)}${nota}</span><b>${esc(efectivo)}${marca}</b>`);
+        const impreso = efectivo !== a.danio ? `<s class="impreso">${esc(a.danio)}</s>` : '';
+        const b = h('button', `boton-accion${falta ? ' sin-saber' : ''}${ventaja ? ' con-ventaja' : ''}`, `<span class="costo">${costo}</span><span class="an">${esc(a.nombre)}${nota}</span><b>${impreso}${esc(efectivo)}${marca}</b>`);
+        if (efectivo !== a.danio) b.title = `La carta dice ${a.danio}; en esta mesa hace ${efectivo}: ${motivo}.`;
         b.disabled = !ok;
         b.onclick = () => jugar({ tipo: 'accion', indice });
         acciones.appendChild(b);
@@ -834,15 +840,41 @@ export async function montarMesa(contenedor, opciones) {
         return `Cambiar por el activo (cuesta ${gratis ? 0 : (yo.activo.carta.retirada ?? 1)} Saber)`;
       }
       case 'promover': return 'Pasar al frente como activo';
-      case 'accion': { const a = yo.activo.carta.acciones[v.indice]; return `${esc(a.nombre)} · ${esc(a.danio)} de daño`; }
+      case 'accion': { const a = yo.activo.carta.acciones[v.indice]; return `${esc(a.nombre)} · ${esc(danioDeAccion(estado, j, v.indice))} de daño`; }   // el mismo número que el botón
       default: return v.tipo;
     }
+  }
+
+  // Texto del desglose: "−10 Castillo feudal · ×2 ventaja".
+  function textoDesglose(dsg) {
+    const t = tableroActual(), l = estado.lugar && estado.lugar.carta;
+    const nombre = { lugar: l ? l.nombre : 'Lugar', tablero: t ? t.nombre : 'tablero', bonus: 'carta jugada', reserva: 'por tu reserva', resistente: 'el rival resiste' };
+    // Texto plano: quien lo inserta en HTML lo pasa por esc().
+    return dsg.pasos.map(p => (p.por ? '×' + p.por + ' ventaja' : (p.valor > 0 ? '+' : '−') + Math.abs(p.valor) + ' ' + nombre[p.fuente])).join(' · ');
+  }
+
+  // Si la carta es un activo en juego, el detalle dice cuánto hace cada acción en esta mesa y por qué.
+  function danioEnMesa(carta) {
+    for (const j of ['A', 'B']) {
+      const yo = estado.jugadores[j], otro = estado.jugadores[j === 'A' ? 'B' : 'A'];
+      if (!yo.activo || yo.activo.carta.id !== carta.id || !otro.activo || !carta.acciones) continue;
+      const filas = carta.acciones.map((a, i) => {
+        const dsg = desgloseDanio(estado, j, i);
+        const total = otro.activo.protegido ? 0 : dsg.total;
+        const porque = otro.activo.protegido ? 'el rival está protegido' : textoDesglose(dsg);
+        return `<li><b>${esc(a.nombre)}</b>: ${total === a.danio ? `${esc(total)} de daño` : `la carta dice ${esc(a.danio)}, aquí hace <b>${esc(total)}</b> (${esc(porque)})`}</li>`;
+      }).join('');
+      return h('div', 'en-esta-mesa', `<div class="titulo-mesa">En esta mesa, contra ${esc(otro.activo.carta.nombre)}</div><ul>${filas}</ul>`);
+    }
+    return null;
   }
 
   function verCarta(carta, orientadoA, opciones = [], instancia = null) {
     const capa = h('div', `capa${girado(orientadoA) ? ' girado' : ''}`);
     const panel = h('div', 'panel-carta');
     panel.appendChild(renderCarta(carta, { tamano: 'grande', instancia, unidades: unidadesCarta(carta) }));
+    const mesaInfo = carta.tipo === 'protagonista' && estado.fase !== 'preparacion' ? danioEnMesa(carta) : null;
+    if (mesaInfo) panel.appendChild(mesaInfo);
     const botones = h('div', 'botones');
     for (const o of opciones) {
       const b = h('button', 'boton-principal', o.texto);   // textoJugada ya escapa los nombres
