@@ -1,7 +1,7 @@
 // Service worker de Cronocartas: guarda la app en la tablet para jugar sin internet.
 // Al publicar una mejora, sube VERSION y agrega aquí los archivos nuevos
 // (la prueba tests/sw.test.js avisa si falta alguno).
-const VERSION = 'cc-v18';
+const VERSION = 'cc-v19';
 const ARCHIVOS = [
   "./",
   "audio/cronista/accion.ogg",
@@ -194,8 +194,30 @@ const ARCHIVOS = [
   "img/cartas/CC-5-U4-004.webp",
   "img/cartas/CC-5-U4-005.webp",
   "img/cartas/CC-5-U4-006.webp",
+  "img/cartas/CC-6-U1-001.webp",
+  "img/cartas/CC-6-U1-002.webp",
+  "img/cartas/CC-6-U1-003.webp",
+  "img/cartas/CC-6-U1-004.webp",
+  "img/cartas/CC-6-U1-005.webp",
+  "img/cartas/CC-6-U1-006.webp",
+  "img/cartas/CC-6-U1-007.webp",
+  "img/cartas/CC-6-U1-008.webp",
+  "img/cartas/CC-6-U1-009.webp",
+  "img/cartas/CC-6-U1-010.webp",
+  "img/cartas/CC-6-U2-001.webp",
+  "img/cartas/CC-6-U2-002.webp",
+  "img/cartas/CC-6-U2-003.webp",
+  "img/cartas/CC-6-U2-004.webp",
+  "img/cartas/CC-6-U2-005.webp",
+  "img/cartas/CC-6-U2-006.webp",
+  "img/cartas/CC-6-U2-007.webp",
+  "img/cartas/CC-6-U3-001.webp",
+  "img/cartas/CC-6-U4-001.webp",
+  "img/cartas/CC-6-U4-002.webp",
   "img/cartas/CC-6-U4-003.webp",
   "img/cartas/CC-6-U4-004.webp",
+  "img/cartas/CC-6-U4-005.webp",
+  "img/cartas/CC-6-U4-006.webp",
   "img/cartas/CC-8-U2-001.webp",
   "img/cartas/CC-8-U2-002.webp",
   "img/cartas/CC-8-U2-003.webp",
@@ -203,6 +225,8 @@ const ARCHIVOS = [
   "img/cartas/CC-8-U2-005.webp",
   "img/cartas/CC-8-U2-006.webp",
   "img/cartas/CC-8-U2-007.webp",
+  "img/cartas/CC-8-U3-002.webp",
+  "img/cartas/CC-8-U3-003.webp",
   "img/cartas/CC-8-U4-001.webp",
   "img/cartas/CC-8-U4-002.webp",
   "img/cartas/CC-8-U4-003.webp",

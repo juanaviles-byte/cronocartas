@@ -301,5 +301,19 @@ if ('serviceWorker' in navigator && window.isSecureContext) {
   navigator.serviceWorker.addEventListener('controllerchange', () => {
     if (habiaControlador && !recargado) { recargado = true; location.reload(); }
   });
-  navigator.serviceWorker.register('sw.js').catch(() => {});
+  // Mientras se descarga una versión nueva, se avisa en pantalla (al terminar, la app se recarga sola).
+  const avisarDescarga = () => {
+    if (!habiaControlador || document.querySelector('.aviso-actualizacion')) return;
+    const aviso = document.createElement('div');
+    aviso.className = 'aviso-actualizacion';
+    aviso.setAttribute('role', 'status');
+    aviso.textContent = 'Descargando la versión nueva del juego… se abrirá sola al terminar.';
+    document.body.appendChild(aviso);
+  };
+  navigator.serviceWorker.register('sw.js').then(reg => {
+    if (reg.installing) avisarDescarga();
+    reg.addEventListener('updatefound', avisarDescarga);
+    // Una app que vuelve del segundo plano no recarga la página: se revisa a mano si hay versión nueva.
+    document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') reg.update().catch(() => {}); });
+  }).catch(() => {});
 }
