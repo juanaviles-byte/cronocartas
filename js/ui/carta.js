@@ -37,6 +37,17 @@ export function textoParaLeer(c) {
   return partes.join(' ');
 }
 
+// Solo las reglas de la carta (sin nombre ni dato): lo que la voz del dispositivo lee después del narrador grabado.
+export function textoReglas(c) {
+  const partes = [];
+  if (c.tipo === 'protagonista') partes.push(`Protagonista de ${nombreDim(c.dimension)}, resistencia ${c.resistencia}.`);
+  else partes.push(`${ETIQUETA[c.tipo] || ''}.`);
+  if (c.habilidad) partes.push('Habilidad ' + c.habilidad.nombre + ': ' + textoHabilidad(c.habilidad));
+  if (c.tipo === 'protagonista') c.acciones.forEach(a => partes.push('Acción ' + a.nombre + ': necesita ' + a.costo + ' de Saber y hace ' + a.danio + ' de daño.'));
+  else if (c.efecto || c.texto) partes.push(c.texto || textoEfecto(c.efecto));
+  return partes.join(' ');
+}
+
 export function textoEfecto(ef) {
   if (!ef) return '';
   if (Array.isArray(ef)) return ef.map(textoEfecto).join(' Luego, ').replace(/ Luego, (\w)/g, (m, l) => ` Luego, ${l.toLowerCase()}`);

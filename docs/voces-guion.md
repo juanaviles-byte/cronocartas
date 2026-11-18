@@ -128,7 +128,7 @@ Ahora juega la tablet. Mira con atención.
 ```
 Cristóbal Colón. En 1492 llegó a América navegando hacia el oeste, cuando buscaba una nueva ruta hacia Asia.
 
-Hernando de Magallanes. Su expedición (1519-1522) encontró el paso entre el Atlántico y el Pacífico. Juan Sebastián Elcano la terminó.
+Hernando de Magallanes. Su expedición entre 1519 y 1522 encontró el paso entre el Atlántico y el Pacífico. Juan Sebastián Elcano la terminó.
 
 Pedro de Valdivia. Fundó Santiago del Nuevo Extremo en 1541, a los pies del cerro Huelén, hoy cerro Santa Lucía.
 

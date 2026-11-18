@@ -9,8 +9,8 @@ import { anotarGanador } from '../torneo.js';
 import { cargarCursoCompleto } from './datos.js';
 import { crearRng } from '../rng.js';
 import { almacen, CLAVES } from '../almacen.js';
-import { renderCarta, textoParaLeer } from './carta.js';
-import { botonEscuchar, leer, detener } from './voz.js';
+import { renderCarta, textoParaLeer, textoReglas } from './carta.js';
+import { botonEscuchar, botonEscucharCarta, leer, detener, reproducir, rutaCronista } from './voz.js';
 import { esc, pips } from '../html.js';
 import { sonidos, sonidoActivo, alternarSonido } from './sonido.js';
 import { hacerArrastrable } from './arrastre.js';
@@ -475,8 +475,18 @@ export async function montarMesa(contenedor, opciones) {
     } else if (e.fase === 'promover' && e.turno === 'A') t = 'Tu activo cayó. Elige quién de tu reserva pasa al frente.';
     else if (e.turno === 'B') t = 'Ahora juega la tablet…';
     // En el tutorial, La Cronista dice el paso a paso (salvo que se le haya pedido una pista).
-    if (!globo || globo.tutorial) globo = { j: 'A', expresion: 'explica', texto: t, tutorial: true };
+    const clave = (CLAVES_TUTORIAL.find(([inicio]) => t.startsWith(inicio)) || [])[1];
+    if (!globo || globo.tutorial) {
+      globo = { j: 'A', expresion: 'explica', texto: t, tutorial: true, clave };
+      if (clave && clave !== ultimoPasoTutorial) { ultimoPasoTutorial = clave; voz(clave); }
+    }
   }
+
+  // Frases del tutorial y su grabación de La Cronista.
+  const CLAVES_TUTORIAL = [['Toca un Protagonista de tu mano', 'tut-activo'], ['Puedes poner hasta 3', 'tut-reserva'], ['Cada turno recibes', 'tut-saber'],
+    ['Ya tienes Saber suficiente', 'tut-accion'], ['En el primer turno', 'tut-primer-turno'], ['¡Puedes <b>evolucionar', 'tut-evolucion'],
+    ['Juega cartas de tu mano', 'tut-jugar'], ['¡Ya sabes jugar', 'tut-fin'], ['Tu activo cayó', 'tut-promover'], ['Ahora juega la tablet', 'tut-rival']];
+  let ultimoPasoTutorial = null;
 
   // ---------- La Cronista (guía) ----------
   const vistasGuia = new Set();   // lo que ya explicó en esta partida, por jugador
@@ -484,9 +494,16 @@ export async function montarMesa(contenedor, opciones) {
   let temporizadorGlobo = null;
   const humanoEs = j => !(contraIA && j === 'B');
 
+  // Si La Cronista tiene grabada esa frase y el sonido está activo, la dice en voz alta.
+  function voz(clave) {
+    const ruta = rutaCronista(clave);
+    if (ruta && sonidoActivo()) reproducir(ruta);
+  }
+
   function hablar(j, dicho, { auto = false } = {}) {
     clearTimeout(temporizadorGlobo);
     globo = { j, ...dicho, auto };
+    voz(globo.audio || globo.clave);
     if (auto) temporizadorGlobo = setTimeout(() => { if (globo && globo.auto) { globo = null; dibujarGlobo(); } }, 11000);
     dibujarGlobo();
   }
@@ -511,7 +528,9 @@ export async function montarMesa(contenedor, opciones) {
 
   function pedirPista(j) {
     if (globo && globo.j === j && globo.esPista) { globo = null; dibujarGlobo(); return; }   // segundo toque: cierra
-    hablar(j, { ...pista(estado, j), esPista: true });
+    const p = pista(estado, j);
+    const audioPista = estado.turno !== j ? 'pista-rival' : estado.jugadores[j].porUbicar ? 'pista-ubicar' : 'pista';
+    hablar(j, { ...p, esPista: true, audio: audioPista });
   }
 
   // Elemento de la mesa que corresponde a la jugada sugerida, para resaltarlo.
@@ -541,7 +560,7 @@ export async function montarMesa(contenedor, opciones) {
     g.innerHTML = '<img class="retrato" src="img/cronista/' + cara + '.jpg" alt="La Cronista"><div class="dice"><b class="quien">La Cronista</b><p>' + globo.texto + '</p></div>';
     const dice = g.querySelector('.dice');
     const acciones = h('div', 'acciones-globo');
-    acciones.appendChild(botonEscuchar(() => globo ? globo.texto.replace(/<[^>]+>/g, '') : '', 'boton-mini'));
+    acciones.appendChild(botonEscuchar(() => globo ? globo.texto.replace(/<[^>]+>/g, '') : '', 'boton-mini', () => globo && rutaCronista(globo.audio || globo.clave)));
     if (!globo.tutorial) {
       const ok = h('button', 'boton-mini', 'Entendido');
       ok.onclick = ev => { ev.stopPropagation(); globo = null; dibujarGlobo(); };
@@ -655,7 +674,7 @@ export async function montarMesa(contenedor, opciones) {
       b.onclick = () => { capa.remove(); if (o.alElegir) o.alElegir(); else jugar(o.jugada); };
       botones.appendChild(b);
     }
-    botones.appendChild(botonEscuchar(() => textoParaLeer(carta)));
+    botones.appendChild(botonEscucharCarta(carta, () => textoParaLeer(carta), () => textoReglas(carta)));
     const cerrar = h('button', 'boton-secundario', opciones.length ? 'Cancelar' : 'Cerrar');
     cerrar.onclick = () => { detener(); capa.remove(); };
     botones.appendChild(cerrar);

@@ -2,8 +2,8 @@
 import { montarMesa, cargarTableros, cargarDuelos } from './mesa.js';
 import { NIVELES } from '../ia.js';
 import { crearAlbum } from '../album.js';
-import { renderCarta, textoParaLeer } from './carta.js';
-import { botonEscuchar, detener } from './voz.js';
+import { renderCarta, textoParaLeer, textoReglas } from './carta.js';
+import { botonEscucharCarta, detener } from './voz.js';
 import { cargarCursoCompleto } from './datos.js';
 import { almacen, CLAVES } from '../almacen.js';
 import { esc } from '../html.js';
@@ -250,7 +250,7 @@ function cartaClicable(c, unidades) {
     const capa = h('div', 'capa');
     const panel = h('div', 'panel-carta');
     panel.appendChild(renderCarta(c, { tamano: 'grande', unidades }));
-    panel.appendChild(botonEscuchar(() => textoParaLeer(c)));
+    panel.appendChild(botonEscucharCarta(c, () => textoParaLeer(c), () => textoReglas(c)));
     const b = boton('Cerrar', 'boton-secundario', () => { detener(); capa.remove(); });
     panel.appendChild(b);
     capa.appendChild(panel);
