@@ -1,0 +1,78 @@
+{
+ "formato": "1536x1024, 4 columnas x 2 filas (cuadros 3:4), orden de lectura",
+ "collages": [
+  {
+   "id": "DA",
+   "dorsos": [
+    "D00",
+    "D01",
+    "D02",
+    "D03",
+    "D04",
+    "D05",
+    "D06",
+    "D07"
+   ]
+  },
+  {
+   "id": "DB",
+   "dorsos": [
+    "D08",
+    "D09",
+    "D10",
+    "D11",
+    "D12",
+    "D13",
+    "D14",
+    "D15"
+   ]
+  },
+  {
+   "id": "DC",
+   "dorsos": [
+    "D16",
+    "D17",
+    "D18",
+    "D19",
+    "D20",
+    "D00b",
+    "D00c",
+    "D00d"
+   ]
+  }
+ ],
+ "temas": {
+  "D01": "conquista",
+  "D02": "originarios",
+  "D03": "colonia",
+  "D04": "paisajes",
+  "D05": "ciudadania",
+  "D06": "independencia",
+  "D07": "republica",
+  "D08": "sigloxx",
+  "D09": "prehistoria",
+  "D10": "oriente",
+  "D11": "grecia",
+  "D12": "roma",
+  "D13": "medieval",
+  "D14": "mayas",
+  "D15": "aztecas",
+  "D16": "incas",
+  "D17": "renacimiento",
+  "D18": "absolutismo",
+  "D19": "ilustracion",
+  "D20": "aula"
+ },
+ "bandos": {
+  "conquistadores": "conquista",
+  "originarios": "originarios",
+  "patriotas": "independencia",
+  "realistas": "colonia",
+  "grecia": "grecia",
+  "roma": "roma",
+  "mesoamerica": "aztecas",
+  "andes": "incas",
+  "absolutismo": "absolutismo",
+  "ilustracion": "ilustracion"
+ }
+}
