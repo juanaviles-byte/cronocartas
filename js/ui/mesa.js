@@ -9,7 +9,7 @@ import { anotarGanador } from '../torneo.js';
 import { cargarCursoCompleto } from './datos.js';
 import { crearRng } from '../rng.js';
 import { almacen, CLAVES } from '../almacen.js';
-import { renderCarta, textoParaLeer, textoReglas } from './carta.js';
+import { renderCarta, textoParaLeer } from './carta.js';
 import { botonEscuchar, botonEscucharCarta, leer, detener, reproducir, rutaCronista } from './voz.js';
 import { esc, pips } from '../html.js';
 import { sonidos, sonidoActivo, alternarSonido } from './sonido.js';
@@ -675,7 +675,7 @@ export async function montarMesa(contenedor, opciones) {
       b.onclick = () => { capa.remove(); if (o.alElegir) o.alElegir(); else jugar(o.jugada); };
       botones.appendChild(b);
     }
-    botones.appendChild(botonEscucharCarta(carta, () => textoParaLeer(carta), () => textoReglas(carta)));
+    botones.appendChild(botonEscucharCarta(carta, () => textoParaLeer(carta)));
     const cerrar = h('button', 'boton-secundario', opciones.length ? 'Cancelar' : 'Cerrar');
     cerrar.onclick = () => { detener(); capa.remove(); };
     botones.appendChild(cerrar);

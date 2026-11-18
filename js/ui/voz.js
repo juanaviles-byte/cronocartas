@@ -42,11 +42,11 @@ export function reproducir(ruta, alTerminar) {
   } catch { return false; }
 }
 
-// Carta: el narrador grabado lee nombre y dato; luego la voz del dispositivo lee las reglas.
-export function leerCarta(carta, textoCompleto, textoReglas) {
+// Carta: si hay grabación del narrador se reproduce solo esa; si no, la voz del dispositivo lee nombre y dato.
+export function leerCarta(carta, texto) {
   const ruta = rutaNarrador(carta);
-  if (ruta) return reproducir(ruta, () => leer(textoReglas));
-  return leer(textoCompleto);
+  if (ruta) return reproducir(ruta);
+  return leer(texto);
 }
 
 export function detener() {
@@ -70,10 +70,10 @@ export function botonEscuchar(textoFn, clase = 'boton-secundario', audioFn = nul
   return b;
 }
 
-// Botón "Escuchar" de una carta: narrador grabado + reglas con la voz del dispositivo.
-export function botonEscucharCarta(carta, textoCompletoFn, textoReglasFn, clase = 'boton-secundario') {
-  const b = botonEscuchar(textoCompletoFn, clase);
-  b.onclick = ev => { ev.stopPropagation(); leerCarta(carta, textoCompletoFn(), textoReglasFn()); };
+// Botón "Escuchar" de una carta: narrador grabado o, si falta, la voz del dispositivo (nombre y dato).
+export function botonEscucharCarta(carta, textoFn, clase = 'boton-secundario') {
+  const b = botonEscuchar(textoFn, clase);
+  b.onclick = ev => { ev.stopPropagation(); leerCarta(carta, textoFn()); };
   b.hidden = !vozDisponible() && !rutaNarrador(carta);
   return b;
 }
