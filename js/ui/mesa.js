@@ -15,6 +15,9 @@ import { esc, pips } from '../html.js';
 import { sonidos, sonidoActivo, alternarSonido } from './sonido.js';
 import { hacerArrastrable } from './arrastre.js';
 
+// Dorso de carta: reloj de arena dorado sobre azul noche (el emblema de La Cronista).
+const DORSO = '<svg class="emblema-dorso" viewBox="0 0 40 56" aria-hidden="true"><rect x="3" y="3" width="34" height="50" rx="4" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M13 14h14M13 42h14M14 15c0 8 12 8 12 13s-12 5-12 13M26 15c0 8-12 8-12 13s12 5 12 13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M17 38c1-3 5-3 6 0z" fill="currentColor"/></svg>';
+
 let DUELOS = null;
 export async function cargarDuelos() {
   if (!DUELOS) DUELOS = await fetch('data/duelos.json').then(r => r.json()).then(d => d.duelos).catch(() => []);
@@ -149,6 +152,7 @@ export async function montarMesa(contenedor, opciones) {
     if (uidsAntes) raiz.querySelectorAll('.campo [data-uid]').forEach(e => { if (!uidsAntes.has(e.dataset.uid)) e.classList.add('entra'); });
     uidsAntes = ahora;
     hitosAntes = { A: estado.jugadores.A.hitos, B: estado.jugadores.B.hitos };
+    raiz.querySelectorAll('.mano').forEach(m => m.classList.toggle('desplazable', m.scrollWidth > m.clientWidth + 2));
     marcarSaber();
     registrarAlbum();
     activarArrastre();
@@ -280,8 +284,13 @@ export async function montarMesa(contenedor, opciones) {
       c.appendChild(bt);
     }
     const l = estado.lugar;
-    const lugar = h('button', 'lugar-en-juego', l ? `<span>Lugar</span> ${esc(l.carta.nombre)}` : '<span>Sin lugar en juego</span>');
-    if (l) lugar.onclick = () => verCarta(l.carta, estado.turno);
+    const lugar = h('button', `lugar-en-juego${l ? ' con-lugar' : ''}`);
+    if (l) {
+      lugar.appendChild(renderCarta(l.carta, { tamano: 'mini' }));
+      lugar.appendChild(h('span', 'nombre-lugar', `<small>Lugar</small>${esc(l.carta.nombre)}`));
+      lugar.setAttribute('aria-label', 'Lugar en juego: ' + l.carta.nombre);   // atributo: no se interpreta como HTML
+      lugar.onclick = () => verCarta(l.carta, estado.turno);
+    } else lugar.appendChild(h('div', 'hueco', '<span>Lugar</span>'));
     c.appendChild(lugar);
     const turno = estado.fase === 'fin' ? 'Partida terminada'
       : estado.fase === 'preparacion' ? `${nombres[estado.turno]}: prepara tu mesa`
@@ -326,14 +335,14 @@ export async function montarMesa(contenedor, opciones) {
       ca.classList.add('en-activo');
       ca.onclick = () => tocarEnMesa(j, yo.activo);
       zonaActivo.appendChild(ca);
-    } else zonaActivo.appendChild(h('div', 'hueco', 'Activo'));
-    campo.appendChild(zonaActivo);
+    } else zonaActivo.appendChild(h('div', 'hueco', '<span>Activo</span>'));
 
     const acciones = h('div', 'acciones-activo');
     if (yo.activo && yo.activo.carta.acciones) {
       const validas = esMiTurno && humano ? jugadasValidas(estado) : [];
       const tiene = yo.activo.saber;
-      acciones.appendChild(h('div', 'saber-activo', `<span class="pip"></span> Tu activo tiene <b>${esc(tiene)}</b> de Saber`));
+      const quien = humano ? 'Tu activo tiene' : 'Su activo tiene';
+      acciones.appendChild(h('div', 'saber-activo', `<span class="pip"></span> ${quien} <b>${esc(tiene)}</b> de Saber`));
       yo.activo.carta.acciones.forEach((a, indice) => {
         const ok = validas.some(v => v.tipo === 'accion' && v.indice === indice);
         const falta = Math.max(0, a.costo - tiene);
@@ -352,7 +361,6 @@ export async function montarMesa(contenedor, opciones) {
         acciones.appendChild(b);
       });
     }
-    campo.appendChild(acciones);
 
     const reserva = h('div', 'reserva');
     for (let i = 0; i < 3; i++) {
@@ -362,23 +370,42 @@ export async function montarMesa(contenedor, opciones) {
         cr.dataset.uid = r.uid;
         cr.onclick = () => tocarEnMesa(j, r);
         reserva.appendChild(cr);
-      } else reserva.appendChild(h('div', 'hueco', 'Reserva'));
+      } else reserva.appendChild(h('div', 'hueco', '<span>Reserva</span>'));
     }
-    campo.appendChild(reserva);
 
     const marcador = h('div', 'marcador');
+    if (bandoDe) marcador.style.setProperty('--bando-placa', bandoDe[j].color);
     marcador.innerHTML = `
       ${bandoDe ? `<div class="bando" style="--bando:${bandoDe[j].color}">${esc(bandoDe[j].nombre)}</div>` : ''}
       <div class="nombre-jugador">${nombres[j]}</div>
       <div class="hitos" title="Hitos">${[...Array(estado.hitosParaGanar)].map((_, i) => `<i class="${i < yo.hitos ? 'si' : ''}${i < yo.hitos && i >= hitosAntes[j] ? ' nuevo' : ''}"></i>`).join('')}</div>
-      <div class="cuentas">Mazo ${yo.mazo.length}</div>`;
+      <div class="cuentas">Mano ${yo.mano.length}</div>`;
     if (estado.lineaTiempo) {
       const n = (yo.linea || []).length;
       const bl = h('button', 'linea-mini', `<span class="reloj"></span> Línea de tiempo · ${n}`);
       bl.onclick = () => verLinea(j);
       marcador.appendChild(bl);
     }
-    campo.appendChild(marcador);
+
+    // Mazo y descarte como pilas de cartas
+    const pilas = h('div', 'pilas');
+    const mazo = h('div', 'pila pila-mazo', `${yo.mazo.length ? DORSO : ''}<span class="cuenta">${yo.mazo.length}</span><small>Mazo</small>`);
+    if (!yo.mazo.length) mazo.classList.add('vacia');
+    const desc = h('button', 'pila pila-descarte');
+    const tope = yo.descarte[yo.descarte.length - 1];
+    if (tope) desc.appendChild(renderCarta(tope.carta, { tamano: 'mini' }));
+    else desc.appendChild(h('div', 'hueco', '<span>Descarte</span>'));
+    desc.appendChild(h('small', '', `Descarte · ${yo.descarte.length}`));
+    desc.setAttribute('aria-label', `Ver el descarte (${yo.descarte.length} cartas)`);
+    desc.onclick = () => verDescarte(j);
+    pilas.append(mazo, desc);
+
+    // Activo al centro; a su izquierda la placa y la reserva; a su derecha las acciones y las pilas.
+    const izq = h('div', 'ala ala-izq');
+    izq.append(marcador, reserva);
+    const der = h('div', 'ala ala-der');
+    der.append(acciones, pilas);
+    campo.append(izq, zonaActivo, der);
     s.appendChild(campo);
 
     // Mano + controles
@@ -393,8 +420,11 @@ export async function montarMesa(contenedor, opciones) {
         if (usable) el.classList.add('usable');
         el.onclick = () => tocarEnMano(j, c);
         mano.appendChild(el);
-      } else mano.appendChild(h('div', 'carta carta-mini dorso', '<span>CC</span>'));
+      } else mano.appendChild(h('div', 'carta carta-mini dorso', DORSO));
     }
+    if (!mostrar) mano.classList.add('oculta');
+    mano.style.setProperty('--n', yo.mano.length);
+    [...mano.children].forEach((el, i) => el.style.setProperty('--i', i - (yo.mano.length - 1) / 2));
     fila.appendChild(mano);
 
     const controles = h('div', 'controles');
@@ -729,6 +759,28 @@ export async function montarMesa(contenedor, opciones) {
     zona.appendChild(fantasma);
     await esperar(900);
     fantasma.remove();
+  }
+
+  // ---------- Descarte ----------
+  function verDescarte(j) {
+    const yo = estado.jugadores[j];
+    const capa = h('div', `capa capa-descarte${girado(j) ? ' girado' : ''}`);
+    const panel = h('div', 'panel-descarte');
+    panel.appendChild(h('div', 'titulo-linea', `Descarte de ${nombres[j]} · ${yo.descarte.length}`));
+    const grilla = h('div', 'grilla-descarte');
+    if (!yo.descarte.length) grilla.appendChild(h('p', 'nota', 'Todavía vacío. Aquí quedan las cartas jugadas y los Protagonistas derrotados: sirven para las Conexiones.'));
+    for (const c of [...yo.descarte].reverse()) {
+      const el = renderCarta(c.carta, { tamano: 'mini' });
+      el.onclick = () => verCarta(c.carta, j);
+      grilla.appendChild(el);
+    }
+    panel.appendChild(grilla);
+    const cerrar = h('button', 'boton-secundario', 'Cerrar');
+    cerrar.onclick = () => capa.remove();
+    panel.appendChild(cerrar);
+    capa.appendChild(panel);
+    capa.onclick = ev => { if (ev.target === capa) capa.remove(); };
+    raiz.appendChild(capa);
   }
 
   // ---------- Línea de tiempo ----------
