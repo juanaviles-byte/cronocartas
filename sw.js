@@ -1,7 +1,7 @@
 // Service worker de Cronocartas: guarda la app en la tablet para jugar sin internet.
 // Al publicar una mejora, sube VERSION y agrega aquí los archivos nuevos
 // (la prueba tests/sw.test.js avisa si falta alguno).
-const VERSION = 'cc-v30';
+const VERSION = 'cc-v31';
 const ARCHIVOS = [
   "./",
   "audio/cronista/accion.ogg",
@@ -406,6 +406,7 @@ self.addEventListener('fetch', e => {
     const guardado = await cache.match(e.request, { ignoreSearch: true });
     const red = fetch(e.request).then(r => { if (r.ok) cache.put(e.request, r.clone()); return r; }).catch(() => null);
     e.waitUntil(red);
-    return guardado || (await red) || cache.match('index.html');
+    // La página de inicio solo reemplaza a una página; nunca a un dato, una imagen o un audio.
+    return guardado || (await red) || (e.request.mode === 'navigate' ? cache.match('index.html') : Response.error());
   }));
 });

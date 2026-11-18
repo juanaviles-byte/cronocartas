@@ -23,3 +23,14 @@ test('el service worker guarda las ilustraciones para jugar sin internet', () =>
   const sw = readFileSync('sw.js', 'utf8');
   for (const ruta of Object.values(arte)) assert.ok(sw.includes(ruta), `sw.js no incluye ${ruta}`);
 });
+
+test('si la lista de ilustraciones falla, se vuelve a pedir en la próxima carga', () => {
+  const datos = readFileSync('js/ui/datos.js', 'utf8');
+  assert.doesNotMatch(datos, /arteDelJuego \|\|= fetch/, 'no debe guardar para siempre un intento fallido');
+  assert.match(datos, /arteDelJuego = null/);
+});
+
+test('el service worker solo devuelve la página de inicio cuando se pide una página, nunca en lugar de un dato o una imagen', () => {
+  const sw = readFileSync('sw.js', 'utf8');
+  assert.match(sw, /mode === 'navigate'/);
+});
