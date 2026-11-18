@@ -10,7 +10,7 @@ import { cargarCursoCompleto } from './datos.js';
 import { crearRng } from '../rng.js';
 import { almacen, CLAVES } from '../almacen.js';
 import { renderCarta, textoParaLeer, imagenCarta, escenarioCarta, textoEfecto } from './carta.js';
-import { botonEscuchar, botonEscucharCarta, leer, detener, reproducir, rutaCronista } from './voz.js';
+import { botonEscuchar, botonEscucharCarta, leer, detener, reproducir, rutaCronista, rutaNarrador } from './voz.js';
 import { esc, pips } from '../html.js';
 import { sonidos, sonidoActivo, alternarSonido } from './sonido.js';
 import { hacerArrastrable, ultimaSoltada } from './arrastre.js';
@@ -1170,12 +1170,14 @@ export async function montarMesa(contenedor, opciones) {
       c.appendChild(b);
       const capa = dobleCara(c);
       const texto = '¿Sabías que? ' + carta.nombre + '. ' + carta.dato;   // texto plano para la voz
+      // Nombre y dato: es lo mismo que grabó el narrador; si la carta no tiene grabación, voz de la tablet.
+      const grabacion = () => rutaNarrador(carta);
       capa.querySelectorAll('.boton-principal').forEach(x => {
-        x.parentNode.insertBefore(botonEscuchar(() => texto), x);
+        x.parentNode.insertBefore(botonEscuchar(() => texto, 'boton-secundario', grabacion), x);
         x.onclick = () => { detener(); capa.remove(); resolve(); };
       });
       raiz.appendChild(capa);
-      if (config.leerSabias) leer(texto);
+      if (config.leerSabias) { const r = grabacion(); if (r) reproducir(r); else leer(texto); }
     });
   }
 

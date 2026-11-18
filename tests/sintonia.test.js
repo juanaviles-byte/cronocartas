@@ -264,3 +264,10 @@ test('los textos de la mesa y de La Cronista no muestran el daño impreso como s
     assert.deepEqual(malos, [], `${f} muestra daño impreso: ${malos.join(' | ')}`);
   }
 });
+
+// El «¿Sabías que?» dice el nombre y el dato de la carta: usa la grabación del narrador si existe.
+test('el ¿Sabías que? usa la voz del narrador', () => {
+  const mesa = readFileSync('js/ui/mesa.js', 'utf8');
+  const bloque = mesa.slice(mesa.indexOf('function sabiasQue('), mesa.indexOf('function sabiasQue(') + 2500);
+  assert.match(bloque, /rutaNarrador\(carta\)/);
+});
