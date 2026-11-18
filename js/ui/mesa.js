@@ -16,6 +16,7 @@ import { sonidos, sonidoActivo, alternarSonido } from './sonido.js';
 import { hacerArrastrable, ultimaSoltada } from './arrastre.js';
 import { volar, impacto, deshacerEnArena, relojSobre, granoHacia } from './efectos.js';
 import { arenaDelTiempo } from './viaje.js';
+import { planDeEscena, escenaAtaque, escenaInvocacion } from './director.js';
 import { dorsoDeMazo, cargarDorsos } from './dorsos.js';
 import { textoAnio, direccionViaje, anioEnViaje, epocaDe, cargarEpocas } from './tiempo.js';
 
@@ -221,7 +222,7 @@ export async function montarMesa(contenedor, opciones) {
       raiz.querySelectorAll('.campo [data-uid]').forEach(el => {
         const uid = el.dataset.uid, antes = cartasAntes[uid], c = cartas[uid];
         if (!c) return;
-        if (!antes) volar(el, origenDe(c.j));
+        if (!antes) { if (entradasDirigidas.has(uid)) entradasDirigidas.delete(uid); else volar(el, origenDe(c.j)); }
         else if (antes.id !== c.id) relojSobre(el);   // misma carta en juego, otra etapa: evolucionó
       });
       for (const j of ['A', 'B']) {
@@ -234,7 +235,7 @@ export async function montarMesa(contenedor, opciones) {
         const visibles = els.filter(el => el.dataset.mano && nuevas.includes(el.dataset.mano));
         (visibles.length ? visibles : els.slice(-nuevas.length)).forEach((el, k) => setTimeout(() => volar(el, desde, { ms: 480 }), k * 90));
       }
-      if (lugarAhora && lugarAhora !== lugarAntes) {
+      if (lugarAhora && lugarAhora !== lugarAntes && !entradasDirigidas.delete('lugar')) {
         const el = raiz.querySelector('.centro .lugar-en-juego .carta');
         if (el) volar(el, origenDe(estado.lugar.duenio || estado.turno), { ms: 620 });
       }
@@ -860,10 +861,22 @@ export async function montarMesa(contenedor, opciones) {
 
   // ---------- Jugadas y eventos ----------
   async function jugar(jugada) {
-    if (!vivo || estado.fase === 'fin') return;
+    if (!vivo || estado.fase === 'fin' || enEscena) return;
     let r;
     const antes = estado;
     try { r = aplicarJugada(estado, jugada); } catch { render(); return; }
+    // El director representa la jugada sobre la mesa de antes; recién después se dibuja el resultado.
+    const plan = sinMovimiento() ? null : planDeEscena(antes, jugada, r.eventos);
+    if (plan) {
+      enEscena = true; ocupado = true;
+      raiz.classList.add('en-escena');
+      quitarPrevia();
+      try { await dirigir(plan); } catch { /* si algo falla, igual se muestra el resultado */ }
+      raiz.classList.remove('en-escena');
+      enEscena = false; ocupado = false;
+      if (!vivo) return;
+    }
+    escenaActual = plan;
     estado = r.estado;
     if (humanoEs(antes.turno) && jugadaReversible(antes, estado, jugada)) historial.push(antes);
     else historial = [];
@@ -872,6 +885,41 @@ export async function montarMesa(contenedor, opciones) {
     render();
     await mostrarEventos(r.eventos);
     if (estado.fase === 'fin') pantallaFinal();
+  }
+
+  let enEscena = false, escenaActual = null;
+  const entradasDirigidas = new Set();   // cartas que ya llegaron a la mesa con la invocación: no vuelan otra vez
+
+  async function dirigir(plan) {
+    const j = plan.jugador, otro = j === 'A' ? 'B' : 'A';
+    if (plan.tipo === 'ataque') {
+      return escenaAtaque({
+        mesa: raiz, plan,
+        atk: raiz.querySelector(`.lado-${j} .zona-activo .carta`),
+        def: raiz.querySelector(`.lado-${otro} .zona-activo .carta`),
+        alGolpear: () => sonidos.ataque(),
+        alCaer: () => sonidos.caida(),
+      });
+    }
+    if (plan.breve) return;   // en la preparación basta con el vuelo normal
+    const lado = raiz.querySelector(`.lado-${j}`);
+    const enMano = raiz.querySelector(`.lado-${j} .mano [data-mano="${CSS.escape(plan.uid)}"]`)
+      || [...raiz.querySelectorAll(`.lado-${j} .mano > .carta-mini`)].pop();
+    let desde = null;
+    if (performance.now() - ultimaSoltada.t < 900) desde = { x: ultimaSoltada.x, y: ultimaSoltada.y };
+    else if (enMano) { const r = enMano.getBoundingClientRect(); desde = { x: r.left + r.width / 2, y: r.top + r.height / 2 }; }
+    if (enMano) enMano.style.visibility = 'hidden';
+    const destino = plan.destino === 'activo' ? lado.querySelector('.zona-activo')
+      : plan.destino === 'reserva' ? (lado.querySelector('.reserva .hueco') || lado.querySelector('.reserva'))
+        : plan.destino === 'evolucion' ? lado.querySelector(`[data-uid="${CSS.escape(plan.objetivo)}"]`)
+          : plan.destino === 'lugar' ? raiz.querySelector('.centro .lugar-en-juego') : null;
+    const efecto = plan.carta.texto || textoEfecto(plan.carta.efecto);
+    const detalle = plan.destino === 'efecto'
+      ? `<small>${plan.carta.tipo === 'personaje' ? 'Personaje' : plan.carta.tipo === 'aula' ? 'Aula' : 'Acontecimiento'}</small><b>${esc(plan.carta.nombre)}</b>${efecto ? `<span>${esc(efecto)}</span>` : ''}`
+      : plan.destino === 'evolucion' ? `<small>Evolución</small><b>${esc(plan.carta.nombre)}</b>` : '';
+    sonidos.jugar();
+    await escenaInvocacion({ grande: renderCarta(plan.carta, { tamano: 'normal' }), desde, destino, plan, girado: girado(j), detalle });
+    if (plan.destino !== 'efecto') entradasDirigidas.add(plan.destino === 'lugar' ? 'lugar' : plan.uid);
   }
 
   // Deshacer: vuelve al estado anterior a la última jugada reversible del turno.
@@ -892,7 +940,7 @@ export async function montarMesa(contenedor, opciones) {
   async function mostrarEventos(eventos) {
     ocupado = true;
     for (const ev of eventos) {
-      if (['colocar', 'bajar', 'lugar', 'efecto', 'evolucion', 'retirar', 'promover'].includes(ev.tipo)) sonidos.jugar();
+      if (['colocar', 'bajar', 'lugar', 'efecto', 'evolucion', 'retirar', 'promover'].includes(ev.tipo) && !(escenaActual && escenaActual.tipo === 'invocacion' && !escenaActual.breve)) sonidos.jugar();
       if (ev.tipo === 'turno' && estado.fase === 'turno') { sonidos.turno(); if (ev.robo) sonidos.robar(); anunciarTurno(ev.jugador); }
       if (ev.tipo === 'ventaja') { sonidos.ventaja(); registrar(`<b>¡Ventaja ×2!</b> ${FRASES_VENTAJA[ev.de]}`); }
       if (ev.tipo === 'protegido') sonidos.protegido();
@@ -910,10 +958,13 @@ export async function montarMesa(contenedor, opciones) {
         registrar(`${nombres[ev.jugador]} ubicó <b>${esc(ev.hecho.nombre)}</b> (${esc(ev.hecho.texto)}): ${ev.correcto ? '¡bien ubicada! +1 Saber' : 'quedó en su lugar correcto'}`);
       }
       if (ev.tipo === 'conexion') { sonidos.conexion(); avisoConexion(ev); registrar(`¡Conexión histórica! <b>${esc(ev.causa.nombre)}</b> → <b>${esc(ev.efecto.nombre)}</b>: +1 Saber`); }
-      if (ev.tipo === 'danio') {
+      const atacoEnEscena = escenaActual && escenaActual.tipo === 'ataque';
+      if (ev.tipo === 'danio' && !atacoEnEscena) {
         sonidos.ataque();
         embestida(ev.jugador);
         destello(ev.jugador === 'A' ? 'B' : 'A', ev.valor);
+      }
+      if (ev.tipo === 'danio') {
         if (!eventos.some(e => e.tipo === 'ventaja')) registrar(`${esc(ev.carta.nombre)} usa <b>${esc(ev.accion)}</b>: ${ev.valor} de daño`);
       }
       if (ev.tipo === 'protegido') registrar(`<b>${esc(ev.carta.nombre)}</b> estaba protegido: no recibe daño`);
@@ -923,12 +974,12 @@ export async function montarMesa(contenedor, opciones) {
       if (ev.tipo === 'revelar') registrar(`${nombres[ev.jugador]}: se miraron ${ev.cartas.length} cartas del mazo${ev.tomada ? ` y se tomó <b>${esc(ev.tomada.nombre)}</b>` : ', sin Protagonistas'}`);
       if (ev.tipo === 'caida') {
         caidas.push(ev.carta);
-        sonidos.caida();
-        await archivar(ev.carta, ev.jugador);
+        if (!atacoEnEscena) { sonidos.caida(); await archivar(ev.carta, ev.jugador); }
         if (config.sabias) await sabiasQue(ev.carta, ev.jugador === 'A' ? 'B' : 'A');
       }
     }
     ocupado = false;
+    escenaActual = null;
     programarIA();
   }
 

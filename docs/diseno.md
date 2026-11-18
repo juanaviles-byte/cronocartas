@@ -418,3 +418,10 @@ La ilustración manda: ocupa a sangre los 2/3 superiores de la carta. Cada eleme
 
 - 24 dorsos recortados de 3 collages 4×2 (`img/dorsos/D00…D20`, más `D00b–d`, variantes del general). `data/dorsos.json` asigna temática a cada carta y bando.
 - `js/ui/dorsos.js` → `dorsoDeMazo`: en un Duelo, el dorso del bando; en otra partida, el de la temática que domina el mazo (≥ 30 % y sin empate); si no, el general D00. Se ve en la pila del mazo y en la mano oculta.
+
+## 24. Director de escena: ataque e invocación (18 nov 2026)
+
+- `js/ui/director.js`: `planDeEscena(antes, jugada, eventos)` (puro, probado) decide la escena; `escenaAtaque` y `escenaInvocacion` la representan **sobre la mesa de antes**; recién después se redibuja con el estado nuevo. Mientras dura, la mesa tiene la clase `en-escena` y no acepta toques.
+- **Ataque:** se levanta (brillo y sombra) → toma impulso → embiste → impacto congelado 90 ms con sacudida, destello, número grande (con «¡Ventaja ×2!» o «Protegido») y la resistencia bajando → el defensor retrocede y el atacante vuelve. Si cae: cámara lenta a sepia, sello «Archivada» y se deshace en arena.
+- **Invocación:** la carta sale de la mano (o de donde se soltó), crece en el centro con un círculo dorado en su destino y aterriza. Personajes, Acontecimientos y Aula se muestran con su efecto y se deshacen en arena. En la preparación se usa solo el vuelo corto.
+- Lo ya representado no se repite en los eventos (embestida, número de daño, archivo, vuelo de entrada). Con «reducir movimiento» no hay escena.
