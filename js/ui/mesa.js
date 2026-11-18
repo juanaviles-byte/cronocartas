@@ -16,6 +16,7 @@ import { sonidos, sonidoActivo, alternarSonido } from './sonido.js';
 import { hacerArrastrable, ultimaSoltada } from './arrastre.js';
 import { volar, impacto, deshacerEnArena, relojSobre, granoHacia } from './efectos.js';
 import { arenaDelTiempo } from './viaje.js';
+import { dorsoDeMazo, cargarDorsos } from './dorsos.js';
 import { textoAnio, direccionViaje, anioEnViaje, epocaDe, cargarEpocas } from './tiempo.js';
 
 // Dorso de carta: reloj de arena dorado sobre azul noche (el emblema de La Cronista).
@@ -78,7 +79,7 @@ export async function montarMesa(contenedor, opciones) {
     const a = duelo.bandos.find(b => b.id === config.bandoA) || duelo.bandos[0];
     return { A: a, B: duelo.bandos.find(b => b !== a) };
   })() : null;
-  const [datosA, datosB, tableros, epocas] = await Promise.all([cargarCursoCompleto(config.cursoA), cargarCursoCompleto(config.cursoB), cargarTableros(), cargarEpocas()]);
+  const [datosA, datosB, tableros, epocas, dorsos] = await Promise.all([cargarCursoCompleto(config.cursoA), cargarCursoCompleto(config.cursoB), cargarTableros(), cargarEpocas(), cargarDorsos()]);
   const unidadesDe = { [config.cursoA]: datosA.unidades, [config.cursoB]: datosB.unidades };
 
   let estado = opciones.estado;
@@ -98,6 +99,14 @@ export async function montarMesa(contenedor, opciones) {
       tablero,
       lineaTiempo: config.linea,
     });
+  }
+  // Dorso de cada mazo: el del bando en un Duelo, o el de la temática que domina sus cartas.
+  const dorsoHtml = {};
+  for (const j of ['A', 'B']) {
+    const yo = estado.jugadores[j];
+    const todas = [...yo.mano, ...yo.mazo, ...yo.descarte, ...(yo.activo ? [yo.activo] : []), ...yo.reserva].map(x => x.carta);
+    const ruta = dorsoDeMazo(dorsos, todas, bandoDe ? bandoDe[j].id : null);
+    dorsoHtml[j] = ruta ? `<img class="dorso-img" src="${esc(ruta)}" alt="" draggable="false">` : DORSO;
   }
   const tableroActual = () => tableros.find(t => t.id === (estado.tablero && estado.tablero.id)) || null;
 
@@ -537,7 +546,7 @@ export async function montarMesa(contenedor, opciones) {
 
     // Mazo y descarte como pilas de cartas
     const pilas = h('div', 'pilas');
-    const mazo = h('div', 'pila pila-mazo', `${yo.mazo.length ? DORSO : ''}<span class="cuenta">${yo.mazo.length}</span><small>Mazo</small>`);
+    const mazo = h('div', 'pila pila-mazo', `${yo.mazo.length ? dorsoHtml[j] : ''}<span class="cuenta">${yo.mazo.length}</span><small>Mazo</small>`);
     if (!yo.mazo.length) mazo.classList.add('vacia');
     const desc = h('button', 'pila pila-descarte');
     const tope = yo.descarte[yo.descarte.length - 1];
@@ -568,7 +577,7 @@ export async function montarMesa(contenedor, opciones) {
         if (usable) el.classList.add('usable');
         el.onclick = () => tocarEnMano(j, c);
         mano.appendChild(el);
-      } else mano.appendChild(h('div', 'carta carta-mini dorso', DORSO));
+      } else mano.appendChild(h('div', 'carta carta-mini dorso', dorsoHtml[j]));
     }
     if (!mostrar) mano.classList.add('oculta');
     mano.style.setProperty('--n', yo.mano.length);

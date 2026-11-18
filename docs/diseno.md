@@ -413,3 +413,8 @@ La ilustración manda: ocupa a sangre los 2/3 superiores de la carta. Cada eleme
 - **Arena del reloj** (`js/ui/viaje.js`): al cambiar de escenario (entra, sale o se reemplaza un Lugar, o empieza una partida nueva) el escenario anterior se dibuja en un canvas detrás de las cartas y se deshace de arriba hacia abajo en granos con gravedad. Un cartel central muestra «Viajando al pasado / al futuro», el contador de años, el nombre y el efecto o regla. Una partida retomada no viaja.
 - **Efectos de cartas** (`js/ui/efectos.js`, una sola capa de granos): las cartas vuelan en arco desde la mano, desde donde se soltaron o desde el mazo (al robar), dejando arena; el golpe muestra un anillo de impacto (en el espacio del activo si lo derrotó); la derrotada se vuelve sepia con el sello «Archivada» y se deshace en arena; al evolucionar gira un reloj de arena con un destello; el Saber llega como un grano de oro.
 - **Rendimiento:** solo transform/opacity y canvas 2D, con tope de 1400 granos; 60 fps con la CPU cuatro veces más lenta (mediana). Con «reducir movimiento» no hay arena ni vuelos: el cambio es directo y el cartel muestra el año final.
+
+## 23. Dorsos temáticos (18 nov 2026)
+
+- 24 dorsos recortados de 3 collages 4×2 (`img/dorsos/D00…D20`, más `D00b–d`, variantes del general). `data/dorsos.json` asigna temática a cada carta y bando.
+- `js/ui/dorsos.js` → `dorsoDeMazo`: en un Duelo, el dorso del bando; en otra partida, el de la temática que domina el mazo (≥ 30 % y sin empate); si no, el general D00. Se ve en la pila del mazo y en la mano oculta.
