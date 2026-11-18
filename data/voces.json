@@ -85,5 +85,26 @@
   "CC-7-U4-004": "audio/narrador/CC-7-U4-004.ogg",
   "CC-7-U4-005": "audio/narrador/CC-7-U4-005.ogg"
  },
- "cronista": {}
+ "cronista": {
+  "saber": "audio/cronista/saber.ogg",
+  "primer-turno": "audio/cronista/primer-turno.ogg",
+  "desventaja": "audio/cronista/desventaja.ogg",
+  "ventaja": "audio/cronista/ventaja.ogg",
+  "evolucion": "audio/cronista/evolucion.ogg",
+  "personaje": "audio/cronista/personaje.ogg",
+  "lugar": "audio/cronista/lugar.ogg",
+  "aula": "audio/cronista/aula.ogg",
+  "peligro": "audio/cronista/peligro.ogg",
+  "accion": "audio/cronista/accion.ogg",
+  "conexion": "audio/cronista/conexion.ogg",
+  "hito": "audio/cronista/hito.ogg",
+  "ubicar-bien": "audio/cronista/ubicar-bien.ogg",
+  "caida": "audio/cronista/caida.ogg",
+  "pista": "audio/cronista/pista.ogg",
+  "pista-ubicar": "audio/cronista/pista-ubicar.ogg",
+  "pista-rival": "audio/cronista/pista-rival.ogg",
+  "tut-jugar": "audio/cronista/tut-jugar.ogg",
+  "tut-fin": "audio/cronista/tut-fin.ogg",
+  "tut-rival": "audio/cronista/tut-rival.ogg"
+ }
 }

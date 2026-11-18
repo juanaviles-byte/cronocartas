@@ -1,9 +1,29 @@
 // Service worker de Cronocartas: guarda la app en la tablet para jugar sin internet.
 // Al publicar una mejora, sube VERSION y agrega aquí los archivos nuevos
 // (la prueba tests/sw.test.js avisa si falta alguno).
-const VERSION = 'cc-v13';
+const VERSION = 'cc-v14';
 const ARCHIVOS = [
   "./",
+  "audio/cronista/accion.ogg",
+  "audio/cronista/aula.ogg",
+  "audio/cronista/caida.ogg",
+  "audio/cronista/conexion.ogg",
+  "audio/cronista/desventaja.ogg",
+  "audio/cronista/evolucion.ogg",
+  "audio/cronista/hito.ogg",
+  "audio/cronista/lugar.ogg",
+  "audio/cronista/peligro.ogg",
+  "audio/cronista/personaje.ogg",
+  "audio/cronista/pista-rival.ogg",
+  "audio/cronista/pista-ubicar.ogg",
+  "audio/cronista/pista.ogg",
+  "audio/cronista/primer-turno.ogg",
+  "audio/cronista/saber.ogg",
+  "audio/cronista/tut-fin.ogg",
+  "audio/cronista/tut-jugar.ogg",
+  "audio/cronista/tut-rival.ogg",
+  "audio/cronista/ubicar-bien.ogg",
+  "audio/cronista/ventaja.ogg",
   "audio/narrador/CC-5-U1-001.ogg",
   "audio/narrador/CC-5-U1-002.ogg",
   "audio/narrador/CC-5-U1-003.ogg",
