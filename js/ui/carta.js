@@ -58,8 +58,11 @@ export function registrarImagenes(mapa) {
   for (const [id, img] of Object.entries(mapa || {})) IMAGENES.set(id, img);
 }
 
+// Ruta de la ilustración de una carta (la subida por el docente o la del juego), o null.
+export const imagenCarta = carta => (carta && (carta.imagen || IMAGENES.get(carta.id))) || null;
+
 function imagenDe(carta) {
-  const img = carta.imagen || IMAGENES.get(carta.id);
+  const img = imagenCarta(carta);
   return img ? `<img src="${esc(img)}" alt="">` : arteCarta(carta);
 }
 

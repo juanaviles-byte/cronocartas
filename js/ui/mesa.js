@@ -9,7 +9,7 @@ import { anotarGanador } from '../torneo.js';
 import { cargarCursoCompleto } from './datos.js';
 import { crearRng } from '../rng.js';
 import { almacen, CLAVES } from '../almacen.js';
-import { renderCarta, textoParaLeer } from './carta.js';
+import { renderCarta, textoParaLeer, imagenCarta, textoEfecto } from './carta.js';
 import { botonEscuchar, botonEscucharCarta, leer, detener, reproducir, rutaCronista } from './voz.js';
 import { esc, pips } from '../html.js';
 import { sonidos, sonidoActivo, alternarSonido } from './sonido.js';
@@ -219,7 +219,12 @@ export async function montarMesa(contenedor, opciones) {
             if (v.tipo === 'colocar') out.set(yo.activo ? reserva : zonaActivo, v);
             if (v.tipo === 'bajar') out.set(reserva, v);
             if (v.tipo === 'evolucionar') { const t = lado.querySelector(`[data-uid="${v.objetivo}"]`); if (t) out.set(t, v); }
-            if (v.tipo === 'jugar') out.set(lado, { jugarCarta: true });
+            if (v.tipo === 'jugar') {
+              out.set(lado, { jugarCarta: true });
+              // Un Lugar también se puede soltar en su espacio de la barra central.
+              const hueco = entrada.carta.tipo === 'lugar' && raiz.querySelector('.centro .lugar-en-juego');
+              if (hueco) out.set(hueco, { jugarCarta: true });
+            }
           }
           return [...out].map(([el2, accion]) => ({ el: el2, accion }));
         },
@@ -250,14 +255,45 @@ export async function montarMesa(contenedor, opciones) {
     verCarta(entrada.carta, j, opciones.map(v => ({ jugada: v, texto: textoJugada(v, j) })));
   }
 
-  // El fondo es el tablero; si el Lugar en juego tiene su propio escenario, se muestra ese.
+  // El fondo es el tablero. Si hay un Lugar en juego, su ilustración pasa a ser el escenario
+  // (capa .escena-lugar sobre el tablero, con transición); sin ilustración, se usa su tablero asociado.
+  let escena = null, escenaSaliente = null;
+  const urlCompleta = ruta => `url("${new URL(ruta, location.href).href}")`;   // relativa en CSS se resolvería desde css/
   function pintarFondo() {
     const t = tableroActual();
-    const lugarId = estado.lugar && estado.lugar.carta.id;
-    const escenario = (lugarId && tableros.find(x => x.lugares.includes(lugarId))) || t;
-    // URL completa: una ruta relativa en una variable CSS se resolvería desde css/.
-    if (escenario) raiz.style.setProperty('--fondo-img', `url("${new URL(escenario.imagen, location.href).href}")`);
-    raiz.classList.toggle('con-tablero', !!escenario);
+    const lugar = estado.lugar && estado.lugar.carta;
+    const img = lugar ? imagenCarta(lugar) : null;
+    const escenario = (!img && lugar && tableros.find(x => x.lugares.includes(lugar.id))) || t;
+    if (escenario) raiz.style.setProperty('--fondo-img', urlCompleta(escenario.imagen));
+    raiz.classList.toggle('con-tablero', !!escenario || !!img);
+    raiz.classList.toggle('con-escena', !!img);
+    if ((escena && escena.id) !== (img ? lugar.id : null)) {
+      if (escena) {
+        const vieja = escena.el;
+        vieja.classList.remove('entra'); vieja.classList.add('sale');
+        escenaSaliente = vieja;
+        setTimeout(() => { vieja.remove(); if (escenaSaliente === vieja) escenaSaliente = null; }, 800);
+      }
+      escena = null;
+      if (img) {
+        const el = h('div', 'escena-lugar entra');
+        el.style.setProperty('--escena', urlCompleta(img));
+        // Al terminar la entrada se quita la animación: si no, se repetiría en cada redibujo.
+        el.addEventListener('animationend', () => el.classList.remove('entra'), { once: true });
+        escena = { id: lugar.id, el };
+      }
+    }
+    if (escenaSaliente) raiz.appendChild(escenaSaliente);
+    if (escena) raiz.appendChild(escena.el);
+  }
+
+  function anunciarEscenario(carta, j) {
+    if (sinMovimiento()) return;
+    const efecto = carta.texto || textoEfecto(carta.efecto);
+    const c = h('div', `cartel-escenario${girado(j) ? ' girado' : ''}`,
+      `<small>Nuevo escenario</small><b>${esc(carta.nombre)}</b>${efecto ? `<span>${esc(efecto)}</span>` : ''}`);
+    raiz.appendChild(c);
+    setTimeout(() => c.remove(), 2600);
   }
 
   function verTablero() {
@@ -746,7 +782,7 @@ export async function montarMesa(contenedor, opciones) {
       if (ev.tipo === 'protegido') registrar(`<b>${esc(ev.carta.nombre)}</b> estaba protegido: no recibe daño`);
       if (ev.tipo === 'evolucion') registrar(`<b>${esc(ev.de.nombre)}</b> evoluciona en <b>${esc(ev.a.nombre)}</b>`);
       if (ev.tipo === 'efecto' && !eventos.some(x => x.tipo === 'revelar' || x.tipo === 'conexion')) registrar(`${nombres[ev.jugador]}: <b>${esc(ev.carta.nombre)}</b>`);
-      if (ev.tipo === 'lugar') registrar(`Nuevo lugar: <b>${esc(ev.carta.nombre)}</b>`);
+      if (ev.tipo === 'lugar') { registrar(`Nuevo lugar: <b>${esc(ev.carta.nombre)}</b>`); anunciarEscenario(ev.carta, ev.jugador); }
       if (ev.tipo === 'revelar') registrar(`${nombres[ev.jugador]}: se miraron ${ev.cartas.length} cartas del mazo${ev.tomada ? ` y se tomó <b>${esc(ev.tomada.nombre)}</b>` : ', sin Protagonistas'}`);
       if (ev.tipo === 'caida') {
         caidas.push(ev.carta);

@@ -13,6 +13,8 @@ const UMBRAL = 10;   // píxeles antes de considerar que es un arrastre
 export function hacerArrastrable(el, { objetivos, alSoltar, girado = false }) {
   let inicio = null, fantasma = null, lista = [], encima = null, arrastrando = false;
 
+  // Las ilustraciones son <img>: sin esto, el mouse inicia el arrastre nativo de imagen y cancela el nuestro.
+  el.addEventListener('dragstart', ev => ev.preventDefault());
   el.addEventListener('pointerdown', ev => {
     if (ev.button !== 0) return;
     inicio = { x: ev.clientX, y: ev.clientY, id: ev.pointerId };

@@ -393,3 +393,9 @@ La ilustración manda: ocupa a sangre los 2/3 superiores de la carta. Cada eleme
 - **Botones** con los colores de La Cronista: azul noche y bronce; dorado para la acción principal. Las acciones disponibles son boletos de pergamino.
 - **La Cronista** habla desde la regla de tiempo (franja azul sobre la barra central), sin tapar activos, mano ni botones. Su globo deja pasar los toques, salvo en sus propios botones.
 - **Arrastre táctil:** el gesto horizontal solo desplaza la mano cuando las cartas no caben (clase `.desplazable`). Si no, cualquier gesto arrastra; antes, arrastrar en diagonal desde el borde de la mano se cancelaba.
+
+## 20. Escenario del Lugar y arrastre con mouse
+
+- **Escenario:** al entrar un Lugar, su ilustración pasa a ser el fondo de la mesa (capa `.escena-lugar` con entrada animada, leve desenfoque y oscurecido para que las zonas se lean). Un cartel central anuncia «Nuevo escenario» con el efecto. Al salir el Lugar, vuelve el tablero. Si un Lugar no tiene ilustración, se usa su tablero asociado (comportamiento anterior).
+- **Soltar un Lugar:** además de la mitad propia de la mesa, vale soltarlo en su espacio de la barra central.
+- **Arrastre con mouse:** las ilustraciones son `<img>`; se bloquea el arrastre nativo de imágenes (`dragstart`), que cancelaba el arrastre del juego.

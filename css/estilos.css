@@ -58,6 +58,7 @@ button:disabled { opacity: .35; cursor: default; }
    Medidas en em: la carta mide 20em × 28em y --w define su ancho. */
 .carta { position: relative; flex: none; color: #1d1d1f; }
 .carta svg, .carta img { display: block; }
+.carta img { -webkit-user-drag: none; user-select: none; }
 .carta .icono-tipo { flex: none; display: inline-block; vertical-align: middle; }
 .pip { display: inline-block; width: .8em; height: .8em; border-radius: 50%; margin-right: .15em; vertical-align: middle;
   background: radial-gradient(circle at 35% 30%, #fff6c9, #E9C46A 45%, #a77d14); box-shadow: 0 0 0 .1em rgba(0,0,0,.35); }
@@ -664,3 +665,31 @@ button:disabled { opacity: .35; cursor: default; }
 .aviso-actualizacion { position: fixed; left: 50%; bottom: 1.2rem; transform: translateX(-50%); z-index: 9999; max-width: min(92vw, 34rem);
   padding: .75rem 1.1rem; border-radius: .7rem; background: var(--noche, #17264F); color: #F3EAD3; border: 1px solid #C9A24A;
   box-shadow: 0 .4rem 1.4rem rgba(0,0,0,.45); font-size: .95rem; line-height: 1.35; text-align: center; pointer-events: none; }
+
+/* ---------- Escenario del Lugar en juego ----------
+   La ilustración del Lugar reemplaza al tablero como fondo. Va en una capa bajo todo el contenido
+   (z-index -1 dentro de .mesa, que aísla su apilamiento), levemente desenfocada y oscurecida. */
+.mesa { position: relative; isolation: isolate; }
+.escena-lugar { position: absolute; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+.escena-lugar::before { content: ""; position: absolute; inset: -4%; background: var(--escena) center / cover no-repeat; filter: blur(3px) saturate(1.1); }
+.escena-lugar::after { content: ""; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at center, rgba(12,14,18,.22) 0%, rgba(12,14,18,.66) 78%), linear-gradient(rgba(12,14,18,.28), rgba(12,14,18,.28)); }
+.escena-lugar.entra { animation: escena-entra 1.2s ease-out both; }
+.escena-lugar.sale { animation: escena-sale .8s ease-in both; }
+@keyframes escena-entra { from { opacity: 0; transform: scale(1.08); } to { opacity: 1; transform: none; } }
+@keyframes escena-sale { from { opacity: 1; } to { opacity: 0; } }
+
+.cartel-escenario { position: fixed; left: 50%; top: 50%; z-index: 60; transform: translate(-50%, -50%); pointer-events: none;
+  display: flex; flex-direction: column; align-items: center; gap: .2rem; max-width: min(86vw, 30rem); padding: .9rem 1.6rem 1rem;
+  background: var(--perg); color: #2a2017; border: 2px solid var(--bronce); border-radius: .6rem; text-align: center;
+  box-shadow: 0 0 0 4px rgba(23,38,79,.85), 0 .6rem 2rem rgba(0,0,0,.6); animation: cartel-escenario 2.6s ease both; }
+.cartel-escenario small { font-size: .72rem; letter-spacing: .04em; color: #7a5a1c; font-weight: 700; }
+.cartel-escenario b { font-family: var(--serif); font-size: 1.7rem; line-height: 1.1; }
+.cartel-escenario span { font-size: .9rem; color: #4a3b26; }
+.cartel-escenario.girado { transform: translate(-50%, -50%) rotate(180deg); }
+@keyframes cartel-escenario { 0% { opacity: 0; scale: .9; } 12% { opacity: 1; scale: 1; } 82% { opacity: 1; } 100% { opacity: 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .escena-lugar.entra, .escena-lugar.sale { animation-duration: 1ms; }
+  .cartel-escenario { animation: none; }
+}
