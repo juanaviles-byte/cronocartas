@@ -3,6 +3,9 @@
 
 const UMBRAL = 10;   // píxeles antes de considerar que es un arrastre
 
+// Dónde se soltó la última carta: la animación de entrada parte desde ahí.
+export const ultimaSoltada = { x: 0, y: 0, t: 0 };
+
 /**
  * @param {HTMLElement} el        carta que se puede arrastrar
  * @param {object} op
@@ -42,6 +45,7 @@ export function hacerArrastrable(el, { objetivos, alSoltar, girado = false }) {
     if (!inicio || (ev && ev.pointerId !== inicio.id)) return;
     if (arrastrando) {
       const accion = encima && encima.accion;
+      if (accion && ev) Object.assign(ultimaSoltada, { x: ev.clientX, y: ev.clientY, t: performance.now() });
       limpiar(!accion);
       if (accion) alSoltar(accion);
       // Evita que el soltar se interprete como un toque en la carta.

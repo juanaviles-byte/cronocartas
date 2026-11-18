@@ -406,3 +406,10 @@ La ilustración manda: ocupa a sangre los 2/3 superiores de la carta. Cada eleme
 - **Mouse:** las cartas arrastrables muestran el cursor de mano; al pasar el cursor por una carta de la mano aparece una vista previa grande encima. Los destinos de arrastre se iluminan más.
 - **Botón de preparación:** desactivado dice «Primero elige tu activo» y se ve como botón apagado, no transparente.
 - **Regla del tablero:** usa hasta dos líneas en vez de cortarse.
+
+## 22. Viaje en el tiempo: transiciones y efectos (18 nov 2026)
+
+- **Épocas** (`data/epocas.json`): cada tablero y cada Lugar tiene un año (`anio`, `aprox`, `hoy`). `js/ui/tiempo.js` da el texto («c. 3000 a. C.», «Hoy»), la dirección del viaje y el año del contador (sin año 0).
+- **Arena del reloj** (`js/ui/viaje.js`): al cambiar de escenario (entra, sale o se reemplaza un Lugar, o empieza una partida nueva) el escenario anterior se dibuja en un canvas detrás de las cartas y se deshace de arriba hacia abajo en granos con gravedad. Un cartel central muestra «Viajando al pasado / al futuro», el contador de años, el nombre y el efecto o regla. Una partida retomada no viaja.
+- **Efectos de cartas** (`js/ui/efectos.js`, una sola capa de granos): las cartas vuelan en arco desde la mano, desde donde se soltaron o desde el mazo (al robar), dejando arena; el golpe muestra un anillo de impacto (en el espacio del activo si lo derrotó); la derrotada se vuelve sepia con el sello «Archivada» y se deshace en arena; al evolucionar gira un reloj de arena con un destello; el Saber llega como un grano de oro.
+- **Rendimiento:** solo transform/opacity y canvas 2D, con tope de 1400 granos; 60 fps con la CPU cuatro veces más lenta (mediana). Con «reducir movimiento» no hay arena ni vuelos: el cambio es directo y el cartel muestra el año final.

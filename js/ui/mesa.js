@@ -13,7 +13,10 @@ import { renderCarta, textoParaLeer, imagenCarta, escenarioCarta, textoEfecto } 
 import { botonEscuchar, botonEscucharCarta, leer, detener, reproducir, rutaCronista } from './voz.js';
 import { esc, pips } from '../html.js';
 import { sonidos, sonidoActivo, alternarSonido } from './sonido.js';
-import { hacerArrastrable } from './arrastre.js';
+import { hacerArrastrable, ultimaSoltada } from './arrastre.js';
+import { volar, impacto, deshacerEnArena, relojSobre, granoHacia } from './efectos.js';
+import { arenaDelTiempo } from './viaje.js';
+import { textoAnio, direccionViaje, anioEnViaje, epocaDe, cargarEpocas } from './tiempo.js';
 
 // Dorso de carta: reloj de arena dorado sobre azul noche (el emblema de La Cronista).
 const DORSO = '<svg class="emblema-dorso" viewBox="0 0 40 56" aria-hidden="true"><rect x="3" y="3" width="34" height="50" rx="4" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M13 14h14M13 42h14M14 15c0 8 12 8 12 13s-12 5-12 13M26 15c0 8-12 8-12 13s12 5 12 13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M17 38c1-3 5-3 6 0z" fill="currentColor"/></svg>';
@@ -75,7 +78,7 @@ export async function montarMesa(contenedor, opciones) {
     const a = duelo.bandos.find(b => b.id === config.bandoA) || duelo.bandos[0];
     return { A: a, B: duelo.bandos.find(b => b !== a) };
   })() : null;
-  const [datosA, datosB, tableros] = await Promise.all([cargarCursoCompleto(config.cursoA), cargarCursoCompleto(config.cursoB), cargarTableros()]);
+  const [datosA, datosB, tableros, epocas] = await Promise.all([cargarCursoCompleto(config.cursoA), cargarCursoCompleto(config.cursoB), cargarTableros(), cargarEpocas()]);
   const unidadesDe = { [config.cursoA]: datosA.unidades, [config.cursoB]: datosB.unidades };
 
   let estado = opciones.estado;
@@ -152,7 +155,7 @@ export async function montarMesa(contenedor, opciones) {
     previa = h('div', 'vista-previa');
     previa.dataset.uid = entrada.uid;
     previa.appendChild(renderCarta(entrada.carta, { tamano: 'normal' }));
-    document.body.appendChild(previa);
+    raiz.appendChild(previa);   // dentro de la mesa: se va con ella al cambiar de pantalla
     const r = el.getBoundingClientRect(), w = previa.offsetWidth, hgt = previa.offsetHeight;
     previa.style.left = `${Math.min(Math.max(8, r.left + r.width / 2 - w / 2), innerWidth - w - 8)}px`;
     previa.style.top = `${Math.max(8, r.top - hgt - 10)}px`;
@@ -160,9 +163,9 @@ export async function montarMesa(contenedor, opciones) {
   raiz.addEventListener('pointerover', vistaPrevia);
   raiz.addEventListener('pointerleave', quitarPrevia);
   raiz.addEventListener('pointerdown', quitarPrevia, true);
+  raiz.addEventListener('pointerup', quitarPrevia, true);
 
   // ---------- Dibujo ----------
-  let uidsAntes = null;                 // para animar las cartas que entran a la mesa
   let hitosAntes = { A: 0, B: 0 };      // para animar el sello del Hito nuevo
   function render() {
     if (!vivo) return quitarPrevia();
@@ -173,9 +176,7 @@ export async function montarMesa(contenedor, opciones) {
     raiz.appendChild(centro());
     raiz.appendChild(lado('A'));
     if (config.modo === 'tutorial') entrenador();
-    const ahora = new Set([...raiz.querySelectorAll('.campo [data-uid]')].map(e => e.dataset.uid));
-    if (uidsAntes) raiz.querySelectorAll('.campo [data-uid]').forEach(e => { if (!uidsAntes.has(e.dataset.uid)) e.classList.add('entra'); });
-    uidsAntes = ahora;
+    animarMovimientos();
     hitosAntes = { A: estado.jugadores.A.hitos, B: estado.jugadores.B.hitos };
     raiz.querySelectorAll('.mano').forEach(m => m.classList.toggle('desplazable', m.scrollWidth > m.clientWidth + 2));
     marcarSaber();
@@ -185,6 +186,53 @@ export async function montarMesa(contenedor, opciones) {
     guiaProactiva();
     dibujarGlobo();
     programarIA();
+  }
+
+  // ---------- Movimiento de cartas ----------
+  // Compara con el dibujo anterior: cartas nuevas en la mesa vuelan desde la mano (o desde donde se soltaron),
+  // las robadas salen del mazo, el Lugar llega a la barra y una evolución hace girar el reloj.
+  let cartasAntes = null, manosAntes = null, lugarAntes;
+  function origenDe(j) {
+    if (estado.turno === j && performance.now() - ultimaSoltada.t < 700) return { x: ultimaSoltada.x, y: ultimaSoltada.y };
+    const m = raiz.querySelector(`.lado-${j} .mano`) || raiz.querySelector(`.lado-${j} .pila-mazo`);
+    if (!m) return null;
+    const r = m.getBoundingClientRect();
+    return { x: r.left + r.width / 2, y: r.top + r.height / 2 };
+  }
+  function animarMovimientos() {
+    const cartas = {}, manos = {};
+    for (const j of ['A', 'B']) {
+      const yo = estado.jugadores[j];
+      for (const p of [yo.activo, ...yo.reserva]) if (p) cartas[p.uid] = { j, id: p.carta.id };
+      manos[j] = new Set(yo.mano.map(c => c.uid));
+    }
+    const lugarAhora = estado.lugar ? estado.lugar.uid : null;
+    const quieto = sinMovimiento();
+    if (cartasAntes && !quieto) {
+      raiz.querySelectorAll('.campo [data-uid]').forEach(el => {
+        const uid = el.dataset.uid, antes = cartasAntes[uid], c = cartas[uid];
+        if (!c) return;
+        if (!antes) volar(el, origenDe(c.j));
+        else if (antes.id !== c.id) relojSobre(el);   // misma carta en juego, otra etapa: evolucionó
+      });
+      for (const j of ['A', 'B']) {
+        const nuevas = [...manos[j]].filter(u => !manosAntes[j].has(u));
+        if (!nuevas.length || nuevas.length > 6) continue;
+        const mazo = raiz.querySelector(`.lado-${j} .pila-mazo`);
+        if (!mazo) continue;
+        const r = mazo.getBoundingClientRect(), desde = { x: r.left + r.width / 2, y: r.top + r.height / 2 };
+        const els = [...raiz.querySelectorAll(`.lado-${j} .mano > .carta-mini`)];
+        const visibles = els.filter(el => el.dataset.mano && nuevas.includes(el.dataset.mano));
+        (visibles.length ? visibles : els.slice(-nuevas.length)).forEach((el, k) => setTimeout(() => volar(el, desde, { ms: 480 }), k * 90));
+      }
+      if (lugarAhora && lugarAhora !== lugarAntes) {
+        const el = raiz.querySelector('.centro .lugar-en-juego .carta');
+        if (el) volar(el, origenDe(estado.lugar.duenio || estado.turno), { ms: 620 });
+      }
+    } else if (cartasAntes && quieto) {
+      raiz.querySelectorAll('.campo [data-uid]').forEach(el => { if (!cartasAntes[el.dataset.uid]) el.classList.add('entra'); });
+    }
+    cartasAntes = cartas; manosAntes = manos; lugarAntes = lugarAhora;
   }
 
   // ---------- Saber visible ----------
@@ -215,6 +263,10 @@ export async function montarMesa(contenedor, opciones) {
     if (insignia) { insignia.classList.remove('gana'); void insignia.offsetWidth; insignia.classList.add(d > 0 ? 'gana' : 'pierde'); }
     if (d > 0) sonidos.saber();
     if (sinMovimiento()) return;
+    if (d > 0) {
+      const b = raiz.querySelector('.centro'), r = b && b.getBoundingClientRect();
+      if (r) granoHacia(el, { x: r.left + r.width / 2, y: r.top + r.height / 2 });
+    }
     const n = h('div', `numero-saber${d < 0 ? ' menos' : ''}`, `${d > 0 ? '+' : '−'}${Math.abs(d)} Saber`);
     el.appendChild(n);
     setTimeout(() => n.remove(), 1400);
@@ -280,9 +332,10 @@ export async function montarMesa(contenedor, opciones) {
     verCarta(entrada.carta, j, opciones.map(v => ({ jugada: v, texto: textoJugada(v, j) })));
   }
 
-  // El fondo es el tablero. Si hay un Lugar en juego, su ilustración pasa a ser el escenario
-  // (capa .escena-lugar sobre el tablero, con transición); sin ilustración, se usa su tablero asociado.
-  let escena = null, escenaSaliente = null;
+  // El fondo es el tablero. Si hay un Lugar en juego, su escenario (o su ilustración) lo reemplaza.
+  // Cada cambio de escenario es un viaje en el tiempo: el anterior se deshace en arena (viaje.js)
+  // y un contador lleva el año de una época a la otra.
+  let escena = null, viaje = null, fondoPrevio = null;
   const urlCompleta = ruta => `url("${new URL(ruta, location.href).href}")`;   // relativa en CSS se resolvería desde css/
   function pintarFondo() {
     const t = tableroActual();
@@ -294,33 +347,65 @@ export async function montarMesa(contenedor, opciones) {
     if (escenario) raiz.style.setProperty('--fondo-img', urlCompleta(escenario.imagen));
     raiz.classList.toggle('con-tablero', !!escenario || !!img);
     raiz.classList.toggle('con-escena', !!img);
-    if ((escena && escena.id) !== (img ? lugar.id : null)) {
-      if (escena) {
-        const vieja = escena.el;
-        vieja.classList.remove('entra'); vieja.classList.add('sale');
-        escenaSaliente = vieja;
-        setTimeout(() => { vieja.remove(); if (escenaSaliente === vieja) escenaSaliente = null; }, 800);
-      }
+
+    // ¿Cambió el escenario desde el último dibujo?
+    const ahora = img ? { clave: lugar.id, url: img, epoca: epocaDe(epocas, lugar.id), lugar }
+      : escenario ? { clave: escenario.id, url: escenario.imagen, epoca: epocaDe(epocas, escenario.id), tablero: escenario } : null;
+    const cambio = !fondoListo || (fondoPrevio && fondoPrevio.clave) !== (ahora && ahora.clave);
+    if (cambio) {
+      // Al abrir una partida nueva se viaja desde hoy hasta la época del tablero; una partida retomada no viaja.
+      if (fondoListo) viajar(fondoPrevio, ahora);
+      else if (partidaNueva && ahora && ahora.epoca && !ahora.epoca.hoy) viajar(null, ahora);
+      fondoPrevio = ahora; fondoListo = true;
+    }
+    if (cambio || (escena && escena.id) !== (img ? lugar.id : null)) {
+      if (escena) escena.el.remove();
       escena = null;
       if (img) {
-        const el = h('div', `escena-lugar entra${propio ? ' nitida' : ''}`);
+        const el = h('div', `escena-lugar${propio ? ' nitida' : ''}${viaje ? '' : ' entra'}`);
         el.style.setProperty('--escena', urlCompleta(img));
         // Al terminar la entrada se quita la animación: si no, se repetiría en cada redibujo.
         el.addEventListener('animationend', () => el.classList.remove('entra'), { once: true });
         escena = { id: lugar.id, el };
       }
     }
-    if (escenaSaliente) raiz.appendChild(escenaSaliente);
     if (escena) raiz.appendChild(escena.el);
+    if (viaje && !viaje.dataset.fin) raiz.appendChild(viaje); else viaje = null;
+  }
+  let fondoListo = false;
+
+  // Viaje de un escenario a otro: arena sobre el anterior + cartel con el contador de años.
+  function viajar(desde, hasta) {
+    const quieto = sinMovimiento();
+    if (!quieto) {
+      const r = raiz.getBoundingClientRect();
+      viaje = arenaDelTiempo({ ancho: r.width || innerWidth, alto: r.height || innerHeight, imagen: desde ? new URL(desde.url, location.href).href : null });
+    }
+    if (hasta) anunciarViaje(desde ? desde.epoca : { anio: new Date().getFullYear(), hoy: true }, hasta, quieto);
   }
 
-  function anunciarEscenario(carta, j) {
-    if (sinMovimiento()) return;
-    const efecto = carta.texto || textoEfecto(carta.efecto);
-    const c = h('div', `cartel-escenario${girado(j) ? ' girado' : ''}`,
-      `<small>Nuevo escenario</small><b>${esc(carta.nombre)}</b>${efecto ? `<span>${esc(efecto)}</span>` : ''}`);
+  function anunciarViaje(epocaDesde, hasta, quieto) {
+    const dir = direccionViaje(epocaDesde, hasta.epoca);
+    const titulo = dir === 'pasado' ? 'Viajando al pasado' : dir === 'futuro' ? 'Viajando al futuro' : 'Nuevo escenario';
+    const carta = hasta.lugar;
+    const nombre = carta ? carta.nombre : hasta.tablero.nombre;
+    const detalle = carta ? (carta.texto || textoEfecto(carta.efecto)) : (hasta.tablero.textoRegla ? `Regla del tablero: ${hasta.tablero.textoRegla}` : '');
+    const c = h('div', `cartel-escenario viaje-${dir || 'mismo'}${girado(estado.turno) ? ' girado' : ''}`,
+      `<small class="rumbo">${titulo}</small>${hasta.epoca ? '<div class="anio-viaje"></div>' : ''}<b>${esc(nombre)}</b>${detalle ? `<span>${esc(detalle)}</span>` : ''}`);
     raiz.appendChild(c);
-    setTimeout(() => c.remove(), 2600);
+    const caja = c.querySelector('.anio-viaje');
+    if (caja && dir && !quieto) {
+      const t0 = performance.now(), dura = 1300, a0 = epocaDesde.anio, a1 = hasta.epoca.anio;
+      caja.textContent = textoAnio(epocaDesde);
+      const paso = ms => {
+        const t = (ms - t0) / dura;
+        if (t >= 1 || !c.isConnected) { caja.textContent = textoAnio(hasta.epoca); caja.classList.add('llego'); return; }
+        caja.textContent = textoAnio({ anio: anioEnViaje(a0, a1, t) });
+        requestAnimationFrame(paso);
+      };
+      requestAnimationFrame(paso);
+    } else if (caja) { caja.textContent = textoAnio(hasta.epoca); caja.classList.add('llego'); }
+    setTimeout(() => c.remove(), 2800);
   }
 
   function verTablero() {
@@ -825,7 +910,7 @@ export async function montarMesa(contenedor, opciones) {
       if (ev.tipo === 'protegido') registrar(`<b>${esc(ev.carta.nombre)}</b> estaba protegido: no recibe daño`);
       if (ev.tipo === 'evolucion') registrar(`<b>${esc(ev.de.nombre)}</b> evoluciona en <b>${esc(ev.a.nombre)}</b>`);
       if (ev.tipo === 'efecto' && !eventos.some(x => x.tipo === 'revelar' || x.tipo === 'conexion')) registrar(`${nombres[ev.jugador]}: <b>${esc(ev.carta.nombre)}</b>`);
-      if (ev.tipo === 'lugar') { registrar(`Nuevo lugar: <b>${esc(ev.carta.nombre)}</b>`); anunciarEscenario(ev.carta, ev.jugador); }
+      if (ev.tipo === 'lugar') { registrar(`Nuevo lugar: <b>${esc(ev.carta.nombre)}</b>`); }
       if (ev.tipo === 'revelar') registrar(`${nombres[ev.jugador]}: se miraron ${ev.cartas.length} cartas del mazo${ev.tomada ? ` y se tomó <b>${esc(ev.tomada.nombre)}</b>` : ', sin Protagonistas'}`);
       if (ev.tipo === 'caida') {
         caidas.push(ev.carta);
@@ -846,17 +931,22 @@ export async function montarMesa(contenedor, opciones) {
     const d = raiz.querySelector(`.lado-${atacante === 'A' ? 'B' : 'A'} .zona-activo .carta`);
     if (a) { a.classList.remove('embiste'); void a.offsetWidth; a.classList.add('embiste'); }
     if (d) { d.classList.remove('golpeado'); void d.offsetWidth; d.classList.add('golpeado'); }
+    // Si el golpe lo derrotó, la carta ya no está: el impacto va al espacio del activo.
+    const blanco = d || raiz.querySelector(`.lado-${atacante === 'A' ? 'B' : 'A'} .zona-activo`);
+    if (blanco && !sinMovimiento()) setTimeout(() => impacto(blanco), 160);
   }
 
   // La carta derrotada se vuelve sepia y queda "archivada" un momento.
   async function archivar(carta, duenio) {
     const zona = raiz.querySelector(`.lado-${duenio} .zona-activo`);
     if (!zona || sinMovimiento()) return;
+    // Se vuelve foto antigua (sepia, con el sello) y luego se deshace en arena.
     const fantasma = renderCarta(carta, { tamano: 'mini' });
     fantasma.classList.add('archivada');
     fantasma.appendChild(h('div', 'sello-archivo', 'Archivada'));
     zona.appendChild(fantasma);
-    await esperar(900);
+    await esperar(520);
+    await deshacerEnArena(fantasma, 820);
     fantasma.remove();
   }
 
