@@ -1,7 +1,7 @@
 // Service worker de Cronocartas: guarda la app en la tablet para jugar sin internet.
 // Al publicar una mejora, sube VERSION y agrega aquí los archivos nuevos
 // (la prueba tests/sw.test.js avisa si falta alguno).
-const VERSION = 'cc-v23';
+const VERSION = 'cc-v24';
 const ARCHIVOS = [
   "./",
   "audio/cronista/accion.ogg",
@@ -157,6 +157,7 @@ const ARCHIVOS = [
   "data/arte.json",
   "data/aula.json",
   "data/duelos.json",
+  "data/escenarios.json",
   "data/mazo-5.json",
   "data/mazo-6.json",
   "data/mazo-7.json",
@@ -296,6 +297,20 @@ const ARCHIVOS = [
   "img/cronista/celebra.jpg",
   "img/cronista/explica.jpg",
   "img/cronista/pista.jpg",
+  "img/escenarios/CC-5-U1-007.webp",
+  "img/escenarios/CC-5-U3-006.webp",
+  "img/escenarios/CC-5-U4-006.webp",
+  "img/escenarios/CC-6-U1-007.webp",
+  "img/escenarios/CC-6-U2-007.webp",
+  "img/escenarios/CC-6-U4-006.webp",
+  "img/escenarios/CC-7-U1-006.webp",
+  "img/escenarios/CC-7-U2-007.webp",
+  "img/escenarios/CC-7-U4-007.webp",
+  "img/escenarios/CC-7-U4-010.webp",
+  "img/escenarios/CC-8-U1-009.webp",
+  "img/escenarios/CC-8-U2-007.webp",
+  "img/escenarios/CC-8-U3-007.webp",
+  "img/escenarios/CC-8-U4-005.webp",
   "img/tableros/T-5-1.jpg",
   "img/tableros/T-5-2.jpg",
   "img/tableros/T-5-3.jpg",

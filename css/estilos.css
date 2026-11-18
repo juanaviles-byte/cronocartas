@@ -720,3 +720,7 @@ button:disabled { opacity: .35; cursor: default; }
   .globo-cronista.acoplado .retrato { width: 42px; height: 42px; }
   .globo-cronista.acoplado .dice p { font-size: .78rem; }
 }
+
+/* Escenario pintado para la mesa: nítido (la ilustración de carta ampliada sí se desenfoca) */
+.escena-lugar.nitida::before { inset: 0; filter: none; }
+.escena-lugar.nitida::after { background: radial-gradient(ellipse at center, rgba(12,14,18,.18) 0%, rgba(12,14,18,.58) 80%), linear-gradient(rgba(12,14,18,.22), rgba(12,14,18,.22)); }

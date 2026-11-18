@@ -4,13 +4,18 @@ import { cargarCurso } from '../mazos.js';
 import { almacen, CLAVES } from '../almacen.js';
 import { leerImagenes } from '../imagenes.js';
 import { extraerImagenes } from '../ediciones.js';
-import { registrarImagenes } from './carta.js';
+import { registrarImagenes, registrarEscenarios } from './carta.js';
 
 // Ilustraciones que trae el juego (data/arte.json). Las que sube el docente en esta tablet tienen prioridad.
 let arteDelJuego = null;
 const cargarArte = () => (arteDelJuego ||= fetch('data/arte.json').then(r => (r.ok ? r.json() : {})).catch(() => ({})));
 
+// Escenarios de mesa de los Lugares (data/escenarios.json).
+let escenarios = null;
+const cargarEscenarios = () => (escenarios ||= fetch('data/escenarios.json').then(r => (r.ok ? r.json() : {})).catch(() => ({})).then(m => { registrarEscenarios(m); return m; }));
+
 export async function cargarCursoCompleto(curso) {
+  await cargarEscenarios();
   const d = await cargarCurso(curso, {
     comunidad: almacen.cartasComunidad(curso),
     ediciones: almacen.leer(CLAVES.ediciones, {}) || {},

@@ -58,6 +58,13 @@ export function registrarImagenes(mapa) {
   for (const [id, img] of Object.entries(mapa || {})) IMAGENES.set(id, img);
 }
 
+// Escenarios de mesa de las cartas Lugar (data/escenarios.json, los registra datos.js).
+const ESCENARIOS = new Map();
+export function registrarEscenarios(mapa) {
+  for (const [id, ruta] of Object.entries(mapa || {})) ESCENARIOS.set(id, ruta);
+}
+export const escenarioCarta = carta => (carta && ESCENARIOS.get(carta.id)) || null;
+
 // Ruta de la ilustración de una carta (la subida por el docente o la del juego), o null.
 export const imagenCarta = carta => (carta && (carta.imagen || IMAGENES.get(carta.id))) || null;
 

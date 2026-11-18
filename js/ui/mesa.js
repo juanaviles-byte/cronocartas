@@ -9,7 +9,7 @@ import { anotarGanador } from '../torneo.js';
 import { cargarCursoCompleto } from './datos.js';
 import { crearRng } from '../rng.js';
 import { almacen, CLAVES } from '../almacen.js';
-import { renderCarta, textoParaLeer, imagenCarta, textoEfecto } from './carta.js';
+import { renderCarta, textoParaLeer, imagenCarta, escenarioCarta, textoEfecto } from './carta.js';
 import { botonEscuchar, botonEscucharCarta, leer, detener, reproducir, rutaCronista } from './voz.js';
 import { esc, pips } from '../html.js';
 import { sonidos, sonidoActivo, alternarSonido } from './sonido.js';
@@ -287,7 +287,9 @@ export async function montarMesa(contenedor, opciones) {
   function pintarFondo() {
     const t = tableroActual();
     const lugar = estado.lugar && estado.lugar.carta;
-    const img = lugar ? imagenCarta(lugar) : null;
+    // Primero el escenario pintado para la mesa; si no hay, la ilustración de la carta (ampliada y desenfocada).
+    const propio = lugar ? escenarioCarta(lugar) : null;
+    const img = propio || (lugar ? imagenCarta(lugar) : null);
     const escenario = (!img && lugar && tableros.find(x => x.lugares.includes(lugar.id))) || t;
     if (escenario) raiz.style.setProperty('--fondo-img', urlCompleta(escenario.imagen));
     raiz.classList.toggle('con-tablero', !!escenario || !!img);
@@ -301,7 +303,7 @@ export async function montarMesa(contenedor, opciones) {
       }
       escena = null;
       if (img) {
-        const el = h('div', 'escena-lugar entra');
+        const el = h('div', `escena-lugar entra${propio ? ' nitida' : ''}`);
         el.style.setProperty('--escena', urlCompleta(img));
         // Al terminar la entrada se quita la animación: si no, se repetiría en cada redibujo.
         el.addEventListener('animationend', () => el.classList.remove('entra'), { once: true });
