@@ -462,17 +462,17 @@ export async function montarMesa(contenedor, opciones) {
     const e = estado, yo = e.jugadores.A;
     let t = '';
     if (e.fase === 'preparacion' && e.turno === 'A') t = !yo.activo
-      ? 'Toca un Protagonista de tu mano y colócalo como <b>activo</b>: es quien combate.'
-      : 'Puedes poner hasta 3 Protagonistas en la <b>reserva</b>. Cuando quieras, toca <b>Listo</b>.';
+      ? 'Elige un Protagonista de tu mano y ponlo como <b>activo</b>: es quien combate. Conviene uno con buena resistencia.'
+      : 'Pon Protagonistas en tu <b>reserva</b> (hasta 3). Si tu activo cae y no tienes reserva, pierdes la partida. Cuando quieras, toca <b>Listo</b>.';
     else if (e.turno === 'A' && e.fase === 'turno') {
       const v = jugadasValidas(e);
-      if (yo.saberPendiente > 0) t = 'Cada turno recibes 1 de <b>Saber</b>. Toca tu activo y dale Saber: las acciones lo necesitan.';
-      else if (v.some(x => x.tipo === 'accion')) t = 'Ya tienes Saber suficiente. Usa una <b>acción</b> (botones junto a tu activo). Al usarla, termina tu turno.';
-      else if (e.numeroTurno === 1) t = 'En el primer turno de la partida no se puede atacar. Baja cartas o toca <b>Pasar turno</b>.';
-      else if (v.some(x => x.tipo === 'evolucionar')) t = '¡Puedes <b>evolucionar</b>! Una Etapa 2 muestra cómo cambia algo en la historia.';
+      if (yo.saberPendiente > 0) t = 'Cada turno ganas 1 de <b>Saber</b>. Toca un Protagonista para dárselo: las acciones necesitan Saber, y no se pierde al atacar.';
+      else if (v.some(x => x.tipo === 'accion')) t = 'Ya puedes usar una <b>acción</b>: los botones junto a tu activo. Al atacar se termina tu turno, así que primero juega tus cartas.';
+      else if (e.numeroTurno === 1) t = 'En el primer turno de la partida no se puede atacar. Prepara tu mesa: baja Protagonistas o juega cartas, y luego pasa el turno.';
+      else if (v.some(x => x.tipo === 'evolucionar')) t = '¡Puedes <b>evolucionar</b>! Una Etapa 2 muestra cómo algo cambió en la historia, y es más fuerte. Toca la carta que brilla en tu mano.';
       else t = 'Juega cartas de tu mano (las que brillan se pueden usar) o toca <b>Pasar turno</b>.';
       if (e.numeroTurno >= 7) t = '¡Ya sabes jugar! Gana quien consigue 3 <b>Hitos</b> (derrotar Protagonistas). Sigue o vuelve al menú.';
-    } else if (e.fase === 'promover' && e.turno === 'A') t = 'Tu activo cayó. Elige quién de tu reserva pasa al frente.';
+    } else if (e.fase === 'promover' && e.turno === 'A') t = 'Tu activo cayó. Elige quién de tu <b>reserva</b> pasa al frente: mira su resistencia y contra quién tiene ventaja.';
     else if (e.turno === 'B') t = 'Ahora juega la tablet…';
     // En el tutorial, La Cronista dice el paso a paso (salvo que se le haya pedido una pista).
     const clave = (CLAVES_TUTORIAL.find(([inicio]) => t.startsWith(inicio)) || [])[1];
@@ -483,9 +483,10 @@ export async function montarMesa(contenedor, opciones) {
   }
 
   // Frases del tutorial y su grabación de La Cronista.
-  const CLAVES_TUTORIAL = [['Toca un Protagonista de tu mano', 'tut-activo'], ['Puedes poner hasta 3', 'tut-reserva'], ['Cada turno recibes', 'tut-saber'],
-    ['Ya tienes Saber suficiente', 'tut-accion'], ['En el primer turno', 'tut-primer-turno'], ['¡Puedes <b>evolucionar', 'tut-evolucion'],
-    ['Juega cartas de tu mano', 'tut-jugar'], ['¡Ya sabes jugar', 'tut-fin'], ['Tu activo cayó', 'tut-promover'], ['Ahora juega la tablet', 'tut-rival']];
+  // Las frases del tutorial que coinciden con las de La Cronista en partida usan la misma grabación.
+  const CLAVES_TUTORIAL = [['Elige un Protagonista de tu mano', 'prep-activo'], ['Pon Protagonistas en tu', 'prep-reserva'], ['Cada turno ganas', 'saber'],
+    ['Ya puedes usar una', 'accion'], ['En el primer turno', 'primer-turno'], ['¡Puedes <b>evolucionar', 'evolucion'],
+    ['Juega cartas de tu mano', 'tut-jugar'], ['¡Ya sabes jugar', 'tut-fin'], ['Tu activo cayó', 'promover'], ['Ahora juega la tablet', 'tut-rival']];
   let ultimoPasoTutorial = null;
 
   // ---------- La Cronista (guía) ----------

@@ -613,26 +613,6 @@
     {
      "clave": "prep-activo",
      "texto": "Elige un Protagonista de tu mano y ponlo como activo: es quien combate. Conviene uno con buena resistencia."
-    },
-    {
-     "clave": "prep-reserva",
-     "texto": "Pon Protagonistas en tu reserva, hasta tres. Si tu activo cae y no tienes reserva, pierdes la partida."
-    },
-    {
-     "clave": "promover",
-     "texto": "Tu activo cayó. Elige quién de tu reserva pasa al frente: mira su resistencia y contra quién tiene ventaja."
-    },
-    {
-     "clave": "ubicar",
-     "texto": "¡Línea de tiempo! Pon la carta en su lugar: lo más antiguo va a la izquierda. Si aciertas, tu activo gana uno de Saber."
-    },
-    {
-     "clave": "saber",
-     "texto": "Cada turno ganas uno de Saber. Toca un Protagonista para dárselo: las acciones necesitan Saber, y no se pierde al atacar."
-    },
-    {
-     "clave": "primer-turno",
-     "texto": "En el primer turno de la partida no se puede atacar. Prepara tu mesa: baja Protagonistas o juega cartas, y luego pasa el turno."
     }
    ]
   },
@@ -640,28 +620,8 @@
    "id": "C02",
    "lineas": [
     {
-     "clave": "desventaja",
-     "texto": "¡Ojo! El activo rival tiene ventaja sobre el tuyo: te hará el doble de daño. Podrías retirar a tu activo."
-    },
-    {
-     "clave": "ventaja",
-     "texto": "¡Tu activo tiene ventaja! Contra este rival, sus acciones hacen el doble de daño."
-    },
-    {
-     "clave": "evolucion",
-     "texto": "¡Puedes evolucionar! Una Etapa dos muestra cómo algo cambió en la historia, y es más fuerte. Toca la carta que brilla en tu mano."
-    },
-    {
-     "clave": "personaje",
-     "texto": "Tienes un Personaje: una persona real de la historia. Su efecto ocurre al instante, y puedes jugar solo uno por turno."
-    },
-    {
-     "clave": "lugar",
-     "texto": "Tienes un Lugar: cambia el escenario y da una ventaja mientras esté en juego. Si el rival juega otro, el tuyo se va."
-    },
-    {
-     "clave": "aula",
-     "texto": "Las cartas Aula muestran buenas prácticas de una sala de clases. Te ayudan, y puedes jugar una por turno."
+     "clave": "prep-reserva",
+     "texto": "Pon Protagonistas en tu reserva, hasta tres. Si tu activo cae y no tienes reserva, pierdes la partida."
     }
    ]
   },
@@ -669,28 +629,8 @@
    "id": "C03",
    "lineas": [
     {
-     "clave": "peligro",
-     "texto": "¡Cuidado! Tu activo puede caer en el próximo ataque. Retirarlo cuesta Saber, pero salva al Protagonista."
-    },
-    {
-     "clave": "accion",
-     "texto": "Ya puedes usar una acción: los botones junto a tu activo. Al atacar se termina tu turno, así que primero juega tus cartas."
-    },
-    {
-     "clave": "conexion",
-     "texto": "¡Una conexión entre causa y consecuencia! Por entender cómo se relacionan los hechos, tu activo gana uno de Saber."
-    },
-    {
-     "clave": "hito",
-     "texto": "¡Ganaste un Hito por derrotar a un Protagonista rival! Los Hitos son los puntos: el primero en reunir los necesarios gana."
-    },
-    {
-     "clave": "ubicar-bien",
-     "texto": "¡Muy bien ubicada en tu línea de tiempo! Ordenar los hechos en el tiempo es pensar como historiador."
-    },
-    {
-     "clave": "caida",
-     "texto": "Perdiste un Protagonista y el rival gana un Hito. Elige bien quién sigue: busca a quien tenga ventaja."
+     "clave": "promover",
+     "texto": "Tu activo cayó. Elige quién de tu reserva pasa al frente: mira su resistencia y contra quién tiene ventaja."
     }
    ]
   },
@@ -698,28 +638,8 @@
    "id": "C04",
    "lineas": [
     {
-     "clave": "pista",
-     "texto": "Te doy una pista: mira lo que brilla en la mesa."
-    },
-    {
-     "clave": "pista-ubicar",
-     "texto": "Piensa en las fechas que ya tienes en tu línea. Lo más antiguo va a la izquierda."
-    },
-    {
-     "clave": "pista-rival",
-     "texto": "Ahora juega el rival. Mira qué hace: así también se aprende."
-    },
-    {
-     "clave": "tut-activo",
-     "texto": "Toca un Protagonista de tu mano y colócalo como activo: es quien combate."
-    },
-    {
-     "clave": "tut-reserva",
-     "texto": "Puedes poner hasta tres Protagonistas en la reserva. Cuando quieras, toca Listo."
-    },
-    {
-     "clave": "tut-saber",
-     "texto": "Cada turno recibes uno de Saber. Toca tu activo y dale Saber: las acciones lo necesitan."
+     "clave": "ubicar",
+     "texto": "¡Línea de tiempo! Pon la carta en su lugar: lo más antiguo va a la izquierda. Si aciertas, tu activo gana uno de Saber."
     }
    ]
   },
@@ -727,33 +647,175 @@
    "id": "C05",
    "lineas": [
     {
-     "clave": "tut-accion",
-     "texto": "Ya tienes Saber suficiente. Usa una acción, con los botones junto a tu activo. Al usarla, termina tu turno."
-    },
-    {
-     "clave": "tut-primer-turno",
-     "texto": "En el primer turno de la partida no se puede atacar. Baja cartas o toca Pasar turno."
-    },
-    {
-     "clave": "tut-evolucion",
-     "texto": "¡Puedes evolucionar! Una Etapa dos muestra cómo cambia algo en la historia."
-    },
-    {
-     "clave": "tut-jugar",
-     "texto": "Juega cartas de tu mano, las que brillan se pueden usar, o toca Pasar turno."
-    },
-    {
-     "clave": "tut-fin",
-     "texto": "¡Ya sabes jugar! Gana quien consigue tres Hitos, derrotando Protagonistas. Sigue jugando o vuelve al menú."
-    },
-    {
-     "clave": "tut-promover",
-     "texto": "Tu activo cayó. Elige quién de tu reserva pasa al frente."
+     "clave": "saber",
+     "texto": "Cada turno ganas uno de Saber. Toca un Protagonista para dárselo: las acciones necesitan Saber, y no se pierde al atacar."
     }
    ]
   },
   {
    "id": "C06",
+   "lineas": [
+    {
+     "clave": "primer-turno",
+     "texto": "En el primer turno de la partida no se puede atacar. Prepara tu mesa: baja Protagonistas o juega cartas, y luego pasa el turno."
+    }
+   ]
+  },
+  {
+   "id": "C07",
+   "lineas": [
+    {
+     "clave": "desventaja",
+     "texto": "¡Ojo! El activo rival tiene ventaja sobre el tuyo: te hará el doble de daño. Podrías retirar a tu activo."
+    }
+   ]
+  },
+  {
+   "id": "C08",
+   "lineas": [
+    {
+     "clave": "ventaja",
+     "texto": "¡Tu activo tiene ventaja! Contra este rival, sus acciones hacen el doble de daño."
+    }
+   ]
+  },
+  {
+   "id": "C09",
+   "lineas": [
+    {
+     "clave": "evolucion",
+     "texto": "¡Puedes evolucionar! Una Etapa dos muestra cómo algo cambió en la historia, y es más fuerte. Toca la carta que brilla en tu mano."
+    }
+   ]
+  },
+  {
+   "id": "C10",
+   "lineas": [
+    {
+     "clave": "personaje",
+     "texto": "Tienes un Personaje: una persona real de la historia. Su efecto ocurre al instante, y puedes jugar solo uno por turno."
+    }
+   ]
+  },
+  {
+   "id": "C11",
+   "lineas": [
+    {
+     "clave": "lugar",
+     "texto": "Tienes un Lugar: cambia el escenario y da una ventaja mientras esté en juego. Si el rival juega otro, el tuyo se va."
+    }
+   ]
+  },
+  {
+   "id": "C12",
+   "lineas": [
+    {
+     "clave": "aula",
+     "texto": "Las cartas Aula muestran buenas prácticas de una sala de clases. Te ayudan, y puedes jugar una por turno."
+    }
+   ]
+  },
+  {
+   "id": "C13",
+   "lineas": [
+    {
+     "clave": "peligro",
+     "texto": "¡Cuidado! Tu activo puede caer en el próximo ataque. Retirarlo cuesta Saber, pero salva al Protagonista."
+    }
+   ]
+  },
+  {
+   "id": "C14",
+   "lineas": [
+    {
+     "clave": "accion",
+     "texto": "Ya puedes usar una acción: los botones junto a tu activo. Al atacar se termina tu turno, así que primero juega tus cartas."
+    }
+   ]
+  },
+  {
+   "id": "C15",
+   "lineas": [
+    {
+     "clave": "conexion",
+     "texto": "¡Una conexión entre causa y consecuencia! Por entender cómo se relacionan los hechos, tu activo gana uno de Saber."
+    }
+   ]
+  },
+  {
+   "id": "C16",
+   "lineas": [
+    {
+     "clave": "hito",
+     "texto": "¡Ganaste un Hito por derrotar a un Protagonista rival! Los Hitos son los puntos: el primero en reunir los necesarios gana."
+    }
+   ]
+  },
+  {
+   "id": "C17",
+   "lineas": [
+    {
+     "clave": "ubicar-bien",
+     "texto": "¡Muy bien ubicada en tu línea de tiempo! Ordenar los hechos en el tiempo es pensar como historiador."
+    }
+   ]
+  },
+  {
+   "id": "C18",
+   "lineas": [
+    {
+     "clave": "caida",
+     "texto": "Perdiste un Protagonista y el rival gana un Hito. Elige bien quién sigue: busca a quien tenga ventaja."
+    }
+   ]
+  },
+  {
+   "id": "C19",
+   "lineas": [
+    {
+     "clave": "pista",
+     "texto": "Te doy una pista: mira lo que brilla en la mesa."
+    }
+   ]
+  },
+  {
+   "id": "C20",
+   "lineas": [
+    {
+     "clave": "pista-ubicar",
+     "texto": "Piensa en las fechas que ya tienes en tu línea. Lo más antiguo va a la izquierda."
+    }
+   ]
+  },
+  {
+   "id": "C21",
+   "lineas": [
+    {
+     "clave": "pista-rival",
+     "texto": "Ahora juega el rival. Mira qué hace: así también se aprende."
+    }
+   ]
+  },
+  {
+   "id": "C22",
+   "lineas": [
+    {
+     "clave": "tut-jugar",
+     "texto": "Juega cartas de tu mano, las que brillan se pueden usar, o toca Pasar turno."
+    }
+   ]
+  },
+  {
+   "id": "C23",
+   "lineas": [
+    {
+     "clave": "tut-fin",
+     "texto": "¡Ya sabes jugar! Gana quien consigue tres Hitos, derrotando Protagonistas. Sigue jugando o vuelve al menú."
+    }
+   ]
+  },
+  {
+   "id": "C24",
    "lineas": [
     {
      "clave": "tut-rival",

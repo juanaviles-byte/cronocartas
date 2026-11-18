@@ -13,7 +13,7 @@
 6. Revisa que lea **todas** las frases del bloque, en orden y con una pausa clara entre ellas. Si se salta una, corta el audio o lee algo mal, vuelve a generar ese bloque. Si el audio sale cortado porque el bloque es muy largo, divídelo en dos (`N05a.wav` y `N05b.wav`).
 7. Envíame los archivos cuando los tengas (pueden ir de a varios). Yo los corto por los silencios, los asigno a cada carta, los comprimo y los dejo en el juego.
 
-Son **21 bloques del narrador** (N01–N21, las mismas cartas y en el mismo orden que los collages K01–K21) y **6 bloques de La Cronista** (C01–C06). Las siglas, los siglos y las fechas ya están escritos en palabras para que la voz los lea bien.
+Son **21 bloques del narrador** (N01–N21, las mismas cartas y en el mismo orden que los collages K01–K21) y **24 frases de La Cronista** (C01–C24, una por audio). Las siglas, los siglos y las fechas ya están escritos en palabras para que la voz los lea bien.
 
 ## Estilo del narrador
 
@@ -29,96 +29,150 @@ La Cronista: mujer latinoamericana de unos 30 años, guía amable y entusiasta d
 
 ## Bloques de La Cronista
 
+Ahora va **una frase por audio**: así no hay nada que cortar. Pega una frase, toca Run, descarga y guarda con su número (`C01.wav`, `C02.wav`…). Donde se indica, agrega esa expresión justo antes de la primera palabra (escribe `<` y elígela).
+
 ### C01
 
 ```
 Elige un Protagonista de tu mano y ponlo como activo: es quien combate. Conviene uno con buena resistencia.
-
-Pon Protagonistas en tu reserva, hasta tres. Si tu activo cae y no tienes reserva, pierdes la partida.
-
-Tu activo cayó. Elige quién de tu reserva pasa al frente: mira su resistencia y contra quién tiene ventaja.
-
-¡Línea de tiempo! Pon la carta en su lugar: lo más antiguo va a la izquierda. Si aciertas, tu activo gana uno de Saber.
-
-Cada turno ganas uno de Saber. Toca un Protagonista para dárselo: las acciones necesitan Saber, y no se pierde al atacar.
-
-En el primer turno de la partida no se puede atacar. Prepara tu mesa: baja Protagonistas o juega cartas, y luego pasa el turno.
-
 ```
 
 ### C02
 
 ```
-¡Ojo! El activo rival tiene ventaja sobre el tuyo: te hará el doble de daño. Podrías retirar a tu activo.
-
-¡Tu activo tiene ventaja! Contra este rival, sus acciones hacen el doble de daño.
-
-¡Puedes evolucionar! Una Etapa dos muestra cómo algo cambió en la historia, y es más fuerte. Toca la carta que brilla en tu mano.
-
-Tienes un Personaje: una persona real de la historia. Su efecto ocurre al instante, y puedes jugar solo uno por turno.
-
-Tienes un Lugar: cambia el escenario y da una ventaja mientras esté en juego. Si el rival juega otro, el tuyo se va.
-
-Las cartas Aula muestran buenas prácticas de una sala de clases. Te ayudan, y puedes jugar una por turno.
-
+Pon Protagonistas en tu reserva, hasta tres. Si tu activo cae y no tienes reserva, pierdes la partida.
 ```
 
 ### C03
 
 ```
-¡Cuidado! Tu activo puede caer en el próximo ataque. Retirarlo cuesta Saber, pero salva al Protagonista.
-
-Ya puedes usar una acción: los botones junto a tu activo. Al atacar se termina tu turno, así que primero juega tus cartas.
-
-¡Una conexión entre causa y consecuencia! Por entender cómo se relacionan los hechos, tu activo gana uno de Saber.
-
-¡Ganaste un Hito por derrotar a un Protagonista rival! Los Hitos son los puntos: el primero en reunir los necesarios gana.
-
-¡Muy bien ubicada en tu línea de tiempo! Ordenar los hechos en el tiempo es pensar como historiador.
-
-Perdiste un Protagonista y el rival gana un Hito. Elige bien quién sigue: busca a quien tenga ventaja.
-
+Tu activo cayó. Elige quién de tu reserva pasa al frente: mira su resistencia y contra quién tiene ventaja.
 ```
 
-### C04
+### C04 · expresión: `chuckle`
 
 ```
-Te doy una pista: mira lo que brilla en la mesa.
-
-Piensa en las fechas que ya tienes en tu línea. Lo más antiguo va a la izquierda.
-
-Ahora juega el rival. Mira qué hace: así también se aprende.
-
-Toca un Protagonista de tu mano y colócalo como activo: es quien combate.
-
-Puedes poner hasta tres Protagonistas en la reserva. Cuando quieras, toca Listo.
-
-Cada turno recibes uno de Saber. Toca tu activo y dale Saber: las acciones lo necesitan.
-
+¡Línea de tiempo! Pon la carta en su lugar: lo más antiguo va a la izquierda. Si aciertas, tu activo gana uno de Saber.
 ```
 
 ### C05
 
 ```
-Ya tienes Saber suficiente. Usa una acción, con los botones junto a tu activo. Al usarla, termina tu turno.
-
-En el primer turno de la partida no se puede atacar. Baja cartas o toca Pasar turno.
-
-¡Puedes evolucionar! Una Etapa dos muestra cómo cambia algo en la historia.
-
-Juega cartas de tu mano, las que brillan se pueden usar, o toca Pasar turno.
-
-¡Ya sabes jugar! Gana quien consigue tres Hitos, derrotando Protagonistas. Sigue jugando o vuelve al menú.
-
-Tu activo cayó. Elige quién de tu reserva pasa al frente.
-
+Cada turno ganas uno de Saber. Toca un Protagonista para dárselo: las acciones necesitan Saber, y no se pierde al atacar.
 ```
 
 ### C06
 
 ```
-Ahora juega la tablet. Mira con atención.
+En el primer turno de la partida no se puede atacar. Prepara tu mesa: baja Protagonistas o juega cartas, y luego pasa el turno.
+```
 
+### C07 · expresión: `gasp`
+
+```
+¡Ojo! El activo rival tiene ventaja sobre el tuyo: te hará el doble de daño. Podrías retirar a tu activo.
+```
+
+### C08 · expresión: `chuckle`
+
+```
+¡Tu activo tiene ventaja! Contra este rival, sus acciones hacen el doble de daño.
+```
+
+### C09
+
+```
+¡Puedes evolucionar! Una Etapa dos muestra cómo algo cambió en la historia, y es más fuerte. Toca la carta que brilla en tu mano.
+```
+
+### C10
+
+```
+Tienes un Personaje: una persona real de la historia. Su efecto ocurre al instante, y puedes jugar solo uno por turno.
+```
+
+### C11
+
+```
+Tienes un Lugar: cambia el escenario y da una ventaja mientras esté en juego. Si el rival juega otro, el tuyo se va.
+```
+
+### C12
+
+```
+Las cartas Aula muestran buenas prácticas de una sala de clases. Te ayudan, y puedes jugar una por turno.
+```
+
+### C13 · expresión: `gasp`
+
+```
+¡Cuidado! Tu activo puede caer en el próximo ataque. Retirarlo cuesta Saber, pero salva al Protagonista.
+```
+
+### C14
+
+```
+Ya puedes usar una acción: los botones junto a tu activo. Al atacar se termina tu turno, así que primero juega tus cartas.
+```
+
+### C15 · expresión: `cheer`
+
+```
+¡Una conexión entre causa y consecuencia! Por entender cómo se relacionan los hechos, tu activo gana uno de Saber.
+```
+
+### C16 · expresión: `cheer`
+
+```
+¡Ganaste un Hito por derrotar a un Protagonista rival! Los Hitos son los puntos: el primero en reunir los necesarios gana.
+```
+
+### C17 · expresión: `chuckle`
+
+```
+¡Muy bien ubicada en tu línea de tiempo! Ordenar los hechos en el tiempo es pensar como historiador.
+```
+
+### C18
+
+```
+Perdiste un Protagonista y el rival gana un Hito. Elige bien quién sigue: busca a quien tenga ventaja.
+```
+
+### C19 · expresión: `whispers`
+
+```
+Te doy una pista: mira lo que brilla en la mesa.
+```
+
+### C20
+
+```
+Piensa en las fechas que ya tienes en tu línea. Lo más antiguo va a la izquierda.
+```
+
+### C21
+
+```
+Ahora juega el rival. Mira qué hace: así también se aprende.
+```
+
+### C22
+
+```
+Juega cartas de tu mano, las que brillan se pueden usar, o toca Pasar turno.
+```
+
+### C23 · expresión: `laugh`
+
+```
+¡Ya sabes jugar! Gana quien consigue tres Hitos, derrotando Protagonistas. Sigue jugando o vuelve al menú.
+```
+
+### C24
+
+```
+Ahora juega la tablet. Mira con atención.
 ```
 
 ## Bloques del narrador
