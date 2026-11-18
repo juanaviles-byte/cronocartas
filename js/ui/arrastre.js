@@ -26,8 +26,10 @@ export function hacerArrastrable(el, { objetivos, alSoltar, girado = false }) {
     const dx = ev.clientX - inicio.x, dy = ev.clientY - inicio.y;
     if (!arrastrando) {
       if (Math.hypot(dx, dy) < UMBRAL) return;
-      // En la mano, un gesto horizontal es para desplazar la fila de cartas.
-      if (ev.pointerType === 'touch' && Math.abs(dx) > Math.abs(dy) * 1.4) { inicio = null; return; }
+      // En la mano, un gesto muy horizontal desplaza la fila, pero solo si las cartas no caben y la fila se puede desplazar.
+      const fila = el.closest('.mano');
+      const desplazable = fila && fila.scrollWidth > fila.clientWidth + 2;
+      if (ev.pointerType === 'touch' && desplazable && Math.abs(dx) > Math.abs(dy) * 1.8) { inicio = null; return; }
       empezar(ev);
     }
     mover(ev);

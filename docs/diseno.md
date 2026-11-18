@@ -379,3 +379,17 @@ La ilustración manda: ocupa a sangre los 2/3 superiores de la carta. Cada eleme
   - robar o buscar cartas del mazo.
 
   Motor: `jugadaReversible(antes, despues, jugada)`.
+
+## 19. Mesa "gabinete del historiador"
+
+- **Distribución:** los activos quedan al centro, enfrentados a ambos lados de la barra.
+  - A la izquierda: la placa del jugador y la reserva.
+  - A la derecha: las acciones, el mazo y el descarte.
+  - Abajo: la mano en abanico. La mano del rival es un abanico pequeño de dorsos.
+- **Espacios:** marcos de vitrina con esquineros de bronce sobre un velo translúcido, con etiquetas grabadas en serif cursiva. El activo tiene doble marco dorado: es el único elemento llamativo.
+- **Barra central:** una regla de tiempo azul noche con marcas de bronce. El Lugar es una carta física que asoma por encima y por debajo de la regla.
+- **Placa del jugador:** cartucho de pergamino con el color del bando, nombre en serif, Hitos como sellos de lacre y botón de la línea de tiempo.
+- **Pilas:** el mazo es un montón de dorsos (reloj de arena dorado sobre azul noche) con el número de cartas. El descarte muestra la carta de arriba; al tocarlo se ven todas.
+- **Botones** con los colores de La Cronista: azul noche y bronce; dorado para la acción principal. Las acciones disponibles son boletos de pergamino.
+- **La Cronista** habla desde la regla de tiempo (franja azul sobre la barra central), sin tapar activos, mano ni botones. Su globo deja pasar los toques, salvo en sus propios botones.
+- **Arrastre táctil:** el gesto horizontal solo desplaza la mano cuando las cartas no caben (clase `.desplazable`). Si no, cualquier gesto arrastra; antes, arrastrar en diagonal desde el borde de la mano se cancelaba.
