@@ -10,9 +10,10 @@ import { cargarCursoCompleto } from './datos.js';
 import { crearRng } from '../rng.js';
 import { almacen, CLAVES } from '../almacen.js';
 import { renderCarta, textoParaLeer, imagenCarta, escenarioCarta, textoEfecto } from './carta.js';
-import { botonEscuchar, botonEscucharCarta, leer, detener, reproducir, rutaCronista, rutaNarrador } from './voz.js';
+import { botonEscuchar, botonEscucharCarta, leer, detener, reproducir, rutaCronista, rutaNarrador, hablarPersonaje } from './voz.js';
 import { esc, pips } from '../html.js';
 import { sonidos, sonidoActivo, alternarSonido } from './sonido.js';
+import { ambiente, rutaAmbiente, ambientesListos } from './ambiente.js';
 import { hacerArrastrable, ultimaSoltada } from './arrastre.js';
 import { volar, impacto, deshacerEnArena, relojSobre, granoHacia } from './efectos.js';
 import { arenaDelTiempo } from './viaje.js';
@@ -80,7 +81,7 @@ export async function montarMesa(contenedor, opciones) {
     const a = duelo.bandos.find(b => b.id === config.bandoA) || duelo.bandos[0];
     return { A: a, B: duelo.bandos.find(b => b !== a) };
   })() : null;
-  const [datosA, datosB, tableros, epocas, dorsos] = await Promise.all([cargarCursoCompleto(config.cursoA), cargarCursoCompleto(config.cursoB), cargarTableros(), cargarEpocas(), cargarDorsos()]);
+  const [datosA, datosB, tableros, epocas, dorsos] = await Promise.all([cargarCursoCompleto(config.cursoA), cargarCursoCompleto(config.cursoB), cargarTableros(), cargarEpocas(), cargarDorsos(), ambientesListos]);
   const unidadesDe = { [config.cursoA]: datosA.unidades, [config.cursoB]: datosB.unidades };
 
   let estado = opciones.estado;
@@ -353,6 +354,7 @@ export async function montarMesa(contenedor, opciones) {
     // Primero el escenario pintado para la mesa; si no hay, la ilustración de la carta (ampliada y desenfocada).
     const propio = lugar ? escenarioCarta(lugar) : null;
     const img = propio || (lugar ? imagenCarta(lugar) : null);
+    ambiente.poner(lugar ? rutaAmbiente(lugar.id) : null);   // el sonido del escenario (si tiene)
     const escenario = (!img && lugar && tableros.find(x => x.lugares.includes(lugar.id))) || t;
     if (escenario) raiz.style.setProperty('--fondo-img', urlCompleta(escenario.imagen));
     raiz.classList.toggle('con-tablero', !!escenario || !!img);
@@ -458,7 +460,7 @@ export async function montarMesa(contenedor, opciones) {
     c.appendChild(h('div', 'registro', ''));
     const son = h('button', 'boton-sonido', sonidoActivo() ? ICONO_SONIDO : ICONO_SILENCIO);
     son.setAttribute('aria-label', 'Sonido');
-    son.onclick = () => { son.innerHTML = alternarSonido() ? ICONO_SONIDO : ICONO_SILENCIO; };
+    son.onclick = () => { son.innerHTML = alternarSonido() ? ICONO_SONIDO : ICONO_SILENCIO; ambiente.refrescar(); };
     c.appendChild(son);
     if (config.modo !== 'tutorial') {
       const cr = h('button', `boton-guia${config.cronista ? ' encendida' : ''}`, '<img src="img/cronista/cara.jpg" alt="">');
@@ -994,7 +996,8 @@ export async function montarMesa(contenedor, opciones) {
       ? `<small>${plan.carta.tipo === 'personaje' ? 'Personaje' : plan.carta.tipo === 'aula' ? 'Aula' : 'Acontecimiento'}</small><b>${esc(plan.carta.nombre)}</b>${efecto ? `<span>${esc(efecto)}</span>` : ''}`
       : plan.destino === 'evolucion' ? `<small>Evolución</small><b>${esc(plan.carta.nombre)}</b>` : '';
     sonidos.jugar();
-    await escenaInvocacion({ grande: renderCarta(plan.carta, { tamano: 'normal' }), desde, destino, plan, girado: girado(j), detalle });
+    const espera = plan.carta.tipo === 'personaje' && sonidoActivo() ? hablarPersonaje(plan.carta) : null;
+    await escenaInvocacion({ grande: renderCarta(plan.carta, { tamano: 'normal' }), desde, destino, plan, girado: girado(j), detalle, espera });
     if (plan.destino !== 'efecto') entradasDirigidas.add(plan.destino === 'lugar' ? 'lugar' : plan.uid);
   }
 
@@ -1284,6 +1287,7 @@ export async function montarMesa(contenedor, opciones) {
   }
 
   function destruir() {
+    ambiente.poner(null);
     vivo = false;
     clearTimeout(temporizador);
   }

@@ -119,7 +119,7 @@ export async function escenaAtaque({ mesa, atk, def, plan, alGolpear, alCaer }) 
  * Invocación: la carta sale de la mano, se muestra en grande sobre un círculo dorado y aterriza en su lugar.
  * Personajes y Acontecimientos se muestran con su efecto y se deshacen en arena (van al descarte).
  */
-export async function escenaInvocacion({ grande, desde, destino, plan, girado = false, detalle = '' }) {
+export async function escenaInvocacion({ grande, desde, destino, plan, girado = false, detalle = '', espera = null }) {
   if (!grande || !grande.animate) return;
   const capa = document.createElement('div');
   capa.className = `escena-invocacion${girado ? ' girado' : ''}`;
@@ -155,7 +155,7 @@ export async function escenaInvocacion({ grande, desde, destino, plan, girado = 
     { offset: 0.7, transform: 'translate(0, -6px) scale(1.06) rotate(1deg)', opacity: 1 },
     { transform: 'none', opacity: 1 }], { duration: 420, easing: 'cubic-bezier(.2,.8,.3,1)', fill: 'forwards' }));
   estallido(c.x, c.y, 22, 3);
-  await esperar(plan.destino === 'efecto' ? 1100 : 480);
+  await Promise.all([esperar(plan.destino === 'efecto' ? 1100 : 480), espera]);   // si el Personaje habla, la carta espera su frase
   if (plan.destino === 'efecto') {
     await deshacerEnArena(caja, 700);
   } else if (rd) {

@@ -151,5 +151,6 @@
   "promover": "audio/cronista/promover.ogg",
   "ubicar": "audio/cronista/ubicar.ogg",
   "prep-activo": "audio/cronista/prep-activo.ogg"
- }
+ },
+ "personajes": {}
 }
