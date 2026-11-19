@@ -2,5 +2,13 @@
  "CC-5-U1-007": {
   "ruta": "audio/ambientes/CC-5-U1-007.ogg",
   "licencia": "CC0"
+ },
+ "CC-5-U3-006": {
+  "ruta": "audio/ambientes/CC-5-U3-006.ogg",
+  "licencia": "CC0"
+ },
+ "CC-5-U4-006": {
+  "ruta": "audio/ambientes/CC-5-U4-006.ogg",
+  "licencia": "CC0"
  }
 }
