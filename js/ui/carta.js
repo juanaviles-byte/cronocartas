@@ -107,7 +107,8 @@ export function renderCarta(carta, { tamano = 'normal', instancia = null, unidad
   const res = carta.resistencia;
   const vida = instancia ? Math.max(0, res - instancia.danio) : res;
   const claveTipo = esProt ? carta.dimension : carta.tipo;
-  const categoria = esProt ? nombreDim(carta.dimension) : ETIQUETA[carta.tipo];
+  // En una expansión, los Personajes son presencias sagradas (no combaten ni se dibujan como personas).
+  const categoria = esProt ? nombreDim(carta.dimension) : carta.coleccion && carta.tipo === 'personaje' ? 'Presencia sagrada' : ETIQUETA[carta.tipo];
 
   const el = document.createElement('div');
   el.className = `carta carta-${tamano} tipo-${carta.tipo}${carta.comunidad ? ' comunidad' : ''}${clasesColeccion(carta)}`;
@@ -137,7 +138,8 @@ export function renderCarta(carta, { tamano = 'normal', instancia = null, unidad
   if (esProt) {
     partes.push(carta.acciones.map(a => `<div class="t-accion"><span class="t-costo">${pips(a.costo)}</span><span class="t-an">${esc(a.nombre)}</span><b>${esc(a.danio)}</b></div>`).join(''));
   } else {
-    partes.push(`<div class="t-linea"><b>${carta.tipo === 'personaje' ? 'Personaje.' : 'Efecto.'}</b> ${esc(carta.texto || textoEfecto(carta.efecto))}</div>`);
+    const rotulo = carta.tipo !== 'personaje' ? 'Efecto.' : carta.coleccion ? 'Presencia sagrada.' : 'Personaje.';
+    partes.push(`<div class="t-linea"><b>${rotulo}</b> ${esc(carta.texto || textoEfecto(carta.efecto))}</div>`);
   }
   const conex = (carta.conexiones || []).filter(x => x.causaNombre).map(x => esc(x.causaNombre));
   if (conex.length) partes.push(`<div class="t-conexion"><b>Conexión:</b> ${conex.join(' o ')} → +1 Saber</div>`);

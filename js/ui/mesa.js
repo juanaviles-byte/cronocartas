@@ -1006,7 +1006,7 @@ export async function montarMesa(contenedor, opciones) {
           : plan.destino === 'lugar' ? raiz.querySelector('.centro .lugar-en-juego') : null;
     const efecto = plan.carta.texto || textoEfecto(plan.carta.efecto);
     const detalle = plan.destino === 'efecto'
-      ? `<small>${plan.carta.tipo === 'personaje' ? 'Personaje' : plan.carta.tipo === 'aula' ? 'Aula' : 'Acontecimiento'}</small><b>${esc(plan.carta.nombre)}</b>${efecto ? `<span>${esc(efecto)}</span>` : ''}`
+      ? `<small>${plan.carta.tipo === 'personaje' ? (plan.carta.coleccion ? 'Presencia sagrada' : 'Personaje') : plan.carta.tipo === 'aula' ? 'Aula' : plan.carta.coleccion ? 'Relato' : 'Acontecimiento'}</small><b>${esc(plan.carta.nombre)}</b>${efecto ? `<span>${esc(efecto)}</span>` : ''}`
       : plan.destino === 'evolucion' ? `<small>Evolución</small><b>${esc(plan.carta.nombre)}</b>` : '';
     sonidos.invocar(plan.carta.tipo);   // cada tipo de carta tiene su sonido de invocación
     const espera = plan.carta.tipo === 'personaje' && sonidoActivo() ? hablarPersonaje(plan.carta) : null;

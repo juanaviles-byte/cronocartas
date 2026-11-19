@@ -180,3 +180,9 @@ test('las partidas de la expansión terminan: mazo completo y los dos duelos, ta
   }
   assert.ok(ganadores.A > 0 && ganadores.B > 0, `siempre gana el mismo: ${JSON.stringify(ganadores)}`);
 });
+
+test('en la expansión, los Personajes se rotulan «Presencia sagrada» y los Acontecimientos «Relato»', () => {
+  const carta = readFileSync('js/ui/carta.js', 'utf8');
+  assert.match(carta, /carta\.coleccion && carta\.tipo === 'personaje' \? 'Presencia sagrada'/);
+  assert.match(readFileSync('js/ui/mesa.js', 'utf8'), /plan\.carta\.coleccion \? 'Relato' : 'Acontecimiento'/);
+});
