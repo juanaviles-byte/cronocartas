@@ -1,6 +1,6 @@
 // Carga un curso con todo lo de esta tablet: ediciones del docente,
 // imágenes y cartas aprobadas del banco de ideas.
-import { cargarCurso } from '../mazos.js';
+import { cargarCurso, cargarExpansion } from '../mazos.js';
 import { almacen, CLAVES } from '../almacen.js';
 import { leerImagenes } from '../imagenes.js';
 import { extraerImagenes } from '../ediciones.js';
@@ -40,4 +40,13 @@ export async function cargarCursoCompleto(curso) {
   const c = extraerImagenes(d.cartas), a = extraerImagenes(d.aula);
   registrarImagenes({ ...(await cargarArte()), ...c.mapa, ...a.mapa });
   return { ...d, cartas: c.cartas, aula: a.cartas };
+}
+
+// Lo mismo para una expansión (js/colecciones.js): cartas, duelos e ilustraciones.
+export async function cargarColeccionCompleta(id) {
+  await cargarEscenarios();
+  const d = await cargarExpansion(id, { imagenes: await leerImagenes() });
+  const c = extraerImagenes(d.cartas);
+  registrarImagenes({ ...(await cargarArte()), ...c.mapa });
+  return { ...d, cartas: c.cartas };
 }

@@ -1,7 +1,7 @@
 // Carga, revisión y armado de mazos. Los mazos viven en data/*.json para que
 // se puedan corregir o ampliar sin tocar el código.
 import { DIMENSIONES, TODAS_DIMENSIONES } from './motor.js';
-import { FUERZAS } from './colecciones.js';
+import { FUERZAS, coleccion } from './colecciones.js';
 import { barajar } from './rng.js';
 
 export const COMPOSICION = { protagonista: 11, personaje: 3, acontecimiento: 3, lugar: 1, aula: 2 };
@@ -180,4 +180,14 @@ export function mazoDeBando(cartas, aula, rng, duelo, bandoId) {
   // Si una Etapa 2 está en el núcleo, su base también.
   for (const c of cartas) if (nucleo.has(c.id) && c.evolucionaDe) nucleo.add(c.evolucionaDe);
   return armarMazo(cartas, aula, rng, { nucleo, excluir: ids(rival.nucleo) });
+}
+
+// Una expansión: sus cartas y sus duelos (sin cartas de aula ni unidades). Las imágenes que subió
+// el docente en esta tablet se aplican igual que en los cursos.
+export async function cargarExpansion(id, { imagenes = {} } = {}) {
+  const col = coleccion(id);
+  if (!col) throw new Error(`Colección desconocida: ${id}`);
+  const d = await fetch(col.archivo).then(r => r.json());
+  const { aplicarEdiciones } = await import('./ediciones.js');
+  return { cartas: aplicarEdiciones(d.cartas, {}, imagenes), aula: [], unidades: [], duelos: d.duelos || [], coleccion: col };
 }

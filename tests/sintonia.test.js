@@ -8,7 +8,7 @@ import { crearPartida, jugadasValidas, aplicarJugada, danioDeAccion, VENTAJA } f
 import { textoEfecto, textoHabilidad } from '../js/ui/carta.js';
 
 const leer = f => JSON.parse(readFileSync(f, 'utf8'));
-const TODAS = [5, 6, 7, 8].flatMap(c => leer(`data/mazo-${c}.json`).cartas).concat(leer('data/aula.json').cartas);
+const TODAS = [5, 6, 7, 8].flatMap(c => leer(`data/mazo-${c}.json`).cartas).concat(leer('data/aula.json').cartas, leer('data/exp-fin-del-mundo.json').cartas);
 const TABLEROS = leer('data/tableros.json').tableros;
 const PROT = TODAS.filter(c => c.tipo === 'protagonista' && !c.evolucionaDe && !c.habilidad);
 const clon = x => JSON.parse(JSON.stringify(x));

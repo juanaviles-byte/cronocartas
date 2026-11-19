@@ -1,0 +1,834 @@
+{
+ "coleccion": "fin-del-mundo",
+ "nombre": "Leyendas del Fin del Mundo",
+ "cartas": [
+  {
+   "id": "FM-001",
+   "nombre": "Caicai Vilú",
+   "tipo": "protagonista",
+   "coleccion": "fin-del-mundo",
+   "dimension": "Mar",
+   "resistencia": 110,
+   "retirada": 2,
+   "acciones": [
+    {
+     "nombre": "Marejada",
+     "costo": 2,
+     "danio": 40
+    },
+    {
+     "nombre": "Diluvio",
+     "costo": 3,
+     "danio": 70
+    }
+   ],
+   "emblema": "ola",
+   "zona": "Mapuche y Chiloé",
+   "frase": "La serpiente que levantó las aguas.",
+   "dato": "En el relato de origen mapuche-huilliche, la serpiente del mar hizo subir las aguas para cubrir la tierra y luchó contra Tentén Vilú."
+  },
+  {
+   "id": "FM-002",
+   "nombre": "La Pincoya",
+   "tipo": "protagonista",
+   "coleccion": "fin-del-mundo",
+   "dimension": "Mar",
+   "resistencia": 70,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Danza de la marea",
+     "costo": 2,
+     "danio": 40
+    }
+   ],
+   "habilidad": {
+    "nombre": "Mar generoso",
+    "tipo": "sanador",
+    "n": 10
+   },
+   "emblema": "ola",
+   "zona": "Chiloé",
+   "frase": "Su danza anuncia la abundancia del mar.",
+   "dato": "Espíritu del mar chilote. Si danza mirando al mar, habrá peces y mariscos en abundancia; si mira hacia la tierra, escasearán."
+  },
+  {
+   "id": "FM-003",
+   "nombre": "El Caleuche",
+   "tipo": "protagonista",
+   "coleccion": "fin-del-mundo",
+   "dimension": "Mar",
+   "resistencia": 90,
+   "retirada": 2,
+   "acciones": [
+    {
+     "nombre": "Niebla encantada",
+     "costo": 2,
+     "danio": 40
+    },
+    {
+     "nombre": "Canto de fiesta",
+     "costo": 3,
+     "danio": 60
+    }
+   ],
+   "emblema": "barco",
+   "zona": "Chiloé",
+   "frase": "El barco de luz que se oculta en la niebla.",
+   "dato": "Barco encantado que navega de noche por los canales de Chiloé, iluminado y con música de fiesta. Si alguien se acerca, se oculta bajo el agua o en la niebla."
+  },
+  {
+   "id": "FM-004",
+   "nombre": "El Millalobo",
+   "tipo": "protagonista",
+   "coleccion": "fin-del-mundo",
+   "dimension": "Mar",
+   "resistencia": 80,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Golpe de cola",
+     "costo": 1,
+     "danio": 20
+    },
+    {
+     "nombre": "Orden del rey",
+     "costo": 2,
+     "danio": 50
+    }
+   ],
+   "emblema": "corona",
+   "zona": "Chiloé",
+   "frase": "El rey de los seres del mar.",
+   "dato": "Según la mitología chilota, es el rey del mar: mitad hombre y mitad lobo marino. Es el padre de la Pincoya."
+  },
+  {
+   "id": "FM-005",
+   "nombre": "El Trelke",
+   "tipo": "protagonista",
+   "coleccion": "fin-del-mundo",
+   "dimension": "Mar",
+   "resistencia": 70,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Envolver",
+     "costo": 1,
+     "danio": 20
+    },
+    {
+     "nombre": "Arrastrar al fondo",
+     "costo": 2,
+     "danio": 40
+    }
+   ],
+   "emblema": "ancla",
+   "zona": "Mapuche y Chiloé",
+   "frase": "Un cuero vivo que acecha bajo el agua.",
+   "dato": "También llamado Cuero: un ser de lagos y mares con forma de cuero de vaca extendido y garras en los bordes, que se esconde bajo el agua."
+  },
+  {
+   "id": "FM-006",
+   "nombre": "La Sirena chilota",
+   "tipo": "protagonista",
+   "coleccion": "fin-del-mundo",
+   "dimension": "Mar",
+   "resistencia": 60,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Canto del mar",
+     "costo": 1,
+     "danio": 20
+    }
+   ],
+   "habilidad": {
+    "nombre": "Aviso del mar",
+    "tipo": "saberAlEntrar",
+    "n": 1
+   },
+   "emblema": "ola",
+   "zona": "Chiloé",
+   "frase": "Guardiana de los peces y los náufragos.",
+   "dato": "Hermana de la Pincoya en los relatos chilotes: mitad mujer y mitad pez. Cuida a los peces y acompaña a quienes naufragan."
+  },
+  {
+   "id": "FM-007",
+   "nombre": "Tentén Vilú",
+   "tipo": "protagonista",
+   "coleccion": "fin-del-mundo",
+   "dimension": "TierraFuego",
+   "resistencia": 110,
+   "retirada": 2,
+   "acciones": [
+    {
+     "nombre": "Alzar los cerros",
+     "costo": 2,
+     "danio": 40
+    },
+    {
+     "nombre": "Montaña viva",
+     "costo": 3,
+     "danio": 70
+    }
+   ],
+   "emblema": "montana",
+   "zona": "Mapuche y Chiloé",
+   "frase": "La serpiente que elevó los cerros.",
+   "dato": "En el relato de origen mapuche-huilliche, la serpiente de la tierra elevó los cerros para salvar a las personas del diluvio de Caicai Vilú."
+  },
+  {
+   "id": "FM-008",
+   "nombre": "El Cherufe",
+   "tipo": "protagonista",
+   "coleccion": "fin-del-mundo",
+   "dimension": "TierraFuego",
+   "resistencia": 90,
+   "retirada": 2,
+   "acciones": [
+    {
+     "nombre": "Lluvia de ceniza",
+     "costo": 2,
+     "danio": 40
+    },
+    {
+     "nombre": "Erupción",
+     "costo": 3,
+     "danio": 60
+    }
+   ],
+   "emblema": "volcan",
+   "zona": "Mapuche",
+   "frase": "El gigante de magma que habita los volcanes.",
+   "dato": "Ser de los relatos mapuche que vive dentro de los volcanes, hecho de roca y fuego. Con él se explicaban las erupciones."
+  },
+  {
+   "id": "FM-009",
+   "nombre": "La Lampalagua",
+   "tipo": "protagonista",
+   "coleccion": "fin-del-mundo",
+   "dimension": "TierraFuego",
+   "resistencia": 80,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Sed infinita",
+     "costo": 1,
+     "danio": 20
+    },
+    {
+     "nombre": "Secar el estero",
+     "costo": 2,
+     "danio": 50
+    }
+   ],
+   "emblema": "montana",
+   "zona": "Zona central y Norte Chico",
+   "frase": "La culebra que se bebe los esteros.",
+   "dato": "Culebra gigante del folclore campesino. Se decía que bebía el agua de ríos y esteros hasta dejarlos secos."
+  },
+  {
+   "id": "FM-010",
+   "nombre": "El Culebrón",
+   "tipo": "protagonista",
+   "coleccion": "fin-del-mundo",
+   "dimension": "TierraFuego",
+   "resistencia": 70,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Acecho",
+     "costo": 1,
+     "danio": 20
+    },
+    {
+     "nombre": "Mala suerte",
+     "costo": 2,
+     "danio": 40
+    }
+   ],
+   "emblema": "casa",
+   "zona": "Chiloé y zona central",
+   "frase": "Escondido bajo la casa, se lleva la suerte.",
+   "dato": "Gran serpiente con melena que vive escondida bajo las casas. Según el relato, se alimenta de la suerte y el bienestar de la familia."
+  },
+  {
+   "id": "FM-011",
+   "nombre": "Coquena",
+   "tipo": "protagonista",
+   "coleccion": "fin-del-mundo",
+   "dimension": "TierraFuego",
+   "resistencia": 70,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Arreo nocturno",
+     "costo": 2,
+     "danio": 40
+    }
+   ],
+   "habilidad": {
+    "nombre": "Guardián de la puna",
+    "tipo": "resistente",
+    "n": 10
+   },
+   "emblema": "sol",
+   "zona": "Puna de Atacama",
+   "frase": "Protector de las vicuñas de la puna.",
+   "dato": "Protector de las vicuñas en el folclore de la Puna de Atacama: un hombrecito vestido de blanco que de noche arrea sus manadas y castiga a quien las caza sin necesidad."
+  },
+  {
+   "id": "FM-012",
+   "nombre": "El Camahueto",
+   "tipo": "protagonista",
+   "coleccion": "fin-del-mundo",
+   "dimension": "TierraFuego",
+   "resistencia": 60,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Embestida",
+     "costo": 1,
+     "danio": 20
+    }
+   ],
+   "habilidad": {
+    "nombre": "Cuerno de oro",
+    "tipo": "fuerzaReserva",
+    "n": 10
+   },
+   "emblema": "sol",
+   "zona": "Chiloé",
+   "frase": "Corre hacia el mar abriendo la tierra.",
+   "dato": "Ser chilote con forma de ternero y un cuerno en la frente. Nace en la tierra del bosque y, al crecer, corre hacia el mar abriendo surcos a su paso."
+  },
+  {
+   "id": "FM-013",
+   "nombre": "El Chonchón",
+   "tipo": "protagonista",
+   "coleccion": "fin-del-mundo",
+   "dimension": "CieloViento",
+   "resistencia": 90,
+   "retirada": 2,
+   "acciones": [
+    {
+     "nombre": "Vuelo nocturno",
+     "costo": 2,
+     "danio": 40
+    },
+    {
+     "nombre": "Grito en la noche",
+     "costo": 3,
+     "danio": 60
+    }
+   ],
+   "emblema": "estrella",
+   "zona": "Mapuche y zona central",
+   "frase": "La cabeza que vuela con sus orejas.",
+   "dato": "En los relatos mapuche y campesinos, una cabeza que vuela de noche usando sus grandes orejas como alas. Su paso se reconoce por un grito: «tue, tue»."
+  },
+  {
+   "id": "FM-014",
+   "nombre": "El Tué-tué",
+   "tipo": "protagonista",
+   "coleccion": "fin-del-mundo",
+   "dimension": "CieloViento",
+   "resistencia": 70,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Presagio",
+     "costo": 2,
+     "danio": 40
+    }
+   ],
+   "habilidad": {
+    "nombre": "Aviso nocturno",
+    "tipo": "saberAlEntrar",
+    "n": 1
+   },
+   "emblema": "estrella",
+   "zona": "Zona central y sur",
+   "frase": "Su canto nocturno trae malos presagios.",
+   "dato": "Ave nocturna de los relatos campesinos. Su canto, «tué, tué», se tomaba como aviso de malas noticias."
+  },
+  {
+   "id": "FM-015",
+   "nombre": "El Piuchén",
+   "tipo": "protagonista",
+   "coleccion": "fin-del-mundo",
+   "dimension": "CieloViento",
+   "resistencia": 80,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Silbido",
+     "costo": 1,
+     "danio": 20
+    },
+    {
+     "nombre": "Picada en vuelo",
+     "costo": 2,
+     "danio": 50
+    }
+   ],
+   "emblema": "pluma",
+   "zona": "Mapuche y Chiloé",
+   "frase": "La serpiente alada que silba en las quebradas.",
+   "dato": "Serpiente voladora de los relatos mapuche y chilotes, también llamada Peuchén, con alas y un silbido agudo. Vive en bosques y quebradas."
+  },
+  {
+   "id": "FM-016",
+   "nombre": "El Anchimallén",
+   "tipo": "protagonista",
+   "coleccion": "fin-del-mundo",
+   "dimension": "CieloViento",
+   "resistencia": 60,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Destello",
+     "costo": 1,
+     "danio": 20
+    }
+   ],
+   "habilidad": {
+    "nombre": "Luz que guía",
+    "tipo": "inspirador"
+   },
+   "emblema": "sol",
+   "zona": "Mapuche",
+   "frase": "Una pequeña luz viva en la oscuridad.",
+   "dato": "Pequeño ser luminoso de los relatos mapuche que brilla en la noche como una llama. Puede guiar a los caminantes o confundirlos."
+  },
+  {
+   "id": "FM-017",
+   "nombre": "El Alicanto",
+   "tipo": "protagonista",
+   "coleccion": "fin-del-mundo",
+   "dimension": "CieloViento",
+   "resistencia": 110,
+   "retirada": 2,
+   "acciones": [
+    {
+     "nombre": "Alas de plata",
+     "costo": 2,
+     "danio": 40
+    },
+    {
+     "nombre": "Vuelo dorado",
+     "costo": 3,
+     "danio": 70
+    }
+   ],
+   "emblema": "estrella",
+   "zona": "Desierto de Atacama",
+   "frase": "El ave que brilla con el oro del desierto.",
+   "dato": "Ave del desierto de Atacama que se alimenta de oro y plata, por eso sus alas brillan. A quien lo sigue con codicia lo lleva al borde de un abismo."
+  },
+  {
+   "id": "FM-018",
+   "nombre": "La Voladora",
+   "tipo": "protagonista",
+   "coleccion": "fin-del-mundo",
+   "dimension": "CieloViento",
+   "resistencia": 70,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Recado",
+     "costo": 1,
+     "danio": 20
+    },
+    {
+     "nombre": "Grito triste",
+     "costo": 2,
+     "danio": 40
+    }
+   ],
+   "emblema": "pluma",
+   "zona": "Chiloé",
+   "frase": "La mensajera nocturna de los brujos.",
+   "dato": "En la mitología chilota, la mensajera de los brujos, que de noche se transforma en un pájaro de grito triste para llevar recados."
+  },
+  {
+   "id": "FM-019",
+   "nombre": "La Calchona",
+   "tipo": "protagonista",
+   "coleccion": "fin-del-mundo",
+   "dimension": "BosqueNoche",
+   "resistencia": 70,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Balido",
+     "costo": 2,
+     "danio": 40
+    }
+   ],
+   "habilidad": {
+    "nombre": "Lana espesa",
+    "tipo": "resistente",
+    "n": 10
+   },
+   "emblema": "arbol",
+   "zona": "Zona central",
+   "frase": "La oveja negra que recorre los campos.",
+   "dato": "Mujer que, según el relato campesino, se transforma de noche en una oveja negra y lanuda para recorrer los campos. Asusta, pero no hace daño."
+  },
+  {
+   "id": "FM-020",
+   "nombre": "La Lola",
+   "tipo": "protagonista",
+   "coleccion": "fin-del-mundo",
+   "dimension": "BosqueNoche",
+   "resistencia": 90,
+   "retirada": 2,
+   "acciones": [
+    {
+     "nombre": "Grito en la pampa",
+     "costo": 2,
+     "danio": 40
+    },
+    {
+     "nombre": "Lamento",
+     "costo": 3,
+     "danio": 60
+    }
+   ],
+   "emblema": "estrella",
+   "zona": "Pampa salitrera",
+   "frase": "El espíritu que recorre la pampa salitrera.",
+   "dato": "Espíritu que, según los relatos de los mineros del norte, recorre la pampa y los yacimientos de noche. Su grito hacía temblar a los trabajadores."
+  },
+  {
+   "id": "FM-021",
+   "nombre": "El Basilisco chilote",
+   "tipo": "protagonista",
+   "coleccion": "fin-del-mundo",
+   "dimension": "BosqueNoche",
+   "resistencia": 80,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Picotazo",
+     "costo": 1,
+     "danio": 20
+    },
+    {
+     "nombre": "Mirada de piedra",
+     "costo": 2,
+     "danio": 50
+    }
+   ],
+   "emblema": "casa",
+   "zona": "Chiloé",
+   "frase": "Mitad gallo, mitad serpiente.",
+   "dato": "Según la mitología chilota, nace de un huevo puesto por un gallo viejo. Mitad gallo y mitad serpiente, se esconde bajo las casas."
+  },
+  {
+   "id": "FM-022",
+   "nombre": "El Duende",
+   "tipo": "protagonista",
+   "coleccion": "fin-del-mundo",
+   "dimension": "BosqueNoche",
+   "resistencia": 60,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Esconder cosas",
+     "costo": 1,
+     "danio": 20
+    }
+   ],
+   "habilidad": {
+    "nombre": "Travesura",
+    "tipo": "saberAlEntrar",
+    "n": 1
+   },
+   "emblema": "arbol",
+   "zona": "Todo Chile",
+   "frase": "Pequeño, travieso y de sombrero enorme.",
+   "dato": "Ser pequeño de sombrero grande que aparece en relatos de casi todo Chile. Vive en el bosque y hace travesuras a quienes andan solos."
+  },
+  {
+   "id": "FM-023",
+   "nombre": "La Viuda",
+   "tipo": "protagonista",
+   "coleccion": "fin-del-mundo",
+   "dimension": "BosqueNoche",
+   "resistencia": 70,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Aparición",
+     "costo": 1,
+     "danio": 20
+    },
+    {
+     "nombre": "Susto",
+     "costo": 2,
+     "danio": 40
+    }
+   ],
+   "emblema": "campana",
+   "zona": "Zona central y sur",
+   "frase": "Aparece de negro en los caminos de noche.",
+   "dato": "Mujer alta vestida de negro que, según los relatos campesinos, se aparece a quienes viajan de noche por los caminos."
+  },
+  {
+   "id": "FM-024",
+   "nombre": "El Huallepén",
+   "tipo": "protagonista",
+   "coleccion": "fin-del-mundo",
+   "dimension": "BosqueNoche",
+   "resistencia": 110,
+   "retirada": 2,
+   "acciones": [
+    {
+     "nombre": "Embestida",
+     "costo": 2,
+     "danio": 40
+    },
+    {
+     "nombre": "Niebla del río",
+     "costo": 3,
+     "danio": 70
+    }
+   ],
+   "emblema": "arbol",
+   "zona": "Mapuche y Chiloé",
+   "frase": "Mitad oveja, mitad ternero, junto al río.",
+   "dato": "Ser de lagos y ríos en los relatos mapuche y chilotes. Su nombre significa «oveja-ternero»: cabeza de ternero, cuerpo de oveja y patas torcidas."
+  },
+  {
+   "id": "FM-025",
+   "nombre": "Ngenechen",
+   "tipo": "personaje",
+   "coleccion": "fin-del-mundo",
+   "efecto": {
+    "tipo": "curarTodos",
+    "n": 20
+   },
+   "emblema": "sol",
+   "zona": "Pueblo mapuche",
+   "frase": "La fuerza que sostiene la vida.",
+   "dato": "Para el pueblo mapuche, Ngenechen es la fuerza que da y sostiene la vida. Por respeto no se dibuja: su presencia se muestra en la luz y la tierra."
+  },
+  {
+   "id": "FM-026",
+   "nombre": "Pillán",
+   "tipo": "personaje",
+   "coleccion": "fin-del-mundo",
+   "efecto": {
+    "tipo": "bonusDanio",
+    "n": 40,
+    "dimension": "TierraFuego"
+   },
+   "emblema": "volcan",
+   "zona": "Pueblo mapuche",
+   "frase": "La fuerza de los volcanes y el trueno.",
+   "dato": "Para el pueblo mapuche, el Pillán es una fuerza de los antepasados ligada a los volcanes y al trueno. Por respeto no se dibuja: se muestra en el volcán."
+  },
+  {
+   "id": "FM-027",
+   "nombre": "Make Make",
+   "tipo": "personaje",
+   "coleccion": "fin-del-mundo",
+   "efecto": {
+    "tipo": "robar",
+    "n": 2
+   },
+   "emblema": "pluma",
+   "zona": "Pueblo rapanui",
+   "frase": "El creador del mundo rapanui.",
+   "dato": "Para el pueblo rapanui, Make Make es el creador del mundo, unido a las aves marinas. Por respeto no se dibuja: se muestra en el cielo y el mar de la isla."
+  },
+  {
+   "id": "FM-028",
+   "nombre": "Pachamama",
+   "tipo": "personaje",
+   "coleccion": "fin-del-mundo",
+   "efecto": {
+    "tipo": "curar",
+    "n": 40
+   },
+   "emblema": "maiz",
+   "zona": "Pueblos andinos",
+   "frase": "La madre tierra de los Andes.",
+   "dato": "Para los pueblos andinos, la Pachamama es la madre tierra que alimenta y protege. Por respeto no se dibuja: se muestra en los cultivos y los cerros."
+  },
+  {
+   "id": "FM-029",
+   "nombre": "Achachilas",
+   "tipo": "personaje",
+   "coleccion": "fin-del-mundo",
+   "efecto": {
+    "tipo": "proteger"
+   },
+   "emblema": "montana",
+   "zona": "Pueblo aymara",
+   "frase": "Los espíritus protectores de los cerros.",
+   "dato": "Para el pueblo aymara, los Achachilas son los espíritus de los cerros, protectores del pueblo y de su territorio. Por respeto no se dibujan: se muestran en las cumbres."
+  },
+  {
+   "id": "FM-030",
+   "nombre": "Temáukel",
+   "tipo": "personaje",
+   "coleccion": "fin-del-mundo",
+   "efecto": {
+    "tipo": "saberExtra",
+    "n": 1
+   },
+   "emblema": "estrella",
+   "zona": "Pueblo selk'nam",
+   "frase": "El ser sin forma más allá de las estrellas.",
+   "dato": "Para el pueblo selk'nam, Temáukel es el ser supremo, sin forma, que vive más allá de las estrellas. Por respeto no se dibuja: se muestra en el cielo del sur."
+  },
+  {
+   "id": "FM-031",
+   "nombre": "El gran diluvio",
+   "tipo": "acontecimiento",
+   "coleccion": "fin-del-mundo",
+   "efecto": {
+    "tipo": "proteger"
+   },
+   "emblema": "ola",
+   "zona": "Mapuche y Chiloé",
+   "frase": "Las aguas suben; los cerros, también.",
+   "dato": "Según el relato mapuche-huilliche, Caicai Vilú hizo subir el mar y Tentén Vilú elevó los cerros. Quienes subieron a lo alto se salvaron."
+  },
+  {
+   "id": "FM-032",
+   "nombre": "La carrera del Tangata Manu",
+   "tipo": "acontecimiento",
+   "coleccion": "fin-del-mundo",
+   "efecto": {
+    "tipo": "buscarProtagonista",
+    "n": 3
+   },
+   "emblema": "pluma",
+   "zona": "Rapa Nui",
+   "frase": "La carrera por el primer huevo del manutara.",
+   "dato": "Competencia rapanui: jóvenes nadaban hasta el islote Motu Nui en busca del primer huevo del manutara, un ave marina. Su patrocinador se convertía en el Tangata Manu del año."
+  },
+  {
+   "id": "FM-033",
+   "nombre": "La Noche de San Juan",
+   "tipo": "acontecimiento",
+   "coleccion": "fin-del-mundo",
+   "efecto": {
+    "tipo": "robar",
+    "n": 2
+   },
+   "emblema": "estrella",
+   "zona": "Zona central y Chiloé",
+   "frase": "La noche larga de las historias y la suerte.",
+   "dato": "En la noche del 23 al 24 de junio, una de las más largas del año, en el campo y en Chiloé se cuentan historias, se buscan tesoros y se prueba la suerte."
+  },
+  {
+   "id": "FM-034",
+   "nombre": "Kenos ordena la tierra",
+   "tipo": "acontecimiento",
+   "coleccion": "fin-del-mundo",
+   "efecto": {
+    "tipo": "buscar",
+    "n": 5,
+    "cartaTipo": "lugar"
+   },
+   "emblema": "mapa",
+   "zona": "Pueblo selk'nam",
+   "frase": "El antepasado que ordenó la tierra.",
+   "dato": "En los relatos selk'nam, Kenos fue el primer antepasado: ordenó la tierra fueguina, dio nombre a los lugares y repartió los territorios."
+  },
+  {
+   "id": "FM-035",
+   "nombre": "La marea de la Pincoya",
+   "tipo": "acontecimiento",
+   "coleccion": "fin-del-mundo",
+   "efecto": {
+    "tipo": "curar",
+    "n": 30
+   },
+   "emblema": "ola",
+   "zona": "Chiloé",
+   "frase": "La danza que llena las redes.",
+   "dato": "Cuando la Pincoya danza mirando al mar, según los relatos chilotes, la marea trae peces y mariscos en abundancia para las familias de la costa."
+  },
+  {
+   "id": "FM-036",
+   "nombre": "El despertar del volcán",
+   "tipo": "acontecimiento",
+   "coleccion": "fin-del-mundo",
+   "efecto": {
+    "tipo": "bonusDanio",
+    "n": 20
+   },
+   "emblema": "volcan",
+   "zona": "Pueblo mapuche",
+   "frase": "Cuando el volcán despierta, tiembla la tierra.",
+   "dato": "Los relatos mapuche explicaban las erupciones como el enojo de los seres que viven dentro de los volcanes, como el Cherufe."
+  },
+  {
+   "id": "FM-037",
+   "nombre": "El mar interior de Chiloé",
+   "tipo": "lugar",
+   "coleccion": "fin-del-mundo",
+   "efecto": {
+    "tipo": "bonusDimension",
+    "dimension": "Mar",
+    "n": 10
+   },
+   "emblema": "barco",
+   "zona": "Chiloé",
+   "frase": "Canales donde navegan los relatos.",
+   "dato": "Canales e islas entre Chiloé y el continente. Aquí nacieron muchos relatos del mar chilote: la Pincoya, la Sirena, el Millalobo y el Caleuche."
+  },
+  {
+   "id": "FM-038",
+   "nombre": "El volcán Rukapillán",
+   "tipo": "lugar",
+   "coleccion": "fin-del-mundo",
+   "efecto": {
+    "tipo": "bonusDimension",
+    "dimension": "TierraFuego",
+    "n": 10
+   },
+   "emblema": "volcan",
+   "zona": "Araucanía",
+   "frase": "La casa del Pillán.",
+   "dato": "Nombre mapuche del volcán Villarrica: «casa del Pillán». Es uno de los volcanes más activos de Chile."
+  },
+  {
+   "id": "FM-039",
+   "nombre": "El desierto de Atacama",
+   "tipo": "lugar",
+   "coleccion": "fin-del-mundo",
+   "efecto": {
+    "tipo": "bonusDimension",
+    "dimension": "CieloViento",
+    "n": 10
+   },
+   "emblema": "estrella",
+   "zona": "Norte Grande",
+   "frase": "Bajo el cielo más estrellado de Chile.",
+   "dato": "Uno de los desiertos más secos del mundo y uno de los mejores cielos para ver estrellas. Allí los mineros contaban historias del Alicanto."
+  },
+  {
+   "id": "FM-040",
+   "nombre": "El bosque valdiviano",
+   "tipo": "lugar",
+   "coleccion": "fin-del-mundo",
+   "efecto": {
+    "tipo": "bonusDimension",
+    "dimension": "BosqueNoche",
+    "n": 10
+   },
+   "emblema": "arbol",
+   "zona": "Sur de Chile",
+   "frase": "Alerces, helechos y sombras con historias.",
+   "dato": "Bosque lluvioso del sur de Chile, con alerces milenarios, helechos y copihues. En sus sombras se cuentan historias de duendes y seres de la noche."
+  }
+ ],
+ "duelos": []
+}
