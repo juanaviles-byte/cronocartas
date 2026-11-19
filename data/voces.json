@@ -124,7 +124,13 @@
   "CC-A-E7": "audio/narrador/CC-A-E7.ogg",
   "CC-A-E8": "audio/narrador/CC-A-E8.ogg",
   "CC-A-E9": "audio/narrador/CC-A-E9.ogg",
-  "CC-A-E12": "audio/narrador/CC-A-E12.ogg"
+  "CC-A-E12": "audio/narrador/CC-A-E12.ogg",
+  "FM-001": "audio/narrador/FM-001.ogg",
+  "FM-002": "audio/narrador/FM-002.ogg",
+  "FM-003": "audio/narrador/FM-003.ogg",
+  "FM-004": "audio/narrador/FM-004.ogg",
+  "FM-005": "audio/narrador/FM-005.ogg",
+  "FM-006": "audio/narrador/FM-006.ogg"
  },
  "cronista": {
   "saber": "audio/cronista/saber.ogg",
