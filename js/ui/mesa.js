@@ -1219,7 +1219,7 @@ export async function montarMesa(contenedor, opciones) {
     if (sinMovimiento()) return;
     const texto = contraIA ? (j === 'A' ? 'Tu turno' : 'Turno de la Tablet') : `Turno de ${nombres[j]}`;   // nombres ya escapados
     const extra = estado.jugadores[j].saberPendiente > 0 ? '<small><span class="pip"></span> +1 de Saber para repartir</small>' : '';
-    const b = h('div', `banner-turno${girado(j) ? ' girado' : ''}`, texto + extra);
+    const b = h('div', `banner-turno${girado(j) ? ' girado' : ''}${contraIA && j === 'B' ? ' rival' : ''}`, texto + extra);
     raiz.appendChild(b);
     bannerHasta = performance.now() + 1100;
     setTimeout(() => b.remove(), 1100);
