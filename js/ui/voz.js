@@ -36,15 +36,59 @@ export const rutaCronista = clave => (clave && VOCES.cronista[clave]) || null;
 export const rutaPersonaje = carta => (carta && VOCES.personajes && VOCES.personajes[carta.id]) || null;
 
 let audio = null;
+let tramoSonando = null;   // fuente de WebAudio del tramo que suena
+let turno = 0;             // cada reproducción nueva invalida a las anteriores que aún se están cargando
+
+// La narración viene en un archivo por bloque y cada carta es un tramo { ruta, desde, hasta } de ese
+// archivo. Se decodifica con WebAudio (preciso al centésimo y sin depender de que el servidor permita
+// saltar dentro del archivo, cosa que sin internet no siempre ocurre). Se guardan los últimos bloques.
+let ctxVoz = null;
+const bloques = new Map();
+function contextoVoz() {
+  if (!ctxVoz) { const C = globalThis.AudioContext || globalThis.webkitAudioContext; if (!C) return null; ctxVoz = new C(); }
+  if (ctxVoz.state === 'suspended') ctxVoz.resume().catch(() => {});
+  return ctxVoz;
+}
+function bloque(ctx, ruta) {
+  if (!bloques.has(ruta)) {
+    bloques.set(ruta, fetch(ruta).then(r => { if (!r.ok) throw new Error(ruta); return r.arrayBuffer(); })
+      .then(b => new Promise((ok, mal) => ctx.decodeAudioData(b, ok, mal))));
+    if (bloques.size > 3) bloques.delete(bloques.keys().next().value);
+  }
+  return bloques.get(ruta);
+}
+function reproducirTramo(t, alTerminar, mio) {
+  const ctx = contextoVoz();
+  const fin = () => { if (mio !== turno) return; tramoSonando = null; ambiente.atenuar(false); if (alTerminar) alTerminar(); };
+  if (!ctx) {   // sin WebAudio: la etiqueta de audio salta al tramo y se corta al terminar
+    audio = new Audio(t.ruta);
+    audio.onloadedmetadata = () => { try { audio.currentTime = t.desde; } catch { /* sin salto */ } };
+    audio.ontimeupdate = () => { if (audio && audio.currentTime >= t.hasta) { audio.pause(); audio = null; fin(); } };
+    audio.onended = () => { audio = null; fin(); };
+    audio.play().catch(() => { audio = null; fin(); });
+    return;
+  }
+  bloque(ctx, t.ruta).then(buf => {
+    if (mio !== turno) return;
+    const fuente = ctx.createBufferSource();
+    fuente.buffer = buf; fuente.connect(ctx.destination);
+    fuente.onended = fin;
+    tramoSonando = fuente;
+    fuente.start(0, t.desde, Math.max(0, t.hasta - t.desde));
+  }).catch(() => { bloques.delete(t.ruta); fin(); });
+}
+
 export function reproducir(ruta, alTerminar) {
   detener();
+  const mio = ++turno;
   try {
-    audio = new Audio(ruta);
     ambiente.atenuar(true);   // el fondo baja mientras habla la voz
+    if (ruta && typeof ruta === 'object') { reproducirTramo(ruta, alTerminar, mio); return true; }
+    audio = new Audio(ruta);
     audio.onended = () => { audio = null; ambiente.atenuar(false); if (alTerminar) alTerminar(); };
     audio.play().catch(() => { audio = null; ambiente.atenuar(false); if (alTerminar) alTerminar(); });
     return true;
-  } catch { return false; }
+  } catch { ambiente.atenuar(false); return false; }
 }
 
 // Carta: si hay grabación del narrador se reproduce solo esa; si no, la voz del dispositivo lee nombre y dato.
@@ -67,7 +111,9 @@ export function hablarPersonaje(carta, { tope = 12000 } = {}) {
 
 export function detener() {
   try { speechSynthesis.cancel(); } catch { /* sin voz */ }
+  turno++;
   if (audio) { try { audio.pause(); } catch { /* sin audio */ } audio = null; }
+  if (tramoSonando) { try { tramoSonando.onended = null; tramoSonando.stop(); } catch { /* ya terminó */ } tramoSonando = null; }
   ambiente.atenuar(false);
 }
 
