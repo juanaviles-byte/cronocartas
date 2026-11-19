@@ -6,12 +6,13 @@ import { renderCarta, textoParaLeer } from './carta.js';
 import { botonEscucharCarta, detener } from './voz.js';
 import { cargarCursoCompleto } from './datos.js';
 import { confirmar } from './confirmar.js';
+import { COLECCIONES, coleccion } from '../colecciones.js';
 import { almacen, CLAVES } from '../almacen.js';
 import { esc } from '../html.js';
 
 const app = document.getElementById('app');
 let actual = null;            // vista montada (con destruir opcional)
-let eleccion = { modo: 'caraacara', cursoA: 7, cursoB: 7, tablero: 'azar', reforzar: false, mazo: 'curso', duelo: null, bandoA: null, linea: true };
+let eleccion = { modo: 'caraacara', cursoA: 7, cursoB: 7, tablero: 'azar', reforzar: false, mazo: 'curso', duelo: null, bandoA: null, linea: true, coleccion: null };
 let partidaPendiente = null;   // la deja lista el torneo antes de ir a #mesa
 
 const h = (tag, cls, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; };
@@ -57,6 +58,24 @@ const vistas = {
     v.appendChild(volver());
     v.appendChild(h('h1', '', 'Nueva partida'));
     const grupo = titulo => { const g = h('div', 'grupo'); g.appendChild(h('h2', '', titulo)); v.appendChild(g); return g; };
+    // Categoría: los cursos de Historia o las expansiones.
+    const pestanas = h('div', 'pestanas');
+    pestanas.setAttribute('role', 'tablist');
+    for (const [clave, texto] of [['cursos', 'Cursos'], ['expansiones', 'Expansiones']]) {
+      const activa = (clave === 'expansiones') === !!eleccion.coleccion;
+      const b = h('button', `pestana${activa ? ' activa' : ''}`, texto);
+      b.setAttribute('role', 'tab'); b.setAttribute('aria-selected', String(activa));
+      b.onclick = () => {
+        if (activa) return;
+        Object.assign(eleccion, { coleccion: clave === 'expansiones' ? COLECCIONES[0].id : null, duelo: null, bandoA: null, tablero: 'azar', reforzar: false, mazo: 'curso' });
+        render();
+      };
+      pestanas.appendChild(b);
+    }
+    v.appendChild(pestanas);
+    const col = eleccion.coleccion ? coleccion(eleccion.coleccion) : null;
+    if (eleccion.coleccion && !col) eleccion.coleccion = null;
+    const exp = col ? await fetch(col.archivo).then(r => r.json()).catch(() => null) : null;
     const opciones = (lista, actual, alElegir, clase = 'opciones') => {
       const fila = h('div', clase);
       for (const [valor, t, d] of lista) {
@@ -67,6 +86,11 @@ const vistas = {
       return fila;
     };
 
+    if (col) {
+      grupo('¿Qué expansión?').appendChild(opciones(COLECCIONES.map(c => [c.id, esc(c.nombre), esc(c.descripcion || '')]), eleccion.coleccion,
+        id => { eleccion.coleccion = id; eleccion.duelo = null; eleccion.bandoA = null; }, 'opciones colecciones'));
+    }
+
     grupo('¿Cómo juegan?').appendChild(opciones([['caraacara', 'Cara a cara', 'Dos jugadores en esta tablet'], ['ia', 'Contra la tablet', 'Un jugador']],
       eleccion.modo, m => { eleccion.modo = m; }));
     if (eleccion.modo === 'ia') {
@@ -75,10 +99,13 @@ const vistas = {
         n => { almacen.guardar(CLAVES.ajustes, { ...(almacen.leer(CLAVES.ajustes, {}) || {}), nivel: n }); }, 'opciones niveles'));
     }
 
-    grupo('¿Con qué mazos?').appendChild(opciones([['curso', 'Mazo del curso', 'Cartas de las 4 unidades'], ['duelo', 'Duelo temático', 'Cada jugador, un bando histórico']],
+    grupo('¿Con qué mazos?').appendChild(opciones(col
+      ? [['curso', 'Mazo completo', 'Todas las cartas de la expansión'], ['duelo', 'Duelo temático', 'Cada jugador, una fuerza']]
+      : [['curso', 'Mazo del curso', 'Cartas de las 4 unidades'], ['duelo', 'Duelo temático', 'Cada jugador, un bando histórico']],
       eleccion.mazo, m => { eleccion.mazo = m; }));
 
-    const cruzados = !!ajustes.cruzados && eleccion.mazo === 'curso';
+    const cruzados = !col && !!ajustes.cruzados && eleccion.mazo === 'curso';
+    if (!col) {
     const cursos = grupo(cruzados ? 'Mazo de cada jugador' : '¿Qué curso?');
     const filas = cruzados ? [['cursoA', eleccion.modo === 'ia' ? 'Tú' : 'Jugador 1'], ['cursoB', eleccion.modo === 'ia' ? 'Tablet' : 'Jugador 2']] : [['cursoA', '']];
     for (const [k, etiqueta] of filas) {
@@ -91,10 +118,11 @@ const vistas = {
       }
       cursos.appendChild(fila);
     }
+    }
 
     let listo = true;
     if (eleccion.mazo === 'duelo') {
-      const delCurso = duelos.filter(d => d.curso === eleccion.cursoA);
+      const delCurso = col ? ((exp && exp.duelos) || []) : duelos.filter(d => d.curso === eleccion.cursoA);
       if (!delCurso.some(d => d.id === eleccion.duelo)) { eleccion.duelo = delCurso[0]?.id || null; eleccion.bandoA = null; }
       const gd = grupo('Duelo');
       gd.appendChild(opciones(delCurso.map(d => [d.id, esc(d.nombre), d.bandos.map(b => esc(b.nombre)).join(' vs. ')]), eleccion.duelo, id => { eleccion.duelo = id; eleccion.bandoA = null; }));
@@ -112,8 +140,12 @@ const vistas = {
         gb.appendChild(fila);
         const t = tableros.find(x => x.id === d.tablero);
         if (t) gb.appendChild(h('p', 'nota', `Tablero: <b>${esc(t.nombre)}</b> · ${esc(t.textoRegla)}`));
-      } else { listo = false; gd.appendChild(h('p', 'nota', 'Este curso todavía no tiene duelos temáticos.')); }
-    } else {
+        if (d.arte) {
+          const arte = h('figure', 'duelo-portada', `<img class="arte-duelo" src="${esc(d.arte)}" alt="">${d.texto ? `<figcaption>${esc(d.texto)}</figcaption>` : ''}`);
+          gb.appendChild(arte);
+        }
+      } else { listo = false; gd.appendChild(h('p', 'nota', col ? 'Esta expansión todavía no tiene duelos.' : 'Este curso todavía no tiene duelos temáticos.')); }
+    } else if (!col) {
       // Tablero: uno por unidad del curso, o sorpresa.
       const grupoT = grupo('Tablero');
       const grilla = h('div', 'tableros');
@@ -135,10 +167,12 @@ const vistas = {
       }
     }
 
-    const gl = grupo('Reglas extra');
-    const ll = h('label', 'interruptor', `<input type="checkbox"${eleccion.linea ? ' checked' : ''}><span>Línea de tiempo<small>Los Personajes y Acontecimientos con fecha se ordenan en una línea de tiempo. Si los ubicas bien, ganas +1 de Saber.</small></span>`);
-    ll.querySelector('input').onchange = ev => { eleccion.linea = ev.target.checked; };
-    gl.appendChild(ll);
+    if (!col) {   // Las expansiones no tienen fechas: sin línea de tiempo.
+      const gl = grupo('Reglas extra');
+      const ll = h('label', 'interruptor', `<input type="checkbox"${eleccion.linea ? ' checked' : ''}><span>Línea de tiempo<small>Los Personajes y Acontecimientos con fecha se ordenan en una línea de tiempo. Si los ubicas bien, ganas +1 de Saber.</small></span>`);
+      ll.querySelector('input').onchange = ev => { eleccion.linea = ev.target.checked; };
+      gl.appendChild(ll);
+    }
 
     const empezar = boton('Empezar', 'boton-principal grande', async () => {
       const guardada = almacen.leer(CLAVES.partida, null);
@@ -147,7 +181,8 @@ const vistas = {
         if (!si) return;
       }
       almacen.borrar(CLAVES.partida);
-      partidaPendiente = { ...eleccion, duelo: eleccion.mazo === 'duelo' ? eleccion.duelo : null, nivel: (almacen.leer(CLAVES.ajustes, {}) || {}).nivel };
+      partidaPendiente = { ...eleccion, duelo: eleccion.mazo === 'duelo' ? eleccion.duelo : null, nivel: (almacen.leer(CLAVES.ajustes, {}) || {}).nivel,
+        ...(col ? { coleccion: col.id, linea: false, tablero: null, reforzar: false } : { coleccion: null }) };
       location.hash = '#mesa';
     });
     empezar.disabled = !listo;

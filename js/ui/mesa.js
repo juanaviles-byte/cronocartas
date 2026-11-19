@@ -66,6 +66,7 @@ export async function montarMesa(contenedor, opciones) {
     nivel: ({ cronista: 'erudito' })[opciones.nivel || ajustes.nivel] || opciones.nivel || ajustes.nivel || 'historiador',
     linea: opciones.modo === 'tutorial' ? false : opciones.linea !== false,
     duelo: opciones.duelo || null,
+    coleccion: opciones.coleccion || null,   // expansión (js/colecciones.js); null en los cursos
     bandoA: opciones.bandoA || null,
     nombres: opciones.nombres || null,
     torneo: opciones.torneo || null,
