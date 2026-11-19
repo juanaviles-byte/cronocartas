@@ -99,17 +99,16 @@ El campo «dato» se muestra como **«De dónde viene»**: qué pueblo o zona cu
 
 ## Cómo encaja en el código
 
-- `data/colecciones.json` define cada colección. Los cursos usan las dimensiones de siempre; la expansión declara:
+- `js/colecciones.js` define cada colección. Los cursos usan las dimensiones de siempre. La expansión declara:
   - `id: "fin-del-mundo"` y el nombre;
-  - las cuatro fuerzas, cada una con su clave, su nombre visible, su color y su emblema;
+  - las cuatro fuerzas, cada una con su clave, su nombre visible, su tema de colores, su emblema y su frase de ventaja;
   - la ronda de ventajas;
-  - el archivo de cartas (`data/exp-fin-del-mundo.json`);
-  - el fondo general;
-  - `lineaTiempo: false`;
+  - el archivo de cartas y duelos (`data/exp-fin-del-mundo.json`);
+  - el fondo general y el dorso general;
   - la etiqueta del dato: «De dónde viene».
-- El motor recibe las fuerzas y la ronda de ventajas al crear la partida y las guarda en el estado. `desgloseDanio` y la validación de cartas las leen de ahí. Si no vienen, se usan `DIMENSIONES` y `VENTAJA` de hoy, de modo que las partidas guardadas de los cursos siguen funcionando.
+- El motor une las fuerzas de las colecciones a las ventajas de Historia en un solo mapa: las claves no se repiten y los mazos no se mezclan. Las partidas guardadas de los cursos siguen igual, y la configuración de la partida guarda `coleccion` para retomarla.
 - Los códigos de carta de la expansión son `FM-001`…`FM-040`. Ilustraciones en `img/cartas/FM-xxx.webp`, escenarios en `img/escenarios/FM-xxx.webp`, dorsos en `img/dorsos/FM-*.webp` y ambientes en `audio/ambientes/FM-xxx.ogg`.
-- Los duelos de la expansión van en el mismo `data/duelos.json`, con `coleccion: "fin-del-mundo"` en vez de `curso`.
+- Los duelos de la expansión van dentro de `data/exp-fin-del-mundo.json`, para que el Torneo (fuera de esta versión) y las pruebas de los cursos no los vean.
 - La IA, el director de escena, los efectos, el desglose de daño, el menú de partida y el sonido funcionan igual: solo leen las fuerzas desde la colección.
 - La auditoría de sintonía (que el texto de cada carta coincida con lo que hace) se aplica también a las 40 cartas nuevas.
 
