@@ -135,3 +135,48 @@ test('dorsos de la expansión: uno por bando y uno general que reemplaza al de H
   // Los cursos siguen igual: sin general propio, el de Historia.
   assert.equal(dorsoDeMazo(DORSOS, [], null), DORSOS.general);
 });
+
+test('la mesa y la carta usan los datos de la colección (sin línea de tiempo, etiqueta y sigla propias)', () => {
+  const mesa = readFileSync('js/ui/mesa.js', 'utf8');
+  assert.match(mesa, /if \(colec\) \{ config\.linea = false;/);
+  assert.match(mesa, /dorsoDeMazo\(dorsos, todas, bandoDe \? bandoDe\[j\]\.id : null, colec \? colec\.dorso : undefined\)/);
+  assert.match(mesa, /tableroActual\(\) \|\| fondoColeccion/);
+  const carta = readFileSync('js/ui/carta.js', 'utf8');
+  assert.match(carta, /col \? col\.etiquetaDato : 'Dato histórico'/);
+  assert.match(carta, /col \? esc\(col\.sigla\)/);
+  const esc = JSON.parse(readFileSync('data/escenarios.json', 'utf8'));
+  for (const c of X.cartas.filter(c => c.tipo === 'lugar')) assert.ok(existsSync(esc[c.id] || ''), `${c.id} sin escenario`);
+  assert.ok(existsSync(coleccion('fin-del-mundo').fondo));
+});
+
+test('guiones de la expansión: narrador en 7 bloques que cubren las 40 cartas, y ambientes ME00–ME04', () => {
+  const g = JSON.parse(readFileSync('docs/fin-del-mundo/narrador.json', 'utf8'));
+  assert.deepEqual(g.narrador.map(b => b.id), ['FN01', 'FN02', 'FN03', 'FN04', 'FN05', 'FN06', 'FN07']);
+  assert.deepEqual(g.narrador.flatMap(b => b.lineas.map(l => l.clave)), X.cartas.map(c => c.id));
+  for (const b of g.narrador) for (const l of b.lineas) assert.ok(l.texto.startsWith(X.cartas.find(c => c.id === l.clave).nombre + '.'), l.clave);
+  const amb = readFileSync('docs/fin-del-mundo/ambientes.md', 'utf8');
+  for (const k of ['ME00', 'ME01', 'ME02', 'ME03', 'ME04']) assert.match(amb, new RegExp(`\\| ${k} \\|`));
+  assert.match(readFileSync('js/ui/mesa.js', 'utf8'), /colec && colec\.ambiente/);
+});
+
+import { crearPartida, aplicarJugada } from '../js/motor.js';
+import { elegirJugada } from '../js/ia.js';
+
+test('las partidas de la expansión terminan: mazo completo y los dos duelos, tablet contra tablet', () => {
+  const casos = [];
+  for (let s = 1; s <= 20; s++) casos.push({ s, A: armarMazo(X.cartas, [], crearRng(s)), B: armarMazo(X.cartas, [], crearRng(s + 100)) });
+  for (const d of X.duelos) for (let s = 1; s <= 10; s++) casos.push({ s, A: mazoDeBando(X.cartas, [], crearRng(s), d, d.bandos[0].id), B: mazoDeBando(X.cartas, [], crearRng(s), d, d.bandos[1].id) });
+  const ganadores = { A: 0, B: 0 };
+  for (const { s, A, B } of casos) {
+    let e = crearPartida({ mazoA: A, mazoB: B, semilla: s });
+    let n = 0, ventajas = 0;
+    while (e.fase !== 'fin' && n < 2000) {
+      const r = aplicarJugada(e, elegirJugada(e, e.turno, { nivel: 'erudito' }));
+      ventajas += r.eventos.filter(x => x.tipo === 'ventaja').length;
+      e = r.estado; n++;
+    }
+    assert.equal(e.fase, 'fin', `semilla ${s}: no terminó en ${n} jugadas`);
+    ganadores[e.ganador]++;
+  }
+  assert.ok(ganadores.A > 0 && ganadores.B > 0, `siempre gana el mismo: ${JSON.stringify(ganadores)}`);
+});

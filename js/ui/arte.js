@@ -70,6 +70,8 @@ export const TEMAS = {
 
 export function temaCarta(carta) {
   if (carta.tipo === 'protagonista') return TEMAS[carta.dimension] || TEMAS.acontecimiento;
+  // En una expansión, el Lugar toma el color de la fuerza que favorece.
+  if (carta.tipo === 'lugar' && carta.coleccion && TEMAS[carta.efecto?.dimension]) return TEMAS[carta.efecto.dimension];
   return TEMAS[carta.tipo] || TEMAS.acontecimiento;
 }
 

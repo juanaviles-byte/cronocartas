@@ -4,6 +4,7 @@
 import { arteCarta, temaCarta, iconoTipo } from './arte.js';
 import { VENTAJA } from '../motor.js';
 import { NOMBRE_DIMENSION } from '../mazos.js';
+import { coleccion } from '../colecciones.js';
 import { esc, pips } from '../html.js';
 
 const DEBIL_ANTE = Object.fromEntries(Object.entries(VENTAJA).map(([a, b]) => [b, a]));
@@ -87,6 +88,14 @@ function aplicarTema(el, carta) {
   el.style.setProperty('--c-papel', t.papel);
 }
 
+// Cartas de una expansión: su colección y su fuerza (Lugar: la que favorece; Personaje: presencia
+// sagrada; Acontecimiento: relato). El CSS dibuja con eso los marcos propios de cada fuerza.
+function clasesColeccion(c) {
+  if (!c.coleccion) return '';
+  const f = c.tipo === 'protagonista' ? c.dimension : c.tipo === 'lugar' ? c.efecto && c.efecto.dimension : c.tipo === 'personaje' ? 'sagrado' : 'relato';
+  return ` col-${c.coleccion} fuerza-${f}`;
+}
+
 // Clases de tamaño según el largo del texto: así nada se monta sobre nada.
 const claseNombre = n => (n.length <= 14 ? 'n1' : n.length <= 20 ? 'n2' : n.length <= 26 ? 'n3' : 'n4');
 const claseCategoria = t => (t.length <= 10 ? 'k1' : 'k2');
@@ -101,7 +110,7 @@ export function renderCarta(carta, { tamano = 'normal', instancia = null, unidad
   const categoria = esProt ? nombreDim(carta.dimension) : ETIQUETA[carta.tipo];
 
   const el = document.createElement('div');
-  el.className = `carta carta-${tamano} tipo-${carta.tipo}${carta.comunidad ? ' comunidad' : ''}`;
+  el.className = `carta carta-${tamano} tipo-${carta.tipo}${carta.comunidad ? ' comunidad' : ''}${clasesColeccion(carta)}`;
   aplicarTema(el, carta);
 
   if (tamano === 'mini') {
@@ -139,11 +148,12 @@ export function renderCarta(carta, { tamano = 'normal', instancia = null, unidad
 
   const unidad = carta.unidad && unidades ? unidades[carta.unidad - 1] : null;
   const claseN = claseNombre(carta.nombre);   // n1–n4 según el largo del nombre
-  const refPie = carta.oa || (carta.mbe ? 'MBE ' + carta.mbe.dominio + '·' + carta.mbe.estandar : '');
+  const col = carta.coleccion ? coleccion(carta.coleccion) : null;   // carta de una expansión
+  const refPie = carta.oa || (carta.mbe ? 'MBE ' + carta.mbe.dominio + '·' + carta.mbe.estandar : '') || carta.zona || '';
   const pie = esProt
-    ? `<span>Débil ${iconoTipo(DEBIL_ANTE[carta.dimension], 14)}×2 · Retirada ${pips(carta.retirada ?? 1)}</span><span>${esc(carta.oa || '')}</span>`
+    ? `<span>Débil ${iconoTipo(DEBIL_ANTE[carta.dimension], 14)}×2 · Retirada ${pips(carta.retirada ?? 1)}</span><span>${esc(carta.oa || carta.zona || '')}</span>`
     : `<span>${esc(carta.id || '')}</span><span>${esc(refPie)}</span>`;
-  const sello = carta.curso ? `${esc(carta.curso)}°` : carta.mbe ? esc(carta.mbe.dominio) : '';
+  const sello = carta.curso ? `${esc(carta.curso)}°` : carta.mbe ? esc(carta.mbe.dominio) : col ? esc(col.sigla) : '';
 
   const tarjeta = `
     <div class="myl">
@@ -171,8 +181,8 @@ export function renderCarta(carta, { tamano = 'normal', instancia = null, unidad
   envoltura.appendChild(el);
   const ficha = document.createElement('div');
   ficha.className = 'ficha-dato';
-  ficha.innerHTML = `<small>Dato histórico</small><p>${esc(carta.dato)}</p>
-    <div class="ficha-ref">${carta.curso ? `${esc(carta.curso)}° básico` : ''}${unidad ? ` · Unidad ${esc(carta.unidad)}: ${esc(unidad)}` : ''}${carta.oa ? ` · ${esc(carta.oa)}` : ''}${carta.mbe ? `Marco para la Buena Enseñanza · Dominio ${esc(carta.mbe.dominio)} · Estándar ${esc(carta.mbe.estandar)}: ${esc(carta.mbe.nombre)}` : ''}</div>`;
+  ficha.innerHTML = `<small>${esc(col ? col.etiquetaDato : 'Dato histórico')}</small><p>${esc(carta.dato)}</p>
+    <div class="ficha-ref">${col ? `${esc(carta.zona || '')} · ${esc(col.nombre)}` : ''}${carta.curso ? `${esc(carta.curso)}° básico` : ''}${unidad ? ` · Unidad ${esc(carta.unidad)}: ${esc(unidad)}` : ''}${carta.oa ? ` · ${esc(carta.oa)}` : ''}${carta.mbe ? `Marco para la Buena Enseñanza · Dominio ${esc(carta.mbe.dominio)} · Estándar ${esc(carta.mbe.estandar)}: ${esc(carta.mbe.nombre)}` : ''}</div>`;
   envoltura.appendChild(ficha);
   return envoltura;
 }

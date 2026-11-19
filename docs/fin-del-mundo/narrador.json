@@ -1,0 +1,199 @@
+{
+ "narrador": [
+  {
+   "id": "FN01",
+   "lineas": [
+    {
+     "clave": "FM-001",
+     "texto": "Caicai Vilú. En el relato de origen mapuche-huilliche, la serpiente del mar hizo subir las aguas para cubrir la tierra y luchó contra Tentén Vilú."
+    },
+    {
+     "clave": "FM-002",
+     "texto": "La Pincoya. Espíritu del mar chilote. Si danza mirando al mar, habrá peces y mariscos en abundancia; si mira hacia la tierra, escasearán."
+    },
+    {
+     "clave": "FM-003",
+     "texto": "El Caleuche. Barco encantado que navega de noche por los canales de Chiloé, iluminado y con música de fiesta. Si alguien se acerca, se oculta bajo el agua o en la niebla."
+    },
+    {
+     "clave": "FM-004",
+     "texto": "El Millalobo. Según la mitología chilota, es el rey del mar: mitad hombre y mitad lobo marino. Es el padre de la Pincoya."
+    },
+    {
+     "clave": "FM-005",
+     "texto": "El Trelke. También llamado Cuero: un ser de lagos y mares con forma de cuero de vaca extendido y garras en los bordes, que se esconde bajo el agua."
+    },
+    {
+     "clave": "FM-006",
+     "texto": "La Sirena chilota. Hermana de la Pincoya en los relatos chilotes: mitad mujer y mitad pez. Cuida a los peces y acompaña a quienes naufragan."
+    }
+   ]
+  },
+  {
+   "id": "FN02",
+   "lineas": [
+    {
+     "clave": "FM-007",
+     "texto": "Tentén Vilú. En el relato de origen mapuche-huilliche, la serpiente de la tierra elevó los cerros para salvar a las personas del diluvio de Caicai Vilú."
+    },
+    {
+     "clave": "FM-008",
+     "texto": "El Cherufe. Ser de los relatos mapuche que vive dentro de los volcanes, hecho de roca y fuego. Con él se explicaban las erupciones."
+    },
+    {
+     "clave": "FM-009",
+     "texto": "La Lampalagua. Culebra gigante del folclore campesino. Se decía que bebía el agua de ríos y esteros hasta dejarlos secos."
+    },
+    {
+     "clave": "FM-010",
+     "texto": "El Culebrón. Gran serpiente con melena que vive escondida bajo las casas. Según el relato, se alimenta de la suerte y el bienestar de la familia."
+    },
+    {
+     "clave": "FM-011",
+     "texto": "Coquena. Protector de las vicuñas en el folclore de la Puna de Atacama: un hombrecito vestido de blanco que de noche arrea sus manadas y castiga a quien las caza sin necesidad."
+    },
+    {
+     "clave": "FM-012",
+     "texto": "El Camahueto. Ser chilote con forma de ternero y un cuerno en la frente. Nace en la tierra del bosque y, al crecer, corre hacia el mar abriendo surcos a su paso."
+    }
+   ]
+  },
+  {
+   "id": "FN03",
+   "lineas": [
+    {
+     "clave": "FM-013",
+     "texto": "El Chonchón. En los relatos mapuche y campesinos, una cabeza que vuela de noche usando sus grandes orejas como alas. Su paso se reconoce por un grito: \"tue, tue\"."
+    },
+    {
+     "clave": "FM-014",
+     "texto": "El Tué-tué. Ave nocturna de los relatos campesinos. Su canto, \"tué, tué\", se tomaba como aviso de malas noticias."
+    },
+    {
+     "clave": "FM-015",
+     "texto": "El Piuchén. Serpiente voladora de los relatos mapuche y chilotes, también llamada Peuchén, con alas y un silbido agudo. Vive en bosques y quebradas."
+    },
+    {
+     "clave": "FM-016",
+     "texto": "El Anchimallén. Pequeño ser luminoso de los relatos mapuche que brilla en la noche como una llama. Puede guiar a los caminantes o confundirlos."
+    },
+    {
+     "clave": "FM-017",
+     "texto": "El Alicanto. Ave del desierto de Atacama que se alimenta de oro y plata, por eso sus alas brillan. A quien lo sigue con codicia lo lleva al borde de un abismo."
+    },
+    {
+     "clave": "FM-018",
+     "texto": "La Voladora. En la mitología chilota, la mensajera de los brujos, que de noche se transforma en un pájaro de grito triste para llevar recados."
+    }
+   ]
+  },
+  {
+   "id": "FN04",
+   "lineas": [
+    {
+     "clave": "FM-019",
+     "texto": "La Calchona. Mujer que, según el relato campesino, se transforma de noche en una oveja negra y lanuda para recorrer los campos. Asusta, pero no hace daño."
+    },
+    {
+     "clave": "FM-020",
+     "texto": "La Lola. Espíritu que, según los relatos de los mineros del norte, recorre la pampa y los yacimientos de noche. Su grito hacía temblar a los trabajadores."
+    },
+    {
+     "clave": "FM-021",
+     "texto": "El Basilisco chilote. Según la mitología chilota, nace de un huevo puesto por un gallo viejo. Mitad gallo y mitad serpiente, se esconde bajo las casas."
+    },
+    {
+     "clave": "FM-022",
+     "texto": "El Duende. Ser pequeño de sombrero grande que aparece en relatos de casi todo Chile. Vive en el bosque y hace travesuras a quienes andan solos."
+    },
+    {
+     "clave": "FM-023",
+     "texto": "La Viuda. Mujer alta vestida de negro que, según los relatos campesinos, se aparece a quienes viajan de noche por los caminos."
+    },
+    {
+     "clave": "FM-024",
+     "texto": "El Huallepén. Ser de lagos y ríos en los relatos mapuche y chilotes. Su nombre significa \"oveja-ternero\": cabeza de ternero, cuerpo de oveja y patas torcidas."
+    }
+   ]
+  },
+  {
+   "id": "FN05",
+   "lineas": [
+    {
+     "clave": "FM-025",
+     "texto": "Ngenechen. Para el pueblo mapuche, Ngenechen es la fuerza que da y sostiene la vida. Por respeto no se dibuja: su presencia se muestra en la luz y la tierra."
+    },
+    {
+     "clave": "FM-026",
+     "texto": "Pillán. Para el pueblo mapuche, el Pillán es una fuerza de los antepasados ligada a los volcanes y al trueno. Por respeto no se dibuja: se muestra en el volcán."
+    },
+    {
+     "clave": "FM-027",
+     "texto": "Make Make. Para el pueblo rapanui, Make Make es el creador del mundo, unido a las aves marinas. Por respeto no se dibuja: se muestra en el cielo y el mar de la isla."
+    },
+    {
+     "clave": "FM-028",
+     "texto": "Pachamama. Para los pueblos andinos, la Pachamama es la madre tierra que alimenta y protege. Por respeto no se dibuja: se muestra en los cultivos y los cerros."
+    },
+    {
+     "clave": "FM-029",
+     "texto": "Achachilas. Para el pueblo aymara, los Achachilas son los espíritus de los cerros, protectores del pueblo y de su territorio. Por respeto no se dibujan: se muestran en las cumbres."
+    },
+    {
+     "clave": "FM-030",
+     "texto": "Temáukel. Para el pueblo selk'nam, Temáukel es el ser supremo, sin forma, que vive más allá de las estrellas. Por respeto no se dibuja: se muestra en el cielo del sur."
+    }
+   ]
+  },
+  {
+   "id": "FN06",
+   "lineas": [
+    {
+     "clave": "FM-031",
+     "texto": "El gran diluvio. Según el relato mapuche-huilliche, Caicai Vilú hizo subir el mar y Tentén Vilú elevó los cerros. Quienes subieron a lo alto se salvaron."
+    },
+    {
+     "clave": "FM-032",
+     "texto": "La carrera del Tangata Manu. Competencia rapanui: jóvenes nadaban hasta el islote Motu Nui en busca del primer huevo del manutara, un ave marina. Su patrocinador se convertía en el Tangata Manu del año."
+    },
+    {
+     "clave": "FM-033",
+     "texto": "La Noche de San Juan. En la noche del 23 al 24 de junio, una de las más largas del año, en el campo y en Chiloé se cuentan historias, se buscan tesoros y se prueba la suerte."
+    },
+    {
+     "clave": "FM-034",
+     "texto": "Kenos ordena la tierra. En los relatos selk'nam, Kenos fue el primer antepasado: ordenó la tierra fueguina, dio nombre a los lugares y repartió los territorios."
+    },
+    {
+     "clave": "FM-035",
+     "texto": "La marea de la Pincoya. Cuando la Pincoya danza mirando al mar, según los relatos chilotes, la marea trae peces y mariscos en abundancia para las familias de la costa."
+    },
+    {
+     "clave": "FM-036",
+     "texto": "El despertar del volcán. Los relatos mapuche explicaban las erupciones como el enojo de los seres que viven dentro de los volcanes, como el Cherufe."
+    }
+   ]
+  },
+  {
+   "id": "FN07",
+   "lineas": [
+    {
+     "clave": "FM-037",
+     "texto": "El mar interior de Chiloé. Canales e islas entre Chiloé y el continente. Aquí nacieron muchos relatos del mar chilote: la Pincoya, la Sirena, el Millalobo y el Caleuche."
+    },
+    {
+     "clave": "FM-038",
+     "texto": "El volcán Rukapillán. Nombre mapuche del volcán Villarrica: \"casa del Pillán\". Es uno de los volcanes más activos de Chile."
+    },
+    {
+     "clave": "FM-039",
+     "texto": "El desierto de Atacama. Uno de los desiertos más secos del mundo y uno de los mejores cielos para ver estrellas. Allí los mineros contaban historias del Alicanto."
+    },
+    {
+     "clave": "FM-040",
+     "texto": "El bosque valdiviano. Bosque lluvioso del sur de Chile, con alerces milenarios, helechos y copihues. En sus sombras se cuentan historias de duendes y seres de la noche."
+    }
+   ]
+  }
+ ]
+}

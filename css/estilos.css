@@ -831,3 +831,22 @@ button:disabled { opacity: .35; cursor: default; }
 .duelo-portada { margin: 12px 0 0; position: relative; border-radius: 12px; overflow: hidden; max-width: 420px; }
 .duelo-portada img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
 .duelo-portada figcaption { position: absolute; inset: auto 0 0 0; padding: 18px 12px 10px; color: #fff; font-size: .9rem; background: linear-gradient(transparent, rgba(0,0,0,.7)); }
+
+/* Expansiones: zona del Lugar en el cartel de viaje y en ¿Sabías que? */
+.cartel-escenario .zona-viaje { font-size: .82rem; letter-spacing: .02em; opacity: .85; margin: 2px 0 4px; }
+.sabias-texto .zona { display: block; opacity: .75; margin-top: 2px; }
+
+/* Expansiones: marcos de la naturaleza. El color sale del tema de cada fuerza (--c, --c-claro, --c-oscuro);
+   el adorno es una franja que corre bajo la ilustración. Sin símbolos de los pueblos. */
+.col-fin-del-mundo .myl { border-color: var(--c-claro); box-shadow: inset 0 0 0 .07em var(--c-oscuro), 0 0 .55em color-mix(in srgb, var(--c) 70%, transparent); }
+.col-fin-del-mundo .myl::after { content: ""; position: absolute; left: 6%; right: 6%; top: calc(68% - .62em); height: .9em; z-index: 1; pointer-events: none;
+  background: var(--c-claro); -webkit-mask: var(--adorno) center / auto 100% repeat-x; mask: var(--adorno) center / auto 100% repeat-x;
+  filter: drop-shadow(0 0 .12em var(--c-oscuro)); opacity: .95; }
+.col-fin-del-mundo .myl-texto { background: linear-gradient(180deg, var(--c-papel), color-mix(in srgb, var(--c-papel) 82%, var(--c-claro))); }
+.col-fin-del-mundo.carta-mini { box-shadow: 0 0 0 .1em var(--c-claro), 0 0 .5em color-mix(in srgb, var(--c) 60%, transparent); }
+.fuerza-Mar { --adorno: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 12' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M0 8 Q5 2 10 8 T20 8 T30 8 T40 8'/%3E%3Cpath d='M0 11 Q5 6 10 11 T20 11 T30 11 T40 11' stroke-width='1'/%3E%3C/svg%3E"); }
+.fuerza-TierraFuego { --adorno: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 12' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2 12 Q4 6 6 9 Q7 2 10 6 Q12 1 14 7 Q16 4 18 12' fill='black' stroke='none'/%3E%3Cpath d='M22 12 Q24 6 26 9 Q27 2 30 6 Q32 1 34 7 Q36 4 38 12' fill='black' stroke='none'/%3E%3C/svg%3E"); }
+.fuerza-CieloViento { --adorno: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 12' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M10 2 L11.2 5.8 L15 7 L11.2 8.2 L10 12 L8.8 8.2 L5 7 L8.8 5.8 Z' fill='black' stroke='none'/%3E%3Cpath d='M20 7 Q26 3 32 7 Q36 9 39 6' /%3E%3Ccircle cx='30' cy='3' r='1' fill='black' stroke='none'/%3E%3C/svg%3E"); }
+.fuerza-BosqueNoche { --adorno: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 12' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 12 V1'/%3E%3Cpath d='M20 4 L13 2 M20 4 L27 2 M20 7 L12 5 M20 7 L28 5 M20 10 L11 8 M20 10 L29 8' stroke-width='1.2'/%3E%3Ccircle cx='4' cy='6' r='1.1' fill='black' stroke='none'/%3E%3Ccircle cx='36' cy='4' r='1.1' fill='black' stroke='none'/%3E%3C/svg%3E"); }
+.fuerza-sagrado { --adorno: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 12' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='20' cy='7' r='3' fill='black' stroke='none'/%3E%3Cpath d='M20 1 V2.5 M20 11.5 V13 M14 7 H15.5 M24.5 7 H26 M15.8 2.8 L16.8 3.8 M23.2 10.2 L24.2 11.2 M24.2 2.8 L23.2 3.8 M16.8 10.2 L15.8 11.2' stroke-width='1.1'/%3E%3Cpath d='M0 7 H10 M30 7 H40' stroke-width='.8'/%3E%3C/svg%3E"); }
+.fuerza-relato { --adorno: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 12' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M0 7 H14 M26 7 H40' stroke-width='.9'/%3E%3Cpath d='M20 2 L24 7 L20 12 L16 7 Z' fill='black' stroke='none'/%3E%3C/svg%3E"); }

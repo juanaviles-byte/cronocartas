@@ -14,6 +14,7 @@ export const COLECCIONES = [
     fondo: 'img/escenarios/FM-ME00.webp',
     dorso: 'img/dorsos/FM-general.webp',
     etiquetaDato: 'De dónde viene',
+    // ambiente: 'audio/ambientes/FM-ME00.ogg',   ← se agrega cuando llegue el sonido general (ME00)
     fuerzas: {
       Mar: {
         nombre: 'Mar',

@@ -6,7 +6,7 @@ import { elegirJugada } from '../ia.js';
 import { armarMazo, mazoDeBando } from '../mazos.js';
 import { crearAlbum, cartasVisibles } from '../album.js';
 import { anotarGanador } from '../torneo.js';
-import { cargarCursoCompleto } from './datos.js';
+import { cargarCursoCompleto, cargarColeccionCompleta } from './datos.js';
 import { crearRng } from '../rng.js';
 import { almacen, CLAVES } from '../almacen.js';
 import { renderCarta, textoParaLeer, imagenCarta, escenarioCarta, textoEfecto } from './carta.js';
@@ -14,7 +14,7 @@ import { botonEscuchar, botonEscucharCarta, leer, detener, reproducir, rutaCroni
 import { esc, pips } from '../html.js';
 import { sonidos, sonidoActivo, alternarSonido } from './sonido.js';
 import { ambiente, rutaAmbiente, ambientesListos } from './ambiente.js';
-import { FUERZAS } from '../colecciones.js';
+import { FUERZAS, coleccion } from '../colecciones.js';
 import { hacerArrastrable, ultimaSoltada } from './arrastre.js';
 import { volar, impacto, deshacerEnArena, relojSobre, granoHacia } from './efectos.js';
 import { arenaDelTiempo } from './viaje.js';
@@ -78,21 +78,25 @@ export async function montarMesa(contenedor, opciones) {
   const nombres = { A: esc(crudos.A), B: esc(crudos.B) };
 
   contenedor.innerHTML = '<div class="cargando">Barajando…</div>';
-  const duelo = config.duelo ? (await cargarDuelos()).find(d => d.id === config.duelo) || null : null;
-  if (duelo) { config.cursoA = duelo.curso; config.cursoB = duelo.curso; config.tablero = duelo.tablero; }
+  // Expansión: un solo mazo para los dos jugadores, sin tableros ni línea de tiempo (sus cartas no tienen fecha).
+  const colec = config.coleccion ? coleccion(config.coleccion) : null;
+  if (colec) { config.linea = false; config.reforzar = false; config.tablero = null; }
+  const datosCol = colec ? await cargarColeccionCompleta(colec.id) : null;
+  const duelo = config.duelo ? (colec ? datosCol.duelos : await cargarDuelos()).find(d => d.id === config.duelo) || null : null;
+  if (duelo && !colec) { config.cursoA = duelo.curso; config.cursoB = duelo.curso; config.tablero = duelo.tablero; }
   const bandoDe = duelo ? (() => {
     const a = duelo.bandos.find(b => b.id === config.bandoA) || duelo.bandos[0];
     return { A: a, B: duelo.bandos.find(b => b !== a) };
   })() : null;
-  const [datosA, datosB, tableros, epocas, dorsos] = await Promise.all([cargarCursoCompleto(config.cursoA), cargarCursoCompleto(config.cursoB), cargarTableros(), cargarEpocas(), cargarDorsos(), ambientesListos]);
+  const [datosA, datosB, tableros, epocas, dorsos] = await Promise.all([colec ? datosCol : cargarCursoCompleto(config.cursoA), colec ? datosCol : cargarCursoCompleto(config.cursoB), cargarTableros(), cargarEpocas(), cargarDorsos(), ambientesListos]);
   const unidadesDe = { [config.cursoA]: datosA.unidades, [config.cursoB]: datosB.unidades };
 
   let estado = opciones.estado;
   if (!estado) {
     const rng = crearRng(config.semilla);
     // Tablero: el elegido o uno al azar del curso.
-    const delCurso = tableros.filter(t => t.curso === config.cursoA);
-    let tablero = tableros.find(t => t.id === config.tablero);
+    const delCurso = colec ? [] : tableros.filter(t => t.curso === config.cursoA);
+    let tablero = colec ? null : tableros.find(t => t.id === config.tablero);
     if (!tablero && delCurso.length) tablero = delCurso[Math.floor(rng.siguiente() * delCurso.length)];
     config.tablero = tablero ? tablero.id : null;
     const foco = config.reforzar && tablero ? { unidad: tablero.unidad } : {};
@@ -110,7 +114,7 @@ export async function montarMesa(contenedor, opciones) {
   for (const j of ['A', 'B']) {
     const yo = estado.jugadores[j];
     const todas = [...yo.mano, ...yo.mazo, ...yo.descarte, ...(yo.activo ? [yo.activo] : []), ...yo.reserva].map(x => x.carta);
-    const ruta = dorsoDeMazo(dorsos, todas, bandoDe ? bandoDe[j].id : null);
+    const ruta = dorsoDeMazo(dorsos, todas, bandoDe ? bandoDe[j].id : null, colec ? colec.dorso : undefined);
     dorsoHtml[j] = ruta ? `<img class="dorso-img" src="${esc(ruta)}" alt="" draggable="false">` : DORSO;
   }
   const tableroActual = () => tableros.find(t => t.id === (estado.tablero && estado.tablero.id)) || null;
@@ -351,13 +355,16 @@ export async function montarMesa(contenedor, opciones) {
   // y un contador lleva el año de una época a la otra.
   let escena = null, viaje = null, fondoPrevio = null;
   const urlCompleta = ruta => `url("${new URL(ruta, location.href).href}")`;   // relativa en CSS se resolvería desde css/
+  // En una expansión no hay tableros: su fondo general hace de escenario de base.
+  const fondoColeccion = colec && colec.fondo ? { id: `${colec.id}-fondo`, nombre: colec.nombre, imagen: colec.fondo, lugares: [], textoRegla: '' } : null;
   function pintarFondo() {
-    const t = tableroActual();
+    const t = tableroActual() || fondoColeccion;
     const lugar = estado.lugar && estado.lugar.carta;
     // Primero el escenario pintado para la mesa; si no hay, la ilustración de la carta (ampliada y desenfocada).
     const propio = lugar ? escenarioCarta(lugar) : null;
     const img = propio || (lugar ? imagenCarta(lugar) : null);
-    ambiente.poner(lugar ? rutaAmbiente(lugar.id) : null);   // el sonido del escenario (si tiene)
+    // El sonido del escenario (si tiene); en una expansión, sin Lugar suena su ambiente general (si lo trae).
+    ambiente.poner(lugar ? rutaAmbiente(lugar.id) : (colec && colec.ambiente) || null);
     const escenario = (!img && lugar && tableros.find(x => x.lugares.includes(lugar.id))) || t;
     if (escenario) raiz.style.setProperty('--fondo-img', urlCompleta(escenario.imagen));
     raiz.classList.toggle('con-tablero', !!escenario || !!img);
@@ -401,12 +408,12 @@ export async function montarMesa(contenedor, opciones) {
 
   function anunciarViaje(epocaDesde, hasta, quieto) {
     const dir = direccionViaje(epocaDesde, hasta.epoca);
-    const titulo = dir === 'pasado' ? 'Viajando al pasado' : dir === 'futuro' ? 'Viajando al futuro' : 'Nuevo escenario';
+    const titulo = dir === 'pasado' ? 'Viajando al pasado' : dir === 'futuro' ? 'Viajando al futuro' : colec ? 'Viajando a' : 'Nuevo escenario';
     const carta = hasta.lugar;
     const nombre = carta ? carta.nombre : hasta.tablero.nombre;
     const detalle = carta ? (carta.texto || textoEfecto(carta.efecto)) : (hasta.tablero.textoRegla ? `Regla del tablero: ${hasta.tablero.textoRegla}` : '');
     const c = h('div', `cartel-escenario viaje-${dir || 'mismo'}${girado(estado.turno) ? ' girado' : ''}`,
-      `<small class="rumbo">${titulo}</small>${hasta.epoca ? '<div class="anio-viaje"></div>' : ''}<b>${esc(nombre)}</b>${detalle ? `<span>${esc(detalle)}</span>` : ''}`);
+      `<small class="rumbo">${titulo}</small>${hasta.epoca ? '<div class="anio-viaje"></div>' : ''}${carta && carta.zona ? `<div class="zona-viaje">${esc(carta.zona)}</div>` : ''}<b>${esc(nombre)}</b>${detalle ? `<span>${esc(detalle)}</span>` : ''}`);
     raiz.appendChild(c);
     const caja = c.querySelector('.anio-viaje');
     if (caja && dir && !quieto) {
@@ -1211,10 +1218,11 @@ export async function montarMesa(contenedor, opciones) {
   function sabiasQue(carta, ganador) {
     return new Promise(resolve => {
       const c = h('div', 'sabias');
-      c.innerHTML = `<div class="titulo-sabias">¿Sabías que…?</div>`;
+      const deCol = carta.coleccion ? coleccion(carta.coleccion) : null;
+      c.innerHTML = `<div class="titulo-sabias">${esc(deCol ? deCol.etiquetaDato : '¿Sabías que…?')}</div>`;
       const fila = h('div', 'sabias-fila');
       fila.appendChild(renderCarta(carta, { tamano: 'mini' }));
-      fila.appendChild(h('div', 'sabias-texto', `<b>${esc(carta.nombre)}</b><p>${esc(carta.dato)}</p><small>${nombres[ganador]} gana un Hito</small>`));
+      fila.appendChild(h('div', 'sabias-texto', `<b>${esc(carta.nombre)}</b>${carta.zona ? `<small class="zona">${esc(carta.zona)}</small>` : ''}<p>${esc(carta.dato)}</p><small>${nombres[ganador]} gana un Hito</small>`));
       c.appendChild(fila);
       const b = h('button', 'boton-principal', 'Seguir');
       c.appendChild(b);
