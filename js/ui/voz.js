@@ -56,7 +56,7 @@ export function leerCarta(carta, texto) {
 
 // Frase grabada de un Personaje al jugarse. La promesa se cumple cuando termina de hablar
 // (o al tope, por si el audio se queda pegado); sin grabación se cumple de inmediato.
-export function hablarPersonaje(carta, { tope = 6000 } = {}) {
+export function hablarPersonaje(carta, { tope = 9000 } = {}) {
   const ruta = rutaPersonaje(carta);
   if (!ruta) return Promise.resolve(false);
   return new Promise(resolve => {

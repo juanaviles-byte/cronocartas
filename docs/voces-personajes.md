@@ -6,7 +6,7 @@ Cada uno de los 19 Personajes dice una frase corta cuando se juega, mientras su 
 
 1. Entra a aistudio.google.com/generate-speech, igual que con La Cronista. Modo **un solo hablante**, temperatura **0,8**.
 2. Por cada Personaje, elige una voz que calce con la descripción (hombre o mujer, edad, timbre). Prueba dos o tres y quédate con la que suene más al personaje. **Cada Personaje con una voz distinta**, salvo que se repitan lejos (por ejemplo, un personaje de 5° y otro de 8°).
-3. En el cuadro de **instrucciones de estilo** pega la línea "Estilo"; en el texto, pega solo la frase.
+3. En el cuadro de **instrucciones de estilo** pega la línea "Estilo"; en el texto, pega la frase **con sus etiquetas** (`<chuckle>`, `<sigh>`, `<short pause>`…), que van en inglés. Si la voz lee una etiqueta en voz alta, cámbiala a corchetes (`[chuckle]`) o bórrala.
 4. Escucha, descarga y guarda con el código del bloque (`P01.wav`, `P02.wav`…). Envíamelas de a varias, con su código en el mensaje.
 5. Si un personaje suena caricaturesco o exagerado, bájale la intensidad al estilo: deben sonar dignos y creíbles.
 
@@ -20,7 +20,7 @@ Cada uno de los 19 Personajes dice una frase corta cuando se juega, mientras su 
 - **Estilo:** Habla en español latinoamericano neutro, entusiasta y visionario, como quien mira el horizonte desde la proa.
 
 ```
-¡Navegaremos hacia el oeste hasta encontrar un nuevo camino a Asia!
+<breath> ¡Miren ese horizonte! Navegando hacia el oeste llegaremos a Asia… ¡estoy seguro!
 ```
 
 ### P02 · Hernando de Magallanes (5°)
@@ -29,7 +29,7 @@ Cada uno de los 19 Personajes dice una frase corta cuando se juega, mientras su 
 - **Estilo:** Habla en español latinoamericano neutro, cansado pero decidido, como un capitán tras meses en el mar.
 
 ```
-Entre tormentas y frío, buscamos el paso que une dos océanos.
+<exhales> Meses de tormenta y frío… <short pause> pero ahí está: ¡el paso entre dos océanos!
 ```
 
 ### P03 · Pedro de Valdivia (5°)
@@ -38,7 +38,7 @@ Entre tormentas y frío, buscamos el paso que une dos océanos.
 - **Estilo:** Habla en español latinoamericano neutro, solemne y seguro, como quien da una orden.
 
 ```
-Aquí, junto al cerro Huelén, fundaremos una ciudad.
+<throat-clearing> Aquí, junto al cerro Huelén, fundaremos una ciudad. ¡Que se trace la plaza!
 ```
 
 ### P04 · Inés de Suárez (5°)
@@ -47,7 +47,7 @@ Aquí, junto al cerro Huelén, fundaremos una ciudad.
 - **Estilo:** Habla en español latinoamericano neutro, valiente y urgente, sin gritar.
 
 ```
-No dejaré que Santiago caiga: ¡a defender la ciudad!
+<heavy breath> ¡No dejaré que Santiago caiga! <short pause> ¡A defender la ciudad, ahora!
 ```
 
 ### P05 · Lautaro (5°)
@@ -56,7 +56,7 @@ No dejaré que Santiago caiga: ¡a defender la ciudad!
 - **Estilo:** Habla en español latinoamericano neutro, decidido y digno, con calma contenida.
 
 ```
-Aprendí cómo combaten los españoles. Ahora defenderé mi tierra.
+<breath> Aprendí cómo combaten los españoles. <short pause> Ahora… defenderé mi tierra.
 ```
 
 ### P06 · Bernardo O'Higgins (6°)
@@ -65,7 +65,7 @@ Aprendí cómo combaten los españoles. Ahora defenderé mi tierra.
 - **Estilo:** Habla en español latinoamericano neutro, solemne, como un discurso ante el pueblo.
 
 ```
-Después de Chacabuco, Chile debe gobernarse a sí mismo.
+Vencimos en Chacabuco. <short pause> ¡Ahora Chile se gobernará a sí mismo!
 ```
 
 ### P07 · José Miguel Carrera (6°)
@@ -74,7 +74,7 @@ Después de Chacabuco, Chile debe gobernarse a sí mismo.
 - **Estilo:** Habla en español latinoamericano neutro, apasionado y rápido, lleno de impulso.
 
 ```
-Que Chile tenga su propia bandera y su propio periódico.
+<chuckle> ¿Bandera propia? ¿Periódico propio? ¡Claro que sí! Chile tendrá las dos cosas.
 ```
 
 ### P08 · Javiera Carrera (6°)
@@ -83,7 +83,7 @@ Que Chile tenga su propia bandera y su propio periódico.
 - **Estilo:** Habla en español latinoamericano neutro, orgullosa y emocionada.
 
 ```
-Con cada puntada, esta bandera habla de un país libre.
+<sigh> Con cada puntada… <short pause> esta bandera habla de un país libre.
 ```
 
 ### P09 · Andrés Bello (6°)
@@ -92,7 +92,7 @@ Con cada puntada, esta bandera habla de un país libre.
 - **Estilo:** Habla en español latinoamericano neutro, sereno y reflexivo, como un maestro.
 
 ```
-Un país necesita leyes claras y una universidad para todos.
+<throat-clearing> Un país necesita leyes claras… <short pause> y una universidad para todos.
 ```
 
 ### P10 · Gabriela Mistral (6°)
@@ -101,7 +101,7 @@ Un país necesita leyes claras y una universidad para todos.
 - **Estilo:** Habla en español latinoamericano neutro, cálida y pausada, con dulzura.
 
 ```
-Fui maestra antes que poeta: enseñar también es escribir.
+<chuckle> Fui maestra antes que poeta. <short pause> Enseñar… también es escribir.
 ```
 
 ### P11 · Pericles (7°)
@@ -110,7 +110,7 @@ Fui maestra antes que poeta: enseñar también es escribir.
 - **Estilo:** Habla en español latinoamericano neutro, orador ante una multitud, inspirador.
 
 ```
-Ciudadanos de Atenas: la Asamblea es de todos los que votan.
+¡Ciudadanos de Atenas! <short pause> La Asamblea es de todos los que votan.
 ```
 
 ### P12 · Carlomagno (7°)
@@ -119,7 +119,7 @@ Ciudadanos de Atenas: la Asamblea es de todos los que votan.
 - **Estilo:** Habla en español latinoamericano neutro, majestuoso y lento.
 
 ```
-Desde hoy, como emperador, uniré estos reinos.
+<breath> Desde hoy, como emperador… uniré estos reinos bajo una sola corona.
 ```
 
 ### P13 · Pachacútec (7°)
@@ -128,7 +128,7 @@ Desde hoy, como emperador, uniré estos reinos.
 - **Estilo:** Habla en español latinoamericano neutro, majestuoso y digno, con calma.
 
 ```
-Haré del Cusco el corazón del Tawantinsuyu.
+Miren el Cusco. <short pause> Lo haré el corazón del Tawantinsuyu.
 ```
 
 ### P14 · Moctezuma II (7°)
@@ -137,7 +137,7 @@ Haré del Cusco el corazón del Tawantinsuyu.
 - **Estilo:** Habla en español latinoamericano neutro, majestuoso y digno, con calma.
 
 ```
-Desde Tenochtitlan, sobre el lago, gobierno un gran pueblo.
+<breath> Desde Tenochtitlan, la ciudad sobre el lago… gobierno a un gran pueblo.
 ```
 
 ### P15 · Leonardo da Vinci (8°)
@@ -146,7 +146,7 @@ Desde Tenochtitlan, sobre el lago, gobierno un gran pueblo.
 - **Estilo:** Habla en español latinoamericano neutro, maravillado, como quien descubre algo.
 
 ```
-Observo, dibujo, invento: todo se puede aprender.
+<chuckle> ¡Mira esto! Observo, dibujo, invento… <short pause> todo se puede aprender.
 ```
 
 ### P16 · Martín Lutero (8°)
@@ -155,7 +155,7 @@ Observo, dibujo, invento: todo se puede aprender.
 - **Estilo:** Habla en español latinoamericano neutro, vehemente y convencido.
 
 ```
-Mis noventa y cinco tesis recorrerán toda Europa.
+Noventa y cinco tesis. <short pause> ¡Y recorrerán toda Europa!
 ```
 
 ### P17 · Luis XIV (8°)
@@ -164,7 +164,7 @@ Mis noventa y cinco tesis recorrerán toda Europa.
 - **Estilo:** Habla en español latinoamericano neutro, altivo y orgulloso, con elegancia.
 
 ```
-En Versalles, todo gira en torno al rey.
+<chuckle> En Versalles, todo gira en torno al rey. <short pause> Es decir… en torno a mí.
 ```
 
 ### P18 · Bartolomé de las Casas (8°)
@@ -173,7 +173,7 @@ En Versalles, todo gira en torno al rey.
 - **Estilo:** Habla en español latinoamericano neutro, indignado pero respetuoso, como quien defiende a otros.
 
 ```
-Los pueblos indígenas tienen dignidad: lo diré ante el rey.
+<sigh> Lo que he visto no es justo. Los pueblos indígenas tienen dignidad… ¡y lo diré ante el rey!
 ```
 
 ### P19 · Montesquieu (8°)
@@ -182,5 +182,5 @@ Los pueblos indígenas tienen dignidad: lo diré ante el rey.
 - **Estilo:** Habla en español latinoamericano neutro, razonador y tranquilo, como explicando una idea.
 
 ```
-Para que nadie abuse del poder, hay que dividirlo en tres.
+Pensemos… <short pause> Si el poder se divide en tres, nadie podrá abusar de él.
 ```
