@@ -1062,3 +1062,11 @@ body:not([data-vista="mesa"]) { background: radial-gradient(ellipse at 20% 0%, #
 .capa-final .final .botones { margin: 14px auto 0; }
 @keyframes final-entra { from { transform: scale(.86) translateY(14px); opacity: 0; } to { transform: none; opacity: 1; } }
 @media (prefers-reduced-motion: reduce) { .capa-final .aviso-doble { animation: none; } }
+
+/* Tablet en vertical: hay alto de sobra; el activo y la mano crecen hasta donde deja el ancho (la reserva no, para no montarse) */
+@media (orientation: portrait) and (min-width: 700px) {
+  .mesa .zona-activo .carta-mini { --ch: min(calc(var(--lado) * .42), 30vw); }
+  .mesa .zona-activo .hueco { height: min(calc(var(--lado) * .42), 30vw); width: calc(min(calc(var(--lado) * .42), 30vw) * .72); }
+  .mesa .mano .carta-mini { --ch: min(calc(var(--lado) * .3), 20vw); }
+  .mesa .mano.oculta .carta-mini { --ch: calc(var(--lado) * .16); }
+}
