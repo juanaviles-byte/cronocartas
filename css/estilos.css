@@ -1072,7 +1072,7 @@ body:not([data-vista="mesa"]) { background: radial-gradient(ellipse at 20% 0%, #
 }
 
 /* Cartas vivas: el activo de quien juega respira con un brillo leve (sin moverse, para no esquivar el toque) */
-.lado.activo-turno .zona-activo .carta-mini:not(.archivada):not(.embiste):not(.golpeado):not(.se-cura):not(.se-protege):not(:active) { animation: respira 3.6s ease-in-out infinite; }
+.lado.activo-turno .zona-activo .carta-mini:not(.archivada):not(.embiste):not(.golpeado):not(.se-cura):not(.se-protege):not(.sugerida):not(.pide-saber):not(:active) { animation: respira 3.6s ease-in-out infinite; }
 @keyframes respira { 0%, 100% { filter: drop-shadow(0 4px 10px rgba(0,0,0,.35)); }
   50% { filter: drop-shadow(0 8px 14px rgba(0,0,0,.4)) drop-shadow(0 0 12px rgba(233,196,106,.45)) brightness(1.04); } }
 @media (prefers-reduced-motion: reduce) { .lado.activo-turno .zona-activo .carta-mini { animation: none; } }
@@ -1088,3 +1088,10 @@ body:not([data-vista="mesa"]) { background: radial-gradient(ellipse at 20% 0%, #
 @keyframes banner-impulso { from { scale: .7; } to { scale: 1; } }
 @keyframes banner-barrido { to { transform: translateX(120%); } }
 @media (prefers-reduced-motion: reduce) { .banner-turno::after { display: none; } .banner-turno { animation: banner 1.1s ease forwards; } }
+
+/* Pista visible en la mano: la fila recorta lo que sobresale, así que se le da aire (sin mover la mesa)
+   y la carta sugerida asoma un poco con un anillo más grueso. */
+.mano { padding-top: 12px; padding-bottom: 10px; margin-top: -8px; margin-bottom: -6px; }
+.mano .carta-mini.sugerida { transform: translateY(-5px); animation-name: sugerida-mano; }
+@keyframes sugerida-mano { 0%, 100% { box-shadow: 0 0 0 4px #7FD1FF, 0 0 10px 3px rgba(127,209,255,.6); } 50% { box-shadow: 0 0 0 5px #fff, 0 0 14px 5px rgba(127,209,255,.95); } }
+@media (prefers-reduced-motion: reduce) { .mano .carta-mini.sugerida { transform: none; animation: none; box-shadow: 0 0 0 4px #7FD1FF; } }

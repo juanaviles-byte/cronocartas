@@ -21,6 +21,9 @@ export function hacerArrastrable(el, { objetivos, alSoltar, girado = false }) {
   el.classList.add('arrastrable');
   el.addEventListener('pointerdown', ev => {
     if (ev.button !== 0) return;
+    // Un segundo dedo (o la palma) sobre la misma carta no reemplaza al que ya la tiene: si lo hiciera,
+    // el soltar del primero se ignoraría y la carta quedaría pegada en la pantalla.
+    if (inicio) return;
     inicio = { x: ev.clientX, y: ev.clientY, id: ev.pointerId };
     arrastrando = false;
     // Capturar desde el inicio: aunque el dedo salga rápido de la carta, sigue llegando el movimiento.
@@ -44,7 +47,8 @@ export function hacerArrastrable(el, { objetivos, alSoltar, girado = false }) {
   const terminar = ev => {
     if (!inicio || (ev && ev.pointerId !== inicio.id)) return;
     if (arrastrando) {
-      const accion = encima && encima.accion;
+      // Si la mesa se redibujó durante el arrastre, la carta y los destinos ya no están: se cancela sin jugar.
+      const accion = el.isConnected && encima && encima.el.isConnected ? encima.accion : null;
       if (accion && ev) Object.assign(ultimaSoltada, { x: ev.clientX, y: ev.clientY, t: performance.now() });
       limpiar(!accion);
       if (accion) alSoltar(accion);
@@ -53,8 +57,16 @@ export function hacerArrastrable(el, { objetivos, alSoltar, girado = false }) {
     }
     inicio = null;
   };
+  const cancelar = ev => {
+    if (!inicio || (ev && ev.pointerId !== inicio.id)) return;
+    if (arrastrando) limpiar(true);
+    inicio = null;
+  };
   el.addEventListener('pointerup', terminar);
-  el.addEventListener('pointercancel', () => { if (arrastrando) limpiar(true); inicio = null; });
+  el.addEventListener('pointercancel', cancelar);
+  // Mientras se arrastra, el soltar se escucha en toda la página: si la mesa se redibuja, la carta original
+  // sale del documento, pierde la captura del puntero y su propio "pointerup" nunca llega.
+  const enVentana = { up: ev => terminar(ev), cancel: ev => cancelar(ev) };
 
   function empezar(ev) {
     arrastrando = true;
@@ -69,6 +81,8 @@ export function hacerArrastrable(el, { objetivos, alSoltar, girado = false }) {
     fantasma.style.setProperty('--ch', getComputedStyle(el).getPropertyValue('--ch'));
     document.body.appendChild(fantasma);
     document.body.classList.add('arrastrando');
+    addEventListener('pointerup', enVentana.up, true);
+    addEventListener('pointercancel', enVentana.cancel, true);
     el.classList.add('origen-arrastre');
   }
 
@@ -87,13 +101,15 @@ export function hacerArrastrable(el, { objetivos, alSoltar, girado = false }) {
   }
 
   function limpiar(volver) {
+    removeEventListener('pointerup', enVentana.up, true);
+    removeEventListener('pointercancel', enVentana.cancel, true);
     lista.forEach(o => o.el.classList.remove('destino-posible', 'destino-encima'));
     el.classList.remove('origen-arrastre');
     document.body.classList.remove('arrastrando');
     const f = fantasma;
     fantasma = null; encima = null; lista = []; arrastrando = false;
     if (!f) return;
-    if (volver) {
+    if (volver && el.isConnected) {
       const r = el.getBoundingClientRect();
       f.classList.add('volviendo');
       f.style.left = `${r.left + r.width / 2}px`;
