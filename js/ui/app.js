@@ -2,7 +2,7 @@
 import { montarMesa, cargarTableros, cargarDuelos } from './mesa.js';
 import { NIVELES } from '../ia.js';
 import { crearAlbum } from '../album.js';
-import { renderCarta, textoParaLeer } from './carta.js';
+import { renderCarta, textoParaLeer, registrarImagenes } from './carta.js';
 import { botonEscucharCarta, detener } from './voz.js';
 import { cargarCursoCompleto } from './datos.js';
 import { confirmar } from './confirmar.js';
@@ -20,14 +20,23 @@ const h = (tag, cls, html) => { const e = document.createElement(tag); if (cls) 
 const CURSOS = [5, 6, 7, 8];
 
 const vistas = {
-  inicio() {
+  async inicio() {
     const v = h('div', 'pantalla inicio');
-    v.innerHTML = `
+    // Fondo: un escenario del juego al azar, con un paneo lento (se detiene con «reducir movimiento»).
+    const fondos = await fetch('data/escenarios.json').then(r => (r.ok ? r.json() : {})).catch(() => ({}));
+    const lista = Object.values(fondos);
+    const fondo = h('div', 'inicio-fondo');
+    if (lista.length) fondo.style.backgroundImage = `url("${new URL(lista[Math.floor(Math.random() * lista.length)], location.href).href}")`;
+    v.appendChild(fondo);
+
+    const principal = h('section', 'inicio-principal');
+    principal.innerHTML = `
       <header class="portada">
         <div class="marca">Cronocartas</div>
         <p class="lema">Duelo de cartas de Historia · 5° a 8° básico</p>
       </header>`;
     const menu = h('nav', 'menu-principal');
+    menu.setAttribute('aria-label', 'Menú principal');
     const guardada = almacen.leer(CLAVES.partida, null);
     if (guardada && guardada.version === 1 && guardada.estado && guardada.estado.fase !== 'fin') {
       const b = boton('Continuar partida', 'boton-principal grande', () => { location.hash = '#mesa'; });
@@ -36,19 +45,50 @@ const vistas = {
         if (si) { almacen.borrar(CLAVES.partida); render(); }
       });
       menu.append(b, terminar);
+      menu.append(boton('Nueva partida', 'boton-secundario grande', () => { location.hash = '#jugar'; }));
+    } else {
+      menu.append(boton('Jugar', 'boton-principal grande', () => { location.hash = '#jugar'; }));
     }
-    menu.append(
-      boton('Jugar', 'boton-principal grande', () => { location.hash = '#jugar'; }),
-      boton('Aprender a jugar', 'boton-secundario grande', () => { location.hash = '#tutorial'; }),
-      boton('Colección y álbum', 'boton-secundario grande', () => { location.hash = '#coleccion'; }),
-      boton('Torneo', 'boton-secundario grande', () => { location.hash = '#torneo'; }),
-      boton('Banco de ideas', 'boton-secundario grande', () => { location.hash = '#banco'; }),
-    );
-    v.appendChild(menu);
+    principal.appendChild(menu);
+
+    // El resto del menú: fichas con ícono.
+    const ICONOS = {
+      tutorial: '<path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 20.5A2.5 2.5 0 0 0 6.5 23H20v-5"/><path d="M9 8h7M9 12h5"/>',
+      coleccion: '<rect x="3" y="6" width="11" height="15" rx="1.6" transform="rotate(-8 8.5 13.5)"/><rect x="10" y="3" width="11" height="15" rx="1.6" transform="rotate(8 15.5 10.5)"/>',
+      torneo: '<path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M7 6H4a3 3 0 0 0 3 4M17 6h3a3 3 0 0 1-3 4"/>',
+      banco: '<path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.6 10.8c.6.5 1 1.3 1 2.2h5.2c0-.9.4-1.7 1-2.2A6 6 0 0 0 12 3z"/>',
+    };
+    const fichas = h('nav', 'menu-fichas');
+    fichas.setAttribute('aria-label', 'Más opciones');
+    for (const [clave, titulo, detalle, destino] of [
+      ['tutorial', 'Aprender a jugar', 'Una partida guiada', '#tutorial'],
+      ['coleccion', 'Colección y álbum', 'Las cartas que descubriste', '#coleccion'],
+      ['torneo', 'Torneo', 'Llaves para todo el curso', '#torneo'],
+      ['banco', 'Banco de ideas', 'Crea tus propias cartas', '#banco'],
+    ]) {
+      const f = h('button', 'ficha-menu', `<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONOS[clave]}</svg><b>${titulo}</b><span>${detalle}</span>`);
+      f.onclick = () => { location.hash = destino; };
+      fichas.appendChild(f);
+    }
+    principal.appendChild(fichas);
     const pie = h('footer', 'pie');
     pie.append(boton('Panel docente', 'enlace', () => { location.hash = '#docente'; }));
     pie.appendChild(h('span', '', 'Escuela Gabriela Mistral · Mostazal'));
-    v.appendChild(pie);
+    principal.appendChild(pie);
+    v.appendChild(principal);
+
+    // Tres cartas de verdad, en abanico: lo más característico del juego.
+    const abanico = h('div', 'inicio-abanico');
+    abanico.setAttribute('aria-hidden', 'true');
+    v.appendChild(abanico);
+    Promise.all([fetch('data/arte.json').then(r => r.json()), fetch(`data/mazo-${CURSOS[Math.floor(Math.random() * CURSOS.length)]}.json`).then(r => r.json())])
+      .then(([arte, mazo]) => {
+        registrarImagenes(arte);
+        const prot = mazo.cartas.filter(c => c.tipo === 'protagonista' && arte[c.id]);
+        const elegidas = [];
+        while (elegidas.length < 3 && prot.length) elegidas.push(prot.splice(Math.floor(Math.random() * prot.length), 1)[0]);
+        elegidas.forEach((c, i) => { const el = renderCarta(c, { tamano: 'normal' }); el.style.setProperty('--i', i - 1); abanico.appendChild(el); });
+      }).catch(() => { /* sin cartas: el inicio funciona igual */ });
     return v;
   },
 

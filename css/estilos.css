@@ -923,3 +923,56 @@ button:disabled { opacity: .35; cursor: default; }
 }
 
 .controles .botonera { display: flex; gap: 8px; justify-content: flex-end; flex-wrap: wrap; }
+
+/* ---------- Inicio: portada del juego ----------
+   Fondo con un escenario del juego, columna con la marca y las acciones, y un abanico de cartas reales. */
+body[data-vista="inicio"], body[data-vista=""] { background: #0b1020; }
+.pantalla.inicio { max-width: none; margin: 0; position: relative; isolation: isolate; overflow: hidden;
+  display: grid; grid-template-columns: minmax(300px, 500px) 1fr; align-items: center; gap: 5vw; padding: max(28px, 6vh) 6vw; }
+.inicio-fondo { position: absolute; inset: -6%; z-index: -2; background: #17264F center / cover no-repeat; filter: brightness(.6) saturate(1.05);
+  animation: paneo 48s ease-in-out infinite alternate; }
+@keyframes paneo { from { transform: scale(1.04) translate(-1.5%, -1%); } to { transform: scale(1.1) translate(1.5%, 1%); } }
+.pantalla.inicio::before { content: ""; position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(90deg, rgba(9,13,26,.96) 0%, rgba(9,13,26,.82) 38%, rgba(9,13,26,.25) 75%, rgba(9,13,26,.5) 100%),
+              linear-gradient(0deg, rgba(9,13,26,.7), transparent 30%); }
+.inicio-principal { display: flex; flex-direction: column; gap: 26px; }
+.inicio .portada .marca { font-family: var(--serif); font-weight: 700; color: #F3EAD3; letter-spacing: -.01em; font-size: clamp(2.8rem, 7vw, 4.6rem);
+  text-shadow: 0 3px 18px rgba(0,0,0,.6); }
+.inicio .portada .lema { color: rgba(243,234,211,.78); }
+.inicio .menu-principal { gap: 10px; }
+.inicio .menu-principal .boton-principal.grande { min-height: 64px; font-size: 1.25rem; background: linear-gradient(180deg, #F2D27E, #E1B44F); color: #1d1608;
+  box-shadow: 0 0 0 2px rgba(255,243,196,.55) inset, 0 8px 24px rgba(233,196,106,.28); }
+.inicio .menu-principal .boton-secundario.grande { min-height: 52px; background: rgba(23,38,79,.72); border: 1.5px solid rgba(201,162,74,.6); color: #F3EAD3; }
+.menu-fichas { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.ficha-menu { display: grid; grid-template-columns: auto 1fr; grid-template-rows: auto auto; column-gap: 12px; align-items: center; text-align: left;
+  min-height: 64px; padding: 10px 14px; border-radius: 12px; background: rgba(23,38,79,.62); border: 1px solid rgba(201,162,74,.35);
+  color: #F3EAD3; backdrop-filter: blur(4px); transition: transform .15s ease, border-color .15s ease, background .15s ease; }
+.ficha-menu svg { grid-row: span 2; color: var(--oro); }
+.ficha-menu b { font-size: .98rem; }
+.ficha-menu span { font-size: .78rem; color: rgba(243,234,211,.68); }
+.ficha-menu:hover, .ficha-menu:focus-visible { transform: translateY(-2px); border-color: var(--oro); background: rgba(23,38,79,.85); }
+.inicio .pie { color: rgba(243,234,211,.6); gap: 12px; flex-wrap: wrap; }
+.inicio .pie .enlace { color: rgba(243,234,211,.8); }
+.inicio-abanico { position: relative; height: min(70vh, 520px); }
+.inicio-abanico .carta { position: absolute; left: 50%; top: 50%; --w: clamp(110px, min(18vw, 40vh), 250px);
+  transform: translate(-50%, -50%) translateX(calc(var(--i) * 62%)) translateY(calc(var(--i) * var(--i) * 6%)) rotate(calc(var(--i) * 9deg));
+  box-shadow: 0 18px 40px rgba(0,0,0,.55); border-radius: calc(var(--w) / 20 * .45); animation: carta-llega .8s cubic-bezier(.2,.9,.3,1.2) both; animation-delay: calc((var(--i) + 1) * 120ms); }
+.inicio-abanico .carta:nth-child(2) { z-index: 2; }
+@keyframes carta-llega { from { opacity: 0; transform: translate(-50%, -30%) rotate(0); } }
+@media (max-width: 820px) {
+  .pantalla.inicio { grid-template-columns: 1fr; padding: max(24px, env(safe-area-inset-top)) 22px 28px; }
+  .inicio-abanico { display: none; }
+  .pantalla.inicio::before { background: linear-gradient(180deg, rgba(9,13,26,.7), rgba(9,13,26,.92) 45%); }
+}
+@media (max-width: 420px) { .menu-fichas { grid-template-columns: 1fr; } }
+@media (max-height: 520px) and (orientation: landscape) {
+  .pantalla.inicio { padding: 16px 5vw; gap: 3vw; }
+  .inicio-principal { gap: 12px; }
+  .inicio .portada .marca { font-size: 2.2rem; }
+  .ficha-menu { min-height: 48px; padding: 6px 10px; }
+  .ficha-menu span { display: none; }
+  .inicio .menu-principal .boton-principal.grande { min-height: 50px; }
+  .pantalla.inicio { grid-template-columns: minmax(280px, 1.3fr) 1fr; }
+  .inicio-abanico { height: 80vh; }
+}
+@media (prefers-reduced-motion: reduce) { .inicio-fondo, .inicio-abanico .carta { animation: none; } }
