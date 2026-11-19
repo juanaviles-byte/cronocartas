@@ -227,8 +227,19 @@ const vistas = {
       location.hash = '#mesa';
     });
     empezar.disabled = !listo;
-    v.appendChild(empezar);
-    if (eleccion.modo === 'caraacara') v.appendChild(h('p', 'nota', 'Pongan la tablet en horizontal, entre los dos jugadores.'));
+    // Barra fija abajo: lo elegido en una línea y «Empezar», siempre a la vista (en celular no hay que bajar a buscarlo).
+    const duelos2 = col ? ((exp && exp.duelos) || []) : duelos;
+    const dueloSel = eleccion.mazo === 'duelo' ? duelos2.find(d => d.id === eleccion.duelo) : null;
+    const resumen = [
+      eleccion.modo === 'ia' ? 'Contra la tablet' : 'Cara a cara',
+      col ? col.nombre : `${eleccion.cursoA}° básico`,
+      dueloSel ? dueloSel.nombre : col ? 'Mazo completo' : 'Mazo del curso',
+    ];
+    const barra = h('div', 'barra-empezar');
+    barra.appendChild(h('div', 'resumen-eleccion', resumen.map(x => `<span>${esc(x)}</span>`).join('')
+      + (eleccion.modo === 'caraacara' ? '<small>Pongan la tablet en horizontal, entre los dos jugadores.</small>' : '')));
+    barra.appendChild(empezar);
+    v.appendChild(barra);
     return v;
   },
 
