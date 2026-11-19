@@ -1,7 +1,7 @@
 // Service worker de Cronocartas: guarda la app en la tablet para jugar sin internet.
 // Al publicar una mejora, sube VERSION y agrega aquí los archivos nuevos
 // (la prueba tests/sw.test.js avisa si falta alguno).
-const VERSION = 'cc-v46';
+const VERSION = 'cc-v47';
 const ARCHIVOS = [
   "./",
   "audio/ambientes/CC-5-U1-007.ogg",
@@ -173,6 +173,25 @@ const ARCHIVOS = [
   "audio/narrador/FM-004.ogg",
   "audio/narrador/FM-005.ogg",
   "audio/narrador/FM-006.ogg",
+  "audio/personajes/CC-5-U1-001.ogg",
+  "audio/personajes/CC-5-U1-002.ogg",
+  "audio/personajes/CC-5-U1-003.ogg",
+  "audio/personajes/CC-5-U1-004.ogg",
+  "audio/personajes/CC-5-U2-003.ogg",
+  "audio/personajes/CC-6-U1-003.ogg",
+  "audio/personajes/CC-6-U1-004.ogg",
+  "audio/personajes/CC-6-U1-005.ogg",
+  "audio/personajes/CC-6-U2-001.ogg",
+  "audio/personajes/CC-6-U3-001.ogg",
+  "audio/personajes/CC-7-U2-008.ogg",
+  "audio/personajes/CC-7-U3-008.ogg",
+  "audio/personajes/CC-7-U4-008.ogg",
+  "audio/personajes/CC-7-U4-011.ogg",
+  "audio/personajes/CC-8-U1-001.ogg",
+  "audio/personajes/CC-8-U1-002.ogg",
+  "audio/personajes/CC-8-U1-008.ogg",
+  "audio/personajes/CC-8-U2-001.ogg",
+  "audio/personajes/CC-8-U3-001.ogg",
   "audio/sfx/ataque_fuerte.ogg",
   "audio/sfx/ataque_ligero.ogg",
   "audio/sfx/buscar.ogg",

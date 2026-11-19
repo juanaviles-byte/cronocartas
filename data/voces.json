@@ -158,5 +158,25 @@
   "ubicar": "audio/cronista/ubicar.ogg",
   "prep-activo": "audio/cronista/prep-activo.ogg"
  },
- "personajes": {}
+ "personajes": {
+  "CC-5-U1-001": "audio/personajes/CC-5-U1-001.ogg",
+  "CC-5-U1-002": "audio/personajes/CC-5-U1-002.ogg",
+  "CC-5-U1-003": "audio/personajes/CC-5-U1-003.ogg",
+  "CC-5-U1-004": "audio/personajes/CC-5-U1-004.ogg",
+  "CC-5-U2-003": "audio/personajes/CC-5-U2-003.ogg",
+  "CC-6-U1-003": "audio/personajes/CC-6-U1-003.ogg",
+  "CC-6-U1-004": "audio/personajes/CC-6-U1-004.ogg",
+  "CC-6-U1-005": "audio/personajes/CC-6-U1-005.ogg",
+  "CC-6-U2-001": "audio/personajes/CC-6-U2-001.ogg",
+  "CC-6-U3-001": "audio/personajes/CC-6-U3-001.ogg",
+  "CC-7-U2-008": "audio/personajes/CC-7-U2-008.ogg",
+  "CC-7-U3-008": "audio/personajes/CC-7-U3-008.ogg",
+  "CC-7-U4-008": "audio/personajes/CC-7-U4-008.ogg",
+  "CC-7-U4-011": "audio/personajes/CC-7-U4-011.ogg",
+  "CC-8-U1-001": "audio/personajes/CC-8-U1-001.ogg",
+  "CC-8-U1-002": "audio/personajes/CC-8-U1-002.ogg",
+  "CC-8-U1-008": "audio/personajes/CC-8-U1-008.ogg",
+  "CC-8-U2-001": "audio/personajes/CC-8-U2-001.ogg",
+  "CC-8-U3-001": "audio/personajes/CC-8-U3-001.ogg"
+ }
 }
