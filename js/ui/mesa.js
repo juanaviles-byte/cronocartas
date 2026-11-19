@@ -16,9 +16,9 @@ import { sonidos, sonidoActivo, alternarSonido } from './sonido.js';
 import { ambiente, rutaAmbiente, ambientesListos } from './ambiente.js';
 import { FUERZAS, coleccion } from '../colecciones.js';
 import { hacerArrastrable, ultimaSoltada } from './arrastre.js';
-import { volar, impacto, deshacerEnArena, relojSobre, granoHacia, motasQueSuben, estallido } from './efectos.js';
+import { volar, impacto, deshacerEnArena, relojSobre, granoHacia, motasQueSuben, estallido, arenaQueCae } from './efectos.js';
 import { arenaDelTiempo } from './viaje.js';
-import { planDeEscena, escenaAtaque, escenaInvocacion } from './director.js';
+import { planDeEscena, escenaAtaque, escenaInvocacion, estiloDeGolpe } from './director.js';
 import { dorsoDeMazo, cargarDorsos } from './dorsos.js';
 import { textoAnio, direccionViaje, anioEnViaje, epocaDe, cargarEpocas } from './tiempo.js';
 
@@ -1073,7 +1073,7 @@ export async function montarMesa(contenedor, opciones) {
       const atacoEnEscena = escenaActual && escenaActual.tipo === 'ataque';
       if (ev.tipo === 'danio' && !atacoEnEscena) {
         sonidos.ataque(ev.valor);
-        embestida(ev.jugador);
+        embestida(ev.jugador, { valor: ev.valor, ventaja: eventos.some(e => e.tipo === 'ventaja') });
         destello(ev.jugador === 'A' ? 'B' : 'A', ev.valor);
       }
       if (ev.tipo === 'danio') {
@@ -1104,14 +1104,16 @@ export async function montarMesa(contenedor, opciones) {
   const esperar = ms => new Promise(r => setTimeout(r, ms));
   const sinMovimiento = () => window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  function embestida(atacante) {
+  function embestida(atacante, ev = {}) {
     const a = raiz.querySelector(`.lado-${atacante} .zona-activo .carta`);
     const d = raiz.querySelector(`.lado-${atacante === 'A' ? 'B' : 'A'} .zona-activo .carta`);
     if (a) { a.classList.remove('embiste'); void a.offsetWidth; a.classList.add('embiste'); }
     if (d) { d.classList.remove('golpeado'); void d.offsetWidth; d.classList.add('golpeado'); }
     // Si el golpe lo derrotó, la carta ya no está: el impacto va al espacio del activo.
     const blanco = d || raiz.querySelector(`.lado-${atacante === 'A' ? 'B' : 'A'} .zona-activo`);
-    if (blanco && !sinMovimiento()) setTimeout(() => impacto(blanco), 160);
+    const activo = estado.jugadores[atacante].activo;
+    const golpe = estiloDeGolpe(activo && activo.carta, ev.valor || 0, !!ev.ventaja);
+    if (blanco && !sinMovimiento()) setTimeout(() => impacto(blanco, golpe), 160);
   }
 
   // La carta derrotada se vuelve sepia y queda "archivada" un momento.
@@ -1322,7 +1324,22 @@ export async function montarMesa(contenedor, opciones) {
     const capa = dobleCara(c);
     capa.querySelectorAll('.boton-principal').forEach(b => { b.onclick = () => { if (config.torneo) { location.hash = '#torneo'; return; } capa.remove(); reiniciar(); }; });
     capa.querySelectorAll('.boton-secundario').forEach(b => { b.onclick = () => { location.hash = '#inicio'; }; });
+    capa.classList.add('capa-final', contraIA && g === 'B' ? 'gana-ia' : 'gana-persona');
     raiz.appendChild(capa);
+    celebrar(!(contraIA && g === 'B'));
+  }
+
+  // Cierre: si gana una persona, luz y destellos que suben; si gana la IA, arena que cae despacio.
+  function celebrar(ganaPersona) {
+    if (sinMovimiento()) return;
+    const w = innerWidth, hgt = innerHeight;
+    if (!ganaPersona) { arenaQueCae(w * 0.15, w * 0.85, 0, 40); setTimeout(() => { const g = document.querySelector('.capa-granos'); if (g) { g.style.zIndex = '55'; setTimeout(() => { g.style.zIndex = ''; }, 3500); } }, 20); return; }
+    const paleta = colec ? 'sagrado' : 'oro';
+    [[0.25, 0.3, 0], [0.75, 0.3, 260], [0.5, 0.18, 520]].forEach(([fx, fy, t]) =>
+      setTimeout(() => estallido(w * fx, hgt * fy, 40, 5.5, paleta), t));
+    setTimeout(() => motasQueSuben(w * 0.1, w * 0.9, hgt, 46, paleta), 300);
+    // La capa de granos queda sobre el aviso final mientras dura la celebración.
+    setTimeout(() => { const g = document.querySelector('.capa-granos'); if (g) { g.style.zIndex = '55'; setTimeout(() => { g.style.zIndex = ''; }, 3500); } }, 20);
   }
 
   function razonFinal(g) {

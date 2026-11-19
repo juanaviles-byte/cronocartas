@@ -69,3 +69,11 @@ test('cada tipo de carta tiene su forma de invocarse, y en la expansión, el col
   assert.deepEqual(estiloDeInvocacion({ tipo: 'protagonista', dimension: 'Mar', coleccion: 'fin-del-mundo' }), { tipo: 'protagonista', paleta: 'Mar' });
   assert.deepEqual(estiloDeInvocacion({ tipo: 'lugar', efecto: { dimension: 'BosqueNoche' }, coleccion: 'fin-del-mundo' }), { tipo: 'lugar', paleta: 'BosqueNoche' });
 });
+
+import { estiloDeGolpe } from '../js/ui/director.js';
+test('el golpe toma el color de quien ataca y crece con el daño o la ventaja', () => {
+  assert.deepEqual(estiloDeGolpe({ tipo: 'protagonista', dimension: 'Politica' }, 30, false), { paleta: 'oro', fuerte: false });
+  assert.deepEqual(estiloDeGolpe({ tipo: 'protagonista', dimension: 'Politica' }, 60, false), { paleta: 'oro', fuerte: true });
+  assert.deepEqual(estiloDeGolpe({ tipo: 'protagonista', dimension: 'TierraFuego', coleccion: 'fin-del-mundo' }, 20, true), { paleta: 'TierraFuego', fuerte: true });
+  assert.deepEqual(estiloDeGolpe(null, 10, false), { paleta: 'oro', fuerte: false });
+});

@@ -1042,3 +1042,23 @@ body:not([data-vista="mesa"]) { background: radial-gradient(ellipse at 20% 0%, #
 .carta-mini.se-protege { animation: se-protege 1.2s ease; }
 @keyframes se-protege { 0% { box-shadow: 0 0 0 0 rgba(150,200,255,0); } 35% { box-shadow: 0 0 0 4px rgba(190,220,255,.95), 0 0 30px 8px rgba(120,180,255,.7); } 100% { box-shadow: 0 0 0 0 rgba(150,200,255,0); } }
 @media (prefers-reduced-motion: reduce) { .carta-mini.se-cura, .carta-mini.se-protege { animation: none; } }
+
+/* Golpes con el color de quien ataca; los fuertes, más grandes y con destello en la mesa */
+.anillo-impacto { border-color: var(--tinte, rgba(255,236,170,.95)); box-shadow: 0 0 18px var(--tinte, rgba(233,196,106,.8)), inset 0 0 14px var(--tinte, rgba(233,196,106,.6)); }
+.anillo-impacto.fuerte { border-width: 5px; animation-duration: .75s; }
+.anillo-impacto.fuerte::after { content: ""; position: absolute; inset: 18%; border-radius: 50%; border: 2px solid var(--tinte, #FFE6A3); animation: anillo-impacto .55s .08s ease-out both; }
+.mesa.destello-golpe::after { content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 43; background: radial-gradient(circle at 50% 50%, rgba(255,255,255,.22), rgba(255,255,255,0) 60%); animation: destello-golpe .35s ease-out forwards; }
+@keyframes destello-golpe { from { opacity: 1; } to { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .mesa.destello-golpe::after { display: none; } }
+
+/* Aviso final: el mismo lenguaje de los menús, con el título en serif dorado */
+.capa-final .panel-aviso { background: linear-gradient(180deg, #1b2440 0%, #121831 100%); border: 1px solid rgba(233,196,106,.55);
+  box-shadow: 0 0 0 4px rgba(233,196,106,.08), 0 24px 60px rgba(0,0,0,.6); padding: 24px 28px 22px; }
+.capa-final .aviso-doble { animation: final-entra .5s cubic-bezier(.2,.9,.3,1.2) both; }
+.capa-final .titulo-final { font-family: "Palatino Linotype", "Book Antiqua", Palatino, "Noto Serif", Georgia, serif; font-size: clamp(1.9rem, 4.5vw, 2.8rem);
+  color: #F3D98B; text-shadow: 0 2px 18px rgba(233,196,106,.45); letter-spacing: .01em; margin-bottom: 4px; }
+.capa-final.gana-ia .titulo-final { color: #DCE3EE; text-shadow: none; }
+.capa-final .aprendido { background: rgba(255,255,255,.04); border-radius: 12px; padding: 10px 14px; margin: 10px 0; }
+.capa-final .final .botones { margin: 14px auto 0; }
+@keyframes final-entra { from { transform: scale(.86) translateY(14px); opacity: 0; } to { transform: none; opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .capa-final .aviso-doble { animation: none; } }

@@ -14,7 +14,7 @@ export function planDeEscena(antes, jugada, eventos) {
     if (!d || !def || !yo.activo) return null;
     const vidaAntes = Math.max(0, def.carta.resistencia - def.danio);
     return {
-      tipo: 'ataque', jugador: j, valor: d.valor, accion: d.accion,
+      tipo: 'ataque', jugador: j, valor: d.valor, accion: d.accion, atacante: yo.activo.carta,
       ventaja: eventos.some(e => e.tipo === 'ventaja'), protegido: eventos.some(e => e.tipo === 'protegido'),
       cae: eventos.some(e => e.tipo === 'caida' && e.jugador === rival(j)),
       vidaAntes, vidaDespues: Math.max(0, vidaAntes - d.valor),
@@ -85,8 +85,10 @@ export async function escenaAtaque({ mesa, atk, def, plan, alGolpear, alCaer }) 
     { duration: 170, easing: 'cubic-bezier(.6,0,.9,.6)', fill: 'forwards' }));
   // 4) Impacto: la acción se congela un instante, tiembla la mesa, salta el daño.
   if (alGolpear) alGolpear();
-  impacto(def);
-  sacudir(mesa, plan.valor >= 60 ? 10 : 7);
+  const golpe = estiloDeGolpe(plan.atacante, plan.valor, plan.ventaja);
+  impacto(def, golpe);
+  sacudir(mesa, golpe.fuerte ? 11 : 6);
+  if (golpe.fuerte && mesa) { mesa.classList.remove('destello-golpe'); void mesa.offsetWidth; mesa.classList.add('destello-golpe'); }
   def.animate([{ filter: 'brightness(2.4) saturate(.3)' }, { filter: 'none' }], { duration: 260 });
   const extra = plan.protegido ? 'Protegido' : plan.ventaja ? '¡Ventaja ×2!' : '';
   numeroGolpe(def, plan.valor ? `−${plan.valor}` : '0', extra);
@@ -132,6 +134,12 @@ export function estiloDeInvocacion(carta) {
   const fuerza = carta.coleccion ? (carta.tipo === 'protagonista' ? carta.dimension : carta.tipo === 'lugar' ? carta.efecto && carta.efecto.dimension : sagrada ? 'sagrado' : null) : null;
   const paleta = fuerza || (tipo === 'personaje' || tipo === 'sagrado' ? 'sagrado' : 'oro');
   return { tipo, paleta };
+}
+
+// El golpe se tiñe con la fuerza de quien ataca (en la expansión) y es fuerte con ventaja o daño alto.
+export function estiloDeGolpe(atacante, valor, ventaja) {
+  const paleta = atacante && atacante.coleccion && atacante.tipo === 'protagonista' && atacante.dimension ? atacante.dimension : 'oro';
+  return { paleta, fuerte: !!ventaja || valor >= 50 };
 }
 
 export async function escenaInvocacion({ grande, desde, destino, plan, girado = false, detalle = '', espera = null }) {

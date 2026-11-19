@@ -111,12 +111,15 @@ export function volar(el, desde, { ms = 560, girar = 0 } = {}) {
 }
 
 // Golpe: anillo de impacto y arena que salta del defensor.
-export function impacto(el) {
+export function impacto(el, { paleta = 'oro', fuerte = false } = {}) {
   if (!el) return;
   const r = el.getBoundingClientRect(), c = centro(r);
-  estallido(c.x, c.y, 34, 5);
+  estallido(c.x, c.y, fuerte ? 52 : 30, fuerte ? 6.5 : 4.6, paleta);
+  if (fuerte) setTimeout(() => estallido(c.x, c.y, 24, 3, paleta), 90);
   const anillo = document.createElement('div');
-  anillo.className = 'anillo-impacto';
+  anillo.className = `anillo-impacto${fuerte ? ' fuerte' : ''}`;
+  const tinte = (PALETAS[paleta] || ORO)[0];
+  anillo.style.setProperty('--tinte', tinte);
   anillo.style.left = `${c.x}px`; anillo.style.top = `${c.y}px`;
   anillo.style.setProperty('--d', `${Math.max(r.width, r.height) * 1.1}px`);
   document.body.appendChild(anillo);
