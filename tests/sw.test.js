@@ -32,3 +32,25 @@ test('la app busca versión nueva al volver a ella y avisa mientras la descarga'
   assert.match(app, /updatefound/, 'debe escuchar updatefound para avisar la descarga');
   assert.match(app, /aviso-actualizacion/, 'debe mostrar un aviso de actualización');
 });
+
+// Actualizaciones livianas: cada archivo lleva una huella de su contenido y, al instalar
+// una versión nueva, los archivos con la misma huella se copian de la versión anterior.
+test('cada archivo de la app tiene su huella y coincide con su contenido', async () => {
+  const { createHash } = await import('node:crypto');
+  const sw = readFileSync(join(raiz, 'sw.js'), 'utf8');
+  const lista = JSON.parse(sw.match(/const ARCHIVOS = (\[[\s\S]*?\]);/)[1]);
+  const huellas = JSON.parse(sw.match(/const HUELLAS = (\{[\s\S]*?\});/)[1]);
+  for (const f of lista) {
+    const real = f === './' ? 'index.html' : f;
+    const esperada = createHash('sha256').update(readFileSync(join(raiz, real))).digest('hex').slice(0, 12);
+    assert.equal(huellas[f], esperada, `huella vieja o faltante para ${f}`);
+  }
+});
+
+test('al instalar, solo se descargan los archivos cuya huella cambió', () => {
+  const sw = readFileSync(join(raiz, 'sw.js'), 'utf8');
+  const instalar = sw.slice(sw.indexOf("addEventListener('install'"), sw.indexOf("addEventListener('activate'"));
+  assert.match(instalar, /huellasPrevias\[u\] === HUELLAS\[u\]/, 'debe comparar la huella anterior con la nueva');
+  assert.match(instalar, /addAll\(pendientes/, 'debe descargar solo los pendientes');
+  assert.match(instalar, /put\(HUELLAS_URL/, 'debe guardar las huellas de la versión instalada');
+});
