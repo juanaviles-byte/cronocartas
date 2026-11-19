@@ -399,6 +399,7 @@ export async function montarMesa(contenedor, opciones) {
   // Viaje de un escenario a otro: arena sobre el anterior + cartel con el contador de años.
   function viajar(desde, hasta) {
     const quieto = sinMovimiento();
+    sonidos.viaje();
     if (!quieto) {
       const r = raiz.getBoundingClientRect();
       viaje = arenaDelTiempo({ ancho: r.width || innerWidth, alto: r.height || innerHeight, imagen: desde ? new URL(desde.url, location.href).href : null });
@@ -493,6 +494,7 @@ export async function montarMesa(contenedor, opciones) {
   // Menú de la partida: seguir, salir dejándola guardada, o terminarla (con confirmación).
   function abrirMenu() {
     if (raiz.querySelector('.menu-partida')) return;
+    sonidos.abrir();
     const capa = h('div', `capa capa-menu${girado(estado.turno) ? ' girado' : ''}`);
     const panel = h('div', 'panel-aviso menu-partida');
     panel.setAttribute('role', 'dialog');
@@ -926,6 +928,7 @@ export async function montarMesa(contenedor, opciones) {
   }
 
   function verCarta(carta, orientadoA, opciones = [], instancia = null) {
+    sonidos.abrir();
     const capa = h('div', `capa${girado(orientadoA) ? ' girado' : ''}`);
     const panel = h('div', 'panel-carta');
     panel.appendChild(renderCarta(carta, { tamano: 'grande', instancia, unidades: unidadesCarta(carta) }));
@@ -985,7 +988,7 @@ export async function montarMesa(contenedor, opciones) {
         mesa: raiz, plan,
         atk: raiz.querySelector(`.lado-${j} .zona-activo .carta`),
         def: raiz.querySelector(`.lado-${otro} .zona-activo .carta`),
-        alGolpear: () => sonidos.ataque(),
+        alGolpear: () => sonidos.ataque(plan.ventaja ? Math.max(plan.valor, 50) : plan.valor),
         alCaer: () => sonidos.caida(),
       });
     }
@@ -1005,7 +1008,7 @@ export async function montarMesa(contenedor, opciones) {
     const detalle = plan.destino === 'efecto'
       ? `<small>${plan.carta.tipo === 'personaje' ? 'Personaje' : plan.carta.tipo === 'aula' ? 'Aula' : 'Acontecimiento'}</small><b>${esc(plan.carta.nombre)}</b>${efecto ? `<span>${esc(efecto)}</span>` : ''}`
       : plan.destino === 'evolucion' ? `<small>Evolución</small><b>${esc(plan.carta.nombre)}</b>` : '';
-    sonidos.jugar();
+    sonidos.invocar(plan.carta.tipo);   // cada tipo de carta tiene su sonido de invocación
     const espera = plan.carta.tipo === 'personaje' && sonidoActivo() ? hablarPersonaje(plan.carta) : null;
     await escenaInvocacion({ grande: renderCarta(plan.carta, { tamano: 'normal' }), desde, destino, plan, girado: girado(j), detalle, espera });
     if (plan.destino !== 'efecto') entradasDirigidas.add(plan.destino === 'lugar' ? 'lugar' : plan.uid);
@@ -1030,7 +1033,7 @@ export async function montarMesa(contenedor, opciones) {
     ocupado = true;
     for (const ev of eventos) {
       if (['colocar', 'bajar', 'lugar', 'efecto', 'evolucion', 'retirar', 'promover'].includes(ev.tipo) && !(escenaActual && escenaActual.tipo === 'invocacion' && !escenaActual.breve)) sonidos.jugar();
-      if (ev.tipo === 'turno' && estado.fase === 'turno') { sonidos.turno(); if (ev.robo) sonidos.robar(); anunciarTurno(ev.jugador); }
+      if (ev.tipo === 'turno' && estado.fase === 'turno') { sonidos.turno(contraIA && ev.jugador === 'B'); if (ev.robo) sonidos.robar(); anunciarTurno(ev.jugador); }
       if (ev.tipo === 'ventaja') { sonidos.ventaja(); registrar(`<b>¡Ventaja ×2!</b> ${FRASES_VENTAJA[ev.de]}`); }
       if (ev.tipo === 'protegido') sonidos.protegido();
       guiaDeEvento(ev);
@@ -1049,7 +1052,7 @@ export async function montarMesa(contenedor, opciones) {
       if (ev.tipo === 'conexion') { sonidos.conexion(); avisoConexion(ev); registrar(`¡Conexión histórica! <b>${esc(ev.causa.nombre)}</b> → <b>${esc(ev.efecto.nombre)}</b>: +1 Saber`); }
       const atacoEnEscena = escenaActual && escenaActual.tipo === 'ataque';
       if (ev.tipo === 'danio' && !atacoEnEscena) {
-        sonidos.ataque();
+        sonidos.ataque(ev.valor);
         embestida(ev.jugador);
         destello(ev.jugador === 'A' ? 'B' : 'A', ev.valor);
       }
@@ -1060,6 +1063,11 @@ export async function montarMesa(contenedor, opciones) {
       if (ev.tipo === 'evolucion') registrar(`<b>${esc(ev.de.nombre)}</b> evoluciona en <b>${esc(ev.a.nombre)}</b>`);
       if (ev.tipo === 'efecto' && !eventos.some(x => x.tipo === 'revelar' || x.tipo === 'conexion')) registrar(`${nombres[ev.jugador]}: <b>${esc(ev.carta.nombre)}</b>`);
       if (ev.tipo === 'lugar') { registrar(`Nuevo lugar: <b>${esc(ev.carta.nombre)}</b>`); }
+      if (ev.tipo === 'efecto') {   // el sonido de lo que hace la carta
+        const tipos = (Array.isArray(ev.carta.efecto) ? ev.carta.efecto : [ev.carta.efecto]).filter(Boolean).map(x => x.tipo);
+        if (tipos.some(x => x === 'curar' || x === 'curarTodos')) sonidos.curar();
+        if (tipos.some(x => x.startsWith('buscar') || x.startsWith('robar'))) sonidos.buscar();
+      }
       if (ev.tipo === 'revelar') registrar(`${nombres[ev.jugador]}: se miraron ${ev.cartas.length} cartas del mazo${ev.tomada ? ` y se tomó <b>${esc(ev.tomada.nombre)}</b>` : ', sin Protagonistas'}`);
       if (ev.tipo === 'caida') {
         caidas.push(ev.carta);
@@ -1241,7 +1249,7 @@ export async function montarMesa(contenedor, opciones) {
 
   function pantallaFinal() {
     const g = estado.ganador;
-    sonidos.victoria();
+    if (contraIA && g === 'B') sonidos.derrota(); else sonidos.victoria();
     const c = h('div', 'final');
     registrarAlbum();
     const lineas = estado.lineaTiempo ? ['A', 'B'].filter(j => (estado.jugadores[j].linea || []).length).map(j => {

@@ -7,6 +7,7 @@ import { botonEscucharCarta, detener } from './voz.js';
 import { cargarCursoCompleto } from './datos.js';
 import { confirmar } from './confirmar.js';
 import { COLECCIONES, coleccion } from '../colecciones.js';
+import { sonidos, precargarSonidos } from './sonido.js';
 import { almacen, CLAVES } from '../almacen.js';
 import { esc } from '../html.js';
 
@@ -361,4 +362,14 @@ if ('serviceWorker' in navigator && window.isSecureContext) {
     // Una app que vuelve del segundo plano no recarga la página: se revisa a mano si hay versión nueva.
     document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') reg.update().catch(() => {}); });
   }).catch(() => {});
+}
+
+// Sonido de interfaz: un toque suave en cada botón, y el banco de efectos se carga con el primer gesto
+// (los navegadores no dejan sonar nada antes de que la persona toque la pantalla).
+if (typeof document !== 'undefined') {
+  document.addEventListener('pointerdown', () => precargarSonidos(), { once: true, capture: true });
+  document.addEventListener('click', ev => {
+    const b = ev.target.closest && ev.target.closest('button, .opcion, [role="tab"]');
+    if (b && !b.disabled && !b.classList.contains('boton-sonido')) sonidos.toque();
+  }, true);
 }
