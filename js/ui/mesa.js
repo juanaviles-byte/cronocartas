@@ -14,6 +14,7 @@ import { botonEscuchar, botonEscucharCarta, leer, detener, reproducir, rutaCroni
 import { esc, pips } from '../html.js';
 import { sonidos, sonidoActivo, alternarSonido } from './sonido.js';
 import { ambiente, rutaAmbiente, ambientesListos } from './ambiente.js';
+import { FUERZAS } from '../colecciones.js';
 import { hacerArrastrable, ultimaSoltada } from './arrastre.js';
 import { volar, impacto, deshacerEnArena, relojSobre, granoHacia } from './efectos.js';
 import { arenaDelTiempo } from './viaje.js';
@@ -42,6 +43,7 @@ export const FRASES_VENTAJA = {
   Sociedad: 'Los grupos sociales crean y cambian la cultura',
   Cultura: 'Las ideas y técnicas transforman el territorio',
   Territorio: 'El territorio condiciona el poder',
+  ...Object.fromEntries(Object.entries(FUERZAS).map(([k, f]) => [k, f.frase])),
 };
 
 const ICONO_SONIDO = '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a8 8 0 0 1 0 11"/></svg>';

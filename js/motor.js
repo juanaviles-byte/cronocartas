@@ -3,16 +3,20 @@
 // de eventos ocurridos. No sabe nada de la pantalla, así que el mismo motor
 // sirve para jugar en una tablet, contra la IA o, en el futuro, en línea.
 import { rngDesdeEstado, barajar } from './rng.js';
+import { FUERZAS, VENTAJA_FUERZAS } from './colecciones.js';
 
 export const DIMENSIONES = ['Politica', 'Economia', 'Sociedad', 'Cultura', 'Territorio'];
+// Las de Historia más las fuerzas de las expansiones (js/colecciones.js).
+export const TODAS_DIMENSIONES = [...DIMENSIONES, ...Object.keys(FUERZAS)];
 
-// Cada dimensión es fuerte contra la siguiente (daño ×2).
+// Cada dimensión es fuerte contra la siguiente (daño ×2). Las fuerzas de cada expansión, en su ronda.
 export const VENTAJA = {
   Politica: 'Economia',
   Economia: 'Sociedad',
   Sociedad: 'Cultura',
   Cultura: 'Territorio',
   Territorio: 'Politica',
+  ...VENTAJA_FUERZAS,
 };
 
 export const MANO_INICIAL = 5;

@@ -1,3 +1,4 @@
+import { FUERZAS } from '../colecciones.js';
 // Ilustraciones originales de las cartas: un emblema simple sobre el color
 // de su dimensión. Sin fotos ni retratos: todo se dibuja aquí.
 
@@ -11,6 +12,7 @@ export const COLORES = {
   acontecimiento: '#4E5964',
   lugar: '#2F7178',
   aula: '#1D3557',
+  ...Object.fromEntries(Object.entries(FUERZAS).map(([k, f]) => [k, f.tema.base])),
 };
 
 export function colorCarta(carta) {
@@ -63,6 +65,7 @@ export const TEMAS = {
   acontecimiento: { base: '#56626E', claro: '#CDD5DC', oscuro: '#2E363E', papel: '#F1F4F6', icono: 'pergamino' },
   lugar:          { base: '#23807F', claro: '#B2E3E0', oscuro: '#11504F', papel: '#E6F6F5', icono: 'mapa' },
   aula:           { base: '#1D3557', claro: '#E9C46A', oscuro: '#0F1E33', papel: '#F6F1E3', icono: 'libro' },
+  ...Object.fromEntries(Object.entries(FUERZAS).map(([k, f]) => [k, f.tema])),
 };
 
 export function temaCarta(carta) {

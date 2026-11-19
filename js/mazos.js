@@ -1,6 +1,7 @@
 // Carga, revisión y armado de mazos. Los mazos viven en data/*.json para que
 // se puedan corregir o ampliar sin tocar el código.
-import { DIMENSIONES } from './motor.js';
+import { DIMENSIONES, TODAS_DIMENSIONES } from './motor.js';
+import { FUERZAS } from './colecciones.js';
 import { barajar } from './rng.js';
 
 export const COMPOSICION = { protagonista: 11, personaje: 3, acontecimiento: 3, lugar: 1, aula: 2 };
@@ -13,13 +14,14 @@ function efectoValido(ef) {
   if (Array.isArray(ef)) return ef.length > 0 && ef.every(efectoValido);
   if (!ef || !EFECTOS.includes(ef.tipo)) return false;
   if (ef.tipo === 'buscar' && !TIPOS_BUSQUEDA.includes(ef.cartaTipo)) return false;
-  if (ef.dimension && !DIMENSIONES.includes(ef.dimension)) return false;
+  if (ef.dimension && !TODAS_DIMENSIONES.includes(ef.dimension)) return false;
   return true;
 }
 
 export const HABILIDADES = ['resistente', 'fuerzaReserva', 'sanador', 'inspirador', 'saberAlEntrar'];
 
-export const NOMBRE_DIMENSION = { Politica: 'Política', Economia: 'Economía', Sociedad: 'Sociedad', Cultura: 'Cultura', Territorio: 'Territorio' };
+export const NOMBRE_DIMENSION = { Politica: 'Política', Economia: 'Economía', Sociedad: 'Sociedad', Cultura: 'Cultura', Territorio: 'Territorio',
+  ...Object.fromEntries(Object.entries(FUERZAS).map(([k, f]) => [k, f.nombre])) };
 
 export function validarCarta(c) {
   const e = [];
@@ -33,7 +35,7 @@ export function validarCarta(c) {
   }
   if (!c.dato) e.push(`${id}: sin dato`);
   if (c.tipo === 'protagonista') {
-    if (!DIMENSIONES.includes(c.dimension)) e.push(`${id}: dimensión desconocida "${c.dimension}"`);
+    if (!TODAS_DIMENSIONES.includes(c.dimension)) e.push(`${id}: dimensión desconocida "${c.dimension}"`);
     if (!(c.resistencia >= 50 && c.resistencia <= 120)) e.push(`${id}: resistencia fuera de 50–120`);
     if (!Array.isArray(c.acciones) || c.acciones.length < 1 || c.acciones.length > 2) e.push(`${id}: necesita 1 o 2 acciones`);
     for (const a of c.acciones || []) {
@@ -50,7 +52,7 @@ export function validarCarta(c) {
     if (!efectoValido(c.efecto)) e.push(`${id}: efecto desconocido o mal escrito`);
   }
   if (c.tipo === 'lugar') {
-    if (!c.efecto || c.efecto.tipo !== 'bonusDimension' || !DIMENSIONES.includes(c.efecto.dimension)) e.push(`${id}: el lugar necesita bonusDimension con una dimensión válida`);
+    if (!c.efecto || c.efecto.tipo !== 'bonusDimension' || !TODAS_DIMENSIONES.includes(c.efecto.dimension)) e.push(`${id}: el lugar necesita bonusDimension con una dimensión válida`);
   }
   return e;
 }
