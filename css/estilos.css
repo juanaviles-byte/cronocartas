@@ -850,3 +850,76 @@ button:disabled { opacity: .35; cursor: default; }
 .fuerza-BosqueNoche { --adorno: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 12' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 12 V1'/%3E%3Cpath d='M20 4 L13 2 M20 4 L27 2 M20 7 L12 5 M20 7 L28 5 M20 10 L11 8 M20 10 L29 8' stroke-width='1.2'/%3E%3Ccircle cx='4' cy='6' r='1.1' fill='black' stroke='none'/%3E%3Ccircle cx='36' cy='4' r='1.1' fill='black' stroke='none'/%3E%3C/svg%3E"); }
 .fuerza-sagrado { --adorno: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 12' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='20' cy='7' r='3' fill='black' stroke='none'/%3E%3Cpath d='M20 1 V2.5 M20 11.5 V13 M14 7 H15.5 M24.5 7 H26 M15.8 2.8 L16.8 3.8 M23.2 10.2 L24.2 11.2 M24.2 2.8 L23.2 3.8 M16.8 10.2 L15.8 11.2' stroke-width='1.1'/%3E%3Cpath d='M0 7 H10 M30 7 H40' stroke-width='.8'/%3E%3C/svg%3E"); }
 .fuerza-relato { --adorno: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 12' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M0 7 H14 M26 7 H40' stroke-width='.9'/%3E%3Cpath d='M20 2 L24 7 L20 12 L16 7 Z' fill='black' stroke='none'/%3E%3C/svg%3E"); }
+
+/* ---------- Mesa: placa del Lugar ----------
+   Una placa horizontal a la izquierda de la franja, del alto de la franja (no choca con los paneles).
+   Con un Lugar: su ilustración de fondo, nombre y efecto encima. Vacía: una casilla punteada que invita a jugar uno. */
+.mesa .lugar-en-juego { order: -1; flex: none; height: auto; max-width: none; padding: 0; background: none; }
+.placa-lugar { position: relative; display: flex; align-items: center; gap: 10px; width: clamp(190px, 24vw, 330px); height: calc(var(--centro) + 16px); margin: -8px 0;
+  border-radius: 10px; overflow: hidden; text-align: left; }
+.placa-lugar.carta { padding: 6px 12px; border: 2px solid var(--oro); box-shadow: 0 0 18px rgba(233,196,106,.45), 0 4px 12px rgba(0,0,0,.5);
+  background: linear-gradient(90deg, rgba(10,14,24,.88) 0%, rgba(10,14,24,.55) 58%, rgba(10,14,24,0) 100%), var(--arte-lugar, none) center / cover no-repeat, var(--noche); }
+.placa-lugar .nombre-lugar { text-shadow: 0 1px 3px rgba(0,0,0,.9); }
+.placa-lugar.hueco-lugar { padding: 6px 12px; border: 2px dashed rgba(233,196,106,.55); background: rgba(23,38,79,.6); color: rgba(233,196,106,.9); }
+.placa-lugar.hueco-lugar span { font-size: .74rem; line-height: 1.2; color: rgba(243,234,211,.75); }
+.placa-lugar.hueco-lugar span b { display: block; color: var(--oro); font-size: .86rem; }
+.placa-lugar .nombre-lugar { gap: 0; min-width: 0; }
+.nombre-lugar small { color: var(--oro); font-size: .64rem; letter-spacing: .02em; }
+.nombre-lugar b { font-size: .98rem; color: var(--perg); font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.nombre-lugar i { font-style: normal; font-family: system-ui, sans-serif; font-size: .72rem; color: rgba(243,234,211,.85);
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.lugar-en-juego.destino-encima .placa-lugar { box-shadow: 0 0 0 3px var(--oro), 0 0 26px rgba(233,196,106,.7); }
+.lugar-en-juego.con-lugar:hover .placa-lugar, .lugar-en-juego.con-lugar:focus-visible .placa-lugar { filter: brightness(1.12); }
+
+/* ---------- Celular vertical: girar ---------- */
+.girar-aviso { display: none; }
+@media (orientation: portrait) and (max-width: 600px) {
+  .mesa > :not(.girar-aviso):not(.escena-lugar) { visibility: hidden; }
+  .girar-aviso { display: flex; position: fixed; inset: 0; z-index: 60; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
+    background: rgba(10,14,24,.92); color: var(--perg, #F3EAD3); text-align: center; padding: 24px; }
+  .girar-aviso svg { color: var(--oro, #E9C46A); animation: girar-tel 2.4s ease-in-out infinite; }
+  .girar-aviso b { font-size: 1.3rem; font-family: var(--serif); color: var(--oro, #E9C46A); }
+  @keyframes girar-tel { 0%, 30% { transform: rotate(0); } 60%, 100% { transform: rotate(-90deg); } }
+}
+
+/* ---------- Pantallas bajas (celular horizontal): mesa compacta ---------- */
+@media (max-height: 520px) and (orientation: landscape) {
+  .mesa { --centro: 38px; }
+  .lado { padding: 4px 10px; gap: 2px; }
+  .campo { flex-basis: 60%; gap: 8px; }
+  .mesa .marcador { min-width: 0; padding: 4px 8px; gap: 3px; }
+  .mesa .marcador .nombre-jugador { font-size: .85rem; }
+  .hitos i { width: 15px; height: 15px; }
+  .cuentas { font-size: .68rem; }
+  .linea-mini { display: none; }
+  .boton-accion { min-height: 34px; font-size: .74rem; padding: 0 8px; max-width: 170px; gap: 5px; }
+  .boton-accion b { font-size: .9rem; }
+  .boton-accion small { font-size: .62rem; }
+  .acciones-activo { gap: 4px; }
+  .saber-activo { font-size: .66rem; }
+  .fila-mano { gap: 6px; }
+  .mano .carta-mini { --ch: calc(var(--lado) * .38); }
+  .boton-accion > span { min-width: 0; }
+  .boton-accion small, .boton-accion .calculo { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 110px; }
+  .boton-accion { max-width: 190px; }
+  .mano:not(.oculta) > .carta-mini + .carta-mini { margin-left: calc(var(--lado) * -.06); }
+  .controles { min-width: 0; gap: 6px; flex-direction: row; align-items: flex-end; flex-wrap: nowrap; }
+  .controles .pista { display: none; }
+  .controles .botonera { flex-wrap: nowrap; gap: 6px; }
+  .controles .boton-principal, .controles .boton-secundario, .mesa .boton-deshacer { min-height: 34px; padding: 0 12px; font-size: .82rem; }
+  .boton-cronista { padding: 2px 10px 2px 2px; font-size: .82rem; }
+  .boton-cronista img { width: 30px; height: 30px; }
+  .mesa .aviso-turno { font-size: .92rem; }
+  .mesa .registro { font-size: .76rem; }
+  .boton-guia img { width: 28px; height: 28px; }
+  .boton-menu { min-height: 34px; }
+  .tablero-en-juego span { -webkit-line-clamp: 1; font-size: .7rem; }
+  .placa-lugar { width: clamp(150px, 26vw, 240px); }
+  .nombre-lugar i, .placa-lugar.hueco-lugar span { -webkit-line-clamp: 1; font-size: .64rem; }
+  .placa-lugar.hueco-lugar span { display: none; }
+  .banner-turno { font-size: 1.15rem; padding: 8px 22px; }
+  .globo-cronista { max-width: 62vw; }
+  .globo-cronista .dice p { font-size: .74rem; line-height: 1.25; }
+}
+
+.controles .botonera { display: flex; gap: 8px; justify-content: flex-end; flex-wrap: wrap; }

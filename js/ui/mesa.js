@@ -193,6 +193,8 @@ export async function montarMesa(contenedor, opciones) {
     raiz.appendChild(lado('B'));
     raiz.appendChild(centro());
     raiz.appendChild(lado('A'));
+    // En un celular vertical la mesa no cabe: se pide girarlo (el CSS lo muestra solo en ese caso).
+    raiz.appendChild(h('div', 'girar-aviso', '<svg viewBox="0 0 48 48" width="64" height="64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="15" y="6" width="18" height="30" rx="3"/><path d="M38 30a14 14 0 0 1-14 12M38 30l-4-2M38 30l2 4"/></svg><b>Gira el teléfono</b><span>La mesa se juega en horizontal.</span>'));
     if (config.modo === 'tutorial') entrenador();
     animarMovimientos();
     hitosAntes = { A: estado.jugadores.A.hitos, B: estado.jugadores.B.hitos };
@@ -449,20 +451,29 @@ export async function montarMesa(contenedor, opciones) {
   function centro() {
     const c = h('div', 'centro');
     const t = tableroActual();
+    // El Lugar: una casilla con forma de carta que asoma por encima y por debajo de la franja.
+    const l = estado.lugar;
+    const lugar = h('button', `lugar-en-juego${l ? ' con-lugar' : ''}`);
+    if (l) {
+      // Placa horizontal: la ilustración del Lugar de fondo, con su nombre y su efecto encima.
+      const arte = imagenCarta(l.carta);
+      const placa = h('span', 'placa-lugar carta');
+      if (arte) placa.style.setProperty('--arte-lugar', urlCompleta(arte));
+      placa.innerHTML = `<span class="nombre-lugar"><small>Lugar en juego</small><b>${esc(l.carta.nombre)}</b><i>${esc(l.carta.texto || textoEfecto(l.carta.efecto))}</i></span>`;
+      lugar.appendChild(placa);
+      lugar.setAttribute('aria-label', 'Lugar en juego: ' + l.carta.nombre);   // atributo: no se interpreta como HTML
+      lugar.onclick = () => verCarta(l.carta, estado.turno);
+    } else {
+      lugar.appendChild(h('div', 'placa-lugar hueco-lugar', '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2z"/><path d="M9 4v14M15 6v14"/></svg><span><b>Lugar</b> Juega uno para cambiar el escenario</span>'));
+      lugar.setAttribute('aria-label', 'Casilla del Lugar: vacía');
+      lugar.tabIndex = -1;
+    }
+    c.appendChild(lugar);
     if (t) {
       const bt = h('button', 'tablero-en-juego', `<b>${esc(t.nombre)}</b> <span>${esc(t.textoRegla)}</span>`);
       bt.onclick = verTablero;
       c.appendChild(bt);
     }
-    const l = estado.lugar;
-    const lugar = h('button', `lugar-en-juego${l ? ' con-lugar' : ''}`);
-    if (l) {
-      lugar.appendChild(renderCarta(l.carta, { tamano: 'mini' }));
-      lugar.appendChild(h('span', 'nombre-lugar', `<small>Lugar</small>${esc(l.carta.nombre)}`));
-      lugar.setAttribute('aria-label', 'Lugar en juego: ' + l.carta.nombre);   // atributo: no se interpreta como HTML
-      lugar.onclick = () => verCarta(l.carta, estado.turno);
-    } else lugar.appendChild(h('div', 'hueco', '<span>Lugar</span>'));
-    c.appendChild(lugar);
     const turno = estado.fase === 'fin' ? 'Partida terminada'
       : estado.fase === 'preparacion' ? `${nombres[estado.turno]}: prepara tu mesa`
       : estado.fase === 'promover' ? `${nombres[estado.turno]}: elige un nuevo activo`
@@ -651,11 +662,14 @@ export async function montarMesa(contenedor, opciones) {
 
     const controles = h('div', 'controles');
     if (humano && config.cronista) controles.appendChild(botonCronista(j));
+    // «Deshacer» va en la misma fila que «Pasar turno»: así los botones no se salen de la pantalla.
+    const botonera = h('div', 'botonera');
     if (esMiTurno && humano && historial.length && ['turno', 'preparacion'].includes(estado.fase)) {
       const d = h('button', 'boton-secundario boton-deshacer', 'Deshacer');
       d.onclick = deshacer;
-      controles.appendChild(d);
+      botonera.appendChild(d);
     }
+    if (estado.fase !== 'turno' && botonera.children.length) controles.appendChild(botonera);
     if (esMiTurno && humano) {
       const validas = jugadasValidas(estado);
       if (estado.fase === 'turno' && yo.saberPendiente > 0) controles.appendChild(h('div', 'pista pista-saber', `<span class="pip"></span> Ganaste 1 de Saber este turno: toca un Protagonista para dárselo`));
@@ -671,7 +685,8 @@ export async function montarMesa(contenedor, opciones) {
       } else if (estado.fase === 'turno') {
         const b = h('button', 'boton-secundario boton-pasar', 'Pasar turno');
         b.onclick = () => jugar({ tipo: 'pasar' });
-        controles.appendChild(b);
+        botonera.appendChild(b);
+        controles.appendChild(botonera);
       } else if (estado.fase === 'promover') {
         controles.appendChild(h('div', 'pista', 'Toca un Protagonista de tu reserva'));
       }
@@ -774,8 +789,13 @@ export async function montarMesa(contenedor, opciones) {
     }
   }
 
+  let bannerHasta = 0, globoDiferido = null;
   function dibujarGlobo() {
     raiz.querySelectorAll('.globo-cronista').forEach(g => g.remove());
+    // Mientras se ve el cartel «Tu turno», el globo espera: así no se pisan.
+    const espera = bannerHasta - performance.now();
+    clearTimeout(globoDiferido);
+    if (globo && espera > 0) { globoDiferido = setTimeout(() => { if (vivo) dibujarGlobo(); }, espera + 60); return; }
     raiz.querySelectorAll('.sugerida').forEach(g => g.classList.remove('sugerida'));
     if (!globo || (!config.cronista && !globo.tutorial)) return;
     const g = h('div', `globo-cronista lado-globo-${globo.j}${girado(globo.j) ? ' girado' : ''}${globo.tutorial ? ' entrenador' : ''}`);
@@ -1198,6 +1218,7 @@ export async function montarMesa(contenedor, opciones) {
     const extra = estado.jugadores[j].saberPendiente > 0 ? '<small><span class="pip"></span> +1 de Saber para repartir</small>' : '';
     const b = h('div', `banner-turno${girado(j) ? ' girado' : ''}`, texto + extra);
     raiz.appendChild(b);
+    bannerHasta = performance.now() + 1100;
     setTimeout(() => b.remove(), 1100);
   }
 
