@@ -2,33 +2,33 @@
  "narrador": {
   "CC-5-U1-001": {
    "ruta": "audio/narrador/N01.ogg",
-   "desde": 0.0,
-   "hasta": 9.655
+   "desde": 0.23,
+   "hasta": 10.52
   },
   "CC-5-U1-002": {
    "ruta": "audio/narrador/N01.ogg",
-   "desde": 10.255,
-   "hasta": 22.202
+   "desde": 11.89,
+   "hasta": 24.761
   },
   "CC-5-U1-003": {
    "ruta": "audio/narrador/N01.ogg",
-   "desde": 22.802,
-   "hasta": 32.671
+   "desde": 26.15,
+   "hasta": 36.707
   },
   "CC-5-U1-004": {
    "ruta": "audio/narrador/N01.ogg",
-   "desde": 33.271,
-   "hasta": 41.486
+   "desde": 38.03,
+   "hasta": 46.328
   },
   "CC-5-U1-005": {
    "ruta": "audio/narrador/N01.ogg",
-   "desde": 42.086,
-   "hasta": 51.271
+   "desde": 47.81,
+   "hasta": 57.304
   },
   "CC-5-U1-006": {
    "ruta": "audio/narrador/N01.ogg",
-   "desde": 51.871,
-   "hasta": 60.562
+   "desde": 58.59,
+   "hasta": 68.55
   },
   "CC-5-U1-007": {
    "ruta": "audio/narrador/N02.ogg",

@@ -186,3 +186,9 @@ test('en la expansión, los Personajes se rotulan «Presencia sagrada» y los Ac
   assert.match(carta, /carta\.coleccion && carta\.tipo === 'personaje' \? 'Presencia sagrada'/);
   assert.match(readFileSync('js/ui/mesa.js', 'utf8'), /plan\.carta\.coleccion \? 'Relato' : 'Acontecimiento'/);
 });
+
+test('el ambiente general de la expansión existe y es un bucle de ambiente', async () => {
+  const { COLECCIONES } = await import('../js/colecciones.js');
+  for (const c of COLECCIONES) if (c.ambiente) assert.ok(existsSync(c.ambiente), `falta ${c.ambiente}`);
+  assert.equal(COLECCIONES.find(c => c.sigla === 'FM').ambiente, 'audio/ambientes/FM-ME00.ogg');
+});

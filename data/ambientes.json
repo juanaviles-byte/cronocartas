@@ -54,5 +54,21 @@
  "CC-8-U4-005": {
   "ruta": "audio/ambientes/CC-8-U4-005.ogg",
   "licencia": "CC0"
+ },
+ "FM-037": {
+  "ruta": "audio/ambientes/FM-037.ogg",
+  "licencia": "CC0"
+ },
+ "FM-038": {
+  "ruta": "audio/ambientes/FM-038.ogg",
+  "licencia": "CC0"
+ },
+ "FM-039": {
+  "ruta": "audio/ambientes/FM-039.ogg",
+  "licencia": "CC0"
+ },
+ "FM-040": {
+  "ruta": "audio/ambientes/FM-040.ogg",
+  "licencia": "CC0"
  }
 }

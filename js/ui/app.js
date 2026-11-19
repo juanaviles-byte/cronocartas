@@ -8,6 +8,7 @@ import { cargarCursoCompleto } from './datos.js';
 import { confirmar } from './confirmar.js';
 import { COLECCIONES, coleccion } from '../colecciones.js';
 import { sonidos, precargarSonidos } from './sonido.js';
+import { ambiente } from './ambiente.js';
 import { almacen, CLAVES } from '../almacen.js';
 import { esc } from '../html.js';
 
@@ -367,6 +368,10 @@ function volver() {
   return boton('← Volver', 'volver', () => { location.hash = '#inicio'; });
 }
 
+// El tema del inicio suena en los menús; en la mesa manda el ambiente del escenario.
+const TEMA_INICIO = 'audio/tema/inicio.ogg';
+const VISTAS_DE_JUEGO = new Set(['mesa', 'tutorial']);
+
 let ficha = 0;   // cada navegación tiene su ficha; una vista que llega tarde se descarta
 async function render() {
   if (actual && actual.destruir) actual.destruir();
@@ -376,6 +381,7 @@ async function render() {
   const nombre = (location.hash || '#inicio').slice(1);
   const vista = vistas[nombre] || vistas.inicio;
   document.body.dataset.vista = nombre;
+  if (!VISTAS_DE_JUEGO.has(nombre)) ambiente.poner(TEMA_INICIO);
   try {
     const r = await vista();
     if (mia !== ficha) { if (r && r.destruir) r.destruir(); return; }
@@ -418,7 +424,7 @@ if ('serviceWorker' in navigator && window.isSecureContext) {
 // Sonido de interfaz: un toque suave en cada botón, y el banco de efectos se carga con el primer gesto
 // (los navegadores no dejan sonar nada antes de que la persona toque la pantalla).
 if (typeof document !== 'undefined') {
-  document.addEventListener('pointerdown', () => precargarSonidos(), { once: true, capture: true });
+  document.addEventListener('pointerdown', () => { precargarSonidos(); ambiente.pausar(false); }, { once: true, capture: true });
   document.addEventListener('click', ev => {
     const b = ev.target.closest && ev.target.closest('button, .opcion, [role="tab"]');
     if (b && !b.disabled && !b.classList.contains('boton-sonido')) sonidos.toque();
