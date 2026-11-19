@@ -10,5 +10,49 @@
  "CC-5-U4-006": {
   "ruta": "audio/ambientes/CC-5-U4-006.ogg",
   "licencia": "CC0"
+ },
+ "CC-6-U1-007": {
+  "ruta": "audio/ambientes/CC-6-U1-007.ogg",
+  "licencia": "CC0"
+ },
+ "CC-6-U2-007": {
+  "ruta": "audio/ambientes/CC-6-U2-007.ogg",
+  "licencia": "CC0"
+ },
+ "CC-6-U4-006": {
+  "ruta": "audio/ambientes/CC-6-U4-006.ogg",
+  "licencia": "CC0"
+ },
+ "CC-7-U1-006": {
+  "ruta": "audio/ambientes/CC-7-U1-006.ogg",
+  "licencia": "CC0"
+ },
+ "CC-7-U2-007": {
+  "ruta": "audio/ambientes/CC-7-U2-007.ogg",
+  "licencia": "CC0"
+ },
+ "CC-7-U4-007": {
+  "ruta": "audio/ambientes/CC-7-U4-007.ogg",
+  "licencia": "CC0"
+ },
+ "CC-7-U4-010": {
+  "ruta": "audio/ambientes/CC-7-U4-010.ogg",
+  "licencia": "CC0"
+ },
+ "CC-8-U1-009": {
+  "ruta": "audio/ambientes/CC-8-U1-009.ogg",
+  "licencia": "CC0"
+ },
+ "CC-8-U2-007": {
+  "ruta": "audio/ambientes/CC-8-U2-007.ogg",
+  "licencia": "CC0"
+ },
+ "CC-8-U3-007": {
+  "ruta": "audio/ambientes/CC-8-U3-007.ogg",
+  "licencia": "CC0"
+ },
+ "CC-8-U4-005": {
+  "ruta": "audio/ambientes/CC-8-U4-005.ogg",
+  "licencia": "CC0"
  }
 }
