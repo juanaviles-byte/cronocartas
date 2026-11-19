@@ -1,7 +1,7 @@
 // Service worker de Cronocartas: guarda la app en la tablet para jugar sin internet.
 // Al publicar una mejora, sube VERSION y agrega aquí los archivos nuevos
 // (la prueba tests/sw.test.js avisa si falta alguno).
-const VERSION = 'cc-v59';
+const VERSION = 'cc-v60';
 const ARCHIVOS = [
   "./",
   "audio/ambientes/CC-5-U1-007.ogg",
@@ -140,7 +140,6 @@ const ARCHIVOS = [
   "data/voces.json",
   "icons/icon-192.png",
   "icons/icon-512.png",
-  "icons/icon.svg",
   "img/cartas/CC-5-U1-001.webp",
   "img/cartas/CC-5-U1-002.webp",
   "img/cartas/CC-5-U1-003.webp",
@@ -364,6 +363,7 @@ const ARCHIVOS = [
   "img/escenarios/FM-039.webp",
   "img/escenarios/FM-040.webp",
   "img/escenarios/FM-ME00.webp",
+  "img/logo.webp",
   "img/tableros/T-5-1.jpg",
   "img/tableros/T-5-2.jpg",
   "img/tableros/T-5-3.jpg",
@@ -387,6 +387,7 @@ const ARCHIVOS = [
   "js/colecciones.js",
   "js/compartir.js",
   "js/ediciones.js",
+  "js/eleccion.js",
   "js/html.js",
   "js/ia.js",
   "js/imagenes.js",

@@ -11,6 +11,7 @@ import { sonidos, precargarSonidos } from './sonido.js';
 import { ambiente } from './ambiente.js';
 import { almacen, CLAVES } from '../almacen.js';
 import { esc } from '../html.js';
+import { CURSOS, mazosDePartida } from '../eleccion.js';
 
 const app = document.getElementById('app');
 let actual = null;            // vista montada (con destruir opcional)
@@ -18,7 +19,6 @@ let eleccion = { modo: 'caraacara', cursoA: 7, cursoB: 7, tablero: 'azar', refor
 let partidaPendiente = null;   // la deja lista el torneo antes de ir a #mesa
 
 const h = (tag, cls, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; };
-const CURSOS = [5, 6, 7, 8];
 
 const vistas = {
   async inicio() {
@@ -33,8 +33,8 @@ const vistas = {
     const principal = h('section', 'inicio-principal');
     principal.innerHTML = `
       <header class="portada">
-        <div class="marca">Cronocartas</div>
-        <p class="lema">Duelo de cartas de Historia · 5° a 8° básico</p>
+        <h1 class="marca"><img src="img/logo.webp" alt="Cronocartas: Duelo de Historia" width="1400" height="325"></h1>
+        <p class="lema">Para 5° a 8° básico</p>
       </header>`;
     const menu = h('nav', 'menu-principal');
     menu.setAttribute('aria-label', 'Menú principal');
@@ -134,7 +134,7 @@ const vistas = {
     }
 
     grupo('¿Cómo juegan?').appendChild(opciones([['caraacara', 'Cara a cara', 'Dos jugadores en esta tablet'], ['ia', 'Contra la tablet', 'Un jugador']],
-      eleccion.modo, m => { eleccion.modo = m; }));
+      eleccion.modo, m => { eleccion.modo = m; if (m !== 'ia' && eleccion.cursoB === 'azar') eleccion.cursoB = eleccion.cursoA; }));
     if (eleccion.modo === 'ia') {
       const nivel = ajustes.nivel === 'cronista' ? 'erudito' : ajustes.nivel || 'historiador';
       grupo('Nivel de la tablet').appendChild(opciones(NIVELES.map(n => [n.id, n.nombre, n.texto]), nivel,
@@ -143,10 +143,14 @@ const vistas = {
 
     grupo('¿Con qué mazos?').appendChild(opciones(col
       ? [['curso', 'Mazo completo', 'Todas las cartas de la expansión'], ['duelo', 'Duelo temático', 'Cada jugador, una fuerza']]
-      : [['curso', 'Mazo del curso', 'Cartas de las 4 unidades'], ['duelo', 'Duelo temático', 'Cada jugador, un bando histórico']],
-      eleccion.mazo, m => { eleccion.mazo = m; }));
+      : [['curso', 'Mazo del curso', 'Cartas de las 4 unidades'], ['libre', 'Modo libre', 'Cada jugador, su curso: 5° contra 8°'], ['duelo', 'Duelo temático', 'Cada jugador, un bando histórico']],
+      eleccion.mazo, m => {
+        // Al entrar al modo libre, la tablet parte con un mazo al azar; cara a cara, con el mismo curso.
+        if (m === 'libre' && eleccion.mazo !== 'libre') eleccion.cursoB = eleccion.modo === 'ia' ? 'azar' : eleccion.cursoA;
+        eleccion.mazo = m;
+      }));
 
-    const cruzados = !col && !!ajustes.cruzados && eleccion.mazo === 'curso';
+    const cruzados = !col && eleccion.mazo === 'libre';
     if (!col) {
     const cursos = grupo(cruzados ? 'Mazo de cada jugador' : '¿Qué curso?');
     const filas = cruzados ? [['cursoA', eleccion.modo === 'ia' ? 'Tú' : 'Jugador 1'], ['cursoB', eleccion.modo === 'ia' ? 'Tablet' : 'Jugador 2']] : [['cursoA', '']];
@@ -156,6 +160,11 @@ const vistas = {
       for (const c of CURSOS) {
         const b = h('button', `opcion curso-${c}${eleccion[k] === c ? ' elegida' : ''}`, `<b>${c}°</b><span>básico</span>`);
         b.onclick = () => { eleccion[k] = c; if (!cruzados) eleccion.cursoB = c; if (k === 'cursoA') { eleccion.tablero = 'azar'; eleccion.reforzar = false; eleccion.duelo = null; eleccion.bandoA = null; } render(); };
+        fila.appendChild(b);
+      }
+      if (k === 'cursoB' && eleccion.modo === 'ia') {
+        const b = h('button', `opcion curso-azar${eleccion.cursoB === 'azar' ? ' elegida' : ''}`, '<b>?</b><span>al azar</span>');
+        b.onclick = () => { eleccion.cursoB = 'azar'; render(); };
         fila.appendChild(b);
       }
       cursos.appendChild(fila);
@@ -201,7 +210,7 @@ const vistas = {
         grilla.appendChild(b);
       }
       grupoT.appendChild(grilla);
-      if (eleccion.tablero !== 'azar') {
+      if (eleccion.tablero !== 'azar' && !cruzados) {
         const t = tableros.find(x => x.id === eleccion.tablero);
         const l = h('label', 'interruptor', `<input type="checkbox"${eleccion.reforzar ? ' checked' : ''}><span>Reforzar la unidad ${t ? t.unidad : ''}<small>El mazo incluye todas las cartas de esa unidad, ideal para repasar antes de una prueba.</small></span>`);
         l.querySelector('input').onchange = ev => { eleccion.reforzar = ev.target.checked; };
@@ -224,7 +233,7 @@ const vistas = {
       }
       almacen.borrar(CLAVES.partida);
       partidaPendiente = { ...eleccion, duelo: eleccion.mazo === 'duelo' ? eleccion.duelo : null, nivel: (almacen.leer(CLAVES.ajustes, {}) || {}).nivel,
-        ...(col ? { coleccion: col.id, linea: false, tablero: null, reforzar: false } : { coleccion: null }) };
+        ...(col ? { coleccion: col.id, linea: false, tablero: null, reforzar: false } : { coleccion: null, ...mazosDePartida(eleccion) }) };
       location.hash = '#mesa';
     });
     empezar.disabled = !listo;
@@ -233,8 +242,8 @@ const vistas = {
     const dueloSel = eleccion.mazo === 'duelo' ? duelos2.find(d => d.id === eleccion.duelo) : null;
     const resumen = [
       eleccion.modo === 'ia' ? 'Contra la tablet' : 'Cara a cara',
-      col ? col.nombre : `${eleccion.cursoA}° básico`,
-      dueloSel ? dueloSel.nombre : col ? 'Mazo completo' : 'Mazo del curso',
+      col ? col.nombre : cruzados ? `${eleccion.cursoA}° contra ${eleccion.cursoB === 'azar' ? 'un curso al azar' : `${eleccion.cursoB}°`}` : `${eleccion.cursoA}° básico`,
+      dueloSel ? dueloSel.nombre : col ? 'Mazo completo' : cruzados ? 'Modo libre' : 'Mazo del curso',
     ];
     const barra = h('div', 'barra-empezar');
     barra.appendChild(h('div', 'resumen-eleccion', resumen.map(x => `<span>${esc(x)}</span>`).join('')
@@ -251,7 +260,7 @@ const vistas = {
     if (guardada && guardada.version === 1 && guardada.estado && guardada.estado.fase !== 'fin') {
       return montarMesa(cont, { ...guardada.config, estado: guardada.estado });
     }
-    const config = partidaPendiente || { ...eleccion, duelo: eleccion.mazo === 'duelo' ? eleccion.duelo : null };
+    const config = partidaPendiente || { ...eleccion, duelo: eleccion.mazo === 'duelo' ? eleccion.duelo : null, ...(eleccion.coleccion ? {} : mazosDePartida(eleccion)) };
     partidaPendiente = null;
     return montarMesa(cont, config);
   },

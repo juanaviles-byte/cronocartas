@@ -33,9 +33,8 @@ button:disabled { opacity: .35; cursor: default; }
 .pantalla h1 { font-size: 2rem; margin: 8px 0 24px; letter-spacing: -.01em; }
 .pantalla h2 { font-size: 1rem; color: var(--tenue); font-weight: 600; text-transform: uppercase; letter-spacing: .08em; margin: 28px 0 12px; }
 .inicio { display: flex; flex-direction: column; justify-content: center; gap: 40px; max-width: 520px; }
-.portada .marca { font-size: clamp(2.6rem, 8vw, 4.2rem); font-weight: 800; letter-spacing: -.03em; line-height: 1; }
-.portada .marca::after { content: ""; display: block; width: 64px; height: 6px; margin-top: 14px; border-radius: 3px;
-  background: linear-gradient(90deg, #B83A26, #B9850F, #2C64A8, #6E43A6, #2B7D52); }
+.portada .marca { margin: 0; line-height: 0; }
+.portada .marca img { display: block; width: 100%; max-width: 520px; height: auto; filter: drop-shadow(0 4px 14px rgba(0,0,0,.55)); }
 .portada .lema { color: var(--tenue); font-size: 1.1rem; margin: 14px 0 0; }
 .menu-principal { display: grid; gap: 12px; }
 .pie { display: flex; justify-content: space-between; align-items: center; color: var(--tenue); font-size: .85rem; }

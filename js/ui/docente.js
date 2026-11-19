@@ -222,16 +222,6 @@ export async function vistaDocente({ volver }) {
     }
     s.appendChild(o1); zona.appendChild(s);
 
-    s = h('section', 'paso'); s.appendChild(h('h2', '', 'Mazos cruzados'));
-    s.appendChild(h('p', 'nota', 'Permite que cada jugador use el mazo de un curso distinto (por ejemplo, 7° contra 8°).'));
-    const o2 = h('div', 'opciones');
-    for (const [val, t] of [[false, 'No'], [true, 'Sí']]) {
-      const b = h('button', `opcion chica${!!a.cruzados === val ? ' elegida' : ''}`, t);
-      b.onclick = () => guardar({ cruzados: val });
-      o2.appendChild(b);
-    }
-    s.appendChild(o2); zona.appendChild(s);
-
     s = h('section', 'paso'); s.appendChild(h('h2', '', '"¿Sabías que…?" al derrotar una carta'));
     const o3 = h('div', 'opciones');
     for (const [val, t] of [[true, 'Mostrar'], [false, 'No mostrar']]) {
