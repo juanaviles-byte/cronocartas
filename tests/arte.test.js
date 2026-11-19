@@ -4,7 +4,8 @@ import { readFileSync, existsSync } from 'node:fs';
 
 const arte = JSON.parse(readFileSync('data/arte.json', 'utf8'));
 const ids = new Set([5, 6, 7, 8].flatMap(c => JSON.parse(readFileSync(`data/mazo-${c}.json`, 'utf8')).cartas.map(x => x.id))
-  .concat(JSON.parse(readFileSync('data/aula.json', 'utf8')).cartas.map(x => x.id)));
+  .concat(JSON.parse(readFileSync('data/aula.json', 'utf8')).cartas.map(x => x.id))
+  .concat(JSON.parse(readFileSync('data/exp-fin-del-mundo.json', 'utf8')).cartas.map(x => x.id)));
 
 test('cada ilustración de data/arte.json es de una carta que existe y su archivo está', () => {
   for (const [id, ruta] of Object.entries(arte)) {
