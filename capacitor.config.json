@@ -1,0 +1,16 @@
+{
+  "appId": "cl.gabrielamistral.cronocartas",
+  "appName": "Cronocartas",
+  "webDir": "www",
+  "backgroundColor": "#17264F",
+  "android": {
+    "backgroundColor": "#17264F"
+  },
+  "plugins": {
+    "SystemBars": {
+      "insetsHandling": "css",
+      "style": "DARK",
+      "hidden": true
+    }
+  }
+}

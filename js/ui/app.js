@@ -405,7 +405,8 @@ async function render() {
 window.addEventListener('hashchange', render);
 render();
 
-if ('serviceWorker' in navigator && window.isSecureContext) {
+// En el APK (Capacitor) los archivos ya vienen dentro de la app: no hace falta guardarlos otra vez.
+if ('serviceWorker' in navigator && window.isSecureContext && !window.Capacitor) {
   // Si llega una versión nueva mientras la app está abierta, se recarga una vez
   // para no mezclar archivos viejos y nuevos.
   const habiaControlador = !!navigator.serviceWorker.controller;

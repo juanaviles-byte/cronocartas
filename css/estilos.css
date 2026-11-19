@@ -29,7 +29,7 @@ button:disabled { opacity: .35; cursor: default; }
 .volver { font-size: 1rem; }
 
 /* ---------- Pantallas de menú ---------- */
-.pantalla { max-width: 960px; margin: 0 auto; padding: max(24px, env(safe-area-inset-top)) 24px 40px; min-height: 100vh; min-height: 100dvh; }
+.pantalla { max-width: 960px; margin: 0 auto; padding: max(24px, var(--safe-area-inset-top, env(safe-area-inset-top))) 24px 40px; min-height: 100vh; min-height: 100dvh; }
 .pantalla h1 { font-size: 2rem; margin: 8px 0 24px; letter-spacing: -.01em; }
 .pantalla h2 { font-size: 1rem; color: var(--tenue); font-weight: 600; text-transform: uppercase; letter-spacing: .08em; margin: 28px 0 12px; }
 .inicio { display: flex; flex-direction: column; justify-content: center; gap: 40px; max-width: 520px; }
@@ -962,7 +962,7 @@ body[data-vista="inicio"], body[data-vista=""] { background: #0b1020; }
 .inicio-abanico .carta:nth-child(2) { z-index: 2; }
 @keyframes carta-llega { from { opacity: 0; transform: translate(-50%, -30%) rotate(0); } }
 @media (max-width: 820px) {
-  .pantalla.inicio { grid-template-columns: 1fr; padding: max(24px, env(safe-area-inset-top)) 22px 28px; }
+  .pantalla.inicio { grid-template-columns: 1fr; padding: max(24px, var(--safe-area-inset-top, env(safe-area-inset-top))) 22px 28px; }
   .inicio-abanico { display: none; }
   .pantalla.inicio::before { background: linear-gradient(180deg, rgba(9,13,26,.7), rgba(9,13,26,.92) 45%); }
 }
@@ -1001,7 +1001,7 @@ body:not([data-vista="mesa"]) { background: radial-gradient(ellipse at 20% 0%, #
 .interruptor input { accent-color: #E9C46A; }
 .preparar { padding-bottom: 120px; }
 .barra-empezar { position: sticky; bottom: 0; z-index: 5; display: flex; align-items: center; justify-content: space-between; gap: 16px;
-  margin: 28px -24px -40px; padding: 14px 24px max(14px, env(safe-area-inset-bottom));
+  margin: 28px -24px -40px; padding: 14px 24px max(14px, var(--safe-area-inset-bottom, env(safe-area-inset-bottom)));
   background: linear-gradient(180deg, rgba(10,15,34,.0), rgba(10,15,34,.94) 22%); backdrop-filter: blur(6px); }
 .resumen-eleccion { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 0; color: #F3EAD3; font-size: .92rem; min-width: 0; }
 .resumen-eleccion span + span::before { content: "·"; margin: 0 8px; color: rgba(233,196,106,.7); }

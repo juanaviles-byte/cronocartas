@@ -1,7 +1,7 @@
 // Service worker de Cronocartas: guarda la app en la tablet para jugar sin internet.
 // Al publicar una mejora, sube VERSION y agrega aquí los archivos nuevos
 // (la prueba tests/sw.test.js avisa si falta alguno).
-const VERSION = 'cc-v61';
+const VERSION = 'cc-v62';
 const ARCHIVOS = [
   "./",
   "audio/ambientes/CC-5-U1-007.ogg",
@@ -540,7 +540,7 @@ const HUELLAS = {
   "audio/sfx/viaje.ogg": "aab7115984b2",
   "audio/sfx/victoria.ogg": "a4a5c41a13af",
   "audio/tema/inicio.ogg": "939b0d467795",
-  "css/estilos.css": "ce9fc3ee3ae4",
+  "css/estilos.css": "3b329b310c28",
   "data/ambientes.json": "963d06be0a1d",
   "data/arte.json": "305fc8be9797",
   "data/aula.json": "9c4641e855c6",
@@ -815,7 +815,7 @@ const HUELLAS = {
   "js/rng.js": "a0cb6ba3f25e",
   "js/torneo.js": "b56f306f0b06",
   "js/ui/ambiente.js": "0ed01386c80b",
-  "js/ui/app.js": "65fdbc1c02ab",
+  "js/ui/app.js": "cb29e1cf8996",
   "js/ui/arrastre.js": "3f7dac42c935",
   "js/ui/arte.js": "025bfdbed582",
   "js/ui/banco.js": "73df652d2bdf",
