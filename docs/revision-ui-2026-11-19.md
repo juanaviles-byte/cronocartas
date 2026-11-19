@@ -19,11 +19,12 @@ Revisión hecha sobre la app en funcionamiento, en celular vertical (390 × 844)
 
 5. **El inicio no se ve como un juego.** Es un menú oscuro alineado a la izquierda, con un gran vacío al lado y nada del arte del juego. Arreglo: un fondo con el arte de Cronocartas (escenarios), el logo grande, «Jugar» como acción principal y el resto del menú como fichas con ícono.
 6. **Jugar se ve como un formulario web.** Las opciones son pastillas oscuras iguales. En celular, «Empezar» queda muy abajo y hay que desplazarse para encontrarlo. Arreglo: opciones como fichas con ícono, cursos con su color, y una barra inferior fija con un resumen de lo elegido y el botón «Empezar», siempre visible.
-7. **La tablet vertical desaprovecha el alto.** Sobran franjas vacías arriba y abajo, y la mano queda pequeña. Arreglo: en vertical, cartas y mano más grandes.
+7. *(Hecho)* **La tablet vertical desaprovecha el alto.** Sobran franjas vacías arriba y abajo, y la mano queda pequeña. Arreglo: en vertical, cartas y mano más grandes.
 
 ## Detalles
 
 8. En la mesa se mezclan una tipografía con serifa (en las etiquetas) y la sin serifa del resto, sin un criterio claro.
+   *Resuelto como regla:* serifa para los nombres de la historia (cartas, jugadores, acciones, Lugares, títulos de aviso) y las casillas vacías; sin serifa para instrucciones, cifras y rótulos bajo las pilas. Lo que hay en la mesa ya la cumple.
 9. El texto «Reserva» de las casillas vacías tiene poco contraste. Es aceptable porque solo indica dónde va una carta.
 
 ## Lo que ya funciona bien

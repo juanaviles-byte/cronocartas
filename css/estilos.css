@@ -1070,3 +1070,9 @@ body:not([data-vista="mesa"]) { background: radial-gradient(ellipse at 20% 0%, #
   .mesa .mano .carta-mini { --ch: min(calc(var(--lado) * .3), 20vw); }
   .mesa .mano.oculta .carta-mini { --ch: calc(var(--lado) * .16); }
 }
+
+/* Cartas vivas: el activo de quien juega respira con un brillo leve (sin moverse, para no esquivar el toque) */
+.lado.activo-turno .zona-activo .carta-mini:not(.archivada):not(.embiste):not(.golpeado):not(.se-cura):not(.se-protege):not(:active) { animation: respira 3.6s ease-in-out infinite; }
+@keyframes respira { 0%, 100% { filter: drop-shadow(0 4px 10px rgba(0,0,0,.35)); }
+  50% { filter: drop-shadow(0 8px 14px rgba(0,0,0,.4)) drop-shadow(0 0 12px rgba(233,196,106,.45)) brightness(1.04); } }
+@media (prefers-reduced-motion: reduce) { .lado.activo-turno .zona-activo .carta-mini { animation: none; } }
