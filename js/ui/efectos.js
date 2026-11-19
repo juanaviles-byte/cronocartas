@@ -51,12 +51,31 @@ export function arenaQueCae(x0, x1, y, n = 12, color = null) {
     vida: 1, desgaste: al(0.012, 0.02), t: al(1.6, 3), color: color || oro() })));
 }
 
+// Paletas de granos: el oro del reloj y, en las expansiones, el color de cada fuerza.
+export const PALETAS = {
+  oro: ORO,
+  Mar: ['#6FD3F2', '#BDEBFA', '#2E9BC6', '#FFFFFF'],
+  TierraFuego: ['#FF8A3D', '#FFC15E', '#E2482B', '#FFE3A3'],
+  CieloViento: ['#CFC8F2', '#FFFFFF', '#9E92E6', '#FFF1C4'],
+  BosqueNoche: ['#B6F28A', '#FFE48A', '#6FCB6A', '#E9FFD0'],
+  sagrado: ['#FFF6D8', '#FFE7A3', '#FFFFFF', '#F3D98B'],
+};
+const de = paleta => { const p = PALETAS[paleta] || ORO; return () => p[Math.floor(Math.random() * p.length)]; };
+
 // Estallido de granos desde un punto (impacto, aterrizaje).
-export function estallido(x, y, n = 26, fuerza = 4) {
+export function estallido(x, y, n = 26, fuerza = 4, paleta = null) {
+  const color = de(paleta);
   agregar(Array.from({ length: n }, () => {
     const a = al(0, Math.PI * 2), v = al(fuerza * 0.4, fuerza);
-    return { x, y, vx: Math.cos(a) * v, vy: Math.sin(a) * v - 1, peso: 0.16, roce: 0.96, vida: 1, desgaste: al(0.018, 0.03), t: al(1.8, 3.2), color: oro() };
+    return { x, y, vx: Math.cos(a) * v, vy: Math.sin(a) * v - 1, peso: 0.16, roce: 0.96, vida: 1, desgaste: al(0.018, 0.03), t: al(1.8, 3.2), color: color() };
   }));
+}
+
+// Motas de luz que suben despacio (presencias, personajes, curación).
+export function motasQueSuben(x0, x1, y, n = 30, paleta = 'sagrado') {
+  const color = de(paleta);
+  agregar(Array.from({ length: n }, () => ({ x: al(x0, x1), y: y + al(-20, 20), vx: al(-0.3, 0.3), vy: al(-2.2, -0.8), peso: -0.01, roce: 0.99,
+    vida: 1, desgaste: al(0.008, 0.016), t: al(1.4, 2.8), color: color() })));
 }
 
 // Estela de arena que sigue a un elemento mientras se mueve.

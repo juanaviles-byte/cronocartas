@@ -59,3 +59,13 @@ test('en la preparación la invocación es breve, y pasar o dar Saber no tienen 
   assert.equal(planDeEscena(enJuego(), { tipo: 'pasar' }, []), null);
   assert.equal(planDeEscena(enJuego(), { tipo: 'saber', destino: 'x' }, []), null);
 });
+
+import { estiloDeInvocacion } from '../js/ui/director.js';
+test('cada tipo de carta tiene su forma de invocarse, y en la expansión, el color de su fuerza', () => {
+  assert.deepEqual(estiloDeInvocacion({ tipo: 'protagonista', dimension: 'Politica' }), { tipo: 'protagonista', paleta: 'oro' });
+  assert.deepEqual(estiloDeInvocacion({ tipo: 'personaje' }), { tipo: 'personaje', paleta: 'sagrado' });
+  assert.deepEqual(estiloDeInvocacion({ tipo: 'aula' }), { tipo: 'acontecimiento', paleta: 'oro' });
+  assert.deepEqual(estiloDeInvocacion({ tipo: 'personaje', coleccion: 'fin-del-mundo' }), { tipo: 'sagrado', paleta: 'sagrado' });
+  assert.deepEqual(estiloDeInvocacion({ tipo: 'protagonista', dimension: 'Mar', coleccion: 'fin-del-mundo' }), { tipo: 'protagonista', paleta: 'Mar' });
+  assert.deepEqual(estiloDeInvocacion({ tipo: 'lugar', efecto: { dimension: 'BosqueNoche' }, coleccion: 'fin-del-mundo' }), { tipo: 'lugar', paleta: 'BosqueNoche' });
+});

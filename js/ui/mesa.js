@@ -16,7 +16,7 @@ import { sonidos, sonidoActivo, alternarSonido } from './sonido.js';
 import { ambiente, rutaAmbiente, ambientesListos } from './ambiente.js';
 import { FUERZAS, coleccion } from '../colecciones.js';
 import { hacerArrastrable, ultimaSoltada } from './arrastre.js';
-import { volar, impacto, deshacerEnArena, relojSobre, granoHacia } from './efectos.js';
+import { volar, impacto, deshacerEnArena, relojSobre, granoHacia, motasQueSuben, estallido } from './efectos.js';
 import { arenaDelTiempo } from './viaje.js';
 import { planDeEscena, escenaAtaque, escenaInvocacion } from './director.js';
 import { dorsoDeMazo, cargarDorsos } from './dorsos.js';
@@ -1085,8 +1085,9 @@ export async function montarMesa(contenedor, opciones) {
       if (ev.tipo === 'lugar') { registrar(`Nuevo lugar: <b>${esc(ev.carta.nombre)}</b>`); }
       if (ev.tipo === 'efecto') {   // el sonido de lo que hace la carta
         const tipos = (Array.isArray(ev.carta.efecto) ? ev.carta.efecto : [ev.carta.efecto]).filter(Boolean).map(x => x.tipo);
-        if (tipos.some(x => x === 'curar' || x === 'curarTodos')) sonidos.curar();
-        if (tipos.some(x => x.startsWith('buscar') || x.startsWith('robar'))) sonidos.buscar();
+        if (tipos.some(x => x === 'curar' || x === 'curarTodos')) { sonidos.curar(); efectoVisible('curar', ev.jugador, tipos.includes('curarTodos')); }
+        if (tipos.some(x => x.startsWith('buscar') || x.startsWith('robar'))) { sonidos.buscar(); efectoVisible('robar', ev.jugador); }
+        if (tipos.includes('proteger')) efectoVisible('proteger', ev.jugador);
       }
       if (ev.tipo === 'revelar') registrar(`${nombres[ev.jugador]}: se miraron ${ev.cartas.length} cartas del mazo${ev.tomada ? ` y se tomó <b>${esc(ev.tomada.nombre)}</b>` : ', sin Protagonistas'}`);
       if (ev.tipo === 'caida') {
@@ -1220,6 +1221,29 @@ export async function montarMesa(contenedor, opciones) {
     raiz.appendChild(b);
     bannerHasta = performance.now() + 1100;
     setTimeout(() => b.remove(), 1100);
+  }
+
+  // Lo que hace una carta se ve en la mesa: luz que sube sobre quien se cura, un escudo que brilla
+  // sobre el activo protegido, destellos sobre el mazo cuando se roba o se busca.
+  function efectoVisible(tipo, j, todos = false) {
+    if (sinMovimiento()) return;
+    const lado = raiz.querySelector(`.lado-${j}`);
+    if (!lado) return;
+    const caja = el => el && el.getBoundingClientRect();
+    if (tipo === 'curar') {
+      const els = todos ? [...lado.querySelectorAll('.zona-activo .carta-mini, .reserva .carta-mini')] : [lado.querySelector('.zona-activo .carta-mini')];
+      for (const el of els.filter(Boolean)) {
+        const r = caja(el);
+        motasQueSuben(r.left, r.right, r.bottom - r.height * 0.2, 22, 'BosqueNoche');
+        el.classList.remove('se-cura'); void el.offsetWidth; el.classList.add('se-cura');
+      }
+    } else if (tipo === 'proteger') {
+      const el = lado.querySelector('.zona-activo .carta-mini');
+      if (el) { el.classList.remove('se-protege'); void el.offsetWidth; el.classList.add('se-protege'); }
+    } else if (tipo === 'robar') {
+      const r = caja(lado.querySelector('.pila-mazo'));
+      if (r) estallido(r.left + r.width / 2, r.top + r.height / 2, 18, 2.6);
+    }
   }
 
   function destello(jugadorObjetivo, valor) {

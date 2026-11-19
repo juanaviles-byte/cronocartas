@@ -1,7 +1,7 @@
 // Director de escena: antes de mostrar el resultado de una jugada, la representa paso a paso
 // sobre la mesa tal como estaba (anticipación → acción → impacto → reacción). Luego la mesa
 // se redibuja con el estado nuevo. Solo transform/opacity/filter y Web Animations API.
-import { impacto, estallido, deshacerEnArena } from './efectos.js';
+import { motasQueSuben, impacto, estallido, deshacerEnArena } from './efectos.js';
 
 const rival = j => (j === 'A' ? 'B' : 'A');
 
@@ -119,12 +119,30 @@ export async function escenaAtaque({ mesa, atk, def, plan, alGolpear, alCaer }) 
  * Invocación: la carta sale de la mano, se muestra en grande sobre un círculo dorado y aterriza en su lugar.
  * Personajes y Acontecimientos se muestran con su efecto y se deshacen en arena (van al descarte).
  */
+// Cada tipo de carta entra distinto:
+//  Protagonista: aterriza con peso (la mesa se sacude, levanta polvo).
+//  Personaje: rayos dorados detrás, luz que sube y se va ascendiendo.
+//  Presencia sagrada (expansión): un halo suave que pulsa, sin sacudidas.
+//  Acontecimiento / Aula: la carta gira hacia el frente, una onda la anuncia y se deshace en arena.
+//  Lugar: un barrido de luz la cruza antes de ir a su casilla.
+// En una expansión, los granos toman el color de la fuerza de la carta.
+export function estiloDeInvocacion(carta) {
+  const sagrada = carta.tipo === 'personaje' && !!carta.coleccion;
+  const tipo = carta.tipo === 'aula' ? 'acontecimiento' : sagrada ? 'sagrado' : carta.tipo;
+  const fuerza = carta.coleccion ? (carta.tipo === 'protagonista' ? carta.dimension : carta.tipo === 'lugar' ? carta.efecto && carta.efecto.dimension : sagrada ? 'sagrado' : null) : null;
+  const paleta = fuerza || (tipo === 'personaje' || tipo === 'sagrado' ? 'sagrado' : 'oro');
+  return { tipo, paleta };
+}
+
 export async function escenaInvocacion({ grande, desde, destino, plan, girado = false, detalle = '', espera = null }) {
   if (!grande || !grande.animate) return;
+  const { tipo, paleta } = estiloDeInvocacion(plan.carta);
   const capa = document.createElement('div');
-  capa.className = `escena-invocacion${girado ? ' girado' : ''}`;
+  capa.className = `escena-invocacion inv-${tipo}${girado ? ' girado' : ''}`;
   const caja = document.createElement('div');
   caja.className = 'invocada';
+  if (tipo === 'personaje' || tipo === 'sagrado') { const aura = document.createElement('div'); aura.className = `aura aura-${tipo}`; caja.appendChild(aura); }
+  if (tipo === 'lugar') { const barrido = document.createElement('div'); barrido.className = 'barrido-luz'; caja.appendChild(barrido); }
   caja.appendChild(grande);
   capa.appendChild(caja);
   if (detalle) {
@@ -134,13 +152,13 @@ export async function escenaInvocacion({ grande, desde, destino, plan, girado = 
     capa.appendChild(t);
   }
   document.body.appendChild(capa);
-  const rc = caja.getBoundingClientRect(), c = centro(rc);
+  const rc = grande.getBoundingClientRect(), c = centro(rc);
   // Círculo dorado en el destino (o bajo la carta si es un efecto).
   let circulo = null;
   const rd = destino ? destino.getBoundingClientRect() : null;
   if (rd || plan.destino === 'efecto') {
     circulo = document.createElement('div');
-    circulo.className = 'circulo-invocacion';
+    circulo.className = `circulo-invocacion circulo-${tipo}`;
     const p = rd ? centro(rd) : c;
     circulo.style.left = `${p.x}px`; circulo.style.top = `${p.y}px`;
     circulo.style.setProperty('--d', `${Math.max(rd ? rd.width : rc.width, 80) * 1.7}px`);
@@ -149,21 +167,53 @@ export async function escenaInvocacion({ grande, desde, destino, plan, girado = 
   const g = girado ? -1 : 1;
   const de = desde || { x: c.x, y: innerHeight };
   const k0 = Math.max(0.2, Math.min(0.5, 80 / rc.width));
-  // Sale de la mano y crece en el centro.
-  await fin(caja.animate([
-    { transform: `translate(${(de.x - c.x) * g}px, ${(de.y - c.y) * g}px) scale(${k0}) rotate(-10deg)`, opacity: 0.4 },
-    { offset: 0.7, transform: 'translate(0, -6px) scale(1.06) rotate(1deg)', opacity: 1 },
-    { transform: 'none', opacity: 1 }], { duration: 420, easing: 'cubic-bezier(.2,.8,.3,1)', fill: 'forwards' }));
-  estallido(c.x, c.y, 22, 3);
+  const dx = (de.x - c.x) * g, dy = (de.y - c.y) * g;
+  // Entrada según el tipo.
+  const entradas = {
+    protagonista: [[{ transform: `translate(${dx}px, ${dy}px) scale(${k0}) rotate(-12deg)`, opacity: 0.4 },
+      { offset: 0.6, transform: 'translate(0, -18px) scale(1.12) rotate(2deg)', opacity: 1 },
+      { offset: 0.82, transform: 'translate(0, 4px) scale(.97)', opacity: 1 }, { transform: 'none', opacity: 1 }], 520],
+    personaje: [[{ transform: `translate(${dx}px, ${dy}px) scale(${k0})`, opacity: 0 },
+      { offset: 0.5, transform: 'translate(0, 30px) scale(.9)', opacity: 1 }, { transform: 'none', opacity: 1 }], 700],
+    sagrado: [[{ transform: 'translateY(40px) scale(.85)', opacity: 0, filter: 'brightness(2.4)' },
+      { offset: 0.6, transform: 'translateY(-6px) scale(1.02)', opacity: 1, filter: 'brightness(1.5)' },
+      { transform: 'none', opacity: 1, filter: 'brightness(1)' }], 900],
+    acontecimiento: [[{ transform: `translate(${dx}px, ${dy}px) scale(${k0}) rotateY(90deg)`, opacity: 0.5 },
+      { offset: 0.55, transform: 'translate(0, -8px) scale(1.05) rotateY(-12deg)', opacity: 1 },
+      { transform: 'none', opacity: 1 }], 560],
+    lugar: [[{ transform: `translate(${dx}px, ${dy}px) scale(${k0}) rotate(-6deg)`, opacity: 0.4 },
+      { offset: 0.7, transform: 'translate(0, -6px) scale(1.06)', opacity: 1 }, { transform: 'none', opacity: 1 }], 480],
+  };
+  const [cuadros, dura] = entradas[tipo] || entradas.protagonista;
+  await fin(caja.animate(cuadros, { duration: dura, easing: 'cubic-bezier(.2,.8,.3,1)', fill: 'forwards' }));
+  if (tipo === 'protagonista') { estallido(c.x, c.y + rc.height * 0.4, 30, 4, paleta); sacudir(document.querySelector('.mesa'), 4); }
+  else if (tipo === 'personaje' || tipo === 'sagrado') motasQueSuben(rc.left, rc.right, rc.bottom, tipo === 'sagrado' ? 46 : 34, paleta);
+  else if (tipo === 'acontecimiento') { onda(c, rc.width * 1.6); estallido(c.x, c.y, 22, 3, paleta); }
+  else estallido(c.x, c.y, 22, 3, paleta);
   await Promise.all([esperar(plan.destino === 'efecto' ? 1100 : 480), espera]);   // si el Personaje habla, la carta espera su frase
   if (plan.destino === 'efecto') {
-    await deshacerEnArena(caja, 700);
+    if (tipo === 'personaje' || tipo === 'sagrado') {
+      // Se va hacia arriba, hecha luz.
+      motasQueSuben(rc.left, rc.right, c.y, 26, paleta);
+      await fin(caja.animate([{ transform: 'none', opacity: 1, filter: 'brightness(1)' },
+        { transform: 'translateY(-50px) scale(.92)', opacity: 0, filter: 'brightness(2.2)' }], { duration: 650, easing: 'ease-in', fill: 'forwards' }));
+    } else await deshacerEnArena(caja, 700);
   } else if (rd) {
     const p = centro(rd), k = Math.max(0.15, rd.height / rc.height);
     await fin(caja.animate([{ transform: 'none' }, { transform: `translate(${(p.x - c.x) * g}px, ${(p.y - c.y) * g}px) scale(${k})`, opacity: 1 }],
-      { duration: 300, easing: 'cubic-bezier(.6,0,.4,1)', fill: 'forwards' }));
-    estallido(p.x, p.y + rd.height * 0.3, 26, 3.4);
+      { duration: tipo === 'protagonista' ? 260 : 320, easing: tipo === 'protagonista' ? 'cubic-bezier(.7,0,.9,.6)' : 'cubic-bezier(.6,0,.4,1)', fill: 'forwards' }));
+    estallido(p.x, p.y + rd.height * 0.3, tipo === 'protagonista' ? 34 : 26, tipo === 'protagonista' ? 4.2 : 3.4, paleta);
+    if (tipo === 'protagonista') sacudir(document.querySelector('.mesa'), 3);
   }
   if (circulo) { circulo.classList.add('apaga'); setTimeout(() => circulo.remove(), 450); }
   capa.remove();
+}
+
+// Onda que se expande desde un punto (los acontecimientos se anuncian así).
+function onda(p, d) {
+  const o = document.createElement('div');
+  o.className = 'onda-invocacion';
+  o.style.left = `${p.x}px`; o.style.top = `${p.y}px`; o.style.setProperty('--d', `${d}px`);
+  document.body.appendChild(o);
+  setTimeout(() => o.remove(), 800);
 }
