@@ -25,7 +25,15 @@
   "renacimiento": "img/dorsos/D17.webp",
   "absolutismo": "img/dorsos/D18.webp",
   "ilustracion": "img/dorsos/D19.webp",
-  "aula": "img/dorsos/D20.webp"
+  "aula": "img/dorsos/D20.webp",
+  "fm-general": "img/dorsos/FM-general.webp",
+  "fm-mar": "img/dorsos/FM-mar.webp",
+  "fm-tierra-fuego": "img/dorsos/FM-tierra-fuego.webp",
+  "fm-cielo-viento": "img/dorsos/FM-cielo-viento.webp",
+  "fm-bosque-noche": "img/dorsos/FM-bosque-noche.webp",
+  "fm-general-b": "img/dorsos/FM-general-b.webp",
+  "fm-general-c": "img/dorsos/FM-general-c.webp",
+  "fm-general-d": "img/dorsos/FM-general-d.webp"
  },
  "bandos": {
   "conquistadores": "conquista",
@@ -37,7 +45,11 @@
   "mesoamerica": "aztecas",
   "andes": "incas",
   "absolutismo": "absolutismo",
-  "ilustracion": "ilustracion"
+  "ilustracion": "ilustracion",
+  "fm-mar": "fm-mar",
+  "fm-tierra-fuego": "fm-tierra-fuego",
+  "fm-cielo-viento": "fm-cielo-viento",
+  "fm-bosque-noche": "fm-bosque-noche"
  },
  "cartas": {
   "CC-5-U1-001": "conquista",

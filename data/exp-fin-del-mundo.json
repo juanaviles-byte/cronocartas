@@ -830,5 +830,108 @@
    "dato": "Bosque lluvioso del sur de Chile, con alerces milenarios, helechos y copihues. En sus sombras se cuentan historias de duendes y seres de la noche."
   }
  ],
- "duelos": []
+ "duelos": [
+  {
+   "id": "D-FM-1",
+   "coleccion": "fin-del-mundo",
+   "nombre": "La Guerra de las Serpientes",
+   "soloNucleo": true,
+   "arte": "img/duelos/D-FM-1.webp",
+   "texto": "Caicai Vilú hace subir el mar; Tentén Vilú eleva los cerros.",
+   "bandos": [
+    {
+     "id": "fm-mar",
+     "nombre": "Mar",
+     "lema": "Las aguas suben",
+     "color": "#1F6E8C",
+     "emblema": "ola",
+     "nucleo": [
+      "Caicai Vilú",
+      "La Pincoya",
+      "El Caleuche",
+      "El Millalobo",
+      "El Trelke",
+      "La Sirena chilota",
+      "El mar interior de Chiloé",
+      "El gran diluvio",
+      "La marea de la Pincoya",
+      "Ngenechen",
+      "Make Make",
+      "Temáukel"
+     ]
+    },
+    {
+     "id": "fm-tierra-fuego",
+     "nombre": "Tierra y Fuego",
+     "lema": "Los cerros se elevan",
+     "color": "#B8432A",
+     "emblema": "volcan",
+     "nucleo": [
+      "Tentén Vilú",
+      "El Cherufe",
+      "La Lampalagua",
+      "El Culebrón",
+      "Coquena",
+      "El Camahueto",
+      "El volcán Rukapillán",
+      "El despertar del volcán",
+      "Kenos ordena la tierra",
+      "Pillán",
+      "Pachamama",
+      "Achachilas"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "D-FM-2",
+   "coleccion": "fin-del-mundo",
+   "nombre": "Luces y Sombras",
+   "soloNucleo": true,
+   "arte": "img/duelos/D-FM-2.webp",
+   "texto": "Los seres del cielo traen la luz; los del bosque guardan la noche.",
+   "bandos": [
+    {
+     "id": "fm-cielo-viento",
+     "nombre": "Cielo y Viento",
+     "lema": "La luz que guía",
+     "color": "#5B4FA8",
+     "emblema": "estrella",
+     "nucleo": [
+      "El Chonchón",
+      "El Tué-tué",
+      "El Piuchén",
+      "El Anchimallén",
+      "El Alicanto",
+      "La Voladora",
+      "El desierto de Atacama",
+      "La carrera del Tangata Manu",
+      "Kenos ordena la tierra",
+      "Make Make",
+      "Temáukel",
+      "Achachilas"
+     ]
+    },
+    {
+     "id": "fm-bosque-noche",
+     "nombre": "Bosque y Noche",
+     "lema": "Lo que guarda la sombra",
+     "color": "#2F6B3A",
+     "emblema": "arbol",
+     "nucleo": [
+      "La Calchona",
+      "La Lola",
+      "El Basilisco chilote",
+      "El Duende",
+      "La Viuda",
+      "El Huallepén",
+      "El bosque valdiviano",
+      "La Noche de San Juan",
+      "Ngenechen",
+      "Pachamama"
+     ]
+    }
+   ]
+  }
+ ]
 }

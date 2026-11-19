@@ -179,7 +179,9 @@ export function mazoDeBando(cartas, aula, rng, duelo, bandoId) {
   const nucleo = ids(propio.nucleo);
   // Si una Etapa 2 está en el núcleo, su base también.
   for (const c of cartas) if (nucleo.has(c.id) && c.evolucionaDe) nucleo.add(c.evolucionaDe);
-  return armarMazo(cartas, aula, rng, { nucleo, excluir: ids(rival.nucleo) });
+  // En las expansiones, cada bando juega solo con su núcleo (las otras fuerzas quedan fuera).
+  const excluir = duelo.soloNucleo ? new Set(cartas.filter(c => !nucleo.has(c.id)).map(c => c.id)) : ids(rival.nucleo);
+  return armarMazo(cartas, aula, rng, { nucleo, excluir });
 }
 
 // Una expansión: sus cartas y sus duelos (sin cartas de aula ni unidades). Las imágenes que subió

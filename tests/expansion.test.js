@@ -86,3 +86,52 @@ test('cada carta de la expansión tiene su ilustración registrada', () => {
     assert.ok(existsSync(arte[c.id]), `falta ${arte[c.id]}`);
   }
 });
+
+import { mazoDeBando } from '../js/mazos.js';
+import { dorsoDeMazo } from '../js/ui/dorsos.js';
+const DORSOS = JSON.parse(readFileSync('data/dorsos.json', 'utf8'));
+
+test('los duelos de la expansión: La Guerra de las Serpientes y Luces y Sombras', () => {
+  assert.deepEqual(X.duelos.map(d => d.nombre), ['La Guerra de las Serpientes', 'Luces y Sombras']);
+  const nombres = new Set(X.cartas.map(c => c.nombre));
+  const fuerzas = [];
+  for (const d of X.duelos) {
+    assert.equal(d.coleccion, 'fin-del-mundo'); assert.equal(d.soloNucleo, true);
+    assert.ok(existsSync(d.arte), `falta ${d.arte}`);
+    assert.equal(d.bandos.length, 2);
+    const [a, b] = d.bandos;
+    assert.ok(a.nucleo.every(n => !b.nucleo.includes(n)), `${d.id}: núcleos compartidos`);
+    for (const bando of d.bandos) {
+      assert.match(bando.id, /^fm-/);
+      for (const n of bando.nucleo) assert.ok(nombres.has(n), `${bando.id}: ${n} no existe`);
+      const prots = X.cartas.filter(c => c.tipo === 'protagonista' && bando.nucleo.includes(c.nombre));
+      assert.equal(prots.length, 6, bando.id);
+      fuerzas.push(prots[0].dimension);
+      assert.ok(prots.every(c => c.dimension === prots[0].dimension), `${bando.id}: mezcla fuerzas`);
+      assert.ok(X.cartas.some(c => c.tipo === 'lugar' && c.efecto.dimension === prots[0].dimension && bando.nucleo.includes(c.nombre)), `${bando.id}: sin su Lugar`);
+    }
+  }
+  assert.deepEqual(fuerzas.sort(), ['BosqueNoche', 'CieloViento', 'Mar', 'TierraFuego']);
+  assert.deepEqual(X.duelos[0].bandos.map(b => b.id), ['fm-mar', 'fm-tierra-fuego']);
+});
+
+test('un mazo de bando con soloNucleo tiene 20 cartas, todas de su núcleo', () => {
+  for (const d of X.duelos) for (const b of d.bandos) for (let s = 1; s <= 10; s++) {
+    const m = mazoDeBando(X.cartas, [], crearRng(s), d, b.id);
+    assert.equal(m.length, 20, b.id);
+    assert.ok(m.every(c => b.nucleo.includes(c.nombre)), `${b.id}: ${m.filter(c => !b.nucleo.includes(c.nombre)).map(c => c.nombre)}`);
+  }
+});
+
+test('dorsos de la expansión: uno por bando y uno general que reemplaza al de Historia', () => {
+  const fm = coleccion('fin-del-mundo');
+  assert.ok(existsSync(fm.dorso), `falta ${fm.dorso}`);
+  const cartas = X.cartas.slice(0, 20);
+  assert.equal(dorsoDeMazo(DORSOS, cartas, null, fm.dorso), fm.dorso);
+  for (const b of ['fm-mar', 'fm-tierra-fuego', 'fm-cielo-viento', 'fm-bosque-noche']) {
+    const r = dorsoDeMazo(DORSOS, cartas, b, fm.dorso);
+    assert.notEqual(r, fm.dorso, b); assert.ok(existsSync(r), `falta ${r}`);
+  }
+  // Los cursos siguen igual: sin general propio, el de Historia.
+  assert.equal(dorsoDeMazo(DORSOS, [], null), DORSOS.general);
+});
