@@ -15,6 +15,7 @@ import { esc, pips } from '../html.js';
 import { sonidos, sonidoActivo, alternarSonido } from './sonido.js';
 import { ambiente, rutaAmbiente, ambientesListos } from './ambiente.js';
 import { FUERZAS, coleccion } from '../colecciones.js';
+import { tablerosDisponibles } from '../eleccion.js';
 import { hacerArrastrable, ultimaSoltada } from './arrastre.js';
 import { liviano } from '../rendimiento.js';
 import { disposicionDeMesa } from './disposicion.js';
@@ -70,6 +71,7 @@ export async function montarMesa(contenedor, opciones) {
     linea: opciones.modo === 'tutorial' ? false : opciones.linea !== false,
     duelo: opciones.duelo || null,
     coleccion: opciones.coleccion || null,   // expansión (js/colecciones.js); null en los cursos
+    libre: !opciones.coleccion && (opciones.mazo === 'libre' || !!opciones.libre),   // modo libre: todos los tableros
     // Modo libre: el mazo de cada jugador puede ser una expansión aunque la partida sea de cursos.
     coleccionA: (!opciones.coleccion && coleccion(opciones.coleccionA)) ? opciones.coleccionA : null,
     coleccionB: (!opciones.coleccion && coleccion(opciones.coleccionB)) ? opciones.coleccionB : null,
@@ -87,9 +89,9 @@ export async function montarMesa(contenedor, opciones) {
   // Expansión: un solo mazo para los dos jugadores, sin tableros ni línea de tiempo (sus cartas no tienen fecha).
   const colec = config.coleccion ? coleccion(config.coleccion) : null;
   if (colec) { config.linea = false; config.reforzar = false; config.tablero = null; }
-  // Modo libre con dos expansiones: tampoco hay tablero ni línea de tiempo.
-  const sinCurso = !!(colec || (config.coleccionA && config.coleccionB));
-  if (sinCurso) { config.linea = false; config.reforzar = false; config.tablero = null; }
+  // Modo libre con dos expansiones: no hay línea de tiempo (sus cartas no tienen fecha), pero sí tablero.
+  const sinCurso = !!colec;
+  if (config.coleccionA && config.coleccionB) { config.linea = false; config.reforzar = false; }
   const datosCol = colec ? await cargarColeccionCompleta(colec.id) : null;
   const duelo = config.duelo ? (colec ? datosCol.duelos : await cargarDuelos()).find(d => d.id === config.duelo) || null : null;
   if (duelo && !colec) { config.cursoA = duelo.curso; config.cursoB = duelo.curso; config.tablero = duelo.tablero; }
@@ -108,7 +110,7 @@ export async function montarMesa(contenedor, opciones) {
   if (!estado) {
     const rng = crearRng(config.semilla);
     // Tablero: el elegido o uno al azar del curso.
-    const delCurso = sinCurso ? [] : tableros.filter(t => t.curso === config.cursoA);
+    const delCurso = sinCurso ? [] : tablerosDisponibles(tableros, { libre: config.libre, curso: config.cursoA });
     let tablero = sinCurso ? null : tableros.find(t => t.id === config.tablero);
     if (!tablero && delCurso.length) tablero = delCurso[Math.floor(rng.siguiente() * delCurso.length)];
     config.tablero = tablero ? tablero.id : null;
@@ -701,7 +703,12 @@ export async function montarMesa(contenedor, opciones) {
     if (!mostrar) mano.classList.add('oculta');
     mano.style.setProperty('--n', yo.mano.length);
     [...mano.children].forEach((el, i) => el.style.setProperty('--i', i - (yo.mano.length - 1) / 2));
-    fila.appendChild(mano);
+    // Vista del jugador: la mano del rival (boca abajo) va junto a su mazo y su descarte, a la vista.
+    if (vistaJugador && j === 'B') {
+      mano.classList.add('mano-rival');
+      mano.setAttribute('aria-label', `${yo.mano.length} cartas en la mano de ${nombres[j]}`);
+      der.insertBefore(mano, pilas);
+    } else fila.appendChild(mano);
 
     const controles = h('div', 'controles');
     if (humano && config.cronista) controles.appendChild(botonCronista(j));

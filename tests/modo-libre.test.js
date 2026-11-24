@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { mazosDePartida, MAZOS_LIBRES } from '../js/eleccion.js';
+import { mazosDePartida, MAZOS_LIBRES, tablerosDisponibles } from '../js/eleccion.js';
 import { COLECCIONES } from '../js/colecciones.js';
 
 // Modo libre: cada jugador usa el mazo de un curso distinto; contra la tablet, su mazo puede ser al azar.
@@ -63,4 +63,16 @@ test('la mesa carga cada mazo del modo libre por separado (curso o expansión)',
 
 test('el panel docente ya no esconde los mazos cruzados', () => {
   assert.doesNotMatch(readFileSync('js/ui/docente.js', 'utf8'), /Mazos cruzados/);
+});
+
+test('en modo libre se ofrecen los tableros de todos los cursos; con el mazo del curso, solo los de ese curso', () => {
+  const T = [{ id: 'T-5-1', curso: 5 }, { id: 'T-7-2', curso: 7 }, { id: 'T-8-3', curso: 8 }];
+  assert.deepEqual(tablerosDisponibles(T, { libre: true, curso: 7 }).map(t => t.id), ['T-5-1', 'T-7-2', 'T-8-3']);
+  assert.deepEqual(tablerosDisponibles(T, { libre: true, curso: null }).map(t => t.id), ['T-5-1', 'T-7-2', 'T-8-3']);
+  assert.deepEqual(tablerosDisponibles(T, { libre: false, curso: 7 }).map(t => t.id), ['T-7-2']);
+});
+
+test('la mesa y la pantalla de nueva partida usan la misma lista de tableros', () => {
+  assert.match(readFileSync('js/ui/mesa.js', 'utf8'), /tablerosDisponibles\(tableros, \{ libre: config\.libre/);
+  assert.match(readFileSync('js/ui/app.js', 'utf8'), /tablerosDisponibles\(tableros, \{ libre: cruzados/);
 });

@@ -11,7 +11,7 @@ import { sonidos, precargarSonidos } from './sonido.js';
 import { ambiente } from './ambiente.js';
 import { almacen, CLAVES } from '../almacen.js';
 import { esc } from '../html.js';
-import { CURSOS, MAZOS_LIBRES, mazosDePartida } from '../eleccion.js';
+import { CURSOS, MAZOS_LIBRES, mazosDePartida, tablerosDisponibles } from '../eleccion.js';
 import { modoEscuelaActivo } from '../rendimiento.js';
 
 const app = document.getElementById('app');
@@ -153,6 +153,7 @@ const vistas = {
         // Al entrar al modo libre, la tablet parte con un mazo al azar; cara a cara, con el mismo curso.
         if (m === 'libre' && eleccion.mazo !== 'libre') eleccion.cursoB = eleccion.modo === 'ia' ? 'azar' : eleccion.cursoA;
         // Fuera del modo libre solo hay cursos: si se había elegido una expansión, se vuelve a un curso.
+        if (m !== 'libre' && eleccion.mazo === 'libre') eleccion.tablero = 'azar';   // el tablero podía ser de otro curso
         if (m !== 'libre') { if (!CURSOS.includes(eleccion.cursoA)) eleccion.cursoA = CURSOS.includes(eleccion.cursoB) ? eleccion.cursoB : 7; eleccion.cursoB = eleccion.cursoA; }
         eleccion.mazo = m;
       }));
@@ -210,15 +211,15 @@ const vistas = {
           gb.appendChild(arte);
         }
       } else { listo = false; gd.appendChild(h('p', 'nota', col ? 'Esta expansión todavía no tiene duelos.' : 'Este curso todavía no tiene duelos temáticos.')); }
-    } else if (!col && cursoDeMesa) {
-      // Tablero: uno por unidad del curso, o sorpresa.
+    } else if (!col && (cursoDeMesa || cruzados)) {
+      // Tablero: uno por unidad del curso (en el modo libre, los de todos los cursos), o sorpresa.
       const grupoT = grupo('Tablero');
       const grilla = h('div', 'tableros');
-      const sorpresa = h('button', `opcion-tablero sorpresa${eleccion.tablero === 'azar' ? ' elegida' : ''}`, '<b>Sorpresa</b><small>Un tablero al azar del curso</small>');
+      const sorpresa = h('button', `opcion-tablero sorpresa${eleccion.tablero === 'azar' ? ' elegida' : ''}`, `<b>Sorpresa</b><small>${cruzados ? 'Un tablero al azar entre todos' : 'Un tablero al azar del curso'}</small>`);
       sorpresa.onclick = () => { eleccion.tablero = 'azar'; eleccion.reforzar = false; render(); };
       grilla.appendChild(sorpresa);
-      for (const t of tableros.filter(t => t.curso === cursoDeMesa)) {
-        const b = h('button', `opcion-tablero${eleccion.tablero === t.id ? ' elegida' : ''}`, `<b>U${t.unidad} · ${esc(t.nombre)}</b><small>${esc(t.textoRegla)}</small>`);
+      for (const t of tablerosDisponibles(tableros, { libre: cruzados, curso: cursoDeMesa })) {
+        const b = h('button', `opcion-tablero${eleccion.tablero === t.id ? ' elegida' : ''}`, `<b>${cruzados ? `${t.curso}° · ` : ''}U${t.unidad} · ${esc(t.nombre)}</b><small>${esc(t.textoRegla)}</small>`);
         b.style.backgroundImage = `url("${t.imagen}")`;
         b.onclick = () => { eleccion.tablero = t.id; render(); };
         grilla.appendChild(b);

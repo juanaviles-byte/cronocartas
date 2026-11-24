@@ -1125,7 +1125,15 @@ body:not([data-vista="mesa"]) { background: radial-gradient(ellipse at 20% 0%, #
 .mesa.vista-jugador .lado-B { --lado: calc((100vh - var(--centro)) * .34); height: var(--lado); background: none; box-shadow: none; }
 .mesa.vista-jugador .lado-A { --lado: calc((100vh - var(--centro)) * .66); height: var(--lado); }
 /* Rival: sin mano, sin acciones ni pilas a la vista; su activo y su reserva, centrados. */
-.mesa.vista-jugador .lado-B .fila-mano, .mesa.vista-jugador .lado-B .acciones-activo, .mesa.vista-jugador .lado-B .pilas { display: none; }
+/* El rival muestra en tiempo real su mano boca abajo, su mazo y su descarte (al lado derecho de su activo). */
+.mesa.vista-jugador .lado-B .fila-mano, .mesa.vista-jugador .lado-B .acciones-activo { display: none; }
+.mesa.vista-jugador .lado-B .ala-der { justify-content: flex-end; gap: 12px; }
+.mesa.vista-jugador .lado-B .mano-rival { flex: 0 1 auto; min-width: 0; padding: 0; overflow: visible; }
+.mesa.vista-jugador .lado-B .mano-rival .carta-mini { --ch: calc(var(--lado) * .42); }
+.mesa.vista-jugador .lado-B .mano-rival .carta-mini + .carta-mini { margin-left: calc(var(--lado) * -.2); }
+.mesa.vista-jugador .lado-B .pila-mazo { width: calc(var(--lado) * .42 * .72); height: calc(var(--lado) * .42); }
+.mesa.vista-jugador .lado-B .pila-descarte .carta-mini { --ch: calc(var(--lado) * .42); }
+.mesa.vista-jugador .lado-B .pila-descarte .hueco { height: calc(var(--lado) * .42); width: calc(var(--lado) * .42 * .72); }
 .mesa.vista-jugador .lado-B .campo { flex: 1 1 auto; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); }
 .mesa.vista-jugador .lado-B .zona-activo .carta-mini { --ch: calc(var(--lado) * .74); }
 .mesa.vista-jugador .lado-B .zona-activo .hueco { height: calc(var(--lado) * .74); width: calc(var(--lado) * .74 * .72); }
@@ -1165,6 +1173,7 @@ body:not([data-vista="mesa"]) { background: radial-gradient(ellipse at 20% 0%, #
 /* Celular horizontal */
 @media (max-height: 520px) and (orientation: landscape) {
   .mesa.vista-jugador { --centro: 46px; }
+  .mesa.vista-jugador .lado-B .pila-descarte { display: none; }   /* se abre tocando la placa del rival */
   .mesa.vista-jugador .lado-B { --lado: calc((100vh - var(--centro)) * .32); }
   .mesa.vista-jugador .lado-A { --lado: calc((100vh - var(--centro)) * .68); }
   .mesa.vista-jugador .lado { padding: 2px 10px; }
@@ -1216,7 +1225,16 @@ body:not([data-vista="mesa"]) { background: radial-gradient(ellipse at 20% 0%, #
   .mesa.vista-jugador .marcador .nombre-jugador { font-size: .95rem; }
 
   /* Rival: una sola fila, placa · activo · reserva. */
-  .mesa.vista-jugador .lado-B .campo { grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); grid-template-areas: "marc activo res"; }
+  .mesa.vista-jugador .lado-B .campo { grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); grid-template-areas: "marc activo res" "mano activo pil"; }
+  .mesa.vista-jugador .lado-B .mano-rival { grid-area: mano; justify-self: start; }
+  .mesa.vista-jugador .lado-B .pilas { grid-area: pil; justify-self: end; gap: 6px; }
+  .mesa.vista-jugador .lado-B .mano-rival .carta-mini { --ch: min(calc(var(--lado) * .22), 15vw); }
+  .mesa.vista-jugador .lado-B .mano-rival .carta-mini + .carta-mini { margin-left: calc(min(calc(var(--lado) * .22), 15vw) * -.55); }
+  .mesa.vista-jugador .lado-B .pila-mazo { width: calc(min(calc(var(--lado) * .22), 15vw) * .72); height: min(calc(var(--lado) * .22), 15vw); }
+  .mesa.vista-jugador .lado-B .pila-descarte .carta-mini { --ch: min(calc(var(--lado) * .22), 15vw); }
+  .mesa.vista-jugador .lado-B .pila-descarte .hueco { height: min(calc(var(--lado) * .22), 15vw); width: calc(min(calc(var(--lado) * .22), 15vw) * .72); }
+  .mesa.vista-jugador .lado-B .pila-descarte .carta-mini { --ch: 64px; }
+  .mesa.vista-jugador .lado-B .pila-descarte .hueco { height: 64px; width: 46px; }
   .mesa.vista-jugador .lado-B .marcador { grid-area: marc; justify-self: start; }
   .mesa.vista-jugador .lado-B .zona-activo { grid-area: activo; }
   .mesa.vista-jugador .lado-B .reserva { grid-area: res; justify-self: end; padding: 5px; gap: 4px; }

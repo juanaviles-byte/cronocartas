@@ -22,3 +22,9 @@ export function mazosDePartida(eleccion, azar = Math.random) {
   // Reforzar una unidad no tiene sentido si cada mazo es de otro curso.
   return { cursoA, cursoB, reforzar: false, coleccionA: esCurso(a) ? null : a, coleccionB: esCurso(b) ? null : b };
 }
+
+// Tableros que se pueden elegir (y de los que sale «Sorpresa»): en el modo libre, los de todos los cursos;
+// si no, solo los del curso.
+export function tablerosDisponibles(tableros, { libre = false, curso = null } = {}) {
+  return libre ? tableros.slice() : tableros.filter(t => t.curso === curso);
+}
