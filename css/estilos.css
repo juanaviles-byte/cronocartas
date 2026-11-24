@@ -1181,3 +1181,27 @@ body:not([data-vista="mesa"]) { background: radial-gradient(ellipse at 20% 0%, #
 .mesa.vista-jugador .lado-A .mano:not(.oculta) > .carta-mini + .carta-mini { margin-left: calc(var(--solape, 0px) * -1); }
 .mesa.vista-jugador .linea-mini .t { display: none; }
 .mesa.vista-jugador .linea-mini { min-width: 44px; justify-content: center; }
+
+/* Vista del jugador en vertical (tablet en vertical): mismo orden de arriba abajo; los tamaños salen del ancho,
+   y los botones van en su propia fila bajo la mano. */
+@media (orientation: portrait) {
+  .mesa.vista-jugador .lado-B .zona-activo .carta-mini { --ch: min(calc(var(--lado) * .62), 24vw); }
+  .mesa.vista-jugador .lado-B .zona-activo .hueco { height: min(calc(var(--lado) * .62), 24vw); width: calc(min(calc(var(--lado) * .62), 24vw) * .72); }
+  .mesa.vista-jugador .lado-B .reserva .carta-mini { --ch: min(calc(var(--lado) * .34), 12vw); }
+  .mesa.vista-jugador .lado-B .reserva .hueco { height: min(calc(var(--lado) * .34), 12vw); width: calc(min(calc(var(--lado) * .34), 12vw) * .72); }
+  .mesa.vista-jugador .lado-A .campo { flex: 0 0 56%; }
+  .mesa.vista-jugador .lado-A .zona-activo .carta-mini { --ch: min(calc(var(--lado) * .46), 32vw); }
+  .mesa.vista-jugador .lado-A .zona-activo .hueco { height: min(calc(var(--lado) * .46), 32vw); width: calc(min(calc(var(--lado) * .46), 32vw) * .72); }
+  .mesa.vista-jugador .lado-A .reserva .carta-mini { --ch: min(calc(var(--lado) * .2), 13vw); }
+  .mesa.vista-jugador .lado-A .reserva .hueco { height: min(calc(var(--lado) * .2), 13vw); width: calc(min(calc(var(--lado) * .2), 13vw) * .72); }
+  .mesa.vista-jugador .lado-A .pila-mazo { width: calc(min(calc(var(--lado) * .16), 11vw) * .72); height: min(calc(var(--lado) * .16), 11vw); }
+  .mesa.vista-jugador .lado-A .pila-descarte .carta-mini { --ch: min(calc(var(--lado) * .16), 11vw); }
+  .mesa.vista-jugador .lado-A .pila-descarte .hueco { height: min(calc(var(--lado) * .16), 11vw); width: calc(min(calc(var(--lado) * .16), 11vw) * .72); }
+  .mesa.vista-jugador .lado-A .fila-mano { flex-direction: column; align-items: stretch; gap: 8px; }
+  .mesa.vista-jugador .lado-A .mano .carta-mini { --ch: min(calc(var(--lado) * .26), 21vw); }
+  .mesa.vista-jugador .lado-A .controles { justify-content: flex-end; align-self: stretch; max-width: none; gap: 10px; }
+  .mesa.vista-jugador .lado-A .controles .botonera { flex-wrap: nowrap; }
+  .mesa.vista-jugador .centro .placa-lugar { width: 46vw; }
+}
+
+.mesa.vista-jugador .boton-deshacer, .mesa.vista-jugador .controles .boton-secundario, .mesa.vista-jugador .controles .boton-principal { min-height: 44px; }
