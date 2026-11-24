@@ -1,7 +1,7 @@
 // Service worker de Cronocartas: guarda la app en la tablet para jugar sin internet.
 // Al publicar una mejora, sube VERSION y agrega aquí los archivos nuevos
 // (la prueba tests/sw.test.js avisa si falta alguno).
-const VERSION = 'cc-v95';
+const VERSION = 'cc-v96';
 const ARCHIVOS = [
   "./",
   "audio/ambientes/CC-5-U1-007.ogg",
@@ -537,7 +537,7 @@ const HUELLAS = {
   "audio/sfx/efectos.ogg": "e77b492179ab",
   "audio/sfx/motivos.ogg": "aa1403569e39",
   "audio/tema/inicio.ogg": "d2c8c512d3d7",
-  "css/estilos.css": "b5ef37e1816d",
+  "css/estilos.css": "907384f80b39",
   "data/ambientes.json": "b59e779a954c",
   "data/arte.json": "6d56ff970f5e",
   "data/aula.json": "9c4641e855c6",

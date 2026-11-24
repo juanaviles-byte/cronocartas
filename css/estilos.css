@@ -1207,6 +1207,12 @@ body:not([data-vista="mesa"]) { background: radial-gradient(ellipse at 20% 0%, #
   .mesa.vista-jugador .lado-B .zona-activo .hueco { height: min(calc(var(--lado) * .62), 24vw); width: calc(min(calc(var(--lado) * .62), 24vw) * .72); }
   .mesa.vista-jugador .lado-B .reserva .carta-mini { --ch: min(calc(var(--lado) * .34), 12vw); }
   .mesa.vista-jugador .lado-B .reserva .hueco { height: min(calc(var(--lado) * .34), 12vw); width: calc(min(calc(var(--lado) * .34), 12vw) * .72); }
+  /* La mano boca abajo del rival, su mazo y su descarte: del tamaño de su reserva (antes casi como su activo, y lo tapaban). */
+  .mesa.vista-jugador .lado-B .mano-rival .carta-mini { --ch: min(calc(var(--lado) * .26), 11vw); }
+  .mesa.vista-jugador .lado-B .mano-rival .carta-mini + .carta-mini { margin-left: calc(min(calc(var(--lado) * .26), 11vw) * -.55); }
+  .mesa.vista-jugador .lado-B .pila-mazo { width: calc(min(calc(var(--lado) * .26), 11vw) * .72); height: min(calc(var(--lado) * .26), 11vw); }
+  .mesa.vista-jugador .lado-B .pila-descarte .carta-mini { --ch: min(calc(var(--lado) * .26), 11vw); }
+  .mesa.vista-jugador .lado-B .pila-descarte .hueco { height: min(calc(var(--lado) * .26), 11vw); width: calc(min(calc(var(--lado) * .26), 11vw) * .72); }
   .mesa.vista-jugador .lado-A .campo { flex: 0 0 56%; }
   .mesa.vista-jugador .lado-A .zona-activo .carta-mini { --ch: min(calc(var(--lado) * .46), 32vw); }
   .mesa.vista-jugador .lado-A .zona-activo .hueco { height: min(calc(var(--lado) * .46), 32vw); width: calc(min(calc(var(--lado) * .46), 32vw) * .72); }
