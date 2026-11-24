@@ -108,7 +108,7 @@ function llave(t, duelos, alJugar, alCambiar) {
         });
         const anotar = h('button', 'boton-secundario', 'Anotar ganador');
         anotar.onclick = () => {
-          acciones.replaceChildren(h('span', 'nota', '¿Quién ganó?'));
+          acciones.textContent = ''; acciones.appendChild(h('span', 'nota', '¿Quién ganó?'));
           for (const n of [p.a, p.b]) {
             const b = h('button', 'boton-secundario', esc(n));
             b.onclick = () => { almacen.guardar(CLAVES.torneo, anotarGanador(t, p.id, n)); alCambiar(); };

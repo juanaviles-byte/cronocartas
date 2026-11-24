@@ -57,7 +57,7 @@ export async function montarMesa(contenedor, opciones) {
     modo: opciones.modo || 'caraacara',
     cursoA: Number(opciones.cursoA || 7),
     cursoB: Number(opciones.cursoB || opciones.cursoA || 7),
-    semilla: opciones.semilla ?? Math.floor(Math.random() * 1e9),
+    semilla: opciones.semilla != null ? opciones.semilla : Math.floor(Math.random() * 1e9),
     hitosParaGanar: opciones.hitosParaGanar || ajustes.hitosParaGanar || 3,
     sabias: ajustes.sabias !== false,
     leerSabias: !!ajustes.leerSabias,
@@ -270,7 +270,7 @@ export async function montarMesa(contenedor, opciones) {
     }
     if (saberAntes) {
       for (const [uid, n] of Object.entries(ahora)) {
-        const d = n - (saberAntes[uid] ?? 0);
+        const d = n - (saberAntes[uid] || 0);
         if (d) flotarSaber(uid, d);
       }
     }
@@ -894,7 +894,7 @@ export async function montarMesa(contenedor, opciones) {
       (v.tipo === 'asignarSaber' && v.destino === inst.uid) ||
       (v.tipo === 'retirar' && v.reemplazo === inst.uid) ||
       (v.tipo === 'promover' && v.uid === inst.uid) ||
-      (v.tipo === 'accion' && estado.jugadores[j].activo?.uid === inst.uid)
+      (v.tipo === 'accion' && !!estado.jugadores[j].activo && estado.jugadores[j].activo.uid === inst.uid)
     ).map(v => ({ jugada: v, texto: textoJugada(v, j) })) : [];
     verCarta(inst.carta, estado.turno, opciones, inst);
   }
@@ -915,7 +915,7 @@ export async function montarMesa(contenedor, opciones) {
       case 'asignarSaber': return 'Darle 1 de Saber';
       case 'retirar': {
         const gratis = estado.tablero && estado.tablero.regla && estado.tablero.regla.tipo === 'retiroGratis';
-        return `Cambiar por el activo (cuesta ${gratis ? 0 : (yo.activo.carta.retirada ?? 1)} Saber)`;
+        return `Cambiar por el activo (cuesta ${gratis ? 0 : (yo.activo.carta.retirada != null ? yo.activo.carta.retirada : 1)} Saber)`;
       }
       case 'promover': return 'Pasar al frente como activo';
       case 'accion': { const a = yo.activo.carta.acciones[v.indice]; return `${esc(a.nombre)} · ${esc(danioDeAccion(estado, j, v.indice))} de daño`; }   // el mismo número que el botón

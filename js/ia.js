@@ -79,7 +79,7 @@ function erudito(e, j, js) {
 function historiador(estado, jugador, js) {
   const yo = estado.jugadores[jugador];
   const otro = estado.jugadores[jugador === 'A' ? 'B' : 'A'];
-  const carta = uid => yo.mano.find(c => c.uid === uid)?.carta;
+  const carta = uid => { const e = yo.mano.find(c => c.uid === uid); return e && e.carta; };
   const deTipo = t => js.filter(j => j.tipo === t);
 
   if (estado.fase === 'preparacion') {
@@ -105,18 +105,19 @@ function historiador(estado, jugador, js) {
   // 4. Lugar favorable (bonifica la dimensión del activo) si no hay otro lugar propio.
   const lugar = deTipo('jugar').find(j => {
     const c = carta(j.uid);
-    return c.tipo === 'lugar' && c.efecto?.dimension === yo.activo.carta.dimension && estado.lugar?.carta.id !== c.id;
+    return c.tipo === 'lugar' && !!c.efecto && c.efecto.dimension === yo.activo.carta.dimension && !(estado.lugar && estado.lugar.carta.id === c.id);
   });
   if (lugar) return lugar;
   // 5. Aula o acontecimiento útil.
   const util = deTipo('jugar').find(j => {
     const c = carta(j.uid);
     if (c.tipo === 'lugar') return false;
-    const t = (Array.isArray(c.efecto) ? c.efecto[0] : c.efecto)?.tipo;
+    const ef = Array.isArray(c.efecto) ? c.efecto[0] : c.efecto;
+    const t = ef && ef.tipo;
     if (t === 'curar') return yo.activo.danio >= 20;
     if (t === 'curarTodos') return [yo.activo, ...yo.reserva].some(p => p.danio >= 20);
     if (t === 'retiroGratis') return yo.activo.danio * 2 >= yo.activo.carta.resistencia;
-    if (t === 'anularLugar') return estado.lugar?.carta.efecto?.dimension === otro.activo?.carta.dimension;
+    if (t === 'anularLugar') return !!(estado.lugar && estado.lugar.carta.efecto && otro.activo) && estado.lugar.carta.efecto.dimension === otro.activo.carta.dimension;
     return true;
   });
   if (util) {

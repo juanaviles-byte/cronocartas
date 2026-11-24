@@ -14,7 +14,7 @@ export const EFECTOS_ESTUDIANTE = [
   [{ tipo: 'bonusDanio', n: 20 }, 'Tu próxima acción hace +20'],
   [{ tipo: 'buscarProtagonista', n: 3 }, 'Busca un Protagonista en tu mazo'],
 ];
-const mismoEfecto = (a, b) => !!a && !!b && a.tipo === b.tipo && (a.n ?? null) === (b.n ?? null);
+const mismoEfecto = (a, b) => !!a && !!b && a.tipo === b.tipo && (a.n != null ? a.n : null) === (b.n != null ? b.n : null);
 export const efectoPermitido = ef => EFECTOS_ESTUDIANTE.some(([e]) => mismoEfecto(e, ef));
 
 export function puntosPoder(carta) {

@@ -24,4 +24,4 @@ export function anioEnViaje(desde, hasta, t) {
 export const epocaDe = (epocas, id) => (epocas && id && epocas[id]) || null;
 
 let epocas = null;
-export const cargarEpocas = () => (epocas ||= fetch('data/epocas.json').then(r => (r.ok ? r.json() : {})).catch(() => ({})));
+export const cargarEpocas = () => (epocas = epocas || fetch('data/epocas.json').then(r => (r.ok ? r.json() : {})).catch(() => ({})));

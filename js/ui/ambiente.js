@@ -13,7 +13,7 @@ export function crearAmbiente({ crearAudio = ruta => new Audio(ruta), activo = (
 
   function fundir(p, hacia, ms, alFin) {
     clearInterval(p.timer);
-    const desde = p.el.volume ?? 0;
+    const desde = p.el.volume || 0;
     const pasos = Math.max(1, Math.round(ms / PASO));
     let i = 0;
     p.timer = setInterval(() => {

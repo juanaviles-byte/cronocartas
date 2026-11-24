@@ -121,8 +121,8 @@ export function renderCarta(carta, { tamano = 'normal', instancia = null, unidad
       ${esProt ? `<div class="m-res${instancia && instancia.danio ? ' herido' : ''}">${esc(vida)}</div>` : ''}
       ${carta.evolucionaDe ? '<div class="etapa">2</div>' : ''}
       ${esProt && instancia ? `<div class="mini-saber${instancia.saber ? '' : ' cero'}" title="Saber"><span class="pip"></span><b>${esc(instancia.saber)}</b></div>` : ''}
-      ${instancia?.protegido ? '<div class="sello">Protegido</div>' : ''}
-      ${instancia?.bonus ? `<div class="sello">+${esc(instancia.bonus)}</div>` : ''}
+      ${instancia && instancia.protegido ? '<div class="sello">Protegido</div>' : ''}
+      ${instancia && instancia.bonus ? `<div class="sello">+${esc(instancia.bonus)}</div>` : ''}
       <div class="m-banda">
         ${carta.habilidad ? '<span class="m-hab" title="Tiene habilidad">◆</span>' : ''}
         <span class="m-nombre">${esc(carta.nombre)}</span>
@@ -153,7 +153,7 @@ export function renderCarta(carta, { tamano = 'normal', instancia = null, unidad
   const col = carta.coleccion ? coleccion(carta.coleccion) : null;   // carta de una expansión
   const refPie = carta.oa || (carta.mbe ? 'MBE ' + carta.mbe.dominio + '·' + carta.mbe.estandar : '') || carta.zona || '';
   const pie = esProt
-    ? `<span>Débil ${iconoTipo(DEBIL_ANTE[carta.dimension], 14)}×2 · Retirada ${pips(carta.retirada ?? 1)}</span><span>${esc(carta.oa || carta.zona || '')}</span>`
+    ? `<span>Débil ${iconoTipo(DEBIL_ANTE[carta.dimension], 14)}×2 · Retirada ${pips(carta.retirada != null ? carta.retirada : 1)}</span><span>${esc(carta.oa || carta.zona || '')}</span>`
     : `<span>${esc(carta.id || '')}</span><span>${esc(refPie)}</span>`;
   const sello = carta.curso ? `${esc(carta.curso)}°` : carta.mbe ? esc(carta.mbe.dominio) : col ? esc(col.sigla) : '';
 

@@ -162,7 +162,7 @@ export async function cargarCurso(curso, { comunidad = [], ediciones = {}, image
   const cartas = [...aplicarEdiciones(m.cartas, ediciones, imagenes), ...extra];
   const porId = new Map(cartas.map(c => [c.id, c]));
   for (const c of cartas) if (Array.isArray(c.conexiones)) {
-    c.conexiones = c.conexiones.map(x => ({ ...x, causaNombre: porId.get(x.causa)?.nombre }));
+    c.conexiones = c.conexiones.map(x => ({ ...x, causaNombre: porId.has(x.causa) ? porId.get(x.causa).nombre : undefined }));
   }
   for (const c of cartas) if (c.evolucionaDe && porId.get(c.evolucionaDe)) {
     const b = porId.get(c.evolucionaDe);

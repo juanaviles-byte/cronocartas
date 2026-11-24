@@ -6,7 +6,7 @@ import { EMBLEMAS } from './ui/arte.js';
 export const CAMPOS_EDITABLES = ['nombre', 'dato', 'resistencia', 'acciones', 'emblema'];
 const ID_VALIDO = /^CC-(\d-U\d-\d{3}|A-E\d{1,2})$/;
 const IMAGEN_VALIDA = /^data:image\/(jpeg|png|webp);base64,[A-Za-z0-9+/=]+$/;
-const IMAGEN_MAX = 1_500_000;
+const IMAGEN_MAX = 1500000;
 
 const texto = (v, max) => (typeof v === 'string' ? v.slice(0, max) : undefined);
 const numero = v => (v === '' || v == null || !Number.isFinite(Number(v)) ? undefined : Number(v));

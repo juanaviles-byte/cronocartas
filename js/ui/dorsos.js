@@ -15,4 +15,4 @@ export function dorsoDeMazo(dorsos, cartas, bando, general = dorsos && dorsos.ge
 }
 
 let dorsos = null;
-export const cargarDorsos = () => (dorsos ||= fetch('data/dorsos.json').then(r => (r.ok ? r.json() : null)).catch(() => null));
+export const cargarDorsos = () => (dorsos = dorsos || fetch('data/dorsos.json').then(r => (r.ok ? r.json() : null)).catch(() => null));

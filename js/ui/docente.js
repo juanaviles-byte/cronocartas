@@ -72,7 +72,7 @@ export async function vistaDocente({ volver }) {
     const orden = { pendiente: 0, devuelta: 1, aprobada: 2, descartada: 3 };
     for (const p of lista.slice().sort((a, b) => orden[a.estado] - orden[b.estado])) {
       const fila = h('div', 'fila-propuesta');
-      fila.appendChild(renderCarta({ ...p, comunidad: true }, { tamano: 'normal', unidades: datos[p.curso]?.unidades }));
+      fila.appendChild(renderCarta({ ...p, comunidad: true }, { tamano: 'normal', unidades: datos[p.curso] && datos[p.curso].unidades }));
       const lado = h('div', 'acciones-propuesta');
       lado.appendChild(h('div', `estado estado-${p.estado}`, { pendiente: 'Pendiente', aprobada: 'Aprobada', devuelta: 'Devuelta', descartada: 'Descartada' }[p.estado]));
       lado.appendChild(h('p', 'nota', `Por <b>${esc(p.autor || 'sin nombre')}</b> · Fuente: ${esc(p.fuente)}`));

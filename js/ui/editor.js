@@ -88,7 +88,7 @@ export async function pestanaEditar(zona) {
     };
     const campo = (etiqueta, valor, max, area, fn) => {
       const l = h('label', 'campo-texto', `<span>${etiqueta}</span>`);
-      const i = h(area ? 'textarea' : 'input'); i.value = valor ?? ''; i.maxLength = max;
+      const i = h(area ? 'textarea' : 'input'); i.value = valor == null ? '' : valor; i.maxLength = max;
       i.oninput = () => { fn(i.value); previsualizar(); };
       l.appendChild(i); form.appendChild(l);
     };

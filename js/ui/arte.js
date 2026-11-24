@@ -17,7 +17,7 @@ export const COLORES = {
 
 export function colorCarta(carta) {
   if (carta.tipo === 'protagonista') return COLORES[carta.dimension] || '#555';
-  if (carta.tipo === 'lugar') return COLORES[carta.efecto?.dimension] ? COLORES.lugar : COLORES.lugar;
+  if (carta.tipo === 'lugar') return COLORES.lugar;
   return COLORES[carta.tipo] || '#555';
 }
 
@@ -71,7 +71,7 @@ export const TEMAS = {
 export function temaCarta(carta) {
   if (carta.tipo === 'protagonista') return TEMAS[carta.dimension] || TEMAS.acontecimiento;
   // En una expansión, el Lugar toma el color de la fuerza que favorece.
-  if (carta.tipo === 'lugar' && carta.coleccion && TEMAS[carta.efecto?.dimension]) return TEMAS[carta.efecto.dimension];
+  if (carta.tipo === 'lugar' && carta.coleccion && carta.efecto && TEMAS[carta.efecto.dimension]) return TEMAS[carta.efecto.dimension];
   return TEMAS[carta.tipo] || TEMAS.acontecimiento;
 }
 

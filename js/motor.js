@@ -24,7 +24,8 @@ export const RESERVA_MAX = 3;
 
 const rival = j => (j === 'A' ? 'B' : 'A');
 // structuredClone no existe en Chrome antiguo (< 98); el estado es JSON puro.
-const clonar = x => (typeof structuredClone === 'function' ? structuredClone(x) : JSON.parse(JSON.stringify(x)));
+// El estado es JSON puro (se guarda en la tablet), así que se clona como JSON: funciona en cualquier navegador.
+const clonar = x => JSON.parse(JSON.stringify(x));
 const esBase = c => c.tipo === 'protagonista' && !c.evolucionaDe;
 
 function nuevoJugador() {
@@ -134,7 +135,7 @@ export function jugadasValidas(e) {
 // Regla del tablero en juego (o null).
 const regla = (e, tipo) => (e.tablero && e.tablero.regla && e.tablero.regla.tipo === tipo ? e.tablero.regla : null);
 const limiteAula = e => (regla(e, 'aulaDoble') ? 2 : 1);
-const costoRetirada = (e, inst) => (regla(e, 'retiroGratis') ? 0 : (inst.carta.retirada ?? 1));
+const costoRetirada = (e, inst) => (regla(e, 'retiroGratis') ? 0 : (inst.carta.retirada != null ? inst.carta.retirada : 1));
 
 const habilidad = (inst, tipo) => (inst && inst.carta.habilidad && inst.carta.habilidad.tipo === tipo ? inst.carta.habilidad : null);
 

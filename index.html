@@ -13,6 +13,48 @@
 </head>
 <body>
   <main id="app"><div class="cargando">Cargando…</div></main>
+  <div id="arranque-fallido" hidden></div>
+  <script>
+  // Escrito en JavaScript antiguo a propósito: debe funcionar justo donde el resto no.
+  // Si la app no arranca (navegador muy antiguo, archivo que no carga), en vez de quedarse
+  // en «Cargando…» se explica qué pasa y qué hacer.
+  (function () {
+    var errores = [];
+    function mostrar(urgente) {
+      if (window.__cronocartasListo) return;
+      var caja = document.getElementById('arranque-fallido');
+      if (!caja) return;
+      var m = /Chrome\/(\d+)/.exec(navigator.userAgent);
+      var version = m ? parseInt(m[1], 10) : 0;
+      var antiguo = version && version < 74;
+      var html = '<h1>Cronocartas no pudo abrirse</h1>';
+      if (antiguo || urgente === 'sin-modulos') {
+        html += '<p>Esta tablet tiene un navegador antiguo' + (version ? ' (Chrome ' + version + ')' : '') + '.</p>' +
+          '<p>Actualiza <b>Chrome</b> y <b>Android System WebView</b> desde Play Store y vuelve a abrir el juego.</p>';
+      } else {
+        html += '<p>Algo impidió que el juego terminara de cargar' + (version ? ' (Chrome ' + version + ')' : '') + '.</p>' +
+          '<p>Prueba de nuevo. Si se repite, conéctate a internet un momento y vuelve a abrirlo.</p>';
+      }
+      if (errores.length) html += '<details><summary>Detalle para el profesor</summary><pre>' +
+        errores.slice(0, 5).join('\n').replace(/[&<>]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]; }) + '</pre></details>';
+      html += '<p><button type="button" onclick="location.reload()">Reintentar</button></p>';
+      caja.innerHTML = html;
+      caja.hidden = false;
+      var cargando = document.querySelector('.cargando');
+      if (cargando) cargando.style.display = 'none';
+    }
+    window.addEventListener('error', function (e) {
+      var donde = e.filename ? ' (' + String(e.filename).split('/').pop() + ':' + e.lineno + ')' : '';
+      var que = e.message || (e.target && e.target.src ? 'No cargó ' + e.target.src.split('/').pop() : 'Error');
+      errores.push(que + donde);
+      // Cualquier error antes de terminar de arrancar: se da un momento por si la app igual arranca.
+      if (!window.__cronocartasListo) setTimeout(function () { mostrar(); }, 2000);
+    }, true);
+    window.__cronocartasMostrarFallo = mostrar;
+    setTimeout(function () { mostrar(); }, 15000);
+  })();
+  </script>
+  <script nomodule>window.__cronocartasMostrarFallo('sin-modulos');</script>
   <script type="module" src="js/ui/app.js"></script>
 </body>
 </html>

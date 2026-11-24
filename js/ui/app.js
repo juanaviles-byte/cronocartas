@@ -18,6 +18,8 @@ let actual = null;            // vista montada (con destruir opcional)
 let eleccion = { modo: 'caraacara', cursoA: 7, cursoB: 7, tablero: 'azar', reforzar: false, mazo: 'curso', duelo: null, bandoA: null, linea: true, coleccion: null };
 let partidaPendiente = null;   // la deja lista el torneo antes de ir a #mesa
 
+// replaceChildren llegó en Chrome 86; las tablets pueden traer uno más antiguo.
+const vaciarYPoner = (padre, hijo) => { padre.textContent = ''; padre.appendChild(hijo); };
 const h = (tag, cls, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; };
 
 const vistas = {
@@ -174,7 +176,7 @@ const vistas = {
     let listo = true;
     if (eleccion.mazo === 'duelo') {
       const delCurso = col ? ((exp && exp.duelos) || []) : duelos.filter(d => d.curso === eleccion.cursoA);
-      if (!delCurso.some(d => d.id === eleccion.duelo)) { eleccion.duelo = delCurso[0]?.id || null; eleccion.bandoA = null; }
+      if (!delCurso.some(d => d.id === eleccion.duelo)) { eleccion.duelo = delCurso.length ? delCurso[0].id : null; eleccion.bandoA = null; }
       const gd = grupo('Duelo');
       gd.appendChild(opciones(delCurso.map(d => [d.id, esc(d.nombre), d.bandos.map(b => esc(b.nombre)).join(' vs. ')]), eleccion.duelo, id => { eleccion.duelo = id; eleccion.bandoA = null; }));
       const d = delCurso.find(x => x.id === eleccion.duelo);
@@ -256,7 +258,7 @@ const vistas = {
   async mesa() {
     const guardada = almacen.leer(CLAVES.partida, null);
     const cont = h('div', 'pantalla-mesa');
-    app.replaceChildren(cont);
+    vaciarYPoner(app, cont);
     if (guardada && guardada.version === 1 && guardada.estado && guardada.estado.fase !== 'fin') {
       return montarMesa(cont, { ...guardada.config, estado: guardada.estado });
     }
@@ -267,7 +269,7 @@ const vistas = {
 
   async tutorial() {
     const cont = h('div', 'pantalla-mesa');
-    app.replaceChildren(cont);
+    vaciarYPoner(app, cont);
     return montarMesa(cont, { modo: 'tutorial', cursoA: 7, cursoB: 7, semilla: 2026, tablero: 'T-7-2' });
   },
 
@@ -394,16 +396,17 @@ async function render() {
   try {
     const r = await vista();
     if (mia !== ficha) { if (r && r.destruir) r.destruir(); return; }
-    if (r instanceof HTMLElement) { app.replaceChildren(r); actual = null; }
+    if (r instanceof HTMLElement) { vaciarYPoner(app, r); actual = null; }
     else actual = r;
   } catch (e) {
     console.error(e);
-    if (mia === ficha) app.replaceChildren(h('div', 'pantalla error', `<h1>Algo falló</h1><p>${esc(e.message || e)}</p><p><a href="#inicio">Volver al inicio</a></p>`));
+    if (mia === ficha) vaciarYPoner(app, h('div', 'pantalla error', `<h1>Algo falló</h1><p>${esc(e.message || e)}</p><p><a href="#inicio">Volver al inicio</a></p>`));
   }
 }
 
 window.addEventListener('hashchange', render);
-render();
+// Señal para index.html: la app arrancó (si no llega, se muestra el aviso de arranque fallido).
+render().then(() => { window.__cronocartasListo = true; });
 
 // En el APK (Capacitor) los archivos ya vienen dentro de la app: no hace falta guardarlos otra vez.
 if ('serviceWorker' in navigator && window.isSecureContext && !window.Capacitor) {

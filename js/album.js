@@ -20,7 +20,7 @@ export function cartasVisibles(estado, humanos = ['A', 'B']) {
 export function crearAlbum(almacen) {
   const leer = () => {
     const a = almacen.leer(CLAVES.album, null);
-    return { descubiertas: Array.isArray(a?.descubiertas) ? a.descubiertas : [], insignias: Array.isArray(a?.insignias) ? a.insignias : [] };
+    return { descubiertas: Array.isArray(a && a.descubiertas) ? a.descubiertas : [], insignias: Array.isArray(a && a.insignias) ? a.insignias : [] };
   };
   const cuentan = cartas => cartas.filter(c => !c.comunidad);
 
