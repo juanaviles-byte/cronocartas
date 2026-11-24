@@ -1,7 +1,8 @@
 // Director de escena: antes de mostrar el resultado de una jugada, la representa paso a paso
 // sobre la mesa tal como estaba (anticipación → acción → impacto → reacción). Luego la mesa
 // se redibuja con el estado nuevo. Solo transform/opacity/filter y Web Animations API.
-import { motasQueSuben, impacto, estallido, deshacerEnArena } from './efectos.js';
+import { motasQueSuben, impacto, estallido, deshacerEnArena, lluviaDeMonedas } from './efectos.js';
+import { dimensionDeInvocacion, emblemaDimension, adornoEncima, COLOR_DIMENSION } from './invocacion-dimension.js';
 
 const rival = j => (j === 'A' ? 'B' : 'A');
 
@@ -129,6 +130,7 @@ export async function escenaAtaque({ mesa, atk, def, plan, alGolpear, alCaer }) 
 //  Lugar: un barrido de luz la cruza antes de ir a su casilla.
 // En una expansión, los granos toman el color de la fuerza de la carta.
 export function estiloDeInvocacion(carta) {
+  // (Los Protagonistas y Lugares de Historia además usan el emblema de su dimensión: invocacion-dimension.js.)
   const sagrada = carta.tipo === 'personaje' && !!carta.coleccion;
   const tipo = carta.tipo === 'aula' ? 'acontecimiento' : sagrada ? 'sagrado' : carta.tipo;
   const fuerza = carta.coleccion ? (carta.tipo === 'protagonista' ? carta.dimension : carta.tipo === 'lugar' ? carta.efecto && carta.efecto.dimension : sagrada ? 'sagrado' : null) : null;
@@ -144,14 +146,22 @@ export function estiloDeGolpe(atacante, valor, ventaja) {
 
 export async function escenaInvocacion({ grande, desde, destino, plan, girado = false, detalle = '', espera = null }) {
   if (!grande || !grande.animate) return;
-  const { tipo, paleta } = estiloDeInvocacion(plan.carta);
+  const estilo = estiloDeInvocacion(plan.carta), tipo = estilo.tipo;
+  const dimPaleta = dimensionDeInvocacion(plan.carta);
+  const paleta = dimPaleta || estilo.paleta;
+  const dim = dimensionDeInvocacion(plan.carta);
   const capa = document.createElement('div');
-  capa.className = `escena-invocacion inv-${tipo}${girado ? ' girado' : ''}`;
+  capa.className = `escena-invocacion inv-${tipo}${girado ? ' girado' : ''}${dim ? ` dim dim-${dim}` : ''}`;
+  if (dim) { capa.style.setProperty('--dim', COLOR_DIMENSION[dim][0]); capa.style.setProperty('--dim-a', COLOR_DIMENSION[dim][1]); }
   const caja = document.createElement('div');
   caja.className = 'invocada';
   if (tipo === 'personaje' || tipo === 'sagrado') { const aura = document.createElement('div'); aura.className = `aura aura-${tipo}`; caja.appendChild(aura); }
   if (tipo === 'lugar') { const barrido = document.createElement('div'); barrido.className = 'barrido-luz'; caja.appendChild(barrido); }
+  // Cada dimensión trae su emblema animado detrás de la carta (en vez del destello dorado).
+  if (dim) caja.appendChild(emblemaDimension(dim));
   caja.appendChild(grande);
+  const encima = dim ? adornoEncima(dim) : null;
+  if (encima) caja.appendChild(encima);
   capa.appendChild(caja);
   if (detalle) {
     const t = document.createElement('div');
@@ -166,7 +176,8 @@ export async function escenaInvocacion({ grande, desde, destino, plan, girado = 
   const rd = destino ? destino.getBoundingClientRect() : null;
   if (rd || plan.destino === 'efecto') {
     circulo = document.createElement('div');
-    circulo.className = `circulo-invocacion circulo-${tipo}`;
+    circulo.className = `circulo-invocacion circulo-${tipo}${dim ? ' circulo-dim' : ''}`;
+    if (dim) { circulo.style.setProperty('--dim', COLOR_DIMENSION[dim][0]); circulo.style.setProperty('--dim-a', COLOR_DIMENSION[dim][1]); }
     const p = rd ? centro(rd) : c;
     circulo.style.left = `${p.x}px`; circulo.style.top = `${p.y}px`;
     circulo.style.setProperty('--d', `${Math.max(rd ? rd.width : rc.width, 80) * 1.7}px`);
@@ -194,6 +205,7 @@ export async function escenaInvocacion({ grande, desde, destino, plan, girado = 
   };
   const [cuadros, dura] = entradas[tipo] || entradas.protagonista;
   await fin(caja.animate(cuadros, { duration: dura, easing: 'cubic-bezier(.2,.8,.3,1)', fill: 'forwards' }));
+  if (dimPaleta === 'economia') lluviaDeMonedas(rc.left - rc.width * 0.3, rc.right + rc.width * 0.3, rc.top - 20, 26);
   if (tipo === 'protagonista') { estallido(c.x, c.y + rc.height * 0.4, 30, 4, paleta); sacudir(document.querySelector('.mesa'), 4); }
   else if (tipo === 'personaje' || tipo === 'sagrado') motasQueSuben(rc.left, rc.right, rc.bottom, tipo === 'sagrado' ? 46 : 34, paleta);
   else if (tipo === 'acontecimiento') { onda(c, rc.width * 1.6); estallido(c.x, c.y, 22, 3, paleta); }

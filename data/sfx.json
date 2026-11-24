@@ -25,5 +25,12 @@
  "turno_rival": "audio/sfx/turno_rival.ogg",
  "viaje": "audio/sfx/viaje.ogg",
  "victoria": "audio/sfx/victoria.ogg",
- "derrota": "audio/sfx/derrota.ogg"
+ "derrota": "audio/sfx/derrota.ogg",
+ "invocar_economia": "audio/sfx/invocar_economia.ogg",
+ "invocar_politica": "audio/sfx/invocar_politica.ogg",
+ "invocar_sociedad": "audio/sfx/invocar_sociedad.ogg",
+ "invocar_cultura": "audio/sfx/invocar_cultura.ogg",
+ "invocar_territorio": "audio/sfx/invocar_territorio.ogg",
+ "moneda_lanzar": "audio/sfx/moneda_lanzar.ogg",
+ "moneda_cae": "audio/sfx/moneda_cae.ogg"
 }

@@ -1305,3 +1305,85 @@ body:not([data-vista="mesa"]) { background: radial-gradient(ellipse at 20% 0%, #
 .aviso-apk-botones { display: flex; justify-content: flex-end; margin-top: 4px; }
 .aviso-apk-botones > * + * { margin-left: 10px; }
 .aviso-apk-botones a, .aviso-apk-botones button { min-height: 44px; display: inline-flex; align-items: center; padding: 0 16px; text-decoration: none; }
+
+/* ---------- Invocación según la dimensión (en vez del destello dorado) ----------
+   El emblema va detrás de la carta; solo anima transform y opacity, así que corre también en el modo escuela. */
+.escena-invocacion.dim .invocada { filter: drop-shadow(0 0 22px var(--dim)) drop-shadow(0 1rem 1.6rem rgba(0,0,0,.6)); }
+.circulo-invocacion.circulo-dim { background: radial-gradient(circle, var(--dim-a) 0%, rgba(0,0,0,0) 66%),
+    repeating-conic-gradient(from 0deg, var(--dim) 0 2deg, rgba(0,0,0,0) 2deg 15deg); filter: drop-shadow(0 0 10px var(--dim)); }
+.emblema-dim { --s: 620px; position: absolute; left: 50%; top: 50%; width: var(--s); height: var(--s); margin: calc(var(--s) / -2) 0 0 calc(var(--s) / -2);
+  z-index: -1; pointer-events: none; }
+@media (max-width: 600px), (max-height: 520px) { .emblema-dim { --s: 430px; } }
+.emblema-dim .pieza { position: absolute; left: 50%; top: 50%; display: block; font-style: normal; }
+.emblema-dim svg { display: block; width: 100%; height: 100%; }
+
+/* Economía: una lluvia de monedas que salen girando desde la carta. */
+.emblema-economia .pieza { width: calc(var(--s) * .1); height: calc(var(--s) * .1); margin: calc(var(--s) * -.05);
+  animation: moneda-sale 1.4s cubic-bezier(.2,.8,.3,1) both; animation-delay: calc(var(--i) * 30ms); }
+.emblema-economia .pieza b { display: block; width: 100%; height: 100%; animation: moneda-gira .5s linear infinite; }
+@keyframes moneda-sale {
+  0% { transform: rotate(var(--a)) translateY(0) scale(.2); opacity: 0; }
+  15% { opacity: 1; }
+  65% { transform: rotate(var(--a)) translateY(calc(var(--r) * var(--s) * -.5)) scale(1); opacity: 1; }
+  100% { transform: rotate(var(--a)) translateY(calc(var(--r) * var(--s) * -.56)) scale(.85); opacity: 0; } }
+@keyframes moneda-gira { 0%, 100% { transform: scaleX(1); } 50% { transform: scaleX(.12); } }
+
+/* Política: un sello de lacre timbra la carta como un decreto; dos ondas rojas salen del golpe. */
+.sello-encima { position: absolute; right: -9%; bottom: 4%; width: 38%; height: auto; z-index: 4; display: block;
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,.55)); animation: sello-golpe .45s .25s cubic-bezier(.55,0,.8,.3) both; }
+.sello-encima svg { display: block; width: 100%; height: auto; }
+@keyframes sello-golpe { 0% { transform: scale(2.6) rotate(-30deg); opacity: 0; } 60% { opacity: 1; } 100% { transform: rotate(-8deg); opacity: 1; } }
+.emblema-politica .onda-sello { position: absolute; left: 50%; top: 50%; width: calc(var(--s) * .7); height: calc(var(--s) * .7); margin: calc(var(--s) * -.35);
+  border-radius: 50%; border: 5px solid var(--dim); opacity: 0; animation: onda-sello .9s .6s ease-out both; }
+.emblema-politica .onda-sello.segunda { animation-delay: .78s; }
+@keyframes onda-sello { from { transform: scale(.6); opacity: .95; } to { transform: scale(1.45); opacity: 0; } }
+
+/* Sociedad: personas que llegan y forman una ronda alrededor. */
+.emblema-sociedad .ronda { position: absolute; top: 0; right: 0; bottom: 0; left: 0; animation: ronda-gira 16s linear infinite; }
+@keyframes ronda-gira { to { transform: rotate(360deg); } }
+.emblema-sociedad .pieza { width: calc(var(--s) * .075); height: calc(var(--s) * .1); margin: calc(var(--s) * -.05) 0 0 calc(var(--s) * -.0375); color: #BFD6F6;
+  transform: rotate(var(--a)) translateY(calc(var(--s) * -.42)) rotate(calc(var(--a) * -1));
+  animation: persona-llega .5s cubic-bezier(.2,.9,.3,1.3) both; animation-delay: calc(var(--i) * 60ms); }
+.emblema-sociedad .pieza:nth-child(odd) { color: #8FB6EC; }
+@keyframes persona-llega { from { opacity: 0; transform: rotate(var(--a)) translateY(calc(var(--s) * -.15)) rotate(calc(var(--a) * -1)) scale(.3); } }
+
+/* Cultura: letras y signos de muchas culturas que suben. */
+.emblema-cultura::before { content: ""; position: absolute; top: 10%; right: 10%; bottom: 10%; left: 10%; border-radius: 50%;
+  background: radial-gradient(circle, var(--dim-a) 0%, rgba(0,0,0,0) 70%); }
+.emblema-cultura .pieza { left: calc(50% + var(--x)); top: 72%; font-family: var(--serif, Georgia, serif); font-size: calc(var(--s) * .11); line-height: 1; font-weight: 700;
+  color: #F6EEFF; text-shadow: 0 0 14px #8E5CD0, 0 0 4px #45246F, 0 2px 2px rgba(0,0,0,.6); animation: signo-sube 1.6s ease-out both; animation-delay: calc(var(--i) * 55ms); }
+@keyframes signo-sube { 0% { transform: translateY(calc(var(--s) * .1)) scale(.6); opacity: 0; } 25% { opacity: 1; } 100% { transform: translateY(calc(var(--s) * -.6)) scale(1.1); opacity: 0; } }
+
+/* Territorio: una rosa de los vientos que gira y una cordillera que se alza. */
+.emblema-territorio .rosa { position: absolute; left: 50%; top: 50%; width: calc(var(--s) * .95); height: calc(var(--s) * .95); margin: calc(var(--s) * -.475);
+  color: #8FD6AA; opacity: .85; animation: rosa-entra .8s cubic-bezier(.2,.8,.3,1) both; }
+@keyframes rosa-entra { from { transform: rotate(-120deg) scale(.4); opacity: 0; } to { transform: none; opacity: .85; } }
+.emblema-territorio .montanas { position: absolute; left: -6%; right: -6%; bottom: 18%; height: 30%; color: #2F7D50; opacity: .95;
+  animation: montanas-suben .7s .1s cubic-bezier(.2,.8,.3,1) both; }
+@keyframes montanas-suben { from { transform: translateY(45%); opacity: 0; } }
+
+/* Modo escuela: el mismo emblema, con la mitad de las piezas y sin giros continuos. */
+.modo-escuela .emblema-dim .pieza:nth-child(even) { display: none; }
+.modo-escuela .emblema-sociedad .ronda, .modo-escuela .emblema-economia .pieza b { animation: none; }
+.modo-escuela .circulo-invocacion.circulo-dim, .modo-escuela .escena-invocacion.dim .invocada, .modo-escuela .sello-encima { filter: none; }
+
+/* ---------- Sorteo inicial con la moneda SIU ---------- */
+.sorteo { position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 70; display: flex; align-items: center; justify-content: center; padding: 16px;
+  background: radial-gradient(circle at 50% 45%, #1B2647 0%, #0A0E18 70%); }
+.sorteo-panel { width: 100%; max-width: 28rem; display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center; color: var(--perg, #F3EAD3); }
+.sorteo-panel.girado { transform: rotate(180deg); }
+.sorteo-panel h2 { margin: 0; font-family: var(--serif, Georgia, serif); font-size: 1.6rem; color: var(--oro, #E9C46A); }
+.sorteo-texto { margin: 0; min-height: 2.6em; font-size: 1rem; }
+.moneda-escena { position: relative; width: 190px; height: 190px; margin: 26px 0 8px; perspective: 900px; }
+@media (max-height: 520px) { .moneda-escena { width: 130px; height: 130px; margin: 14px 0 4px; } .sorteo-panel h2 { font-size: 1.3rem; } }
+.moneda { position: absolute; top: 0; right: 0; bottom: 0; left: 0; transform-style: preserve-3d; will-change: transform; }
+.moneda .cara { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 50%; -webkit-backface-visibility: hidden; backface-visibility: hidden;
+  box-shadow: 0 0 0 2px #8A5A06; }
+.moneda .cara-reverso { transform: rotateY(180deg); }
+.sombra-moneda { position: absolute; left: 15%; right: 15%; bottom: -14px; height: 14px; border-radius: 50%; background: rgba(0,0,0,.45); filter: blur(4px); }
+.modo-escuela .sombra-moneda { filter: none; opacity: .5; }
+.sorteo-opciones { display: flex; justify-content: center; gap: 14px; min-height: 0; }
+.opcion-lado { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 10px 14px; min-width: 120px; }
+.opcion-lado img { width: 74px; height: 74px; border-radius: 50%; }
+.sorteo-panel.resuelto h2 { animation: cartel-invocacion .45s cubic-bezier(.2,.9,.3,1.2) both; }
+.sorteo-comenzar { min-width: 12rem; }

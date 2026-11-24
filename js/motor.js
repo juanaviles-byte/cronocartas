@@ -53,7 +53,8 @@ function instancia(entrada, turno) {
   return { uid: entrada.uid, carta: entrada.carta, danio: 0, saber: 0, protegido: false, bonus: 0, turnoEntrada: turno };
 }
 
-export function crearPartida({ mazoA, mazoB, semilla, hitosParaGanar = 3, tablero = null, lineaTiempo = false }) {
+// primero: quién juega el primer turno (lo decide el sorteo de la moneda; sin sorteo, A).
+export function crearPartida({ mazoA, mazoB, semilla, hitosParaGanar = 3, tablero = null, lineaTiempo = false, primero = 'A' }) {
   const rng = rngDesdeEstado(semilla);
   const jugadores = { A: nuevoJugador(), B: nuevoJugador() };
   for (const [j, mazo] of [['A', mazoA], ['B', mazoB]]) {
@@ -75,7 +76,8 @@ export function crearPartida({ mazoA, mazoB, semilla, hitosParaGanar = 3, tabler
     }
   }
   return { fase: 'preparacion', turno: 'A', numeroTurno: 0, jugadores, lugar: null,
-    ganador: null, hitosParaGanar, rng: rng.estado, tablero: tablero ? { id: tablero.id, regla: tablero.regla || null } : null, lineaTiempo: !!lineaTiempo };
+    ganador: null, hitosParaGanar, rng: rng.estado, tablero: tablero ? { id: tablero.id, regla: tablero.regla || null } : null, lineaTiempo: !!lineaTiempo,
+    primero: primero === 'B' ? 'B' : 'A' };
 }
 
 export function jugadasValidas(e) {
@@ -251,7 +253,7 @@ export function aplicarJugada(estadoEntrada, jugada) {
     case 'listo': {
       yo.listo = true;
       if (!e.jugadores[rival(j)].listo) e.turno = rival(j);
-      else { e.fase = 'turno'; e.turno = 'A'; iniciarTurno(e, ev); }
+      else { e.fase = 'turno'; e.turno = e.primero || 'A'; iniciarTurno(e, ev); }
       break;
     }
     case 'promover': {

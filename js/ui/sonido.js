@@ -106,6 +106,9 @@ RESPALDO.ataque_fuerte = RESPALDO.ataque_ligero;
 RESPALDO.turno_rival = RESPALDO.turno_propio;
 RESPALDO.curar = RESPALDO.conexion;
 RESPALDO.invocar_protagonista = RESPALDO.carta_colocar;
+['politica', 'economia', 'sociedad', 'cultura', 'territorio'].forEach(d => { RESPALDO[`invocar_${d}`] = RESPALDO.carta_colocar; });
+RESPALDO.moneda_lanzar = RESPALDO.saber;
+RESPALDO.moneda_cae = RESPALDO.saber;
 
 function efecto(nombre, opciones) {
   if (!tocar(nombre, opciones) && RESPALDO[nombre]) RESPALDO[nombre]();
@@ -131,7 +134,10 @@ export const sonidos = {
   jugar: () => efecto('carta_colocar', { variar: 0.08 }),
   voltear: () => efecto('carta_voltear'),
   buscar: () => efecto('buscar'),
-  invocar: tipo => { efecto(INVOCAR[tipo] || 'carta_colocar'); if (tipo === 'protagonista') vibrar(25); },
+  // Con dimensión (Protagonistas y Lugares de Historia), suena la de su dimensión: monedas, sello, gente…
+  invocar: (tipo, dim = null) => { efecto(dim ? `invocar_${dim}` : INVOCAR[tipo] || 'carta_colocar'); if (tipo === 'protagonista') vibrar(25); },
+  monedaLanzar: () => efecto('moneda_lanzar', { variar: 0.03 }),
+  monedaCae: () => { efecto('moneda_cae', { variar: 0.03 }); vibrar(20); },
   // Combate: el golpe crece con el daño.
   ataque: (danio = 30) => { efecto(danio >= 50 ? 'ataque_fuerte' : 'ataque_ligero', { tono: danio >= 70 ? 0.92 : 1 }); vibrar(danio >= 50 ? [30, 20, 40] : 35); },
   ventaja: () => efecto('ventaja'),

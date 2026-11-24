@@ -32,7 +32,12 @@ function bucle() {
     if (g.vida <= 0 || g.y > innerHeight + 20) { granos.splice(i, 1); continue; }
     ctx.globalAlpha = Math.min(1, g.vida);
     ctx.fillStyle = g.color;
-    ctx.fillRect(g.x * dpr, g.y * dpr, g.t * dpr, g.t * dpr);
+    if (g.forma === 'moneda') {   // una moneda que gira: elipse cuyo ancho late con el giro
+      g.giro += g.vg;
+      const rx = Math.max(0.6, Math.abs(Math.cos(g.giro)) * g.t) * dpr;
+      ctx.beginPath(); ctx.ellipse(g.x * dpr, g.y * dpr, rx, g.t * dpr, 0, 0, Math.PI * 2); ctx.fill();
+      ctx.strokeStyle = '#8A5A06'; ctx.lineWidth = dpr; ctx.stroke();
+    } else ctx.fillRect(g.x * dpr, g.y * dpr, g.t * dpr, g.t * dpr);
   }
   ctx.globalAlpha = 1;
   if (granos.length) requestAnimationFrame(bucle);
@@ -62,6 +67,12 @@ export const PALETAS = {
   CieloViento: ['#CFC8F2', '#FFFFFF', '#9E92E6', '#FFF1C4'],
   BosqueNoche: ['#B6F28A', '#FFE48A', '#6FCB6A', '#E9FFD0'],
   sagrado: ['#FFF6D8', '#FFE7A3', '#FFFFFF', '#F3D98B'],
+  // Dimensiones de Historia (invocación según la dimensión).
+  politica: ['#E05A43', '#F6C1B4', '#C0392B', '#F3D98B'],
+  economia: ['#E9B949', '#FFE08A', '#C98A0B', '#FFF1C4'],
+  sociedad: ['#7FB0EE', '#B9D3F2', '#3B7BD0', '#FFFFFF'],
+  cultura: ['#B48BEA', '#D6C3F0', '#8E5CD0', '#FFF1C4'],
+  territorio: ['#6CC28F', '#B5E0C4', '#3A9C64', '#D9C08A'],
 };
 const de = paleta => { const p = PALETAS[paleta] || ORO; return () => p[Math.floor(Math.random() * p.length)]; };
 
@@ -72,6 +83,13 @@ export function estallido(x, y, n = 26, fuerza = 4, paleta = null) {
     const a = al(0, Math.PI * 2), v = al(fuerza * 0.4, fuerza);
     return { x, y, vx: Math.cos(a) * v, vy: Math.sin(a) * v - 1, peso: 0.16, roce: 0.96, vida: 1, desgaste: al(0.018, 0.03), t: al(1.8, 3.2), color: color() };
   }));
+}
+
+// Monedas que caen girando (invocación de Economía).
+export function lluviaDeMonedas(x0, x1, y, n = 24) {
+  const color = de('economia');
+  agregar(Array.from({ length: n }, () => ({ x: al(x0, x1), y: y + al(-60, 10), vx: al(-0.6, 0.6), vy: al(0.5, 2.5), peso: 0.12, roce: 0.99,
+    vida: 1.4, desgaste: al(0.008, 0.014), t: al(5, 8), color: color(), forma: 'moneda', giro: al(0, 6), vg: al(0.12, 0.3) })));
 }
 
 // Motas de luz que suben despacio (presencias, personajes, curación).

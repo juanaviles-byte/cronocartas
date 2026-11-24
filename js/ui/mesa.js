@@ -16,6 +16,8 @@ import { sonidos, sonidoActivo, alternarSonido } from './sonido.js';
 import { ambiente, rutaAmbiente, ambientesListos } from './ambiente.js';
 import { FUERZAS, coleccion } from '../colecciones.js';
 import { tablerosDisponibles } from '../eleccion.js';
+import { dimensionDeInvocacion } from './invocacion-dimension.js';
+import { sorteoInicial } from './sorteo.js';
 import { hacerArrastrable, ultimaSoltada } from './arrastre.js';
 import { liviano } from '../rendimiento.js';
 import { disposicionDeMesa } from './disposicion.js';
@@ -79,6 +81,7 @@ export async function montarMesa(contenedor, opciones) {
     nombres: opciones.nombres || null,
     torneo: opciones.torneo || null,
     cronista: opciones.modo === 'tutorial' || ajustes.cronista !== false,
+    primero: opciones.primero === 'A' || opciones.primero === 'B' ? opciones.primero : null,   // lo decide el sorteo
   };
   const contraIA = config.modo !== 'caraacara';
   // Los nombres solo se insertan en HTML: se guardan ya escapados (en el torneo los escribe el docente).
@@ -115,6 +118,8 @@ export async function montarMesa(contenedor, opciones) {
     if (!tablero && delCurso.length) tablero = delCurso[Math.floor(rng.siguiente() * delCurso.length)];
     config.tablero = tablero ? tablero.id : null;
     const foco = config.reforzar && tablero ? { unidad: tablero.unidad } : {};
+    // Quién parte: en el tutorial, siempre quien aprende; si no, el sorteo con la moneda SIU.
+    if (!config.primero) config.primero = config.modo === 'tutorial' ? 'A' : await sorteoInicial(contenedor, { nombres: crudos, contraIA, caraACara: config.modo === 'caraacara' });
     estado = crearPartida({
       mazoA: bandoDe ? mazoDeBando(datosA.cartas, datosA.aula, rng, duelo, bandoDe.A.id) : armarMazo(datosA.cartas, datosA.aula, rng, foco),
       mazoB: bandoDe ? mazoDeBando(datosB.cartas, datosB.aula, rng, duelo, bandoDe.B.id) : armarMazo(datosB.cartas, datosB.aula, rng, foco),
@@ -122,6 +127,7 @@ export async function montarMesa(contenedor, opciones) {
       hitosParaGanar: config.hitosParaGanar,
       tablero,
       lineaTiempo: config.linea,
+      primero: config.primero,
     });
   }
   // Dorso de cada mazo: el del bando en un Duelo, o el de la temática que domina sus cartas.
@@ -1100,7 +1106,7 @@ export async function montarMesa(contenedor, opciones) {
     const detalle = plan.destino === 'efecto'
       ? `<small>${plan.carta.tipo === 'personaje' ? (plan.carta.coleccion ? 'Presencia sagrada' : 'Personaje') : plan.carta.tipo === 'aula' ? 'Aula' : plan.carta.coleccion ? 'Relato' : 'Acontecimiento'}</small><b>${esc(plan.carta.nombre)}</b>${efecto ? `<span>${esc(efecto)}</span>` : ''}`
       : plan.destino === 'evolucion' ? `<small>Evolución</small><b>${esc(plan.carta.nombre)}</b>` : '';
-    sonidos.invocar(plan.carta.tipo);   // cada tipo de carta tiene su sonido de invocación
+    sonidos.invocar(plan.carta.tipo, dimensionDeInvocacion(plan.carta));   // cada tipo (y cada dimensión) tiene su sonido
     const espera = plan.carta.tipo === 'personaje' && sonidoActivo() ? hablarPersonaje(plan.carta) : null;
     await escenaInvocacion({ grande: renderCarta(plan.carta, { tamano: 'normal' }), desde, destino, plan, girado: girado(j), detalle, espera });
     if (plan.destino !== 'efecto') entradasDirigidas.add(plan.destino === 'lugar' ? 'lugar' : plan.uid);
