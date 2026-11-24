@@ -1143,6 +1143,8 @@ body:not([data-vista="mesa"]) { background: radial-gradient(ellipse at 20% 0%, #
 /* Sin rótulos en la mesa: huecos y pilas se entienden por su forma (cada uno conserva su aria-label). */
 .mesa.vista-jugador .hueco span, .mesa.vista-jugador .pila small, .mesa.vista-jugador .saber-activo, .mesa.vista-jugador .boton-accion small { display: none; }
 .mesa.vista-jugador .lado-A .cuentas { display: none; }
+/* El descanso sí se avisa en el botón: si no, parece un error que el golpe fuerte no se pueda usar. */
+.mesa.vista-jugador .boton-accion small.descanso { display: block; font-size: .66rem; }
 .mesa.vista-jugador .cuentas { display: flex; align-items: center; gap: 4px; font-weight: 700; }
 .icono-mano { width: 12px; height: 16px; border-radius: 2px; background: var(--noche, #17264F); border: 1px solid var(--bronce, #C9A24A); box-shadow: 3px -2px 0 -1px var(--bronce, #C9A24A); }
 .mesa.vista-jugador .linea-mini { min-height: 44px; }

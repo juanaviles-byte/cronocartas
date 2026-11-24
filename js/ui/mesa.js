@@ -1,6 +1,6 @@
 // Mesa de juego: cara a cara en la misma tablet, contra la tablet o tutorial.
 // Solo dibuja y traduce toques en jugadas; las reglas viven en motor.js.
-import { crearPartida, jugadasValidas, aplicarJugada, busquedaDe, danioDeAccion, desgloseDanio, jugadaReversible, VENTAJA } from '../motor.js';
+import { crearPartida, jugadasValidas, aplicarJugada, busquedaDe, danioDeAccion, desgloseDanio, jugadaReversible, VENTAJA, COSTO_POTENTE } from '../motor.js';
 import { situacion, situacionDeEvento, pista } from './guia.js';
 import { elegirJugada } from '../ia.js';
 import { armarMazo, mazoDeBando } from '../mazos.js';
@@ -621,13 +621,15 @@ export async function montarMesa(contenedor, opciones) {
         const dsg = rivalActivo ? desgloseDanio(estado, j, indice) : null;
         const efectivo = rivalActivo && rivalActivo.protegido ? 0 : dsg ? dsg.total : a.danio;
         const motivo = rivalActivo && rivalActivo.protegido ? 'el rival está protegido' : dsg ? textoDesglose(dsg) : '';
-        const nota = falta ? `<small class="falta">Falta ${falta} de Saber</small>`
+        const descansa = yo.activo.descansa && a.costo >= COSTO_POTENTE;
+        const nota = descansa ? '<small class="falta descanso">Descansa este turno</small>'
+          : falta ? `<small class="falta">Falta ${falta} de Saber</small>`
           : primerTurno ? '<small class="falta">No se ataca en el primer turno</small>'
           : rivalActivo && rivalActivo.protegido ? '<small class="falta">El rival está protegido</small>'
           : efectivo !== a.danio && motivo ? `<small class="calculo">${esc(motivo)}</small>` : '';
         const marca = ventaja ? '<i class="x2" title="Ventaja: daño doble">×2</i>' : '';
         const impreso = efectivo !== a.danio ? `<s class="impreso">${esc(a.danio)}</s>` : '';
-        const b = h('button', `boton-accion${falta ? ' sin-saber' : ''}${ventaja ? ' con-ventaja' : ''}`, `<span class="costo">${costo}</span><span class="an">${esc(a.nombre)}${nota}</span><b>${impreso}${esc(efectivo)}${marca}</b>`);
+        const b = h('button', `boton-accion${falta || descansa ? ' sin-saber' : ''}${ventaja ? ' con-ventaja' : ''}`, `<span class="costo">${costo}</span><span class="an">${esc(a.nombre)}${nota}</span><b>${impreso}${esc(efectivo)}${marca}</b>`);
         if (efectivo !== a.danio) b.title = `La carta dice ${a.danio}; en esta mesa hace ${efectivo}: ${motivo}.`;
         else if (nota) b.title = nota.replace(/<[^>]+>/g, '');   // en la vista del jugador la nota no se ve en el botón
         b.disabled = !ok;
@@ -1139,6 +1141,7 @@ export async function montarMesa(contenedor, opciones) {
         if (!(contraIA && ev.jugador === 'B')) avisoLinea(ev);
         registrar(`${nombres[ev.jugador]} ubicó <b>${esc(ev.hecho.nombre)}</b> (${esc(ev.hecho.texto)}): ${ev.correcto ? '¡bien ubicada! +1 Saber' : 'quedó en su lugar correcto'}`);
       }
+      if (ev.tipo === 'refuerzo') registrar(`<b>${esc(ev.carta.nombre)}</b> entra de refuerzo con +1 de Saber`);
       if (ev.tipo === 'conexion') { sonidos.conexion(); avisoConexion(ev); registrar(`¡Conexión histórica! <b>${esc(ev.causa.nombre)}</b> → <b>${esc(ev.efecto.nombre)}</b>: +1 Saber`); }
       const atacoEnEscena = escenaActual && escenaActual.tipo === 'ataque';
       if (ev.tipo === 'danio' && !atacoEnEscena) {

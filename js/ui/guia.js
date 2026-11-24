@@ -48,6 +48,9 @@ export function situacion(e, j) {
   if (yo.activo && yo.reserva.length && vida(yo.activo) <= mejorGolpe(e, otro(j), 1)) {
     return dice('peligro', 'atenta', `¡Cuidado! ${n(yo.activo.carta)} puede caer en el próximo ataque. Retirarlo cuesta Saber, pero salva al Protagonista.`);
   }
+  if (yo.activo && yo.activo.descansa && (yo.activo.carta.acciones || []).some(x => x.costo >= 3)) {
+    return dice('descanso', 'explica', `${n(yo.activo.carta)} usó un <b>golpe potente</b> en su turno anterior: este turno descansa y solo puede usar sus acciones más baratas.`);
+  }
   if (v.some(x => x.tipo === 'accion')) return dice('accion', 'explica', 'Ya puedes usar una <b>acción</b>: los botones junto a tu activo. Al atacar se termina tu turno, así que primero juega tus cartas.');
   return null;
 }

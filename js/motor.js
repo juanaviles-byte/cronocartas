@@ -126,12 +126,16 @@ export function jugadasValidas(e) {
   }
   if (e.numeroTurno > 1) {
     (yo.activo.carta.acciones || []).forEach((a, indice) => {
-      if (yo.activo.saber >= a.costo) js.push({ tipo: 'accion', indice });
+      // Descanso: tras un ataque de costo 3, la carta no puede repetir otro de costo 3 en su turno siguiente.
+      if (yo.activo.saber >= a.costo && !(yo.activo.descansa && a.costo >= COSTO_POTENTE)) js.push({ tipo: 'accion', indice });
     });
   }
   js.push({ tipo: 'pasar' });
   return js;
 }
+
+// Un ataque de este costo o más es «potente»: después, la carta descansa un turno (ver jugadasValidas).
+export const COSTO_POTENTE = 3;
 
 // Regla del tablero en juego (o null).
 const regla = (e, tipo) => (e.tablero && e.tablero.regla && e.tablero.regla.tipo === tipo ? e.tablero.regla : null);
@@ -254,6 +258,9 @@ export function aplicarJugada(estadoEntrada, jugada) {
       const k = yo.reserva.findIndex(r => r.uid === jugada.uid);
       yo.activo = yo.reserva.splice(k, 1)[0];
       ev.push({ tipo: 'promover', jugador: j, carta: yo.activo.carta });
+      // Refuerzo: la carta que reemplaza a una caída llega con +1 de Saber, para poder responder.
+      yo.activo.saber += 1;
+      ev.push({ tipo: 'refuerzo', jugador: j, carta: yo.activo.carta });
       // El turno del atacante terminó con su acción: ahora juega quien promovió.
       e.fase = 'turno';
       e.numeroTurno++;
@@ -454,6 +461,7 @@ function resolverAccion(e, j, indice, ev) {
     }
   }
   atk.bonus = 0;
+  if (accion.costo >= COSTO_POTENTE) atk.atacoFuerte = true;
   def.danio += danio;
   ev.push({ tipo: 'danio', jugador: j, accion: accion.nombre, valor: danio, carta: atk.carta, objetivo: def.carta });
   if (accion.efecto) aplicarEfecto(e, j, accion.efecto, ev);
@@ -486,7 +494,7 @@ function terminarTurno(e, ev) {
 function iniciarTurno(e, ev) {
   const yo = e.jugadores[e.turno];
   if (e.numeroTurno === 0) e.numeroTurno = 1;
-  for (const p of enMesa(yo)) p.protegido = false;
+  for (const p of enMesa(yo)) { p.protegido = false; p.descansa = !!p.atacoFuerte; p.atacoFuerte = false; }
   yo.aulaUsada = false;
   yo.aulaCuenta = 0;
   yo.personajeUsado = false;
