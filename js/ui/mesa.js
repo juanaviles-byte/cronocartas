@@ -56,6 +56,8 @@ export const FRASES_VENTAJA = {
 const ICONO_SONIDO = '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a8 8 0 0 1 0 11"/></svg>';
 const ICONO_SILENCIO = '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 9v6h4l5 4V5L8 9z"/><path d="M17 9l5 6M22 9l-5 6"/></svg>';
 
+// Celular en vertical (vista del jugador): los botones no van en el borde de abajo, donde suelen estar los del sistema.
+const celularVertical = () => typeof matchMedia === 'function' && matchMedia('(orientation: portrait) and (max-width: 600px)').matches;
 const h = (tag, cls, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; };
 
 export async function montarMesa(contenedor, opciones) {
@@ -525,6 +527,14 @@ export async function montarMesa(contenedor, opciones) {
       : estado.fase === 'promover' ? `${nombres[estado.turno]}: elige un nuevo activo`
       : (contraIA && estado.turno === 'A') ? 'Tu turno' : `Turno de ${nombres[estado.turno]}`;
     c.appendChild(h('div', `aviso-turno turno-${estado.turno}`, turno));
+    // Vista del jugador: «Pasar turno» también va en la franja central. En el celular vertical es el que se ve,
+    // porque abajo suelen estar los botones del sistema (atrás, inicio) encima de la pantalla.
+    if (vistaJugador && estado.fase === 'turno' && estado.turno === 'A') {
+      const pasar = h('button', 'boton-secundario boton-pasar boton-pasar-centro', 'Pasar turno');
+      pasar.onclick = () => jugar({ tipo: 'pasar' });
+      c.appendChild(pasar);
+      c.classList.add('con-pasar');
+    }
     c.appendChild(h('div', 'registro', ''));
     const son = h('button', 'boton-sonido', sonidoActivo() ? ICONO_SONIDO : ICONO_SILENCIO);
     son.setAttribute('aria-label', 'Sonido');
@@ -762,7 +772,8 @@ export async function montarMesa(contenedor, opciones) {
         if (!config.cronista) controles.appendChild(h('div', 'pista', 'Toca un Protagonista de tu reserva'));
       }
     }
-    fila.appendChild(controles);
+    // Celular vertical: el orbe de Saber, la Pista y «Listo» van bajo la placa «Tú», lejos del borde de abajo.
+    (vistaJugador && j === 'A' && celularVertical() ? campo : fila).appendChild(controles);
     s.appendChild(fila);
     return s;
   }
@@ -857,7 +868,7 @@ export async function montarMesa(contenedor, opciones) {
       case 'retirar': return q(`${L} .campo [data-uid="${CSS.escape(jd.reemplazo)}"]`);
       case 'promover': return q(`${L} .campo [data-uid="${CSS.escape(jd.uid)}"]`);
       case 'listo': return q(`${L} .controles .boton-principal`);
-      case 'pasar': return q(`${L} .controles .boton-pasar`);
+      case 'pasar': return q(`${L} .controles .boton-pasar, .centro .boton-pasar-centro`).filter(b => b.offsetParent !== null);
       default: return [];
     }
   }
@@ -1447,8 +1458,14 @@ export async function montarMesa(contenedor, opciones) {
     }, 700);
   }
 
-  // Al girar la tablet o cambiar el tamaño de la ventana, la mano vuelve a calcular cuánto se solapa.
-  const alCambiarTamano = () => { if (vivo) raiz.querySelectorAll('.mano:not(.oculta)').forEach(solaparMano); };
+  // Al girar la tablet o cambiar el tamaño de la ventana, la mano vuelve a calcular cuánto se solapa
+  // (y si se pasa de celular vertical a otra forma, o al revés, la mesa se vuelve a armar).
+  let eraCelular = celularVertical();
+  const alCambiarTamano = () => {
+    if (!vivo) return;
+    if (celularVertical() !== eraCelular) { eraCelular = celularVertical(); render(); return; }
+    raiz.querySelectorAll('.mano:not(.oculta)').forEach(solaparMano);
+  };
   addEventListener('resize', alCambiarTamano);
 
   function destruir() {
