@@ -1,7 +1,7 @@
 // Service worker de Cronocartas: guarda la app en la tablet para jugar sin internet.
 // Al publicar una mejora, sube VERSION y agrega aquí los archivos nuevos
 // (la prueba tests/sw.test.js avisa si falta alguno).
-const VERSION = 'cc-v91';
+const VERSION = 'cc-v92';
 const ARCHIVOS = [
   "./",
   "audio/ambientes/CC-5-U1-007.ogg",
@@ -359,6 +359,9 @@ const ARCHIVOS = [
   "img/dorsos/D18.webp",
   "img/dorsos/D19.webp",
   "img/dorsos/D20.webp",
+  "img/dorsos/D21.webp",
+  "img/dorsos/D22.webp",
+  "img/dorsos/D23.webp",
   "img/dorsos/FM-bosque-noche.webp",
   "img/dorsos/FM-cielo-viento.webp",
   "img/dorsos/FM-general-b.webp",
@@ -538,7 +541,7 @@ const HUELLAS = {
   "data/ambientes.json": "b59e779a954c",
   "data/arte.json": "6d56ff970f5e",
   "data/aula.json": "9c4641e855c6",
-  "data/dorsos.json": "6010ff66e9d1",
+  "data/dorsos.json": "d3ddee56110d",
   "data/duelos.json": "b731550e7bff",
   "data/epocas.json": "77553582d691",
   "data/escenarios.json": "8e7359167c6d",
@@ -568,7 +571,7 @@ const HUELLAS = {
   "img/cartas/CC-5-U2-002.webp": "5f6dbe8384a9",
   "img/cartas/CC-5-U2-003.webp": "ef9dac854e86",
   "img/cartas/CC-5-U2-004.webp": "c52e4110771a",
-  "img/cartas/CC-5-U2-005.webp": "5ac6a6da445a",
+  "img/cartas/CC-5-U2-005.webp": "6f3f4de20e45",
   "img/cartas/CC-5-U2-006.webp": "b338293ac33c",
   "img/cartas/CC-5-U2-007.webp": "5bb70d01dada",
   "img/cartas/CC-5-U2-008.webp": "90d973709fd8",
@@ -594,7 +597,7 @@ const HUELLAS = {
   "img/cartas/CC-5-U4-003.webp": "27d973c62d46",
   "img/cartas/CC-5-U4-004.webp": "37721302a25e",
   "img/cartas/CC-5-U4-005.webp": "58f185acaf9c",
-  "img/cartas/CC-5-U4-006.webp": "5ed7c15cda36",
+  "img/cartas/CC-5-U4-006.webp": "9afbc8e0a831",
   "img/cartas/CC-5-U4-007.webp": "3fd0ae5e80db",
   "img/cartas/CC-5-U4-008.webp": "47b0da05f59f",
   "img/cartas/CC-5-U4-009.webp": "1ca3d849af4c",
@@ -818,6 +821,9 @@ const HUELLAS = {
   "img/dorsos/D18.webp": "14958746687c",
   "img/dorsos/D19.webp": "d0b7bd874e27",
   "img/dorsos/D20.webp": "0e999bdb4dff",
+  "img/dorsos/D21.webp": "fb6d78b9ece6",
+  "img/dorsos/D22.webp": "ba63c92927ea",
+  "img/dorsos/D23.webp": "6325c91f70dd",
   "img/dorsos/FM-bosque-noche.webp": "daa66cffa288",
   "img/dorsos/FM-cielo-viento.webp": "7aad0fa69051",
   "img/dorsos/FM-general-b.webp": "52a03e7ff332",

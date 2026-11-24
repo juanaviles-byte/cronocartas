@@ -33,7 +33,10 @@
   "fm-bosque-noche": "img/dorsos/FM-bosque-noche.webp",
   "fm-general-b": "img/dorsos/FM-general-b.webp",
   "fm-general-c": "img/dorsos/FM-general-c.webp",
-  "fm-general-d": "img/dorsos/FM-general-d.webp"
+  "fm-general-d": "img/dorsos/FM-general-d.webp",
+  "mesopotamia": "img/dorsos/D21.webp",
+  "sur": "img/dorsos/D22.webp",
+  "pipiolos": "img/dorsos/D23.webp"
  },
  "bandos": {
   "conquistadores": "conquista",
@@ -53,13 +56,13 @@
   "santiago": "colonia",
   "frontera": "originarios",
   "norte": "paisajes",
-  "sur": "fm-general-c",
+  "sur": "sur",
   "pelucones": "independencia",
-  "pipiolos": "ciudadania",
+  "pipiolos": "pipiolos",
   "trabajadores": "sigloxx",
   "empresarios": "republica",
   "egipto": "oriente",
-  "mesopotamia": "prehistoria",
+  "mesopotamia": "mesopotamia",
   "senores": "medieval",
   "burgueses": "renacimiento",
   "defensores": "originarios",
