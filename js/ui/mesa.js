@@ -86,7 +86,8 @@ export async function montarMesa(contenedor, opciones) {
     torneo: opciones.torneo || null,
     cronista: opciones.modo === 'tutorial' || ajustes.cronista !== false,
     primero: opciones.primero === 'A' || opciones.primero === 'B' ? opciones.primero : null,   // lo decide el sorteo
-    rivalAzar: !!opciones.rivalAzar,            // modo libre: el mazo de la tablet salió al azar
+    azarLibre: opciones.azarLibre || null,     // modo libre: lo elegido cuando algún mazo salió al azar
+    rivalAzar: !!opciones.rivalAzar,            // (partidas guardadas antes: el mazo de la tablet salió al azar)
     mazoElegidoA: opciones.mazoElegidoA != null ? opciones.mazoElegidoA : null,
   };
   const contraIA = config.modo !== 'caraacara';
@@ -1454,8 +1455,9 @@ export async function montarMesa(contenedor, opciones) {
 
   async function reiniciar() {
     destruir();
-    // Si el mazo de la tablet era al azar, se sortea otro para la partida nueva.
-    const otroMazo = config.rivalAzar ? mazosDePartida({ mazo: 'libre', cursoA: config.mazoElegidoA, cursoB: 'azar' }) : {};
+    // Si algún mazo era al azar, se sortea otro para la partida nueva.
+    const eleccionAzar = config.azarLibre || (config.rivalAzar ? { cursoA: config.mazoElegidoA, cursoB: 'azar' } : null);
+    const otroMazo = eleccionAzar ? mazosDePartida({ mazo: 'libre', ...eleccionAzar }) : {};
     const nueva = await montarMesa(contenedor, { ...opciones, ...otroMazo, estado: null, primero: null, semilla: config.modo === 'tutorial' ? opciones.semilla : undefined });
     api.destruir = nueva.destruir;
   }

@@ -140,7 +140,7 @@ const vistas = {
     }
 
     grupo('¿Cómo juegan?').appendChild(opciones([['caraacara', 'Cara a cara', 'Dos jugadores en esta tablet'], ['ia', 'Contra la tablet', 'Un jugador']],
-      eleccion.modo, m => { eleccion.modo = m; if (m !== 'ia' && eleccion.cursoB === 'azar') eleccion.cursoB = eleccion.cursoA; }));
+      eleccion.modo, m => { eleccion.modo = m; }));
     if (eleccion.modo === 'ia') {
       const nivel = ajustes.nivel === 'cronista' ? 'erudito' : ajustes.nivel || 'historiador';
       grupo('Nivel de la tablet').appendChild(opciones(NIVELES.map(n => [n.id, n.nombre, n.texto]), nivel,
@@ -175,9 +175,10 @@ const vistas = {
         b.onclick = () => { eleccion[k] = c; if (!cruzados) eleccion.cursoB = c; if (k === 'cursoA' || ex) { eleccion.tablero = 'azar'; eleccion.reforzar = false; eleccion.duelo = null; eleccion.bandoA = null; } render(); };
         fila.appendChild(b);
       }
-      if (k === 'cursoB' && eleccion.modo === 'ia') {
-        const b = h('button', `opcion curso-azar${eleccion.cursoB === 'azar' ? ' elegida' : ''}`, '<b>?</b><span>al azar</span>');
-        b.onclick = () => { eleccion.cursoB = 'azar'; render(); };
+      if (cruzados) {   // cada jugador puede pedir un mazo al azar (curso o expansión)
+        const b = h('button', `opcion curso-azar${eleccion[k] === 'azar' ? ' elegida' : ''}`, '<b>?</b><span>al azar</span>');
+        b.setAttribute('aria-label', `${etiqueta}: mazo al azar`);
+        b.onclick = () => { eleccion[k] = 'azar'; if (k === 'cursoA') { eleccion.tablero = 'azar'; eleccion.reforzar = false; } render(); };
         fila.appendChild(b);
       }
       cursos.appendChild(fila);
@@ -234,7 +235,8 @@ const vistas = {
       }
     }
 
-    if (!col && cursoDeMesa) {   // Las expansiones no tienen fechas: sin línea de tiempo.
+    // Las expansiones no tienen fechas: sin línea de tiempo (con un mazo al azar puede salir un curso; la mesa decide).
+    if (!col && (cursoDeMesa || (cruzados && [eleccion.cursoA, eleccion.cursoB].includes('azar')))) {
       const gl = grupo('Reglas extra');
       const ll = h('label', 'interruptor', `<input type="checkbox"${eleccion.linea ? ' checked' : ''}><span>Línea de tiempo<small>Los Personajes y Acontecimientos con fecha se ordenan en una línea de tiempo. Si los ubicas bien, ganas +1 de Saber.</small></span>`);
       ll.querySelector('input').onchange = ev => { eleccion.linea = ev.target.checked; };

@@ -77,11 +77,37 @@ test('la mesa y la pantalla de nueva partida usan la misma lista de tableros', (
   assert.match(readFileSync('js/ui/app.js', 'utf8'), /tablerosDisponibles\(tableros, \{ libre: cruzados/);
 });
 
-test('contra la tablet con mazo al azar, la partida recuerda que era al azar para sortearlo de nuevo', () => {
-  const r = mazosDePartida({ mazo: 'libre', cursoA: 6, cursoB: 'azar' }, azar(0));
-  assert.equal(r.rivalAzar, true);
-  assert.equal(r.mazoElegidoA, 6);
+test('con un mazo al azar, la partida recuerda lo elegido para sortearlo de nuevo en «Otra partida»', () => {
+  assert.deepEqual(mazosDePartida({ mazo: 'libre', cursoA: 6, cursoB: 'azar' }, azar(0)).azarLibre, { cursoA: 6, cursoB: 'azar' });
+  assert.deepEqual(mazosDePartida({ mazo: 'libre', cursoA: 'azar', cursoB: 7 }, azar(0)).azarLibre, { cursoA: 'azar', cursoB: 7 });
+  assert.equal(mazosDePartida({ mazo: 'libre', cursoA: 6, cursoB: 7 }, azar(0)).azarLibre, undefined);
   const mesa = readFileSync('js/ui/mesa.js', 'utf8');
-  assert.match(mesa, /config\.rivalAzar \? mazosDePartida\(\{ mazo: 'libre', cursoA: config\.mazoElegidoA, cursoB: 'azar' \}\)/,
-    '«Otra partida» vuelve a sortear el mazo de la tablet');
+  assert.match(mesa, /mazosDePartida\(\{ mazo: 'libre', \.\.\.eleccionAzar \}\)/, '«Otra partida» vuelve a sortear');
+  // Partidas guardadas antes de este cambio: solo traían rivalAzar y mazoElegidoA.
+  assert.match(mesa, /config\.rivalAzar \? \{ cursoA: config\.mazoElegidoA, cursoB: 'azar' \}/);
+});
+
+// El jugador también puede pedir un mazo al azar (contra la tablet y cara a cara, en el modo libre).
+test('el mazo al azar del jugador sale de cualquiera de los cursos o expansiones', () => {
+  const n = MAZOS_LIBRES.length;
+  const salidas = MAZOS_LIBRES.map((_, i) => {
+    const r = mazosDePartida({ mazo: 'libre', cursoA: 'azar', cursoB: 7 }, azar((i + 0.5) / n));
+    assert.ok([5, 6, 7, 8].includes(r.cursoA) && [5, 6, 7, 8].includes(r.cursoB));
+    return r.coleccionA || r.cursoA;
+  });
+  assert.deepEqual(salidas, MAZOS_LIBRES);
+});
+
+test('los dos mazos al azar a la vez dan una partida válida', () => {
+  for (let i = 0; i < 20; i++) {
+    const r = mazosDePartida({ mazo: 'libre', cursoA: 'azar', cursoB: 'azar' }, () => (i * 0.37) % 1);
+    assert.ok([5, 6, 7, 8].includes(r.cursoA) && [5, 6, 7, 8].includes(r.cursoB));
+    assert.ok(r.coleccionA !== 'azar' && r.coleccionB !== 'azar');
+  }
+});
+
+test('la pantalla de nueva partida ofrece «al azar» en la fila de cada jugador del modo libre', () => {
+  const app = readFileSync('js/ui/app.js', 'utf8');
+  assert.match(app, /curso-azar\$\{eleccion\[k\] === 'azar'/);
+  assert.match(app, /eleccion\[k\] = 'azar'/);
 });
