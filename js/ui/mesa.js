@@ -18,6 +18,7 @@ import { FUERZAS, coleccion } from '../colecciones.js';
 import { hacerArrastrable, ultimaSoltada } from './arrastre.js';
 import { liviano } from '../rendimiento.js';
 import { disposicionDeMesa } from './disposicion.js';
+import { colocarBurbuja } from './burbuja.js';
 import { volar, impacto, deshacerEnArena, relojSobre, granoHacia, motasQueSuben, estallido, arenaQueCae } from './efectos.js';
 import { arenaDelTiempo } from './viaje.js';
 import { planDeEscena, escenaAtaque, escenaInvocacion, estiloDeGolpe } from './director.js';
@@ -684,15 +685,15 @@ export async function montarMesa(contenedor, opciones) {
         b.disabled = !listo;
         b.onclick = () => jugar({ tipo: 'listo' });
         controles.appendChild(b);
-        if (!listo) controles.appendChild(h('div', 'pista', 'Toca un Protagonista de tu mano'));
-        else if (!yo.reserva.length) controles.appendChild(h('div', 'pista suave', 'Consejo: pon Protagonistas en la reserva. Si tu activo cae y no tienes reserva, pierdes.'));
+        if (!listo && !config.cronista) controles.appendChild(h('div', 'pista', 'Toca un Protagonista de tu mano'));
+        else if (!yo.reserva.length && !config.cronista) controles.appendChild(h('div', 'pista suave', 'Consejo: pon Protagonistas en la reserva. Si tu activo cae y no tienes reserva, pierdes.'));
       } else if (estado.fase === 'turno') {
         const b = h('button', 'boton-secundario boton-pasar', 'Pasar turno');
         b.onclick = () => jugar({ tipo: 'pasar' });
         botonera.appendChild(b);
         controles.appendChild(botonera);
       } else if (estado.fase === 'promover') {
-        controles.appendChild(h('div', 'pista', 'Toca un Protagonista de tu reserva'));
+        if (!config.cronista) controles.appendChild(h('div', 'pista', 'Toca un Protagonista de tu reserva'));
       }
     }
     fila.appendChild(controles);
@@ -747,7 +748,9 @@ export async function montarMesa(contenedor, opciones) {
     clearTimeout(temporizadorGlobo);
     globo = { j, ...dicho, auto };
     voz(globo.audio || globo.clave);
-    if (auto) temporizadorGlobo = setTimeout(() => { if (globo && globo.auto) { globo = null; dibujarGlobo(); } }, 11000);
+    // Se cierra sola: con voz grabada, cuando termina la frase (~11 s); sin voz, a los 6 s.
+    const conVoz = !!rutaCronista(globo.audio || globo.clave) && sonidoActivo();
+    if (auto) temporizadorGlobo = setTimeout(() => { if (globo && globo.auto) { globo = null; dibujarGlobo(); } }, conVoz ? 11000 : 6000);
     dibujarGlobo();
   }
 
@@ -794,44 +797,50 @@ export async function montarMesa(contenedor, opciones) {
   }
 
   let bannerHasta = 0, globoDiferido = null;
+  // Zonas que una burbuja nunca tapa: los activos, el Lugar y los botones para seguir jugando.
+  const ZONAS_PROHIBIDAS = ['.zona-activo', '.lugar-en-juego', '.boton-pasar', '.controles .boton-principal'];
   function dibujarGlobo() {
-    raiz.querySelectorAll('.globo-cronista').forEach(g => g.remove());
-    // Mientras se ve el cartel «Tu turno», el globo espera: así no se pisan.
-    const espera = bannerHasta - performance.now();
+    raiz.querySelectorAll('.burbuja-cronista').forEach(g => g.remove());
+    // Mientras se ve el cartel «Tu turno» o la escena de una jugada, la burbuja espera: así no se pisan.
+    const espera = Math.max(bannerHasta - performance.now(), raiz.classList.contains('en-escena') ? 400 : 0);
     clearTimeout(globoDiferido);
     if (globo && espera > 0) { globoDiferido = setTimeout(() => { if (vivo) dibujarGlobo(); }, espera + 60); return; }
     raiz.querySelectorAll('.sugerida').forEach(g => g.classList.remove('sugerida'));
     if (!globo || (!config.cronista && !globo.tutorial)) return;
-    const g = h('div', `globo-cronista lado-globo-${globo.j}${girado(globo.j) ? ' girado' : ''}${globo.tutorial ? ' entrenador' : ''}`);
+    const gir = girado(globo.j);
+    const g = h('div', `burbuja-cronista lado-globo-${globo.j}${gir ? ' girado' : ''}${globo.tutorial ? ' entrenador' : ''}`);
     const cara = ['explica', 'pista', 'celebra', 'atenta'].includes(globo.expresion) ? globo.expresion : 'explica';
     // globo.texto viene de guia.js (nombres ya escapados con esc) o del paso a paso del tutorial (texto fijo).
-    g.innerHTML = '<img class="retrato" src="img/cronista/' + cara + '.jpg" alt="La Cronista"><div class="dice"><b class="quien">La Cronista</b><p>' + globo.texto + '</p></div>';
-    const dice = g.querySelector('.dice');
-    const acciones = h('div', 'acciones-globo');
-    acciones.appendChild(botonEscuchar(() => globo ? globo.texto.replace(/<[^>]+>/g, '') : '', 'boton-mini', () => globo && rutaCronista(globo.audio || globo.clave)));
-    if (!globo.tutorial) {
-      const ok = h('button', 'boton-mini', 'Entendido');
-      ok.onclick = ev => { ev.stopPropagation(); globo = null; dibujarGlobo(); };
-      acciones.appendChild(ok);
-    }
-    dice.appendChild(acciones);
+    g.innerHTML = '<img class="retrato" src="img/cronista/' + cara + '.jpg" alt="La Cronista"><p>' + globo.texto + '</p><i class="colita" aria-hidden="true"></i>';
+    const escuchar = botonEscuchar(() => globo ? globo.texto.replace(/<[^>]+>/g, '') : '', 'boton-icono', () => globo && rutaCronista(globo.audio || globo.clave));
+    escuchar.setAttribute('aria-label', 'Escuchar a La Cronista');
+    g.insertBefore(escuchar, g.querySelector('.colita'));
+    g.setAttribute('role', 'status');
+    // Un toque la cierra (en el tutorial vuelve en el paso siguiente).
+    g.onclick = () => { clearTimeout(temporizadorGlobo); if (globo && !globo.tutorial) globo = null; g.remove(); };
+    g.style.visibility = 'hidden';
     raiz.appendChild(g);
-    acoplarGlobo(g);
-    if (globo.jugada && estado.turno === globo.j) objetivoDe(globo.jugada).forEach(el => el.classList.add('sugerida'));
+    const objetivos = globo.jugada && estado.turno === globo.j ? objetivoDe(globo.jugada) : [];
+    ubicarBurbuja(g, objetivos[0] || raiz.querySelector(`.lado-${globo.j} .boton-cronista`), gir);
+    g.style.visibility = '';
+    objetivos.forEach(el => el.classList.add('sugerida'));
   }
 
-  // Si hay espacio, el globo se acopla a la barra a la derecha del activo: así no tapa el tablero,
-  // el Lugar, el turno ni los mensajes. Si no cabe (pantalla angosta o mitad girada), queda centrado.
-  function acoplarGlobo(g) {
-    if (g.classList.contains('girado')) return;
-    const barra = raiz.querySelector('.centro'), son = raiz.querySelector('.centro .boton-sonido');
-    const activo = raiz.querySelector(`.lado-${globo.j} .zona-activo`);
-    if (!barra || !son || !activo) return;
-    const izq = activo.getBoundingClientRect().right + 14, der = son.getBoundingClientRect().left - 12;
-    if (der - izq < 280) return;
-    const b = barra.getBoundingClientRect();
-    g.classList.add('acoplado');
-    g.style.left = `${izq}px`; g.style.width = `${der - izq}px`; g.style.top = `${b.top + b.height / 2}px`;
+  // Pone la burbuja junto a lo que señala, sin tapar las zonas prohibidas, con la colita apuntando.
+  function ubicarBurbuja(g, objetivo, gir) {
+    const rect = el => { const r = el.getBoundingClientRect(); return { x: r.left, y: r.top, w: r.width, h: r.height }; };
+    const prohibidas = [...raiz.querySelectorAll(ZONAS_PROHIBIDAS.join(','))].map(rect).filter(r => r.w && r.h);
+    const mano = raiz.querySelector(`.lado-${globo.j} .mano`);
+    const tamano = { w: g.offsetWidth, h: g.offsetHeight };
+    const p = colocarBurbuja({ objetivo: objetivo ? rect(objetivo) : null, tamano, pantalla: { w: innerWidth, h: innerHeight }, prohibidas, respaldo: mano ? rect(mano) : null });
+    g.style.left = `${p.x}px`; g.style.top = `${p.y}px`;
+    // En la mitad girada la burbuja rota 180°: la colita se dibuja en el punto opuesto para que, ya girada, apunte bien.
+    const opuesto = { arriba: 'abajo', abajo: 'arriba', izq: 'der', der: 'izq', respaldo: 'abajo' };
+    const ladoColita = p.lado === 'respaldo' ? 'arriba' : p.lado;   // respaldo: la burbuja queda sobre la mano
+    let cx = p.colita.x - p.x, cy = p.colita.y - p.y, lado = ladoColita;
+    if (gir) { cx = tamano.w - cx; cy = tamano.h - cy; lado = opuesto[ladoColita]; }
+    g.dataset.colita = lado;
+    g.style.setProperty('--cx', `${cx}px`); g.style.setProperty('--cy', `${cy}px`);
   }
 
   function botonCronista(j) {

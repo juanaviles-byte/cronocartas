@@ -56,3 +56,15 @@ test('la colita apunta al objetivo', () => {
   assert.ok(r.colita.x >= r.x + 16 && r.colita.x <= r.x + 244);
   assert.equal(r.colita.x, Math.min(Math.max(440, r.x + 16), r.x + 244));
 });
+
+// La mesa usa la burbuja en vez del globo central de antes.
+const mesa = readFileSync('js/ui/mesa.js', 'utf8');
+test('la mesa coloca las burbujas con colocarBurbuja', () => {
+  assert.match(mesa, /import \{ colocarBurbuja \} from '\.\/burbuja\.js';/);
+});
+test('ya no existe el globo acoplado a la barra central', () => {
+  assert.doesNotMatch(mesa, /function acoplarGlobo/);
+});
+test('La Cronista dibuja una burbuja-cronista', () => {
+  assert.match(mesa, /['`]burbuja-cronista/);
+});
