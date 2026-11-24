@@ -1295,3 +1295,13 @@ body:not([data-vista="mesa"]) { background: radial-gradient(ellipse at 20% 0%, #
 
 /* Sin rótulos en ninguna mesa: los espacios se entienden por su forma y conservan su aria-label. */
 .mesa .hueco span, .mesa .pila small { display: none; }
+
+/* Aviso de APK nuevo (solo en el APK): una tarjeta abajo, sobre todo lo demás. */
+.aviso-apk { position: fixed; left: 50%; bottom: 1rem; transform: translateX(-50%); z-index: 10000; width: min(92vw, 30rem);
+  display: flex; flex-direction: column; gap: 6px; padding: 14px 16px; border-radius: 14px; background: #F6F1E3; color: #2a2017;
+  box-shadow: 0 0 0 2px var(--oro, #E9C46A), 0 10px 30px rgba(0,0,0,.45); }
+.aviso-apk b { font-family: var(--serif); font-size: 1.05rem; }
+.aviso-apk span { font-size: .88rem; color: #5a4a33; }
+.aviso-apk-botones { display: flex; justify-content: flex-end; margin-top: 4px; }
+.aviso-apk-botones > * + * { margin-left: 10px; }
+.aviso-apk-botones a, .aviso-apk-botones button { min-height: 44px; display: inline-flex; align-items: center; padding: 0 16px; text-decoration: none; }

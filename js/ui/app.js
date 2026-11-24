@@ -11,6 +11,7 @@ import { sonidos, precargarSonidos } from './sonido.js';
 import { ambiente } from './ambiente.js';
 import { almacen, CLAVES } from '../almacen.js';
 import { esc } from '../html.js';
+import { revisarActualizacionApk } from '../actualizacion.js';
 import { CURSOS, MAZOS_LIBRES, mazosDePartida, tablerosDisponibles } from '../eleccion.js';
 import { modoEscuelaActivo } from '../rendimiento.js';
 
@@ -420,6 +421,9 @@ async function render() {
 window.addEventListener('hashchange', render);
 // Señal para index.html: la app arrancó (si no llega, se muestra el aviso de arranque fallido).
 render().then(() => { window.__cronocartasListo = true; });
+
+// En el APK: al abrir, si hay una versión publicada más nueva, se ofrece descargarla en Chrome.
+if (window.Capacitor) revisarActualizacionApk();
 
 // En el APK (Capacitor) los archivos ya vienen dentro de la app: no hace falta guardarlos otra vez.
 if ('serviceWorker' in navigator && window.isSecureContext && !window.Capacitor) {
