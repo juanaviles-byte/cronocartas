@@ -2,6 +2,11 @@
 // Un toque corto sigue siendo un "clic" (abre el detalle de la carta).
 
 const UMBRAL = 10;   // píxeles antes de considerar que es un arrastre
+const SALIDA = 18;   // con el dedo, cuánto hay que salir de la mano hacia la mesa para arrastrar la carta
+
+// Cada carta arrastrable con sus opciones: al repasar la mano con el dedo, se arrastra la carta marcada
+// (puede no ser la que se tocó primero).
+const REGISTRO = new WeakMap();
 
 // Dónde se soltó la última carta: la animación de entrada parte desde ahí.
 export const ultimaSoltada = { x: 0, y: 0, t: 0 };
@@ -13,8 +18,11 @@ export const ultimaSoltada = { x: 0, y: 0, t: 0 };
  *   alSoltar(accion)               se llama al soltar sobre un objetivo
  *   girado                         true si la carta está en la mitad girada (cara a cara)
  */
-export function hacerArrastrable(el, { objetivos, alSoltar, girado = false }) {
+export function hacerArrastrable(el, op) {
+  const { girado = false } = op;
+  REGISTRO.set(el, op);
   let inicio = null, fantasma = null, lista = [], encima = null, arrastrando = false;
+  let origen = el, opActual = op;   // la carta que de verdad se arrastra
 
   // Las ilustraciones son <img>: sin esto, el mouse inicia el arrastre nativo de imagen y cancela el nuestro.
   el.addEventListener('dragstart', ev => ev.preventDefault());
@@ -25,7 +33,7 @@ export function hacerArrastrable(el, { objetivos, alSoltar, girado = false }) {
     // el soltar del primero se ignoraría y la carta quedaría pegada en la pantalla.
     if (inicio) return;
     inicio = { x: ev.clientX, y: ev.clientY, id: ev.pointerId };
-    arrastrando = false;
+    arrastrando = false; origen = el; opActual = op;
     // Capturar desde el inicio: aunque el dedo salga rápido de la carta, sigue llegando el movimiento.
     try { el.setPointerCapture(ev.pointerId); } catch { /* sin captura */ }
   });
@@ -35,10 +43,18 @@ export function hacerArrastrable(el, { objetivos, alSoltar, girado = false }) {
     const dx = ev.clientX - inicio.x, dy = ev.clientY - inicio.y;
     if (!arrastrando) {
       if (Math.hypot(dx, dy) < UMBRAL) return;
-      // En la mano, un gesto muy horizontal desplaza la fila, pero solo si las cartas no caben y la fila se puede desplazar.
       const fila = el.closest('.mano');
-      const desplazable = fila && fila.scrollWidth > fila.clientWidth + 2;
-      if (ev.pointerType === 'touch' && desplazable && Math.abs(dx) > Math.abs(dy) * 1.8) { inicio = null; return; }
+      if (fila && ev.pointerType !== 'mouse') {
+        // Con el dedo, mientras siga sobre la mano solo se repasan las cartas (repaso.js); la carta se arrastra
+        // al sacar el dedo hacia la mesa, y es la que quedó marcada.
+        const r = fila.getBoundingClientRect();
+        if (!(girado ? ev.clientY > r.bottom + SALIDA : ev.clientY < r.top - SALIDA)) return;
+        const marcada = fila.querySelector('.repasada');
+        if (marcada && marcada !== el) {
+          if (!REGISTRO.has(marcada)) return;   // esa carta no se puede jugar ahora
+          origen = marcada; opActual = REGISTRO.get(marcada);
+        }
+      }
       empezar(ev);
     }
     mover(ev);
@@ -48,10 +64,11 @@ export function hacerArrastrable(el, { objetivos, alSoltar, girado = false }) {
     if (!inicio || (ev && ev.pointerId !== inicio.id)) return;
     if (arrastrando) {
       // Si la mesa se redibujó durante el arrastre, la carta y los destinos ya no están: se cancela sin jugar.
-      const accion = el.isConnected && encima && encima.el.isConnected ? encima.accion : null;
+      const accion = origen.isConnected && encima && encima.el.isConnected ? encima.accion : null;
       if (accion && ev) Object.assign(ultimaSoltada, { x: ev.clientX, y: ev.clientY, t: performance.now() });
+      const soltar = opActual.alSoltar;
       limpiar(!accion);
-      if (accion) alSoltar(accion);
+      if (accion) soltar(accion);
       // Evita que el soltar se interprete como un toque en la carta.
       el.addEventListener('click', e => { e.stopPropagation(); e.preventDefault(); }, { capture: true, once: true });
     }
@@ -70,20 +87,21 @@ export function hacerArrastrable(el, { objetivos, alSoltar, girado = false }) {
 
   function empezar(ev) {
     arrastrando = true;
-    lista = objetivos() || [];
+    lista = opActual.objetivos() || [];
     lista.forEach(o => o.el.classList.add('destino-posible'));
-    const r = el.getBoundingClientRect();
-    fantasma = el.cloneNode(true);
+    const r = origen.getBoundingClientRect();
+    fantasma = origen.cloneNode(true);
+    fantasma.classList.remove('repasada');
     fantasma.classList.add('fantasma-arrastre');
     if (girado) fantasma.classList.add('girado');
     fantasma.style.width = `${r.width}px`;
     fantasma.style.height = `${r.height}px`;
-    fantasma.style.setProperty('--ch', getComputedStyle(el).getPropertyValue('--ch'));
+    fantasma.style.setProperty('--ch', getComputedStyle(origen).getPropertyValue('--ch'));
     document.body.appendChild(fantasma);
     document.body.classList.add('arrastrando');
     addEventListener('pointerup', enVentana.up, true);
     addEventListener('pointercancel', enVentana.cancel, true);
-    el.classList.add('origen-arrastre');
+    origen.classList.add('origen-arrastre');
   }
 
   function mover(ev) {
@@ -104,13 +122,13 @@ export function hacerArrastrable(el, { objetivos, alSoltar, girado = false }) {
     removeEventListener('pointerup', enVentana.up, true);
     removeEventListener('pointercancel', enVentana.cancel, true);
     lista.forEach(o => o.el.classList.remove('destino-posible', 'destino-encima'));
-    el.classList.remove('origen-arrastre');
+    origen.classList.remove('origen-arrastre');
     document.body.classList.remove('arrastrando');
     const f = fantasma;
     fantasma = null; encima = null; lista = []; arrastrando = false;
     if (!f) return;
-    if (volver && el.isConnected) {
-      const r = el.getBoundingClientRect();
+    if (volver && origen.isConnected) {
+      const r = origen.getBoundingClientRect();
       f.classList.add('volviendo');
       f.style.left = `${r.left + r.width / 2}px`;
       f.style.top = `${r.top + r.height / 2}px`;

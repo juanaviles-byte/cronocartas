@@ -76,3 +76,12 @@ test('la mesa y la pantalla de nueva partida usan la misma lista de tableros', (
   assert.match(readFileSync('js/ui/mesa.js', 'utf8'), /tablerosDisponibles\(tableros, \{ libre: config\.libre/);
   assert.match(readFileSync('js/ui/app.js', 'utf8'), /tablerosDisponibles\(tableros, \{ libre: cruzados/);
 });
+
+test('contra la tablet con mazo al azar, la partida recuerda que era al azar para sortearlo de nuevo', () => {
+  const r = mazosDePartida({ mazo: 'libre', cursoA: 6, cursoB: 'azar' }, azar(0));
+  assert.equal(r.rivalAzar, true);
+  assert.equal(r.mazoElegidoA, 6);
+  const mesa = readFileSync('js/ui/mesa.js', 'utf8');
+  assert.match(mesa, /config\.rivalAzar \? mazosDePartida\(\{ mazo: 'libre', cursoA: config\.mazoElegidoA, cursoB: 'azar' \}\)/,
+    '«Otra partida» vuelve a sortear el mazo de la tablet');
+});

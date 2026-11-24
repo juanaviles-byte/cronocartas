@@ -193,3 +193,10 @@ test('el ambiente general de la expansión existe y es un bucle de ambiente', as
   for (const c of COLECCIONES) if (c.ambiente) assert.ok(existsSync(c.ambiente), `falta ${c.ambiente}`);
   assert.equal(COLECCIONES.find(c => c.sigla === 'FM').ambiente, 'audio/ambientes/FM-ME00.ogg');
 });
+
+test('las cartas jugables de la mano se marcan también en la expansión', () => {
+  const css = readFileSync('css/estilos.css', 'utf8');
+  const col = css.indexOf('.col-fin-del-mundo.carta-mini {');
+  const usable = css.indexOf('.col-fin-del-mundo.carta-mini.usable {');
+  assert.ok(col > 0 && usable > col, 'la marca de «usable» debe ir después del borde de la expansión');
+});

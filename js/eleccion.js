@@ -20,7 +20,9 @@ export function mazosDePartida(eleccion, azar = Math.random) {
   const cursoA = esCurso(a) ? Number(a) : esCurso(b) ? Number(b) : 7;
   const cursoB = esCurso(b) ? Number(b) : cursoA;
   // Reforzar una unidad no tiene sentido si cada mazo es de otro curso.
-  return { cursoA, cursoB, reforzar: false, coleccionA: esCurso(a) ? null : a, coleccionB: esCurso(b) ? null : b };
+  return { cursoA, cursoB, reforzar: false, coleccionA: esCurso(a) ? null : a, coleccionB: esCurso(b) ? null : b,
+    // Si el de la tablet salió al azar, «Otra partida» lo vuelve a sortear.
+    ...(eleccion.cursoB === 'azar' ? { rivalAzar: true, mazoElegidoA: a } : {}) };
 }
 
 // Tableros que se pueden elegir (y de los que sale «Sorpresa»): en el modo libre, los de todos los cursos;

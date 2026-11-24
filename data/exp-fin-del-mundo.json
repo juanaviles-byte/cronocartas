@@ -383,7 +383,7 @@
    "tipo": "protagonista",
    "coleccion": "fin-del-mundo",
    "dimension": "CieloViento",
-   "resistencia": 60,
+   "resistencia": 70,
    "retirada": 1,
    "acciones": [
     {
@@ -651,7 +651,7 @@
    "coleccion": "fin-del-mundo",
    "efecto": {
     "tipo": "curar",
-    "n": 40
+    "n": 30
    },
    "emblema": "maiz",
    "zona": "Pueblos andinos",
@@ -731,11 +731,17 @@
    "nombre": "Kenos ordena la tierra",
    "tipo": "acontecimiento",
    "coleccion": "fin-del-mundo",
-   "efecto": {
-    "tipo": "buscar",
-    "n": 5,
-    "cartaTipo": "lugar"
-   },
+   "efecto": [
+    {
+     "tipo": "buscar",
+     "n": 5,
+     "cartaTipo": "lugar"
+    },
+    {
+     "tipo": "saberExtra",
+     "n": 1
+    }
+   ],
    "emblema": "mapa",
    "zona": "Pueblo selk'nam",
    "frase": "El antepasado que ordenó la tierra.",

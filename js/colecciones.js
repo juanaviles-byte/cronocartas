@@ -20,17 +20,17 @@ export const COLECCIONES = [
       Mar: {
         nombre: 'Mar',
         tema: { base: '#1F6E8C', claro: '#A9DCEB', oscuro: '#0B3550', papel: '#E6F4F8', icono: 'ola' },
-        frase: 'El mar apaga el fuego',
+        frase: 'La bruma del mar cubre el cielo',
       },
       TierraFuego: {
         nombre: 'Tierra y Fuego',
         tema: { base: '#B8432A', claro: '#F4BFA6', oscuro: '#5A1A0E', papel: '#FBEDE5', icono: 'volcan' },
-        frase: 'La ceniza de los volcanes cubre el cielo',
+        frase: 'El fuego de los volcanes ilumina la noche',
       },
       CieloViento: {
         nombre: 'Cielo y Viento',
         tema: { base: '#5B4FA8', claro: '#CFC8F2', oscuro: '#2A2160', papel: '#F0EEFB', icono: 'estrella' },
-        frase: 'El viento y la luz disipan la noche',
+        frase: 'El viento y la lluvia apagan el fuego',
       },
       BosqueNoche: {
         nombre: 'Bosque y Noche',
@@ -38,7 +38,9 @@ export const COLECCIONES = [
         frase: 'Los brujos del Caleuche gobiernan el mar',
       },
     },
-    ventaja: { Mar: 'TierraFuego', TierraFuego: 'CieloViento', CieloViento: 'BosqueNoche', BosqueNoche: 'Mar' },
+    // Ronda: Mar → Cielo y Viento → Tierra y Fuego → Bosque y Noche → Mar. Los rivales de cada Duelo
+    // (Mar contra Tierra y Fuego; Cielo y Viento contra Bosque y Noche) quedan opuestos: ninguno tiene ventaja.
+    ventaja: { Mar: 'CieloViento', CieloViento: 'TierraFuego', TierraFuego: 'BosqueNoche', BosqueNoche: 'Mar' },
   },
 ];
 

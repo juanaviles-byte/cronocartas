@@ -15,11 +15,12 @@ import { esc, pips } from '../html.js';
 import { sonidos, sonidoActivo, alternarSonido } from './sonido.js';
 import { ambiente, rutaAmbiente, ambientesListos } from './ambiente.js';
 import { FUERZAS, coleccion } from '../colecciones.js';
-import { tablerosDisponibles } from '../eleccion.js';
+import { tablerosDisponibles, mazosDePartida } from '../eleccion.js';
 import { dimensionDeInvocacion } from './invocacion-dimension.js';
 import { motivoDeCarta } from '../motivos.js';
 import { sorteoInicial } from './sorteo.js';
 import { hacerArrastrable, ultimaSoltada } from './arrastre.js';
+import { repasarMano } from './repaso.js';
 import { liviano } from '../rendimiento.js';
 import { disposicionDeMesa } from './disposicion.js';
 import { colocarBurbuja } from './burbuja.js';
@@ -85,6 +86,8 @@ export async function montarMesa(contenedor, opciones) {
     torneo: opciones.torneo || null,
     cronista: opciones.modo === 'tutorial' || ajustes.cronista !== false,
     primero: opciones.primero === 'A' || opciones.primero === 'B' ? opciones.primero : null,   // lo decide el sorteo
+    rivalAzar: !!opciones.rivalAzar,            // modo libre: el mazo de la tablet salió al azar
+    mazoElegidoA: opciones.mazoElegidoA != null ? opciones.mazoElegidoA : null,
   };
   const contraIA = config.modo !== 'caraacara';
   // Los nombres solo se insertan en HTML: se guardan ya escapados (en el torneo los escribe el docente).
@@ -195,10 +198,14 @@ export async function montarMesa(contenedor, opciones) {
     if (!el) return quitarPrevia();
     const j = el.closest('.lado-A') ? 'A' : 'B';
     if (!humanoEs(j) || girado(j)) return quitarPrevia();
+    mostrarPrevia(el, j, false);
+  }
+  // Carta en grande sobre la mano: con mouse al pasar el cursor; con el dedo al dejarlo quieto (repaso.js).
+  function mostrarPrevia(el, j, tactil) {
     const entrada = estado.jugadores[j].mano.find(c => c.uid === el.dataset.mano);
     if (!entrada || (previa && previa.dataset.uid === entrada.uid)) return;
     quitarPrevia();
-    previa = h('div', 'vista-previa');
+    previa = h('div', `vista-previa${tactil ? ' tactil' : ''}`);
     previa.dataset.uid = entrada.uid;
     previa.appendChild(renderCarta(entrada.carta, { tamano: 'normal' }));
     raiz.appendChild(previa);   // dentro de la mesa: se va con ella al cambiar de pantalla
@@ -720,6 +727,7 @@ export async function montarMesa(contenedor, opciones) {
       } else mano.appendChild(h('div', 'carta carta-mini dorso', dorsoHtml[j]));
     }
     if (!mostrar) mano.classList.add('oculta');
+    else if (!girado(j)) repasarMano(mano, { mirar: el => mostrarPrevia(el, j, true), dejar: quitarPrevia });
     mano.style.setProperty('--n', yo.mano.length);
     [...mano.children].forEach((el, i) => el.style.setProperty('--i', i - (yo.mano.length - 1) / 2));
     // Vista del jugador: la mano del rival (boca abajo) va junto a su mazo y su descarte, a la vista.
@@ -1443,7 +1451,9 @@ export async function montarMesa(contenedor, opciones) {
 
   async function reiniciar() {
     destruir();
-    const nueva = await montarMesa(contenedor, { ...opciones, estado: null, semilla: config.modo === 'tutorial' ? opciones.semilla : undefined });
+    // Si el mazo de la tablet era al azar, se sortea otro para la partida nueva.
+    const otroMazo = config.rivalAzar ? mazosDePartida({ mazo: 'libre', cursoA: config.mazoElegidoA, cursoB: 'azar' }) : {};
+    const nueva = await montarMesa(contenedor, { ...opciones, ...otroMazo, estado: null, primero: null, semilla: config.modo === 'tutorial' ? opciones.semilla : undefined });
     api.destruir = nueva.destruir;
   }
 

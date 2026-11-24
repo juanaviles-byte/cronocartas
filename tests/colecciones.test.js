@@ -25,20 +25,22 @@ test('la ronda de ventajas de la expansión se cierra: cada fuerza le gana a una
   const claves = Object.keys(fm.fuerzas).sort();
   assert.deepEqual(claves, ['BosqueNoche', 'CieloViento', 'Mar', 'TierraFuego']);
   assert.deepEqual(Object.values(fm.ventaja).sort(), claves);
-  assert.equal(fm.ventaja.Mar, 'TierraFuego');
-  assert.equal(fm.ventaja.TierraFuego, 'CieloViento');
-  assert.equal(fm.ventaja.CieloViento, 'BosqueNoche');
+  // Los Duelos enfrentan Mar con Tierra y Fuego, y Cielo y Viento con Bosque y Noche: en la ronda quedan opuestos,
+  // así ninguno de los dos bandos de un Duelo le hace doble daño al otro.
+  assert.equal(fm.ventaja.Mar, 'CieloViento');
+  assert.equal(fm.ventaja.CieloViento, 'TierraFuego');
+  assert.equal(fm.ventaja.TierraFuego, 'BosqueNoche');
   assert.equal(fm.ventaja.BosqueNoche, 'Mar');
   assert.equal(fm.etiquetaDato, 'De dónde viene');
   assert.equal(coleccion('no-existe'), null);
 });
 
-test('el motor aplica ×2 de Mar contra Tierra y Fuego y nada contra Cielo y Viento', () => {
+test('el motor aplica ×2 de Mar contra Cielo y Viento y nada contra Tierra y Fuego', () => {
   const golpe = [{ nombre: 'Ola', costo: 1, danio: 20 }];
   const mar = prot('Mar', 70, golpe), tierra = prot('TierraFuego', 70, golpe), cielo = prot('CieloViento', 70, golpe);
-  assert.deepEqual(desgloseDanio(mesa(mar, tierra), 'A', 0).pasos, [{ fuente: 'ventaja', por: 2 }]);
-  assert.equal(desgloseDanio(mesa(mar, tierra), 'A', 0).total, 40);
-  assert.deepEqual(desgloseDanio(mesa(mar, cielo), 'A', 0).pasos, []);
+  assert.deepEqual(desgloseDanio(mesa(mar, cielo), 'A', 0).pasos, [{ fuente: 'ventaja', por: 2 }]);
+  assert.equal(desgloseDanio(mesa(mar, cielo), 'A', 0).total, 40);
+  assert.deepEqual(desgloseDanio(mesa(mar, tierra), 'A', 0).pasos, [], 'Mar y Tierra y Fuego (rivales en su Duelo) no tienen ventaja');
   assert.deepEqual(desgloseDanio(mesa(prot('BosqueNoche', 70, golpe), mar), 'A', 0).pasos, [{ fuente: 'ventaja', por: 2 }]);
 });
 
@@ -81,4 +83,15 @@ test('cada colección del registro declara lo que necesita la app', () => {
   }
   const js = readFileSync('js/colecciones.js', 'utf8');
   assert.doesNotMatch(js, /from '\.\/motor\.js'/, 'colecciones.js no depende del motor');
+});
+
+test('en los Duelos de la expansión ningún bando tiene ventaja sobre el otro', () => {
+  const datos = JSON.parse(readFileSync('data/exp-fin-del-mundo.json', 'utf8'));
+  const fm = coleccion('fin-del-mundo');
+  const fuerzaDe = b => { const c = datos.cartas.find(x => b.nucleo.includes(x.nombre) && x.tipo === 'protagonista'); return c.dimension; };
+  for (const d of datos.duelos) {
+    const [a, b] = d.bandos.map(fuerzaDe);
+    assert.notEqual(fm.ventaja[a], b, `${d.id}: ${a} le gana a ${b}`);
+    assert.notEqual(fm.ventaja[b], a, `${d.id}: ${b} le gana a ${a}`);
+  }
 });

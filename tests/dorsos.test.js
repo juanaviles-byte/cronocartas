@@ -27,3 +27,12 @@ test('sin temática dominante, el dorso general', () => {
   assert.equal(dorsoDeMazo(D, mezcla, null), D.general);
   assert.equal(dorsoDeMazo(null, mezcla, null), null);
 });
+
+test('en cada Duelo (cursos y expansiones) los dos bandos tienen su propio dorso, y son distintos', () => {
+  const duelos = [...JSON.parse(readFileSync('data/duelos.json', 'utf8')).duelos, ...(JSON.parse(readFileSync('data/exp-fin-del-mundo.json', 'utf8')).duelos || [])];
+  for (const d of duelos) {
+    const [a, b] = d.bandos.map(x => dorsoDeMazo(D, [], x.id, 'general'));
+    for (const [x, r] of [[d.bandos[0], a], [d.bandos[1], b]]) assert.notEqual(r, 'general', `${d.id}/${x.id} sin dorso de bando`);
+    assert.notEqual(a, b, `${d.id}: los dos bandos tienen el mismo dorso`);
+  }
+});
