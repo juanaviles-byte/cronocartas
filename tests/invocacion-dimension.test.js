@@ -23,7 +23,7 @@ test('cada dimensión tiene su sonido de invocación en el banco', () => {
 
 test('la escena de invocación usa el emblema de la dimensión y el sonido suena según la dimensión', () => {
   assert.match(readFileSync('js/ui/director.js', 'utf8'), /emblemaDimension\(dim\)/);
-  assert.match(readFileSync('js/ui/mesa.js', 'utf8'), /sonidos\.invocar\(plan\.carta\.tipo, dimensionDeInvocacion\(plan\.carta\)\)/);
+  assert.match(readFileSync("js/ui/mesa.js", "utf8"), /sonidos\.invocar\(plan\.carta\.tipo, dimensionDeInvocacion\(plan\.carta\), motivoDeCarta\(plan\.carta\)\)/);
   const css = readFileSync('css/estilos.css', 'utf8');
   for (const d of Object.values(DIMENSION_INVOCACION)) assert.match(css, new RegExp(`\\.emblema-${d}`));
 });

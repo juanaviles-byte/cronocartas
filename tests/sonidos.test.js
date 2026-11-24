@@ -21,7 +21,7 @@ test('cada efecto que usa el juego está en el banco o tiene respaldo sintetizad
 
 test('la mesa suena distinto según la carta, el daño, el turno y el final', () => {
   const mesa = readFileSync('js/ui/mesa.js', 'utf8');
-  assert.match(mesa, /sonidos\.invocar\(plan\.carta\.tipo, dimensionDeInvocacion\(plan\.carta\)\)/);
+  assert.match(mesa, /sonidos\.invocar\(plan\.carta\.tipo, dimensionDeInvocacion\(plan\.carta\), motivoDeCarta\(plan\.carta\)\)/);
   assert.match(mesa, /sonidos\.ataque\(plan\.ventaja \? Math\.max\(plan\.valor, 50\) : plan\.valor\)/);
   assert.match(mesa, /sonidos\.turno\(contraIA && ev\.jugador === 'B'\)/);
   assert.match(mesa, /sonidos\.derrota\(\)/);

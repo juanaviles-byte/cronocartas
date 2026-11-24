@@ -3,6 +3,8 @@
 // se redibuja con el estado nuevo. Solo transform/opacity/filter y Web Animations API.
 import { motasQueSuben, impacto, estallido, deshacerEnArena, lluviaDeMonedas } from './efectos.js';
 import { dimensionDeInvocacion, emblemaDimension, adornoEncima, COLOR_DIMENSION } from './invocacion-dimension.js';
+import { escenaMotivo } from './invocacion-motivo.js';
+import { motivoDeCarta } from '../motivos.js';
 
 const rival = j => (j === 'A' ? 'B' : 'A');
 
@@ -150,6 +152,7 @@ export async function escenaInvocacion({ grande, desde, destino, plan, girado = 
   const dimPaleta = dimensionDeInvocacion(plan.carta);
   const paleta = dimPaleta || estilo.paleta;
   const dim = dimensionDeInvocacion(plan.carta);
+  const motivo = motivoDeCarta(plan.carta);
   const capa = document.createElement('div');
   capa.className = `escena-invocacion inv-${tipo}${girado ? ' girado' : ''}${dim ? ` dim dim-${dim}` : ''}`;
   if (dim) { capa.style.setProperty('--dim', COLOR_DIMENSION[dim][0]); capa.style.setProperty('--dim-a', COLOR_DIMENSION[dim][1]); }
@@ -157,10 +160,13 @@ export async function escenaInvocacion({ grande, desde, destino, plan, girado = 
   caja.className = 'invocada';
   if (tipo === 'personaje' || tipo === 'sagrado') { const aura = document.createElement('div'); aura.className = `aura aura-${tipo}`; caja.appendChild(aura); }
   if (tipo === 'lugar') { const barrido = document.createElement('div'); barrido.className = 'barrido-luz'; caja.appendChild(barrido); }
-  // Cada dimensión trae su emblema animado detrás de la carta (en vez del destello dorado).
-  if (dim) caja.appendChild(emblemaDimension(dim));
+  // Lo que la carta es (un tren, un barco, una marcha…) decide su animación; si no tiene motivo,
+  // entra con el emblema de su dimensión (en vez del destello dorado). El color sigue siendo el de la dimensión.
+  const escena = motivo ? escenaMotivo(motivo) : null;
+  if (escena) caja.appendChild(escena.fondo);
+  else if (dim) caja.appendChild(emblemaDimension(dim));
   caja.appendChild(grande);
-  const encima = dim ? adornoEncima(dim) : null;
+  const encima = escena ? escena.frente : dim ? adornoEncima(dim) : null;
   if (encima) caja.appendChild(encima);
   capa.appendChild(caja);
   if (detalle) {
@@ -205,7 +211,7 @@ export async function escenaInvocacion({ grande, desde, destino, plan, girado = 
   };
   const [cuadros, dura] = entradas[tipo] || entradas.protagonista;
   await fin(caja.animate(cuadros, { duration: dura, easing: 'cubic-bezier(.2,.8,.3,1)', fill: 'forwards' }));
-  if (dimPaleta === 'economia') lluviaDeMonedas(rc.left - rc.width * 0.3, rc.right + rc.width * 0.3, rc.top - 20, 26);
+  if (dimPaleta === 'economia' && !motivoDeCarta(plan.carta)) lluviaDeMonedas(rc.left - rc.width * 0.3, rc.right + rc.width * 0.3, rc.top - 20, 26);
   if (tipo === 'protagonista') { estallido(c.x, c.y + rc.height * 0.4, 30, 4, paleta); sacudir(document.querySelector('.mesa'), 4); }
   else if (tipo === 'personaje' || tipo === 'sagrado') motasQueSuben(rc.left, rc.right, rc.bottom, tipo === 'sagrado' ? 46 : 34, paleta);
   else if (tipo === 'acontecimiento') { onda(c, rc.width * 1.6); estallido(c.x, c.y, 22, 3, paleta); }

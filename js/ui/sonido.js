@@ -111,7 +111,7 @@ RESPALDO.moneda_lanzar = RESPALDO.saber;
 RESPALDO.moneda_cae = RESPALDO.saber;
 
 function efecto(nombre, opciones) {
-  if (!tocar(nombre, opciones) && RESPALDO[nombre]) RESPALDO[nombre]();
+  if (!tocar(nombre, opciones)) (RESPALDO[nombre] || (nombre.indexOf('motivo_') === 0 ? RESPALDO.carta_colocar : null) || (() => {}))();
 }
 
 function vibrar(patron) {
@@ -135,7 +135,8 @@ export const sonidos = {
   voltear: () => efecto('carta_voltear'),
   buscar: () => efecto('buscar'),
   // Con dimensión (Protagonistas y Lugares de Historia), suena la de su dimensión: monedas, sello, gente…
-  invocar: (tipo, dim = null) => { efecto(dim ? `invocar_${dim}` : INVOCAR[tipo] || 'carta_colocar'); if (tipo === 'protagonista') vibrar(25); },
+  // Primero lo que la carta es (tren, barco, marcha…: js/motivos.js); si no, su dimensión; si no, su tipo.
+  invocar: (tipo, dim = null, motivo = null) => { efecto(motivo ? `motivo_${motivo}` : dim ? `invocar_${dim}` : INVOCAR[tipo] || 'carta_colocar'); if (tipo === 'protagonista') vibrar(25); },
   monedaLanzar: () => efecto('moneda_lanzar', { variar: 0.03 }),
   monedaCae: () => { efecto('moneda_cae', { variar: 0.03 }); vibrar(20); },
   // Combate: el golpe crece con el daño.

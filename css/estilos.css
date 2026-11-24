@@ -1387,3 +1387,67 @@ body:not([data-vista="mesa"]) { background: radial-gradient(ellipse at 20% 0%, #
 .opcion-lado img { width: 74px; height: 74px; border-radius: 50%; }
 .sorteo-panel.resuelto h2 { animation: cartel-invocacion .45s cubic-bezier(.2,.9,.3,1.2) both; }
 .sorteo-comenzar { min-width: 12rem; }
+
+/* ---------- Invocación según el motivo de la carta (js/motivos.js) ----------
+   Reemplaza al emblema de la dimensión. «fondo» va detrás de la carta; «frente» (golpes, coronas,
+   campanas) va encima, sobre su esquina. Solo transform y opacity. */
+.motivo { --s: 620px; position: absolute; left: 50%; top: 50%; width: var(--s); height: var(--s); margin: calc(var(--s) / -2) 0 0 calc(var(--s) / -2);
+  z-index: -1; pointer-events: none; }
+@media (max-width: 600px), (max-height: 520px) { .motivo { --s: 520px; } }
+.motivo-frente { position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 5; pointer-events: none; }
+.motivo-capa { position: absolute; top: 0; right: 0; bottom: 0; left: 0; filter: drop-shadow(0 2px 3px rgba(0,0,0,.55)); }
+.motivo .pieza, .motivo-frente .pieza { position: absolute; display: block; font-style: normal; }
+.motivo svg, .motivo-frente svg { display: block; width: 100%; height: auto; fill: currentColor; stroke: currentColor; overflow: visible; }
+
+.capa-cruza .pieza { left: 0; top: calc(var(--y) * 100%); width: calc(var(--s) * var(--t)); animation: motivo-cruza 2s linear both; }
+@keyframes motivo-cruza { from { transform: translate(-100%, -50%); } to { transform: translate(var(--s), -50%); } }
+.capa-alza .pieza { left: calc(var(--x) * 100%); top: calc(var(--y) * 100%); width: calc(var(--s) * var(--t)); transform: translateX(-50%);
+  animation: motivo-alza .8s cubic-bezier(.2,.8,.3,1) both; animation-delay: calc(var(--k) * 90ms); }
+@keyframes motivo-alza { from { transform: translate(-50%, 40%); opacity: 0; } to { transform: translateX(-50%); opacity: 1; } }
+.capa-alza.tiembla .pieza { animation: motivo-alza .6s cubic-bezier(.2,.8,.3,1) both, motivo-tiembla .12s .6s 7 linear; }
+@keyframes motivo-tiembla { 0%, 100% { transform: translateX(-50%); } 25% { transform: translateX(calc(-50% - 5px)); } 75% { transform: translateX(calc(-50% + 5px)); } }
+.capa-lluvia .pieza { left: calc(var(--x) * 100%); top: -8%; width: calc(var(--s) * var(--t)); opacity: 0;
+  animation: motivo-cae 1.7s ease-in both; animation-delay: calc(var(--k) * 85ms + var(--d) * 1s); }
+@keyframes motivo-cae { 0% { transform: translateY(0) rotate(-25deg); opacity: 0; } 12% { opacity: 1; } 100% { transform: translateY(calc(var(--s) * 1.05)) rotate(150deg); opacity: .15; } }
+.capa-sube .pieza { left: calc(var(--x) * 100%); top: 90%; width: calc(var(--s) * var(--t)); opacity: 0;
+  animation: motivo-sube 1.8s ease-out both; animation-delay: calc(var(--k) * 90ms + var(--d) * 1s); }
+@keyframes motivo-sube { 0% { transform: translateY(0) scale(.6); opacity: 0; } 20% { opacity: 1; } 100% { transform: translateY(calc(var(--s) * -.8)) scale(1.25); opacity: 0; } }
+.capa-ronda { animation: ronda-gira 16s linear infinite; }
+.capa-ronda .pieza { left: 50%; top: 50%; width: calc(var(--s) * var(--t)); margin-left: calc(var(--s) * var(--t) / -2); margin-top: calc(var(--s) * var(--t) / -2);
+  transform: rotate(var(--a)) translateY(calc(var(--s) * -.42)) rotate(calc(var(--a) * -1));
+  animation: persona-llega .5s cubic-bezier(.2,.9,.3,1.3) both; animation-delay: calc(var(--k) * 60ms); }
+.capa-signos .pieza { left: calc(var(--x) * 100%); top: 74%; font-family: var(--serif, Georgia, serif); font-size: calc(var(--s) * .1); font-weight: 700; line-height: 1;
+  animation: signo-sube 1.6s ease-out both; animation-delay: calc(var(--k) * 60ms); }
+.capa-ondas .ola { position: absolute; left: -10%; width: 240%; bottom: 4%; height: 15%; animation: motivo-ola-entra .6s ease-out both, motivo-olas 2.6s linear infinite; }
+.capa-ondas .ola svg { height: 100%; }
+.capa-ondas .ola-2 { bottom: 10%; opacity: .55; animation: motivo-ola-entra .6s .15s ease-out both, motivo-olas 3.4s linear infinite reverse; }
+@keyframes motivo-olas { to { transform: translateX(-20%); } }
+@keyframes motivo-ola-entra { from { opacity: 0; } }
+.capa-orbita .orbita { position: absolute; left: 50%; top: 50%; width: calc(var(--s) * .95); height: calc(var(--s) * .95); margin: calc(var(--s) * -.475);
+  transform: rotate(var(--a)); animation: motivo-orbita 3.2s linear infinite, motivo-ola-entra .6s ease-out both; }
+@keyframes motivo-orbita { from { transform: rotate(var(--a)); } to { transform: rotate(calc(var(--a) + 360deg)); } }
+.capa-traza .traza { position: absolute; left: -2%; right: -2%; bottom: 6%; height: 28%; }
+.capa-traza .traza svg { height: 100%; }
+.capa-traza path { animation: motivo-traza 1.6s linear both; }
+@keyframes motivo-traza { from { stroke-dashoffset: 480; opacity: 0; } 15% { opacity: 1; } to { stroke-dashoffset: 0; } }
+.capa-pulso .anillo { position: absolute; left: 50%; top: 50%; width: calc(var(--s) * .66); height: calc(var(--s) * .66); margin: calc(var(--s) * -.33);
+  border-radius: 50%; border: 5px solid currentColor; opacity: 0; animation: onda-sello .9s .35s ease-out both; }
+.capa-pulso .anillo.segundo { animation-delay: .6s; }
+
+/* Encima de la carta: el golpe (pico, mazo, balanza, pergamino), lo que baja (corona, laurel) y lo que se mece (campana). */
+.capa-golpe .pieza { right: -16%; top: -8%; width: calc(var(--t) * 130%); transform: rotate(-8deg); animation: sello-golpe .45s .25s cubic-bezier(.55,0,.8,.3) both; }
+.capa-golpe.gira .pieza { transform-origin: 20% 90%; animation: motivo-golpea 1.3s .2s ease-in-out both; }
+@keyframes motivo-golpea { 0% { transform: rotate(-70deg); opacity: 0; } 15% { opacity: 1; transform: rotate(-70deg); } 35% { transform: rotate(12deg); }
+  50% { transform: rotate(-40deg); } 68% { transform: rotate(12deg); } 84% { transform: rotate(-25deg); } 100% { transform: rotate(6deg); opacity: 1; } }
+.capa-baja .pieza { left: 50%; top: -24%; width: calc(var(--t) * 130%); transform: translateX(-50%); animation: motivo-baja .7s .2s cubic-bezier(.2,.8,.3,1.2) both; }
+@keyframes motivo-baja { from { transform: translate(-50%, -80%) scale(1.3); opacity: 0; } to { transform: translateX(-50%); opacity: 1; } }
+.capa-vaiven .pieza { left: 50%; top: -30%; width: calc(var(--t) * 130%); margin-left: calc(var(--t) * -65%); transform-origin: 50% 0; animation: motivo-vaiven 1.8s ease-in-out both; }
+@keyframes motivo-vaiven { 0% { transform: rotate(0); opacity: 0; } 10% { opacity: 1; } 25% { transform: rotate(26deg); } 45% { transform: rotate(-20deg); }
+  65% { transform: rotate(13deg); } 85% { transform: rotate(-6deg); } 100% { transform: rotate(0); opacity: 1; } }
+
+/* Modo escuela: la mitad de las piezas que caen, suben o rodean; sin giros sin fin ni sombras. */
+.modo-escuela .capa-lluvia .pieza:nth-child(even), .modo-escuela .capa-sube .pieza:nth-child(even),
+.modo-escuela .capa-ronda .pieza:nth-child(even), .modo-escuela .capa-signos .pieza:nth-child(even), .modo-escuela .capa-ondas .ola-2 { display: none; }
+.modo-escuela .capa-ronda, .modo-escuela .capa-orbita .orbita { animation: none; }
+.modo-escuela .capa-ondas .ola { animation: motivo-ola-entra .6s ease-out both; }
+.modo-escuela .motivo-capa { filter: none; }
