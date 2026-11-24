@@ -1216,3 +1216,6 @@ body:not([data-vista="mesa"]) { background: radial-gradient(ellipse at 20% 0%, #
 .mesa.vista-jugador.con-tablero .centro { background: rgba(23,38,79,.42); }
 .mesa.vista-jugador.con-tablero .centro .aviso-turno, .mesa.vista-jugador.con-tablero .centro .registro { text-shadow: 0 1px 3px rgba(0,0,0,.95); }
 .mesa.vista-jugador .placa-lugar.hueco-lugar { background: rgba(23,38,79,.72); }
+
+/* Sin rótulos en ninguna mesa: los espacios se entienden por su forma y conservan su aria-label. */
+.mesa .hueco span, .mesa .pila small { display: none; }

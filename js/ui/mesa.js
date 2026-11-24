@@ -587,7 +587,7 @@ export async function montarMesa(contenedor, opciones) {
       ca.classList.add('en-activo');
       ca.onclick = () => tocarEnMesa(j, yo.activo);
       zonaActivo.appendChild(ca);
-    } else zonaActivo.appendChild(h('div', 'hueco', '<span>Activo</span>'));
+    } else { const hz = h('div', 'hueco', '<span>Activo</span>'); hz.setAttribute('aria-label', 'Activo: vacío'); zonaActivo.appendChild(hz); }
 
     const acciones = h('div', 'acciones-activo');
     if (yo.activo && yo.activo.carta.acciones) {
@@ -629,7 +629,7 @@ export async function montarMesa(contenedor, opciones) {
         cr.dataset.uid = r.uid;
         cr.onclick = () => tocarEnMesa(j, r);
         reserva.appendChild(cr);
-      } else reserva.appendChild(h('div', 'hueco', '<span>Reserva</span>'));
+      } else { const hr = h('div', 'hueco', '<span>Reserva</span>'); hr.setAttribute('aria-label', 'Reserva: espacio vacío'); reserva.appendChild(hr); }
     }
 
     const marcador = h('div', 'marcador');
@@ -652,6 +652,7 @@ export async function montarMesa(contenedor, opciones) {
     // Mazo y descarte como pilas de cartas
     const pilas = h('div', 'pilas');
     const mazo = h('div', 'pila pila-mazo', `${yo.mazo.length ? dorsoHtml[j] : ''}<span class="cuenta">${yo.mazo.length}</span><small>Mazo</small>`);
+    mazo.setAttribute('aria-label', `Mazo: ${yo.mazo.length} cartas`);
     if (!yo.mazo.length) mazo.classList.add('vacia');
     const desc = h('button', 'pila pila-descarte');
     const tope = yo.descarte[yo.descarte.length - 1];
