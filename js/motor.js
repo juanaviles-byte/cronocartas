@@ -4,6 +4,7 @@
 // sirve para jugar en una tablet, contra la IA o, en el futuro, en línea.
 import { rngDesdeEstado, barajar } from './rng.js';
 import { FUERZAS, VENTAJA_FUERZAS } from './colecciones.js';
+import { rangoDeFecha } from './fechas.js';
 
 export const DIMENSIONES = ['Politica', 'Economia', 'Sociedad', 'Cultura', 'Territorio'];
 // Las de Historia más las fuerzas de las expansiones (js/colecciones.js).
@@ -145,7 +146,8 @@ function entrarALinea(e, j, carta, ev) {
   if (!e.lineaTiempo || !carta.fecha || !['personaje', 'acontecimiento'].includes(carta.tipo)) return;
   const yo = e.jugadores[j];
   yo.linea = yo.linea || [];
-  const hecho = { id: carta.id, nombre: carta.nombre, anio: carta.fecha.anio, texto: carta.fecha.texto };
+  const { desde, hasta } = rangoDeFecha(carta.fecha);
+  const hecho = { id: carta.id, nombre: carta.nombre, anio: carta.fecha.anio, texto: carta.fecha.texto, desde, hasta };
   if (!yo.linea.length) { yo.linea.push(hecho); ev.push({ tipo: 'linea', jugador: j, hecho, automatico: true }); }
   else yo.porUbicar = hecho;
 }
@@ -310,7 +312,10 @@ export function aplicarJugada(estadoEntrada, jugada) {
       const hecho = yo.porUbicar;
       const linea = yo.linea;
       const antes = linea[jugada.posicion - 1], despues = linea[jugada.posicion];
-      const correcto = (!antes || antes.anio <= hecho.anio) && (!despues || hecho.anio <= despues.anio);
+      // Se juzga con el rango que muestra el texto de cada fecha: es correcto si los rangos permiten ese orden.
+      // (Las líneas guardadas antes no tienen rango: se usa el año.)
+      const desde = x => (x.desde != null ? x.desde : x.anio), hasta = x => (x.hasta != null ? x.hasta : x.anio);
+      const correcto = (!antes || desde(antes) <= hasta(hecho)) && (!despues || desde(hecho) <= hasta(despues));
       let posicionCorrecta = linea.findIndex(x => x.anio > hecho.anio);
       if (posicionCorrecta < 0) posicionCorrecta = linea.length;
       linea.splice(correcto ? jugada.posicion : posicionCorrecta, 0, hecho);
