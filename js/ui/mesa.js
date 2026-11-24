@@ -203,7 +203,7 @@ export async function montarMesa(contenedor, opciones) {
     if (config.modo === 'tutorial') entrenador();
     animarMovimientos();
     hitosAntes = { A: estado.jugadores.A.hitos, B: estado.jugadores.B.hitos };
-    if (vistaJugador) solaparMano(raiz.querySelector('.lado-A .mano:not(.oculta)'));
+    raiz.querySelectorAll('.mano:not(.oculta)').forEach(solaparMano);
     raiz.querySelectorAll('.mano').forEach(m => m.classList.toggle('desplazable', m.scrollWidth > m.clientWidth + 2));
     marcarSaber();
     registrarAlbum();
@@ -413,7 +413,7 @@ export async function montarMesa(contenedor, opciones) {
   }
   let fondoListo = false;
 
-  // Vista del jugador: si la mano no cabe, las cartas se solapan lo justo para verse todas (como un abanico en la mano).
+  // Si la mano no cabe, las cartas se solapan lo justo para verse todas (como un abanico en la mano).
   function solaparMano(m) {
     if (!m || m.children.length < 2) return;
     m.style.removeProperty('--solape');
@@ -1418,7 +1418,7 @@ export async function montarMesa(contenedor, opciones) {
   }
 
   // Al girar la tablet o cambiar el tamaño de la ventana, la mano vuelve a calcular cuánto se solapa.
-  const alCambiarTamano = () => { if (vivo && vistaJugador) solaparMano(raiz.querySelector('.lado-A .mano:not(.oculta)')); };
+  const alCambiarTamano = () => { if (vivo) raiz.querySelectorAll('.mano:not(.oculta)').forEach(solaparMano); };
   addEventListener('resize', alCambiarTamano);
 
   function destruir() {

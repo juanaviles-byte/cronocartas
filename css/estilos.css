@@ -1179,6 +1179,7 @@ body:not([data-vista="mesa"]) { background: radial-gradient(ellipse at 20% 0%, #
 /* Mano con muchas cartas: se solapan lo justo para caber completas (--n la pone mesa.js). */
 .mesa.vista-jugador .lado-A .mano:not(.oculta) { padding-left: 12px; }
 .mesa.vista-jugador .lado-A .mano:not(.oculta) > .carta-mini + .carta-mini { margin-left: calc(var(--solape, 0px) * -1); }
+.mesa .mano[style*="--solape"]:not(.oculta) > .carta-mini + .carta-mini { margin-left: calc(var(--solape) * -1); }
 .mesa.vista-jugador .linea-mini .t { display: none; }
 .mesa.vista-jugador .linea-mini { min-width: 44px; justify-content: center; }
 
