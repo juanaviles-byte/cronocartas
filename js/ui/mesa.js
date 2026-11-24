@@ -647,13 +647,16 @@ export async function montarMesa(contenedor, opciones) {
         const ventaja = rivalActivo && VENTAJA[yo.activo.carta.dimension] === rivalActivo.carta.dimension;
         // El número del botón sale del mismo cálculo que aplica el motor, y se explica si difiere del de la carta.
         const dsg = rivalActivo ? desgloseDanio(estado, j, indice) : null;
-        const efectivo = rivalActivo && rivalActivo.protegido ? 0 : dsg ? dsg.total : a.danio;
-        const motivo = rivalActivo && rivalActivo.protegido ? 'el rival está protegido' : dsg ? textoDesglose(dsg) : '';
+        // Rival protegido: sin n no recibe daño; con n (escudo) recibe n menos.
+        const prot = rivalActivo ? rivalActivo.protegido : false;
+        const base = dsg ? dsg.total : a.danio;
+        const efectivo = prot === true ? 0 : prot ? Math.max(0, base - prot) : base;
+        const motivo = prot === true ? 'el rival está protegido' : prot ? `${dsg ? textoDesglose(dsg) + '; ' : ''}escudo del rival −${prot}` : dsg ? textoDesglose(dsg) : '';
         const descansa = yo.activo.descansa && a.costo >= COSTO_POTENTE;
         const nota = descansa ? '<small class="falta descanso">Descansa este turno</small>'
           : falta ? `<small class="falta">Falta ${falta} de Saber</small>`
           : primerTurno ? '<small class="falta">No se ataca en el primer turno</small>'
-          : rivalActivo && rivalActivo.protegido ? '<small class="falta">El rival está protegido</small>'
+          : prot === true ? '<small class="falta">El rival está protegido</small>'
           : efectivo !== a.danio && motivo ? `<small class="calculo">${esc(motivo)}</small>` : '';
         const marca = ventaja ? '<i class="x2" title="Ventaja: daño doble">×2</i>' : '';
         const impreso = efectivo !== a.danio ? `<s class="impreso">${esc(a.danio)}</s>` : '';
@@ -1040,8 +1043,9 @@ export async function montarMesa(contenedor, opciones) {
       if (!yo.activo || yo.activo.carta.id !== carta.id || !otro.activo || !carta.acciones) continue;
       const filas = carta.acciones.map((a, i) => {
         const dsg = desgloseDanio(estado, j, i);
-        const total = otro.activo.protegido ? 0 : dsg.total;
-        const porque = otro.activo.protegido ? 'el rival está protegido' : textoDesglose(dsg);
+        const prot = otro.activo.protegido;
+        const total = prot === true ? 0 : prot ? Math.max(0, dsg.total - prot) : dsg.total;
+        const porque = prot === true ? 'el rival está protegido' : prot ? `${textoDesglose(dsg)}; escudo del rival −${prot}` : textoDesglose(dsg);
         return `<li><b>${esc(a.nombre)}</b>: ${total === a.danio ? `${esc(total)} de daño` : `la carta dice ${esc(a.danio)}, aquí hace <b>${esc(total)}</b> (${esc(porque)})`}</li>`;
       }).join('');
       return h('div', 'en-esta-mesa', `<div class="titulo-mesa">En esta mesa, contra ${esc(otro.activo.carta.nombre)}</div><ul>${filas}</ul>`);
@@ -1182,7 +1186,7 @@ export async function montarMesa(contenedor, opciones) {
       if (ev.tipo === 'danio') {
         if (!eventos.some(e => e.tipo === 'ventaja')) registrar(`${esc(ev.carta.nombre)} usa <b>${esc(ev.accion)}</b>: ${ev.valor} de daño`);
       }
-      if (ev.tipo === 'protegido') registrar(`<b>${esc(ev.carta.nombre)}</b> estaba protegido: no recibe daño`);
+      if (ev.tipo === 'protegido') registrar(ev.absorbe != null && !ev.completo ? `El escudo de <b>${esc(ev.carta.nombre)}</b> absorbe ${esc(ev.absorbe)} de daño` : `<b>${esc(ev.carta.nombre)}</b> estaba protegido: no recibe daño`);
       if (ev.tipo === 'evolucion') registrar(`<b>${esc(ev.de.nombre)}</b> evoluciona en <b>${esc(ev.a.nombre)}</b>`);
       if (ev.tipo === 'efecto' && !eventos.some(x => x.tipo === 'revelar' || x.tipo === 'conexion')) registrar(`${nombres[ev.jugador]}: <b>${esc(ev.carta.nombre)}</b>`);
       if (ev.tipo === 'lugar') { registrar(`Nuevo lugar: <b>${esc(ev.carta.nombre)}</b>`); }

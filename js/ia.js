@@ -1,6 +1,6 @@
 // Rival automático con tres niveles:
 // Aprendiz (a veces se equivoca), Historiador (reglas simples) y Erudito (simula cada jugada y elige la mejor).
-import { jugadasValidas, aplicarJugada, danioDeAccion } from './motor.js';
+import { jugadasValidas, aplicarJugada, danioDeAccion, efectoEfectivo } from './motor.js';
 import { rngDesdeEstado } from './rng.js';
 
 export const NIVELES = [
@@ -112,13 +112,16 @@ function historiador(estado, jugador, js) {
   const util = deTipo('jugar').find(j => {
     const c = carta(j.uid);
     if (c.tipo === 'lugar') return false;
-    const ef = Array.isArray(c.efecto) ? c.efecto[0] : c.efecto;
+    // Con respaldo, cuenta el efecto que de verdad se aplicará ahora.
+    const ef = efectoEfectivo(estado, jugador, Array.isArray(c.efecto) ? c.efecto[0] : c.efecto);
     const t = ef && ef.tipo;
     if (t === 'curar') return yo.activo.danio >= 20;
     if (t === 'curarTodos') return [yo.activo, ...yo.reserva].some(p => p.danio >= 20);
     if (t === 'retiroGratis') return yo.activo.danio * 2 >= yo.activo.carta.resistencia;
-    if (t === 'epidemia') return enMesa(otro).length > enMesa(yo).length;
-    if (t === 'anularLugar') return !!(estado.lugar && estado.lugar.carta.efecto && otro.activo) && estado.lugar.carta.efecto.dimension === otro.activo.carta.dimension;
+    if (t === 'epidemia') return enMesa(otro).length >= enMesa(yo).length;
+    // Quitar el Lugar: si es del rival o favorece a su activo (nunca el propio que conviene).
+    if (t === 'anularLugar') return !!(estado.lugar && otro.activo) && (estado.lugar.duenio === (jugador === 'A' ? 'B' : 'A') ||
+      !!(estado.lugar.carta.efecto && estado.lugar.carta.efecto.dimension === otro.activo.carta.dimension));
     return true;
   });
   if (util) {

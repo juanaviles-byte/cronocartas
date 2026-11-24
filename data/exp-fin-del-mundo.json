@@ -33,7 +33,7 @@
    "tipo": "protagonista",
    "coleccion": "fin-del-mundo",
    "dimension": "Mar",
-   "resistencia": 70,
+   "resistencia": 80,
    "retirada": 1,
    "acciones": [
     {
@@ -108,7 +108,7 @@
    "tipo": "protagonista",
    "coleccion": "fin-del-mundo",
    "dimension": "Mar",
-   "resistencia": 70,
+   "resistencia": 80,
    "retirada": 1,
    "acciones": [
     {
@@ -133,7 +133,7 @@
    "tipo": "protagonista",
    "coleccion": "fin-del-mundo",
    "dimension": "Mar",
-   "resistencia": 60,
+   "resistencia": 70,
    "retirada": 1,
    "acciones": [
     {
@@ -158,7 +158,7 @@
    "tipo": "protagonista",
    "coleccion": "fin-del-mundo",
    "dimension": "TierraFuego",
-   "resistencia": 110,
+   "resistencia": 100,
    "retirada": 2,
    "acciones": [
     {
@@ -333,7 +333,7 @@
    "tipo": "protagonista",
    "coleccion": "fin-del-mundo",
    "dimension": "CieloViento",
-   "resistencia": 70,
+   "resistencia": 80,
    "retirada": 1,
    "acciones": [
     {
@@ -383,7 +383,7 @@
    "tipo": "protagonista",
    "coleccion": "fin-del-mundo",
    "dimension": "CieloViento",
-   "resistencia": 70,
+   "resistencia": 80,
    "retirada": 1,
    "acciones": [
     {
@@ -432,7 +432,7 @@
    "tipo": "protagonista",
    "coleccion": "fin-del-mundo",
    "dimension": "CieloViento",
-   "resistencia": 70,
+   "resistencia": 80,
    "retirada": 1,
    "acciones": [
     {
@@ -582,7 +582,7 @@
    "tipo": "protagonista",
    "coleccion": "fin-del-mundo",
    "dimension": "BosqueNoche",
-   "resistencia": 110,
+   "resistencia": 100,
    "retirada": 2,
    "acciones": [
     {
@@ -664,7 +664,8 @@
    "tipo": "personaje",
    "coleccion": "fin-del-mundo",
    "efecto": {
-    "tipo": "proteger"
+    "tipo": "proteger",
+    "n": 40
    },
    "emblema": "montana",
    "zona": "Pueblo aymara",
@@ -676,10 +677,16 @@
    "nombre": "Temáukel",
    "tipo": "personaje",
    "coleccion": "fin-del-mundo",
-   "efecto": {
-    "tipo": "saberExtra",
-    "n": 1
-   },
+   "efecto": [
+    {
+     "tipo": "saberExtra",
+     "n": 1
+    },
+    {
+     "tipo": "robar",
+     "n": 1
+    }
+   ],
    "emblema": "estrella",
    "zona": "Pueblo selk'nam",
    "frase": "El ser sin forma más allá de las estrellas.",
@@ -691,7 +698,8 @@
    "tipo": "acontecimiento",
    "coleccion": "fin-del-mundo",
    "efecto": {
-    "tipo": "proteger"
+    "tipo": "proteger",
+    "n": 40
    },
    "emblema": "ola",
    "zona": "Mapuche y Chiloé",
@@ -705,7 +713,7 @@
    "coleccion": "fin-del-mundo",
    "efecto": {
     "tipo": "buscarProtagonista",
-    "n": 3
+    "n": 4
    },
    "emblema": "pluma",
    "zona": "Rapa Nui",

@@ -21,7 +21,9 @@
       "Carabela y brújula",
       "Puerto de Sevilla",
       "Diego de Almagro",
-      "Encomienda"
+      "Encomienda",
+      "Fuertes del Biobío",
+      "Construcción antisísmica"
      ]
     },
     {
@@ -36,7 +38,6 @@
       "Lautaro",
       "Parlamento de Quilín",
       "Cordillera de los Andes",
-      "Michimalonco",
       "Caupolicán",
       "Batalla de Curalaba"
      ]
@@ -110,7 +111,9 @@
       "Campos de Hielo",
       "Ignacio Domeyko",
       "Chiloé",
-      "Zona Austral"
+      "Zona Austral",
+      "Pueblo mapuche",
+      "Fuertes del Biobío"
      ]
     }
    ]
@@ -129,15 +132,13 @@
      "emblema": "estrella",
      "nucleo": [
       "Bando patriota",
-      "Chile independiente",
       "Ejército de los Andes",
       "Bernardo O'Higgins",
       "José Miguel Carrera",
       "Javiera Carrera",
       "Cabildo abierto de 1810",
       "Cordillera de los Andes",
-      "Manuel Rodríguez",
-      "Expedición Libertadora del Perú"
+      "Manuel Rodríguez"
      ]
     },
     {
@@ -239,7 +240,8 @@
       "Faraón",
       "Río Nilo",
       "Escritura jeroglífica",
-      "Egipcios"
+      "Egipcios",
+      "Cultivo del maíz"
      ]
     },
     {
@@ -253,7 +255,6 @@
       "Código de Hammurabi",
       "Zigurat",
       "Sumerios",
-      "Invención de la escritura",
       "Creciente Fértil"
      ]
     }
@@ -312,7 +313,8 @@
       "Caballeros medievales",
       "Señor feudal",
       "Campesino medieval",
-      "Carlomagno"
+      "Carlomagno",
+      "Monje copista"
      ]
     },
     {
@@ -325,8 +327,7 @@
       "Gremios",
       "Ferias medievales",
       "Mercader medieval",
-      "Burguesía",
-      "Primeras universidades"
+      "Burguesía"
      ]
     }
    ]

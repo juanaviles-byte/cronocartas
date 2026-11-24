@@ -18,7 +18,7 @@ export function planDeEscena(antes, jugada, eventos) {
     const vidaAntes = Math.max(0, def.carta.resistencia - def.danio);
     return {
       tipo: 'ataque', jugador: j, valor: d.valor, accion: d.accion, atacante: yo.activo.carta,
-      ventaja: eventos.some(e => e.tipo === 'ventaja'), protegido: eventos.some(e => e.tipo === 'protegido'),
+      ventaja: eventos.some(e => e.tipo === 'ventaja'), protegido: eventos.some(e => e.tipo === 'protegido' && e.completo !== false), escudo: (eventos.find(e => e.tipo === 'protegido' && e.completo === false) || {}).absorbe || 0,
       cae: eventos.some(e => e.tipo === 'caida' && e.jugador === rival(j)),
       vidaAntes, vidaDespues: Math.max(0, vidaAntes - d.valor),
     };
@@ -93,7 +93,7 @@ export async function escenaAtaque({ mesa, atk, def, plan, alGolpear, alCaer }) 
   sacudir(mesa, golpe.fuerte ? 11 : 6);
   if (golpe.fuerte && mesa) { mesa.classList.remove('destello-golpe'); void mesa.offsetWidth; mesa.classList.add('destello-golpe'); }
   def.animate([{ filter: 'brightness(2.4) saturate(.3)' }, { filter: 'none' }], { duration: 260 });
-  const extra = plan.protegido ? 'Protegido' : plan.ventaja ? '¡Ventaja ×2!' : '';
+  const extra = plan.protegido ? 'Protegido' : plan.escudo ? `Escudo −${plan.escudo}` : plan.ventaja ? '¡Ventaja ×2!' : '';
   numeroGolpe(def, plan.valor ? `−${plan.valor}` : '0', extra);
   contarVida(def, plan.vidaAntes, plan.vidaDespues, 420);
   await esperar(90);

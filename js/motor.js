@@ -206,9 +206,21 @@ function jugadasDeCarta(yo, c) {
   return [{ tipo: 'jugar', uid: c.uid }];
 }
 
+// Un efecto puede traer un respaldo: se aplica cuando el efecto principal no se puede (la carta nunca queda muerta).
 function efectoAplicable(e, j, ef) {
   if (!ef) return false;
   if (Array.isArray(ef)) return ef.length > 0 && ef.every(x => efectoAplicable(e, j, x));
+  if (ef.respaldo) return principalAplicable(e, j, ef) || efectoAplicable(e, j, ef.respaldo);
+  return principalAplicable(e, j, ef);
+}
+
+// El efecto que de verdad se aplicará ahora: el principal o, si no se puede, su respaldo.
+export function efectoEfectivo(e, j, ef) {
+  if (!ef || Array.isArray(ef)) return ef;
+  return ef.respaldo && !principalAplicable(e, j, ef) ? ef.respaldo : ef;
+}
+
+function principalAplicable(e, j, ef) {
   const yo = e.jugadores[j];
   switch (ef.tipo) {
     case 'buscar': return yo.mazo.length > 0;
@@ -369,6 +381,7 @@ function desgastar(p, n) { p.danio = Math.max(p.danio, Math.min(p.danio + n, p.c
 
 function aplicarEfecto(e, j, ef, ev, eleccion) {
   if (Array.isArray(ef)) { for (const x of ef) aplicarEfecto(e, j, x, ev, eleccion); return; }
+  if (ef.respaldo) { const x = efectoEfectivo(e, j, ef); if (x !== ef) { aplicarEfecto(e, j, x, ev, eleccion); return; } }
   const yo = e.jugadores[j], otro = e.jugadores[rival(j)];
   switch (ef.tipo) {
     case 'recuperar': {
@@ -400,7 +413,7 @@ function aplicarEfecto(e, j, ef, ev, eleccion) {
     case 'robar': robar(yo, ef.n); break;
     case 'robarPorReserva': robar(yo, yo.reserva.length); break;
     case 'curar': yo.activo.danio = Math.max(0, yo.activo.danio - ef.n); break;
-    case 'proteger': yo.activo.protegido = true; break;
+    case 'proteger': yo.activo.protegido = ef.n ? ef.n : true; break;   // con n, escudo: el próximo ataque hace n menos
     case 'bonusDanio': yo.activo.bonus += ef.n; break;
     case 'anularLugar': {
       const l = e.lugar;
@@ -469,11 +482,12 @@ function calcularDanio(e, j, accion) {
   return { danio: desgloseDanio(e, j, indice).total };
 }
 
-// Para el rival automático: daño de la acción `indice` del activo de j (0 si el rival está protegido).
+// Para el rival automático: daño de la acción `indice` del activo de j (descontando el escudo del rival).
 export function danioDeAccion(e, j, indice) {
   const yo = e.jugadores[j], def = e.jugadores[rival(j)].activo;
   if (!yo.activo || !def || !yo.activo.carta.acciones || !yo.activo.carta.acciones[indice]) return 0;
-  return def.protegido ? 0 : calcularDanio(e, j, yo.activo.carta.acciones[indice]).danio;
+  const d = calcularDanio(e, j, yo.activo.carta.acciones[indice]).danio;
+  return def.protegido === true ? 0 : Math.max(0, d - (def.protegido || 0));
 }
 
 function resolverAccion(e, j, indice, ev) {
@@ -484,9 +498,11 @@ function resolverAccion(e, j, indice, ev) {
   if (danio > 0) {
     if (VENTAJA[atk.carta.dimension] === def.carta.dimension) ev.push({ tipo: 'ventaja', de: atk.carta.dimension, contra: def.carta.dimension });
     if (def.protegido) {
+      // Proteger sin n anula el ataque; con n (escudo) le resta n.
+      const completo = def.protegido === true, absorbe = completo ? danio : Math.min(danio, def.protegido);
       def.protegido = false;
-      ev.push({ tipo: 'protegido', jugador: rival(j), carta: def.carta });
-      danio = 0;
+      ev.push({ tipo: 'protegido', jugador: rival(j), carta: def.carta, absorbe, completo });
+      danio -= absorbe;
     }
   }
   atk.bonus = 0;

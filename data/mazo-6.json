@@ -72,10 +72,16 @@
       "tipo": "personaje",
       "curso": 6,
       "unidad": 1,
-      "efecto": {
-        "tipo": "saberExtra",
-        "n": 1
-      },
+      "efecto": [
+        {
+          "tipo": "saberExtra",
+          "n": 1
+        },
+        {
+          "tipo": "robar",
+          "n": 1
+        }
+      ],
       "dato": "Tras la victoria de Chacabuco, fue Director Supremo de Chile entre 1817 y 1823.",
       "oa": "OA 2",
       "emblema": "estrella",
@@ -192,7 +198,7 @@
       "curso": 6,
       "unidad": 1,
       "dimension": "Politica",
-      "resistencia": 80,
+      "resistencia": 100,
       "retirada": 1,
       "acciones": [
         {
@@ -280,7 +286,7 @@
       "tipo": "acontecimiento",
       "efecto": {
         "tipo": "asedio",
-        "n": 10
+        "n": 20
       },
       "dato": "En octubre de 1814 el ejército realista derrotó a los patriotas en Rancagua. Muchos patriotas huyeron a Mendoza.",
       "frase": "En 1814 los realistas vencieron y los patriotas huyeron a Mendoza.",
@@ -298,7 +304,7 @@
       "nombre": "Regimiento Talavera",
       "tipo": "protagonista",
       "dimension": "Politica",
-      "resistencia": 90,
+      "resistencia": 80,
       "retirada": 1,
       "acciones": [
         {
@@ -376,7 +382,7 @@
       "unidad": 2,
       "efecto": {
         "tipo": "robar",
-        "n": 3
+        "n": 2
       },
       "dato": "Redactó el Código Civil de Chile y fue el primer rector de la Universidad de Chile (1843).",
       "oa": "OA 4",
@@ -479,7 +485,8 @@
       "curso": 6,
       "unidad": 2,
       "efecto": {
-        "tipo": "proteger"
+        "tipo": "proteger",
+        "n": 30
       },
       "dato": "Organizó la República con un Presidente con mucho poder y rigió hasta 1925.",
       "oa": "OA 3",
@@ -569,7 +576,7 @@
       "nombre": "Pipiolos",
       "tipo": "protagonista",
       "dimension": "Politica",
-      "resistencia": 70,
+      "resistencia": 80,
       "retirada": 1,
       "acciones": [
         {
@@ -602,10 +609,16 @@
       "id": "CC-6-U2-011",
       "nombre": "Francisco Bilbao",
       "tipo": "personaje",
-      "efecto": {
-        "tipo": "saberReserva",
-        "n": 1
-      },
+      "efecto": [
+        {
+          "tipo": "saberReserva",
+          "n": 1
+        },
+        {
+          "tipo": "robar",
+          "n": 1
+        }
+      ],
       "dato": "Escritor que fundó en 1850 la Sociedad de la Igualdad, que defendía la participación de artesanos y obreros.",
       "frase": "Fundó la Sociedad de la Igualdad en 1850.",
       "emblema": "pluma",
@@ -907,13 +920,13 @@
       "nombre": "Mineros del carbón",
       "tipo": "protagonista",
       "dimension": "Economia",
-      "resistencia": 90,
+      "resistencia": 80,
       "retirada": 2,
       "acciones": [
         {
           "nombre": "Lota",
           "costo": 2,
-          "danio": 40
+          "danio": 30
         },
         {
           "nombre": "Bajo el mar",
@@ -1067,7 +1080,8 @@
       "curso": 6,
       "unidad": 4,
       "efecto": {
-        "tipo": "proteger"
+        "tipo": "proteger",
+        "n": 30
       },
       "dato": "Establece cómo se organiza el país y garantiza los derechos y libertades de las personas.",
       "oa": "OA 16",

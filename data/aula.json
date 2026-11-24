@@ -24,9 +24,10 @@
    "nombre": "Ambiente respetuoso",
    "tipo": "aula",
    "efecto": {
-    "tipo": "proteger"
+    "tipo": "proteger",
+    "n": 30
    },
-   "texto": "Tu Protagonista activo no recibe daño hasta tu próximo turno.",
+   "texto": "El próximo ataque contra tu Protagonista activo hace 30 menos de daño (hasta tu próximo turno).",
    "dato": "Marco para la Buena Enseñanza 2021 · Dominio B: Creación de un ambiente propicio para el aprendizaje. Estándar 5: Ambiente respetuoso y organizado.",
    "mbe": {
     "dominio": "B",
@@ -42,9 +43,13 @@
    "nombre": "Desarrollo personal y social",
    "tipo": "aula",
    "efecto": {
-    "tipo": "moverSaber"
+    "tipo": "moverSaber",
+    "respaldo": {
+     "tipo": "saberExtra",
+     "n": 1
+    }
    },
-   "texto": "Pasa 1 de Saber de tu reserva a tu Protagonista activo.",
+   "texto": "Pasa 1 de Saber de tu reserva a tu Protagonista activo. Si no tienes Saber en la reserva, tu activo recibe 1 de Saber extra.",
    "dato": "Marco para la Buena Enseñanza 2021 · Dominio B: Creación de un ambiente propicio para el aprendizaje. Estándar 6: Desarrollo personal y social.",
    "mbe": {
     "dominio": "B",
@@ -79,9 +84,13 @@
    "nombre": "Pensamiento crítico",
    "tipo": "aula",
    "efecto": {
-    "tipo": "anularLugar"
+    "tipo": "anularLugar",
+    "respaldo": {
+     "tipo": "debilitar",
+     "n": 20
+    }
    },
-   "texto": "Quita el Lugar que esté en juego.",
+   "texto": "Quita el Lugar que esté en juego. Si no hay, el próximo ataque del activo rival hace 20 menos de daño.",
    "dato": "Marco para la Buena Enseñanza 2021 · Dominio C: Enseñanza para el aprendizaje de todos/as los/as estudiantes. Estándar 8: Estrategias para el desarrollo de habilidades del pensamiento.",
    "mbe": {
     "dominio": "C",

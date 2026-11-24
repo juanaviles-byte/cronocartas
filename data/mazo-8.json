@@ -35,7 +35,11 @@
       "unidad": 1,
       "efecto": [
         {
-          "tipo": "anularLugar"
+          "tipo": "anularLugar",
+          "respaldo": {
+            "tipo": "robar",
+            "n": 1
+          }
         },
         {
           "tipo": "robar",
@@ -224,7 +228,11 @@
       "efecto": {
         "tipo": "bonusDanio",
         "n": 30,
-        "dimension": "Politica"
+        "dimension": "Politica",
+        "respaldo": {
+          "tipo": "bonusDanio",
+          "n": 20
+        }
       },
       "dato": "Rey de España en el siglo XVI. Gobernó un imperio tan extenso que se decía que en él nunca se ponía el sol.",
       "frase": "Gobernó un imperio en el que nunca se ponía el sol.",
@@ -242,22 +250,18 @@
       "nombre": "Ejército permanente",
       "tipo": "protagonista",
       "dimension": "Territorio",
-      "resistencia": 100,
+      "resistencia": 80,
       "retirada": 2,
       "acciones": [
         {
           "nombre": "Guarnición",
           "costo": 2,
-          "danio": 40,
-          "efecto": {
-            "tipo": "debilitar",
-            "n": 10
-          }
+          "danio": 40
         },
         {
           "nombre": "Campaña",
           "costo": 3,
-          "danio": 60
+          "danio": 50
         }
       ],
       "dato": "Los reyes absolutos mantuvieron ejércitos pagados todo el año, y no solo en tiempos de guerra.",
@@ -276,7 +280,8 @@
       "nombre": "Derecho divino de los reyes",
       "tipo": "acontecimiento",
       "efecto": {
-        "tipo": "proteger"
+        "tipo": "proteger",
+        "n": 30
       },
       "dato": "Idea según la cual el poder del rey venía directamente de Dios, por lo que nadie podía juzgarlo.",
       "frase": "La idea de que el poder del rey venía de Dios.",
@@ -333,7 +338,7 @@
       "unidad": 2,
       "efecto": {
         "tipo": "curar",
-        "n": 40
+        "n": 30
       },
       "dato": "Fraile que denunció los abusos contra los indígenas y defendió su dignidad humana.",
       "oa": "OA 17",
@@ -618,7 +623,11 @@
       "curso": 8,
       "unidad": 3,
       "efecto": {
-        "tipo": "moverSaberTodo"
+        "tipo": "moverSaberTodo",
+        "respaldo": {
+          "tipo": "debilitar",
+          "n": 30
+        }
       },
       "dato": "Propuso separar el poder del Estado en ejecutivo, legislativo y judicial.",
       "oa": "OA 14",
@@ -737,7 +746,8 @@
       "curso": 8,
       "unidad": 3,
       "efecto": {
-        "tipo": "proteger"
+        "tipo": "proteger",
+        "n": 30
       },
       "dato": "La Declaración de 1789, en la Revolución francesa, proclamó que todos nacen libres e iguales en derechos.",
       "oa": "OA 18",
@@ -812,10 +822,16 @@
       "id": "CC-8-U3-009",
       "nombre": "Mary Wollstonecraft",
       "tipo": "personaje",
-      "efecto": {
-        "tipo": "saberReserva",
-        "n": 1
-      },
+      "efecto": [
+        {
+          "tipo": "saberReserva",
+          "n": 1
+        },
+        {
+          "tipo": "robar",
+          "n": 1
+        }
+      ],
       "dato": "Escritora inglesa que en 1792 defendió que las mujeres tenían derecho a la misma educación que los hombres.",
       "frase": "Defendió en 1792 la educación igualitaria para las mujeres.",
       "emblema": "libro",
@@ -931,8 +947,8 @@
       "acciones": [
         {
           "nombre": "Aislamiento",
-          "costo": 3,
-          "danio": 50
+          "costo": 2,
+          "danio": 40
         }
       ],
       "dato": "Región con poca población y difícil conexión, unida al resto del país por la Carretera Austral.",
@@ -1160,9 +1176,19 @@
       "id": "CC-8-U4-011",
       "nombre": "Migración campo-ciudad",
       "tipo": "acontecimiento",
-      "efecto": {
-        "tipo": "moverSaberTodo"
-      },
+      "efecto": [
+        {
+          "tipo": "moverSaberTodo",
+          "respaldo": {
+            "tipo": "saberExtra",
+            "n": 1
+          }
+        },
+        {
+          "tipo": "robar",
+          "n": 1
+        }
+      ],
       "dato": "En el siglo XX muchas familias dejaron el campo para buscar trabajo en las ciudades, que crecieron rápidamente.",
       "frase": "Muchas familias dejaron el campo para vivir en las ciudades.",
       "emblema": "casa",

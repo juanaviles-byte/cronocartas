@@ -40,7 +40,7 @@ test('las presencias sagradas son Personajes con efecto de apoyo y dato con resp
   const sagrados = ['Ngenechen', 'Pillán', 'Make Make', 'Pachamama', 'Achachilas', 'Temáukel'];
   assert.deepEqual(X.cartas.filter(c => c.tipo === 'personaje').map(c => c.nombre).sort(), [...sagrados].sort());
   for (const c of X.cartas.filter(c => c.tipo === 'personaje')) {
-    assert.ok(['curar', 'curarTodos', 'proteger', 'bonusDanio', 'robar', 'saberExtra', 'moverSaber'].includes(c.efecto.tipo), c.nombre);
+    assert.ok([].concat(c.efecto).every(x => ['curar', 'curarTodos', 'proteger', 'bonusDanio', 'robar', 'saberExtra', 'moverSaber'].includes(x.tipo)), c.nombre);
     assert.match(c.dato, /^Para (el pueblo|los pueblos)/, `${c.nombre}: el dato parte con «Para el pueblo…»`);
   }
 });

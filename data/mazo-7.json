@@ -73,7 +73,7 @@
       "curso": 7,
       "unidad": 1,
       "dimension": "Territorio",
-      "resistencia": 80,
+      "resistencia": 90,
       "retirada": 1,
       "acciones": [
         {
@@ -159,7 +159,7 @@
       "nombre": "Faraón",
       "tipo": "protagonista",
       "dimension": "Politica",
-      "resistencia": 90,
+      "resistencia": 80,
       "retirada": 1,
       "acciones": [
         {
@@ -170,7 +170,7 @@
         {
           "nombre": "Dios-rey",
           "costo": 3,
-          "danio": 70
+          "danio": 60
         }
       ],
       "dato": "Gobernante del antiguo Egipto, considerado un dios. Dirigía el Estado, el ejército y las grandes obras.",
@@ -204,9 +204,15 @@
       "id": "CC-7-U1-009",
       "nombre": "Escritura jeroglífica",
       "tipo": "acontecimiento",
-      "efecto": {
-        "tipo": "recuperar"
-      },
+      "efecto": [
+        {
+          "tipo": "recuperar"
+        },
+        {
+          "tipo": "robar",
+          "n": 1
+        }
+      ],
       "dato": "Los egipcios escribían con signos que representaban objetos y sonidos. Los escribas registraban leyes, cuentas y relatos.",
       "frase": "Signos egipcios que guardaban leyes, cuentas y relatos.",
       "emblema": "pergamino",
@@ -511,7 +517,7 @@
       "nombre": "Esparta",
       "tipo": "protagonista",
       "dimension": "Sociedad",
-      "resistencia": 100,
+      "resistencia": 80,
       "retirada": 2,
       "acciones": [
         {
@@ -535,7 +541,7 @@
       "habilidad": {
         "tipo": "contraataque",
         "nombre": "Escudos",
-        "n": 20
+        "n": 10
       },
       "curso": 7,
       "unidad": 2,
@@ -607,7 +613,7 @@
       "curso": 7,
       "unidad": 3,
       "dimension": "Politica",
-      "resistencia": 80,
+      "resistencia": 90,
       "retirada": 1,
       "acciones": [
         {
@@ -633,7 +639,7 @@
       "curso": 7,
       "unidad": 3,
       "dimension": "Sociedad",
-      "resistencia": 70,
+      "resistencia": 80,
       "retirada": 1,
       "acciones": [
         {
@@ -740,7 +746,7 @@
       "curso": 7,
       "unidad": 3,
       "dimension": "Cultura",
-      "resistencia": 70,
+      "resistencia": 90,
       "retirada": 1,
       "acciones": [
         {
@@ -849,11 +855,7 @@
         {
           "nombre": "Carga",
           "costo": 3,
-          "danio": 60,
-          "efecto": {
-            "tipo": "asedio",
-            "n": 10
-          }
+          "danio": 60
         }
       ],
       "dato": "Guerreros a caballo al servicio de un señor. Seguían un código de honor llamado caballería.",
@@ -874,7 +876,7 @@
       "tipo": "acontecimiento",
       "efecto": {
         "tipo": "epidemia",
-        "n": 10
+        "n": 30
       },
       "dato": "Entre 1347 y 1351 una epidemia de peste recorrió Europa y murió cerca de un tercio de su población.",
       "frase": "Una epidemia que en el siglo XIV recorrió toda Europa.",
@@ -941,7 +943,7 @@
       "curso": 7,
       "unidad": 4,
       "dimension": "Territorio",
-      "resistencia": 80,
+      "resistencia": 70,
       "retirada": 1,
       "acciones": [
         {
@@ -967,7 +969,7 @@
       "curso": 7,
       "unidad": 4,
       "dimension": "Sociedad",
-      "resistencia": 60,
+      "resistencia": 70,
       "retirada": 1,
       "acciones": [
         {

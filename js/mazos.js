@@ -15,6 +15,11 @@ const TIPOS_BUSQUEDA = ['protagonista', 'lugar', 'acontecimiento', 'cualquiera']
 function efectoValido(ef) {
   if (Array.isArray(ef)) return ef.length > 0 && ef.every(efectoValido);
   if (!ef || !EFECTOS.includes(ef.tipo)) return false;
+  // Respaldo: un solo efecto simple, que no pida elegir (no hay pantalla para elegir en ese momento).
+  if (ef.respaldo !== undefined) {
+    const r = ef.respaldo;
+    if (!r || Array.isArray(r) || r.respaldo !== undefined || ['buscar', 'buscarProtagonista', 'retiroGratis'].includes(r.tipo) || !efectoValido(r)) return false;
+  }
   if (ef.tipo === 'buscar' && !TIPOS_BUSQUEDA.includes(ef.cartaTipo)) return false;
   if (ef.dimension && !TODAS_DIMENSIONES.includes(ef.dimension)) return false;
   return true;

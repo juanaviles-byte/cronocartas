@@ -82,7 +82,16 @@ for (const c of TODAS.filter(x => x.efecto && x.tipo !== 'protagonista')) {
         case 'saberExtra': assert.ok(n.includes(ef.n || 1), `el texto no dice ${ef.n || 1}`); assert.equal(yo.activo.saber - yo0.activo.saber, ef.n || 1); break;
         case 'curar': assert.equal(yo0.activo.danio - yo.activo.danio, Math.min(n[0], yo0.activo.danio), `dice ${n[0]}`); break;
         case 'curarTodos': assert.equal(yo0.reserva[0].danio - yo.reserva[0].danio, Math.min(n[0], yo0.reserva[0].danio)); break;
-        case 'proteger': assert.equal(yo.activo.protegido, true); assert.equal(danioDeAccion({ ...r.estado, turno: 'B' }, 'B', 0), 0, 'protegido igual recibe daño'); break;
+        case 'proteger': {
+          const enB = { ...r.estado, turno: 'B' };
+          if (!ef.n) { assert.equal(yo.activo.protegido, true); assert.equal(danioDeAccion(enB, 'B', 0), 0, 'protegido igual recibe daño'); break; }
+          // Escudo: el texto dice cuánto, y el próximo ataque hace exactamente eso menos.
+          assert.ok(n.includes(ef.n), `el texto no dice ${ef.n}`);
+          assert.equal(yo.activo.protegido, ef.n);
+          const sinEscudo = clon(enB); sinEscudo.jugadores.A.activo.protegido = false;
+          assert.equal(danioDeAccion(enB, 'B', 0), Math.max(0, danioDeAccion(sinEscudo, 'B', 0) - ef.n));
+          break;
+        }
         case 'bonusDanio': assert.ok(n.includes(ef.n), `el texto no dice ${ef.n}`); assert.equal(danioDeAccion(r.estado, 'A', 0) - antesDanio, ef.n); break;
         case 'anularLugar': assert.equal(r.estado.lugar, null); break;
         case 'moverSaber': assert.equal(yo.activo.saber - yo0.activo.saber, 1); assert.equal(yo0.reserva[0].saber - yo.reserva[0].saber, 1); break;

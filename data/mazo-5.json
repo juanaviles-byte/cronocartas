@@ -14,9 +14,8 @@
       "curso": 5,
       "unidad": 1,
       "efecto": {
-        "tipo": "buscar",
-        "n": 5,
-        "cartaTipo": "lugar"
+        "tipo": "buscarProtagonista",
+        "n": 4
       },
       "dato": "En 1492 llegó a América navegando hacia el oeste, cuando buscaba una nueva ruta hacia Asia.",
       "oa": "OA 1",
@@ -39,9 +38,15 @@
       "tipo": "personaje",
       "curso": 5,
       "unidad": 1,
-      "efecto": {
-        "tipo": "retiroGratis"
-      },
+      "efecto": [
+        {
+          "tipo": "retiroGratis"
+        },
+        {
+          "tipo": "robar",
+          "n": 1
+        }
+      ],
       "dato": "Su expedición (1519-1522) encontró el paso entre el Atlántico y el Pacífico. Juan Sebastián Elcano la terminó.",
       "oa": "OA 1",
       "emblema": "mapa",
@@ -89,7 +94,8 @@
       "curso": 5,
       "unidad": 1,
       "efecto": {
-        "tipo": "proteger"
+        "tipo": "proteger",
+        "n": 30
       },
       "dato": "Llegó a Chile con Valdivia y participó en la defensa de Santiago durante el ataque de 1541.",
       "oa": "OA 2",
@@ -167,7 +173,7 @@
       "curso": 5,
       "unidad": 1,
       "dimension": "Politica",
-      "resistencia": 70,
+      "resistencia": 80,
       "retirada": 1,
       "acciones": [
         {
@@ -353,7 +359,7 @@
       "unidad": 2,
       "efecto": {
         "tipo": "bonusDanio",
-        "n": 30
+        "n": 20
       },
       "dato": "Joven mapuche que conoció la forma de combatir española y la usó para resistir la Conquista.",
       "oa": "OA 7",
@@ -409,7 +415,7 @@
       "curso": 5,
       "unidad": 2,
       "dimension": "Cultura",
-      "resistencia": 70,
+      "resistencia": 80,
       "retirada": 1,
       "acciones": [
         {
@@ -430,7 +436,8 @@
       "curso": 5,
       "unidad": 2,
       "efecto": {
-        "tipo": "proteger"
+        "tipo": "proteger",
+        "n": 30
       },
       "dato": "En 1641 españoles y mapuches acordaron la paz y reconocieron el río Biobío como frontera.",
       "oa": "OA 7",
@@ -478,7 +485,7 @@
       "nombre": "Encomienda",
       "tipo": "protagonista",
       "dimension": "Economia",
-      "resistencia": 70,
+      "resistencia": 80,
       "retirada": 1,
       "acciones": [
         {
@@ -542,7 +549,7 @@
       "nombre": "Fuertes del Biobío",
       "tipo": "protagonista",
       "dimension": "Territorio",
-      "resistencia": 90,
+      "resistencia": 80,
       "retirada": 2,
       "acciones": [
         {
@@ -716,7 +723,7 @@
       "curso": 5,
       "unidad": 3,
       "dimension": "Territorio",
-      "resistencia": 90,
+      "resistencia": 100,
       "retirada": 1,
       "acciones": [
         {
@@ -769,7 +776,8 @@
       "curso": 5,
       "unidad": 3,
       "efecto": {
-        "tipo": "proteger"
+        "tipo": "proteger",
+        "n": 30
       },
       "dato": "Chile es un país sísmico: construir edificios antisísmicos ayuda a proteger a la comunidad.",
       "oa": "OA 12",
@@ -930,7 +938,7 @@
       "nombre": "Chiloé",
       "tipo": "protagonista",
       "dimension": "Cultura",
-      "resistencia": 70,
+      "resistencia": 80,
       "retirada": 1,
       "acciones": [
         {
@@ -1167,13 +1175,13 @@
       "nombre": "Bomberos voluntarios",
       "tipo": "protagonista",
       "dimension": "Sociedad",
-      "resistencia": 80,
+      "resistencia": 70,
       "retirada": 1,
       "acciones": [
         {
           "nombre": "¡Al rescate!",
           "costo": 2,
-          "danio": 30,
+          "danio": 20,
           "efecto": {
             "tipo": "curarTodos",
             "n": 10
@@ -1182,7 +1190,7 @@
         {
           "nombre": "Compañía",
           "costo": 3,
-          "danio": 60
+          "danio": 50
         }
       ],
       "dato": "En Chile, los bomberos son voluntarios: no reciben sueldo por apagar incendios y rescatar personas.",
@@ -1238,10 +1246,16 @@
       "id": "CC-5-U4-011",
       "nombre": "Elecciones democráticas",
       "tipo": "acontecimiento",
-      "efecto": {
-        "tipo": "saberReserva",
-        "n": 1
-      },
+      "efecto": [
+        {
+          "tipo": "saberReserva",
+          "n": 1
+        },
+        {
+          "tipo": "robar",
+          "n": 1
+        }
+      ],
       "dato": "En una democracia, la ciudadanía elige a sus autoridades con voto secreto, libre e informado.",
       "frase": "La ciudadanía elige a sus autoridades con voto libre y secreto.",
       "emblema": "urna",

@@ -35,9 +35,16 @@ export function textoParaLeer(c) {
   return c.dato ? nombre + '. ' + c.dato : nombre + '.';
 }
 
+// Cómo empieza la frase del respaldo, según lo que le falta al efecto principal.
+const SI_NO = { anularLugar: 'Si no hay,', moverSaberTodo: 'Si no tienes Saber en la reserva,', moverSaber: 'Si no tienes Saber en la reserva,', bonusDanio: 'Si no,' };
+
 export function textoEfecto(ef) {
   if (!ef) return '';
   if (Array.isArray(ef)) return ef.map(textoEfecto).join(' Luego, ').replace(/ Luego, (\w)/g, (m, l) => ` Luego, ${l.toLowerCase()}`);
+  if (ef.respaldo) {
+    const r = textoEfecto(ef.respaldo);
+    return `${textoEfecto({ ...ef, respaldo: undefined })} ${SI_NO[ef.tipo] || 'Si no se puede,'} ${r.charAt(0).toLowerCase()}${r.slice(1)}`;
+  }
   switch (ef.tipo) {
     case 'buscar': return `Mira las ${ef.n || 3} primeras cartas de tu mazo y toma ${NOMBRE_BUSQUEDA[ef.cartaTipo] || 'una carta'}. El resto va al fondo.`;
     case 'retiroGratis': return 'Cambia tu activo por un Protagonista de tu reserva, sin pagar retirada.';
@@ -46,7 +53,7 @@ export function textoEfecto(ef) {
     case 'moverSaberTodo': return 'Pasa todo el Saber de un Protagonista de tu reserva a tu activo.';
     case 'robar': return `Roba ${ef.n} carta${ef.n > 1 ? 's' : ''}.`;
     case 'curar': return `Tu activo recupera ${ef.n} de resistencia.`;
-    case 'proteger': return 'Tu activo no recibe daño hasta tu próximo turno.';
+    case 'proteger': return ef.n ? `El próximo ataque contra tu activo hace ${ef.n} menos de daño (hasta tu próximo turno).` : 'Tu activo no recibe daño hasta tu próximo turno.';
     case 'bonusDanio': return ef.dimension ? `Si tu activo es de ${nombreDim(ef.dimension)}, su próxima acción hace +${ef.n} de daño.` : `Tu próxima acción hace +${ef.n} de daño.`;
     case 'moverSaber': return 'Pasa 1 de Saber de tu reserva a tu activo.';
     case 'anularLugar': return 'Quita el Lugar en juego.';
@@ -73,7 +80,7 @@ export function textoEfectoAccion(ef) {
     case 'robar': return `roba ${ef.n}`;
     case 'curar': return `cura ${ef.n}`;
     case 'curarTodos': return `cura ${ef.n} a todos los tuyos`;
-    case 'proteger': return 'te protege hasta tu turno';
+    case 'proteger': return ef.n ? `escudo de ${ef.n} hasta tu turno` : 'te protege hasta tu turno';
     case 'asedio': return `${ef.n} a cada uno de la reserva rival`;
     case 'debilitar': return `su próximo ataque hace −${ef.n}`;
     case 'quitarSaber': return `el rival pierde ${ef.n || 1} de Saber`;
@@ -150,7 +157,7 @@ export function renderCarta(carta, { tamano = 'normal', instancia = null, unidad
       ${esProt ? `<div class="m-res${instancia && instancia.danio ? ' herido' : ''}">${esc(vida)}</div>` : ''}
       ${carta.evolucionaDe ? '<div class="etapa">2</div>' : ''}
       ${esProt && instancia ? `<div class="mini-saber${instancia.saber ? '' : ' cero'}" title="Saber"><span class="pip"></span><b>${esc(instancia.saber)}</b></div>` : ''}
-      ${instancia && instancia.protegido ? '<div class="sello">Protegido</div>' : ''}
+      ${instancia && instancia.protegido ? `<div class="sello">${instancia.protegido === true ? 'Protegido' : `Escudo ${esc(instancia.protegido)}`}</div>` : ''}
       ${instancia && instancia.bonus ? `<div class="sello">+${esc(instancia.bonus)}</div>` : ''}
       ${instancia && instancia.debil ? `<div class="sello sello-debil" title="Su próximo ataque hace menos daño">−${esc(instancia.debil)}</div>` : ''}
       <div class="m-banda">
