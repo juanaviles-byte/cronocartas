@@ -2,6 +2,8 @@
 // Una sola capa de granos (canvas fijo, sin eventos de puntero) sirve a todos los efectos y solo
 // anima mientras hay granos vivos. Los movimientos de cartas usan la Web Animations API (transform/opacity).
 
+import { liviano } from '../rendimiento.js';
+
 const ORO = ['#E9C46A', '#F3D98B', '#C9A24A', '#FFF1C4'];
 let capa = null, ctx = null, granos = [], corriendo = false, dpr = 1;
 
@@ -37,6 +39,7 @@ function bucle() {
   else { corriendo = false; ctx.clearRect(0, 0, capa.width, capa.height); }
 }
 function agregar(lista) {
+  if (liviano()) return;   // modo escuela: sin partículas
   if (!asegurarCapa()) return;
   granos.push(...lista);
   if (granos.length > 1400) granos.splice(0, granos.length - 1400);   // tope para tablets modestas

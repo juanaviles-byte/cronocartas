@@ -6,6 +6,7 @@ import { exportarCartas, importarCartas, resumenExportacion } from '../compartir
 import { esc } from '../html.js';
 import { renderCarta } from './carta.js';
 import { NOMBRE_DIMENSION } from '../mazos.js';
+import { modoEscuelaActivo } from '../rendimiento.js';
 
 const h = (tag, cls, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; };
 let desbloqueado = false;
@@ -213,7 +214,22 @@ export async function vistaDocente({ volver }) {
   function ajustes(zona) {
     const a = almacen.leer(CLAVES.ajustes, {}) || {};
     const guardar = cambios => { almacen.guardar(CLAVES.ajustes, { ...a, ...cambios }); panel(); };
-    let s = h('section', 'paso'); s.appendChild(h('h2', '', 'Hitos para ganar'));
+    let s = h('section', 'paso'); s.appendChild(h('h2', '', 'Modo escuela'));
+    const activo = modoEscuelaActivo(a, navigator.userAgent, navigator.deviceMemory);
+    s.appendChild(h('p', 'nota', 'Para las tablets del colegio (Galaxy Tab A 8.0): menos efectos especiales y menos memoria, para que el juego corra fluido. '
+      + `En esta tablet ahora está <b>${activo ? 'activado' : 'desactivado'}</b>.`));
+    const oe = h('div', 'opciones');
+    for (const [val, t] of [[undefined, 'Automático (recomendado)'], [true, 'Siempre'], [false, 'Nunca']]) {
+      const b = h('button', `opcion chica${a.modoEscuela === val ? ' elegida' : ''}`, t);
+      b.onclick = () => {
+        document.documentElement.classList.toggle('modo-escuela', modoEscuelaActivo({ ...a, modoEscuela: val }, navigator.userAgent, navigator.deviceMemory));
+        guardar({ modoEscuela: val });
+      };
+      oe.appendChild(b);
+    }
+    s.appendChild(oe); zona.appendChild(s);
+
+    s = h('section', 'paso'); s.appendChild(h('h2', '', 'Hitos para ganar'));
     const o1 = h('div', 'opciones');
     for (const n of [2, 3]) {
       const b = h('button', `opcion chica${(a.hitosParaGanar || 3) === n ? ' elegida' : ''}`, `${n} Hitos${n === 2 ? ' · partida corta' : ''}`);

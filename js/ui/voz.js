@@ -1,4 +1,5 @@
 import { ambiente } from './ambiente.js';
+import { liviano } from '../rendimiento.js';
 // Lectura en voz alta con la voz de la tablet (speechSynthesis). Sin voces en español, el botón no aparece.
 let vozEs = null;
 
@@ -45,7 +46,11 @@ let turno = 0;             // cada reproducción nueva invalida a las anteriores
 let ctxVoz = null;
 const bloques = new Map();
 function contextoVoz() {
-  if (!ctxVoz) { const C = globalThis.AudioContext || globalThis.webkitAudioContext; if (!C) return null; ctxVoz = new C(); }
+  if (!ctxVoz) {
+    const C = globalThis.AudioContext || globalThis.webkitAudioContext; if (!C) return null;
+    // En modo escuela se decodifica a 22 kHz: la mitad de memoria por bloque, y la voz se oye igual.
+    try { ctxVoz = liviano() ? new C({ sampleRate: 22050 }) : new C(); } catch (e) { ctxVoz = new C(); }
+  }
   if (ctxVoz.state === 'suspended') ctxVoz.resume().catch(() => {});
   return ctxVoz;
 }
@@ -53,7 +58,7 @@ function bloque(ctx, ruta) {
   if (!bloques.has(ruta)) {
     bloques.set(ruta, fetch(ruta).then(r => { if (!r.ok) throw new Error(ruta); return r.arrayBuffer(); })
       .then(b => new Promise((ok, mal) => ctx.decodeAudioData(b, ok, mal))));
-    if (bloques.size > 3) bloques.delete(bloques.keys().next().value);
+    if (bloques.size > (liviano() ? 1 : 3)) bloques.delete(bloques.keys().next().value);   // modo escuela: un bloque
   }
   return bloques.get(ruta);
 }

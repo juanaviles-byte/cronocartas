@@ -1101,3 +1101,14 @@ body:not([data-vista="mesa"]) { background: radial-gradient(ellipse at 20% 0%, #
 .mano .carta-mini.sugerida { transform: translateY(-5px); animation-name: sugerida-mano; }
 @keyframes sugerida-mano { 0%, 100% { box-shadow: 0 0 0 4px #7FD1FF, 0 0 10px 3px rgba(127,209,255,.6); } 50% { box-shadow: 0 0 0 5px #fff, 0 0 14px 5px rgba(127,209,255,.95); } }
 @media (prefers-reduced-motion: reduce) { .mano .carta-mini.sugerida { transform: none; animation: none; box-shadow: 0 0 0 4px #7FD1FF; } }
+
+/* Modo escuela */
+/* Perfil liviano para la Galaxy Tab A 8.0 (2019): sin filtros animados, desenfoques ni brillos que se repintan en cada cuadro. */
+.modo-escuela .lado.activo-turno .zona-activo .carta-mini:not(.archivada):not(.embiste):not(.golpeado):not(.se-cura):not(.se-protege):not(.sugerida):not(.pide-saber) { animation: none; }
+.modo-escuela .escena-lugar::before { filter: none; }
+.modo-escuela * { backdrop-filter: none !important; }
+.modo-escuela .inicio-fondo { animation: none; top: 0; right: 0; bottom: 0; left: 0; }
+.modo-escuela .sugerida { animation: none; box-shadow: 0 0 0 4px #7FD1FF; }
+.modo-escuela .mano .carta-mini.sugerida { animation: none; box-shadow: 0 0 0 4px #7FD1FF; }
+.modo-escuela .carta-mini.pide-saber, .modo-escuela .pista-saber { animation: none; box-shadow: 0 0 0 3px #E9C46A; }
+.modo-escuela .aura { animation: none; }

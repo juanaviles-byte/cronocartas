@@ -12,8 +12,11 @@ import { ambiente } from './ambiente.js';
 import { almacen, CLAVES } from '../almacen.js';
 import { esc } from '../html.js';
 import { CURSOS, mazosDePartida } from '../eleccion.js';
+import { modoEscuelaActivo } from '../rendimiento.js';
 
 const app = document.getElementById('app');
+// Modo escuela (perfil liviano): lo elige el docente o se activa solo en la tablet del colegio.
+document.documentElement.classList.toggle('modo-escuela', modoEscuelaActivo(almacen.leer(CLAVES.ajustes, {}) || {}, navigator.userAgent, navigator.deviceMemory));
 let actual = null;            // vista montada (con destruir opcional)
 let eleccion = { modo: 'caraacara', cursoA: 7, cursoB: 7, tablero: 'azar', reforzar: false, mazo: 'curso', duelo: null, bandoA: null, linea: true, coleccion: null };
 let partidaPendiente = null;   // la deja lista el torneo antes de ir a #mesa

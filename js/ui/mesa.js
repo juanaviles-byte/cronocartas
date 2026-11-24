@@ -16,6 +16,7 @@ import { sonidos, sonidoActivo, alternarSonido } from './sonido.js';
 import { ambiente, rutaAmbiente, ambientesListos } from './ambiente.js';
 import { FUERZAS, coleccion } from '../colecciones.js';
 import { hacerArrastrable, ultimaSoltada } from './arrastre.js';
+import { liviano } from '../rendimiento.js';
 import { volar, impacto, deshacerEnArena, relojSobre, granoHacia, motasQueSuben, estallido, arenaQueCae } from './efectos.js';
 import { arenaDelTiempo } from './viaje.js';
 import { planDeEscena, escenaAtaque, escenaInvocacion, estiloDeGolpe } from './director.js';
@@ -402,7 +403,8 @@ export async function montarMesa(contenedor, opciones) {
   function viajar(desde, hasta) {
     const quieto = sinMovimiento();
     sonidos.viaje();
-    if (!quieto) {
+    // La arena que disuelve el escenario es un canvas a pantalla completa: en modo escuela se omite.
+    if (!(sinMovimiento() || liviano())) {
       const r = raiz.getBoundingClientRect();
       viaje = arenaDelTiempo({ ancho: r.width || innerWidth, alto: r.height || innerHeight, imagen: desde ? new URL(desde.url, location.href).href : null });
     }

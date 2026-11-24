@@ -1,7 +1,7 @@
 // Service worker de Cronocartas: guarda la app en la tablet para jugar sin internet.
 // Al publicar una mejora, sube VERSION y agrega aquí los archivos nuevos
 // (la prueba tests/sw.test.js avisa si falta alguno).
-const VERSION = 'cc-v65';
+const VERSION = 'cc-v66';
 const ARCHIVOS = [
   "./",
   "audio/ambientes/CC-5-U1-007.ogg",
@@ -395,6 +395,7 @@ const ARCHIVOS = [
   "js/mazos.js",
   "js/motor.js",
   "js/pin.js",
+  "js/rendimiento.js",
   "js/rng.js",
   "js/torneo.js",
   "js/ui/ambiente.js",
@@ -541,7 +542,7 @@ const HUELLAS = {
   "audio/sfx/viaje.ogg": "aab7115984b2",
   "audio/sfx/victoria.ogg": "a4a5c41a13af",
   "audio/tema/inicio.ogg": "939b0d467795",
-  "css/estilos.css": "a40bd1f7c19e",
+  "css/estilos.css": "c60a641288ba",
   "data/ambientes.json": "963d06be0a1d",
   "data/arte.json": "305fc8be9797",
   "data/aula.json": "9c4641e855c6",
@@ -814,10 +815,11 @@ const HUELLAS = {
   "js/mazos.js": "f0f959f66a37",
   "js/motor.js": "fa46e34f672e",
   "js/pin.js": "5827e158c752",
+  "js/rendimiento.js": "b0e6af5309f8",
   "js/rng.js": "a0cb6ba3f25e",
   "js/torneo.js": "b56f306f0b06",
   "js/ui/ambiente.js": "d42499ed6353",
-  "js/ui/app.js": "be80eeb3a79d",
+  "js/ui/app.js": "acf53868ad10",
   "js/ui/arrastre.js": "3f7dac42c935",
   "js/ui/arte.js": "d522c5ce9e73",
   "js/ui/banco.js": "73df652d2bdf",
@@ -825,17 +827,17 @@ const HUELLAS = {
   "js/ui/confirmar.js": "3014d88399ba",
   "js/ui/datos.js": "bff1d9d77672",
   "js/ui/director.js": "3a9643e8657a",
-  "js/ui/docente.js": "485cab796649",
+  "js/ui/docente.js": "95609970b90d",
   "js/ui/dorsos.js": "4ba05c566ac2",
   "js/ui/editor.js": "efdd01cbbe7b",
-  "js/ui/efectos.js": "f7539fb120f0",
+  "js/ui/efectos.js": "061784a3eba9",
   "js/ui/guia.js": "c9e972efcd9f",
-  "js/ui/mesa.js": "7c83a10baf0a",
+  "js/ui/mesa.js": "37f8be40ba46",
   "js/ui/sonido.js": "fe2c462d22fa",
   "js/ui/tiempo.js": "bc9280b1562f",
   "js/ui/torneo.js": "306ece57a0cc",
   "js/ui/viaje.js": "1a2fd44d4d0a",
-  "js/ui/voz.js": "409c376fb439",
+  "js/ui/voz.js": "d554a57f36fa",
   "manifest.webmanifest": "e4a1e375a727"
 };
 const HUELLAS_URL = './__huellas__';
