@@ -29,18 +29,29 @@ function audio() {
 }
 
 // ── Banco de efectos ──
-const buffers = new Map();       // nombre → AudioBuffer
+// Los efectos vienen juntos en paquetes (data/sfx.json: nombre → { ruta, desde, hasta }): cada paquete
+// se descarga y decodifica una vez, y cada efecto suena desde su tramo.
+const buffers = new Map();       // nombre → { buf, desde, dur }
 let carga = null;
 export function precargarSonidos() {
   if (carga || typeof fetch !== 'function') return carga;
   const a = audio();
   if (!a) return null;
+  const paquetes = new Map();     // ruta → promesa del AudioBuffer
+  const paquete = ruta => {
+    if (!paquetes.has(ruta)) {
+      paquetes.set(ruta, fetch(ruta).then(r => (r.ok ? r.arrayBuffer() : Promise.reject(new Error(ruta))))
+        .then(b => new Promise((ok, mal) => a.decodeAudioData(b, ok, mal))));
+    }
+    return paquetes.get(ruta);
+  };
   carga = fetch('data/sfx.json').then(r => (r.ok ? r.json() : {})).catch(() => ({}))
-    .then(mapa => Promise.all(Object.entries(mapa).map(([nombre, ruta]) =>
-      fetch(ruta).then(r => (r.ok ? r.arrayBuffer() : Promise.reject(new Error(ruta))))
-        .then(b => new Promise((ok, mal) => a.decodeAudioData(b, ok, mal)))
-        .then(buf => { buffers.set(nombre, buf); })
-        .catch(() => { /* ese efecto queda con su versión sintetizada */ }))));
+    .then(mapa => Promise.all(Object.entries(mapa).map(([nombre, ruta]) => {
+      const t = typeof ruta === 'object' && ruta ? ruta : { ruta, desde: 0, hasta: null };
+      return paquete(t.ruta)
+        .then(buf => { buffers.set(nombre, { buf, desde: t.desde || 0, dur: t.hasta != null ? t.hasta - (t.desde || 0) : buf.duration }); })
+        .catch(() => { /* ese efecto queda con su versión sintetizada */ });
+    })));
   return carga;
 }
 
@@ -49,14 +60,14 @@ export function precargarSonidos() {
 function tocar(nombre, { vol = 1, tono = 1, variar = 0.04, desde = 0 } = {}) {
   const a = audio();
   if (!a) return true;               // sonido apagado: no hace falta respaldo
-  const buf = buffers.get(nombre);
-  if (!buf) { precargarSonidos(); return false; }
+  const t = buffers.get(nombre);
+  if (!t) { precargarSonidos(); return false; }
   const src = a.createBufferSource(), g = a.createGain();
-  src.buffer = buf;
+  src.buffer = t.buf;
   src.playbackRate.value = tono * (1 + (Math.random() * 2 - 1) * variar);
   g.gain.value = vol * (1 - Math.random() * variar);
   src.connect(g).connect(salida);
-  src.start(a.currentTime + desde);
+  src.start(a.currentTime + desde, t.desde, t.dur);
   return true;
 }
 

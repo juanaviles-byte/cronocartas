@@ -9,7 +9,7 @@ test('el banco de efectos tiene los sonidos de interfaz, cartas, invocaciones y 
     'invocar_protagonista', 'invocar_personaje', 'invocar_acontecimiento', 'invocar_lugar', 'ataque_ligero', 'ataque_fuerte', 'ventaja',
     'caida', 'curar', 'proteger', 'saber', 'conexion', 'hito', 'turno_propio', 'turno_rival', 'viaje', 'victoria', 'derrota']) {
     assert.ok(SFX[n], `falta ${n}`);
-    assert.ok(existsSync(SFX[n]), `falta el archivo ${SFX[n]}`);
+    assert.ok(existsSync(SFX[n].ruta), `falta el archivo ${SFX[n].ruta}`);
   }
 });
 

@@ -1187,50 +1187,222 @@
   }
  },
  "cronista": {
-  "saber": "audio/cronista/saber.ogg",
-  "primer-turno": "audio/cronista/primer-turno.ogg",
-  "desventaja": "audio/cronista/desventaja.ogg",
-  "ventaja": "audio/cronista/ventaja.ogg",
-  "evolucion": "audio/cronista/evolucion.ogg",
-  "personaje": "audio/cronista/personaje.ogg",
-  "lugar": "audio/cronista/lugar.ogg",
-  "aula": "audio/cronista/aula.ogg",
-  "peligro": "audio/cronista/peligro.ogg",
-  "accion": "audio/cronista/accion.ogg",
-  "conexion": "audio/cronista/conexion.ogg",
-  "hito": "audio/cronista/hito.ogg",
-  "ubicar-bien": "audio/cronista/ubicar-bien.ogg",
-  "caida": "audio/cronista/caida.ogg",
-  "pista": "audio/cronista/pista.ogg",
-  "pista-ubicar": "audio/cronista/pista-ubicar.ogg",
-  "pista-rival": "audio/cronista/pista-rival.ogg",
-  "tut-jugar": "audio/cronista/tut-jugar.ogg",
-  "tut-fin": "audio/cronista/tut-fin.ogg",
-  "tut-rival": "audio/cronista/tut-rival.ogg",
-  "prep-reserva": "audio/cronista/prep-reserva.ogg",
-  "promover": "audio/cronista/promover.ogg",
-  "ubicar": "audio/cronista/ubicar.ogg",
-  "prep-activo": "audio/cronista/prep-activo.ogg"
+  "saber": {
+   "ruta": "audio/cronista/cronista.ogg",
+   "desde": 0.0,
+   "hasta": 7.8075
+  },
+  "primer-turno": {
+   "ruta": "audio/cronista/cronista.ogg",
+   "desde": 8.0575,
+   "hasta": 15.7471
+  },
+  "desventaja": {
+   "ruta": "audio/cronista/cronista.ogg",
+   "desde": 15.9971,
+   "hasta": 23.5399
+  },
+  "ventaja": {
+   "ruta": "audio/cronista/cronista.ogg",
+   "desde": 23.7899,
+   "hasta": 29.6649
+  },
+  "evolucion": {
+   "ruta": "audio/cronista/cronista.ogg",
+   "desde": 29.9149,
+   "hasta": 38.2856
+  },
+  "personaje": {
+   "ruta": "audio/cronista/cronista.ogg",
+   "desde": 38.5356,
+   "hasta": 47.141
+  },
+  "lugar": {
+   "ruta": "audio/cronista/cronista.ogg",
+   "desde": 47.391,
+   "hasta": 55.4796
+  },
+  "aula": {
+   "ruta": "audio/cronista/cronista.ogg",
+   "desde": 55.7296,
+   "hasta": 63.587
+  },
+  "peligro": {
+   "ruta": "audio/cronista/cronista.ogg",
+   "desde": 63.837,
+   "hasta": 70.3784
+  },
+  "accion": {
+   "ruta": "audio/cronista/cronista.ogg",
+   "desde": 70.6284,
+   "hasta": 77.9658
+  },
+  "conexion": {
+   "ruta": "audio/cronista/cronista.ogg",
+   "desde": 78.2158,
+   "hasta": 86.8031
+  },
+  "hito": {
+   "ruta": "audio/cronista/cronista.ogg",
+   "desde": 87.0531,
+   "hasta": 95.5665
+  },
+  "ubicar-bien": {
+   "ruta": "audio/cronista/cronista.ogg",
+   "desde": 95.8165,
+   "hasta": 103.0378
+  },
+  "caida": {
+   "ruta": "audio/cronista/cronista.ogg",
+   "desde": 103.2878,
+   "hasta": 110.6728
+  },
+  "pista": {
+   "ruta": "audio/cronista/cronista.ogg",
+   "desde": 110.9228,
+   "hasta": 114.0151
+  },
+  "pista-ubicar": {
+   "ruta": "audio/cronista/cronista.ogg",
+   "desde": 114.2651,
+   "hasta": 119.2392
+  },
+  "pista-rival": {
+   "ruta": "audio/cronista/cronista.ogg",
+   "desde": 119.4892,
+   "hasta": 123.6319
+  },
+  "tut-jugar": {
+   "ruta": "audio/cronista/cronista.ogg",
+   "desde": 123.8819,
+   "hasta": 128.3567
+  },
+  "tut-fin": {
+   "ruta": "audio/cronista/cronista.ogg",
+   "desde": 128.6067,
+   "hasta": 135.5459
+  },
+  "tut-rival": {
+   "ruta": "audio/cronista/cronista.ogg",
+   "desde": 135.7959,
+   "hasta": 138.4007
+  },
+  "prep-reserva": {
+   "ruta": "audio/cronista/cronista.ogg",
+   "desde": 138.6507,
+   "hasta": 145.7243
+  },
+  "promover": {
+   "ruta": "audio/cronista/cronista.ogg",
+   "desde": 145.9743,
+   "hasta": 152.9772
+  },
+  "ubicar": {
+   "ruta": "audio/cronista/cronista.ogg",
+   "desde": 153.2272,
+   "hasta": 162.9045
+  },
+  "prep-activo": {
+   "ruta": "audio/cronista/cronista.ogg",
+   "desde": 163.1545,
+   "hasta": 170.7752
+  }
  },
  "personajes": {
-  "CC-5-U1-001": "audio/personajes/CC-5-U1-001.ogg",
-  "CC-5-U1-002": "audio/personajes/CC-5-U1-002.ogg",
-  "CC-5-U1-003": "audio/personajes/CC-5-U1-003.ogg",
-  "CC-5-U1-004": "audio/personajes/CC-5-U1-004.ogg",
-  "CC-5-U2-003": "audio/personajes/CC-5-U2-003.ogg",
-  "CC-6-U1-003": "audio/personajes/CC-6-U1-003.ogg",
-  "CC-6-U1-004": "audio/personajes/CC-6-U1-004.ogg",
-  "CC-6-U1-005": "audio/personajes/CC-6-U1-005.ogg",
-  "CC-6-U2-001": "audio/personajes/CC-6-U2-001.ogg",
-  "CC-6-U3-001": "audio/personajes/CC-6-U3-001.ogg",
-  "CC-7-U2-008": "audio/personajes/CC-7-U2-008.ogg",
-  "CC-7-U3-008": "audio/personajes/CC-7-U3-008.ogg",
-  "CC-7-U4-008": "audio/personajes/CC-7-U4-008.ogg",
-  "CC-7-U4-011": "audio/personajes/CC-7-U4-011.ogg",
-  "CC-8-U1-001": "audio/personajes/CC-8-U1-001.ogg",
-  "CC-8-U1-002": "audio/personajes/CC-8-U1-002.ogg",
-  "CC-8-U1-008": "audio/personajes/CC-8-U1-008.ogg",
-  "CC-8-U2-001": "audio/personajes/CC-8-U2-001.ogg",
-  "CC-8-U3-001": "audio/personajes/CC-8-U3-001.ogg"
+  "CC-5-U1-001": {
+   "ruta": "audio/personajes/personajes.ogg",
+   "desde": 0.0,
+   "hasta": 6.4466
+  },
+  "CC-5-U1-002": {
+   "ruta": "audio/personajes/personajes.ogg",
+   "desde": 6.6966,
+   "hasta": 16.3652
+  },
+  "CC-5-U1-003": {
+   "ruta": "audio/personajes/personajes.ogg",
+   "desde": 16.6152,
+   "hasta": 22.6196
+  },
+  "CC-5-U1-004": {
+   "ruta": "audio/personajes/personajes.ogg",
+   "desde": 22.8696,
+   "hasta": 29.455
+  },
+  "CC-5-U2-003": {
+   "ruta": "audio/personajes/personajes.ogg",
+   "desde": 29.705,
+   "hasta": 36.5233
+  },
+  "CC-6-U1-003": {
+   "ruta": "audio/personajes/personajes.ogg",
+   "desde": 36.7733,
+   "hasta": 42.978
+  },
+  "CC-6-U1-004": {
+   "ruta": "audio/personajes/personajes.ogg",
+   "desde": 43.228,
+   "hasta": 49.2232
+  },
+  "CC-6-U1-005": {
+   "ruta": "audio/personajes/personajes.ogg",
+   "desde": 49.4732,
+   "hasta": 54.8273
+  },
+  "CC-6-U2-001": {
+   "ruta": "audio/personajes/personajes.ogg",
+   "desde": 55.0773,
+   "hasta": 63.4384
+  },
+  "CC-6-U3-001": {
+   "ruta": "audio/personajes/personajes.ogg",
+   "desde": 63.6884,
+   "hasta": 71.1364
+  },
+  "CC-7-U2-008": {
+   "ruta": "audio/personajes/personajes.ogg",
+   "desde": 71.3864,
+   "hasta": 77.1742
+  },
+  "CC-7-U3-008": {
+   "ruta": "audio/personajes/personajes.ogg",
+   "desde": 77.4242,
+   "hasta": 85.0153
+  },
+  "CC-7-U4-008": {
+   "ruta": "audio/personajes/personajes.ogg",
+   "desde": 85.2653,
+   "hasta": 91.6863
+  },
+  "CC-7-U4-011": {
+   "ruta": "audio/personajes/personajes.ogg",
+   "desde": 91.9363,
+   "hasta": 98.8406
+  },
+  "CC-8-U1-001": {
+   "ruta": "audio/personajes/personajes.ogg",
+   "desde": 99.0906,
+   "hasta": 106.9941
+  },
+  "CC-8-U1-002": {
+   "ruta": "audio/personajes/personajes.ogg",
+   "desde": 107.2441,
+   "hasta": 111.6278
+  },
+  "CC-8-U1-008": {
+   "ruta": "audio/personajes/personajes.ogg",
+   "desde": 111.8778,
+   "hasta": 118.8685
+  },
+  "CC-8-U2-001": {
+   "ruta": "audio/personajes/personajes.ogg",
+   "desde": 119.1185,
+   "hasta": 127.6898
+  },
+  "CC-8-U3-001": {
+   "ruta": "audio/personajes/personajes.ogg",
+   "desde": 127.9398,
+   "hasta": 134.4156
+  }
  }
 }

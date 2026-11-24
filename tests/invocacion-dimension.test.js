@@ -16,7 +16,7 @@ test('cada dimensión tiene su sonido de invocación en el banco', () => {
   const mapa = JSON.parse(readFileSync('data/sfx.json', 'utf8'));
   for (const d of Object.values(DIMENSION_INVOCACION)) {
     assert.ok(mapa[`invocar_${d}`], `falta invocar_${d}`);
-    assert.ok(existsSync(mapa[`invocar_${d}`]));
+    assert.ok(existsSync(mapa[`invocar_${d}`].ruta));
   }
   assert.ok(mapa.moneda_lanzar && mapa.moneda_cae);
 });

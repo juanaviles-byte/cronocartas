@@ -13,7 +13,7 @@ test('voces.json tiene la sección de Personajes y cada voz es de un Personaje c
   for (const [id, ruta] of Object.entries(voces.personajes)) {
     assert.equal(porId.get(id)?.tipo, 'personaje', `${id} no es un Personaje`);
     assert.ok(guion.frases[id], `${id} no tiene frase en el guion`);
-    assert.ok(existsSync(ruta), `falta ${ruta}`);
+    assert.ok(existsSync(ruta.ruta), `falta ${ruta.ruta}`);
   }
 });
 

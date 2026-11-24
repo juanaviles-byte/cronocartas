@@ -29,7 +29,7 @@ test('cada motivo tiene su animación y su sonido', () => {
   const sfx = leer('sfx.json');
   for (const m of [...MOTIVOS, 'escuela']) {
     assert.ok(DEF_MOTIVOS[m], `falta la animación de ${m}`);
-    assert.ok(sfx[`motivo_${m}`] && existsSync(sfx[`motivo_${m}`]), `falta el sonido de ${m}`);
+    assert.ok(sfx[`motivo_${m}`] && existsSync(sfx[`motivo_${m}`].ruta), `falta el sonido de ${m}`);
   }
 });
 

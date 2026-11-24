@@ -1,72 +1,352 @@
 {
- "ataque_fuerte": "audio/sfx/ataque_fuerte.ogg",
- "ataque_ligero": "audio/sfx/ataque_ligero.ogg",
- "buscar": "audio/sfx/buscar.ogg",
- "caida": "audio/sfx/caida.ogg",
- "carta_colocar": "audio/sfx/carta_colocar.ogg",
- "carta_robar": "audio/sfx/carta_robar.ogg",
- "carta_voltear": "audio/sfx/carta_voltear.ogg",
- "conexion": "audio/sfx/conexion.ogg",
- "curar": "audio/sfx/curar.ogg",
- "derrota": "audio/sfx/derrota.ogg",
- "hito": "audio/sfx/hito.ogg",
- "invocar_acontecimiento": "audio/sfx/invocar_acontecimiento.ogg",
- "invocar_cultura": "audio/sfx/invocar_cultura.ogg",
- "invocar_economia": "audio/sfx/invocar_economia.ogg",
- "invocar_lugar": "audio/sfx/invocar_lugar.ogg",
- "invocar_personaje": "audio/sfx/invocar_personaje.ogg",
- "invocar_politica": "audio/sfx/invocar_politica.ogg",
- "invocar_protagonista": "audio/sfx/invocar_protagonista.ogg",
- "invocar_sociedad": "audio/sfx/invocar_sociedad.ogg",
- "invocar_territorio": "audio/sfx/invocar_territorio.ogg",
- "moneda_cae": "audio/sfx/moneda_cae.ogg",
- "moneda_lanzar": "audio/sfx/moneda_lanzar.ogg",
- "motivo_barco": "audio/sfx/motivo_barco.ogg",
- "motivo_barroco": "audio/sfx/motivo_barroco.ogg",
- "motivo_camino": "audio/sfx/motivo_camino.ogg",
- "motivo_campana": "audio/sfx/motivo_campana.ogg",
- "motivo_campo": "audio/sfx/motivo_campo.ogg",
- "motivo_castillo": "audio/sfx/motivo_castillo.ogg",
- "motivo_ciencia": "audio/sfx/motivo_ciencia.ogg",
- "motivo_columnas": "audio/sfx/motivo_columnas.ogg",
- "motivo_comunidad": "audio/sfx/motivo_comunidad.ogg",
- "motivo_cordillera": "audio/sfx/motivo_cordillera.ogg",
- "motivo_corona": "audio/sfx/motivo_corona.ogg",
- "motivo_desierto": "audio/sfx/motivo_desierto.ogg",
- "motivo_escritura": "audio/sfx/motivo_escritura.ogg",
- "motivo_escuela": "audio/sfx/motivo_escuela.ogg",
- "motivo_fabrica": "audio/sfx/motivo_fabrica.ogg",
- "motivo_fuego": "audio/sfx/motivo_fuego.ogg",
- "motivo_hielo": "audio/sfx/motivo_hielo.ogg",
- "motivo_imprenta": "audio/sfx/motivo_imprenta.ogg",
- "motivo_independencia": "audio/sfx/motivo_independencia.ogg",
- "motivo_justicia": "audio/sfx/motivo_justicia.ogg",
- "motivo_lago": "audio/sfx/motivo_lago.ogg",
- "motivo_marcha": "audio/sfx/motivo_marcha.ogg",
- "motivo_mazo": "audio/sfx/motivo_mazo.ogg",
- "motivo_mercado": "audio/sfx/motivo_mercado.ogg",
- "motivo_mina": "audio/sfx/motivo_mina.ogg",
- "motivo_moai": "audio/sfx/motivo_moai.ogg",
- "motivo_olimpico": "audio/sfx/motivo_olimpico.ogg",
- "motivo_originario": "audio/sfx/motivo_originario.ogg",
- "motivo_pergamino": "audio/sfx/motivo_pergamino.ogg",
- "motivo_peste": "audio/sfx/motivo_peste.ogg",
- "motivo_piramide": "audio/sfx/motivo_piramide.ogg",
- "motivo_rio": "audio/sfx/motivo_rio.ogg",
- "motivo_sismo": "audio/sfx/motivo_sismo.ogg",
- "motivo_templo": "audio/sfx/motivo_templo.ogg",
- "motivo_tren": "audio/sfx/motivo_tren.ogg",
- "motivo_votacion": "audio/sfx/motivo_votacion.ogg",
- "proteger": "audio/sfx/proteger.ogg",
- "saber": "audio/sfx/saber.ogg",
- "turno_propio": "audio/sfx/turno_propio.ogg",
- "turno_rival": "audio/sfx/turno_rival.ogg",
- "ui_abrir": "audio/sfx/ui_abrir.ogg",
- "ui_cerrar": "audio/sfx/ui_cerrar.ogg",
- "ui_confirmar": "audio/sfx/ui_confirmar.ogg",
- "ui_error": "audio/sfx/ui_error.ogg",
- "ui_toque": "audio/sfx/ui_toque.ogg",
- "ventaja": "audio/sfx/ventaja.ogg",
- "viaje": "audio/sfx/viaje.ogg",
- "victoria": "audio/sfx/victoria.ogg"
+ "ataque_fuerte": {
+  "ruta": "audio/sfx/efectos.ogg",
+  "desde": 0.0,
+  "hasta": 1.2786
+ },
+ "ataque_ligero": {
+  "ruta": "audio/sfx/efectos.ogg",
+  "desde": 1.5286,
+  "hasta": 2.2735
+ },
+ "buscar": {
+  "ruta": "audio/sfx/efectos.ogg",
+  "desde": 2.5235,
+  "hasta": 2.9144
+ },
+ "caida": {
+  "ruta": "audio/sfx/efectos.ogg",
+  "desde": 3.1644,
+  "hasta": 5.0225
+ },
+ "carta_colocar": {
+  "ruta": "audio/sfx/efectos.ogg",
+  "desde": 5.2725,
+  "hasta": 5.3625
+ },
+ "carta_robar": {
+  "ruta": "audio/sfx/efectos.ogg",
+  "desde": 5.6125,
+  "hasta": 5.8125
+ },
+ "carta_voltear": {
+  "ruta": "audio/sfx/efectos.ogg",
+  "desde": 6.0625,
+  "hasta": 6.1675
+ },
+ "conexion": {
+  "ruta": "audio/sfx/efectos.ogg",
+  "desde": 6.4175,
+  "hasta": 8.1725
+ },
+ "curar": {
+  "ruta": "audio/sfx/efectos.ogg",
+  "desde": 8.4225,
+  "hasta": 10.73
+ },
+ "derrota": {
+  "ruta": "audio/sfx/efectos.ogg",
+  "desde": 10.98,
+  "hasta": 15.0123
+ },
+ "hito": {
+  "ruta": "audio/sfx/efectos.ogg",
+  "desde": 15.2623,
+  "hasta": 18.6721
+ },
+ "invocar_acontecimiento": {
+  "ruta": "audio/sfx/efectos.ogg",
+  "desde": 18.9221,
+  "hasta": 21.1668
+ },
+ "invocar_cultura": {
+  "ruta": "audio/sfx/efectos.ogg",
+  "desde": 21.4168,
+  "hasta": 24.2529
+ },
+ "invocar_economia": {
+  "ruta": "audio/sfx/efectos.ogg",
+  "desde": 24.5029,
+  "hasta": 26.4119
+ },
+ "invocar_lugar": {
+  "ruta": "audio/sfx/efectos.ogg",
+  "desde": 26.6619,
+  "hasta": 30.0994
+ },
+ "invocar_personaje": {
+  "ruta": "audio/sfx/efectos.ogg",
+  "desde": 30.3494,
+  "hasta": 33.9983
+ },
+ "invocar_politica": {
+  "ruta": "audio/sfx/efectos.ogg",
+  "desde": 34.2483,
+  "hasta": 36.6171
+ },
+ "invocar_protagonista": {
+  "ruta": "audio/sfx/efectos.ogg",
+  "desde": 36.8671,
+  "hasta": 38.4819
+ },
+ "invocar_sociedad": {
+  "ruta": "audio/sfx/efectos.ogg",
+  "desde": 38.7319,
+  "hasta": 40.9838
+ },
+ "invocar_territorio": {
+  "ruta": "audio/sfx/efectos.ogg",
+  "desde": 41.2338,
+  "hasta": 44.0692
+ },
+ "moneda_cae": {
+  "ruta": "audio/sfx/efectos.ogg",
+  "desde": 44.3192,
+  "hasta": 45.4957
+ },
+ "moneda_lanzar": {
+  "ruta": "audio/sfx/efectos.ogg",
+  "desde": 45.7457,
+  "hasta": 46.7859
+ },
+ "motivo_barco": {
+  "ruta": "audio/sfx/motivos.ogg",
+  "desde": 0.0,
+  "hasta": 3.2412
+ },
+ "motivo_barroco": {
+  "ruta": "audio/sfx/motivos.ogg",
+  "desde": 3.4912,
+  "hasta": 7.5869
+ },
+ "motivo_camino": {
+  "ruta": "audio/sfx/motivos.ogg",
+  "desde": 7.8369,
+  "hasta": 11.3814
+ },
+ "motivo_campana": {
+  "ruta": "audio/sfx/motivos.ogg",
+  "desde": 11.6314,
+  "hasta": 15.988
+ },
+ "motivo_campo": {
+  "ruta": "audio/sfx/motivos.ogg",
+  "desde": 16.238,
+  "hasta": 18.8391
+ },
+ "motivo_castillo": {
+  "ruta": "audio/sfx/motivos.ogg",
+  "desde": 19.0891,
+  "hasta": 22.3701
+ },
+ "motivo_ciencia": {
+  "ruta": "audio/sfx/motivos.ogg",
+  "desde": 22.6201,
+  "hasta": 26.2401
+ },
+ "motivo_columnas": {
+  "ruta": "audio/sfx/motivos.ogg",
+  "desde": 26.4901,
+  "hasta": 29.6858
+ },
+ "motivo_comunidad": {
+  "ruta": "audio/sfx/motivos.ogg",
+  "desde": 29.9358,
+  "hasta": 32.2152
+ },
+ "motivo_cordillera": {
+  "ruta": "audio/sfx/motivos.ogg",
+  "desde": 32.4652,
+  "hasta": 36.2129
+ },
+ "motivo_corona": {
+  "ruta": "audio/sfx/motivos.ogg",
+  "desde": 36.4629,
+  "hasta": 39.5389
+ },
+ "motivo_desierto": {
+  "ruta": "audio/sfx/motivos.ogg",
+  "desde": 39.7889,
+  "hasta": 42.4438
+ },
+ "motivo_escritura": {
+  "ruta": "audio/sfx/motivos.ogg",
+  "desde": 42.6938,
+  "hasta": 44.8617
+ },
+ "motivo_escuela": {
+  "ruta": "audio/sfx/motivos.ogg",
+  "desde": 45.1117,
+  "hasta": 47.4688
+ },
+ "motivo_fabrica": {
+  "ruta": "audio/sfx/motivos.ogg",
+  "desde": 47.7188,
+  "hasta": 50.7995
+ },
+ "motivo_fuego": {
+  "ruta": "audio/sfx/motivos.ogg",
+  "desde": 51.0495,
+  "hasta": 53.2061
+ },
+ "motivo_hielo": {
+  "ruta": "audio/sfx/motivos.ogg",
+  "desde": 53.4561,
+  "hasta": 56.5282
+ },
+ "motivo_imprenta": {
+  "ruta": "audio/sfx/motivos.ogg",
+  "desde": 56.7782,
+  "hasta": 58.8768
+ },
+ "motivo_independencia": {
+  "ruta": "audio/sfx/motivos.ogg",
+  "desde": 59.1268,
+  "hasta": 62.0557
+ },
+ "motivo_justicia": {
+  "ruta": "audio/sfx/motivos.ogg",
+  "desde": 62.3057,
+  "hasta": 65.5902
+ },
+ "motivo_lago": {
+  "ruta": "audio/sfx/motivos.ogg",
+  "desde": 65.8402,
+  "hasta": 69.3096
+ },
+ "motivo_marcha": {
+  "ruta": "audio/sfx/motivos.ogg",
+  "desde": 69.5596,
+  "hasta": 72.1261
+ },
+ "motivo_mazo": {
+  "ruta": "audio/sfx/motivos.ogg",
+  "desde": 72.3761,
+  "hasta": 74.2665
+ },
+ "motivo_mercado": {
+  "ruta": "audio/sfx/motivos.ogg",
+  "desde": 74.5165,
+  "hasta": 76.8371
+ },
+ "motivo_mina": {
+  "ruta": "audio/sfx/motivos.ogg",
+  "desde": 77.0871,
+  "hasta": 79.354
+ },
+ "motivo_moai": {
+  "ruta": "audio/sfx/motivos.ogg",
+  "desde": 79.604,
+  "hasta": 83.0348
+ },
+ "motivo_olimpico": {
+  "ruta": "audio/sfx/motivos.ogg",
+  "desde": 83.2848,
+  "hasta": 86.329
+ },
+ "motivo_originario": {
+  "ruta": "audio/sfx/motivos.ogg",
+  "desde": 86.579,
+  "hasta": 89.8697
+ },
+ "motivo_pergamino": {
+  "ruta": "audio/sfx/motivos.ogg",
+  "desde": 90.1197,
+  "hasta": 92.341
+ },
+ "motivo_peste": {
+  "ruta": "audio/sfx/motivos.ogg",
+  "desde": 92.591,
+  "hasta": 97.2745
+ },
+ "motivo_piramide": {
+  "ruta": "audio/sfx/motivos.ogg",
+  "desde": 97.5245,
+  "hasta": 101.8414
+ },
+ "motivo_rio": {
+  "ruta": "audio/sfx/motivos.ogg",
+  "desde": 102.0914,
+  "hasta": 105.4909
+ },
+ "motivo_sismo": {
+  "ruta": "audio/sfx/motivos.ogg",
+  "desde": 105.7409,
+  "hasta": 108.6665
+ },
+ "motivo_templo": {
+  "ruta": "audio/sfx/motivos.ogg",
+  "desde": 108.9165,
+  "hasta": 112.3366
+ },
+ "motivo_tren": {
+  "ruta": "audio/sfx/motivos.ogg",
+  "desde": 112.5866,
+  "hasta": 115.5268
+ },
+ "motivo_votacion": {
+  "ruta": "audio/sfx/motivos.ogg",
+  "desde": 115.7768,
+  "hasta": 118.3294
+ },
+ "proteger": {
+  "ruta": "audio/sfx/efectos.ogg",
+  "desde": 47.0359,
+  "hasta": 48.9812
+ },
+ "saber": {
+  "ruta": "audio/sfx/efectos.ogg",
+  "desde": 49.2312,
+  "hasta": 50.3451
+ },
+ "turno_propio": {
+  "ruta": "audio/sfx/efectos.ogg",
+  "desde": 50.5951,
+  "hasta": 51.8651
+ },
+ "turno_rival": {
+  "ruta": "audio/sfx/efectos.ogg",
+  "desde": 52.1151,
+  "hasta": 53.255
+ },
+ "ui_abrir": {
+  "ruta": "audio/sfx/efectos.ogg",
+  "desde": 53.505,
+  "hasta": 54.3706
+ },
+ "ui_cerrar": {
+  "ruta": "audio/sfx/efectos.ogg",
+  "desde": 54.6206,
+  "hasta": 54.8006
+ },
+ "ui_confirmar": {
+  "ruta": "audio/sfx/efectos.ogg",
+  "desde": 55.0506,
+  "hasta": 56.1323
+ },
+ "ui_error": {
+  "ruta": "audio/sfx/efectos.ogg",
+  "desde": 56.3823,
+  "hasta": 56.6723
+ },
+ "ui_toque": {
+  "ruta": "audio/sfx/efectos.ogg",
+  "desde": 56.9223,
+  "hasta": 56.9823
+ },
+ "ventaja": {
+  "ruta": "audio/sfx/efectos.ogg",
+  "desde": 57.2323,
+  "hasta": 58.6584
+ },
+ "viaje": {
+  "ruta": "audio/sfx/efectos.ogg",
+  "desde": 58.9084,
+  "hasta": 61.2461
+ },
+ "victoria": {
+  "ruta": "audio/sfx/efectos.ogg",
+  "desde": 61.4961,
+  "hasta": 65.0269
+ }
 }
