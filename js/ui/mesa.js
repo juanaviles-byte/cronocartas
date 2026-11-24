@@ -17,6 +17,7 @@ import { ambiente, rutaAmbiente, ambientesListos } from './ambiente.js';
 import { FUERZAS, coleccion } from '../colecciones.js';
 import { hacerArrastrable, ultimaSoltada } from './arrastre.js';
 import { liviano } from '../rendimiento.js';
+import { disposicionDeMesa } from './disposicion.js';
 import { volar, impacto, deshacerEnArena, relojSobre, granoHacia, motasQueSuben, estallido, arenaQueCae } from './efectos.js';
 import { arenaDelTiempo } from './viaje.js';
 import { planDeEscena, escenaAtaque, escenaInvocacion, estiloDeGolpe } from './director.js';
@@ -127,6 +128,7 @@ export async function montarMesa(contenedor, opciones) {
   let caidas = [];               // cartas caídas, para el resumen final
   let temporizador = null;
   const raiz = h('div', `mesa modo-${config.modo}`);
+  raiz.classList.toggle('vista-jugador', disposicionDeMesa(config) === 'jugador');
   contenedor.innerHTML = '';
   contenedor.appendChild(raiz);
 
