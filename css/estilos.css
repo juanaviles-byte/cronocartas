@@ -1949,3 +1949,12 @@ body[data-vista="jugar"] { background: #090d12; }
 }
 /* Sobre la losa, la reserva y el activo ya no llevan su propio recuadro con esquinas. */
 .mesa .reserva { background: none; border-color: transparent; }
+/* Más limpio: las losas casi transparentes dejan ver el escenario; queda el filete de oro y una sombra suave en el borde. */
+.mesa .lado .campo::before { background: linear-gradient(180deg, rgba(10,16,26,.34), rgba(10,16,26,.12) 45%, rgba(10,16,26,.26));
+  box-shadow: inset 0 0 0 1.2px rgba(201,162,74,.7), inset 0 0 18px rgba(0,0,0,.22); }
+.mesa .centro, .mesa.con-tablero .centro { background: none; }
+.mesa .hueco { background: rgba(6,9,15,.5); box-shadow: inset 0 2px 8px rgba(0,0,0,.45); }
+.mesa .lado .reserva, .mesa.vista-jugador .lado .reserva { background: none; border-color: transparent; }
+.mesa .lado .zona-activo, .mesa .activo-turno .zona-activo { background: none; border-color: transparent; outline: 0; }
+.mesa .placa-lugar.hueco-lugar { background: rgba(8,12,20,.55); }
+.mesa .centro .lugar-en-juego .placa-lugar.hueco-lugar, .mesa.vista-jugador .centro .lugar-en-juego .placa-lugar.hueco-lugar { background: rgba(8,12,20,.5); }

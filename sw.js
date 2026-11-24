@@ -567,7 +567,7 @@ const HUELLAS = {
   "audio/sfx/efectos.ogg": "e77b492179ab",
   "audio/sfx/motivos.ogg": "aa1403569e39",
   "audio/tema/inicio.ogg": "d2c8c512d3d7",
-  "css/estilos.css": "2d7fa3ef0166",
+  "css/estilos.css": "06cac9039048",
   "data/ambientes.json": "b59e779a954c",
   "data/arte.json": "6d56ff970f5e",
   "data/aula.json": "fc7ae5835722",
