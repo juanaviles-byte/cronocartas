@@ -14,6 +14,7 @@ import { esc } from '../html.js';
 import { revisarActualizacionApk } from '../actualizacion.js';
 import { CURSOS, MAZOS_LIBRES, mazosDePartida, tablerosDisponibles } from '../eleccion.js';
 import { modoEscuelaActivo } from '../rendimiento.js';
+import { globoNovedades } from './novedades.js';
 
 const app = document.getElementById('app');
 // Modo escuela (perfil liviano): lo elige el docente o se activa solo en la tablet del colegio.
@@ -83,6 +84,8 @@ const vistas = {
     pie.appendChild(h('span', '', 'Escuela Gabriela Mistral · Mostazal'));
     principal.appendChild(pie);
     v.appendChild(principal);
+    // Novedades: un globo con una carta, arriba a la derecha (actualizaciones y noticias).
+    v.appendChild(globoNovedades(almacen));
 
     // Tres cartas de verdad, en abanico: lo más característico del juego.
     const abanico = h('div', 'inicio-abanico');

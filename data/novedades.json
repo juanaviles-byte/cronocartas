@@ -1,0 +1,60 @@
+{
+  "novedades": [
+    {
+      "id": "bitacora-2026-11",
+      "fecha": "2026-11-24",
+      "tipo": "actualizacion",
+      "version": "cc-v100",
+      "titulo": "Bitácora de cambios · noviembre 2026",
+      "resumen": "72 cartas nuevas, nuevas formas de jugar, un juego más cómodo en celular y tablet, y un equilibrio revisado con 30.000 partidas de prueba.",
+      "secciones": [
+        {
+          "titulo": "Cartas nuevas",
+          "puntos": [
+            "72 cartas nuevas para 5° a 8° básico, cada una con su ilustración y su narración: el juego ya tiene 237 cartas.",
+            "17 Personajes nuevos con voz propia, y nuevos Lugares con su propio escenario de mesa.",
+            "Nuevas ilustraciones para Patrimonio colonial (Iglesia de San Francisco), La escuela y Constitución Política.",
+            "Dorsos propios para Mesopotamia, el Sur y los Pipiolos."
+          ]
+        },
+        {
+          "titulo": "Nuevas formas de jugar",
+          "puntos": [
+            "Nuevos efectos: recuperar una carta del descarte, asedio a la reserva rival, debilitar el próximo ataque, quitar Saber, dar Saber a la reserva y epidemia.",
+            "Nuevas habilidades: contraataque, tenaz, legado y alianza.",
+            "Lugares que curan o protegen a los Protagonistas de su dimensión, y Protagonistas con retirada libre.",
+            "Cada carta entra a la mesa con su propia animación y sonido."
+          ]
+        },
+        {
+          "titulo": "Equilibrio",
+          "puntos": [
+            "Revisamos todas las cartas con 30.000 partidas de prueba.",
+            "Proteger ahora es un escudo: el próximo ataque contra tu activo hace 30 menos de daño (40 en Fin del Mundo).",
+            "Quitar el Lugar y mover Saber traen un respaldo: si no se pueden usar, la carta hace otra cosa, así nunca queda muerta en la mano.",
+            "45 cartas ajustadas: las más fuertes bajan un poco y las más débiles suben.",
+            "Los duelos temáticos quedaron parejos: cada bando gana entre el 45 % y el 55 % de las partidas."
+          ]
+        },
+        {
+          "titulo": "Modo libre",
+          "puntos": [
+            "Tu mazo también puede ser «al azar», igual que el de la tablet.",
+            "Si un mazo salió al azar, «Otra partida» sortea uno nuevo.",
+            "Cada mazo muestra el dorso de uno de sus arquetipos, en vez del reloj de arena."
+          ]
+        },
+        {
+          "titulo": "Celular y tablet",
+          "puntos": [
+            "Desliza el dedo por tu mano para repasar las cartas; si lo dejas quieto, la carta se agranda.",
+            "«Pasar turno» va en la franja central, lejos de los botones del celular.",
+            "El Lugar quedó centrado, y en la tablet vertical las cartas del rival ya no tapan a su activo.",
+            "La burbuja de La Cronista ya no se sale de la pantalla en el tutorial.",
+            "Los sonidos cargan más rápido: ahora son 113 archivos menos."
+          ]
+        }
+      ]
+    }
+  ]
+}
