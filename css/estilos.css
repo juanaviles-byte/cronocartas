@@ -1271,19 +1271,21 @@ body:not([data-vista="mesa"]) { background: radial-gradient(ellipse at 20% 0%, #
   .mesa.vista-jugador .lado-A .pila-descarte .hueco { height: 64px; width: 46px; }
   .mesa.vista-jugador .lado-A .fila-mano { margin-top: auto; }
   .mesa.vista-jugador .lado-A .mano .carta-mini { --ch: min(calc(var(--lado) * .22), 25vw); }
-  /* Franja central: turno · Lugar · sonido, Cronista y menú (el menú como ícono). */
-  .mesa.vista-jugador .centro { grid-template-columns: auto minmax(0, 1fr) auto auto auto; column-gap: 4px; padding: 0 6px; }
-  .mesa.vista-jugador .centro > .aviso-turno { grid-column: 1; max-width: 62px; font-size: .74rem; line-height: 1.1; align-self: center; margin: 0; }
-  .mesa.vista-jugador .centro .lugar-en-juego { grid-column: 2; max-width: none; width: 100%; }
+  /* Franja central: sonido y Cronista a la izquierda · el Lugar justo al centro · «Pasar turno» (o el aviso del turno)
+     y el menú a la derecha. Las columnas de los lados son iguales, así el Lugar queda centrado en la pantalla. */
+  .mesa.vista-jugador .centro { grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); column-gap: 4px; padding: 0 6px; }
+  .mesa.vista-jugador .centro .lugar-en-juego { grid-column: 2; grid-row: 1; max-width: none; width: min(calc(100vw - 232px), 240px); }
   .mesa.vista-jugador .centro .placa-lugar { width: 100%; }
   .mesa.vista-jugador .centro > .registro { display: none; }
-  .mesa.vista-jugador .centro > .boton-sonido { grid-column: 3; margin: 0; }
-  .mesa.vista-jugador .centro > .boton-guia { grid-column: 4; margin: 0; }
-  .mesa.vista-jugador .centro > .boton-menu { grid-column: 5; margin: 0; width: 44px; padding: 0; font-size: 0; position: relative; }
+  .mesa.vista-jugador .centro > .boton-sonido { grid-column: 1; grid-row: 1; justify-self: start; margin: 0; }
+  .mesa.vista-jugador .centro > .boton-guia { grid-column: 1; grid-row: 1; justify-self: start; margin: 0 0 0 48px; }
+  .mesa.vista-jugador .centro > .boton-menu { grid-column: 3; grid-row: 1; justify-self: end; margin: 0; width: 44px; padding: 0; font-size: 0; position: relative; }
+  .mesa.vista-jugador .centro > .aviso-turno { grid-column: 3; grid-row: 1; justify-self: end; margin: 0 48px 0 0; max-width: 60px;
+    font-size: .74rem; line-height: 1.1; align-self: center; text-align: right; white-space: normal; }
   /* Los botones del sistema (atrás, inicio) suelen quedar encima del borde de abajo: «Pasar turno» va en la franja
      central (en lugar del aviso «Tu turno»), «Deshacer» no se muestra y lo demás sube sobre la mano. */
-  .mesa.vista-jugador .centro > .boton-pasar-centro { display: block; grid-column: 1; grid-row: 1; min-height: 40px; max-width: 76px;
-    padding: 2px 8px; font-size: .76rem; line-height: 1.05; white-space: normal;
+  .mesa.vista-jugador .centro > .boton-pasar-centro { display: block; grid-column: 3; grid-row: 1; justify-self: end; margin: 0 48px 0 0; min-height: 44px; width: 60px;
+    padding: 2px 6px; font-size: .76rem; line-height: 1.05; white-space: normal;
     background: rgba(23,38,79,.9); border: 2px solid #E9C46A; color: #fff; }
   .mesa.vista-jugador .centro.con-pasar > .aviso-turno { display: none; }
   .mesa.vista-jugador .lado-A .controles .boton-pasar, .mesa.vista-jugador .boton-deshacer { display: none; }

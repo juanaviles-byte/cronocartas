@@ -31,3 +31,15 @@ test('en el celular vertical los controles del jugador van dentro de su campo (y
   assert.match(mesa, /\(vistaJugador && j === 'A' && celularVertical\(\) \? campo : fila\)\.appendChild\(controles\)/);
   assert.match(mesa, /celularVertical\(\) !== eraCelular/);
 });
+
+// Franja central del celular vertical: sonido y Cronista a la izquierda, el Lugar justo al centro,
+// y «Pasar turno» (o el aviso del turno) junto al menú, a la derecha.
+test('en el celular vertical el Lugar queda centrado y «Pasar turno» va a la derecha, junto al menú', () => {
+  assert.match(bloque, /\.centro \{ grid-template-columns: minmax\(0, 1fr\) auto minmax\(0, 1fr\);/, 'columnas laterales iguales: el Lugar al centro');
+  assert.match(bloque, /\.centro \.lugar-en-juego \{[^}]*grid-column: 2;/);
+  assert.match(bloque, /\.centro > \.boton-sonido \{[^}]*grid-column: 1;[^}]*justify-self: start;/);
+  assert.match(bloque, /\.centro > \.boton-guia \{[^}]*grid-column: 1;[^}]*justify-self: start;/);
+  assert.match(bloque, /\.centro > \.boton-menu \{[^}]*grid-column: 3;[^}]*justify-self: end;/);
+  assert.match(bloque, /\.centro > \.boton-pasar-centro \{[^}]*grid-column: 3;[^}]*justify-self: end;/);
+  assert.match(bloque, /\.centro > \.aviso-turno \{[^}]*grid-column: 3;[^}]*justify-self: end;/);
+});

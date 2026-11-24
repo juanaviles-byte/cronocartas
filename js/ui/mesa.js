@@ -137,12 +137,15 @@ export async function montarMesa(contenedor, opciones) {
     });
   }
   // Dorso de cada mazo: el del bando en un Duelo, o el de la temática que domina sus cartas.
-  const dorsoHtml = {};
+  const dorsoHtml = {}, rutaDorso = {};
   for (const j of ['A', 'B']) {
     const yo = estado.jugadores[j];
     const todas = [...yo.mano, ...yo.mazo, ...yo.descarte, ...(yo.activo ? [yo.activo] : []), ...yo.reserva].map(x => x.carta);
     const colecLado = colec || coleccion(config[`coleccion${j}`]);
-    const ruta = dorsoDeMazo(dorsos, todas, bandoDe ? bandoDe[j].id : null, colecLado ? colecLado.dorso : undefined);
+    // Sin temática clara, un arquetipo al azar de sus cartas (fijo por la semilla; distinto del rival si se puede).
+    const azar = { semilla: config.semilla + (j === 'B' ? 7919 : 0), evitar: j === 'B' ? rutaDorso.A : null };
+    const ruta = dorsoDeMazo(dorsos, todas, bandoDe ? bandoDe[j].id : null, colecLado ? colecLado.dorso : undefined, azar);
+    rutaDorso[j] = ruta;
     dorsoHtml[j] = ruta ? `<img class="dorso-img" src="${esc(ruta)}" alt="" draggable="false">` : DORSO;
   }
   const tableroActual = () => tableros.find(t => t.id === (estado.tablero && estado.tablero.id)) || null;
