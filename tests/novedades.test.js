@@ -37,3 +37,30 @@ test('el inicio trae el globo de novedades y funciona sin internet', () => {
   assert.match(readFileSync('sw.js', 'utf8'), /"data\/novedades\.json"/);
   assert.match(readFileSync('js/ui/novedades.js', 'utf8'), /aria-label/);
 });
+
+// Inicio con temas: cada vez que se abre el juego, un tema al azar (fondo y cartas de la misma época).
+import { TEMAS_INICIO, elegirTema, cartasDelTema } from '../js/temas-inicio.js';
+import { existsSync } from 'node:fs';
+
+test('los temas del inicio tienen fondos que existen y al menos 3 cartas con ilustración', () => {
+  const arte = JSON.parse(readFileSync('data/arte.json', 'utf8'));
+  const mazos = {};
+  for (const m of ['mazo-5', 'mazo-6', 'mazo-7', 'mazo-8', 'exp-fin-del-mundo']) mazos[m] = JSON.parse(readFileSync(`data/${m}.json`, 'utf8')).cartas;
+  assert.ok(TEMAS_INICIO.length >= 6);
+  for (const t of TEMAS_INICIO) {
+    for (const f of t.fondos) assert.ok(existsSync(f), `${t.id}: falta ${f}`);
+    assert.ok(cartasDelTema(t, mazos, arte).length >= 3, `${t.id}: pocas cartas`);
+  }
+});
+
+test('elegirTema reparte entre todos los temas', () => {
+  const vistos = new Set();
+  for (let i = 0; i < 60; i++) vistos.add(elegirTema(() => (i + 0.5) / 60).tema.id);
+  assert.equal(vistos.size, TEMAS_INICIO.length);
+});
+
+test('el inicio usa el tema elegido una vez por apertura', () => {
+  const app = readFileSync('js/ui/app.js', 'utf8');
+  assert.match(app, /const TEMA = elegirTema\(\)/);
+  assert.match(app, /cartasDelTema\(TEMA\.tema/);
+});

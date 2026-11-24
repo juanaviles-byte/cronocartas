@@ -68,6 +68,13 @@ export const TEMAS = {
   ...Object.fromEntries(Object.entries(FUERZAS).map(([k, f]) => [k, f.tema])),
 };
 
+// Clave del tema (dimensión, fuerza o tipo): da nombre al marco forjado de la carta (img/marcos/<clave>.webp).
+export function claveTema(carta) {
+  if (carta.tipo === 'protagonista') return TEMAS[carta.dimension] ? carta.dimension : 'acontecimiento';
+  if (carta.tipo === 'lugar' && carta.coleccion && carta.efecto && TEMAS[carta.efecto.dimension]) return carta.efecto.dimension;
+  return TEMAS[carta.tipo] ? carta.tipo : 'acontecimiento';
+}
+
 export function temaCarta(carta) {
   if (carta.tipo === 'protagonista') return TEMAS[carta.dimension] || TEMAS.acontecimiento;
   // En una expansión, el Lugar toma el color de la fuerza que favorece.

@@ -126,3 +126,30 @@ Con los números que elijas, cambio en el juego:
 - El logo, el ícono de la app y la pantalla de carga.
 - El inicio y los menús: botones, fichas, panel de novedades y la pantalla «Nueva partida».
 - El acabado de todas las cartas: marco, banda del nombre, disco del tipo, sello de resistencia, recuadro de descripción, monedas de costo, sello del curso y pie, en las versiones grande y pequeña. La disposición no cambia.
+
+## RV-6 · Marcos vacíos en alta resolución (para reemplazar los provisionales)
+
+Los marcos que usa hoy el juego salen de la lámina RV-5 (recortados y ampliados), así que se ven algo blandos.
+Este prompt pide los mismos marcos vacíos, uno por imagen, en alta resolución. Pedir uno por tipo cambiando solo
+la línea de color.
+
+```
+Marco de carta coleccionable, VACÍO, vista frontal plana, formato vertical 5:7 (1600 × 2240 px), sobre fondo
+blanco liso. Metal forjado oscuro (acero envejecido con relieves y filigranas talladas, bordes biselados, brillo
+frío), esquinas redondeadas pequeñas, una gema tallada al centro del borde superior y otra al centro del borde
+inferior, y vetas de esmalte del color indicado corriendo por el interior de los cuatro lados.
+Color de gema y esmalte: [ROJO CARMESÍ | ORO VIEJO | AZUL REAL | VIOLETA | VERDE BOSQUE | COBRE ROJIZO |
+AZUL ACERO | TURQUESA | AZUL PIZARRA].
+Grosor del marco: 4,5 % del ancho en los cuatro lados, igual en todos.
+La ventana interior debe ser un rectángulo de esquinas redondeadas completamente BLANCO PLANO, sin ilustración,
+sin placas, sin sellos, sin iconos, sin texto, sin números, sin sombra hacia adentro.
+Iluminación pareja, sin perspectiva, sin reflejos de ambiente, sin manos ni objetos alrededor.
+```
+
+Orden sugerido: Política (rojo carmesí), Economía (oro viejo), Sociedad (azul real), Cultura (violeta),
+Territorio (verde bosque), Personaje (cobre rojizo), Acontecimiento (azul acero), Lugar (turquesa),
+Aula (azul pizarra). Las fuerzas de la expansión se sacan recoloreando estos.
+
+Al recibirlos: guardarlos con el nombre del tipo y correr `python3 gen/marcos_desde_lamina.py` en su modo de
+imágenes sueltas (se agrega cuando lleguen); el juego los toma de `img/marcos/<tipo>.webp` sin otros cambios.
+Los botones del menú de inicio usan estos mismos marcos (en 9 cortes), así que también mejoran.

@@ -1,7 +1,7 @@
 // Dibuja una carta al estilo de un TCG: marco de color según el tipo, ventana de
 // ilustración, acciones con íconos de Saber, debilidad, retirada y el dato.
 // Tamaños: mini (mano y mesa), normal (colección) y grande (detalle).
-import { arteCarta, temaCarta, iconoTipo } from './arte.js';
+import { arteCarta, temaCarta, claveTema, iconoTipo } from './arte.js';
 import { VENTAJA } from '../motor.js';
 import { NOMBRE_DIMENSION } from '../mazos.js';
 import { coleccion } from '../colecciones.js';
@@ -122,7 +122,10 @@ function aplicarTema(el, carta) {
   el.style.setProperty('--c-claro', t.claro);
   el.style.setProperty('--c-oscuro', t.oscuro);
   el.style.setProperty('--c-papel', t.papel);
+  // Marco forjado del tipo (imagen con la ventana transparente), relativo a la página.
+  el.style.setProperty('--marco', `url("${MARCOS}${claveTema(carta)}.webp")`);
 }
+const MARCOS = typeof location !== 'undefined' ? new URL('img/marcos/', location.href).href : 'img/marcos/';
 
 // Cartas de una expansión: su colección y su fuerza (Lugar: la que favorece; Personaje: presencia
 // sagrada; Acontecimiento: relato). El CSS dibuja con eso los marcos propios de cada fuerza.

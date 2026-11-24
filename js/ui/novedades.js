@@ -12,7 +12,7 @@ const ICONO = '<svg viewBox="0 0 32 32" width="30" height="30" aria-hidden="true
   + '<path d="M16 10.6l1.6 3.3 3.6.5-2.6 2.5.6 3.6-3.2-1.7-3.2 1.7.6-3.6-2.6-2.5 3.6-.5z" fill="#C9A24A"/></svg>';
 
 export function globoNovedades(almacen) {
-  const b = h('button', 'globo-novedades', `${ICONO}<span class="globo-cuenta" hidden></span>`);
+  const b = h('button', 'globo-novedades', `${ICONO}<span class="globo-rotulo" aria-hidden="true">Novedades</span><span class="globo-cuenta" hidden></span>`);
   b.setAttribute('aria-label', 'Novedades');
   b.title = 'Novedades';
   let novedades = [];

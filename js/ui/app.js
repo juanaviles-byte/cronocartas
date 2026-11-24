@@ -15,6 +15,7 @@ import { revisarActualizacionApk } from '../actualizacion.js';
 import { CURSOS, MAZOS_LIBRES, mazosDePartida, tablerosDisponibles } from '../eleccion.js';
 import { modoEscuelaActivo } from '../rendimiento.js';
 import { globoNovedades } from './novedades.js';
+import { elegirTema, cartasDelTema } from '../temas-inicio.js';
 
 const app = document.getElementById('app');
 // Modo escuela (perfil liviano): lo elige el docente o se activa solo en la tablet del colegio.
@@ -22,6 +23,8 @@ document.documentElement.classList.toggle('modo-escuela', modoEscuelaActivo(alma
 let actual = null;            // vista montada (con destruir opcional)
 let eleccion = { modo: 'caraacara', cursoA: 7, cursoB: 7, tablero: 'azar', reforzar: false, mazo: 'curso', duelo: null, bandoA: null, linea: true, coleccion: null };
 let partidaPendiente = null;   // la deja lista el torneo antes de ir a #mesa
+// Tema del inicio (época: fondo y cartas): uno al azar cada vez que se abre el juego; se mantiene mientras siga abierto.
+const TEMA = elegirTema();
 
 // replaceChildren llegó en Chrome 86; las tablets pueden traer uno más antiguo.
 const vaciarYPoner = (padre, hijo) => { padre.textContent = ''; padre.appendChild(hijo); };
@@ -29,12 +32,10 @@ const h = (tag, cls, html) => { const e = document.createElement(tag); if (cls) 
 
 const vistas = {
   async inicio() {
-    const v = h('div', 'pantalla inicio');
-    // Fondo: un escenario del juego al azar, con un paneo lento (se detiene con «reducir movimiento»).
-    const fondos = await fetch('data/escenarios.json').then(r => (r.ok ? r.json() : {})).catch(() => ({}));
-    const lista = Object.values(fondos);
+    const v = h('div', `pantalla inicio tema-${TEMA.tema.id}`);
+    // Fondo: un paisaje de la época del tema, con un paneo lento (se detiene con «reducir movimiento»).
     const fondo = h('div', 'inicio-fondo');
-    if (lista.length) fondo.style.backgroundImage = `url("${new URL(lista[Math.floor(Math.random() * lista.length)], location.href).href}")`;
+    fondo.style.backgroundImage = `url("${new URL(TEMA.fondo, location.href).href}")`;
     v.appendChild(fondo);
 
     const principal = h('section', 'inicio-principal');
@@ -55,7 +56,9 @@ const vistas = {
       menu.append(b, terminar);
       menu.append(boton('Nueva partida', 'boton-secundario grande', () => { location.hash = '#jugar'; }));
     } else {
-      menu.append(boton('Jugar', 'boton-principal grande', () => { location.hash = '#jugar'; }));
+      const jugar = boton('Jugar', 'boton-principal grande boton-jugar', () => { location.hash = '#jugar'; });
+      jugar.insertAdjacentHTML('afterbegin', '<svg class="icono-jugar" viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z" fill="currentColor"/></svg>');
+      menu.append(jugar);
     }
     principal.appendChild(menu);
 
@@ -80,8 +83,10 @@ const vistas = {
     }
     principal.appendChild(fichas);
     const pie = h('footer', 'pie');
-    pie.append(boton('Panel docente', 'enlace', () => { location.hash = '#docente'; }));
-    pie.appendChild(h('span', '', 'Escuela Gabriela Mistral · Mostazal'));
+    const docente = boton('Panel docente', 'enlace pastilla', () => { location.hash = '#docente'; });
+    docente.insertAdjacentHTML('afterbegin', '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c.6-3.4 3-5.4 6-5.4s5.4 2 6 5.4"/><circle cx="17" cy="9" r="2.4"/><path d="M15.5 14.2c2.6.2 4.6 2 5.1 4.8"/></svg>');
+    pie.append(docente);
+    pie.appendChild(h('span', 'pastilla', '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M3 6.5C5.5 5 8.5 5 12 7c3.5-2 6.5-2 9-.5V19c-2.5-1.5-5.5-1.5-9 .5-3.5-2-6.5-2-9-.5z"/><path d="M12 7v12.5"/></svg>Escuela Gabriela Mistral · Mostazal'));
     principal.appendChild(pie);
     v.appendChild(principal);
     // Novedades: un globo con una carta, arriba a la derecha (actualizaciones y noticias).
@@ -91,10 +96,14 @@ const vistas = {
     const abanico = h('div', 'inicio-abanico');
     abanico.setAttribute('aria-hidden', 'true');
     v.appendChild(abanico);
-    Promise.all([fetch('data/arte.json').then(r => r.json()), fetch(`data/mazo-${CURSOS[Math.floor(Math.random() * CURSOS.length)]}.json`).then(r => r.json())])
-      .then(([arte, mazo]) => {
+    // Tres cartas de la época del tema, al azar.
+    const archivos = [...new Set(TEMA.tema.cartas.map(f => f.mazo))];
+    Promise.all([fetch('data/arte.json').then(r => r.json()), ...archivos.map(m => fetch(`data/${m}.json`).then(r => r.json()))])
+      .then(([arte, ...datos]) => {
         registrarImagenes(arte);
-        const prot = mazo.cartas.filter(c => c.tipo === 'protagonista' && arte[c.id]);
+        const mazos = {};
+        archivos.forEach((m, i) => { mazos[m] = datos[i].cartas; });
+        const prot = cartasDelTema(TEMA.tema, mazos, arte);
         const elegidas = [];
         while (elegidas.length < 3 && prot.length) elegidas.push(prot.splice(Math.floor(Math.random() * prot.length), 1)[0]);
         elegidas.forEach((c, i) => { const el = renderCarta(c, { tamano: 'normal' }); el.style.setProperty('--i', i - 1); abanico.appendChild(el); });
