@@ -1005,7 +1005,7 @@ export async function montarMesa(contenedor, opciones) {
   // Texto del desglose: "−10 Castillo feudal · ×2 ventaja".
   function textoDesglose(dsg) {
     const t = tableroActual(), l = estado.lugar && estado.lugar.carta;
-    const nombre = { lugar: l ? l.nombre : 'Lugar', tablero: t ? t.nombre : 'tablero', bonus: 'carta jugada', reserva: 'por tu reserva', resistente: 'el rival resiste' };
+    const nombre = { lugar: l ? l.nombre : 'Lugar', tablero: t ? t.nombre : 'tablero', bonus: 'carta jugada', reserva: 'por tu reserva', resistente: 'el rival resiste', alianza: 'por tus aliados', debilitado: 'debilitado' };
     // Texto plano: quien lo inserta en HTML lo pasa por esc().
     return dsg.pasos.map(p => (p.por ? '×' + p.por + ' ventaja' : (p.valor > 0 ? '+' : '−') + Math.abs(p.valor) + ' ' + nombre[p.fuente])).join(' · ');
   }

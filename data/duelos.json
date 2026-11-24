@@ -19,7 +19,9 @@
       "Cristóbal Colón",
       "Fundación de ciudades",
       "Carabela y brújula",
-      "Puerto de Sevilla"
+      "Puerto de Sevilla",
+      "Diego de Almagro",
+      "Encomienda"
      ]
     },
     {
@@ -33,7 +35,82 @@
       "Pueblo diaguita",
       "Lautaro",
       "Parlamento de Quilín",
-      "Cordillera de los Andes"
+      "Cordillera de los Andes",
+      "Michimalonco",
+      "Caupolicán",
+      "Batalla de Curalaba"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "D-5-2",
+   "curso": 5,
+   "nombre": "La Colonia",
+   "tablero": "T-5-2",
+   "bandos": [
+    {
+     "id": "santiago",
+     "nombre": "Santiago colonial",
+     "lema": "Gobernar, comerciar y construir la ciudad",
+     "color": "#8C5A2B",
+     "emblema": "columna",
+     "nucleo": [
+      "Real Audiencia",
+      "Encomienda",
+      "Comercio libre",
+      "Mercader colonial",
+      "Sociedad mestiza",
+      "Patrimonio colonial"
+     ]
+    },
+    {
+     "id": "frontera",
+     "nombre": "La Frontera",
+     "lema": "Resistir y negociar en el Biobío",
+     "color": "#2F7A4A",
+     "emblema": "escudo",
+     "nucleo": [
+      "Fuertes del Biobío",
+      "Batalla de Curalaba",
+      "Pueblo mapuche",
+      "Parlamento de Quilín",
+      "Lautaro"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "D-5-3",
+   "curso": 5,
+   "nombre": "Norte y Sur",
+   "tablero": "T-5-3",
+   "bandos": [
+    {
+     "id": "norte",
+     "nombre": "Norte",
+     "lema": "Desierto, altura y minerales",
+     "color": "#C9822B",
+     "emblema": "sol",
+     "nucleo": [
+      "Desierto de Atacama",
+      "Altiplano",
+      "Gran minería del cobre",
+      "Norte Grande",
+      "Minería del cobre"
+     ]
+    },
+    {
+     "id": "sur",
+     "nombre": "Sur",
+     "lema": "Islas, bosques y hielos",
+     "color": "#2F6FA3",
+     "emblema": "montana",
+     "nucleo": [
+      "Campos de Hielo",
+      "Ignacio Domeyko",
+      "Chiloé",
+      "Zona Austral"
      ]
     }
    ]
@@ -58,7 +135,9 @@
       "José Miguel Carrera",
       "Javiera Carrera",
       "Cabildo abierto de 1810",
-      "Cordillera de los Andes"
+      "Cordillera de los Andes",
+      "Manuel Rodríguez",
+      "Expedición Libertadora del Perú"
      ]
     },
     {
@@ -69,7 +148,113 @@
      "emblema": "corona",
      "nucleo": [
       "Ejército realista",
-      "Reconquista española"
+      "Reconquista española",
+      "Mariano Osorio",
+      "Batalla de Rancagua",
+      "Regimiento Talavera"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "D-6-2",
+   "curso": 6,
+   "nombre": "Pelucones y Pipiolos",
+   "tablero": "T-6-1",
+   "bandos": [
+    {
+     "id": "pelucones",
+     "nombre": "Pelucones",
+     "lema": "Orden y un gobierno fuerte",
+     "color": "#5A4A8C",
+     "emblema": "columna",
+     "nucleo": [
+      "Diego Portales",
+      "Batalla de Lircay",
+      "Constitución de 1833",
+      "Chile independiente"
+     ]
+    },
+    {
+     "id": "pipiolos",
+     "nombre": "Pipiolos",
+     "lema": "Libertades e ideas nuevas",
+     "color": "#B0413E",
+     "emblema": "libro",
+     "nucleo": [
+      "Pipiolos",
+      "Francisco Bilbao",
+      "Liberales"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "D-6-3",
+   "curso": 6,
+   "nombre": "La pampa salitrera",
+   "tablero": "T-6-2",
+   "bandos": [
+    {
+     "id": "trabajadores",
+     "nombre": "Trabajadores",
+     "lema": "Organizarse y defender sus derechos",
+     "color": "#B0413E",
+     "emblema": "estrella",
+     "nucleo": [
+      "Pampinos",
+      "Mancomunales",
+      "Luis Emilio Recabarren",
+      "Mineros del carbón"
+     ]
+    },
+    {
+     "id": "empresarios",
+     "nombre": "Empresarios",
+     "lema": "Invertir, producir y exportar",
+     "color": "#3C6E71",
+     "emblema": "corona",
+     "nucleo": [
+      "John Thomas North",
+      "Pampa salitrera",
+      "Llegada del ferrocarril",
+      "Puerto de Valparaíso"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "D-7-1",
+   "curso": 7,
+   "nombre": "Egipto y Mesopotamia",
+   "tablero": "T-7-1",
+   "bandos": [
+    {
+     "id": "egipto",
+     "nombre": "Egipto",
+     "lema": "El regalo del Nilo",
+     "color": "#C9A227",
+     "emblema": "sol",
+     "nucleo": [
+      "Faraón",
+      "Río Nilo",
+      "Escritura jeroglífica",
+      "Egipcios"
+     ]
+    },
+    {
+     "id": "mesopotamia",
+     "nombre": "Mesopotamia",
+     "lema": "Ciudades, leyes y escritura",
+     "color": "#3E6FA0",
+     "emblema": "columna",
+     "nucleo": [
+      "Babilonios",
+      "Código de Hammurabi",
+      "Zigurat",
+      "Sumerios",
+      "Invención de la escritura",
+      "Creciente Fértil"
      ]
     }
    ]
@@ -90,7 +275,9 @@
       "Ciudadano ateniense",
       "Filósofos griegos",
       "Pericles",
-      "Juegos Olímpicos"
+      "Juegos Olímpicos",
+      "Esparta",
+      "Democracia ateniense"
      ]
     },
     {
@@ -103,7 +290,43 @@
       "República romana",
       "Imperio romano",
       "Legión romana",
-      "Mar Mediterráneo"
+      "Mar Mediterráneo",
+      "Julio César"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "D-7-3",
+   "curso": 7,
+   "nombre": "Castillo y ciudad",
+   "tablero": "T-7-3",
+   "bandos": [
+    {
+     "id": "senores",
+     "nombre": "Señores",
+     "lema": "La tierra y la espada",
+     "color": "#6B5B4B",
+     "emblema": "escudo",
+     "nucleo": [
+      "Caballeros medievales",
+      "Señor feudal",
+      "Campesino medieval",
+      "Carlomagno"
+     ]
+    },
+    {
+     "id": "burgueses",
+     "nombre": "Burgueses",
+     "lema": "Oficios, ferias y comercio",
+     "color": "#B5762F",
+     "emblema": "estrella",
+     "nucleo": [
+      "Gremios",
+      "Ferias medievales",
+      "Mercader medieval",
+      "Burguesía",
+      "Primeras universidades"
      ]
     }
    ]
@@ -126,7 +349,8 @@
       "Cultivo del maíz",
       "Calendario maya",
       "Tenochtitlan",
-      "Moctezuma II"
+      "Moctezuma II",
+      "Imperio mexica"
      ]
     },
     {
@@ -162,7 +386,10 @@
       "Monarquía absoluta",
       "Tesorero mercantilista",
       "Luis XIV",
-      "Palacio de Versalles"
+      "Palacio de Versalles",
+      "Felipe II",
+      "Ejército permanente",
+      "Derecho divino de los reyes"
      ]
     },
     {
@@ -176,7 +403,79 @@
       "Montesquieu",
       "Derechos del Hombre",
       "Salones ilustrados",
-      "Independencia de EE. UU."
+      "Independencia de EE. UU.",
+      "Voltaire",
+      "Mary Wollstonecraft",
+      "Toma de la Bastilla",
+      "Revolución francesa"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "D-8-2",
+   "curso": 8,
+   "nombre": "El debate de Valladolid",
+   "tablero": "T-8-2",
+   "bandos": [
+    {
+     "id": "defensores",
+     "nombre": "Defensores de los indígenas",
+     "lema": "Denunciar los abusos",
+     "color": "#2F7A4A",
+     "emblema": "libro",
+     "nucleo": [
+      "Antonio de Montesinos",
+      "Leyes Nuevas",
+      "Debate de Valladolid",
+      "Bartolomé de las Casas",
+      "Frailes dominicos"
+     ]
+    },
+    {
+     "id": "encomenderos",
+     "nombre": "Encomenderos",
+     "lema": "Defender la conquista y la encomienda",
+     "color": "#8C3B2C",
+     "emblema": "escudo",
+     "nucleo": [
+      "Juan Ginés de Sepúlveda",
+      "Conquistadores",
+      "Hacienda colonial",
+      "Elite terrateniente"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "D-8-3",
+   "curso": 8,
+   "nombre": "Campo y ciudad",
+   "tablero": "T-8-4",
+   "bandos": [
+    {
+     "id": "campo",
+     "nombre": "Campo",
+     "lema": "Tradición y tierra",
+     "color": "#6E8B3D",
+     "emblema": "sol",
+     "nucleo": [
+      "Agroindustria",
+      "Cultura huasa",
+      "Violeta Parra",
+      "Valle Central"
+     ]
+    },
+    {
+     "id": "ciudad",
+     "nombre": "Ciudad",
+     "lema": "Crecer y conectarse",
+     "color": "#4A5A8C",
+     "emblema": "estrella",
+     "nucleo": [
+      "Área metropolitana",
+      "Migración campo-ciudad",
+      "Metro de Santiago"
      ]
     }
    ]

@@ -221,6 +221,11 @@ function efectoAplicable(e, j, ef) {
     case 'curar': return yo.activo.danio > 0;
     case 'robar': case 'buscarProtagonista': return yo.mazo.length > 0;
     case 'robarPorReserva': return yo.reserva.length > 0 && yo.mazo.length > 0;
+    case 'recuperar': return yo.descarte.length > 0;
+    case 'asedio': return e.jugadores[rival(j)].reserva.some(r => vidaDe(r) > MINIMO_ASEDIO);
+    case 'debilitar': return !!e.jugadores[rival(j)].activo;
+    case 'quitarSaber': { const o = e.jugadores[rival(j)].activo; return !!o && o.saber > 0; }
+    case 'saberReserva': return yo.reserva.length > 0;
     default: return true;
   }
 }
@@ -261,8 +266,9 @@ export function aplicarJugada(estadoEntrada, jugada) {
       yo.activo = yo.reserva.splice(k, 1)[0];
       ev.push({ tipo: 'promover', jugador: j, carta: yo.activo.carta });
       // Refuerzo: la carta que reemplaza a una caída llega con +1 de Saber, para poder responder.
-      yo.activo.saber += 1;
-      ev.push({ tipo: 'refuerzo', jugador: j, carta: yo.activo.carta });
+      yo.activo.saber += 1 + (yo.legado || 0);
+      ev.push({ tipo: 'refuerzo', jugador: j, carta: yo.activo.carta, legado: yo.legado || 0 });
+      yo.legado = 0;
       // El turno del atacante terminó con su acción: ahora juega quien promovió.
       e.fase = 'turno';
       e.numeroTurno++;
@@ -356,10 +362,25 @@ export function aplicarJugada(estadoEntrada, jugada) {
   return { estado: e, eventos: ev };
 }
 
+// Asedio y epidemia desgastan, pero no eliminan: nadie queda con menos de 10 de resistencia por ellos.
+const MINIMO_ASEDIO = 10;
+const vidaDe = p => p.carta.resistencia - p.danio;
+function desgastar(p, n) { p.danio = Math.max(p.danio, Math.min(p.danio + n, p.carta.resistencia - MINIMO_ASEDIO)); }
+
 function aplicarEfecto(e, j, ef, ev, eleccion) {
   if (Array.isArray(ef)) { for (const x of ef) aplicarEfecto(e, j, x, ev, eleccion); return; }
-  const yo = e.jugadores[j];
+  const yo = e.jugadores[j], otro = e.jugadores[rival(j)];
   switch (ef.tipo) {
+    case 'recuperar': {
+      const c = yo.descarte.pop();
+      if (c) { yo.mano.push(c); ev.push({ tipo: 'recuperar', jugador: j, carta: c.carta }); }
+      break;
+    }
+    case 'asedio': for (const r of otro.reserva) desgastar(r, ef.n); ev.push({ tipo: 'asedio', jugador: j, n: ef.n }); break;
+    case 'epidemia': for (const p of [...enMesa(yo), ...enMesa(otro)]) desgastar(p, ef.n); ev.push({ tipo: 'epidemia', jugador: j, n: ef.n }); break;
+    case 'debilitar': if (otro.activo) otro.activo.debil = (otro.activo.debil || 0) + ef.n; break;
+    case 'quitarSaber': if (otro.activo) otro.activo.saber = Math.max(0, otro.activo.saber - (ef.n || 1)); break;
+    case 'saberReserva': for (const r of yo.reserva) r.saber += ef.n || 1; break;
     case 'saberExtra': yo.activo.saber += ef.n || 1; break;
     case 'curarTodos': for (const p of enMesa(yo)) p.danio = Math.max(0, p.danio - ef.n); break;
     case 'moverSaberTodo': {
@@ -427,6 +448,8 @@ export function desgloseDanio(e, j, indice) {
   suma('bonus', atk.bonus);
   const fr = habilidad(atk, 'fuerzaReserva');
   if (fr) suma('reserva', fr.n * yo.reserva.length);
+  const al = habilidad(atk, 'alianza');
+  if (al) suma('alianza', al.n * yo.reserva.filter(r => r.carta.dimension === atk.carta.dimension).length);
   if (VENTAJA[atk.carta.dimension] === def.carta.dimension) pasos.push({ fuente: 'ventaja', por: 2 });
   let total = base;
   for (const p of pasos) total = p.por ? total * p.por : total + p.valor;
@@ -434,6 +457,10 @@ export function desgloseDanio(e, j, indice) {
   if (muro) { const q = Math.min(total, muro.n); if (q) pasos.push({ fuente: 'tablero', valor: -q }); total -= q; }
   const res = habilidad(def, 'resistente');
   if (res) { const q = Math.min(total, res.n); if (q) pasos.push({ fuente: 'resistente', valor: -q }); total -= q; }
+  if (lugarEf && lugarEf.tipo === 'escudoDimension' && lugarEf.dimension === def.carta.dimension) {
+    const q = Math.min(total, lugarEf.n); if (q) pasos.push({ fuente: 'lugar', valor: -q }); total -= q;
+  }
+  if (atk.debil) { const q = Math.min(total, atk.debil); if (q) pasos.push({ fuente: 'debilitado', valor: -q }); total -= q; }
   return { base, pasos, total };
 }
 
@@ -463,12 +490,30 @@ function resolverAccion(e, j, indice, ev) {
     }
   }
   atk.bonus = 0;
+  atk.debil = 0;
   if (accion.costo >= COSTO_POTENTE) atk.atacoFuerte = true;
   def.danio += danio;
   ev.push({ tipo: 'danio', jugador: j, accion: accion.nombre, valor: danio, carta: atk.carta, objetivo: def.carta });
-  if (accion.efecto) aplicarEfecto(e, j, accion.efecto, ev);
+  // Efecto de la acción: se aplica la parte que tenga sentido (no falla si, por ejemplo, el rival no tiene reserva).
+  for (const x of listaEfectos(accion.efecto)) if (efectoAplicable(e, j, x)) aplicarEfecto(e, j, x, ev);
+
+  // Tenaz: la primera vez que caería, queda con 10.
+  if (def.danio >= def.carta.resistencia && habilidad(def, 'tenaz') && !def.tenazUsado) {
+    def.tenazUsado = true;
+    def.danio = def.carta.resistencia - 10;
+    ev.push({ tipo: 'tenaz', jugador: rival(j), carta: def.carta });
+  }
+  // Contraataque: si el defensor sobrevive a un golpe con daño, el atacante recibe daño (sin bajar de 10).
+  const ca = habilidad(def, 'contraataque');
+  if (ca && danio > 0 && def.danio < def.carta.resistencia) {
+    const antes = atk.danio;
+    desgastar(atk, ca.n);
+    if (atk.danio > antes) ev.push({ tipo: 'contraataque', jugador: rival(j), carta: def.carta, valor: atk.danio - antes });
+  }
 
   if (def.danio >= def.carta.resistencia) {
+    const lg = habilidad(def, 'legado');
+    if (lg) otro.legado = (otro.legado || 0) + (lg.n || 1);
     otro.descarte.push({ uid: def.uid, carta: def.carta });
     otro.activo = null;
     yo.hitos += 1;
@@ -502,6 +547,10 @@ function iniciarTurno(e, ev) {
   yo.personajeUsado = false;
   const cura = regla(e, 'curarInicioTurno');
   if (cura && yo.activo) yo.activo.danio = Math.max(0, yo.activo.danio - cura.n);
+  const lugarEf = e.lugar && e.lugar.carta.efecto;
+  if (lugarEf && lugarEf.tipo === 'curaDimension' && yo.activo && yo.activo.carta.dimension === lugarEf.dimension) {
+    yo.activo.danio = Math.max(0, yo.activo.danio - lugarEf.n);
+  }
   const san = habilidad(yo.activo, 'sanador');
   if (san) yo.activo.danio = Math.max(0, yo.activo.danio - san.n);
   yo.retiroUsado = false;

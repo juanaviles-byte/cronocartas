@@ -7,7 +7,9 @@ import { barajar } from './rng.js';
 export const COMPOSICION = { protagonista: 11, personaje: 3, acontecimiento: 3, lugar: 1, aula: 2 };
 export const TIPOS = ['protagonista', 'personaje', 'acontecimiento', 'lugar', 'aula'];
 export const EFECTOS = ['robar', 'curar', 'proteger', 'bonusDanio', 'moverSaber', 'anularLugar', 'robarPorReserva', 'buscarProtagonista',
-  'buscar', 'retiroGratis', 'saberExtra', 'curarTodos', 'moverSaberTodo'];
+  'buscar', 'retiroGratis', 'saberExtra', 'curarTodos', 'moverSaberTodo',
+  'recuperar', 'asedio', 'debilitar', 'quitarSaber', 'saberReserva', 'epidemia'];
+export const EFECTOS_LUGAR = ['bonusDimension', 'curaDimension', 'escudoDimension'];
 const TIPOS_BUSQUEDA = ['protagonista', 'lugar', 'acontecimiento', 'cualquiera'];
 
 function efectoValido(ef) {
@@ -18,7 +20,7 @@ function efectoValido(ef) {
   return true;
 }
 
-export const HABILIDADES = ['resistente', 'fuerzaReserva', 'sanador', 'inspirador', 'saberAlEntrar'];
+export const HABILIDADES = ['resistente', 'fuerzaReserva', 'sanador', 'inspirador', 'saberAlEntrar', 'contraataque', 'tenaz', 'legado', 'alianza'];
 
 export const NOMBRE_DIMENSION = { Politica: 'Política', Economia: 'Economía', Sociedad: 'Sociedad', Cultura: 'Cultura', Territorio: 'Territorio',
   ...Object.fromEntries(Object.entries(FUERZAS).map(([k, f]) => [k, f.nombre])) };
@@ -37,11 +39,15 @@ export function validarCarta(c) {
   if (c.tipo === 'protagonista') {
     if (!TODAS_DIMENSIONES.includes(c.dimension)) e.push(`${id}: dimensión desconocida "${c.dimension}"`);
     if (!(c.resistencia >= 50 && c.resistencia <= 120)) e.push(`${id}: resistencia fuera de 50–120`);
+    if (c.retirada !== undefined && !(c.retirada >= 0 && c.retirada <= 3)) e.push(`${id}: retirada fuera de 0–3`);
     if (!Array.isArray(c.acciones) || c.acciones.length < 1 || c.acciones.length > 2) e.push(`${id}: necesita 1 o 2 acciones`);
     for (const a of c.acciones || []) {
       if (!a.nombre) e.push(`${id}: acción sin nombre`);
       if (!(a.costo >= 1 && a.costo <= 3)) e.push(`${id}: costo fuera de 1–3`);
       if (!(a.danio >= 0)) e.push(`${id}: daño inválido`);
+      if (a.efecto !== undefined && !efectoValido(a.efecto)) e.push(`${id}: efecto de acción desconocido`);
+      // Proteger en un ataque daría inmunidad permanente (atacar y protegerse cada turno).
+      if (a.efecto && [].concat(a.efecto).some(x => x && x.tipo === 'proteger')) e.push(`${id}: una acción no puede proteger`);
     }
   }
   if (c.habilidad && (!HABILIDADES.includes(c.habilidad.tipo) || !c.habilidad.nombre)) e.push(`${id}: habilidad desconocida`);
@@ -52,7 +58,7 @@ export function validarCarta(c) {
     if (!efectoValido(c.efecto)) e.push(`${id}: efecto desconocido o mal escrito`);
   }
   if (c.tipo === 'lugar') {
-    if (!c.efecto || c.efecto.tipo !== 'bonusDimension' || !TODAS_DIMENSIONES.includes(c.efecto.dimension)) e.push(`${id}: el lugar necesita bonusDimension con una dimensión válida`);
+    if (!c.efecto || !EFECTOS_LUGAR.includes(c.efecto.tipo) || !TODAS_DIMENSIONES.includes(c.efecto.dimension)) e.push(`${id}: el lugar necesita un efecto de dimensión válido`);
   }
   return e;
 }

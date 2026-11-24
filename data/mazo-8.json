@@ -1,664 +1,1178 @@
 {
- "curso": 8,
- "unidades": [
-  "Humanismo, Reforma y Estado moderno",
-  "Choque de dos mundos y Colonia",
-  "Ilustración, revolución e independencia",
-  "Sociedad y territorio: la región"
- ],
- "cartas": [
-  {
-   "id": "CC-8-U1-001",
-   "nombre": "Leonardo da Vinci",
-   "tipo": "personaje",
-   "curso": 8,
-   "unidad": 1,
-   "efecto": {
-    "tipo": "buscar",
-    "n": 5,
-    "cartaTipo": "cualquiera"
-   },
-   "dato": "Artista e inventor del Renacimiento; representa la confianza en la capacidad humana para crear y conocer.",
-   "oa": "OA 1",
-   "emblema": "pluma",
-   "frase": "Artista e inventor: la confianza del Renacimiento en el ser humano.",
-   "fecha": {
-    "anio": 1500,
-    "texto": "c. 1500"
-   }
-  },
-  {
-   "id": "CC-8-U1-002",
-   "nombre": "Martín Lutero",
-   "tipo": "personaje",
-   "curso": 8,
-   "unidad": 1,
-   "efecto": [
+  "curso": 8,
+  "unidades": [
+    "Humanismo, Reforma y Estado moderno",
+    "Choque de dos mundos y Colonia",
+    "Ilustración, revolución e independencia",
+    "Sociedad y territorio: la región"
+  ],
+  "cartas": [
     {
-     "tipo": "anularLugar"
+      "id": "CC-8-U1-001",
+      "nombre": "Leonardo da Vinci",
+      "tipo": "personaje",
+      "curso": 8,
+      "unidad": 1,
+      "efecto": {
+        "tipo": "buscar",
+        "n": 5,
+        "cartaTipo": "cualquiera"
+      },
+      "dato": "Artista e inventor del Renacimiento; representa la confianza en la capacidad humana para crear y conocer.",
+      "oa": "OA 1",
+      "emblema": "pluma",
+      "frase": "Artista e inventor: la confianza del Renacimiento en el ser humano.",
+      "fecha": {
+        "anio": 1500,
+        "texto": "c. 1500"
+      }
     },
     {
-     "tipo": "robar",
-     "n": 1
-    }
-   ],
-   "dato": "En 1517 publicó sus 95 tesis criticando a la Iglesia, lo que dio inicio a la Reforma protestante.",
-   "oa": "OA 2",
-   "emblema": "pergamino",
-   "conexiones": [
-    {
-     "causa": "CC-8-U1-006",
-     "texto": "La imprenta difundió las 95 tesis por toda Europa."
-    }
-   ],
-   "frase": "1517: sus 95 tesis iniciaron la Reforma protestante.",
-   "fecha": {
-    "anio": 1517,
-    "texto": "1517"
-   }
-  },
-  {
-   "id": "CC-8-U1-003",
-   "nombre": "Reyes del siglo XV",
-   "tipo": "protagonista",
-   "curso": 8,
-   "unidad": 1,
-   "dimension": "Politica",
-   "resistencia": 60,
-   "retirada": 1,
-   "acciones": [
-    {
-     "nombre": "Reunir reinos",
-     "costo": 1,
-     "danio": 20
-    }
-   ],
-   "dato": "Los reyes comenzaron a concentrar el poder, que en la Edad Media estaba repartido entre los señores.",
-   "oa": "OA 3",
-   "emblema": "corona",
-   "frase": "Los reyes comenzaron a concentrar el poder."
-  },
-  {
-   "id": "CC-8-U1-004",
-   "nombre": "Monarquía absoluta",
-   "tipo": "protagonista",
-   "curso": 8,
-   "unidad": 1,
-   "dimension": "Politica",
-   "resistencia": 110,
-   "retirada": 2,
-   "acciones": [
-    {
-     "nombre": "Ejército real",
-     "costo": 2,
-     "danio": 50
+      "id": "CC-8-U1-002",
+      "nombre": "Martín Lutero",
+      "tipo": "personaje",
+      "curso": 8,
+      "unidad": 1,
+      "efecto": [
+        {
+          "tipo": "anularLugar"
+        },
+        {
+          "tipo": "robar",
+          "n": 1
+        }
+      ],
+      "dato": "En 1517 publicó sus 95 tesis criticando a la Iglesia, lo que dio inicio a la Reforma protestante.",
+      "oa": "OA 2",
+      "emblema": "pergamino",
+      "conexiones": [
+        {
+          "causa": "CC-8-U1-006",
+          "texto": "La imprenta difundió las 95 tesis por toda Europa."
+        }
+      ],
+      "frase": "1517: sus 95 tesis iniciaron la Reforma protestante.",
+      "fecha": {
+        "anio": 1517,
+        "texto": "1517"
+      }
     },
     {
-     "nombre": "Burocracia",
-     "costo": 3,
-     "danio": 70
-    }
-   ],
-   "dato": "El rey concentraba el poder y lo ejercía con funcionarios, impuestos y ejércitos profesionales.",
-   "oa": "OA 3",
-   "emblema": "corona",
-   "evolucionaDe": "CC-8-U1-003",
-   "frase": "Todo el poder en el rey: funcionarios, impuestos y ejércitos.",
-   "habilidad": {
-    "nombre": "Poder concentrado",
-    "tipo": "resistente",
-    "n": 10
-   }
-  },
-  {
-   "id": "CC-8-U1-005",
-   "nombre": "Tesorero mercantilista",
-   "tipo": "protagonista",
-   "curso": 8,
-   "unidad": 1,
-   "dimension": "Economia",
-   "resistencia": 70,
-   "retirada": 1,
-   "acciones": [
-    {
-     "nombre": "Oro y plata",
-     "costo": 2,
-     "danio": 40
-    }
-   ],
-   "dato": "El mercantilismo medía la riqueza de un reino por el oro y la plata que acumulaba.",
-   "oa": "OA 4",
-   "emblema": "moneda",
-   "frase": "La riqueza de un reino se medía en oro y plata."
-  },
-  {
-   "id": "CC-8-U1-006",
-   "nombre": "Imprenta",
-   "tipo": "acontecimiento",
-   "curso": 8,
-   "unidad": 1,
-   "efecto": {
-    "tipo": "robar",
-    "n": 2
-   },
-   "dato": "Hacia 1450, la imprenta de Gutenberg permitió imprimir libros en serie y difundir ideas más rápido.",
-   "oa": "OA 2",
-   "emblema": "libro",
-   "frase": "Hacia 1450, libros impresos en serie.",
-   "fecha": {
-    "anio": 1450,
-    "texto": "hacia 1450"
-   }
-  },
-  {
-   "id": "CC-8-U1-007",
-   "nombre": "Revolución científica",
-   "tipo": "acontecimiento",
-   "curso": 8,
-   "unidad": 1,
-   "efecto": {
-    "tipo": "bonusDanio",
-    "n": 20
-   },
-   "dato": "Galileo y otros científicos usaron la observación y la experimentación para conocer la naturaleza.",
-   "oa": "OA 2",
-   "emblema": "estrella",
-   "conexiones": [
-    {
-     "causa": "CC-8-U1-006",
-     "texto": "La imprenta hizo circular rápido los nuevos descubrimientos."
-    }
-   ],
-   "frase": "Observar y experimentar para conocer la naturaleza.",
-   "fecha": {
-    "anio": 1610,
-    "texto": "siglo XVII"
-   }
-  },
-  {
-   "id": "CC-8-U1-008",
-   "nombre": "Luis XIV",
-   "tipo": "personaje",
-   "curso": 8,
-   "unidad": 1,
-   "efecto": {
-    "tipo": "bonusDanio",
-    "n": 40,
-    "dimension": "Politica"
-   },
-   "dato": "Rey de Francia entre 1643 y 1715, símbolo de la monarquía absoluta; se le atribuye la frase «El Estado soy yo».",
-   "oa": "OA 3",
-   "emblema": "corona",
-   "conexiones": [
-    {
-     "causa": "CC-8-U1-004",
-     "texto": "Luis XIV llevó la monarquía absoluta a su máxima expresión."
-    }
-   ],
-   "frase": "Rey de Francia (1643–1715), símbolo de la monarquía absoluta.",
-   "fecha": {
-    "anio": 1643,
-    "texto": "1643–1715"
-   }
-  },
-  {
-   "id": "CC-8-U1-009",
-   "nombre": "Palacio de Versalles",
-   "tipo": "lugar",
-   "curso": 8,
-   "unidad": 1,
-   "efecto": {
-    "tipo": "bonusDimension",
-    "dimension": "Politica",
-    "n": 10
-   },
-   "dato": "Palacio construido por Luis XIV; fue el centro del poder y de la vida de la corte en la Francia absolutista.",
-   "oa": "OA 3",
-   "emblema": "casa",
-   "frase": "Centro del poder y de la corte en la Francia absolutista."
-  },
-  {
-   "id": "CC-8-U2-001",
-   "nombre": "Bartolomé de las Casas",
-   "tipo": "personaje",
-   "curso": 8,
-   "unidad": 2,
-   "efecto": {
-    "tipo": "curar",
-    "n": 40
-   },
-   "dato": "Fraile que denunció los abusos contra los indígenas y defendió su dignidad humana.",
-   "oa": "OA 17",
-   "emblema": "pluma",
-   "conexiones": [
-    {
-     "causa": "CC-8-U2-002",
-     "texto": "Los abusos de la conquista llevaron a Las Casas a denunciarlos."
-    }
-   ],
-   "frase": "Denunció los abusos contra los indígenas.",
-   "fecha": {
-    "anio": 1542,
-    "texto": "siglo XVI"
-   }
-  },
-  {
-   "id": "CC-8-U2-002",
-   "nombre": "Conquistadores",
-   "tipo": "protagonista",
-   "curso": 8,
-   "unidad": 2,
-   "dimension": "Politica",
-   "resistencia": 70,
-   "retirada": 1,
-   "acciones": [
-    {
-     "nombre": "Alianzas",
-     "costo": 1,
-     "danio": 20
+      "id": "CC-8-U1-003",
+      "nombre": "Reyes del siglo XV",
+      "tipo": "protagonista",
+      "curso": 8,
+      "unidad": 1,
+      "dimension": "Politica",
+      "resistencia": 60,
+      "retirada": 1,
+      "acciones": [
+        {
+          "nombre": "Reunir reinos",
+          "costo": 1,
+          "danio": 20
+        }
+      ],
+      "dato": "Los reyes comenzaron a concentrar el poder, que en la Edad Media estaba repartido entre los señores.",
+      "oa": "OA 3",
+      "emblema": "corona",
+      "frase": "Los reyes comenzaron a concentrar el poder."
     },
     {
-     "nombre": "Caballos y acero",
-     "costo": 2,
-     "danio": 40
-    }
-   ],
-   "dato": "Avanzaron rápido gracias a alianzas con pueblos indígenas, armas de acero, caballos y epidemias.",
-   "oa": "OA 6",
-   "emblema": "escudo",
-   "frase": "Alianzas, acero, caballos y epidemias."
-  },
-  {
-   "id": "CC-8-U2-003",
-   "nombre": "Hacienda colonial",
-   "tipo": "protagonista",
-   "curso": 8,
-   "unidad": 2,
-   "dimension": "Economia",
-   "resistencia": 60,
-   "retirada": 1,
-   "acciones": [
-    {
-     "nombre": "Inquilinaje",
-     "costo": 1,
-     "danio": 20
-    }
-   ],
-   "dato": "Gran propiedad rural que fue el centro de la economía del Chile colonial.",
-   "oa": "OA 13",
-   "emblema": "casa",
-   "frase": "Gran propiedad rural que fue el centro de la economía del Chile colonial."
-  },
-  {
-   "id": "CC-8-U2-004",
-   "nombre": "Elite terrateniente",
-   "tipo": "protagonista",
-   "curso": 8,
-   "unidad": 2,
-   "dimension": "Economia",
-   "resistencia": 100,
-   "retirada": 2,
-   "acciones": [
-    {
-     "nombre": "Tierras y poder",
-     "costo": 2,
-     "danio": 50
+      "id": "CC-8-U1-004",
+      "nombre": "Monarquía absoluta",
+      "tipo": "protagonista",
+      "curso": 8,
+      "unidad": 1,
+      "dimension": "Politica",
+      "resistencia": 110,
+      "retirada": 2,
+      "acciones": [
+        {
+          "nombre": "Ejército real",
+          "costo": 2,
+          "danio": 50
+        },
+        {
+          "nombre": "Burocracia",
+          "costo": 3,
+          "danio": 70
+        }
+      ],
+      "dato": "El rey concentraba el poder y lo ejercía con funcionarios, impuestos y ejércitos profesionales.",
+      "oa": "OA 3",
+      "emblema": "corona",
+      "evolucionaDe": "CC-8-U1-003",
+      "frase": "Todo el poder en el rey: funcionarios, impuestos y ejércitos.",
+      "habilidad": {
+        "nombre": "Poder concentrado",
+        "tipo": "resistente",
+        "n": 10
+      }
     },
     {
-     "nombre": "Influencia",
-     "costo": 3,
-     "danio": 70
-    }
-   ],
-   "dato": "Los dueños de haciendas formaron una elite que mantuvo su poder durante los siglos XIX y XX.",
-   "oa": "OA 13",
-   "emblema": "corona",
-   "evolucionaDe": "CC-8-U2-003",
-   "frase": "Dueños de haciendas que mantuvieron su poder.",
-   "habilidad": {
-    "nombre": "Tierras y rentas",
-    "tipo": "sanador",
-    "n": 10
-   }
-  },
-  {
-   "id": "CC-8-U2-005",
-   "nombre": "Sociedad de frontera",
-   "tipo": "protagonista",
-   "curso": 8,
-   "unidad": 2,
-   "dimension": "Territorio",
-   "resistencia": 80,
-   "retirada": 1,
-   "acciones": [
-    {
-     "nombre": "Parlamentos",
-     "costo": 2,
-     "danio": 40
-    }
-   ],
-   "dato": "El fracaso de la conquista de Arauco originó una frontera con comercio, parlamentos y conflictos.",
-   "oa": "OA 12",
-   "emblema": "mapa",
-   "frase": "En Arauco: comercio, parlamentos y conflictos."
-  },
-  {
-   "id": "CC-8-U2-006",
-   "nombre": "Arte barroco",
-   "tipo": "acontecimiento",
-   "curso": 8,
-   "unidad": 2,
-   "efecto": {
-    "tipo": "curar",
-    "n": 30
-   },
-   "dato": "Iglesias, música y ceremonias barrocas expresaron la religiosidad de la sociedad colonial.",
-   "oa": "OA 9",
-   "emblema": "campana",
-   "frase": "Iglesias, música y ceremonias de la Colonia.",
-   "fecha": {
-    "anio": 1650,
-    "texto": "siglos XVII–XVIII"
-   }
-  },
-  {
-   "id": "CC-8-U2-007",
-   "nombre": "Océano Atlántico",
-   "tipo": "lugar",
-   "curso": 8,
-   "unidad": 2,
-   "efecto": {
-    "tipo": "bonusDimension",
-    "dimension": "Economia",
-    "n": 10
-   },
-   "dato": "En los siglos XVII y XVIII fue la gran ruta del comercio entre Europa, África y América.",
-   "oa": "OA 10",
-   "emblema": "barco",
-   "frase": "La gran ruta entre Europa, África y América."
-  },
-  {
-   "id": "CC-8-U3-001",
-   "nombre": "Montesquieu",
-   "tipo": "personaje",
-   "curso": 8,
-   "unidad": 3,
-   "efecto": {
-    "tipo": "moverSaberTodo"
-   },
-   "dato": "Propuso separar el poder del Estado en ejecutivo, legislativo y judicial.",
-   "oa": "OA 14",
-   "emblema": "balanza",
-   "frase": "Propuso separar el poder del Estado en ejecutivo, legislativo y judicial.",
-   "fecha": {
-    "anio": 1748,
-    "texto": "1748"
-   }
-  },
-  {
-   "id": "CC-8-U3-002",
-   "nombre": "Criollos",
-   "tipo": "protagonista",
-   "curso": 8,
-   "unidad": 3,
-   "dimension": "Sociedad",
-   "resistencia": 60,
-   "retirada": 1,
-   "acciones": [
-    {
-     "nombre": "Cabildos",
-     "costo": 1,
-     "danio": 20
-    }
-   ],
-   "dato": "Hijos de españoles nacidos en América que querían más participación en el gobierno.",
-   "oa": "OA 16",
-   "emblema": "personas",
-   "conexiones": [
-    {
-     "causa": "CC-8-U3-006",
-     "texto": "La independencia de EE. UU. inspiró a los criollos americanos."
-    }
-   ],
-   "frase": "Nacidos en América, querían participar en el gobierno."
-  },
-  {
-   "id": "CC-8-U3-003",
-   "nombre": "Repúblicas americanas",
-   "tipo": "protagonista",
-   "curso": 8,
-   "unidad": 3,
-   "dimension": "Politica",
-   "resistencia": 110,
-   "retirada": 2,
-   "acciones": [
-    {
-     "nombre": "Soberanía popular",
-     "costo": 2,
-     "danio": 50
+      "id": "CC-8-U1-005",
+      "nombre": "Tesorero mercantilista",
+      "tipo": "protagonista",
+      "curso": 8,
+      "unidad": 1,
+      "dimension": "Economia",
+      "resistencia": 70,
+      "retirada": 1,
+      "acciones": [
+        {
+          "nombre": "Oro y plata",
+          "costo": 2,
+          "danio": 40
+        }
+      ],
+      "dato": "El mercantilismo medía la riqueza de un reino por el oro y la plata que acumulaba.",
+      "oa": "OA 4",
+      "emblema": "moneda",
+      "frase": "La riqueza de un reino se medía en oro y plata."
     },
     {
-     "nombre": "Constitución",
-     "costo": 3,
-     "danio": 70
-    }
-   ],
-   "dato": "Tras las independencias, la mayoría de los nuevos países eligió la república como forma de gobierno.",
-   "oa": "OA 16",
-   "emblema": "estrella",
-   "evolucionaDe": "CC-8-U3-002",
-   "conexiones": [
-    {
-     "causa": "CC-8-U3-001",
-     "texto": "Las nuevas repúblicas adoptaron la separación de poderes."
-    }
-   ],
-   "frase": "Tras las independencias, la mayoría eligió la república.",
-   "habilidad": {
-    "nombre": "Soberanía popular",
-    "tipo": "fuerzaReserva",
-    "n": 10
-   }
-  },
-  {
-   "id": "CC-8-U3-004",
-   "nombre": "Enciclopedistas",
-   "tipo": "protagonista",
-   "curso": 8,
-   "unidad": 3,
-   "dimension": "Cultura",
-   "resistencia": 80,
-   "retirada": 1,
-   "acciones": [
-    {
-     "nombre": "Razón",
-     "costo": 1,
-     "danio": 20
+      "id": "CC-8-U1-006",
+      "nombre": "Imprenta",
+      "tipo": "acontecimiento",
+      "curso": 8,
+      "unidad": 1,
+      "efecto": {
+        "tipo": "robar",
+        "n": 2
+      },
+      "dato": "Hacia 1450, la imprenta de Gutenberg permitió imprimir libros en serie y difundir ideas más rápido.",
+      "oa": "OA 2",
+      "emblema": "libro",
+      "frase": "Hacia 1450, libros impresos en serie.",
+      "fecha": {
+        "anio": 1450,
+        "texto": "hacia 1450"
+      }
     },
     {
-     "nombre": "Enciclopedia",
-     "costo": 3,
-     "danio": 60
-    }
-   ],
-   "dato": "Reunieron el saber de su época en la Enciclopedia para difundir el uso de la razón.",
-   "oa": "OA 14",
-   "emblema": "libro",
-   "conexiones": [
-    {
-     "causa": "CC-8-U1-006",
-     "texto": "La Enciclopedia llegó a muchos lectores gracias a la imprenta."
-    }
-   ],
-   "frase": "Reunieron el saber de su época para difundir la razón.",
-   "habilidad": {
-    "nombre": "Difundir las luces",
-    "tipo": "inspirador"
-   }
-  },
-  {
-   "id": "CC-8-U3-005",
-   "nombre": "Derechos del Hombre",
-   "tipo": "acontecimiento",
-   "curso": 8,
-   "unidad": 3,
-   "efecto": {
-    "tipo": "proteger"
-   },
-   "dato": "La Declaración de 1789, en la Revolución francesa, proclamó que todos nacen libres e iguales en derechos.",
-   "oa": "OA 18",
-   "emblema": "pergamino",
-   "conexiones": [
-    {
-     "causa": "CC-8-U3-004",
-     "texto": "Las ideas ilustradas inspiraron la Declaración de 1789."
-    }
-   ],
-   "frase": "1789: todos nacen libres e iguales en derechos.",
-   "fecha": {
-    "anio": 1789,
-    "texto": "1789"
-   }
-  },
-  {
-   "id": "CC-8-U3-006",
-   "nombre": "Independencia de EE. UU.",
-   "tipo": "acontecimiento",
-   "curso": 8,
-   "unidad": 3,
-   "efecto": {
-    "tipo": "robar",
-    "n": 2
-   },
-   "dato": "En 1776 las trece colonias declararon su independencia de Gran Bretaña e inspiraron a otros pueblos.",
-   "oa": "OA 15",
-   "emblema": "estrella",
-   "frase": "1776: las trece colonias se independizan.",
-   "fecha": {
-    "anio": 1776,
-    "texto": "1776"
-   }
-  },
-  {
-   "id": "CC-8-U3-007",
-   "nombre": "Salones ilustrados",
-   "tipo": "lugar",
-   "curso": 8,
-   "unidad": 3,
-   "efecto": {
-    "tipo": "bonusDimension",
-    "dimension": "Cultura",
-    "n": 10
-   },
-   "dato": "Lugares de reunión donde se discutían las nuevas ideas de la Ilustración.",
-   "oa": "OA 14",
-   "emblema": "pluma",
-   "frase": "Lugares de reunión donde se discutían las nuevas ideas de la Ilustración."
-  },
-  {
-   "id": "CC-8-U4-001",
-   "nombre": "Valle Central",
-   "tipo": "protagonista",
-   "curso": 8,
-   "unidad": 4,
-   "dimension": "Territorio",
-   "resistencia": 80,
-   "retirada": 1,
-   "acciones": [
-    {
-     "nombre": "Suelos fértiles",
-     "costo": 2,
-     "danio": 40
-    }
-   ],
-   "dato": "Región de suelos fértiles y clima mediterráneo, clave para la agricultura de Chile.",
-   "oa": "OA 20",
-   "emblema": "maiz",
-   "frase": "Suelos fértiles y clima mediterráneo."
-  },
-  {
-   "id": "CC-8-U4-002",
-   "nombre": "Región de Aysén",
-   "tipo": "protagonista",
-   "curso": 8,
-   "unidad": 4,
-   "dimension": "Territorio",
-   "resistencia": 90,
-   "retirada": 1,
-   "acciones": [
-    {
-     "nombre": "Aislamiento",
-     "costo": 3,
-     "danio": 50
-    }
-   ],
-   "dato": "Región con poca población y difícil conexión, unida al resto del país por la Carretera Austral.",
-   "oa": "OA 21",
-   "emblema": "montana",
-   "frase": "Poca población, unida al país por la Carretera Austral."
-  },
-  {
-   "id": "CC-8-U4-003",
-   "nombre": "Región de Antofagasta",
-   "tipo": "protagonista",
-   "curso": 8,
-   "unidad": 4,
-   "dimension": "Economia",
-   "resistencia": 70,
-   "retirada": 1,
-   "acciones": [
-    {
-     "nombre": "Cobre",
-     "costo": 1,
-     "danio": 20
+      "id": "CC-8-U1-007",
+      "nombre": "Revolución científica",
+      "tipo": "acontecimiento",
+      "curso": 8,
+      "unidad": 1,
+      "efecto": {
+        "tipo": "bonusDanio",
+        "n": 20
+      },
+      "dato": "Galileo y otros científicos usaron la observación y la experimentación para conocer la naturaleza.",
+      "oa": "OA 2",
+      "emblema": "estrella",
+      "conexiones": [
+        {
+          "causa": "CC-8-U1-006",
+          "texto": "La imprenta hizo circular rápido los nuevos descubrimientos."
+        }
+      ],
+      "frase": "Observar y experimentar para conocer la naturaleza.",
+      "fecha": {
+        "anio": 1610,
+        "texto": "siglo XVII"
+      }
     },
     {
-     "nombre": "Puerto minero",
-     "costo": 2,
-     "danio": 40
-    }
-   ],
-   "dato": "Concentra gran parte de la minería del cobre de Chile.",
-   "oa": "OA 20",
-   "emblema": "engranaje",
-   "frase": "Concentra gran parte de la minería del cobre de Chile."
-  },
-  {
-   "id": "CC-8-U4-004",
-   "nombre": "Pueblo rapanui",
-   "tipo": "protagonista",
-   "curso": 8,
-   "unidad": 4,
-   "dimension": "Cultura",
-   "resistencia": 70,
-   "retirada": 1,
-   "acciones": [
+      "id": "CC-8-U1-008",
+      "nombre": "Luis XIV",
+      "tipo": "personaje",
+      "curso": 8,
+      "unidad": 1,
+      "efecto": {
+        "tipo": "bonusDanio",
+        "n": 40,
+        "dimension": "Politica"
+      },
+      "dato": "Rey de Francia entre 1643 y 1715, símbolo de la monarquía absoluta; se le atribuye la frase «El Estado soy yo».",
+      "oa": "OA 3",
+      "emblema": "corona",
+      "conexiones": [
+        {
+          "causa": "CC-8-U1-004",
+          "texto": "Luis XIV llevó la monarquía absoluta a su máxima expresión."
+        }
+      ],
+      "frase": "Rey de Francia (1643–1715), símbolo de la monarquía absoluta.",
+      "fecha": {
+        "anio": 1643,
+        "texto": "1643–1715"
+      }
+    },
     {
-     "nombre": "Moái",
-     "costo": 2,
-     "danio": 40
+      "id": "CC-8-U1-009",
+      "nombre": "Palacio de Versalles",
+      "tipo": "lugar",
+      "curso": 8,
+      "unidad": 1,
+      "efecto": {
+        "tipo": "bonusDimension",
+        "dimension": "Politica",
+        "n": 10
+      },
+      "dato": "Palacio construido por Luis XIV; fue el centro del poder y de la vida de la corte en la Francia absolutista.",
+      "oa": "OA 3",
+      "emblema": "casa",
+      "frase": "Centro del poder y de la corte en la Francia absolutista."
+    },
+    {
+      "id": "CC-8-U1-010",
+      "nombre": "Felipe II",
+      "tipo": "personaje",
+      "efecto": {
+        "tipo": "bonusDanio",
+        "n": 30,
+        "dimension": "Politica"
+      },
+      "dato": "Rey de España en el siglo XVI. Gobernó un imperio tan extenso que se decía que en él nunca se ponía el sol.",
+      "frase": "Gobernó un imperio en el que nunca se ponía el sol.",
+      "emblema": "corona",
+      "fecha": {
+        "anio": 1556,
+        "texto": "1556–1598"
+      },
+      "curso": 8,
+      "unidad": 1,
+      "oa": "OA 3"
+    },
+    {
+      "id": "CC-8-U1-011",
+      "nombre": "Ejército permanente",
+      "tipo": "protagonista",
+      "dimension": "Territorio",
+      "resistencia": 100,
+      "retirada": 2,
+      "acciones": [
+        {
+          "nombre": "Guarnición",
+          "costo": 2,
+          "danio": 40,
+          "efecto": {
+            "tipo": "debilitar",
+            "n": 10
+          }
+        },
+        {
+          "nombre": "Campaña",
+          "costo": 3,
+          "danio": 60
+        }
+      ],
+      "dato": "Los reyes absolutos mantuvieron ejércitos pagados todo el año, y no solo en tiempos de guerra.",
+      "frase": "Soldados pagados por el rey todo el año.",
+      "emblema": "escudo",
+      "habilidad": {
+        "tipo": "tenaz",
+        "nombre": "Disciplina"
+      },
+      "curso": 8,
+      "unidad": 1,
+      "oa": "OA 3"
+    },
+    {
+      "id": "CC-8-U1-012",
+      "nombre": "Derecho divino de los reyes",
+      "tipo": "acontecimiento",
+      "efecto": {
+        "tipo": "proteger"
+      },
+      "dato": "Idea según la cual el poder del rey venía directamente de Dios, por lo que nadie podía juzgarlo.",
+      "frase": "La idea de que el poder del rey venía de Dios.",
+      "emblema": "corona",
+      "curso": 8,
+      "unidad": 1,
+      "oa": "OA 3"
+    },
+    {
+      "id": "CC-8-U1-013",
+      "nombre": "Compañías comerciales",
+      "tipo": "protagonista",
+      "dimension": "Economia",
+      "resistencia": 100,
+      "retirada": 2,
+      "acciones": [
+        {
+          "nombre": "Acciones",
+          "costo": 2,
+          "danio": 40,
+          "efecto": {
+            "tipo": "robar",
+            "n": 1
+          }
+        },
+        {
+          "nombre": "Comercio mundial",
+          "costo": 3,
+          "danio": 70
+        }
+      ],
+      "dato": "En el siglo XVII nacieron grandes compañías, como la holandesa de las Indias Orientales, que comerciaban por todo el mundo.",
+      "frase": "Empresas que en el siglo XVII comerciaban por todo el mundo.",
+      "emblema": "barco",
+      "habilidad": {
+        "tipo": "fuerzaReserva",
+        "nombre": "Socios",
+        "n": 10
+      },
+      "evolucionaDe": "CC-8-U1-005",
+      "fecha": {
+        "anio": 1602,
+        "texto": "siglo XVII"
+      },
+      "curso": 8,
+      "unidad": 1,
+      "oa": "OA 4"
+    },
+    {
+      "id": "CC-8-U2-001",
+      "nombre": "Bartolomé de las Casas",
+      "tipo": "personaje",
+      "curso": 8,
+      "unidad": 2,
+      "efecto": {
+        "tipo": "curar",
+        "n": 40
+      },
+      "dato": "Fraile que denunció los abusos contra los indígenas y defendió su dignidad humana.",
+      "oa": "OA 17",
+      "emblema": "pluma",
+      "conexiones": [
+        {
+          "causa": "CC-8-U2-002",
+          "texto": "Los abusos de la conquista llevaron a Las Casas a denunciarlos."
+        }
+      ],
+      "frase": "Denunció los abusos contra los indígenas.",
+      "fecha": {
+        "anio": 1542,
+        "texto": "siglo XVI"
+      }
+    },
+    {
+      "id": "CC-8-U2-002",
+      "nombre": "Conquistadores",
+      "tipo": "protagonista",
+      "curso": 8,
+      "unidad": 2,
+      "dimension": "Politica",
+      "resistencia": 70,
+      "retirada": 1,
+      "acciones": [
+        {
+          "nombre": "Alianzas",
+          "costo": 1,
+          "danio": 20
+        },
+        {
+          "nombre": "Caballos y acero",
+          "costo": 2,
+          "danio": 40
+        }
+      ],
+      "dato": "Avanzaron rápido gracias a alianzas con pueblos indígenas, armas de acero, caballos y epidemias.",
+      "oa": "OA 6",
+      "emblema": "escudo",
+      "frase": "Alianzas, acero, caballos y epidemias."
+    },
+    {
+      "id": "CC-8-U2-003",
+      "nombre": "Hacienda colonial",
+      "tipo": "protagonista",
+      "curso": 8,
+      "unidad": 2,
+      "dimension": "Economia",
+      "resistencia": 60,
+      "retirada": 1,
+      "acciones": [
+        {
+          "nombre": "Inquilinaje",
+          "costo": 1,
+          "danio": 20
+        }
+      ],
+      "dato": "Gran propiedad rural que fue el centro de la economía del Chile colonial.",
+      "oa": "OA 13",
+      "emblema": "casa",
+      "frase": "Gran propiedad rural que fue el centro de la economía del Chile colonial."
+    },
+    {
+      "id": "CC-8-U2-004",
+      "nombre": "Elite terrateniente",
+      "tipo": "protagonista",
+      "curso": 8,
+      "unidad": 2,
+      "dimension": "Economia",
+      "resistencia": 100,
+      "retirada": 2,
+      "acciones": [
+        {
+          "nombre": "Tierras y poder",
+          "costo": 2,
+          "danio": 50
+        },
+        {
+          "nombre": "Influencia",
+          "costo": 3,
+          "danio": 70
+        }
+      ],
+      "dato": "Los dueños de haciendas formaron una elite que mantuvo su poder durante los siglos XIX y XX.",
+      "oa": "OA 13",
+      "emblema": "corona",
+      "evolucionaDe": "CC-8-U2-003",
+      "frase": "Dueños de haciendas que mantuvieron su poder.",
+      "habilidad": {
+        "nombre": "Tierras y rentas",
+        "tipo": "sanador",
+        "n": 10
+      }
+    },
+    {
+      "id": "CC-8-U2-005",
+      "nombre": "Sociedad de frontera",
+      "tipo": "protagonista",
+      "curso": 8,
+      "unidad": 2,
+      "dimension": "Territorio",
+      "resistencia": 80,
+      "retirada": 1,
+      "acciones": [
+        {
+          "nombre": "Parlamentos",
+          "costo": 2,
+          "danio": 40
+        }
+      ],
+      "dato": "El fracaso de la conquista de Arauco originó una frontera con comercio, parlamentos y conflictos.",
+      "oa": "OA 12",
+      "emblema": "mapa",
+      "frase": "En Arauco: comercio, parlamentos y conflictos."
+    },
+    {
+      "id": "CC-8-U2-006",
+      "nombre": "Arte barroco",
+      "tipo": "acontecimiento",
+      "curso": 8,
+      "unidad": 2,
+      "efecto": {
+        "tipo": "curar",
+        "n": 30
+      },
+      "dato": "Iglesias, música y ceremonias barrocas expresaron la religiosidad de la sociedad colonial.",
+      "oa": "OA 9",
+      "emblema": "campana",
+      "frase": "Iglesias, música y ceremonias de la Colonia.",
+      "fecha": {
+        "anio": 1650,
+        "texto": "siglos XVII–XVIII"
+      }
+    },
+    {
+      "id": "CC-8-U2-007",
+      "nombre": "Océano Atlántico",
+      "tipo": "lugar",
+      "curso": 8,
+      "unidad": 2,
+      "efecto": {
+        "tipo": "bonusDimension",
+        "dimension": "Economia",
+        "n": 10
+      },
+      "dato": "En los siglos XVII y XVIII fue la gran ruta del comercio entre Europa, África y América.",
+      "oa": "OA 10",
+      "emblema": "barco",
+      "frase": "La gran ruta entre Europa, África y América."
+    },
+    {
+      "id": "CC-8-U2-008",
+      "nombre": "Antonio de Montesinos",
+      "tipo": "personaje",
+      "efecto": {
+        "tipo": "curarTodos",
+        "n": 20
+      },
+      "dato": "Fraile dominico que en 1511, en La Española, denunció en un sermón los abusos contra los indígenas.",
+      "frase": "En 1511 denunció en un sermón los abusos contra los indígenas.",
+      "emblema": "libro",
+      "fecha": {
+        "anio": 1511,
+        "texto": "1511"
+      },
+      "curso": 8,
+      "unidad": 2,
+      "oa": "OA 13"
+    },
+    {
+      "id": "CC-8-U2-009",
+      "nombre": "Leyes Nuevas",
+      "tipo": "acontecimiento",
+      "efecto": {
+        "tipo": "quitarSaber",
+        "n": 1
+      },
+      "dato": "En 1542 la Corona dictó leyes para proteger a los indígenas y limitar las encomiendas.",
+      "frase": "En 1542 la Corona limitó las encomiendas.",
+      "emblema": "pergamino",
+      "fecha": {
+        "anio": 1542,
+        "texto": "1542"
+      },
+      "conexiones": [
+        {
+          "causa": "CC-8-U2-008",
+          "texto": "Las denuncias de los frailes llevaron a la Corona a dictar nuevas leyes."
+        }
+      ],
+      "curso": 8,
+      "unidad": 2,
+      "oa": "OA 13"
+    },
+    {
+      "id": "CC-8-U2-010",
+      "nombre": "Debate de Valladolid",
+      "tipo": "acontecimiento",
+      "efecto": {
+        "tipo": "robar",
+        "n": 2
+      },
+      "dato": "Entre 1550 y 1551, Bartolomé de las Casas y Juan Ginés de Sepúlveda discutieron ante la Corona sobre los derechos de los indígenas.",
+      "frase": "Un debate sobre los derechos de los indígenas de América.",
+      "emblema": "balanza",
+      "fecha": {
+        "anio": 1550,
+        "texto": "1550–1551"
+      },
+      "conexiones": [
+        {
+          "causa": "CC-8-U2-009",
+          "texto": "Las Leyes Nuevas abrieron la discusión sobre cómo tratar a los indígenas."
+        }
+      ],
+      "curso": 8,
+      "unidad": 2,
+      "oa": "OA 13"
+    },
+    {
+      "id": "CC-8-U2-011",
+      "nombre": "Juan Ginés de Sepúlveda",
+      "tipo": "personaje",
+      "efecto": {
+        "tipo": "bonusDanio",
+        "n": 20
+      },
+      "dato": "Humanista español que en Valladolid defendió la conquista. Sus ideas fueron criticadas por Bartolomé de las Casas.",
+      "frase": "En Valladolid defendió la conquista frente a Las Casas.",
+      "emblema": "pluma",
+      "fecha": {
+        "anio": 1550,
+        "texto": "1550"
+      },
+      "curso": 8,
+      "unidad": 2,
+      "oa": "OA 13"
+    },
+    {
+      "id": "CC-8-U2-012",
+      "nombre": "Frailes dominicos",
+      "tipo": "protagonista",
+      "dimension": "Cultura",
+      "resistencia": 80,
+      "retirada": 1,
+      "acciones": [
+        {
+          "nombre": "Sermón",
+          "costo": 1,
+          "danio": 20,
+          "efecto": {
+            "tipo": "debilitar",
+            "n": 10
+          }
+        },
+        {
+          "nombre": "Defensa de los indígenas",
+          "costo": 2,
+          "danio": 40,
+          "efecto": {
+            "tipo": "curarTodos",
+            "n": 10
+          }
+        }
+      ],
+      "dato": "Orden religiosa a la que pertenecían Montesinos y Bartolomé de las Casas. Sus frailes denunciaron los abusos de la conquista.",
+      "frase": "Frailes que denunciaron los abusos de la conquista.",
+      "emblema": "libro",
+      "habilidad": {
+        "tipo": "inspirador",
+        "nombre": "Predicar"
+      },
+      "curso": 8,
+      "unidad": 2,
+      "oa": "OA 13"
+    },
+    {
+      "id": "CC-8-U3-001",
+      "nombre": "Montesquieu",
+      "tipo": "personaje",
+      "curso": 8,
+      "unidad": 3,
+      "efecto": {
+        "tipo": "moverSaberTodo"
+      },
+      "dato": "Propuso separar el poder del Estado en ejecutivo, legislativo y judicial.",
+      "oa": "OA 14",
+      "emblema": "balanza",
+      "frase": "Propuso separar el poder del Estado en ejecutivo, legislativo y judicial.",
+      "fecha": {
+        "anio": 1748,
+        "texto": "1748"
+      }
+    },
+    {
+      "id": "CC-8-U3-002",
+      "nombre": "Criollos",
+      "tipo": "protagonista",
+      "curso": 8,
+      "unidad": 3,
+      "dimension": "Sociedad",
+      "resistencia": 60,
+      "retirada": 1,
+      "acciones": [
+        {
+          "nombre": "Cabildos",
+          "costo": 1,
+          "danio": 20
+        }
+      ],
+      "dato": "Hijos de españoles nacidos en América que querían más participación en el gobierno.",
+      "oa": "OA 16",
+      "emblema": "personas",
+      "conexiones": [
+        {
+          "causa": "CC-8-U3-006",
+          "texto": "La independencia de EE. UU. inspiró a los criollos americanos."
+        }
+      ],
+      "frase": "Nacidos en América, querían participar en el gobierno."
+    },
+    {
+      "id": "CC-8-U3-003",
+      "nombre": "Repúblicas americanas",
+      "tipo": "protagonista",
+      "curso": 8,
+      "unidad": 3,
+      "dimension": "Politica",
+      "resistencia": 110,
+      "retirada": 2,
+      "acciones": [
+        {
+          "nombre": "Soberanía popular",
+          "costo": 2,
+          "danio": 50
+        },
+        {
+          "nombre": "Constitución",
+          "costo": 3,
+          "danio": 70
+        }
+      ],
+      "dato": "Tras las independencias, la mayoría de los nuevos países eligió la república como forma de gobierno.",
+      "oa": "OA 16",
+      "emblema": "estrella",
+      "evolucionaDe": "CC-8-U3-002",
+      "conexiones": [
+        {
+          "causa": "CC-8-U3-001",
+          "texto": "Las nuevas repúblicas adoptaron la separación de poderes."
+        }
+      ],
+      "frase": "Tras las independencias, la mayoría eligió la república.",
+      "habilidad": {
+        "nombre": "Soberanía popular",
+        "tipo": "fuerzaReserva",
+        "n": 10
+      }
+    },
+    {
+      "id": "CC-8-U3-004",
+      "nombre": "Enciclopedistas",
+      "tipo": "protagonista",
+      "curso": 8,
+      "unidad": 3,
+      "dimension": "Cultura",
+      "resistencia": 80,
+      "retirada": 1,
+      "acciones": [
+        {
+          "nombre": "Razón",
+          "costo": 1,
+          "danio": 20
+        },
+        {
+          "nombre": "Enciclopedia",
+          "costo": 3,
+          "danio": 60
+        }
+      ],
+      "dato": "Reunieron el saber de su época en la Enciclopedia para difundir el uso de la razón.",
+      "oa": "OA 14",
+      "emblema": "libro",
+      "conexiones": [
+        {
+          "causa": "CC-8-U1-006",
+          "texto": "La Enciclopedia llegó a muchos lectores gracias a la imprenta."
+        }
+      ],
+      "frase": "Reunieron el saber de su época para difundir la razón.",
+      "habilidad": {
+        "nombre": "Difundir las luces",
+        "tipo": "inspirador"
+      }
+    },
+    {
+      "id": "CC-8-U3-005",
+      "nombre": "Derechos del Hombre",
+      "tipo": "acontecimiento",
+      "curso": 8,
+      "unidad": 3,
+      "efecto": {
+        "tipo": "proteger"
+      },
+      "dato": "La Declaración de 1789, en la Revolución francesa, proclamó que todos nacen libres e iguales en derechos.",
+      "oa": "OA 18",
+      "emblema": "pergamino",
+      "conexiones": [
+        {
+          "causa": "CC-8-U3-004",
+          "texto": "Las ideas ilustradas inspiraron la Declaración de 1789."
+        }
+      ],
+      "frase": "1789: todos nacen libres e iguales en derechos.",
+      "fecha": {
+        "anio": 1789,
+        "texto": "1789"
+      }
+    },
+    {
+      "id": "CC-8-U3-006",
+      "nombre": "Independencia de EE. UU.",
+      "tipo": "acontecimiento",
+      "curso": 8,
+      "unidad": 3,
+      "efecto": {
+        "tipo": "robar",
+        "n": 2
+      },
+      "dato": "En 1776 las trece colonias declararon su independencia de Gran Bretaña e inspiraron a otros pueblos.",
+      "oa": "OA 15",
+      "emblema": "estrella",
+      "frase": "1776: las trece colonias se independizan.",
+      "fecha": {
+        "anio": 1776,
+        "texto": "1776"
+      }
+    },
+    {
+      "id": "CC-8-U3-007",
+      "nombre": "Salones ilustrados",
+      "tipo": "lugar",
+      "curso": 8,
+      "unidad": 3,
+      "efecto": {
+        "tipo": "bonusDimension",
+        "dimension": "Cultura",
+        "n": 10
+      },
+      "dato": "Lugares de reunión donde se discutían las nuevas ideas de la Ilustración.",
+      "oa": "OA 14",
+      "emblema": "pluma",
+      "frase": "Lugares de reunión donde se discutían las nuevas ideas de la Ilustración."
+    },
+    {
+      "id": "CC-8-U3-008",
+      "nombre": "Voltaire",
+      "tipo": "personaje",
+      "efecto": {
+        "tipo": "debilitar",
+        "n": 20
+      },
+      "dato": "Escritor francés de la Ilustración. Con ironía, criticó la intolerancia y los abusos del poder.",
+      "frase": "Criticó con ironía la intolerancia y los abusos del poder.",
+      "emblema": "pluma",
+      "fecha": {
+        "anio": 1764,
+        "texto": "siglo XVIII"
+      },
+      "curso": 8,
+      "unidad": 3,
+      "oa": "OA 14"
+    },
+    {
+      "id": "CC-8-U3-009",
+      "nombre": "Mary Wollstonecraft",
+      "tipo": "personaje",
+      "efecto": {
+        "tipo": "saberReserva",
+        "n": 1
+      },
+      "dato": "Escritora inglesa que en 1792 defendió que las mujeres tenían derecho a la misma educación que los hombres.",
+      "frase": "Defendió en 1792 la educación igualitaria para las mujeres.",
+      "emblema": "libro",
+      "fecha": {
+        "anio": 1792,
+        "texto": "1792"
+      },
+      "curso": 8,
+      "unidad": 3,
+      "oa": "OA 14"
+    },
+    {
+      "id": "CC-8-U3-010",
+      "nombre": "Toma de la Bastilla",
+      "tipo": "acontecimiento",
+      "efecto": [
+        {
+          "tipo": "asedio",
+          "n": 10
+        },
+        {
+          "tipo": "bonusDanio",
+          "n": 10
+        }
+      ],
+      "dato": "El 14 de julio de 1789 el pueblo de París tomó la Bastilla, una prisión símbolo del poder del rey.",
+      "frase": "En 1789 el pueblo de París tomó la Bastilla.",
+      "emblema": "escudo",
+      "fecha": {
+        "anio": 1789,
+        "texto": "1789"
+      },
+      "curso": 8,
+      "unidad": 3,
+      "oa": "OA 14"
+    },
+    {
+      "id": "CC-8-U3-011",
+      "nombre": "Revolución francesa",
+      "tipo": "protagonista",
+      "dimension": "Politica",
+      "resistencia": 120,
+      "retirada": 2,
+      "acciones": [
+        {
+          "nombre": "Derechos",
+          "costo": 2,
+          "danio": 50,
+          "efecto": {
+            "tipo": "curarTodos",
+            "n": 10
+          }
+        },
+        {
+          "nombre": "Libertad e igualdad",
+          "costo": 3,
+          "danio": 80
+        }
+      ],
+      "dato": "Desde 1789, Francia terminó con el poder absoluto del rey y proclamó los derechos de las personas.",
+      "frase": "Desde 1789 terminó con el poder absoluto del rey.",
+      "emblema": "estrella",
+      "habilidad": {
+        "tipo": "alianza",
+        "nombre": "Pueblo",
+        "n": 10
+      },
+      "evolucionaDe": "CC-8-U3-004",
+      "fecha": {
+        "anio": 1789,
+        "texto": "1789"
+      },
+      "conexiones": [
+        {
+          "causa": "CC-8-U3-010",
+          "texto": "La toma de la Bastilla fue el comienzo de la revolución."
+        }
+      ],
+      "curso": 8,
+      "unidad": 3,
+      "oa": "OA 14"
+    },
+    {
+      "id": "CC-8-U4-001",
+      "nombre": "Valle Central",
+      "tipo": "protagonista",
+      "curso": 8,
+      "unidad": 4,
+      "dimension": "Territorio",
+      "resistencia": 80,
+      "retirada": 1,
+      "acciones": [
+        {
+          "nombre": "Suelos fértiles",
+          "costo": 2,
+          "danio": 40
+        }
+      ],
+      "dato": "Región de suelos fértiles y clima mediterráneo, clave para la agricultura de Chile.",
+      "oa": "OA 20",
+      "emblema": "maiz",
+      "frase": "Suelos fértiles y clima mediterráneo."
+    },
+    {
+      "id": "CC-8-U4-002",
+      "nombre": "Región de Aysén",
+      "tipo": "protagonista",
+      "curso": 8,
+      "unidad": 4,
+      "dimension": "Territorio",
+      "resistencia": 90,
+      "retirada": 1,
+      "acciones": [
+        {
+          "nombre": "Aislamiento",
+          "costo": 3,
+          "danio": 50
+        }
+      ],
+      "dato": "Región con poca población y difícil conexión, unida al resto del país por la Carretera Austral.",
+      "oa": "OA 21",
+      "emblema": "montana",
+      "frase": "Poca población, unida al país por la Carretera Austral."
+    },
+    {
+      "id": "CC-8-U4-003",
+      "nombre": "Región de Antofagasta",
+      "tipo": "protagonista",
+      "curso": 8,
+      "unidad": 4,
+      "dimension": "Economia",
+      "resistencia": 70,
+      "retirada": 1,
+      "acciones": [
+        {
+          "nombre": "Cobre",
+          "costo": 1,
+          "danio": 20
+        },
+        {
+          "nombre": "Puerto minero",
+          "costo": 2,
+          "danio": 40
+        }
+      ],
+      "dato": "Concentra gran parte de la minería del cobre de Chile.",
+      "oa": "OA 20",
+      "emblema": "engranaje",
+      "frase": "Concentra gran parte de la minería del cobre de Chile."
+    },
+    {
+      "id": "CC-8-U4-004",
+      "nombre": "Pueblo rapanui",
+      "tipo": "protagonista",
+      "curso": 8,
+      "unidad": 4,
+      "dimension": "Cultura",
+      "resistencia": 70,
+      "retirada": 1,
+      "acciones": [
+        {
+          "nombre": "Moái",
+          "costo": 2,
+          "danio": 40
+        }
+      ],
+      "dato": "En Rapa Nui se conserva una lengua y una cultura polinésica propias; los moái son su símbolo.",
+      "oa": "OA 20",
+      "emblema": "ola",
+      "frase": "Lengua y cultura polinésica; los moái son su símbolo."
+    },
+    {
+      "id": "CC-8-U4-005",
+      "nombre": "Carretera Austral",
+      "tipo": "lugar",
+      "curso": 8,
+      "unidad": 4,
+      "efecto": {
+        "tipo": "bonusDimension",
+        "dimension": "Territorio",
+        "n": 10
+      },
+      "dato": "Camino de más de mil kilómetros que conecta las localidades del sur de Chile.",
+      "oa": "OA 21",
+      "emblema": "mapa",
+      "frase": "Camino de más de mil kilómetros que conecta las localidades del sur de Chile."
+    },
+    {
+      "id": "CC-8-U4-006",
+      "nombre": "Agroindustria",
+      "tipo": "protagonista",
+      "dimension": "Economia",
+      "resistencia": 110,
+      "retirada": 2,
+      "acciones": [
+        {
+          "nombre": "Temporada",
+          "costo": 2,
+          "danio": 50,
+          "efecto": {
+            "tipo": "robar",
+            "n": 1
+          }
+        },
+        {
+          "nombre": "Exportación",
+          "costo": 3,
+          "danio": 70
+        }
+      ],
+      "dato": "Hoy el Valle Central produce frutas y vinos que se procesan y exportan a todo el mundo.",
+      "frase": "Frutas y vinos del valle que se exportan al mundo.",
+      "emblema": "arbol",
+      "habilidad": {
+        "tipo": "sanador",
+        "nombre": "Cosecha",
+        "n": 10
+      },
+      "evolucionaDe": "CC-8-U4-001",
+      "curso": 8,
+      "unidad": 4,
+      "oa": "OA 20"
+    },
+    {
+      "id": "CC-8-U4-007",
+      "nombre": "Cultura huasa",
+      "tipo": "protagonista",
+      "dimension": "Cultura",
+      "resistencia": 80,
+      "retirada": 1,
+      "acciones": [
+        {
+          "nombre": "Rodeo",
+          "costo": 1,
+          "danio": 20
+        },
+        {
+          "nombre": "Fonda",
+          "costo": 2,
+          "danio": 40,
+          "efecto": {
+            "tipo": "curarTodos",
+            "n": 10
+          }
+        }
+      ],
+      "dato": "Tradiciones del campo de la zona central: el rodeo, la cueca, las ramadas y la vestimenta del huaso.",
+      "frase": "Rodeo, cueca y ramadas: tradiciones del campo chileno.",
+      "emblema": "sol",
+      "curso": 8,
+      "unidad": 4,
+      "oa": "OA 20"
+    },
+    {
+      "id": "CC-8-U4-008",
+      "nombre": "Violeta Parra",
+      "tipo": "personaje",
+      "efecto": {
+        "tipo": "recuperar"
+      },
+      "dato": "Cantautora y artista que recorrió los campos de Chile recopilando canciones y tradiciones populares.",
+      "frase": "Recorrió Chile recopilando canciones y tradiciones del campo.",
+      "emblema": "pluma",
+      "fecha": {
+        "anio": 1953,
+        "texto": "siglo XX"
+      },
+      "curso": 8,
+      "unidad": 4,
+      "oa": "OA 20"
+    },
+    {
+      "id": "CC-8-U4-009",
+      "nombre": "Área metropolitana",
+      "tipo": "protagonista",
+      "dimension": "Sociedad",
+      "resistencia": 90,
+      "retirada": 2,
+      "acciones": [
+        {
+          "nombre": "Conurbación",
+          "costo": 2,
+          "danio": 40
+        },
+        {
+          "nombre": "Hora punta",
+          "costo": 3,
+          "danio": 60,
+          "efecto": {
+            "tipo": "debilitar",
+            "n": 20
+          }
+        }
+      ],
+      "dato": "Las grandes ciudades crecen hasta unirse con sus vecinas. En la región Metropolitana vive cerca del 40 % de los chilenos.",
+      "frase": "Ciudades que crecen hasta unirse con sus vecinas.",
+      "emblema": "casa",
+      "habilidad": {
+        "tipo": "alianza",
+        "nombre": "Vecindario",
+        "n": 10
+      },
+      "curso": 8,
+      "unidad": 4,
+      "oa": "OA 20"
+    },
+    {
+      "id": "CC-8-U4-010",
+      "nombre": "Metro de Santiago",
+      "tipo": "protagonista",
+      "dimension": "Sociedad",
+      "resistencia": 80,
+      "retirada": 0,
+      "acciones": [
+        {
+          "nombre": "Próxima estación",
+          "costo": 1,
+          "danio": 20,
+          "efecto": {
+            "tipo": "robar",
+            "n": 1
+          }
+        },
+        {
+          "nombre": "Línea 1",
+          "costo": 2,
+          "danio": 40
+        }
+      ],
+      "dato": "Inaugurado en 1975, el metro conecta la capital bajo tierra y lo usan millones de personas cada semana.",
+      "frase": "Desde 1975 conecta Santiago bajo tierra.",
+      "emblema": "tren",
+      "fecha": {
+        "anio": 1975,
+        "texto": "1975"
+      },
+      "curso": 8,
+      "unidad": 4,
+      "oa": "OA 20"
+    },
+    {
+      "id": "CC-8-U4-011",
+      "nombre": "Migración campo-ciudad",
+      "tipo": "acontecimiento",
+      "efecto": {
+        "tipo": "moverSaberTodo"
+      },
+      "dato": "En el siglo XX muchas familias dejaron el campo para buscar trabajo en las ciudades, que crecieron rápidamente.",
+      "frase": "Muchas familias dejaron el campo para vivir en las ciudades.",
+      "emblema": "casa",
+      "fecha": {
+        "anio": 1940,
+        "texto": "siglo XX"
+      },
+      "curso": 8,
+      "unidad": 4,
+      "oa": "OA 20"
     }
-   ],
-   "dato": "En Rapa Nui se conserva una lengua y una cultura polinésica propias; los moái son su símbolo.",
-   "oa": "OA 20",
-   "emblema": "ola",
-   "frase": "Lengua y cultura polinésica; los moái son su símbolo."
-  },
-  {
-   "id": "CC-8-U4-005",
-   "nombre": "Carretera Austral",
-   "tipo": "lugar",
-   "curso": 8,
-   "unidad": 4,
-   "efecto": {
-    "tipo": "bonusDimension",
-    "dimension": "Territorio",
-    "n": 10
-   },
-   "dato": "Camino de más de mil kilómetros que conecta las localidades del sur de Chile.",
-   "oa": "OA 21",
-   "emblema": "mapa",
-   "frase": "Camino de más de mil kilómetros que conecta las localidades del sur de Chile."
-  }
- ]
+  ]
 }

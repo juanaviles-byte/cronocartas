@@ -21,6 +21,10 @@ export function textoHabilidad(h) {
     case 'sanador': return `Si es tu activo, recupera ${h.n} al inicio de tu turno.`;
     case 'inspirador': return 'Al entrar en juego, robas 1 carta.';
     case 'saberAlEntrar': return `Entra en juego con ${h.n || 1} de Saber.`;
+    case 'contraataque': return `Si recibe daño y no cae, el atacante recibe ${h.n} (sin bajar de 10).`;
+    case 'tenaz': return 'La primera vez que caería, queda con 10 de resistencia.';
+    case 'legado': return `Si cae, tu próximo activo entra con +${h.n || 1} de Saber.`;
+    case 'alianza': return `+${h.n} de daño por cada Protagonista de su misma dimensión en tu reserva.`;
     default: return '';
   }
 }
@@ -49,7 +53,32 @@ export function textoEfecto(ef) {
     case 'robarPorReserva': return 'Roba 1 carta por cada Protagonista en tu reserva.';
     case 'buscarProtagonista': return `Mira las ${ef.n || 3} primeras cartas de tu mazo y toma un Protagonista. El resto va al fondo.`;
     case 'bonusDimension': return `Mientras esté en juego, los Protagonistas de ${nombreDim(ef.dimension)} hacen +${ef.n} de daño.`;
+    case 'curaDimension': return `Mientras esté en juego, el activo de ${nombreDim(ef.dimension)} recupera ${ef.n} al inicio de su turno.`;
+    case 'escudoDimension': return `Mientras esté en juego, los Protagonistas de ${nombreDim(ef.dimension)} reciben ${ef.n} menos de daño.`;
+    case 'recuperar': return 'Toma a tu mano la última carta de tu descarte.';
+    case 'asedio': return `Cada Protagonista de la reserva rival recibe ${ef.n} de daño (sin bajar de 10).`;
+    case 'debilitar': return `El próximo ataque del activo rival hace ${ef.n} menos de daño.`;
+    case 'quitarSaber': return `El activo rival pierde ${ef.n || 1} de Saber.`;
+    case 'saberReserva': return `Cada Protagonista de tu reserva recibe ${ef.n || 1} de Saber.`;
+    case 'epidemia': return `Todos los Protagonistas en juego, tuyos y del rival, reciben ${ef.n} de daño (sin bajar de 10).`;
     default: return '';
+  }
+}
+
+// Efecto de una acción, en pocas palabras (va bajo el nombre de la acción).
+export function textoEfectoAccion(ef) {
+  if (!ef) return '';
+  if (Array.isArray(ef)) return ef.map(textoEfectoAccion).filter(Boolean).join(' y ');
+  switch (ef.tipo) {
+    case 'robar': return `roba ${ef.n}`;
+    case 'curar': return `cura ${ef.n}`;
+    case 'curarTodos': return `cura ${ef.n} a todos los tuyos`;
+    case 'proteger': return 'te protege hasta tu turno';
+    case 'asedio': return `${ef.n} a cada uno de la reserva rival`;
+    case 'debilitar': return `su próximo ataque hace −${ef.n}`;
+    case 'quitarSaber': return `el rival pierde ${ef.n || 1} de Saber`;
+    case 'saberReserva': return `+${ef.n || 1} de Saber a tu reserva`;
+    default: return textoEfecto(ef).replace(/\.$/, '').toLowerCase();
   }
 }
 
@@ -123,6 +152,7 @@ export function renderCarta(carta, { tamano = 'normal', instancia = null, unidad
       ${esProt && instancia ? `<div class="mini-saber${instancia.saber ? '' : ' cero'}" title="Saber"><span class="pip"></span><b>${esc(instancia.saber)}</b></div>` : ''}
       ${instancia && instancia.protegido ? '<div class="sello">Protegido</div>' : ''}
       ${instancia && instancia.bonus ? `<div class="sello">+${esc(instancia.bonus)}</div>` : ''}
+      ${instancia && instancia.debil ? `<div class="sello sello-debil" title="Su próximo ataque hace menos daño">−${esc(instancia.debil)}</div>` : ''}
       <div class="m-banda">
         ${carta.habilidad ? '<span class="m-hab" title="Tiene habilidad">◆</span>' : ''}
         <span class="m-nombre">${esc(carta.nombre)}</span>
@@ -136,7 +166,7 @@ export function renderCarta(carta, { tamano = 'normal', instancia = null, unidad
   if (carta.evolucionaDe && carta.baseNombre) partes.push(`<div class="t-evo">Evoluciona de ${esc(carta.baseNombre)}</div>`);
   if (carta.habilidad) partes.push(`<div class="t-linea"><b>${esc(carta.habilidad.nombre)}.</b> ${esc(textoHabilidad(carta.habilidad))}</div>`);
   if (esProt) {
-    partes.push(carta.acciones.map(a => `<div class="t-accion"><span class="t-costo">${pips(a.costo)}</span><span class="t-an">${esc(a.nombre)}</span><b>${esc(a.danio)}</b></div>`).join(''));
+    partes.push(carta.acciones.map(a => `<div class="t-accion"><span class="t-costo">${pips(a.costo)}</span><span class="t-an">${esc(a.nombre)}${a.efecto ? `<small class="t-aef">${esc(textoEfectoAccion(a.efecto))}</small>` : ''}</span><b>${esc(a.danio)}</b></div>`).join(''));
   } else {
     const rotulo = carta.tipo !== 'personaje' ? 'Efecto.' : carta.coleccion ? 'Presencia sagrada.' : 'Personaje.';
     partes.push(`<div class="t-linea"><b>${rotulo}</b> ${esc(carta.texto || textoEfecto(carta.efecto))}</div>`);
@@ -144,7 +174,7 @@ export function renderCarta(carta, { tamano = 'normal', instancia = null, unidad
   const conex = (carta.conexiones || []).filter(x => x.causaNombre).map(x => esc(x.causaNombre));
   if (conex.length) partes.push(`<div class="t-conexion"><b>Conexión:</b> ${conex.join(' o ')} → +1 Saber</div>`);
   // Cada renglón ocupa espacio aunque sea corto: se suman letras y renglones.
-  const renglones = (carta.evolucionaDe ? 1 : 0) + (carta.habilidad ? 1 : 0) + (esProt ? carta.acciones.length : 1) + (conex.length ? 1 : 0);
+  const renglones = (carta.evolucionaDe ? 1 : 0) + (carta.habilidad ? 1 : 0) + (esProt ? carta.acciones.length + carta.acciones.filter(a => a.efecto).length : 1) + (conex.length ? 1 : 0);
   const largoTexto = partes.join('').replace(/<[^>]+>/g, '').length + renglones * 12;
   const claseTexto = renglones >= 5 ? 'tx4' : largoTexto <= 90 ? 'tx1' : largoTexto <= 120 ? 'tx2' : 'tx3';
 
@@ -153,7 +183,7 @@ export function renderCarta(carta, { tamano = 'normal', instancia = null, unidad
   const col = carta.coleccion ? coleccion(carta.coleccion) : null;   // carta de una expansión
   const refPie = carta.oa || (carta.mbe ? 'MBE ' + carta.mbe.dominio + '·' + carta.mbe.estandar : '') || carta.zona || '';
   const pie = esProt
-    ? `<span>Débil ${iconoTipo(DEBIL_ANTE[carta.dimension], 14)}×2 · Retirada ${pips(carta.retirada != null ? carta.retirada : 1)}</span><span>${esc(carta.oa || carta.zona || '')}</span>`
+    ? `<span>Débil ${iconoTipo(DEBIL_ANTE[carta.dimension], 14)}×2 · Retirada ${carta.retirada === 0 ? 'libre' : pips(carta.retirada != null ? carta.retirada : 1)}</span><span>${esc(carta.oa || carta.zona || '')}</span>`
     : `<span>${esc(carta.id || '')}</span><span>${esc(refPie)}</span>`;
   const sello = carta.curso ? `${esc(carta.curso)}°` : carta.mbe ? esc(carta.mbe.dominio) : col ? esc(col.sigla) : '';
 

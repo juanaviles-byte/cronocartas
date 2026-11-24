@@ -230,6 +230,138 @@
     "CC-A-E9",
     "CC-A-E12"
    ]
+  },
+  {
+   "id": "K22",
+   "cartas": [
+    "CC-5-U1-010",
+    "CC-8-U2-008",
+    "CC-8-U2-009",
+    "CC-8-U2-010",
+    "CC-8-U2-011",
+    "CC-8-U2-012"
+   ]
+  },
+  {
+   "id": "K23",
+   "cartas": [
+    "CC-5-U1-011",
+    "CC-5-U1-012",
+    "CC-5-U2-011",
+    "CC-5-U2-012",
+    "CC-6-U4-009",
+    "CC-5-U2-008"
+   ]
+  },
+  {
+   "id": "K24",
+   "cartas": [
+    "CC-5-U2-009",
+    "CC-5-U2-010",
+    "CC-5-U2-013",
+    "CC-5-U3-007",
+    "CC-5-U3-008",
+    "CC-5-U3-009"
+   ]
+  },
+  {
+   "id": "K25",
+   "cartas": [
+    "CC-5-U3-010",
+    "CC-5-U3-011",
+    "CC-5-U3-012",
+    "CC-6-U4-008",
+    "CC-8-U4-006",
+    "CC-8-U4-007"
+   ]
+  },
+  {
+   "id": "K26",
+   "cartas": [
+    "CC-5-U4-007",
+    "CC-5-U4-008",
+    "CC-5-U4-009",
+    "CC-5-U4-010",
+    "CC-5-U4-011",
+    "CC-6-U4-007"
+   ]
+  },
+  {
+   "id": "K27",
+   "cartas": [
+    "CC-6-U1-011",
+    "CC-6-U1-012",
+    "CC-6-U1-013",
+    "CC-6-U1-014",
+    "CC-6-U1-015",
+    "CC-6-U2-008"
+   ]
+  },
+  {
+   "id": "K28",
+   "cartas": [
+    "CC-6-U2-009",
+    "CC-6-U2-010",
+    "CC-6-U2-011",
+    "CC-6-U2-012",
+    "CC-6-U2-013",
+    "CC-6-U3-007"
+   ]
+  },
+  {
+   "id": "K29",
+   "cartas": [
+    "CC-6-U3-008",
+    "CC-6-U3-009",
+    "CC-6-U3-010",
+    "CC-6-U3-011",
+    "CC-8-U4-008",
+    "CC-8-U4-009"
+   ]
+  },
+  {
+   "id": "K30",
+   "cartas": [
+    "CC-8-U4-010",
+    "CC-8-U4-011",
+    "CC-7-U1-007",
+    "CC-7-U1-008",
+    "CC-7-U1-009",
+    "CC-7-U1-010"
+   ]
+  },
+  {
+   "id": "K31",
+   "cartas": [
+    "CC-7-U1-011",
+    "CC-7-U1-012",
+    "CC-7-U2-009",
+    "CC-7-U2-010",
+    "CC-7-U2-011",
+    "CC-7-U3-009"
+   ]
+  },
+  {
+   "id": "K32",
+   "cartas": [
+    "CC-7-U3-010",
+    "CC-7-U3-011",
+    "CC-7-U3-012",
+    "CC-7-U4-012",
+    "CC-8-U1-010",
+    "CC-8-U1-011"
+   ]
+  },
+  {
+   "id": "K33",
+   "cartas": [
+    "CC-8-U1-012",
+    "CC-8-U1-013",
+    "CC-8-U3-008",
+    "CC-8-U3-009",
+    "CC-8-U3-010",
+    "CC-8-U3-011"
+   ]
   }
  ],
  "temas": {
@@ -357,6 +489,78 @@
   "CC-A-E7": "aula",
   "CC-A-E8": "aula",
   "CC-A-E9": "aula",
-  "CC-A-E12": "aula"
+  "CC-A-E12": "aula",
+  "CC-5-U1-010": "conquista",
+  "CC-8-U2-008": "conquista",
+  "CC-8-U2-009": "conquista",
+  "CC-8-U2-010": "conquista",
+  "CC-8-U2-011": "conquista",
+  "CC-8-U2-012": "conquista",
+  "CC-5-U1-011": "originarios",
+  "CC-5-U1-012": "originarios",
+  "CC-5-U2-011": "originarios",
+  "CC-5-U2-012": "originarios",
+  "CC-6-U4-009": "originarios",
+  "CC-5-U2-008": "colonia",
+  "CC-5-U2-009": "colonia",
+  "CC-5-U2-010": "colonia",
+  "CC-5-U2-013": "colonia",
+  "CC-5-U3-007": "paisajes",
+  "CC-5-U3-008": "paisajes",
+  "CC-5-U3-009": "paisajes",
+  "CC-5-U3-010": "paisajes",
+  "CC-5-U3-011": "paisajes",
+  "CC-5-U3-012": "paisajes",
+  "CC-6-U4-008": "paisajes",
+  "CC-8-U4-006": "paisajes",
+  "CC-8-U4-007": "paisajes",
+  "CC-5-U4-007": "ciudadania",
+  "CC-5-U4-008": "ciudadania",
+  "CC-5-U4-009": "ciudadania",
+  "CC-5-U4-010": "ciudadania",
+  "CC-5-U4-011": "ciudadania",
+  "CC-6-U4-007": "ciudadania",
+  "CC-6-U1-011": "independencia",
+  "CC-6-U1-012": "independencia",
+  "CC-6-U1-013": "independencia",
+  "CC-6-U1-014": "independencia",
+  "CC-6-U1-015": "independencia",
+  "CC-6-U2-008": "republica",
+  "CC-6-U2-009": "republica",
+  "CC-6-U2-010": "republica",
+  "CC-6-U2-011": "republica",
+  "CC-6-U2-012": "republica",
+  "CC-6-U2-013": "republica",
+  "CC-6-U3-007": "sigloxx",
+  "CC-6-U3-008": "sigloxx",
+  "CC-6-U3-009": "sigloxx",
+  "CC-6-U3-010": "sigloxx",
+  "CC-6-U3-011": "sigloxx",
+  "CC-8-U4-008": "sigloxx",
+  "CC-8-U4-009": "sigloxx",
+  "CC-8-U4-010": "sigloxx",
+  "CC-8-U4-011": "sigloxx",
+  "CC-7-U1-007": "oriente",
+  "CC-7-U1-008": "oriente",
+  "CC-7-U1-009": "oriente",
+  "CC-7-U1-010": "oriente",
+  "CC-7-U1-011": "oriente",
+  "CC-7-U1-012": "oriente",
+  "CC-7-U2-009": "grecia",
+  "CC-7-U2-010": "grecia",
+  "CC-7-U2-011": "roma",
+  "CC-7-U3-009": "medieval",
+  "CC-7-U3-010": "medieval",
+  "CC-7-U3-011": "medieval",
+  "CC-7-U3-012": "medieval",
+  "CC-7-U4-012": "aztecas",
+  "CC-8-U1-010": "absolutismo",
+  "CC-8-U1-011": "absolutismo",
+  "CC-8-U1-012": "absolutismo",
+  "CC-8-U1-013": "absolutismo",
+  "CC-8-U3-008": "ilustracion",
+  "CC-8-U3-009": "ilustracion",
+  "CC-8-U3-010": "ilustracion",
+  "CC-8-U3-011": "ilustracion"
  }
 }

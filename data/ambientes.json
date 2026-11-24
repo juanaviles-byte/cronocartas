@@ -70,5 +70,17 @@
  "FM-040": {
   "ruta": "audio/ambientes/FM-040.ogg",
   "licencia": "CC0"
+ },
+ "CC-5-U3-007": {
+  "ruta": "audio/ambientes/FM-039.ogg",
+  "licencia": "CC0"
+ },
+ "CC-7-U1-008": {
+  "ruta": "audio/ambientes/CC-7-U1-008.ogg",
+  "licencia": "CC0"
+ },
+ "CC-7-U3-012": {
+  "ruta": "audio/ambientes/CC-7-U3-012.ogg",
+  "licencia": "CC0"
  }
 }

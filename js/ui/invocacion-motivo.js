@@ -91,6 +91,9 @@ export const DEF_MOTIVOS = {
   sismo: [{ p: 'pulso', c: '#D9A066' }, { p: 'alza', items: [['edificio', 0.5, 0.58, 0.9]], c: '#C9C2B8', tiembla: true }],
   imprenta: [{ p: 'pulso', c: '#E8DFC8' }, { p: 'lluvia', i: 'tipo', c: '#E8DFC8', n: 12, t: 0.06 }],
   barroco: [{ p: 'ronda', i: 'voluta', c: '#E9C46A', n: 10, t: 0.09 }, { p: 'sube', i: 'estrella', c: '#FFF1C4', n: 8, t: 0.03 }],
+  justicia: [{ p: 'pulso', c: '#E9C46A' }, { p: 'baja', i: 'balanza', c: '#E9C46A', t: 0.48 }, { p: 'lluvia', i: 'pergamino', c: '#E8DFC8', n: 6, t: 0.06 }],
+  rio: [{ p: 'ondas', c: '#4FA3D1' }, { p: 'alza', items: [['espiga', 0.1, 0.5, 0.13], ['espiga', 0.2, 0.56, 0.11], ['espiga', 0.8, 0.56, 0.11], ['espiga', 0.9, 0.5, 0.13]], c: '#9BCB6B' }],
+  peste: [{ p: 'sube', i: 'humo', c: '#7D7A75', n: 10, t: 0.12 }, { p: 'vaiven', i: 'campana', c: '#8A8172', t: 0.4 }],
 };
 
 const SIGNOS = ['α', 'Ω', 'Σ', 'A', 'Ж', '文', 'ب', 'Ψ', 'π', 'ℵ'];

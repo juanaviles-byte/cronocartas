@@ -117,6 +117,7 @@ function historiador(estado, jugador, js) {
     if (t === 'curar') return yo.activo.danio >= 20;
     if (t === 'curarTodos') return [yo.activo, ...yo.reserva].some(p => p.danio >= 20);
     if (t === 'retiroGratis') return yo.activo.danio * 2 >= yo.activo.carta.resistencia;
+    if (t === 'epidemia') return enMesa(otro).length > enMesa(yo).length;
     if (t === 'anularLugar') return !!(estado.lugar && estado.lugar.carta.efecto && otro.activo) && estado.lugar.carta.efecto.dimension === otro.activo.carta.dimension;
     return true;
   });

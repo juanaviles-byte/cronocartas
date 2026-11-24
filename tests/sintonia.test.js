@@ -67,19 +67,23 @@ for (const c of TODAS.filter(x => x.efecto && x.tipo !== 'protagonista')) {
       const sirve = TODAS.filter(x => pedido === 'cualquiera' || x.tipo === pedido);
       e.jugadores.A.mazo.unshift({ uid: 'T1', carta: sirve[0] }, { uid: 'T2', carta: sirve[1] || sirve[0] });
     }
+    if (tipos.includes('recuperar')) e.jugadores.A.descarte.push({ uid: 'D1', carta: PROT[5] });
     const antesDanio = danioDeAccion(e, 'A', 0);
+    const otro0 = clon(e.jugadores.B);
     const { jugada, r } = jugarCarta(e, c);
+    const otro = r.estado.jugadores.B;
+    const desgaste = (p0, n0) => Math.min(n0, Math.max(0, p0.carta.resistencia - 10 - p0.danio));
     const yo = r.estado.jugadores.A;
     let manoEsperada = yo0.mano.length;   // la carta jugada sale de la mano
     for (const ef of efs) {
       switch (ef.tipo) {
         case 'robar': assert.ok(n.includes(ef.n), `dice ${n} y roba ${ef.n}`); manoEsperada += ef.n; break;
         case 'robarPorReserva': manoEsperada += yo0.reserva.length; break;
-        case 'saberExtra': assert.equal(yo.activo.saber - yo0.activo.saber, n[0] ?? 1); break;
+        case 'saberExtra': assert.ok(n.includes(ef.n || 1), `el texto no dice ${ef.n || 1}`); assert.equal(yo.activo.saber - yo0.activo.saber, ef.n || 1); break;
         case 'curar': assert.equal(yo0.activo.danio - yo.activo.danio, Math.min(n[0], yo0.activo.danio), `dice ${n[0]}`); break;
         case 'curarTodos': assert.equal(yo0.reserva[0].danio - yo.reserva[0].danio, Math.min(n[0], yo0.reserva[0].danio)); break;
         case 'proteger': assert.equal(yo.activo.protegido, true); assert.equal(danioDeAccion({ ...r.estado, turno: 'B' }, 'B', 0), 0, 'protegido igual recibe daño'); break;
-        case 'bonusDanio': assert.equal(danioDeAccion(r.estado, 'A', 0) - antesDanio, n[0], `dice +${n[0]}`); break;
+        case 'bonusDanio': assert.ok(n.includes(ef.n), `el texto no dice ${ef.n}`); assert.equal(danioDeAccion(r.estado, 'A', 0) - antesDanio, ef.n); break;
         case 'anularLugar': assert.equal(r.estado.lugar, null); break;
         case 'moverSaber': assert.equal(yo.activo.saber - yo0.activo.saber, 1); assert.equal(yo0.reserva[0].saber - yo.reserva[0].saber, 1); break;
         case 'moverSaberTodo': assert.equal(yo.activo.saber, yo0.activo.saber + yo0.reserva[0].saber); assert.equal(yo.reserva[0].saber, 0); break;
@@ -101,6 +105,43 @@ for (const c of TODAS.filter(x => x.efecto && x.tipo !== 'protagonista')) {
           const sin = danioDeAccion(conLugar, 'A', 0);
           conLugar.lugar = { uid: 'L', carta: c, duenio: 'A' };
           assert.equal(danioDeAccion(conLugar, 'A', 0) - sin, n[0]);
+          break;
+        }
+        case 'recuperar': assert.ok(yo.mano.some(x => x.uid === 'D1'), 'no volvió la carta del descarte'); manoEsperada += 1; break;
+        case 'asedio':
+          assert.ok(t.includes(String(ef.n)));
+          assert.equal(otro.reserva[0].danio - otro0.reserva[0].danio, desgaste(otro0.reserva[0], ef.n));
+          assert.equal(otro.activo.danio, otro0.activo.danio, 'el asedio no toca al activo');
+          break;
+        case 'epidemia':
+          assert.ok(t.includes(String(ef.n)));
+          assert.equal(yo.activo.danio - yo0.activo.danio, desgaste(yo0.activo, ef.n));
+          assert.equal(otro.reserva[0].danio - otro0.reserva[0].danio, desgaste(otro0.reserva[0], ef.n));
+          break;
+        case 'debilitar': {
+          assert.ok(t.includes(String(ef.n)));
+          const antes = danioDeAccion({ ...e, turno: 'B', jugadores: { ...e.jugadores, B: { ...otro0, activo: { ...otro0.activo, saber: 9 } } } }, 'B', 0);
+          const despues = danioDeAccion({ ...r.estado, turno: 'B', jugadores: { ...r.estado.jugadores, B: { ...otro, activo: { ...otro.activo, saber: 9 } } } }, 'B', 0);
+          assert.equal(antes - despues, Math.min(ef.n, antes), `dice −${ef.n}`);
+          break;
+        }
+        case 'quitarSaber': assert.equal(otro0.activo.saber - otro.activo.saber, Math.min(n[0] ?? 1, otro0.activo.saber)); break;
+        case 'saberReserva': assert.equal(yo.reserva[0].saber - yo0.reserva[0].saber, n[0] ?? 1); break;
+        case 'curaDimension': {
+          assert.ok(t.includes(String(ef.n)));
+          const m = mesa({ dimA: ef.dimension });
+          m.lugar = { uid: 'L', carta: c, duenio: 'A' }; m.jugadores.A.activo.danio = 40;
+          let s2 = aplicarJugada(m, { tipo: 'pasar' }).estado; s2 = aplicarJugada(s2, { tipo: 'pasar' }).estado;
+          assert.equal(40 - s2.jugadores.A.activo.danio, ef.n);
+          break;
+        }
+        case 'escudoDimension': {
+          assert.ok(t.includes(String(ef.n)));
+          const m = mesa({ dimA: ef.dimension });
+          m.turno = 'B'; m.jugadores.B.activo.saber = 9; m.lugar = null;
+          const sin = danioDeAccion(m, 'B', 0);
+          m.lugar = { uid: 'L', carta: c, duenio: 'A' };
+          assert.equal(sin - danioDeAccion(m, 'B', 0), Math.min(ef.n, sin));
           break;
         }
         default: assert.fail(`efecto ${ef.tipo} sin verificación`);
@@ -153,6 +194,35 @@ for (const c of TODAS.filter(x => x.habilidad)) {
         const entro = [s.activo, ...s.reserva].find(p => p && p.carta.id === c.id);
         if (h.tipo === 'inspirador') assert.equal(s.mano.length, 1, 'no robó 1 carta al entrar');
         else assert.equal(entro.saber, (base ? 0 : 0) + (n[0] ?? 1), `dice que entra con ${n[0]} de Saber`);
+        break;
+      }
+      case 'contraataque': case 'tenaz': case 'legado': {
+        // El rival ataca a esta carta.
+        e.turno = 'B'; otro.activo.saber = 9; otro.saberPendiente = 0;
+        const res = c.resistencia;
+        yo.activo = inst('Aact', c, { danio: h.tipo === 'contraataque' ? 0 : res - 1 });
+        const atk0 = clon(otro.activo);
+        const r = aplicarJugada(e, { tipo: 'accion', indice: 0 }).estado;
+        if (h.tipo === 'contraataque') {
+          assert.ok(r.jugadores.A.activo, 'el defensor debía sobrevivir');
+          assert.equal(r.jugadores.B.activo.danio - atk0.danio, Math.min(n[0], atk0.carta.resistencia - 10 - atk0.danio), `dice ${n[0]}`);
+        } else if (h.tipo === 'tenaz') {
+          assert.equal(r.jugadores.A.activo.danio, res - numeros(t).slice(-1)[0], 'queda con 10');
+        } else {
+          assert.equal(r.fase, 'promover');
+          const p = aplicarJugada(r, { tipo: 'promover', uid: r.jugadores.A.reserva[0].uid }).estado;
+          assert.equal(p.jugadores.A.activo.saber, 2 + 1 + (n[0] ?? 1), `dice +${n[0]} de Saber`);
+        }
+        break;
+      }
+      case 'alianza': {
+        const sinHab = { ...c, habilidad: undefined };
+        const mismos = PROT.filter(x => x.dimension === c.dimension).slice(0, 2);
+        yo.reserva = mismos.map((x, i) => inst('R' + i, x));
+        yo.activo = inst('Aact', sinHab, { saber: 9 }); const normal = danioDeAccion(e, 'A', 0);
+        yo.activo = inst('Aact', c, { saber: 9 }); const con = danioDeAccion(e, 'A', 0);
+        const x2 = VENTAJA[c.dimension] === otro.activo.carta.dimension ? 2 : 1;
+        assert.equal(con - normal, n[0] * mismos.length * x2, `dice +${n[0]} por cada aliado (${mismos.length})`);
         break;
       }
       default: assert.fail(`habilidad ${h.tipo} sin verificación`);

@@ -37,6 +37,19 @@ export const MOTIVO_DE_CARTA = {
   'CC-8-U3-002': 'independencia', 'CC-8-U3-003': 'independencia', 'CC-8-U3-004': 'escritura', 'CC-8-U3-005': 'pergamino',
   'CC-8-U3-006': 'independencia', 'CC-8-U3-007': 'barroco',
   'CC-8-U4-001': 'campo', 'CC-8-U4-002': 'hielo', 'CC-8-U4-003': 'mina', 'CC-8-U4-004': 'moai', 'CC-8-U4-005': 'camino',
+  // Cartas del plan equilibrado (noviembre 2026)
+  'CC-5-U1-011': 'originario', 'CC-5-U1-012': 'originario', 'CC-5-U2-008': 'campo', 'CC-5-U2-009': 'justicia', 'CC-5-U2-010': 'castillo',
+  'CC-5-U2-012': 'originario', 'CC-5-U2-013': 'mercado', 'CC-5-U3-007': 'desierto', 'CC-5-U3-008': 'cordillera', 'CC-5-U3-009': 'hielo',
+  'CC-5-U3-010': 'mina', 'CC-5-U3-012': 'barco', 'CC-5-U4-007': 'comunidad', 'CC-5-U4-008': 'comunidad', 'CC-5-U4-009': 'fuego',
+  'CC-5-U4-010': 'justicia', 'CC-5-U4-011': 'votacion', 'CC-6-U1-013': 'marcha', 'CC-6-U1-014': 'marcha', 'CC-6-U1-015': 'barco',
+  'CC-6-U2-009': 'marcha', 'CC-6-U2-010': 'pergamino', 'CC-6-U2-012': 'desierto', 'CC-6-U3-007': 'comunidad', 'CC-6-U3-009': 'columnas',
+  'CC-6-U3-010': 'mina', 'CC-6-U3-011': 'escuela', 'CC-6-U4-007': 'votacion', 'CC-6-U4-008': 'hielo', 'CC-6-U4-009': 'originario',
+  'CC-7-U1-007': 'piramide', 'CC-7-U1-008': 'rio', 'CC-7-U1-009': 'escritura', 'CC-7-U1-010': 'templo', 'CC-7-U1-011': 'justicia',
+  'CC-7-U1-012': 'templo', 'CC-7-U2-009': 'marcha', 'CC-7-U2-010': 'columnas', 'CC-7-U3-009': 'mazo', 'CC-7-U3-010': 'castillo',
+  'CC-7-U3-011': 'peste', 'CC-7-U3-012': 'mercado', 'CC-7-U4-012': 'lago', 'CC-8-U1-011': 'marcha', 'CC-8-U1-012': 'corona',
+  'CC-8-U1-013': 'barco', 'CC-8-U2-009': 'justicia', 'CC-8-U2-010': 'justicia', 'CC-8-U2-012': 'campana', 'CC-8-U3-010': 'independencia',
+  'CC-8-U3-011': 'independencia', 'CC-8-U4-006': 'campo', 'CC-8-U4-007': 'campo', 'CC-8-U4-009': 'comunidad', 'CC-8-U4-010': 'tren',
+  'CC-8-U4-011': 'camino',
 };
 
 export const MOTIVOS = [...new Set(Object.values(MOTIVO_DE_CARTA))].sort();

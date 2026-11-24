@@ -116,5 +116,17 @@
  "CC-8-U4-005": {
   "anio": 2026,
   "hoy": true
+ },
+ "CC-5-U3-007": {
+  "anio": 2026,
+  "hoy": true
+ },
+ "CC-7-U1-008": {
+  "anio": -1500,
+  "aprox": true
+ },
+ "CC-7-U3-012": {
+  "anio": 1250,
+  "aprox": true
  }
 }

@@ -1,659 +1,1259 @@
 {
- "curso": 5,
- "unidades": [
-  "Viajes de descubrimiento y conquista",
-  "La Colonia en Chile",
-  "Zonas naturales de Chile",
-  "Derechos, deberes y participación"
- ],
- "cartas": [
-  {
-   "id": "CC-5-U1-001",
-   "nombre": "Cristóbal Colón",
-   "tipo": "personaje",
-   "curso": 5,
-   "unidad": 1,
-   "efecto": {
-    "tipo": "buscar",
-    "n": 5,
-    "cartaTipo": "lugar"
-   },
-   "dato": "En 1492 llegó a América navegando hacia el oeste, cuando buscaba una nueva ruta hacia Asia.",
-   "oa": "OA 1",
-   "emblema": "barco",
-   "conexiones": [
+  "curso": 5,
+  "unidades": [
+    "Viajes de descubrimiento y conquista",
+    "La Colonia en Chile",
+    "Zonas naturales de Chile",
+    "Derechos, deberes y participación"
+  ],
+  "cartas": [
     {
-     "causa": "CC-5-U1-005",
-     "texto": "Los avances en navegación hicieron posible el viaje de 1492."
-    }
-   ],
-   "frase": "En 1492 llegó a América buscando una ruta hacia Asia.",
-   "fecha": {
-    "anio": 1492,
-    "texto": "1492"
-   }
-  },
-  {
-   "id": "CC-5-U1-002",
-   "nombre": "Hernando de Magallanes",
-   "tipo": "personaje",
-   "curso": 5,
-   "unidad": 1,
-   "efecto": {
-    "tipo": "retiroGratis"
-   },
-   "dato": "Su expedición (1519-1522) encontró el paso entre el Atlántico y el Pacífico. Juan Sebastián Elcano la terminó.",
-   "oa": "OA 1",
-   "emblema": "mapa",
-   "conexiones": [
-    {
-     "causa": "CC-5-U1-001",
-     "texto": "Tras Colón, otros buscaron un paso hacia Asia navegando al oeste."
-    }
-   ],
-   "frase": "Su expedición halló el paso entre el Atlántico y el Pacífico.",
-   "fecha": {
-    "anio": 1520,
-    "texto": "1519–1522"
-   }
-  },
-  {
-   "id": "CC-5-U1-003",
-   "nombre": "Pedro de Valdivia",
-   "tipo": "personaje",
-   "curso": 5,
-   "unidad": 1,
-   "efecto": {
-    "tipo": "buscarProtagonista",
-    "n": 3
-   },
-   "dato": "Fundó Santiago del Nuevo Extremo en 1541, a los pies del cerro Huelén, hoy cerro Santa Lucía.",
-   "oa": "OA 2",
-   "emblema": "escudo",
-   "conexiones": [
-    {
-     "causa": "CC-5-U1-008",
-     "texto": "Valdivia llegó a Chile al mando de su hueste."
-    }
-   ],
-   "frase": "Fundó Santiago del Nuevo Extremo en 1541.",
-   "fecha": {
-    "anio": 1541,
-    "texto": "1541"
-   }
-  },
-  {
-   "id": "CC-5-U1-004",
-   "nombre": "Inés de Suárez",
-   "tipo": "personaje",
-   "curso": 5,
-   "unidad": 1,
-   "efecto": {
-    "tipo": "proteger"
-   },
-   "dato": "Llegó a Chile con Valdivia y participó en la defensa de Santiago durante el ataque de 1541.",
-   "oa": "OA 2",
-   "emblema": "casa",
-   "frase": "Defendió Santiago durante el ataque de 1541.",
-   "fecha": {
-    "anio": 1541,
-    "texto": "1541"
-   }
-  },
-  {
-   "id": "CC-5-U1-005",
-   "nombre": "Carabela y brújula",
-   "tipo": "acontecimiento",
-   "curso": 5,
-   "unidad": 1,
-   "efecto": {
-    "tipo": "robar",
-    "n": 2
-   },
-   "dato": "Barcos más livianos, la brújula y el astrolabio hicieron posibles los grandes viajes de descubrimiento.",
-   "oa": "OA 1",
-   "emblema": "barco",
-   "frase": "Barcos livianos y nuevos instrumentos hicieron posibles los grandes viajes.",
-   "fecha": {
-    "anio": 1450,
-    "texto": "siglo XV"
-   }
-  },
-  {
-   "id": "CC-5-U1-006",
-   "nombre": "Fundación de ciudades",
-   "tipo": "acontecimiento",
-   "curso": 5,
-   "unidad": 1,
-   "efecto": {
-    "tipo": "buscarProtagonista",
-    "n": 3
-   },
-   "dato": "Los españoles fundaron ciudades como Santiago, La Serena y Concepción para quedarse y expandirse.",
-   "oa": "OA 2",
-   "emblema": "casa",
-   "conexiones": [
-    {
-     "causa": "CC-5-U1-003",
-     "texto": "Valdivia fundó Santiago y otras ciudades para asentar la conquista."
-    }
-   ],
-   "frase": "Santiago, La Serena, Concepción: ciudades para quedarse.",
-   "fecha": {
-    "anio": 1541,
-    "texto": "desde 1541"
-   }
-  },
-  {
-   "id": "CC-5-U1-007",
-   "nombre": "Puerto de Sevilla",
-   "tipo": "lugar",
-   "curso": 5,
-   "unidad": 1,
-   "efecto": {
-    "tipo": "bonusDimension",
-    "dimension": "Economia",
-    "n": 10
-   },
-   "dato": "Desde Sevilla, la Corona española controlaba el comercio y los viajes hacia América.",
-   "oa": "OA 3",
-   "emblema": "ancla",
-   "frase": "Desde aquí, la Corona controlaba el comercio con América."
-  },
-  {
-   "id": "CC-5-U1-008",
-   "nombre": "Hueste conquistadora",
-   "tipo": "protagonista",
-   "curso": 5,
-   "unidad": 1,
-   "dimension": "Politica",
-   "resistencia": 70,
-   "retirada": 1,
-   "acciones": [
-    {
-     "nombre": "Expedición",
-     "costo": 1,
-     "danio": 20
+      "id": "CC-5-U1-001",
+      "nombre": "Cristóbal Colón",
+      "tipo": "personaje",
+      "curso": 5,
+      "unidad": 1,
+      "efecto": {
+        "tipo": "buscar",
+        "n": 5,
+        "cartaTipo": "lugar"
+      },
+      "dato": "En 1492 llegó a América navegando hacia el oeste, cuando buscaba una nueva ruta hacia Asia.",
+      "oa": "OA 1",
+      "emblema": "barco",
+      "conexiones": [
+        {
+          "causa": "CC-5-U1-005",
+          "texto": "Los avances en navegación hicieron posible el viaje de 1492."
+        }
+      ],
+      "frase": "En 1492 llegó a América buscando una ruta hacia Asia.",
+      "fecha": {
+        "anio": 1492,
+        "texto": "1492"
+      }
     },
     {
-     "nombre": "Avanzar",
-     "costo": 2,
-     "danio": 40
-    }
-   ],
-   "dato": "Grupo de soldados y colonos que acompañaba a un conquistador; muchas veces ellos mismos pagaban la expedición.",
-   "oa": "OA 2",
-   "emblema": "escudo",
-   "frase": "Soldados y colonos que seguían a un conquistador.",
-   "habilidad": {
-    "nombre": "Avanzada",
-    "tipo": "saberAlEntrar",
-    "n": 1
-   }
-  },
-  {
-   "id": "CC-5-U1-009",
-   "nombre": "Pueblo diaguita",
-   "tipo": "protagonista",
-   "curso": 5,
-   "unidad": 1,
-   "dimension": "Cultura",
-   "resistencia": 70,
-   "retirada": 1,
-   "acciones": [
-    {
-     "nombre": "Cerámica",
-     "costo": 2,
-     "danio": 40
-    }
-   ],
-   "dato": "Pueblo del Norte Chico conocido por su cerámica pintada con figuras geométricas.",
-   "oa": "OA 4",
-   "emblema": "sol",
-   "frase": "Pueblo del Norte Chico conocido por su cerámica pintada con figuras geométricas."
-  },
-  {
-   "id": "CC-5-U2-001",
-   "nombre": "Españoles e indígenas",
-   "tipo": "protagonista",
-   "curso": 5,
-   "unidad": 2,
-   "dimension": "Sociedad",
-   "resistencia": 60,
-   "retirada": 1,
-   "acciones": [
-    {
-     "nombre": "Encuentro",
-     "costo": 1,
-     "danio": 20
-    }
-   ],
-   "dato": "Durante la Conquista convivieron y se mezclaron españoles, indígenas y, más tarde, africanos.",
-   "oa": "OA 6",
-   "emblema": "personas",
-   "frase": "Dos mundos que convivieron y se mezclaron."
-  },
-  {
-   "id": "CC-5-U2-002",
-   "nombre": "Sociedad mestiza",
-   "tipo": "protagonista",
-   "curso": 5,
-   "unidad": 2,
-   "dimension": "Sociedad",
-   "resistencia": 100,
-   "retirada": 2,
-   "acciones": [
-    {
-     "nombre": "Nuevas costumbres",
-     "costo": 2,
-     "danio": 50
+      "id": "CC-5-U1-002",
+      "nombre": "Hernando de Magallanes",
+      "tipo": "personaje",
+      "curso": 5,
+      "unidad": 1,
+      "efecto": {
+        "tipo": "retiroGratis"
+      },
+      "dato": "Su expedición (1519-1522) encontró el paso entre el Atlántico y el Pacífico. Juan Sebastián Elcano la terminó.",
+      "oa": "OA 1",
+      "emblema": "mapa",
+      "conexiones": [
+        {
+          "causa": "CC-5-U1-001",
+          "texto": "Tras Colón, otros buscaron un paso hacia Asia navegando al oeste."
+        }
+      ],
+      "frase": "Su expedición halló el paso entre el Atlántico y el Pacífico.",
+      "fecha": {
+        "anio": 1520,
+        "texto": "1519–1522"
+      }
     },
     {
-     "nombre": "Raíces comunes",
-     "costo": 3,
-     "danio": 70
-    }
-   ],
-   "dato": "En la Colonia surgió una sociedad mestiza, mezcla de culturas, que es una base del Chile actual.",
-   "oa": "OA 6",
-   "emblema": "personas",
-   "evolucionaDe": "CC-5-U2-001",
-   "frase": "La mezcla de culturas que dio origen al Chile actual.",
-   "habilidad": {
-    "nombre": "Mestizaje",
-    "tipo": "fuerzaReserva",
-    "n": 10
-   }
-  },
-  {
-   "id": "CC-5-U2-003",
-   "nombre": "Lautaro",
-   "tipo": "personaje",
-   "curso": 5,
-   "unidad": 2,
-   "efecto": {
-    "tipo": "bonusDanio",
-    "n": 30
-   },
-   "dato": "Joven mapuche que conoció la forma de combatir española y la usó para resistir la Conquista.",
-   "oa": "OA 7",
-   "emblema": "escudo",
-   "conexiones": [
-    {
-     "causa": "CC-5-U1-003",
-     "texto": "Lautaro conoció la forma de combatir española sirviendo a Valdivia."
-    }
-   ],
-   "frase": "Aprendió la forma de combatir española para resistirla.",
-   "fecha": {
-    "anio": 1553,
-    "texto": "1553"
-   }
-  },
-  {
-   "id": "CC-5-U2-004",
-   "nombre": "Mercader colonial",
-   "tipo": "protagonista",
-   "curso": 5,
-   "unidad": 2,
-   "dimension": "Economia",
-   "resistencia": 60,
-   "retirada": 1,
-   "acciones": [
-    {
-     "nombre": "Monopolio",
-     "costo": 1,
-     "danio": 20
+      "id": "CC-5-U1-003",
+      "nombre": "Pedro de Valdivia",
+      "tipo": "personaje",
+      "curso": 5,
+      "unidad": 1,
+      "efecto": {
+        "tipo": "buscarProtagonista",
+        "n": 3
+      },
+      "dato": "Fundó Santiago del Nuevo Extremo en 1541, a los pies del cerro Huelén, hoy cerro Santa Lucía.",
+      "oa": "OA 2",
+      "emblema": "escudo",
+      "conexiones": [
+        {
+          "causa": "CC-5-U1-008",
+          "texto": "Valdivia llegó a Chile al mando de su hueste."
+        }
+      ],
+      "frase": "Fundó Santiago del Nuevo Extremo en 1541.",
+      "fecha": {
+        "anio": 1541,
+        "texto": "1541"
+      }
     },
     {
-     "nombre": "Flota de Indias",
-     "costo": 2,
-     "danio": 30
-    }
-   ],
-   "dato": "Chile dependía de España: solo podía comerciar con la metrópoli, lo que se llama monopolio comercial.",
-   "oa": "OA 6",
-   "emblema": "moneda",
-   "conexiones": [
-    {
-     "causa": "CC-5-U1-007",
-     "texto": "El comercio con América pasaba por el puerto de Sevilla."
-    }
-   ],
-   "frase": "Chile solo podía comerciar con España."
-  },
-  {
-   "id": "CC-5-U2-005",
-   "nombre": "Patrimonio colonial",
-   "tipo": "protagonista",
-   "curso": 5,
-   "unidad": 2,
-   "dimension": "Cultura",
-   "resistencia": 70,
-   "retirada": 1,
-   "acciones": [
-    {
-     "nombre": "Herencia viva",
-     "costo": 2,
-     "danio": 40
-    }
-   ],
-   "dato": "La iglesia de San Francisco, en Santiago, fue construida en la Colonia y sigue en pie hasta hoy.",
-   "oa": "OA 8",
-   "emblema": "campana",
-   "frase": "La iglesia de San Francisco sigue en pie desde la Colonia."
-  },
-  {
-   "id": "CC-5-U2-006",
-   "nombre": "Parlamento de Quilín",
-   "tipo": "acontecimiento",
-   "curso": 5,
-   "unidad": 2,
-   "efecto": {
-    "tipo": "proteger"
-   },
-   "dato": "En 1641 españoles y mapuches acordaron la paz y reconocieron el río Biobío como frontera.",
-   "oa": "OA 7",
-   "emblema": "pergamino",
-   "conexiones": [
-    {
-     "causa": "CC-5-U2-007",
-     "texto": "La resistencia mapuche llevó a españoles y mapuches a negociar la paz en Quilín."
-    }
-   ],
-   "frase": "1641: paz entre españoles y mapuches en el Biobío.",
-   "fecha": {
-    "anio": 1641,
-    "texto": "1641"
-   }
-  },
-  {
-   "id": "CC-5-U2-007",
-   "nombre": "Pueblo mapuche",
-   "tipo": "protagonista",
-   "curso": 5,
-   "unidad": 2,
-   "dimension": "Territorio",
-   "resistencia": 80,
-   "retirada": 1,
-   "acciones": [
-    {
-     "nombre": "Malón",
-     "costo": 1,
-     "danio": 20
+      "id": "CC-5-U1-004",
+      "nombre": "Inés de Suárez",
+      "tipo": "personaje",
+      "curso": 5,
+      "unidad": 1,
+      "efecto": {
+        "tipo": "proteger"
+      },
+      "dato": "Llegó a Chile con Valdivia y participó en la defensa de Santiago durante el ataque de 1541.",
+      "oa": "OA 2",
+      "emblema": "casa",
+      "frase": "Defendió Santiago durante el ataque de 1541.",
+      "fecha": {
+        "anio": 1541,
+        "texto": "1541"
+      }
     },
     {
-     "nombre": "Defensa del territorio",
-     "costo": 2,
-     "danio": 40
-    }
-   ],
-   "dato": "Pueblo del centro-sur de Chile que resistió la Conquista y mantuvo su autonomía al sur del Biobío durante la Colonia.",
-   "oa": "OA 7",
-   "emblema": "escudo",
-   "frase": "Resistió la Conquista y mantuvo su autonomía al sur del Biobío."
-  },
-  {
-   "id": "CC-5-U3-001",
-   "nombre": "Norte Grande",
-   "tipo": "protagonista",
-   "curso": 5,
-   "unidad": 3,
-   "dimension": "Territorio",
-   "resistencia": 80,
-   "retirada": 1,
-   "acciones": [
-    {
-     "nombre": "Sol del desierto",
-     "costo": 2,
-     "danio": 40
-    }
-   ],
-   "dato": "Tiene el desierto de Atacama, uno de los más secos del mundo, y grandes yacimientos de cobre.",
-   "oa": "OA 9",
-   "emblema": "sol",
-   "frase": "Desierto de Atacama y grandes yacimientos de cobre."
-  },
-  {
-   "id": "CC-5-U3-002",
-   "nombre": "Zona Central",
-   "tipo": "protagonista",
-   "curso": 5,
-   "unidad": 3,
-   "dimension": "Economia",
-   "resistencia": 70,
-   "retirada": 1,
-   "acciones": [
-    {
-     "nombre": "Cosecha",
-     "costo": 1,
-     "danio": 20
+      "id": "CC-5-U1-005",
+      "nombre": "Carabela y brújula",
+      "tipo": "acontecimiento",
+      "curso": 5,
+      "unidad": 1,
+      "efecto": {
+        "tipo": "robar",
+        "n": 2
+      },
+      "dato": "Barcos más livianos, la brújula y el astrolabio hicieron posibles los grandes viajes de descubrimiento.",
+      "oa": "OA 1",
+      "emblema": "barco",
+      "frase": "Barcos livianos y nuevos instrumentos hicieron posibles los grandes viajes.",
+      "fecha": {
+        "anio": 1450,
+        "texto": "siglo XV"
+      }
     },
     {
-     "nombre": "Valle fértil",
-     "costo": 2,
-     "danio": 40
-    }
-   ],
-   "dato": "De clima mediterráneo, concentra la mayor parte de la población y de la agricultura del país.",
-   "oa": "OA 9",
-   "emblema": "maiz",
-   "frase": "Clima mediterráneo y la mayor parte de la población."
-  },
-  {
-   "id": "CC-5-U3-003",
-   "nombre": "Zona Austral",
-   "tipo": "protagonista",
-   "curso": 5,
-   "unidad": 3,
-   "dimension": "Territorio",
-   "resistencia": 90,
-   "retirada": 1,
-   "acciones": [
-    {
-     "nombre": "Hielos y fiordos",
-     "costo": 3,
-     "danio": 50
-    }
-   ],
-   "dato": "Tiene fiordos, canales, hielos y clima frío. Es la zona menos poblada de Chile.",
-   "oa": "OA 9",
-   "emblema": "montana",
-   "frase": "Tiene fiordos, canales, hielos y clima frío. Es la zona menos poblada de Chile.",
-   "habilidad": {
-    "nombre": "Clima extremo",
-    "tipo": "resistente",
-    "n": 10
-   }
-  },
-  {
-   "id": "CC-5-U3-004",
-   "nombre": "Minería del cobre",
-   "tipo": "protagonista",
-   "curso": 5,
-   "unidad": 3,
-   "dimension": "Economia",
-   "resistencia": 70,
-   "retirada": 1,
-   "acciones": [
-    {
-     "nombre": "Extraer",
-     "costo": 2,
-     "danio": 40
-    }
-   ],
-   "dato": "El cobre es un recurso no renovable y el principal producto que Chile vende al mundo.",
-   "oa": "OA 10",
-   "emblema": "engranaje",
-   "conexiones": [
-    {
-     "causa": "CC-5-U3-001",
-     "texto": "El Norte Grande concentra grandes yacimientos de cobre."
-    }
-   ],
-   "frase": "Recurso no renovable y principal exportación de Chile."
-  },
-  {
-   "id": "CC-5-U3-005",
-   "nombre": "Construcción antisísmica",
-   "tipo": "acontecimiento",
-   "curso": 5,
-   "unidad": 3,
-   "efecto": {
-    "tipo": "proteger"
-   },
-   "dato": "Chile es un país sísmico: construir edificios antisísmicos ayuda a proteger a la comunidad.",
-   "oa": "OA 12",
-   "emblema": "casa",
-   "frase": "En un país sísmico, construir bien protege vidas."
-  },
-  {
-   "id": "CC-5-U3-006",
-   "nombre": "Cordillera de los Andes",
-   "tipo": "lugar",
-   "curso": 5,
-   "unidad": 3,
-   "efecto": {
-    "tipo": "bonusDimension",
-    "dimension": "Territorio",
-    "n": 10
-   },
-   "dato": "Recorre Chile de norte a sur y forma su frontera oriental. Allí nacen muchos ríos del país.",
-   "oa": "OA 9",
-   "emblema": "montana",
-   "frase": "Recorre Chile de norte a sur y forma su frontera oriental."
-  },
-  {
-   "id": "CC-5-U4-001",
-   "nombre": "Sujeto de derechos",
-   "tipo": "protagonista",
-   "curso": 5,
-   "unidad": 4,
-   "dimension": "Sociedad",
-   "resistencia": 80,
-   "retirada": 1,
-   "acciones": [
-    {
-     "nombre": "Igual dignidad",
-     "costo": 2,
-     "danio": 40
-    }
-   ],
-   "dato": "Todas las personas tienen derechos, sin importar su etnia, sexo, lugar de nacimiento u otras características.",
-   "oa": "OA 13",
-   "emblema": "balanza",
-   "frase": "Todas las personas tienen derechos, sin excepción."
-  },
-  {
-   "id": "CC-5-U4-002",
-   "nombre": "Directiva de curso",
-   "tipo": "protagonista",
-   "curso": 5,
-   "unidad": 4,
-   "dimension": "Politica",
-   "resistencia": 60,
-   "retirada": 1,
-   "acciones": [
-    {
-     "nombre": "Votación",
-     "costo": 1,
-     "danio": 20
-    }
-   ],
-   "dato": "Elegir una directiva implica escoger personas idóneas y entender las responsabilidades de cada cargo.",
-   "oa": "OA 17",
-   "emblema": "urna",
-   "frase": "Elegir bien y entender las responsabilidades del cargo."
-  },
-  {
-   "id": "CC-5-U4-003",
-   "nombre": "Organización comunitaria",
-   "tipo": "protagonista",
-   "curso": 5,
-   "unidad": 4,
-   "dimension": "Politica",
-   "resistencia": 100,
-   "retirada": 2,
-   "acciones": [
-    {
-     "nombre": "Unir fuerzas",
-     "costo": 2,
-     "danio": 50
+      "id": "CC-5-U1-006",
+      "nombre": "Fundación de ciudades",
+      "tipo": "acontecimiento",
+      "curso": 5,
+      "unidad": 1,
+      "efecto": {
+        "tipo": "buscarProtagonista",
+        "n": 3
+      },
+      "dato": "Los españoles fundaron ciudades como Santiago, La Serena y Concepción para quedarse y expandirse.",
+      "oa": "OA 2",
+      "emblema": "casa",
+      "conexiones": [
+        {
+          "causa": "CC-5-U1-003",
+          "texto": "Valdivia fundó Santiago y otras ciudades para asentar la conquista."
+        }
+      ],
+      "frase": "Santiago, La Serena, Concepción: ciudades para quedarse.",
+      "fecha": {
+        "anio": 1541,
+        "texto": "desde 1541"
+      }
     },
     {
-     "nombre": "Meta común",
-     "costo": 3,
-     "danio": 70
-    }
-   ],
-   "dato": "Juntas de vecinos, fundaciones y voluntariados: personas que se organizan para lograr metas comunes.",
-   "oa": "OA 19",
-   "emblema": "personas",
-   "evolucionaDe": "CC-5-U4-002",
-   "frase": "Personas que se organizan para lograr metas comunes.",
-   "habilidad": {
-    "nombre": "Ayuda mutua",
-    "tipo": "sanador",
-    "n": 10
-   }
-  },
-  {
-   "id": "CC-5-U4-004",
-   "nombre": "Estado de Chile",
-   "tipo": "protagonista",
-   "curso": 5,
-   "unidad": 4,
-   "dimension": "Politica",
-   "resistencia": 80,
-   "retirada": 1,
-   "acciones": [
+      "id": "CC-5-U1-007",
+      "nombre": "Puerto de Sevilla",
+      "tipo": "lugar",
+      "curso": 5,
+      "unidad": 1,
+      "efecto": {
+        "tipo": "bonusDimension",
+        "dimension": "Economia",
+        "n": 10
+      },
+      "dato": "Desde Sevilla, la Corona española controlaba el comercio y los viajes hacia América.",
+      "oa": "OA 3",
+      "emblema": "ancla",
+      "frase": "Desde aquí, la Corona controlaba el comercio con América."
+    },
     {
-     "nombre": "Garantizar derechos",
-     "costo": 2,
-     "danio": 40
-    }
-   ],
-   "dato": "El Estado debe asegurar que las personas ejerzan sus derechos, como la educación y la salud.",
-   "oa": "OA 14",
-   "emblema": "columna",
-   "frase": "Debe asegurar derechos como la educación y la salud."
-  },
-  {
-   "id": "CC-5-U4-005",
-   "nombre": "Proyecto escolar",
-   "tipo": "acontecimiento",
-   "curso": 5,
-   "unidad": 4,
-   "efecto": {
-    "tipo": "curar",
-    "n": 30
-   },
-   "dato": "Un proyecto con plan y presupuesto puede resolver un problema de la escuela, como el gasto de agua.",
-   "oa": "OA 18",
-   "emblema": "engranaje",
-   "conexiones": [
+      "id": "CC-5-U1-008",
+      "nombre": "Hueste conquistadora",
+      "tipo": "protagonista",
+      "curso": 5,
+      "unidad": 1,
+      "dimension": "Politica",
+      "resistencia": 70,
+      "retirada": 1,
+      "acciones": [
+        {
+          "nombre": "Expedición",
+          "costo": 1,
+          "danio": 20
+        },
+        {
+          "nombre": "Avanzar",
+          "costo": 2,
+          "danio": 40
+        }
+      ],
+      "dato": "Grupo de soldados y colonos que acompañaba a un conquistador; muchas veces ellos mismos pagaban la expedición.",
+      "oa": "OA 2",
+      "emblema": "escudo",
+      "frase": "Soldados y colonos que seguían a un conquistador.",
+      "habilidad": {
+        "nombre": "Avanzada",
+        "tipo": "saberAlEntrar",
+        "n": 1
+      }
+    },
     {
-     "causa": "CC-5-U4-002",
-     "texto": "Una directiva organizada puede impulsar proyectos para la escuela."
+      "id": "CC-5-U1-009",
+      "nombre": "Pueblo diaguita",
+      "tipo": "protagonista",
+      "curso": 5,
+      "unidad": 1,
+      "dimension": "Cultura",
+      "resistencia": 70,
+      "retirada": 1,
+      "acciones": [
+        {
+          "nombre": "Cerámica",
+          "costo": 2,
+          "danio": 40
+        }
+      ],
+      "dato": "Pueblo del Norte Chico conocido por su cerámica pintada con figuras geométricas.",
+      "oa": "OA 4",
+      "emblema": "sol",
+      "frase": "Pueblo del Norte Chico conocido por su cerámica pintada con figuras geométricas."
+    },
+    {
+      "id": "CC-5-U1-010",
+      "nombre": "Diego de Almagro",
+      "tipo": "personaje",
+      "efecto": {
+        "tipo": "buscarProtagonista",
+        "n": 4
+      },
+      "dato": "Encabezó la primera expedición española a Chile (1535–1536). Cruzó los Andes y el desierto, y volvió al Perú sin oro.",
+      "frase": "Primera expedición española a Chile, entre 1535 y 1536.",
+      "emblema": "mapa",
+      "fecha": {
+        "anio": 1536,
+        "texto": "1535–1536"
+      },
+      "curso": 5,
+      "unidad": 1,
+      "oa": "OA 2"
+    },
+    {
+      "id": "CC-5-U1-011",
+      "nombre": "Michimalonco",
+      "tipo": "personaje",
+      "efecto": {
+        "tipo": "asedio",
+        "n": 10
+      },
+      "dato": "Lonko del valle del Mapocho. En 1541 dirigió el ataque que destruyó gran parte de la recién fundada Santiago.",
+      "frase": "En 1541 dirigió el ataque a la recién fundada Santiago.",
+      "emblema": "escudo",
+      "fecha": {
+        "anio": 1541,
+        "texto": "1541"
+      },
+      "conexiones": [
+        {
+          "causa": "CC-5-U1-006",
+          "texto": "La fundación de Santiago en tierras del Mapocho provocó la resistencia de sus habitantes."
+        }
+      ],
+      "curso": 5,
+      "unidad": 1,
+      "oa": "OA 2"
+    },
+    {
+      "id": "CC-5-U1-012",
+      "nombre": "Diaguitas del Tawantinsuyu",
+      "tipo": "protagonista",
+      "dimension": "Cultura",
+      "resistencia": 100,
+      "retirada": 2,
+      "acciones": [
+        {
+          "nombre": "Cerámica inca-diaguita",
+          "costo": 2,
+          "danio": 40,
+          "efecto": {
+            "tipo": "robar",
+            "n": 1
+          }
+        },
+        {
+          "nombre": "Caminos del Inca",
+          "costo": 3,
+          "danio": 70
+        }
+      ],
+      "dato": "Hacia el siglo XV, los diaguitas fueron incorporados al Imperio inca y mezclaron sus diseños con los del Cusco.",
+      "frase": "Su cerámica unió los diseños diaguitas con los del Cusco.",
+      "emblema": "sol",
+      "habilidad": {
+        "tipo": "legado",
+        "nombre": "Herencia andina",
+        "n": 1
+      },
+      "evolucionaDe": "CC-5-U1-009",
+      "curso": 5,
+      "unidad": 1,
+      "oa": "OA 4"
+    },
+    {
+      "id": "CC-5-U2-001",
+      "nombre": "Españoles e indígenas",
+      "tipo": "protagonista",
+      "curso": 5,
+      "unidad": 2,
+      "dimension": "Sociedad",
+      "resistencia": 60,
+      "retirada": 1,
+      "acciones": [
+        {
+          "nombre": "Encuentro",
+          "costo": 1,
+          "danio": 20
+        }
+      ],
+      "dato": "Durante la Conquista convivieron y se mezclaron españoles, indígenas y, más tarde, africanos.",
+      "oa": "OA 6",
+      "emblema": "personas",
+      "frase": "Dos mundos que convivieron y se mezclaron."
+    },
+    {
+      "id": "CC-5-U2-002",
+      "nombre": "Sociedad mestiza",
+      "tipo": "protagonista",
+      "curso": 5,
+      "unidad": 2,
+      "dimension": "Sociedad",
+      "resistencia": 100,
+      "retirada": 2,
+      "acciones": [
+        {
+          "nombre": "Nuevas costumbres",
+          "costo": 2,
+          "danio": 50
+        },
+        {
+          "nombre": "Raíces comunes",
+          "costo": 3,
+          "danio": 70
+        }
+      ],
+      "dato": "En la Colonia surgió una sociedad mestiza, mezcla de culturas, que es una base del Chile actual.",
+      "oa": "OA 6",
+      "emblema": "personas",
+      "evolucionaDe": "CC-5-U2-001",
+      "frase": "La mezcla de culturas que dio origen al Chile actual.",
+      "habilidad": {
+        "nombre": "Mestizaje",
+        "tipo": "fuerzaReserva",
+        "n": 10
+      }
+    },
+    {
+      "id": "CC-5-U2-003",
+      "nombre": "Lautaro",
+      "tipo": "personaje",
+      "curso": 5,
+      "unidad": 2,
+      "efecto": {
+        "tipo": "bonusDanio",
+        "n": 30
+      },
+      "dato": "Joven mapuche que conoció la forma de combatir española y la usó para resistir la Conquista.",
+      "oa": "OA 7",
+      "emblema": "escudo",
+      "conexiones": [
+        {
+          "causa": "CC-5-U1-003",
+          "texto": "Lautaro conoció la forma de combatir española sirviendo a Valdivia."
+        }
+      ],
+      "frase": "Aprendió la forma de combatir española para resistirla.",
+      "fecha": {
+        "anio": 1553,
+        "texto": "1553"
+      }
+    },
+    {
+      "id": "CC-5-U2-004",
+      "nombre": "Mercader colonial",
+      "tipo": "protagonista",
+      "curso": 5,
+      "unidad": 2,
+      "dimension": "Economia",
+      "resistencia": 60,
+      "retirada": 1,
+      "acciones": [
+        {
+          "nombre": "Monopolio",
+          "costo": 1,
+          "danio": 20
+        },
+        {
+          "nombre": "Flota de Indias",
+          "costo": 2,
+          "danio": 30
+        }
+      ],
+      "dato": "Chile dependía de España: solo podía comerciar con la metrópoli, lo que se llama monopolio comercial.",
+      "oa": "OA 6",
+      "emblema": "moneda",
+      "conexiones": [
+        {
+          "causa": "CC-5-U1-007",
+          "texto": "El comercio con América pasaba por el puerto de Sevilla."
+        }
+      ],
+      "frase": "Chile solo podía comerciar con España."
+    },
+    {
+      "id": "CC-5-U2-005",
+      "nombre": "Patrimonio colonial",
+      "tipo": "protagonista",
+      "curso": 5,
+      "unidad": 2,
+      "dimension": "Cultura",
+      "resistencia": 70,
+      "retirada": 1,
+      "acciones": [
+        {
+          "nombre": "Herencia viva",
+          "costo": 2,
+          "danio": 40
+        }
+      ],
+      "dato": "La iglesia de San Francisco, en Santiago, fue construida en la Colonia y sigue en pie hasta hoy.",
+      "oa": "OA 8",
+      "emblema": "campana",
+      "frase": "La iglesia de San Francisco sigue en pie desde la Colonia."
+    },
+    {
+      "id": "CC-5-U2-006",
+      "nombre": "Parlamento de Quilín",
+      "tipo": "acontecimiento",
+      "curso": 5,
+      "unidad": 2,
+      "efecto": {
+        "tipo": "proteger"
+      },
+      "dato": "En 1641 españoles y mapuches acordaron la paz y reconocieron el río Biobío como frontera.",
+      "oa": "OA 7",
+      "emblema": "pergamino",
+      "conexiones": [
+        {
+          "causa": "CC-5-U2-007",
+          "texto": "La resistencia mapuche llevó a españoles y mapuches a negociar la paz en Quilín."
+        }
+      ],
+      "frase": "1641: paz entre españoles y mapuches en el Biobío.",
+      "fecha": {
+        "anio": 1641,
+        "texto": "1641"
+      }
+    },
+    {
+      "id": "CC-5-U2-007",
+      "nombre": "Pueblo mapuche",
+      "tipo": "protagonista",
+      "curso": 5,
+      "unidad": 2,
+      "dimension": "Territorio",
+      "resistencia": 80,
+      "retirada": 1,
+      "acciones": [
+        {
+          "nombre": "Malón",
+          "costo": 1,
+          "danio": 20
+        },
+        {
+          "nombre": "Defensa del territorio",
+          "costo": 2,
+          "danio": 40
+        }
+      ],
+      "dato": "Pueblo del centro-sur de Chile que resistió la Conquista y mantuvo su autonomía al sur del Biobío durante la Colonia.",
+      "oa": "OA 7",
+      "emblema": "escudo",
+      "frase": "Resistió la Conquista y mantuvo su autonomía al sur del Biobío."
+    },
+    {
+      "id": "CC-5-U2-008",
+      "nombre": "Encomienda",
+      "tipo": "protagonista",
+      "dimension": "Economia",
+      "resistencia": 70,
+      "retirada": 1,
+      "acciones": [
+        {
+          "nombre": "Tributo",
+          "costo": 2,
+          "danio": 30,
+          "efecto": {
+            "tipo": "robar",
+            "n": 1
+          }
+        },
+        {
+          "nombre": "Encomendero",
+          "costo": 3,
+          "danio": 60
+        }
+      ],
+      "dato": "Sistema colonial en que la Corona entregaba indígenas a un español, que cobraba su trabajo o tributo a cambio de cristianizarlos.",
+      "frase": "Los indígenas debían trabajar o pagar tributo a un encomendero.",
+      "emblema": "balanza",
+      "curso": 5,
+      "unidad": 2,
+      "oa": "OA 6"
+    },
+    {
+      "id": "CC-5-U2-009",
+      "nombre": "Real Audiencia",
+      "tipo": "protagonista",
+      "dimension": "Politica",
+      "resistencia": 80,
+      "retirada": 1,
+      "acciones": [
+        {
+          "nombre": "Audiencia",
+          "costo": 1,
+          "danio": 20
+        },
+        {
+          "nombre": "Fallo real",
+          "costo": 3,
+          "danio": 60,
+          "efecto": {
+            "tipo": "debilitar",
+            "n": 20
+          }
+        }
+      ],
+      "dato": "Tribunal de la Corona que juzgaba y aconsejaba al gobernador. Se instaló en Santiago en 1609.",
+      "frase": "El tribunal del rey en Chile, instalado en Santiago en 1609.",
+      "emblema": "balanza",
+      "fecha": {
+        "anio": 1609,
+        "texto": "1609"
+      },
+      "curso": 5,
+      "unidad": 2,
+      "oa": "OA 6"
+    },
+    {
+      "id": "CC-5-U2-010",
+      "nombre": "Fuertes del Biobío",
+      "tipo": "protagonista",
+      "dimension": "Territorio",
+      "resistencia": 90,
+      "retirada": 2,
+      "acciones": [
+        {
+          "nombre": "Línea de fuertes",
+          "costo": 2,
+          "danio": 30,
+          "efecto": {
+            "tipo": "debilitar",
+            "n": 10
+          }
+        },
+        {
+          "nombre": "Frontera",
+          "costo": 3,
+          "danio": 60
+        }
+      ],
+      "dato": "Tras Curalaba, los españoles levantaron una línea de fuertes a lo largo del río Biobío, que marcó la frontera durante la Colonia.",
+      "frase": "Una línea de fuertes marcó la frontera en el Biobío.",
+      "emblema": "escudo",
+      "habilidad": {
+        "tipo": "contraataque",
+        "nombre": "Empalizada",
+        "n": 20
+      },
+      "curso": 5,
+      "unidad": 2,
+      "oa": "OA 6"
+    },
+    {
+      "id": "CC-5-U2-011",
+      "nombre": "Caupolicán",
+      "tipo": "personaje",
+      "efecto": [
+        {
+          "tipo": "bonusDanio",
+          "n": 10
+        },
+        {
+          "tipo": "saberExtra",
+          "n": 1
+        }
+      ],
+      "dato": "Toqui mapuche elegido, según la tradición, tras sostener un tronco por días. Lideró la resistencia hasta su muerte en 1558.",
+      "frase": "Toqui que lideró la resistencia mapuche hasta 1558.",
+      "emblema": "escudo",
+      "fecha": {
+        "anio": 1558,
+        "texto": "1558"
+      },
+      "curso": 5,
+      "unidad": 2,
+      "oa": "OA 6"
+    },
+    {
+      "id": "CC-5-U2-012",
+      "nombre": "Batalla de Curalaba",
+      "tipo": "acontecimiento",
+      "efecto": {
+        "tipo": "asedio",
+        "n": 20
+      },
+      "dato": "En 1598 los mapuche vencieron al gobernador Óñez de Loyola. Después cayeron las ciudades españolas al sur del Biobío.",
+      "frase": "En 1598 cayeron las ciudades españolas al sur del Biobío.",
+      "emblema": "escudo",
+      "fecha": {
+        "anio": 1598,
+        "texto": "1598"
+      },
+      "conexiones": [
+        {
+          "causa": "CC-5-U2-003",
+          "texto": "La resistencia que inició Lautaro continuó por décadas."
+        }
+      ],
+      "curso": 5,
+      "unidad": 2,
+      "oa": "OA 6"
+    },
+    {
+      "id": "CC-5-U2-013",
+      "nombre": "Comercio libre",
+      "tipo": "protagonista",
+      "dimension": "Economia",
+      "resistencia": 100,
+      "retirada": 2,
+      "acciones": [
+        {
+          "nombre": "Nuevas rutas",
+          "costo": 2,
+          "danio": 40,
+          "efecto": {
+            "tipo": "robar",
+            "n": 1
+          }
+        },
+        {
+          "nombre": "Puertos abiertos",
+          "costo": 3,
+          "danio": 70
+        }
+      ],
+      "dato": "En 1778 la Corona permitió que más puertos americanos comerciaran entre sí y con España: terminó el monopolio de unos pocos.",
+      "frase": "En 1778 se abrió el comercio entre más puertos del imperio.",
+      "emblema": "ancla",
+      "habilidad": {
+        "tipo": "alianza",
+        "nombre": "Red de comercio",
+        "n": 10
+      },
+      "evolucionaDe": "CC-5-U2-004",
+      "fecha": {
+        "anio": 1778,
+        "texto": "1778"
+      },
+      "curso": 5,
+      "unidad": 2,
+      "oa": "OA 6"
+    },
+    {
+      "id": "CC-5-U3-001",
+      "nombre": "Norte Grande",
+      "tipo": "protagonista",
+      "curso": 5,
+      "unidad": 3,
+      "dimension": "Territorio",
+      "resistencia": 80,
+      "retirada": 1,
+      "acciones": [
+        {
+          "nombre": "Sol del desierto",
+          "costo": 2,
+          "danio": 40
+        }
+      ],
+      "dato": "Tiene el desierto de Atacama, uno de los más secos del mundo, y grandes yacimientos de cobre.",
+      "oa": "OA 9",
+      "emblema": "sol",
+      "frase": "Desierto de Atacama y grandes yacimientos de cobre."
+    },
+    {
+      "id": "CC-5-U3-002",
+      "nombre": "Zona Central",
+      "tipo": "protagonista",
+      "curso": 5,
+      "unidad": 3,
+      "dimension": "Economia",
+      "resistencia": 70,
+      "retirada": 1,
+      "acciones": [
+        {
+          "nombre": "Cosecha",
+          "costo": 1,
+          "danio": 20
+        },
+        {
+          "nombre": "Valle fértil",
+          "costo": 2,
+          "danio": 40
+        }
+      ],
+      "dato": "De clima mediterráneo, concentra la mayor parte de la población y de la agricultura del país.",
+      "oa": "OA 9",
+      "emblema": "maiz",
+      "frase": "Clima mediterráneo y la mayor parte de la población."
+    },
+    {
+      "id": "CC-5-U3-003",
+      "nombre": "Zona Austral",
+      "tipo": "protagonista",
+      "curso": 5,
+      "unidad": 3,
+      "dimension": "Territorio",
+      "resistencia": 90,
+      "retirada": 1,
+      "acciones": [
+        {
+          "nombre": "Hielos y fiordos",
+          "costo": 3,
+          "danio": 50
+        }
+      ],
+      "dato": "Tiene fiordos, canales, hielos y clima frío. Es la zona menos poblada de Chile.",
+      "oa": "OA 9",
+      "emblema": "montana",
+      "frase": "Tiene fiordos, canales, hielos y clima frío. Es la zona menos poblada de Chile.",
+      "habilidad": {
+        "nombre": "Clima extremo",
+        "tipo": "resistente",
+        "n": 10
+      }
+    },
+    {
+      "id": "CC-5-U3-004",
+      "nombre": "Minería del cobre",
+      "tipo": "protagonista",
+      "curso": 5,
+      "unidad": 3,
+      "dimension": "Economia",
+      "resistencia": 70,
+      "retirada": 1,
+      "acciones": [
+        {
+          "nombre": "Extraer",
+          "costo": 2,
+          "danio": 40
+        }
+      ],
+      "dato": "El cobre es un recurso no renovable y el principal producto que Chile vende al mundo.",
+      "oa": "OA 10",
+      "emblema": "engranaje",
+      "conexiones": [
+        {
+          "causa": "CC-5-U3-001",
+          "texto": "El Norte Grande concentra grandes yacimientos de cobre."
+        }
+      ],
+      "frase": "Recurso no renovable y principal exportación de Chile."
+    },
+    {
+      "id": "CC-5-U3-005",
+      "nombre": "Construcción antisísmica",
+      "tipo": "acontecimiento",
+      "curso": 5,
+      "unidad": 3,
+      "efecto": {
+        "tipo": "proteger"
+      },
+      "dato": "Chile es un país sísmico: construir edificios antisísmicos ayuda a proteger a la comunidad.",
+      "oa": "OA 12",
+      "emblema": "casa",
+      "frase": "En un país sísmico, construir bien protege vidas."
+    },
+    {
+      "id": "CC-5-U3-006",
+      "nombre": "Cordillera de los Andes",
+      "tipo": "lugar",
+      "curso": 5,
+      "unidad": 3,
+      "efecto": {
+        "tipo": "bonusDimension",
+        "dimension": "Territorio",
+        "n": 10
+      },
+      "dato": "Recorre Chile de norte a sur y forma su frontera oriental. Allí nacen muchos ríos del país.",
+      "oa": "OA 9",
+      "emblema": "montana",
+      "frase": "Recorre Chile de norte a sur y forma su frontera oriental."
+    },
+    {
+      "id": "CC-5-U3-007",
+      "nombre": "Desierto de Atacama",
+      "tipo": "lugar",
+      "efecto": {
+        "tipo": "escudoDimension",
+        "n": 10,
+        "dimension": "Territorio"
+      },
+      "dato": "Es el desierto no polar más árido del mundo. Guarda minerales como el cobre y el salitre.",
+      "frase": "El desierto no polar más árido del mundo.",
+      "emblema": "sol",
+      "curso": 5,
+      "unidad": 3,
+      "oa": "OA 9"
+    },
+    {
+      "id": "CC-5-U3-008",
+      "nombre": "Altiplano",
+      "tipo": "protagonista",
+      "dimension": "Cultura",
+      "resistencia": 80,
+      "retirada": 1,
+      "acciones": [
+        {
+          "nombre": "Fiesta andina",
+          "costo": 1,
+          "danio": 20,
+          "efecto": {
+            "tipo": "curar",
+            "n": 10
+          }
+        },
+        {
+          "nombre": "Llamas y quínoa",
+          "costo": 2,
+          "danio": 40
+        }
+      ],
+      "dato": "Meseta a más de 3.500 metros en el extremo norte. Sus pueblos crían llamas y alpacas y celebran fiestas con música andina.",
+      "frase": "Meseta de altura con llamas, alpacas y fiestas andinas.",
+      "emblema": "montana",
+      "curso": 5,
+      "unidad": 3,
+      "oa": "OA 9"
+    },
+    {
+      "id": "CC-5-U3-009",
+      "nombre": "Campos de Hielo",
+      "tipo": "protagonista",
+      "dimension": "Territorio",
+      "resistencia": 110,
+      "retirada": 2,
+      "acciones": [
+        {
+          "nombre": "Glaciar",
+          "costo": 3,
+          "danio": 50,
+          "efecto": {
+            "tipo": "debilitar",
+            "n": 20
+          }
+        }
+      ],
+      "dato": "Campos de Hielo Sur es una de las mayores reservas de agua dulce del planeta, entre Aysén y Magallanes.",
+      "frase": "Una de las mayores reservas de agua dulce del planeta.",
+      "emblema": "montana",
+      "habilidad": {
+        "tipo": "tenaz",
+        "nombre": "Hielo eterno"
+      },
+      "curso": 5,
+      "unidad": 3,
+      "oa": "OA 9"
+    },
+    {
+      "id": "CC-5-U3-010",
+      "nombre": "Gran minería del cobre",
+      "tipo": "protagonista",
+      "dimension": "Economia",
+      "resistencia": 110,
+      "retirada": 2,
+      "acciones": [
+        {
+          "nombre": "Chuquicamata",
+          "costo": 2,
+          "danio": 50
+        },
+        {
+          "nombre": "Exportación",
+          "costo": 3,
+          "danio": 70,
+          "efecto": {
+            "tipo": "robar",
+            "n": 1
+          }
+        }
+      ],
+      "dato": "En el siglo XX se explotaron grandes yacimientos como Chuquicamata, una de las minas a rajo abierto más grandes del mundo.",
+      "frase": "Chuquicamata, una de las minas a rajo abierto más grandes del mundo.",
+      "emblema": "engranaje",
+      "habilidad": {
+        "tipo": "saberAlEntrar",
+        "nombre": "Riqueza del norte",
+        "n": 1
+      },
+      "evolucionaDe": "CC-5-U3-004",
+      "fecha": {
+        "anio": 1915,
+        "texto": "siglo XX"
+      },
+      "curso": 5,
+      "unidad": 3,
+      "oa": "OA 10"
+    },
+    {
+      "id": "CC-5-U3-011",
+      "nombre": "Ignacio Domeyko",
+      "tipo": "personaje",
+      "efecto": {
+        "tipo": "recuperar"
+      },
+      "dato": "Científico polaco que recorrió Chile estudiando sus minerales y su geografía. Fue rector de la Universidad de Chile.",
+      "frase": "Científico que estudió los minerales y la geografía de Chile.",
+      "emblema": "libro",
+      "fecha": {
+        "anio": 1867,
+        "texto": "siglo XIX"
+      },
+      "curso": 5,
+      "unidad": 3,
+      "oa": "OA 9"
+    },
+    {
+      "id": "CC-5-U3-012",
+      "nombre": "Chiloé",
+      "tipo": "protagonista",
+      "dimension": "Cultura",
+      "resistencia": 70,
+      "retirada": 1,
+      "acciones": [
+        {
+          "nombre": "Minga",
+          "costo": 1,
+          "danio": 20,
+          "efecto": {
+            "tipo": "curarTodos",
+            "n": 10
+          }
+        },
+        {
+          "nombre": "Iglesias de madera",
+          "costo": 2,
+          "danio": 40
+        }
+      ],
+      "dato": "Archipiélago de la zona sur con palafitos, mingas e iglesias de madera que son Patrimonio de la Humanidad.",
+      "frase": "Palafitos, mingas e iglesias de madera patrimoniales.",
+      "emblema": "casa",
+      "curso": 5,
+      "unidad": 3,
+      "oa": "OA 9"
+    },
+    {
+      "id": "CC-5-U4-001",
+      "nombre": "Sujeto de derechos",
+      "tipo": "protagonista",
+      "curso": 5,
+      "unidad": 4,
+      "dimension": "Sociedad",
+      "resistencia": 80,
+      "retirada": 1,
+      "acciones": [
+        {
+          "nombre": "Igual dignidad",
+          "costo": 2,
+          "danio": 40
+        }
+      ],
+      "dato": "Todas las personas tienen derechos, sin importar su etnia, sexo, lugar de nacimiento u otras características.",
+      "oa": "OA 13",
+      "emblema": "balanza",
+      "frase": "Todas las personas tienen derechos, sin excepción."
+    },
+    {
+      "id": "CC-5-U4-002",
+      "nombre": "Directiva de curso",
+      "tipo": "protagonista",
+      "curso": 5,
+      "unidad": 4,
+      "dimension": "Politica",
+      "resistencia": 60,
+      "retirada": 1,
+      "acciones": [
+        {
+          "nombre": "Votación",
+          "costo": 1,
+          "danio": 20
+        }
+      ],
+      "dato": "Elegir una directiva implica escoger personas idóneas y entender las responsabilidades de cada cargo.",
+      "oa": "OA 17",
+      "emblema": "urna",
+      "frase": "Elegir bien y entender las responsabilidades del cargo."
+    },
+    {
+      "id": "CC-5-U4-003",
+      "nombre": "Organización comunitaria",
+      "tipo": "protagonista",
+      "curso": 5,
+      "unidad": 4,
+      "dimension": "Politica",
+      "resistencia": 100,
+      "retirada": 2,
+      "acciones": [
+        {
+          "nombre": "Unir fuerzas",
+          "costo": 2,
+          "danio": 50
+        },
+        {
+          "nombre": "Meta común",
+          "costo": 3,
+          "danio": 70
+        }
+      ],
+      "dato": "Juntas de vecinos, fundaciones y voluntariados: personas que se organizan para lograr metas comunes.",
+      "oa": "OA 19",
+      "emblema": "personas",
+      "evolucionaDe": "CC-5-U4-002",
+      "frase": "Personas que se organizan para lograr metas comunes.",
+      "habilidad": {
+        "nombre": "Ayuda mutua",
+        "tipo": "sanador",
+        "n": 10
+      }
+    },
+    {
+      "id": "CC-5-U4-004",
+      "nombre": "Estado de Chile",
+      "tipo": "protagonista",
+      "curso": 5,
+      "unidad": 4,
+      "dimension": "Politica",
+      "resistencia": 80,
+      "retirada": 1,
+      "acciones": [
+        {
+          "nombre": "Garantizar derechos",
+          "costo": 2,
+          "danio": 40
+        }
+      ],
+      "dato": "El Estado debe asegurar que las personas ejerzan sus derechos, como la educación y la salud.",
+      "oa": "OA 14",
+      "emblema": "columna",
+      "frase": "Debe asegurar derechos como la educación y la salud."
+    },
+    {
+      "id": "CC-5-U4-005",
+      "nombre": "Proyecto escolar",
+      "tipo": "acontecimiento",
+      "curso": 5,
+      "unidad": 4,
+      "efecto": {
+        "tipo": "curar",
+        "n": 30
+      },
+      "dato": "Un proyecto con plan y presupuesto puede resolver un problema de la escuela, como el gasto de agua.",
+      "oa": "OA 18",
+      "emblema": "engranaje",
+      "conexiones": [
+        {
+          "causa": "CC-5-U4-002",
+          "texto": "Una directiva organizada puede impulsar proyectos para la escuela."
+        }
+      ],
+      "frase": "Un buen plan puede resolver un problema de la escuela."
+    },
+    {
+      "id": "CC-5-U4-006",
+      "nombre": "La escuela",
+      "tipo": "lugar",
+      "curso": 5,
+      "unidad": 4,
+      "efecto": {
+        "tipo": "bonusDimension",
+        "dimension": "Sociedad",
+        "n": 10
+      },
+      "dato": "Es un espacio para aprender a convivir: respetar acuerdos, escuchar y buscar soluciones pacíficas.",
+      "oa": "OA 16",
+      "emblema": "libro",
+      "frase": "Aquí aprendemos a convivir y a resolver conflictos en paz."
+    },
+    {
+      "id": "CC-5-U4-007",
+      "nombre": "Derechos del niño",
+      "tipo": "protagonista",
+      "dimension": "Sociedad",
+      "resistencia": 110,
+      "retirada": 2,
+      "acciones": [
+        {
+          "nombre": "Derecho a jugar",
+          "costo": 2,
+          "danio": 40,
+          "efecto": {
+            "tipo": "curar",
+            "n": 20
+          }
+        },
+        {
+          "nombre": "Convención",
+          "costo": 3,
+          "danio": 70
+        }
+      ],
+      "dato": "La Convención sobre los Derechos del Niño reconoce derechos a toda persona menor de 18 años. Chile la ratificó en 1990.",
+      "frase": "Chile ratificó en 1990 la Convención sobre los Derechos del Niño.",
+      "emblema": "personas",
+      "habilidad": {
+        "tipo": "sanador",
+        "nombre": "Cuidado",
+        "n": 10
+      },
+      "evolucionaDe": "CC-5-U4-001",
+      "fecha": {
+        "anio": 1990,
+        "texto": "1990"
+      },
+      "curso": 5,
+      "unidad": 4,
+      "oa": "OA 13"
+    },
+    {
+      "id": "CC-5-U4-008",
+      "nombre": "Junta de vecinos",
+      "tipo": "protagonista",
+      "dimension": "Sociedad",
+      "resistencia": 70,
+      "retirada": 1,
+      "acciones": [
+        {
+          "nombre": "Reunión",
+          "costo": 1,
+          "danio": 20,
+          "efecto": {
+            "tipo": "robar",
+            "n": 1
+          }
+        },
+        {
+          "nombre": "Proyecto del barrio",
+          "costo": 2,
+          "danio": 40
+        }
+      ],
+      "dato": "Organización de los vecinos de un barrio que se reúne para mejorar su entorno y representar sus necesidades ante el municipio.",
+      "frase": "Vecinos que se organizan para mejorar su barrio.",
+      "emblema": "casa",
+      "habilidad": {
+        "tipo": "alianza",
+        "nombre": "Entre vecinos",
+        "n": 10
+      },
+      "curso": 5,
+      "unidad": 4,
+      "oa": "OA 13"
+    },
+    {
+      "id": "CC-5-U4-009",
+      "nombre": "Bomberos voluntarios",
+      "tipo": "protagonista",
+      "dimension": "Sociedad",
+      "resistencia": 80,
+      "retirada": 1,
+      "acciones": [
+        {
+          "nombre": "¡Al rescate!",
+          "costo": 2,
+          "danio": 30,
+          "efecto": {
+            "tipo": "curarTodos",
+            "n": 10
+          }
+        },
+        {
+          "nombre": "Compañía",
+          "costo": 3,
+          "danio": 60
+        }
+      ],
+      "dato": "En Chile, los bomberos son voluntarios: no reciben sueldo por apagar incendios y rescatar personas.",
+      "frase": "En Chile, los bomberos trabajan sin sueldo.",
+      "emblema": "campana",
+      "habilidad": {
+        "tipo": "tenaz",
+        "nombre": "Vocación"
+      },
+      "curso": 5,
+      "unidad": 4,
+      "oa": "OA 13"
+    },
+    {
+      "id": "CC-5-U4-010",
+      "nombre": "Defensoría de la Niñez",
+      "tipo": "protagonista",
+      "dimension": "Politica",
+      "resistencia": 70,
+      "retirada": 1,
+      "acciones": [
+        {
+          "nombre": "Denuncia",
+          "costo": 1,
+          "danio": 20,
+          "efecto": {
+            "tipo": "debilitar",
+            "n": 10
+          }
+        },
+        {
+          "nombre": "Proteger derechos",
+          "costo": 2,
+          "danio": 40,
+          "efecto": {
+            "tipo": "debilitar",
+            "n": 10
+          }
+        }
+      ],
+      "dato": "Institución creada en 2018 para promover y proteger los derechos de niños, niñas y adolescentes en Chile.",
+      "frase": "Desde 2018 protege los derechos de la niñez en Chile.",
+      "emblema": "escudo",
+      "fecha": {
+        "anio": 2018,
+        "texto": "2018"
+      },
+      "curso": 5,
+      "unidad": 4,
+      "oa": "OA 13"
+    },
+    {
+      "id": "CC-5-U4-011",
+      "nombre": "Elecciones democráticas",
+      "tipo": "acontecimiento",
+      "efecto": {
+        "tipo": "saberReserva",
+        "n": 1
+      },
+      "dato": "En una democracia, la ciudadanía elige a sus autoridades con voto secreto, libre e informado.",
+      "frase": "La ciudadanía elige a sus autoridades con voto libre y secreto.",
+      "emblema": "urna",
+      "conexiones": [
+        {
+          "causa": "CC-5-U4-002",
+          "texto": "Elegir la directiva del curso es practicar la democracia."
+        }
+      ],
+      "curso": 5,
+      "unidad": 4,
+      "oa": "OA 13"
     }
-   ],
-   "frase": "Un buen plan puede resolver un problema de la escuela."
-  },
-  {
-   "id": "CC-5-U4-006",
-   "nombre": "La escuela",
-   "tipo": "lugar",
-   "curso": 5,
-   "unidad": 4,
-   "efecto": {
-    "tipo": "bonusDimension",
-    "dimension": "Sociedad",
-    "n": 10
-   },
-   "dato": "Es un espacio para aprender a convivir: respetar acuerdos, escuchar y buscar soluciones pacíficas.",
-   "oa": "OA 16",
-   "emblema": "libro",
-   "frase": "Aquí aprendemos a convivir y a resolver conflictos en paz."
-  }
- ]
+  ]
 }

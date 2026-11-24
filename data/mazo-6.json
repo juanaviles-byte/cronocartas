@@ -1,658 +1,1195 @@
 {
- "curso": 6,
- "unidades": [
-  "Independencia de Chile y América",
-  "La República en el siglo XIX",
-  "El siglo XX en Chile",
-  "Chile: regiones y democracia"
- ],
- "cartas": [
-  {
-   "id": "CC-6-U1-001",
-   "nombre": "Bando patriota",
-   "tipo": "protagonista",
-   "curso": 6,
-   "unidad": 1,
-   "dimension": "Politica",
-   "resistencia": 60,
-   "retirada": 1,
-   "acciones": [
+  "curso": 6,
+  "unidades": [
+    "Independencia de Chile y América",
+    "La República en el siglo XIX",
+    "El siglo XX en Chile",
+    "Chile: regiones y democracia"
+  ],
+  "cartas": [
     {
-     "nombre": "Autonomía",
-     "costo": 1,
-     "danio": 20
-    }
-   ],
-   "dato": "Buscaba que Chile se gobernara a sí mismo: primero con más autonomía y luego con independencia total.",
-   "oa": "OA 2",
-   "emblema": "escudo",
-   "conexiones": [
-    {
-     "causa": "CC-6-U1-006",
-     "texto": "El Cabildo de 1810 inició el camino hacia la autonomía."
-    }
-   ],
-   "frase": "Querían que Chile se gobernara a sí mismo."
-  },
-  {
-   "id": "CC-6-U1-002",
-   "nombre": "Chile independiente",
-   "tipo": "protagonista",
-   "curso": 6,
-   "unidad": 1,
-   "dimension": "Politica",
-   "resistencia": 110,
-   "retirada": 2,
-   "acciones": [
-    {
-     "nombre": "Declaración",
-     "costo": 2,
-     "danio": 50
+      "id": "CC-6-U1-001",
+      "nombre": "Bando patriota",
+      "tipo": "protagonista",
+      "curso": 6,
+      "unidad": 1,
+      "dimension": "Politica",
+      "resistencia": 60,
+      "retirada": 1,
+      "acciones": [
+        {
+          "nombre": "Autonomía",
+          "costo": 1,
+          "danio": 20
+        }
+      ],
+      "dato": "Buscaba que Chile se gobernara a sí mismo: primero con más autonomía y luego con independencia total.",
+      "oa": "OA 2",
+      "emblema": "escudo",
+      "conexiones": [
+        {
+          "causa": "CC-6-U1-006",
+          "texto": "El Cabildo de 1810 inició el camino hacia la autonomía."
+        }
+      ],
+      "frase": "Querían que Chile se gobernara a sí mismo."
     },
     {
-     "nombre": "Maipú",
-     "costo": 3,
-     "danio": 70
-    }
-   ],
-   "dato": "En 1818 se proclamó la Independencia de Chile, y la batalla de Maipú la consolidó ese mismo año.",
-   "oa": "OA 2",
-   "emblema": "estrella",
-   "evolucionaDe": "CC-6-U1-001",
-   "frase": "1818: proclamación de la Independencia y batalla de Maipú.",
-   "habilidad": {
-    "nombre": "Soberanía",
-    "tipo": "resistente",
-    "n": 10
-   }
-  },
-  {
-   "id": "CC-6-U1-003",
-   "nombre": "Bernardo O'Higgins",
-   "tipo": "personaje",
-   "curso": 6,
-   "unidad": 1,
-   "efecto": {
-    "tipo": "saberExtra",
-    "n": 1
-   },
-   "dato": "Tras la victoria de Chacabuco, fue Director Supremo de Chile entre 1817 y 1823.",
-   "oa": "OA 2",
-   "emblema": "estrella",
-   "conexiones": [
-    {
-     "causa": "CC-6-U1-008",
-     "texto": "Con el Ejército de los Andes, O'Higgins triunfó en Chacabuco."
-    }
-   ],
-   "frase": "Tras la victoria de Chacabuco, fue Director Supremo de Chile entre 1817 y 1823.",
-   "fecha": {
-    "anio": 1817,
-    "texto": "1817–1823"
-   }
-  },
-  {
-   "id": "CC-6-U1-004",
-   "nombre": "José Miguel Carrera",
-   "tipo": "personaje",
-   "curso": 6,
-   "unidad": 1,
-   "efecto": {
-    "tipo": "robar",
-    "n": 2
-   },
-   "dato": "En su gobierno se creó una de las primeras banderas nacionales y se publicó la Aurora de Chile (1812).",
-   "oa": "OA 2",
-   "emblema": "pluma",
-   "frase": "Primera bandera nacional y la Aurora de Chile (1812).",
-   "fecha": {
-    "anio": 1812,
-    "texto": "1812"
-   }
-  },
-  {
-   "id": "CC-6-U1-005",
-   "nombre": "Javiera Carrera",
-   "tipo": "personaje",
-   "curso": 6,
-   "unidad": 1,
-   "efecto": {
-    "tipo": "robarPorReserva"
-   },
-   "dato": "Patriota destacada de la Independencia; según la tradición, bordó una de las primeras banderas chilenas.",
-   "oa": "OA 2",
-   "emblema": "estrella",
-   "frase": "Patriota destacada; según la tradición, bordó una bandera."
-  },
-  {
-   "id": "CC-6-U1-006",
-   "nombre": "Cabildo abierto de 1810",
-   "tipo": "acontecimiento",
-   "curso": 6,
-   "unidad": 1,
-   "efecto": {
-    "tipo": "robar",
-    "n": 2
-   },
-   "dato": "El 18 de septiembre de 1810 se formó la Primera Junta Nacional de Gobierno.",
-   "oa": "OA 2",
-   "emblema": "pergamino",
-   "frase": "El 18 de septiembre de 1810 se formó la Primera Junta Nacional de Gobierno.",
-   "fecha": {
-    "anio": 1810,
-    "texto": "1810"
-   }
-  },
-  {
-   "id": "CC-6-U1-007",
-   "nombre": "Cordillera de los Andes",
-   "tipo": "lugar",
-   "curso": 6,
-   "unidad": 1,
-   "efecto": {
-    "tipo": "bonusDimension",
-    "dimension": "Territorio",
-    "n": 10
-   },
-   "dato": "En 1817 el Ejército de los Andes la cruzó desde Mendoza para luchar por la independencia de Chile.",
-   "oa": "OA 1",
-   "emblema": "montana",
-   "frase": "En 1817 el Ejército de los Andes la cruzó desde Mendoza."
-  },
-  {
-   "id": "CC-6-U1-008",
-   "nombre": "Ejército de los Andes",
-   "tipo": "protagonista",
-   "curso": 6,
-   "unidad": 1,
-   "dimension": "Territorio",
-   "resistencia": 80,
-   "retirada": 1,
-   "acciones": [
-    {
-     "nombre": "Cruce de los Andes",
-     "costo": 2,
-     "danio": 40
-    }
-   ],
-   "dato": "Ejército formado en Mendoza por José de San Martín que en 1817 cruzó la cordillera para liberar Chile.",
-   "oa": "OA 2",
-   "emblema": "montana",
-   "frase": "En 1817 cruzó la cordillera para liberar Chile.",
-   "habilidad": {
-    "nombre": "Cruce planificado",
-    "tipo": "saberAlEntrar",
-    "n": 1
-   }
-  },
-  {
-   "id": "CC-6-U1-009",
-   "nombre": "Ejército realista",
-   "tipo": "protagonista",
-   "curso": 6,
-   "unidad": 1,
-   "dimension": "Politica",
-   "resistencia": 80,
-   "retirada": 1,
-   "acciones": [
-    {
-     "nombre": "Lealtad al rey",
-     "costo": 1,
-     "danio": 20
+      "id": "CC-6-U1-002",
+      "nombre": "Chile independiente",
+      "tipo": "protagonista",
+      "curso": 6,
+      "unidad": 1,
+      "dimension": "Politica",
+      "resistencia": 110,
+      "retirada": 2,
+      "acciones": [
+        {
+          "nombre": "Declaración",
+          "costo": 2,
+          "danio": 50
+        },
+        {
+          "nombre": "Maipú",
+          "costo": 3,
+          "danio": 70
+        }
+      ],
+      "dato": "En 1818 se proclamó la Independencia de Chile, y la batalla de Maipú la consolidó ese mismo año.",
+      "oa": "OA 2",
+      "emblema": "estrella",
+      "evolucionaDe": "CC-6-U1-001",
+      "frase": "1818: proclamación de la Independencia y batalla de Maipú.",
+      "habilidad": {
+        "nombre": "Soberanía",
+        "tipo": "resistente",
+        "n": 10
+      }
     },
     {
-     "nombre": "Reconquista",
-     "costo": 2,
-     "danio": 40
-    }
-   ],
-   "dato": "Tropas fieles al rey de España que combatieron a los patriotas; en 1814 vencieron en la batalla de Rancagua.",
-   "oa": "OA 2",
-   "emblema": "escudo",
-   "conexiones": [
-    {
-     "causa": "CC-6-U1-010",
-     "texto": "Tras vencer en Rancagua, el ejército realista recuperó el control de Chile."
-    }
-   ],
-   "frase": "Fieles al rey de España; en 1814 vencieron en Rancagua."
-  },
-  {
-   "id": "CC-6-U1-010",
-   "nombre": "Reconquista española",
-   "tipo": "acontecimiento",
-   "curso": 6,
-   "unidad": 1,
-   "efecto": {
-    "tipo": "bonusDanio",
-    "n": 20
-   },
-   "dato": "Tras la batalla de Rancagua (1814), los realistas gobernaron Chile hasta la victoria patriota de Chacabuco (1817).",
-   "oa": "OA 2",
-   "emblema": "corona",
-   "frase": "De Rancagua (1814) a Chacabuco (1817), Chile volvió a manos realistas.",
-   "fecha": {
-    "anio": 1814,
-    "texto": "1814–1817"
-   }
-  },
-  {
-   "id": "CC-6-U2-001",
-   "nombre": "Andrés Bello",
-   "tipo": "personaje",
-   "curso": 6,
-   "unidad": 2,
-   "efecto": {
-    "tipo": "robar",
-    "n": 3
-   },
-   "dato": "Redactó el Código Civil de Chile y fue el primer rector de la Universidad de Chile (1843).",
-   "oa": "OA 4",
-   "emblema": "libro",
-   "frase": "Autor del Código Civil y primer rector de la U. de Chile.",
-   "fecha": {
-    "anio": 1843,
-    "texto": "1843"
-   }
-  },
-  {
-   "id": "CC-6-U2-002",
-   "nombre": "Liberales",
-   "tipo": "protagonista",
-   "curso": 6,
-   "unidad": 2,
-   "dimension": "Politica",
-   "resistencia": 70,
-   "retirada": 1,
-   "acciones": [
-    {
-     "nombre": "Reformas",
-     "costo": 1,
-     "danio": 20
+      "id": "CC-6-U1-003",
+      "nombre": "Bernardo O'Higgins",
+      "tipo": "personaje",
+      "curso": 6,
+      "unidad": 1,
+      "efecto": {
+        "tipo": "saberExtra",
+        "n": 1
+      },
+      "dato": "Tras la victoria de Chacabuco, fue Director Supremo de Chile entre 1817 y 1823.",
+      "oa": "OA 2",
+      "emblema": "estrella",
+      "conexiones": [
+        {
+          "causa": "CC-6-U1-008",
+          "texto": "Con el Ejército de los Andes, O'Higgins triunfó en Chacabuco."
+        }
+      ],
+      "frase": "Tras la victoria de Chacabuco, fue Director Supremo de Chile entre 1817 y 1823.",
+      "fecha": {
+        "anio": 1817,
+        "texto": "1817–1823"
+      }
     },
     {
-     "nombre": "Limitar el poder",
-     "costo": 2,
-     "danio": 40
-    }
-   ],
-   "dato": "En la segunda mitad del siglo XIX impulsaron reformas que limitaron el poder del Presidente.",
-   "oa": "OA 3",
-   "emblema": "urna",
-   "frase": "Impulsaron reformas para limitar el poder presidencial."
-  },
-  {
-   "id": "CC-6-U2-003",
-   "nombre": "Pampa salitrera",
-   "tipo": "protagonista",
-   "curso": 6,
-   "unidad": 2,
-   "dimension": "Economia",
-   "resistencia": 70,
-   "retirada": 1,
-   "acciones": [
-    {
-     "nombre": "Oro blanco",
-     "costo": 1,
-     "danio": 20
-    }
-   ],
-   "dato": "Tras la Guerra del Pacífico, Chile incorporó Tarapacá y Antofagasta, regiones ricas en salitre.",
-   "oa": "OA 6",
-   "emblema": "engranaje",
-   "conexiones": [
-    {
-     "causa": "CC-6-U2-006",
-     "texto": "El ferrocarril llevaba el salitre de la pampa a los puertos."
-    }
-   ],
-   "frase": "Tras la Guerra del Pacífico, Chile sumó territorios ricos en salitre."
-  },
-  {
-   "id": "CC-6-U2-004",
-   "nombre": "Cuestión social",
-   "tipo": "protagonista",
-   "curso": 6,
-   "unidad": 2,
-   "dimension": "Sociedad",
-   "resistencia": 100,
-   "retirada": 2,
-   "acciones": [
-    {
-     "nombre": "Organizarse",
-     "costo": 2,
-     "danio": 50
+      "id": "CC-6-U1-004",
+      "nombre": "José Miguel Carrera",
+      "tipo": "personaje",
+      "curso": 6,
+      "unidad": 1,
+      "efecto": {
+        "tipo": "robar",
+        "n": 2
+      },
+      "dato": "En su gobierno se creó una de las primeras banderas nacionales y se publicó la Aurora de Chile (1812).",
+      "oa": "OA 2",
+      "emblema": "pluma",
+      "frase": "Primera bandera nacional y la Aurora de Chile (1812).",
+      "fecha": {
+        "anio": 1812,
+        "texto": "1812"
+      }
     },
     {
-     "nombre": "Exigir derechos",
-     "costo": 3,
-     "danio": 70
-    }
-   ],
-   "dato": "La riqueza del salitre trajo también la cuestión social: malas condiciones de vida y trabajo de obreros.",
-   "oa": "OA 6",
-   "emblema": "personas",
-   "evolucionaDe": "CC-6-U2-003",
-   "frase": "La otra cara del salitre: pobreza y trabajo duro.",
-   "habilidad": {
-    "nombre": "Organización obrera",
-    "tipo": "fuerzaReserva",
-    "n": 10
-   }
-  },
-  {
-   "id": "CC-6-U2-005",
-   "nombre": "Constitución de 1833",
-   "tipo": "acontecimiento",
-   "curso": 6,
-   "unidad": 2,
-   "efecto": {
-    "tipo": "proteger"
-   },
-   "dato": "Organizó la República con un Presidente con mucho poder y rigió hasta 1925.",
-   "oa": "OA 3",
-   "emblema": "pergamino",
-   "frase": "Organizó la República con un Presidente con mucho poder y rigió hasta 1925.",
-   "fecha": {
-    "anio": 1833,
-    "texto": "1833"
-   }
-  },
-  {
-   "id": "CC-6-U2-006",
-   "nombre": "Llegada del ferrocarril",
-   "tipo": "acontecimiento",
-   "curso": 6,
-   "unidad": 2,
-   "efecto": {
-    "tipo": "robar",
-    "n": 2
-   },
-   "dato": "En el siglo XIX el ferrocarril conectó ciudades y puertos y cambió la vida de las personas.",
-   "oa": "OA 4",
-   "emblema": "tren",
-   "frase": "El tren conectó ciudades y puertos en el siglo XIX.",
-   "fecha": {
-    "anio": 1851,
-    "texto": "1851"
-   }
-  },
-  {
-   "id": "CC-6-U2-007",
-   "nombre": "Puerto de Valparaíso",
-   "tipo": "lugar",
-   "curso": 6,
-   "unidad": 2,
-   "efecto": {
-    "tipo": "bonusDimension",
-    "dimension": "Economia",
-    "n": 10
-   },
-   "dato": "En el siglo XIX fue uno de los puertos más importantes del océano Pacífico.",
-   "oa": "OA 4",
-   "emblema": "ancla",
-   "frase": "En el siglo XIX fue uno de los puertos más importantes del océano Pacífico."
-  },
-  {
-   "id": "CC-6-U3-001",
-   "nombre": "Gabriela Mistral",
-   "tipo": "personaje",
-   "curso": 6,
-   "unidad": 3,
-   "efecto": {
-    "tipo": "curarTodos",
-    "n": 20
-   },
-   "dato": "Profesora y poeta chilena. En 1945 fue la primera persona latinoamericana en ganar el Nobel de Literatura.",
-   "oa": "OA 7",
-   "emblema": "pluma",
-   "frase": "Maestra y poeta: Premio Nobel de Literatura en 1945.",
-   "fecha": {
-    "anio": 1945,
-    "texto": "1945"
-   }
-  },
-  {
-   "id": "CC-6-U3-002",
-   "nombre": "Ciudadanía",
-   "tipo": "protagonista",
-   "curso": 6,
-   "unidad": 3,
-   "dimension": "Sociedad",
-   "resistencia": 60,
-   "retirada": 1,
-   "acciones": [
-    {
-     "nombre": "Participar",
-     "costo": 1,
-     "danio": 20
-    }
-   ],
-   "dato": "Durante el siglo XX más personas pudieron votar, estudiar y participar en la vida pública.",
-   "oa": "OA 7",
-   "emblema": "personas",
-   "conexiones": [
-    {
-     "causa": "CC-6-U3-005",
-     "texto": "Con el voto femenino, las mujeres pasaron a elegir presidente y parlamentarios."
-    }
-   ],
-   "frase": "En el siglo XX, más personas votaron y participaron."
-  },
-  {
-   "id": "CC-6-U3-003",
-   "nombre": "Recuperación de la democracia",
-   "tipo": "protagonista",
-   "curso": 6,
-   "unidad": 3,
-   "dimension": "Politica",
-   "resistencia": 110,
-   "retirada": 2,
-   "acciones": [
-    {
-     "nombre": "Plebiscito",
-     "costo": 2,
-     "danio": 50
+      "id": "CC-6-U1-005",
+      "nombre": "Javiera Carrera",
+      "tipo": "personaje",
+      "curso": 6,
+      "unidad": 1,
+      "efecto": {
+        "tipo": "robarPorReserva"
+      },
+      "dato": "Patriota destacada de la Independencia; según la tradición, bordó una de las primeras banderas chilenas.",
+      "oa": "OA 2",
+      "emblema": "estrella",
+      "frase": "Patriota destacada; según la tradición, bordó una bandera."
     },
     {
-     "nombre": "Consenso",
-     "costo": 3,
-     "danio": 70
-    }
-   ],
-   "dato": "El plebiscito de 1988 abrió el camino al retorno de la democracia en 1990.",
-   "oa": "OA 8",
-   "emblema": "urna",
-   "evolucionaDe": "CC-6-U3-002",
-   "frase": "El plebiscito de 1988 abrió el camino al retorno de la democracia en 1990.",
-   "habilidad": {
-    "nombre": "Reencuentro",
-    "tipo": "sanador",
-    "n": 10
-   }
-  },
-  {
-   "id": "CC-6-U3-004",
-   "nombre": "Clase media",
-   "tipo": "protagonista",
-   "curso": 6,
-   "unidad": 3,
-   "dimension": "Economia",
-   "resistencia": 70,
-   "retirada": 1,
-   "acciones": [
-    {
-     "nombre": "Estudiar y trabajar",
-     "costo": 2,
-     "danio": 40
-    }
-   ],
-   "dato": "En el siglo XX creció la clase media gracias al acceso a la educación y a nuevos empleos.",
-   "oa": "OA 7",
-   "emblema": "casa",
-   "conexiones": [
-    {
-     "causa": "CC-6-U3-006",
-     "texto": "Más educación permitió que creciera la clase media."
-    }
-   ],
-   "frase": "La educación y el empleo hicieron crecer la clase media."
-  },
-  {
-   "id": "CC-6-U3-005",
-   "nombre": "Voto femenino",
-   "tipo": "acontecimiento",
-   "curso": 6,
-   "unidad": 3,
-   "efecto": {
-    "tipo": "robarPorReserva"
-   },
-   "dato": "En 1949 las mujeres obtuvieron el derecho a votar en elecciones presidenciales y parlamentarias.",
-   "oa": "OA 7",
-   "emblema": "urna",
-   "frase": "1949: las mujeres ganan el voto presidencial; lo usan en 1952.",
-   "fecha": {
-    "anio": 1949,
-    "texto": "1949"
-   }
-  },
-  {
-   "id": "CC-6-U3-006",
-   "nombre": "Instrucción primaria obligatoria",
-   "tipo": "acontecimiento",
-   "curso": 6,
-   "unidad": 3,
-   "efecto": {
-    "tipo": "bonusDanio",
-    "n": 20
-   },
-   "dato": "Desde 1920 la educación primaria fue obligatoria en Chile, lo que amplió el acceso a la educación.",
-   "oa": "OA 7",
-   "emblema": "libro",
-   "frase": "Desde 1920, la educación primaria es obligatoria.",
-   "fecha": {
-    "anio": 1920,
-    "texto": "1920"
-   }
-  },
-  {
-   "id": "CC-6-U4-001",
-   "nombre": "Poder Legislativo",
-   "tipo": "protagonista",
-   "curso": 6,
-   "unidad": 4,
-   "dimension": "Politica",
-   "resistencia": 80,
-   "retirada": 1,
-   "acciones": [
-    {
-     "nombre": "Debatir leyes",
-     "costo": 2,
-     "danio": 40
-    }
-   ],
-   "dato": "El Congreso Nacional, formado por diputados y senadores, elabora y aprueba las leyes.",
-   "oa": "OA 15",
-   "emblema": "columna",
-   "frase": "Diputados y senadores elaboran las leyes."
-  },
-  {
-   "id": "CC-6-U4-002",
-   "nombre": "Poder Judicial",
-   "tipo": "protagonista",
-   "curso": 6,
-   "unidad": 4,
-   "dimension": "Sociedad",
-   "resistencia": 70,
-   "retirada": 1,
-   "acciones": [
-    {
-     "nombre": "Aplicar la ley",
-     "costo": 1,
-     "danio": 20
+      "id": "CC-6-U1-006",
+      "nombre": "Cabildo abierto de 1810",
+      "tipo": "acontecimiento",
+      "curso": 6,
+      "unidad": 1,
+      "efecto": {
+        "tipo": "robar",
+        "n": 2
+      },
+      "dato": "El 18 de septiembre de 1810 se formó la Primera Junta Nacional de Gobierno.",
+      "oa": "OA 2",
+      "emblema": "pergamino",
+      "frase": "El 18 de septiembre de 1810 se formó la Primera Junta Nacional de Gobierno.",
+      "fecha": {
+        "anio": 1810,
+        "texto": "1810"
+      }
     },
     {
-     "nombre": "Justicia",
-     "costo": 2,
-     "danio": 40
-    }
-   ],
-   "dato": "Los tribunales de justicia aplican las leyes y resuelven los conflictos entre las personas.",
-   "oa": "OA 15",
-   "emblema": "balanza",
-   "frase": "Los tribunales aplican la ley y resuelven conflictos."
-  },
-  {
-   "id": "CC-6-U4-003",
-   "nombre": "Región de O'Higgins",
-   "tipo": "protagonista",
-   "curso": 6,
-   "unidad": 4,
-   "dimension": "Territorio",
-   "resistencia": 80,
-   "retirada": 1,
-   "acciones": [
+      "id": "CC-6-U1-007",
+      "nombre": "Cordillera de los Andes",
+      "tipo": "lugar",
+      "curso": 6,
+      "unidad": 1,
+      "efecto": {
+        "tipo": "bonusDimension",
+        "dimension": "Territorio",
+        "n": 10
+      },
+      "dato": "En 1817 el Ejército de los Andes la cruzó desde Mendoza para luchar por la independencia de Chile.",
+      "oa": "OA 1",
+      "emblema": "montana",
+      "frase": "En 1817 el Ejército de los Andes la cruzó desde Mendoza."
+    },
     {
-     "nombre": "El Teniente",
-     "costo": 2,
-     "danio": 40
-    }
-   ],
-   "dato": "Su economía se basa en la agricultura y la minería; allí está El Teniente, gran mina subterránea de cobre.",
-   "oa": "OA 13",
-   "emblema": "montana",
-   "frase": "Agricultura, minería y la mina El Teniente."
-  },
-  {
-   "id": "CC-6-U4-004",
-   "nombre": "Pueblo aymara",
-   "tipo": "protagonista",
-   "curso": 6,
-   "unidad": 4,
-   "dimension": "Cultura",
-   "resistencia": 70,
-   "retirada": 1,
-   "acciones": [
+      "id": "CC-6-U1-008",
+      "nombre": "Ejército de los Andes",
+      "tipo": "protagonista",
+      "curso": 6,
+      "unidad": 1,
+      "dimension": "Territorio",
+      "resistencia": 80,
+      "retirada": 1,
+      "acciones": [
+        {
+          "nombre": "Cruce de los Andes",
+          "costo": 2,
+          "danio": 40
+        }
+      ],
+      "dato": "Ejército formado en Mendoza por José de San Martín que en 1817 cruzó la cordillera para liberar Chile.",
+      "oa": "OA 2",
+      "emblema": "montana",
+      "frase": "En 1817 cruzó la cordillera para liberar Chile.",
+      "habilidad": {
+        "nombre": "Cruce planificado",
+        "tipo": "saberAlEntrar",
+        "n": 1
+      }
+    },
     {
-     "nombre": "Vida en el altiplano",
-     "costo": 2,
-     "danio": 40
+      "id": "CC-6-U1-009",
+      "nombre": "Ejército realista",
+      "tipo": "protagonista",
+      "curso": 6,
+      "unidad": 1,
+      "dimension": "Politica",
+      "resistencia": 80,
+      "retirada": 1,
+      "acciones": [
+        {
+          "nombre": "Lealtad al rey",
+          "costo": 1,
+          "danio": 20
+        },
+        {
+          "nombre": "Reconquista",
+          "costo": 2,
+          "danio": 40
+        }
+      ],
+      "dato": "Tropas fieles al rey de España que combatieron a los patriotas; en 1814 vencieron en la batalla de Rancagua.",
+      "oa": "OA 2",
+      "emblema": "escudo",
+      "conexiones": [
+        {
+          "causa": "CC-6-U1-010",
+          "texto": "Tras vencer en Rancagua, el ejército realista recuperó el control de Chile."
+        }
+      ],
+      "frase": "Fieles al rey de España; en 1814 vencieron en Rancagua."
+    },
+    {
+      "id": "CC-6-U1-010",
+      "nombre": "Reconquista española",
+      "tipo": "acontecimiento",
+      "curso": 6,
+      "unidad": 1,
+      "efecto": {
+        "tipo": "bonusDanio",
+        "n": 20
+      },
+      "dato": "Tras la batalla de Rancagua (1814), los realistas gobernaron Chile hasta la victoria patriota de Chacabuco (1817).",
+      "oa": "OA 2",
+      "emblema": "corona",
+      "frase": "De Rancagua (1814) a Chacabuco (1817), Chile volvió a manos realistas.",
+      "fecha": {
+        "anio": 1814,
+        "texto": "1814–1817"
+      }
+    },
+    {
+      "id": "CC-6-U1-011",
+      "nombre": "Manuel Rodríguez",
+      "tipo": "personaje",
+      "efecto": {
+        "tipo": "debilitar",
+        "n": 20
+      },
+      "dato": "Guerrillero patriota que durante la Reconquista se disfrazaba para burlar a los realistas y organizar la resistencia.",
+      "frase": "Guerrillero que burlaba a los realistas con disfraces.",
+      "emblema": "mapa",
+      "fecha": {
+        "anio": 1816,
+        "texto": "1815–1817"
+      },
+      "curso": 6,
+      "unidad": 1,
+      "oa": "OA 2"
+    },
+    {
+      "id": "CC-6-U1-012",
+      "nombre": "Mariano Osorio",
+      "tipo": "personaje",
+      "efecto": {
+        "tipo": "quitarSaber",
+        "n": 1
+      },
+      "dato": "Militar español enviado desde el Perú. En 1814 venció a los patriotas en Rancagua y comenzó la Reconquista.",
+      "frase": "Venció en Rancagua en 1814 e inició la Reconquista.",
+      "emblema": "escudo",
+      "fecha": {
+        "anio": 1814,
+        "texto": "1814"
+      },
+      "curso": 6,
+      "unidad": 1,
+      "oa": "OA 2"
+    },
+    {
+      "id": "CC-6-U1-013",
+      "nombre": "Batalla de Rancagua",
+      "tipo": "acontecimiento",
+      "efecto": {
+        "tipo": "asedio",
+        "n": 10
+      },
+      "dato": "En octubre de 1814 el ejército realista derrotó a los patriotas en Rancagua. Muchos patriotas huyeron a Mendoza.",
+      "frase": "En 1814 los realistas vencieron y los patriotas huyeron a Mendoza.",
+      "emblema": "escudo",
+      "fecha": {
+        "anio": 1814,
+        "texto": "1814"
+      },
+      "curso": 6,
+      "unidad": 1,
+      "oa": "OA 2"
+    },
+    {
+      "id": "CC-6-U1-014",
+      "nombre": "Regimiento Talavera",
+      "tipo": "protagonista",
+      "dimension": "Politica",
+      "resistencia": 90,
+      "retirada": 1,
+      "acciones": [
+        {
+          "nombre": "Disciplina",
+          "costo": 2,
+          "danio": 40
+        },
+        {
+          "nombre": "Represión",
+          "costo": 3,
+          "danio": 60,
+          "efecto": {
+            "tipo": "quitarSaber",
+            "n": 1
+          }
+        }
+      ],
+      "dato": "Regimiento español llegado en 1814. Durante la Reconquista fue el símbolo del control realista sobre Chile.",
+      "frase": "Símbolo del control realista durante la Reconquista.",
+      "emblema": "escudo",
+      "habilidad": {
+        "tipo": "resistente",
+        "nombre": "Veteranos",
+        "n": 10
+      },
+      "curso": 6,
+      "unidad": 1,
+      "oa": "OA 2"
+    },
+    {
+      "id": "CC-6-U1-015",
+      "nombre": "Expedición Libertadora del Perú",
+      "tipo": "protagonista",
+      "dimension": "Territorio",
+      "resistencia": 120,
+      "retirada": 2,
+      "acciones": [
+        {
+          "nombre": "Escuadra libertadora",
+          "costo": 2,
+          "danio": 50,
+          "efecto": {
+            "tipo": "robar",
+            "n": 1
+          }
+        },
+        {
+          "nombre": "Hacia Lima",
+          "costo": 3,
+          "danio": 80
+        }
+      ],
+      "dato": "En 1820 zarpó desde Valparaíso una escuadra con el ejército de San Martín para liberar el Perú, último bastión realista.",
+      "frase": "En 1820 zarpó desde Valparaíso para liberar el Perú.",
+      "emblema": "barco",
+      "habilidad": {
+        "tipo": "alianza",
+        "nombre": "Ejército unido",
+        "n": 10
+      },
+      "evolucionaDe": "CC-6-U1-008",
+      "fecha": {
+        "anio": 1820,
+        "texto": "1820"
+      },
+      "curso": 6,
+      "unidad": 1,
+      "oa": "OA 2"
+    },
+    {
+      "id": "CC-6-U2-001",
+      "nombre": "Andrés Bello",
+      "tipo": "personaje",
+      "curso": 6,
+      "unidad": 2,
+      "efecto": {
+        "tipo": "robar",
+        "n": 3
+      },
+      "dato": "Redactó el Código Civil de Chile y fue el primer rector de la Universidad de Chile (1843).",
+      "oa": "OA 4",
+      "emblema": "libro",
+      "frase": "Autor del Código Civil y primer rector de la U. de Chile.",
+      "fecha": {
+        "anio": 1843,
+        "texto": "1843"
+      }
+    },
+    {
+      "id": "CC-6-U2-002",
+      "nombre": "Liberales",
+      "tipo": "protagonista",
+      "curso": 6,
+      "unidad": 2,
+      "dimension": "Politica",
+      "resistencia": 70,
+      "retirada": 1,
+      "acciones": [
+        {
+          "nombre": "Reformas",
+          "costo": 1,
+          "danio": 20
+        },
+        {
+          "nombre": "Limitar el poder",
+          "costo": 2,
+          "danio": 40
+        }
+      ],
+      "dato": "En la segunda mitad del siglo XIX impulsaron reformas que limitaron el poder del Presidente.",
+      "oa": "OA 3",
+      "emblema": "urna",
+      "frase": "Impulsaron reformas para limitar el poder presidencial."
+    },
+    {
+      "id": "CC-6-U2-003",
+      "nombre": "Pampa salitrera",
+      "tipo": "protagonista",
+      "curso": 6,
+      "unidad": 2,
+      "dimension": "Economia",
+      "resistencia": 70,
+      "retirada": 1,
+      "acciones": [
+        {
+          "nombre": "Oro blanco",
+          "costo": 1,
+          "danio": 20
+        }
+      ],
+      "dato": "Tras la Guerra del Pacífico, Chile incorporó Tarapacá y Antofagasta, regiones ricas en salitre.",
+      "oa": "OA 6",
+      "emblema": "engranaje",
+      "conexiones": [
+        {
+          "causa": "CC-6-U2-006",
+          "texto": "El ferrocarril llevaba el salitre de la pampa a los puertos."
+        }
+      ],
+      "frase": "Tras la Guerra del Pacífico, Chile sumó territorios ricos en salitre."
+    },
+    {
+      "id": "CC-6-U2-004",
+      "nombre": "Cuestión social",
+      "tipo": "protagonista",
+      "curso": 6,
+      "unidad": 2,
+      "dimension": "Sociedad",
+      "resistencia": 100,
+      "retirada": 2,
+      "acciones": [
+        {
+          "nombre": "Organizarse",
+          "costo": 2,
+          "danio": 50
+        },
+        {
+          "nombre": "Exigir derechos",
+          "costo": 3,
+          "danio": 70
+        }
+      ],
+      "dato": "La riqueza del salitre trajo también la cuestión social: malas condiciones de vida y trabajo de obreros.",
+      "oa": "OA 6",
+      "emblema": "personas",
+      "evolucionaDe": "CC-6-U2-003",
+      "frase": "La otra cara del salitre: pobreza y trabajo duro.",
+      "habilidad": {
+        "nombre": "Organización obrera",
+        "tipo": "fuerzaReserva",
+        "n": 10
+      }
+    },
+    {
+      "id": "CC-6-U2-005",
+      "nombre": "Constitución de 1833",
+      "tipo": "acontecimiento",
+      "curso": 6,
+      "unidad": 2,
+      "efecto": {
+        "tipo": "proteger"
+      },
+      "dato": "Organizó la República con un Presidente con mucho poder y rigió hasta 1925.",
+      "oa": "OA 3",
+      "emblema": "pergamino",
+      "frase": "Organizó la República con un Presidente con mucho poder y rigió hasta 1925.",
+      "fecha": {
+        "anio": 1833,
+        "texto": "1833"
+      }
+    },
+    {
+      "id": "CC-6-U2-006",
+      "nombre": "Llegada del ferrocarril",
+      "tipo": "acontecimiento",
+      "curso": 6,
+      "unidad": 2,
+      "efecto": {
+        "tipo": "robar",
+        "n": 2
+      },
+      "dato": "En el siglo XIX el ferrocarril conectó ciudades y puertos y cambió la vida de las personas.",
+      "oa": "OA 4",
+      "emblema": "tren",
+      "frase": "El tren conectó ciudades y puertos en el siglo XIX.",
+      "fecha": {
+        "anio": 1851,
+        "texto": "1851"
+      }
+    },
+    {
+      "id": "CC-6-U2-007",
+      "nombre": "Puerto de Valparaíso",
+      "tipo": "lugar",
+      "curso": 6,
+      "unidad": 2,
+      "efecto": {
+        "tipo": "bonusDimension",
+        "dimension": "Economia",
+        "n": 10
+      },
+      "dato": "En el siglo XIX fue uno de los puertos más importantes del océano Pacífico.",
+      "oa": "OA 4",
+      "emblema": "ancla",
+      "frase": "En el siglo XIX fue uno de los puertos más importantes del océano Pacífico."
+    },
+    {
+      "id": "CC-6-U2-008",
+      "nombre": "Diego Portales",
+      "tipo": "personaje",
+      "efecto": {
+        "tipo": "bonusDanio",
+        "n": 30,
+        "dimension": "Politica"
+      },
+      "dato": "Ministro que impulsó un gobierno fuerte y ordenado. Sus ideas inspiraron la Constitución de 1833.",
+      "frase": "Impulsó un gobierno fuerte que inspiró la Constitución de 1833.",
+      "emblema": "columna",
+      "fecha": {
+        "anio": 1830,
+        "texto": "1830"
+      },
+      "curso": 6,
+      "unidad": 2,
+      "oa": "OA 4"
+    },
+    {
+      "id": "CC-6-U2-009",
+      "nombre": "Batalla de Lircay",
+      "tipo": "acontecimiento",
+      "efecto": {
+        "tipo": "debilitar",
+        "n": 30
+      },
+      "dato": "En 1830 los conservadores, llamados pelucones, vencieron a los liberales o pipiolos y gobernaron por tres décadas.",
+      "frase": "En 1830 los pelucones vencieron a los pipiolos.",
+      "emblema": "escudo",
+      "fecha": {
+        "anio": 1830,
+        "texto": "1830"
+      },
+      "curso": 6,
+      "unidad": 2,
+      "oa": "OA 4"
+    },
+    {
+      "id": "CC-6-U2-010",
+      "nombre": "Pipiolos",
+      "tipo": "protagonista",
+      "dimension": "Politica",
+      "resistencia": 70,
+      "retirada": 1,
+      "acciones": [
+        {
+          "nombre": "Constitución de 1828",
+          "costo": 1,
+          "danio": 20
+        },
+        {
+          "nombre": "Federalismo",
+          "costo": 2,
+          "danio": 40,
+          "efecto": {
+            "tipo": "robar",
+            "n": 1
+          }
+        }
+      ],
+      "dato": "Así se llamaba a los liberales de la década de 1820. Promovieron la Constitución liberal de 1828.",
+      "frase": "Los liberales de 1820, autores de la Constitución de 1828.",
+      "emblema": "pergamino",
+      "habilidad": {
+        "tipo": "inspirador",
+        "nombre": "Ideas nuevas"
+      },
+      "curso": 6,
+      "unidad": 2,
+      "oa": "OA 4"
+    },
+    {
+      "id": "CC-6-U2-011",
+      "nombre": "Francisco Bilbao",
+      "tipo": "personaje",
+      "efecto": {
+        "tipo": "saberReserva",
+        "n": 1
+      },
+      "dato": "Escritor que fundó en 1850 la Sociedad de la Igualdad, que defendía la participación de artesanos y obreros.",
+      "frase": "Fundó la Sociedad de la Igualdad en 1850.",
+      "emblema": "pluma",
+      "fecha": {
+        "anio": 1850,
+        "texto": "1850"
+      },
+      "curso": 6,
+      "unidad": 2,
+      "oa": "OA 4"
+    },
+    {
+      "id": "CC-6-U2-012",
+      "nombre": "Pampinos",
+      "tipo": "protagonista",
+      "dimension": "Sociedad",
+      "resistencia": 80,
+      "retirada": 1,
+      "acciones": [
+        {
+          "nombre": "Faena",
+          "costo": 1,
+          "danio": 20
+        },
+        {
+          "nombre": "Calichera",
+          "costo": 2,
+          "danio": 40,
+          "efecto": {
+            "tipo": "robar",
+            "n": 1
+          }
+        }
+      ],
+      "dato": "Trabajadores de las oficinas salitreras. Vivían en campamentos del desierto con largas jornadas y pago en fichas.",
+      "frase": "Trabajadores del salitre que vivían en el desierto.",
+      "emblema": "personas",
+      "habilidad": {
+        "tipo": "alianza",
+        "nombre": "Compañeros",
+        "n": 10
+      },
+      "curso": 6,
+      "unidad": 2,
+      "oa": "OA 4"
+    },
+    {
+      "id": "CC-6-U2-013",
+      "nombre": "John Thomas North",
+      "tipo": "personaje",
+      "efecto": {
+        "tipo": "robar",
+        "n": 2
+      },
+      "dato": "Empresario británico que reunió muchas oficinas salitreras y ferrocarriles. Lo llamaron el rey del salitre.",
+      "frase": "El empresario al que llamaron el rey del salitre.",
+      "emblema": "moneda",
+      "fecha": {
+        "anio": 1885,
+        "texto": "siglo XIX"
+      },
+      "curso": 6,
+      "unidad": 2,
+      "oa": "OA 4"
+    },
+    {
+      "id": "CC-6-U3-001",
+      "nombre": "Gabriela Mistral",
+      "tipo": "personaje",
+      "curso": 6,
+      "unidad": 3,
+      "efecto": {
+        "tipo": "curarTodos",
+        "n": 20
+      },
+      "dato": "Profesora y poeta chilena. En 1945 fue la primera persona latinoamericana en ganar el Nobel de Literatura.",
+      "oa": "OA 7",
+      "emblema": "pluma",
+      "frase": "Maestra y poeta: Premio Nobel de Literatura en 1945.",
+      "fecha": {
+        "anio": 1945,
+        "texto": "1945"
+      }
+    },
+    {
+      "id": "CC-6-U3-002",
+      "nombre": "Ciudadanía",
+      "tipo": "protagonista",
+      "curso": 6,
+      "unidad": 3,
+      "dimension": "Sociedad",
+      "resistencia": 60,
+      "retirada": 1,
+      "acciones": [
+        {
+          "nombre": "Participar",
+          "costo": 1,
+          "danio": 20
+        }
+      ],
+      "dato": "Durante el siglo XX más personas pudieron votar, estudiar y participar en la vida pública.",
+      "oa": "OA 7",
+      "emblema": "personas",
+      "conexiones": [
+        {
+          "causa": "CC-6-U3-005",
+          "texto": "Con el voto femenino, las mujeres pasaron a elegir presidente y parlamentarios."
+        }
+      ],
+      "frase": "En el siglo XX, más personas votaron y participaron."
+    },
+    {
+      "id": "CC-6-U3-003",
+      "nombre": "Recuperación de la democracia",
+      "tipo": "protagonista",
+      "curso": 6,
+      "unidad": 3,
+      "dimension": "Politica",
+      "resistencia": 110,
+      "retirada": 2,
+      "acciones": [
+        {
+          "nombre": "Plebiscito",
+          "costo": 2,
+          "danio": 50
+        },
+        {
+          "nombre": "Consenso",
+          "costo": 3,
+          "danio": 70
+        }
+      ],
+      "dato": "El plebiscito de 1988 abrió el camino al retorno de la democracia en 1990.",
+      "oa": "OA 8",
+      "emblema": "urna",
+      "evolucionaDe": "CC-6-U3-002",
+      "frase": "El plebiscito de 1988 abrió el camino al retorno de la democracia en 1990.",
+      "habilidad": {
+        "nombre": "Reencuentro",
+        "tipo": "sanador",
+        "n": 10
+      }
+    },
+    {
+      "id": "CC-6-U3-004",
+      "nombre": "Clase media",
+      "tipo": "protagonista",
+      "curso": 6,
+      "unidad": 3,
+      "dimension": "Economia",
+      "resistencia": 70,
+      "retirada": 1,
+      "acciones": [
+        {
+          "nombre": "Estudiar y trabajar",
+          "costo": 2,
+          "danio": 40
+        }
+      ],
+      "dato": "En el siglo XX creció la clase media gracias al acceso a la educación y a nuevos empleos.",
+      "oa": "OA 7",
+      "emblema": "casa",
+      "conexiones": [
+        {
+          "causa": "CC-6-U3-006",
+          "texto": "Más educación permitió que creciera la clase media."
+        }
+      ],
+      "frase": "La educación y el empleo hicieron crecer la clase media."
+    },
+    {
+      "id": "CC-6-U3-005",
+      "nombre": "Voto femenino",
+      "tipo": "acontecimiento",
+      "curso": 6,
+      "unidad": 3,
+      "efecto": {
+        "tipo": "robarPorReserva"
+      },
+      "dato": "En 1949 las mujeres obtuvieron el derecho a votar en elecciones presidenciales y parlamentarias.",
+      "oa": "OA 7",
+      "emblema": "urna",
+      "frase": "1949: las mujeres ganan el voto presidencial; lo usan en 1952.",
+      "fecha": {
+        "anio": 1949,
+        "texto": "1949"
+      }
+    },
+    {
+      "id": "CC-6-U3-006",
+      "nombre": "Instrucción primaria obligatoria",
+      "tipo": "acontecimiento",
+      "curso": 6,
+      "unidad": 3,
+      "efecto": {
+        "tipo": "bonusDanio",
+        "n": 20
+      },
+      "dato": "Desde 1920 la educación primaria fue obligatoria en Chile, lo que amplió el acceso a la educación.",
+      "oa": "OA 7",
+      "emblema": "libro",
+      "frase": "Desde 1920, la educación primaria es obligatoria.",
+      "fecha": {
+        "anio": 1920,
+        "texto": "1920"
+      }
+    },
+    {
+      "id": "CC-6-U3-007",
+      "nombre": "Mancomunales",
+      "tipo": "protagonista",
+      "dimension": "Sociedad",
+      "resistencia": 80,
+      "retirada": 1,
+      "acciones": [
+        {
+          "nombre": "Ayuda mutua",
+          "costo": 2,
+          "danio": 30,
+          "efecto": {
+            "tipo": "curarTodos",
+            "n": 10
+          }
+        },
+        {
+          "nombre": "Organización obrera",
+          "costo": 3,
+          "danio": 60
+        }
+      ],
+      "dato": "Organizaciones de trabajadores del norte que, desde 1900, se ayudaban en enfermedades y accidentes y defendían sus derechos.",
+      "frase": "Trabajadores que se ayudaban entre sí y defendían sus derechos.",
+      "emblema": "personas",
+      "curso": 6,
+      "unidad": 3,
+      "oa": "OA 7"
+    },
+    {
+      "id": "CC-6-U3-008",
+      "nombre": "Luis Emilio Recabarren",
+      "tipo": "personaje",
+      "efecto": {
+        "tipo": "buscarProtagonista",
+        "n": 4
+      },
+      "dato": "Tipógrafo y dirigente obrero. Fundó periódicos y organizaciones de trabajadores a comienzos del siglo XX.",
+      "frase": "Dirigente obrero que fundó periódicos de trabajadores.",
+      "emblema": "pluma",
+      "fecha": {
+        "anio": 1912,
+        "texto": "siglo XX"
+      },
+      "curso": 6,
+      "unidad": 3,
+      "oa": "OA 7"
+    },
+    {
+      "id": "CC-6-U3-009",
+      "nombre": "República parlamentaria",
+      "tipo": "protagonista",
+      "dimension": "Politica",
+      "resistencia": 110,
+      "retirada": 2,
+      "acciones": [
+        {
+          "nombre": "Rotativa ministerial",
+          "costo": 2,
+          "danio": 50,
+          "efecto": {
+            "tipo": "quitarSaber",
+            "n": 1
+          }
+        },
+        {
+          "nombre": "Congreso",
+          "costo": 3,
+          "danio": 70
+        }
+      ],
+      "dato": "Entre 1891 y 1925 el Congreso tuvo más poder que el Presidente, y los ministros cambiaban muy seguido.",
+      "frase": "De 1891 a 1925, el Congreso tuvo más poder que el Presidente.",
+      "emblema": "columna",
+      "habilidad": {
+        "tipo": "contraataque",
+        "nombre": "Interpelación",
+        "n": 20
+      },
+      "evolucionaDe": "CC-6-U2-002",
+      "fecha": {
+        "anio": 1891,
+        "texto": "1891–1925"
+      },
+      "curso": 6,
+      "unidad": 3,
+      "oa": "OA 3"
+    },
+    {
+      "id": "CC-6-U3-010",
+      "nombre": "Mineros del carbón",
+      "tipo": "protagonista",
+      "dimension": "Economia",
+      "resistencia": 90,
+      "retirada": 2,
+      "acciones": [
+        {
+          "nombre": "Lota",
+          "costo": 2,
+          "danio": 40
+        },
+        {
+          "nombre": "Bajo el mar",
+          "costo": 3,
+          "danio": 60,
+          "efecto": {
+            "tipo": "asedio",
+            "n": 10
+          }
+        }
+      ],
+      "dato": "En Lota y Coronel se extraía carbón desde galerías bajo el mar. Fue una de las industrias más duras del siglo XX.",
+      "frase": "Extraían carbón en galerías bajo el mar, en Lota.",
+      "emblema": "engranaje",
+      "habilidad": {
+        "tipo": "tenaz",
+        "nombre": "Fuerza minera"
+      },
+      "curso": 6,
+      "unidad": 3,
+      "oa": "OA 7"
+    },
+    {
+      "id": "CC-6-U3-011",
+      "nombre": "Educación pública",
+      "tipo": "protagonista",
+      "dimension": "Cultura",
+      "resistencia": 80,
+      "retirada": 1,
+      "acciones": [
+        {
+          "nombre": "Liceos",
+          "costo": 1,
+          "danio": 20,
+          "efecto": {
+            "tipo": "robar",
+            "n": 1
+          }
+        },
+        {
+          "nombre": "Escuelas para todos",
+          "costo": 2,
+          "danio": 40
+        }
+      ],
+      "dato": "En el siglo XX el Estado abrió escuelas y liceos públicos en todo el país, y más niños y niñas pudieron estudiar.",
+      "frase": "El Estado abrió escuelas y liceos públicos en todo Chile.",
+      "emblema": "libro",
+      "habilidad": {
+        "tipo": "saberAlEntrar",
+        "nombre": "Aprender",
+        "n": 1
+      },
+      "curso": 6,
+      "unidad": 3,
+      "oa": "OA 7"
+    },
+    {
+      "id": "CC-6-U4-001",
+      "nombre": "Poder Legislativo",
+      "tipo": "protagonista",
+      "curso": 6,
+      "unidad": 4,
+      "dimension": "Politica",
+      "resistencia": 80,
+      "retirada": 1,
+      "acciones": [
+        {
+          "nombre": "Debatir leyes",
+          "costo": 2,
+          "danio": 40
+        }
+      ],
+      "dato": "El Congreso Nacional, formado por diputados y senadores, elabora y aprueba las leyes.",
+      "oa": "OA 15",
+      "emblema": "columna",
+      "frase": "Diputados y senadores elaboran las leyes."
+    },
+    {
+      "id": "CC-6-U4-002",
+      "nombre": "Poder Judicial",
+      "tipo": "protagonista",
+      "curso": 6,
+      "unidad": 4,
+      "dimension": "Sociedad",
+      "resistencia": 70,
+      "retirada": 1,
+      "acciones": [
+        {
+          "nombre": "Aplicar la ley",
+          "costo": 1,
+          "danio": 20
+        },
+        {
+          "nombre": "Justicia",
+          "costo": 2,
+          "danio": 40
+        }
+      ],
+      "dato": "Los tribunales de justicia aplican las leyes y resuelven los conflictos entre las personas.",
+      "oa": "OA 15",
+      "emblema": "balanza",
+      "frase": "Los tribunales aplican la ley y resuelven conflictos."
+    },
+    {
+      "id": "CC-6-U4-003",
+      "nombre": "Región de O'Higgins",
+      "tipo": "protagonista",
+      "curso": 6,
+      "unidad": 4,
+      "dimension": "Territorio",
+      "resistencia": 80,
+      "retirada": 1,
+      "acciones": [
+        {
+          "nombre": "El Teniente",
+          "costo": 2,
+          "danio": 40
+        }
+      ],
+      "dato": "Su economía se basa en la agricultura y la minería; allí está El Teniente, gran mina subterránea de cobre.",
+      "oa": "OA 13",
+      "emblema": "montana",
+      "frase": "Agricultura, minería y la mina El Teniente."
+    },
+    {
+      "id": "CC-6-U4-004",
+      "nombre": "Pueblo aymara",
+      "tipo": "protagonista",
+      "curso": 6,
+      "unidad": 4,
+      "dimension": "Cultura",
+      "resistencia": 70,
+      "retirada": 1,
+      "acciones": [
+        {
+          "nombre": "Vida en el altiplano",
+          "costo": 2,
+          "danio": 40
+        }
+      ],
+      "dato": "Habita el altiplano y ha aprovechado sus condiciones cultivando quínoa y criando llamas y alpacas.",
+      "oa": "OA 12",
+      "emblema": "sol",
+      "frase": "Quínoa, llamas y alpacas en el altiplano."
+    },
+    {
+      "id": "CC-6-U4-005",
+      "nombre": "Constitución Política",
+      "tipo": "acontecimiento",
+      "curso": 6,
+      "unidad": 4,
+      "efecto": {
+        "tipo": "proteger"
+      },
+      "dato": "Establece cómo se organiza el país y garantiza los derechos y libertades de las personas.",
+      "oa": "OA 16",
+      "emblema": "pergamino",
+      "frase": "Organiza el país y garantiza derechos y libertades."
+    },
+    {
+      "id": "CC-6-U4-006",
+      "nombre": "Municipio",
+      "tipo": "lugar",
+      "curso": 6,
+      "unidad": 4,
+      "efecto": {
+        "tipo": "bonusDimension",
+        "dimension": "Politica",
+        "n": 10
+      },
+      "dato": "Es la institución más cercana a la comunidad; lo dirigen el alcalde y el concejo, elegidos por votación.",
+      "oa": "OA 15",
+      "emblema": "casa",
+      "frase": "La institución más cercana a la comunidad."
+    },
+    {
+      "id": "CC-6-U4-007",
+      "nombre": "Gobierno regional",
+      "tipo": "protagonista",
+      "dimension": "Territorio",
+      "resistencia": 80,
+      "retirada": 1,
+      "acciones": [
+        {
+          "nombre": "Consejo regional",
+          "costo": 1,
+          "danio": 20
+        },
+        {
+          "nombre": "Proyectos regionales",
+          "costo": 2,
+          "danio": 40,
+          "efecto": {
+            "tipo": "curar",
+            "n": 20
+          }
+        }
+      ],
+      "dato": "Cada región de Chile tiene un gobierno regional que decide proyectos para su territorio, como caminos y hospitales.",
+      "frase": "Decide proyectos para su región, como caminos y hospitales.",
+      "emblema": "mapa",
+      "curso": 6,
+      "unidad": 4,
+      "oa": "OA 15"
+    },
+    {
+      "id": "CC-6-U4-008",
+      "nombre": "Región de Magallanes",
+      "tipo": "protagonista",
+      "dimension": "Economia",
+      "resistencia": 100,
+      "retirada": 2,
+      "acciones": [
+        {
+          "nombre": "Ganadería ovina",
+          "costo": 2,
+          "danio": 40
+        },
+        {
+          "nombre": "Estrecho",
+          "costo": 3,
+          "danio": 60,
+          "efecto": {
+            "tipo": "debilitar",
+            "n": 20
+          }
+        }
+      ],
+      "dato": "La región más austral de Chile. Vive de la ganadería de ovejas, el turismo y la energía.",
+      "frase": "La región más austral, con ganadería de ovejas y turismo.",
+      "emblema": "ola",
+      "habilidad": {
+        "tipo": "resistente",
+        "nombre": "Viento patagónico",
+        "n": 10
+      },
+      "curso": 6,
+      "unidad": 4,
+      "oa": "OA 15"
+    },
+    {
+      "id": "CC-6-U4-009",
+      "nombre": "Comunidades aymaras de hoy",
+      "tipo": "protagonista",
+      "dimension": "Cultura",
+      "resistencia": 100,
+      "retirada": 2,
+      "acciones": [
+        {
+          "nombre": "Lengua viva",
+          "costo": 2,
+          "danio": 40,
+          "efecto": {
+            "tipo": "robar",
+            "n": 1
+          }
+        },
+        {
+          "nombre": "Machaq Mara",
+          "costo": 3,
+          "danio": 70
+        }
+      ],
+      "dato": "Las comunidades aymaras mantienen su lengua y celebran el Machaq Mara, el año nuevo andino, cada 21 de junio.",
+      "frase": "Celebran el Machaq Mara, el año nuevo andino, cada 21 de junio.",
+      "emblema": "sol",
+      "habilidad": {
+        "tipo": "sanador",
+        "nombre": "Comunidad",
+        "n": 10
+      },
+      "evolucionaDe": "CC-6-U4-004",
+      "curso": 6,
+      "unidad": 4,
+      "oa": "OA 12"
     }
-   ],
-   "dato": "Habita el altiplano y ha aprovechado sus condiciones cultivando quínoa y criando llamas y alpacas.",
-   "oa": "OA 12",
-   "emblema": "sol",
-   "frase": "Quínoa, llamas y alpacas en el altiplano."
-  },
-  {
-   "id": "CC-6-U4-005",
-   "nombre": "Constitución Política",
-   "tipo": "acontecimiento",
-   "curso": 6,
-   "unidad": 4,
-   "efecto": {
-    "tipo": "proteger"
-   },
-   "dato": "Establece cómo se organiza el país y garantiza los derechos y libertades de las personas.",
-   "oa": "OA 16",
-   "emblema": "pergamino",
-   "frase": "Organiza el país y garantiza derechos y libertades."
-  },
-  {
-   "id": "CC-6-U4-006",
-   "nombre": "Municipio",
-   "tipo": "lugar",
-   "curso": 6,
-   "unidad": 4,
-   "efecto": {
-    "tipo": "bonusDimension",
-    "dimension": "Politica",
-    "n": 10
-   },
-   "dato": "Es la institución más cercana a la comunidad; lo dirigen el alcalde y el concejo, elegidos por votación.",
-   "oa": "OA 15",
-   "emblema": "casa",
-   "frase": "La institución más cercana a la comunidad."
-  }
- ]
+  ]
 }

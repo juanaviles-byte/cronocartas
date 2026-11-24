@@ -1,807 +1,1205 @@
 {
- "curso": 7,
- "unidades": [
-  "Primeras sociedades y civilizaciones",
-  "La Antigüedad clásica",
-  "La Edad Media",
-  "Civilizaciones americanas"
- ],
- "cartas": [
-  {
-   "id": "CC-7-U1-001",
-   "nombre": "Cazadores-recolectores",
-   "tipo": "protagonista",
-   "curso": 7,
-   "unidad": 1,
-   "dimension": "Territorio",
-   "resistencia": 60,
-   "retirada": 1,
-   "acciones": [
+  "curso": 7,
+  "unidades": [
+    "Primeras sociedades y civilizaciones",
+    "La Antigüedad clásica",
+    "La Edad Media",
+    "Civilizaciones americanas"
+  ],
+  "cartas": [
     {
-     "nombre": "Recolectar",
-     "costo": 1,
-     "danio": 20
-    }
-   ],
-   "dato": "En el Paleolítico los grupos humanos eran nómades y vivían de la caza y la recolección.",
-   "oa": "OA 1",
-   "emblema": "arbol",
-   "frase": "Nómades que vivían de la caza y la recolección."
-  },
-  {
-   "id": "CC-7-U1-002",
-   "nombre": "Aldea neolítica",
-   "tipo": "protagonista",
-   "curso": 7,
-   "unidad": 1,
-   "dimension": "Economia",
-   "resistencia": 100,
-   "retirada": 2,
-   "acciones": [
-    {
-     "nombre": "Domesticar",
-     "costo": 2,
-     "danio": 50
+      "id": "CC-7-U1-001",
+      "nombre": "Cazadores-recolectores",
+      "tipo": "protagonista",
+      "curso": 7,
+      "unidad": 1,
+      "dimension": "Territorio",
+      "resistencia": 60,
+      "retirada": 1,
+      "acciones": [
+        {
+          "nombre": "Recolectar",
+          "costo": 1,
+          "danio": 20
+        }
+      ],
+      "dato": "En el Paleolítico los grupos humanos eran nómades y vivían de la caza y la recolección.",
+      "oa": "OA 1",
+      "emblema": "arbol",
+      "frase": "Nómades que vivían de la caza y la recolección."
     },
     {
-     "nombre": "Cosecha",
-     "costo": 3,
-     "danio": 70
-    }
-   ],
-   "dato": "Con la agricultura y la domesticación de animales, los grupos humanos se volvieron sedentarios.",
-   "oa": "OA 2",
-   "emblema": "casa",
-   "evolucionaDe": "CC-7-U1-001",
-   "conexiones": [
-    {
-     "causa": "CC-7-U1-006",
-     "texto": "La agricultura comenzó en las tierras de la Creciente Fértil."
-    }
-   ],
-   "frase": "Con la agricultura, los grupos se volvieron sedentarios.",
-   "habilidad": {
-    "nombre": "Cosechas",
-    "tipo": "sanador",
-    "n": 10
-   }
-  },
-  {
-   "id": "CC-7-U1-003",
-   "nombre": "Egipcios",
-   "tipo": "protagonista",
-   "curso": 7,
-   "unidad": 1,
-   "dimension": "Territorio",
-   "resistencia": 80,
-   "retirada": 1,
-   "acciones": [
-    {
-     "nombre": "Crecida del Nilo",
-     "costo": 2,
-     "danio": 40
-    }
-   ],
-   "dato": "Su civilización creció a orillas del río Nilo, cuyas crecidas fertilizaban la tierra.",
-   "oa": "OA 4",
-   "emblema": "piramide",
-   "frase": "Una civilización nacida a orillas del Nilo."
-  },
-  {
-   "id": "CC-7-U1-004",
-   "nombre": "Sumerios",
-   "tipo": "protagonista",
-   "curso": 7,
-   "unidad": 1,
-   "dimension": "Cultura",
-   "resistencia": 70,
-   "retirada": 1,
-   "acciones": [
-    {
-     "nombre": "Cuneiforme",
-     "costo": 1,
-     "danio": 20
+      "id": "CC-7-U1-002",
+      "nombre": "Aldea neolítica",
+      "tipo": "protagonista",
+      "curso": 7,
+      "unidad": 1,
+      "dimension": "Economia",
+      "resistencia": 100,
+      "retirada": 2,
+      "acciones": [
+        {
+          "nombre": "Domesticar",
+          "costo": 2,
+          "danio": 50
+        },
+        {
+          "nombre": "Cosecha",
+          "costo": 3,
+          "danio": 70
+        }
+      ],
+      "dato": "Con la agricultura y la domesticación de animales, los grupos humanos se volvieron sedentarios.",
+      "oa": "OA 2",
+      "emblema": "casa",
+      "evolucionaDe": "CC-7-U1-001",
+      "conexiones": [
+        {
+          "causa": "CC-7-U1-006",
+          "texto": "La agricultura comenzó en las tierras de la Creciente Fértil."
+        }
+      ],
+      "frase": "Con la agricultura, los grupos se volvieron sedentarios.",
+      "habilidad": {
+        "nombre": "Cosechas",
+        "tipo": "sanador",
+        "n": 10
+      }
     },
     {
-     "nombre": "Primeras leyes",
-     "costo": 2,
-     "danio": 40
-    }
-   ],
-   "dato": "En Mesopotamia crearon una de las primeras escrituras: la escritura cuneiforme.",
-   "oa": "OA 4",
-   "emblema": "pergamino",
-   "conexiones": [
-    {
-     "causa": "CC-7-U1-005",
-     "texto": "Los sumerios usaron la escritura para registrar cuentas y leyes."
-    }
-   ],
-   "frase": "En Mesopotamia crearon una de las primeras escrituras: la escritura cuneiforme."
-  },
-  {
-   "id": "CC-7-U1-005",
-   "nombre": "Invención de la escritura",
-   "tipo": "acontecimiento",
-   "curso": 7,
-   "unidad": 1,
-   "efecto": {
-    "tipo": "robar",
-    "n": 2
-   },
-   "dato": "Permitió llevar registros, cuentas y leyes. Con ella comienza la historia escrita.",
-   "oa": "OA 3",
-   "emblema": "pluma",
-   "frase": "Con ella comienza la historia escrita.",
-   "fecha": {
-    "anio": -3200,
-    "texto": "c. 3200 a.C."
-   }
-  },
-  {
-   "id": "CC-7-U1-006",
-   "nombre": "Creciente Fértil",
-   "tipo": "lugar",
-   "curso": 7,
-   "unidad": 1,
-   "efecto": {
-    "tipo": "bonusDimension",
-    "dimension": "Territorio",
-    "n": 10
-   },
-   "dato": "Zona en forma de media luna, de Mesopotamia al Nilo, donde surgieron la agricultura y las primeras ciudades.",
-   "oa": "OA 2",
-   "emblema": "ola",
-   "frase": "De Mesopotamia al Nilo: aquí nació la agricultura."
-  },
-  {
-   "id": "CC-7-U2-001",
-   "nombre": "Ciudadano ateniense",
-   "tipo": "protagonista",
-   "curso": 7,
-   "unidad": 2,
-   "dimension": "Politica",
-   "resistencia": 70,
-   "retirada": 1,
-   "acciones": [
-    {
-     "nombre": "Votar en la Asamblea",
-     "costo": 2,
-     "danio": 40
-    }
-   ],
-   "dato": "En Atenas los ciudadanos votaban en la Asamblea, pero mujeres, esclavos y extranjeros no participaban.",
-   "oa": "OA 6",
-   "emblema": "urna",
-   "conexiones": [
-    {
-     "causa": "CC-7-U2-008",
-     "texto": "Pericles impulsó la participación de los ciudadanos de Atenas."
-    }
-   ],
-   "frase": "Votaba en la Asamblea; no todos podían hacerlo."
-  },
-  {
-   "id": "CC-7-U2-002",
-   "nombre": "Legión romana",
-   "tipo": "protagonista",
-   "curso": 7,
-   "unidad": 2,
-   "dimension": "Territorio",
-   "resistencia": 80,
-   "retirada": 1,
-   "acciones": [
-    {
-     "nombre": "Formación",
-     "costo": 1,
-     "danio": 20
+      "id": "CC-7-U1-003",
+      "nombre": "Egipcios",
+      "tipo": "protagonista",
+      "curso": 7,
+      "unidad": 1,
+      "dimension": "Territorio",
+      "resistencia": 80,
+      "retirada": 1,
+      "acciones": [
+        {
+          "nombre": "Crecida del Nilo",
+          "costo": 2,
+          "danio": 40
+        }
+      ],
+      "dato": "Su civilización creció a orillas del río Nilo, cuyas crecidas fertilizaban la tierra.",
+      "oa": "OA 4",
+      "emblema": "piramide",
+      "frase": "Una civilización nacida a orillas del Nilo."
     },
     {
-     "nombre": "Calzadas",
-     "costo": 3,
-     "danio": 60
-    }
-   ],
-   "dato": "Ejército organizado y disciplinado que permitió a Roma extender su territorio.",
-   "oa": "OA 7",
-   "emblema": "escudo",
-   "frase": "Ejército organizado y disciplinado que permitió a Roma extender su territorio.",
-   "habilidad": {
-    "nombre": "Disciplina",
-    "tipo": "resistente",
-    "n": 10
-   }
-  },
-  {
-   "id": "CC-7-U2-003",
-   "nombre": "República romana",
-   "tipo": "protagonista",
-   "curso": 7,
-   "unidad": 2,
-   "dimension": "Politica",
-   "resistencia": 60,
-   "retirada": 1,
-   "acciones": [
-    {
-     "nombre": "Senado",
-     "costo": 1,
-     "danio": 20
-    }
-   ],
-   "dato": "Roma se gobernó con un Senado y dos cónsules, elegidos cada año para que nadie concentrara el poder.",
-   "oa": "OA 17",
-   "emblema": "columna",
-   "frase": "Un Senado y dos cónsules elegidos cada año."
-  },
-  {
-   "id": "CC-7-U2-004",
-   "nombre": "Imperio romano",
-   "tipo": "protagonista",
-   "curso": 7,
-   "unidad": 2,
-   "dimension": "Territorio",
-   "resistencia": 110,
-   "retirada": 2,
-   "acciones": [
-    {
-     "nombre": "Romanización",
-     "costo": 2,
-     "danio": 50
+      "id": "CC-7-U1-004",
+      "nombre": "Sumerios",
+      "tipo": "protagonista",
+      "curso": 7,
+      "unidad": 1,
+      "dimension": "Cultura",
+      "resistencia": 70,
+      "retirada": 1,
+      "acciones": [
+        {
+          "nombre": "Cuneiforme",
+          "costo": 1,
+          "danio": 20
+        },
+        {
+          "nombre": "Primeras leyes",
+          "costo": 2,
+          "danio": 40
+        }
+      ],
+      "dato": "En Mesopotamia crearon una de las primeras escrituras: la escritura cuneiforme.",
+      "oa": "OA 4",
+      "emblema": "pergamino",
+      "conexiones": [
+        {
+          "causa": "CC-7-U1-005",
+          "texto": "Los sumerios usaron la escritura para registrar cuentas y leyes."
+        }
+      ],
+      "frase": "En Mesopotamia crearon una de las primeras escrituras: la escritura cuneiforme."
     },
     {
-     "nombre": "Derecho romano",
-     "costo": 3,
-     "danio": 70
-    }
-   ],
-   "dato": "Llegó a rodear todo el Mediterráneo y difundió el latín y el derecho romano.",
-   "oa": "OA 7",
-   "emblema": "corona",
-   "evolucionaDe": "CC-7-U2-003",
-   "frase": "Llegó a rodear todo el Mediterráneo y difundió el latín y el derecho romano."
-  },
-  {
-   "id": "CC-7-U2-005",
-   "nombre": "Filósofos griegos",
-   "tipo": "protagonista",
-   "curso": 7,
-   "unidad": 2,
-   "dimension": "Cultura",
-   "resistencia": 70,
-   "retirada": 1,
-   "acciones": [
-    {
-     "nombre": "Preguntar",
-     "costo": 1,
-     "danio": 20
+      "id": "CC-7-U1-005",
+      "nombre": "Invención de la escritura",
+      "tipo": "acontecimiento",
+      "curso": 7,
+      "unidad": 1,
+      "efecto": {
+        "tipo": "robar",
+        "n": 2
+      },
+      "dato": "Permitió llevar registros, cuentas y leyes. Con ella comienza la historia escrita.",
+      "oa": "OA 3",
+      "emblema": "pluma",
+      "frase": "Con ella comienza la historia escrita.",
+      "fecha": {
+        "anio": -3200,
+        "texto": "c. 3200 a.C."
+      }
     },
     {
-     "nombre": "Razonar",
-     "costo": 2,
-     "danio": 40
-    }
-   ],
-   "dato": "Pensadores como Sócrates, Platón y Aristóteles buscaron explicar el mundo con la razón.",
-   "oa": "OA 8",
-   "emblema": "columna",
-   "conexiones": [
-    {
-     "causa": "CC-7-U2-001",
-     "texto": "El debate en la polis estimuló el pensamiento filosófico."
-    }
-   ],
-   "frase": "Sócrates, Platón y Aristóteles: pensar con la razón.",
-   "habilidad": {
-    "nombre": "Preguntar",
-    "tipo": "inspirador"
-   }
-  },
-  {
-   "id": "CC-7-U2-006",
-   "nombre": "Juegos Olímpicos",
-   "tipo": "acontecimiento",
-   "curso": 7,
-   "unidad": 2,
-   "efecto": {
-    "tipo": "bonusDanio",
-    "n": 20
-   },
-   "dato": "Nacieron en la antigua Grecia, en Olimpia, y hoy se siguen celebrando en todo el mundo.",
-   "oa": "OA 8",
-   "emblema": "estrella",
-   "frase": "Nacieron en Olimpia y aún se celebran.",
-   "fecha": {
-    "anio": -776,
-    "texto": "776 a.C."
-   }
-  },
-  {
-   "id": "CC-7-U2-007",
-   "nombre": "Mar Mediterráneo",
-   "tipo": "lugar",
-   "curso": 7,
-   "unidad": 2,
-   "efecto": {
-    "tipo": "bonusDimension",
-    "dimension": "Economia",
-    "n": 10
-   },
-   "dato": "Espacio de circulación e intercambio que unió a fenicios, griegos y romanos.",
-   "oa": "OA 5",
-   "emblema": "ola",
-   "frase": "Espacio de circulación e intercambio que unió a fenicios, griegos y romanos."
-  },
-  {
-   "id": "CC-7-U2-008",
-   "nombre": "Pericles",
-   "tipo": "personaje",
-   "curso": 7,
-   "unidad": 2,
-   "efecto": {
-    "tipo": "bonusDanio",
-    "n": 40,
-    "dimension": "Politica"
-   },
-   "dato": "Gobernó Atenas en el siglo V a.C., la época de mayor esplendor de su democracia.",
-   "oa": "OA 6",
-   "emblema": "columna",
-   "frase": "Gobernó Atenas en el siglo V a.C., la época de mayor esplendor de su democracia.",
-   "fecha": {
-    "anio": -450,
-    "texto": "siglo V a.C."
-   }
-  },
-  {
-   "id": "CC-7-U3-001",
-   "nombre": "Señor feudal",
-   "tipo": "protagonista",
-   "curso": 7,
-   "unidad": 3,
-   "dimension": "Politica",
-   "resistencia": 80,
-   "retirada": 1,
-   "acciones": [
-    {
-     "nombre": "Fidelidad",
-     "costo": 1,
-     "danio": 20
+      "id": "CC-7-U1-006",
+      "nombre": "Creciente Fértil",
+      "tipo": "lugar",
+      "curso": 7,
+      "unidad": 1,
+      "efecto": {
+        "tipo": "bonusDimension",
+        "dimension": "Territorio",
+        "n": 10
+      },
+      "dato": "Zona en forma de media luna, de Mesopotamia al Nilo, donde surgieron la agricultura y las primeras ciudades.",
+      "oa": "OA 2",
+      "emblema": "ola",
+      "frase": "De Mesopotamia al Nilo: aquí nació la agricultura."
     },
     {
-     "nombre": "Castillo",
-     "costo": 3,
-     "danio": 60
-    }
-   ],
-   "dato": "Recibía tierras a cambio de fidelidad y ayuda militar; a cambio protegía a quienes vivían en ellas.",
-   "oa": "OA 10",
-   "emblema": "escudo",
-   "frase": "Tierras a cambio de fidelidad y protección."
-  },
-  {
-   "id": "CC-7-U3-002",
-   "nombre": "Campesino medieval",
-   "tipo": "protagonista",
-   "curso": 7,
-   "unidad": 3,
-   "dimension": "Sociedad",
-   "resistencia": 70,
-   "retirada": 1,
-   "acciones": [
-    {
-     "nombre": "Trabajar la tierra",
-     "costo": 2,
-     "danio": 40
-    }
-   ],
-   "dato": "La mayoría de la población vivía en el campo y trabajaba las tierras del señor.",
-   "oa": "OA 10",
-   "emblema": "maiz",
-   "frase": "La mayoría de la población vivía en el campo y trabajaba las tierras del señor."
-  },
-  {
-   "id": "CC-7-U3-003",
-   "nombre": "Monje copista",
-   "tipo": "protagonista",
-   "curso": 7,
-   "unidad": 3,
-   "dimension": "Cultura",
-   "resistencia": 60,
-   "retirada": 1,
-   "acciones": [
-    {
-     "nombre": "Copiar a mano",
-     "costo": 1,
-     "danio": 20
+      "id": "CC-7-U1-007",
+      "nombre": "Faraón",
+      "tipo": "protagonista",
+      "dimension": "Politica",
+      "resistencia": 90,
+      "retirada": 1,
+      "acciones": [
+        {
+          "nombre": "Decreto",
+          "costo": 2,
+          "danio": 40
+        },
+        {
+          "nombre": "Dios-rey",
+          "costo": 3,
+          "danio": 70
+        }
+      ],
+      "dato": "Gobernante del antiguo Egipto, considerado un dios. Dirigía el Estado, el ejército y las grandes obras.",
+      "frase": "El rey de Egipto, considerado un dios en la Tierra.",
+      "emblema": "corona",
+      "habilidad": {
+        "tipo": "inspirador",
+        "nombre": "Corte del Nilo"
+      },
+      "curso": 7,
+      "unidad": 1,
+      "oa": "OA 2"
     },
     {
-     "nombre": "Conservar el saber",
-     "costo": 2,
-     "danio": 40
-    }
-   ],
-   "dato": "En los monasterios se copiaban libros a mano, lo que conservó gran parte del saber antiguo.",
-   "oa": "OA 9",
-   "emblema": "libro",
-   "conexiones": [
-    {
-     "causa": "CC-7-U2-005",
-     "texto": "Los monjes copiaron y conservaron obras de los filósofos antiguos."
-    }
-   ],
-   "frase": "Copiaba libros a mano y conservó el saber antiguo."
-  },
-  {
-   "id": "CC-7-U3-004",
-   "nombre": "Mercader medieval",
-   "tipo": "protagonista",
-   "curso": 7,
-   "unidad": 3,
-   "dimension": "Economia",
-   "resistencia": 60,
-   "retirada": 1,
-   "acciones": [
-    {
-     "nombre": "Ferias",
-     "costo": 1,
-     "danio": 20
-    }
-   ],
-   "dato": "Desde el siglo XI el comercio revivió y los mercaderes viajaban por ferias y rutas.",
-   "oa": "OA 12",
-   "emblema": "moneda",
-   "conexiones": [
-    {
-     "causa": "CC-7-U2-007",
-     "texto": "El comercio europeo revivió por las rutas del Mediterráneo."
-    }
-   ],
-   "frase": "Desde el siglo XI, el comercio revivió en ferias y rutas."
-  },
-  {
-   "id": "CC-7-U3-005",
-   "nombre": "Burguesía",
-   "tipo": "protagonista",
-   "curso": 7,
-   "unidad": 3,
-   "dimension": "Economia",
-   "resistencia": 100,
-   "retirada": 2,
-   "acciones": [
-    {
-     "nombre": "Gremios",
-     "costo": 2,
-     "danio": 50
+      "id": "CC-7-U1-008",
+      "nombre": "Río Nilo",
+      "tipo": "lugar",
+      "efecto": {
+        "tipo": "curaDimension",
+        "n": 10,
+        "dimension": "Territorio"
+      },
+      "dato": "Sus crecidas anuales dejaban un limo fértil en las orillas. Sin el Nilo, Egipto habría sido solo desierto.",
+      "frase": "Sus crecidas dejaban tierra fértil en medio del desierto.",
+      "emblema": "ola",
+      "curso": 7,
+      "unidad": 1,
+      "oa": "OA 2"
     },
     {
-     "nombre": "Ciudades libres",
-     "costo": 3,
-     "danio": 70
-    }
-   ],
-   "dato": "Los habitantes de los burgos, dedicados al comercio y a los oficios, formaron un nuevo grupo social.",
-   "oa": "OA 12",
-   "emblema": "casa",
-   "evolucionaDe": "CC-7-U3-004",
-   "frase": "Comerciantes y artesanos de los burgos."
-  },
-  {
-   "id": "CC-7-U3-006",
-   "nombre": "Sabios de al-Ándalus",
-   "tipo": "protagonista",
-   "curso": 7,
-   "unidad": 3,
-   "dimension": "Cultura",
-   "resistencia": 70,
-   "retirada": 1,
-   "acciones": [
-    {
-     "nombre": "Álgebra",
-     "costo": 2,
-     "danio": 40
-    }
-   ],
-   "dato": "En la península ibérica, la cultura islámica aportó avances en matemáticas, medicina y astronomía.",
-   "oa": "OA 11",
-   "emblema": "estrella",
-   "frase": "Matemáticas, medicina y astronomía en la península ibérica."
-  },
-  {
-   "id": "CC-7-U3-007",
-   "nombre": "Primeras universidades",
-   "tipo": "acontecimiento",
-   "curso": 7,
-   "unidad": 3,
-   "efecto": {
-    "tipo": "robar",
-    "n": 2
-   },
-   "dato": "En los siglos XI y XII surgieron las primeras universidades, como las de Bolonia y París.",
-   "oa": "OA 12",
-   "emblema": "libro",
-   "conexiones": [
-    {
-     "causa": "CC-7-U3-003",
-     "texto": "El saber conservado en los monasterios llegó a las universidades."
-    }
-   ],
-   "frase": "Bolonia y París: el saber se reúne en universidades.",
-   "fecha": {
-    "anio": 1088,
-    "texto": "siglos XI–XII"
-   }
-  },
-  {
-   "id": "CC-7-U3-008",
-   "nombre": "Carlomagno",
-   "tipo": "personaje",
-   "curso": 7,
-   "unidad": 3,
-   "efecto": {
-    "tipo": "buscarProtagonista",
-    "n": 3
-   },
-   "dato": "Rey de los francos coronado emperador en el año 800; reunió gran parte de Europa occidental.",
-   "oa": "OA 9",
-   "emblema": "corona",
-   "frase": "Emperador en el año 800; unió gran parte de Europa.",
-   "fecha": {
-    "anio": 800,
-    "texto": "año 800"
-   }
-  },
-  {
-   "id": "CC-7-U4-001",
-   "nombre": "Mayas",
-   "tipo": "protagonista",
-   "curso": 7,
-   "unidad": 4,
-   "dimension": "Cultura",
-   "resistencia": 70,
-   "retirada": 1,
-   "acciones": [
-    {
-     "nombre": "Calendario",
-     "costo": 1,
-     "danio": 20
+      "id": "CC-7-U1-009",
+      "nombre": "Escritura jeroglífica",
+      "tipo": "acontecimiento",
+      "efecto": {
+        "tipo": "recuperar"
+      },
+      "dato": "Los egipcios escribían con signos que representaban objetos y sonidos. Los escribas registraban leyes, cuentas y relatos.",
+      "frase": "Signos egipcios que guardaban leyes, cuentas y relatos.",
+      "emblema": "pergamino",
+      "fecha": {
+        "anio": -3200,
+        "texto": "c. 3200 a.C."
+      },
+      "curso": 7,
+      "unidad": 1,
+      "oa": "OA 2"
     },
     {
-     "nombre": "Glifos",
-     "costo": 2,
-     "danio": 40
-    }
-   ],
-   "dato": "Crearon un calendario muy preciso y una escritura con glifos.",
-   "oa": "OA 15",
-   "emblema": "sol",
-   "frase": "Crearon un calendario muy preciso y una escritura con glifos.",
-   "habilidad": {
-    "nombre": "Astrónomos",
-    "tipo": "saberAlEntrar",
-    "n": 1
-   }
-  },
-  {
-   "id": "CC-7-U4-002",
-   "nombre": "Aztecas",
-   "tipo": "protagonista",
-   "curso": 7,
-   "unidad": 4,
-   "dimension": "Territorio",
-   "resistencia": 80,
-   "retirada": 1,
-   "acciones": [
-    {
-     "nombre": "Chinampas",
-     "costo": 2,
-     "danio": 40
-    }
-   ],
-   "dato": "Fundaron Tenochtitlan sobre un lago y cultivaban en chinampas, islas artificiales.",
-   "oa": "OA 13",
-   "emblema": "piramide",
-   "frase": "Tenochtitlan sobre un lago y cultivos en chinampas.",
-   "habilidad": {
-    "nombre": "Ciudad sobre el lago",
-    "tipo": "resistente",
-    "n": 10
-   }
-  },
-  {
-   "id": "CC-7-U4-003",
-   "nombre": "Ayllu",
-   "tipo": "protagonista",
-   "curso": 7,
-   "unidad": 4,
-   "dimension": "Sociedad",
-   "resistencia": 60,
-   "retirada": 1,
-   "acciones": [
-    {
-     "nombre": "Trabajo comunitario",
-     "costo": 1,
-     "danio": 20
-    }
-   ],
-   "dato": "Comunidad familiar andina que trabajaba la tierra en conjunto y se ayudaba mutuamente.",
-   "oa": "OA 14",
-   "emblema": "personas",
-   "frase": "La comunidad andina que trabajaba unida.",
-   "habilidad": {
-    "nombre": "Trabajo comunitario",
-    "tipo": "fuerzaReserva",
-    "n": 10
-   }
-  },
-  {
-   "id": "CC-7-U4-004",
-   "nombre": "Imperio inca",
-   "tipo": "protagonista",
-   "curso": 7,
-   "unidad": 4,
-   "dimension": "Politica",
-   "resistencia": 110,
-   "retirada": 2,
-   "acciones": [
-    {
-     "nombre": "Qhapaq Ñan",
-     "costo": 2,
-     "danio": 50
+      "id": "CC-7-U1-010",
+      "nombre": "Babilonios",
+      "tipo": "protagonista",
+      "dimension": "Politica",
+      "resistencia": 110,
+      "retirada": 2,
+      "acciones": [
+        {
+          "nombre": "Ley escrita",
+          "costo": 2,
+          "danio": 50,
+          "efecto": {
+            "tipo": "debilitar",
+            "n": 20
+          }
+        },
+        {
+          "nombre": "Babilonia",
+          "costo": 3,
+          "danio": 70
+        }
+      ],
+      "dato": "El rey Hammurabi unificó Mesopotamia desde Babilonia, una de las ciudades más grandes de su tiempo.",
+      "frase": "Hammurabi unificó Mesopotamia desde Babilonia.",
+      "emblema": "templo",
+      "habilidad": {
+        "tipo": "resistente",
+        "nombre": "Murallas",
+        "n": 10
+      },
+      "evolucionaDe": "CC-7-U1-004",
+      "curso": 7,
+      "unidad": 1,
+      "oa": "OA 4"
     },
     {
-     "nombre": "Administración",
-     "costo": 3,
-     "danio": 70
-    }
-   ],
-   "dato": "Unió un enorme territorio con una red de caminos y una administración centralizada en el Cusco.",
-   "oa": "OA 14",
-   "emblema": "corona",
-   "evolucionaDe": "CC-7-U4-003",
-   "conexiones": [
+      "id": "CC-7-U1-011",
+      "nombre": "Código de Hammurabi",
+      "tipo": "acontecimiento",
+      "efecto": {
+        "tipo": "quitarSaber",
+        "n": 1
+      },
+      "dato": "Hacia 1750 a.C., Hammurabi hizo grabar sus leyes en una estela de piedra, a la vista de todos.",
+      "frase": "Leyes grabadas en piedra, a la vista de todos.",
+      "emblema": "pergamino",
+      "fecha": {
+        "anio": -1750,
+        "texto": "c. 1750 a.C."
+      },
+      "conexiones": [
+        {
+          "causa": "CC-7-U1-005",
+          "texto": "Gracias a la escritura, las leyes pudieron quedar grabadas."
+        }
+      ],
+      "curso": 7,
+      "unidad": 1,
+      "oa": "OA 2"
+    },
     {
-     "causa": "CC-7-U4-008",
-     "texto": "Pachacútec inició la gran expansión del Imperio inca."
-    }
-   ],
-   "frase": "Caminos y administración desde el Cusco.",
-   "habilidad": {
-    "nombre": "Administración",
-    "tipo": "saberAlEntrar",
-    "n": 1
-   }
-  },
-  {
-   "id": "CC-7-U4-005",
-   "nombre": "Quipu",
-   "tipo": "acontecimiento",
-   "curso": 7,
-   "unidad": 4,
-   "efecto": {
-    "tipo": "buscarProtagonista",
-    "n": 3
-   },
-   "dato": "Sistema de cuerdas con nudos que los incas usaban para registrar cantidades.",
-   "oa": "OA 14",
-   "emblema": "pergamino",
-   "conexiones": [
+      "id": "CC-7-U1-012",
+      "nombre": "Zigurat",
+      "tipo": "protagonista",
+      "dimension": "Cultura",
+      "resistencia": 90,
+      "retirada": 2,
+      "acciones": [
+        {
+          "nombre": "Ofrenda",
+          "costo": 2,
+          "danio": 40,
+          "efecto": {
+            "tipo": "curar",
+            "n": 20
+          }
+        },
+        {
+          "nombre": "Torre escalonada",
+          "costo": 3,
+          "danio": 60
+        }
+      ],
+      "dato": "Templo de ladrillo en forma de torre escalonada, en el centro de las ciudades de Mesopotamia.",
+      "frase": "Templo escalonado en el centro de las ciudades mesopotámicas.",
+      "emblema": "templo",
+      "curso": 7,
+      "unidad": 1,
+      "oa": "OA 2"
+    },
     {
-     "causa": "CC-7-U4-004",
-     "texto": "La administración inca registraba sus cuentas en quipus."
-    }
-   ],
-   "frase": "Sistema de cuerdas con nudos que los incas usaban para registrar cantidades."
-  },
-  {
-   "id": "CC-7-U4-006",
-   "nombre": "Cultivo del maíz",
-   "tipo": "acontecimiento",
-   "curso": 7,
-   "unidad": 4,
-   "efecto": {
-    "tipo": "curar",
-    "n": 30
-   },
-   "dato": "Fue la base de la alimentación en Mesoamérica y hoy lo seguimos comiendo en toda América.",
-   "oa": "OA 16",
-   "emblema": "maiz",
-   "frase": "Base de la alimentación de Mesoamérica."
-  },
-  {
-   "id": "CC-7-U4-007",
-   "nombre": "Camino del Inca",
-   "tipo": "lugar",
-   "curso": 7,
-   "unidad": 4,
-   "efecto": {
-    "tipo": "bonusDimension",
-    "dimension": "Politica",
-    "n": 10
-   },
-   "dato": "Red de caminos de miles de kilómetros que llegaba hasta la zona central del actual Chile.",
-   "oa": "OA 14",
-   "emblema": "mapa",
-   "frase": "Miles de kilómetros de caminos, hasta el actual Chile."
-  },
-  {
-   "id": "CC-7-U4-008",
-   "nombre": "Pachacútec",
-   "tipo": "personaje",
-   "curso": 7,
-   "unidad": 4,
-   "efecto": {
-    "tipo": "saberExtra",
-    "n": 1
-   },
-   "dato": "Inca que en el siglo XV transformó el Cusco y comenzó la gran expansión del Tawantinsuyu.",
-   "oa": "OA 14",
-   "emblema": "sol",
-   "frase": "Transformó el Cusco y expandió el Tawantinsuyu.",
-   "fecha": {
-    "anio": 1438,
-    "texto": "siglo XV"
-   }
-  },
-  {
-   "id": "CC-7-U4-009",
-   "nombre": "Calendario maya",
-   "tipo": "acontecimiento",
-   "curso": 7,
-   "unidad": 4,
-   "efecto": {
-    "tipo": "robar",
-    "n": 2
-   },
-   "dato": "Los mayas observaron los astros y crearon calendarios muy precisos para organizar la agricultura y las ceremonias.",
-   "oa": "OA 15",
-   "emblema": "sol",
-   "conexiones": [
+      "id": "CC-7-U2-001",
+      "nombre": "Ciudadano ateniense",
+      "tipo": "protagonista",
+      "curso": 7,
+      "unidad": 2,
+      "dimension": "Politica",
+      "resistencia": 70,
+      "retirada": 1,
+      "acciones": [
+        {
+          "nombre": "Votar en la Asamblea",
+          "costo": 2,
+          "danio": 40
+        }
+      ],
+      "dato": "En Atenas los ciudadanos votaban en la Asamblea, pero mujeres, esclavos y extranjeros no participaban.",
+      "oa": "OA 6",
+      "emblema": "urna",
+      "conexiones": [
+        {
+          "causa": "CC-7-U2-008",
+          "texto": "Pericles impulsó la participación de los ciudadanos de Atenas."
+        }
+      ],
+      "frase": "Votaba en la Asamblea; no todos podían hacerlo."
+    },
     {
-     "causa": "CC-7-U4-001",
-     "texto": "Los mayas crearon su calendario observando los astros."
-    }
-   ],
-   "frase": "Calendarios precisos para la agricultura y las ceremonias."
-  },
-  {
-   "id": "CC-7-U4-010",
-   "nombre": "Tenochtitlan",
-   "tipo": "lugar",
-   "curso": 7,
-   "unidad": 4,
-   "efecto": {
-    "tipo": "bonusDimension",
-    "dimension": "Territorio",
-    "n": 10
-   },
-   "dato": "Capital de los mexicas, fundada en 1325 sobre un islote del lago Texcoco y unida a tierra firme por calzadas.",
-   "oa": "OA 13",
-   "emblema": "piramide",
-   "frase": "Capital mexica fundada en 1325 sobre un islote del lago Texcoco."
-  },
-  {
-   "id": "CC-7-U4-011",
-   "nombre": "Moctezuma II",
-   "tipo": "personaje",
-   "curso": 7,
-   "unidad": 4,
-   "efecto": {
-    "tipo": "saberExtra",
-    "n": 1
-   },
-   "dato": "Gobernante mexica de Tenochtitlan cuando llegaron los españoles a México, en 1519.",
-   "oa": "OA 13",
-   "emblema": "corona",
-   "conexiones": [
+      "id": "CC-7-U2-002",
+      "nombre": "Legión romana",
+      "tipo": "protagonista",
+      "curso": 7,
+      "unidad": 2,
+      "dimension": "Territorio",
+      "resistencia": 80,
+      "retirada": 1,
+      "acciones": [
+        {
+          "nombre": "Formación",
+          "costo": 1,
+          "danio": 20
+        },
+        {
+          "nombre": "Calzadas",
+          "costo": 3,
+          "danio": 60
+        }
+      ],
+      "dato": "Ejército organizado y disciplinado que permitió a Roma extender su territorio.",
+      "oa": "OA 7",
+      "emblema": "escudo",
+      "frase": "Ejército organizado y disciplinado que permitió a Roma extender su territorio.",
+      "habilidad": {
+        "nombre": "Disciplina",
+        "tipo": "resistente",
+        "n": 10
+      }
+    },
     {
-     "causa": "CC-7-U4-010",
-     "texto": "Moctezuma gobernaba desde Tenochtitlan, la capital mexica."
+      "id": "CC-7-U2-003",
+      "nombre": "República romana",
+      "tipo": "protagonista",
+      "curso": 7,
+      "unidad": 2,
+      "dimension": "Politica",
+      "resistencia": 60,
+      "retirada": 1,
+      "acciones": [
+        {
+          "nombre": "Senado",
+          "costo": 1,
+          "danio": 20
+        }
+      ],
+      "dato": "Roma se gobernó con un Senado y dos cónsules, elegidos cada año para que nadie concentrara el poder.",
+      "oa": "OA 17",
+      "emblema": "columna",
+      "frase": "Un Senado y dos cónsules elegidos cada año."
+    },
+    {
+      "id": "CC-7-U2-004",
+      "nombre": "Imperio romano",
+      "tipo": "protagonista",
+      "curso": 7,
+      "unidad": 2,
+      "dimension": "Territorio",
+      "resistencia": 110,
+      "retirada": 2,
+      "acciones": [
+        {
+          "nombre": "Romanización",
+          "costo": 2,
+          "danio": 50
+        },
+        {
+          "nombre": "Derecho romano",
+          "costo": 3,
+          "danio": 70
+        }
+      ],
+      "dato": "Llegó a rodear todo el Mediterráneo y difundió el latín y el derecho romano.",
+      "oa": "OA 7",
+      "emblema": "corona",
+      "evolucionaDe": "CC-7-U2-003",
+      "frase": "Llegó a rodear todo el Mediterráneo y difundió el latín y el derecho romano."
+    },
+    {
+      "id": "CC-7-U2-005",
+      "nombre": "Filósofos griegos",
+      "tipo": "protagonista",
+      "curso": 7,
+      "unidad": 2,
+      "dimension": "Cultura",
+      "resistencia": 70,
+      "retirada": 1,
+      "acciones": [
+        {
+          "nombre": "Preguntar",
+          "costo": 1,
+          "danio": 20
+        },
+        {
+          "nombre": "Razonar",
+          "costo": 2,
+          "danio": 40
+        }
+      ],
+      "dato": "Pensadores como Sócrates, Platón y Aristóteles buscaron explicar el mundo con la razón.",
+      "oa": "OA 8",
+      "emblema": "columna",
+      "conexiones": [
+        {
+          "causa": "CC-7-U2-001",
+          "texto": "El debate en la polis estimuló el pensamiento filosófico."
+        }
+      ],
+      "frase": "Sócrates, Platón y Aristóteles: pensar con la razón.",
+      "habilidad": {
+        "nombre": "Preguntar",
+        "tipo": "inspirador"
+      }
+    },
+    {
+      "id": "CC-7-U2-006",
+      "nombre": "Juegos Olímpicos",
+      "tipo": "acontecimiento",
+      "curso": 7,
+      "unidad": 2,
+      "efecto": {
+        "tipo": "bonusDanio",
+        "n": 20
+      },
+      "dato": "Nacieron en la antigua Grecia, en Olimpia, y hoy se siguen celebrando en todo el mundo.",
+      "oa": "OA 8",
+      "emblema": "estrella",
+      "frase": "Nacieron en Olimpia y aún se celebran.",
+      "fecha": {
+        "anio": -776,
+        "texto": "776 a.C."
+      }
+    },
+    {
+      "id": "CC-7-U2-007",
+      "nombre": "Mar Mediterráneo",
+      "tipo": "lugar",
+      "curso": 7,
+      "unidad": 2,
+      "efecto": {
+        "tipo": "bonusDimension",
+        "dimension": "Economia",
+        "n": 10
+      },
+      "dato": "Espacio de circulación e intercambio que unió a fenicios, griegos y romanos.",
+      "oa": "OA 5",
+      "emblema": "ola",
+      "frase": "Espacio de circulación e intercambio que unió a fenicios, griegos y romanos."
+    },
+    {
+      "id": "CC-7-U2-008",
+      "nombre": "Pericles",
+      "tipo": "personaje",
+      "curso": 7,
+      "unidad": 2,
+      "efecto": {
+        "tipo": "bonusDanio",
+        "n": 40,
+        "dimension": "Politica"
+      },
+      "dato": "Gobernó Atenas en el siglo V a.C., la época de mayor esplendor de su democracia.",
+      "oa": "OA 6",
+      "emblema": "columna",
+      "frase": "Gobernó Atenas en el siglo V a.C., la época de mayor esplendor de su democracia.",
+      "fecha": {
+        "anio": -450,
+        "texto": "siglo V a.C."
+      }
+    },
+    {
+      "id": "CC-7-U2-009",
+      "nombre": "Esparta",
+      "tipo": "protagonista",
+      "dimension": "Sociedad",
+      "resistencia": 100,
+      "retirada": 2,
+      "acciones": [
+        {
+          "nombre": "Falange",
+          "costo": 2,
+          "danio": 40,
+          "efecto": {
+            "tipo": "debilitar",
+            "n": 10
+          }
+        },
+        {
+          "nombre": "Agogé",
+          "costo": 3,
+          "danio": 70
+        }
+      ],
+      "dato": "Ciudad griega que educaba a sus jóvenes para la guerra desde la infancia. Su ejército era el más temido de Grecia.",
+      "frase": "Educaba a sus jóvenes para la guerra desde niños.",
+      "emblema": "escudo",
+      "habilidad": {
+        "tipo": "contraataque",
+        "nombre": "Escudos",
+        "n": 20
+      },
+      "curso": 7,
+      "unidad": 2,
+      "oa": "OA 6"
+    },
+    {
+      "id": "CC-7-U2-010",
+      "nombre": "Democracia ateniense",
+      "tipo": "protagonista",
+      "dimension": "Politica",
+      "resistencia": 110,
+      "retirada": 2,
+      "acciones": [
+        {
+          "nombre": "Asamblea",
+          "costo": 2,
+          "danio": 50,
+          "efecto": {
+            "tipo": "saberReserva",
+            "n": 1
+          }
+        },
+        {
+          "nombre": "Siglo de Pericles",
+          "costo": 3,
+          "danio": 70
+        }
+      ],
+      "dato": "En el siglo V a.C., los ciudadanos de Atenas decidían las leyes en la Asamblea. Mujeres, extranjeros y esclavos no votaban.",
+      "frase": "Los ciudadanos de Atenas decidían las leyes en la Asamblea.",
+      "emblema": "columna",
+      "habilidad": {
+        "tipo": "alianza",
+        "nombre": "Ciudadanía",
+        "n": 10
+      },
+      "evolucionaDe": "CC-7-U2-001",
+      "fecha": {
+        "anio": -450,
+        "texto": "siglo V a.C."
+      },
+      "curso": 7,
+      "unidad": 2,
+      "oa": "OA 6"
+    },
+    {
+      "id": "CC-7-U2-011",
+      "nombre": "Julio César",
+      "tipo": "personaje",
+      "efecto": {
+        "tipo": "bonusDanio",
+        "n": 30
+      },
+      "dato": "General romano que conquistó la Galia y concentró el poder en Roma. Fue asesinado en el Senado en el 44 a.C.",
+      "frase": "Conquistó la Galia y concentró el poder en Roma.",
+      "emblema": "corona",
+      "fecha": {
+        "anio": -44,
+        "texto": "44 a.C."
+      },
+      "curso": 7,
+      "unidad": 2,
+      "oa": "OA 6"
+    },
+    {
+      "id": "CC-7-U3-001",
+      "nombre": "Señor feudal",
+      "tipo": "protagonista",
+      "curso": 7,
+      "unidad": 3,
+      "dimension": "Politica",
+      "resistencia": 80,
+      "retirada": 1,
+      "acciones": [
+        {
+          "nombre": "Fidelidad",
+          "costo": 1,
+          "danio": 20
+        },
+        {
+          "nombre": "Castillo",
+          "costo": 3,
+          "danio": 60
+        }
+      ],
+      "dato": "Recibía tierras a cambio de fidelidad y ayuda militar; a cambio protegía a quienes vivían en ellas.",
+      "oa": "OA 10",
+      "emblema": "escudo",
+      "frase": "Tierras a cambio de fidelidad y protección."
+    },
+    {
+      "id": "CC-7-U3-002",
+      "nombre": "Campesino medieval",
+      "tipo": "protagonista",
+      "curso": 7,
+      "unidad": 3,
+      "dimension": "Sociedad",
+      "resistencia": 70,
+      "retirada": 1,
+      "acciones": [
+        {
+          "nombre": "Trabajar la tierra",
+          "costo": 2,
+          "danio": 40
+        }
+      ],
+      "dato": "La mayoría de la población vivía en el campo y trabajaba las tierras del señor.",
+      "oa": "OA 10",
+      "emblema": "maiz",
+      "frase": "La mayoría de la población vivía en el campo y trabajaba las tierras del señor."
+    },
+    {
+      "id": "CC-7-U3-003",
+      "nombre": "Monje copista",
+      "tipo": "protagonista",
+      "curso": 7,
+      "unidad": 3,
+      "dimension": "Cultura",
+      "resistencia": 60,
+      "retirada": 1,
+      "acciones": [
+        {
+          "nombre": "Copiar a mano",
+          "costo": 1,
+          "danio": 20
+        },
+        {
+          "nombre": "Conservar el saber",
+          "costo": 2,
+          "danio": 40
+        }
+      ],
+      "dato": "En los monasterios se copiaban libros a mano, lo que conservó gran parte del saber antiguo.",
+      "oa": "OA 9",
+      "emblema": "libro",
+      "conexiones": [
+        {
+          "causa": "CC-7-U2-005",
+          "texto": "Los monjes copiaron y conservaron obras de los filósofos antiguos."
+        }
+      ],
+      "frase": "Copiaba libros a mano y conservó el saber antiguo."
+    },
+    {
+      "id": "CC-7-U3-004",
+      "nombre": "Mercader medieval",
+      "tipo": "protagonista",
+      "curso": 7,
+      "unidad": 3,
+      "dimension": "Economia",
+      "resistencia": 60,
+      "retirada": 1,
+      "acciones": [
+        {
+          "nombre": "Ferias",
+          "costo": 1,
+          "danio": 20
+        }
+      ],
+      "dato": "Desde el siglo XI el comercio revivió y los mercaderes viajaban por ferias y rutas.",
+      "oa": "OA 12",
+      "emblema": "moneda",
+      "conexiones": [
+        {
+          "causa": "CC-7-U2-007",
+          "texto": "El comercio europeo revivió por las rutas del Mediterráneo."
+        }
+      ],
+      "frase": "Desde el siglo XI, el comercio revivió en ferias y rutas."
+    },
+    {
+      "id": "CC-7-U3-005",
+      "nombre": "Burguesía",
+      "tipo": "protagonista",
+      "curso": 7,
+      "unidad": 3,
+      "dimension": "Economia",
+      "resistencia": 100,
+      "retirada": 2,
+      "acciones": [
+        {
+          "nombre": "Gremios",
+          "costo": 2,
+          "danio": 50
+        },
+        {
+          "nombre": "Ciudades libres",
+          "costo": 3,
+          "danio": 70
+        }
+      ],
+      "dato": "Los habitantes de los burgos, dedicados al comercio y a los oficios, formaron un nuevo grupo social.",
+      "oa": "OA 12",
+      "emblema": "casa",
+      "evolucionaDe": "CC-7-U3-004",
+      "frase": "Comerciantes y artesanos de los burgos."
+    },
+    {
+      "id": "CC-7-U3-006",
+      "nombre": "Sabios de al-Ándalus",
+      "tipo": "protagonista",
+      "curso": 7,
+      "unidad": 3,
+      "dimension": "Cultura",
+      "resistencia": 70,
+      "retirada": 1,
+      "acciones": [
+        {
+          "nombre": "Álgebra",
+          "costo": 2,
+          "danio": 40
+        }
+      ],
+      "dato": "En la península ibérica, la cultura islámica aportó avances en matemáticas, medicina y astronomía.",
+      "oa": "OA 11",
+      "emblema": "estrella",
+      "frase": "Matemáticas, medicina y astronomía en la península ibérica."
+    },
+    {
+      "id": "CC-7-U3-007",
+      "nombre": "Primeras universidades",
+      "tipo": "acontecimiento",
+      "curso": 7,
+      "unidad": 3,
+      "efecto": {
+        "tipo": "robar",
+        "n": 2
+      },
+      "dato": "En los siglos XI y XII surgieron las primeras universidades, como las de Bolonia y París.",
+      "oa": "OA 12",
+      "emblema": "libro",
+      "conexiones": [
+        {
+          "causa": "CC-7-U3-003",
+          "texto": "El saber conservado en los monasterios llegó a las universidades."
+        }
+      ],
+      "frase": "Bolonia y París: el saber se reúne en universidades.",
+      "fecha": {
+        "anio": 1088,
+        "texto": "siglos XI–XII"
+      }
+    },
+    {
+      "id": "CC-7-U3-008",
+      "nombre": "Carlomagno",
+      "tipo": "personaje",
+      "curso": 7,
+      "unidad": 3,
+      "efecto": {
+        "tipo": "buscarProtagonista",
+        "n": 3
+      },
+      "dato": "Rey de los francos coronado emperador en el año 800; reunió gran parte de Europa occidental.",
+      "oa": "OA 9",
+      "emblema": "corona",
+      "frase": "Emperador en el año 800; unió gran parte de Europa.",
+      "fecha": {
+        "anio": 800,
+        "texto": "año 800"
+      }
+    },
+    {
+      "id": "CC-7-U3-009",
+      "nombre": "Gremios",
+      "tipo": "protagonista",
+      "dimension": "Economia",
+      "resistencia": 80,
+      "retirada": 1,
+      "acciones": [
+        {
+          "nombre": "Oficio",
+          "costo": 1,
+          "danio": 20
+        },
+        {
+          "nombre": "Maestros artesanos",
+          "costo": 2,
+          "danio": 40,
+          "efecto": {
+            "tipo": "robar",
+            "n": 1
+          }
+        }
+      ],
+      "dato": "Asociaciones de artesanos de un mismo oficio. Fijaban precios y calidad, y formaban a aprendices y oficiales.",
+      "frase": "Artesanos de un mismo oficio que cuidaban la calidad.",
+      "emblema": "engranaje",
+      "habilidad": {
+        "tipo": "alianza",
+        "nombre": "Taller",
+        "n": 10
+      },
+      "curso": 7,
+      "unidad": 3,
+      "oa": "OA 12"
+    },
+    {
+      "id": "CC-7-U3-010",
+      "nombre": "Caballeros medievales",
+      "tipo": "protagonista",
+      "dimension": "Sociedad",
+      "resistencia": 90,
+      "retirada": 2,
+      "acciones": [
+        {
+          "nombre": "Torneo",
+          "costo": 2,
+          "danio": 40
+        },
+        {
+          "nombre": "Carga",
+          "costo": 3,
+          "danio": 60,
+          "efecto": {
+            "tipo": "asedio",
+            "n": 10
+          }
+        }
+      ],
+      "dato": "Guerreros a caballo al servicio de un señor. Seguían un código de honor llamado caballería.",
+      "frase": "Guerreros a caballo con un código de honor.",
+      "emblema": "escudo",
+      "habilidad": {
+        "tipo": "resistente",
+        "nombre": "Armadura",
+        "n": 10
+      },
+      "curso": 7,
+      "unidad": 3,
+      "oa": "OA 12"
+    },
+    {
+      "id": "CC-7-U3-011",
+      "nombre": "Peste negra",
+      "tipo": "acontecimiento",
+      "efecto": {
+        "tipo": "epidemia",
+        "n": 10
+      },
+      "dato": "Entre 1347 y 1351 una epidemia de peste recorrió Europa y murió cerca de un tercio de su población.",
+      "frase": "Una epidemia que en el siglo XIV recorrió toda Europa.",
+      "emblema": "campana",
+      "fecha": {
+        "anio": 1348,
+        "texto": "1347–1351"
+      },
+      "curso": 7,
+      "unidad": 3,
+      "oa": "OA 12"
+    },
+    {
+      "id": "CC-7-U3-012",
+      "nombre": "Ferias medievales",
+      "tipo": "lugar",
+      "efecto": {
+        "tipo": "bonusDimension",
+        "n": 10,
+        "dimension": "Economia"
+      },
+      "dato": "Grandes mercados periódicos, como los de Champaña, donde se reunían comerciantes de toda Europa.",
+      "frase": "Mercados donde se reunían comerciantes de toda Europa.",
+      "emblema": "balanza",
+      "curso": 7,
+      "unidad": 3,
+      "oa": "OA 12"
+    },
+    {
+      "id": "CC-7-U4-001",
+      "nombre": "Mayas",
+      "tipo": "protagonista",
+      "curso": 7,
+      "unidad": 4,
+      "dimension": "Cultura",
+      "resistencia": 70,
+      "retirada": 1,
+      "acciones": [
+        {
+          "nombre": "Calendario",
+          "costo": 1,
+          "danio": 20
+        },
+        {
+          "nombre": "Glifos",
+          "costo": 2,
+          "danio": 40
+        }
+      ],
+      "dato": "Crearon un calendario muy preciso y una escritura con glifos.",
+      "oa": "OA 15",
+      "emblema": "sol",
+      "frase": "Crearon un calendario muy preciso y una escritura con glifos.",
+      "habilidad": {
+        "nombre": "Astrónomos",
+        "tipo": "saberAlEntrar",
+        "n": 1
+      }
+    },
+    {
+      "id": "CC-7-U4-002",
+      "nombre": "Aztecas",
+      "tipo": "protagonista",
+      "curso": 7,
+      "unidad": 4,
+      "dimension": "Territorio",
+      "resistencia": 80,
+      "retirada": 1,
+      "acciones": [
+        {
+          "nombre": "Chinampas",
+          "costo": 2,
+          "danio": 40
+        }
+      ],
+      "dato": "Fundaron Tenochtitlan sobre un lago y cultivaban en chinampas, islas artificiales.",
+      "oa": "OA 13",
+      "emblema": "piramide",
+      "frase": "Tenochtitlan sobre un lago y cultivos en chinampas.",
+      "habilidad": {
+        "nombre": "Ciudad sobre el lago",
+        "tipo": "resistente",
+        "n": 10
+      }
+    },
+    {
+      "id": "CC-7-U4-003",
+      "nombre": "Ayllu",
+      "tipo": "protagonista",
+      "curso": 7,
+      "unidad": 4,
+      "dimension": "Sociedad",
+      "resistencia": 60,
+      "retirada": 1,
+      "acciones": [
+        {
+          "nombre": "Trabajo comunitario",
+          "costo": 1,
+          "danio": 20
+        }
+      ],
+      "dato": "Comunidad familiar andina que trabajaba la tierra en conjunto y se ayudaba mutuamente.",
+      "oa": "OA 14",
+      "emblema": "personas",
+      "frase": "La comunidad andina que trabajaba unida.",
+      "habilidad": {
+        "nombre": "Trabajo comunitario",
+        "tipo": "fuerzaReserva",
+        "n": 10
+      }
+    },
+    {
+      "id": "CC-7-U4-004",
+      "nombre": "Imperio inca",
+      "tipo": "protagonista",
+      "curso": 7,
+      "unidad": 4,
+      "dimension": "Politica",
+      "resistencia": 110,
+      "retirada": 2,
+      "acciones": [
+        {
+          "nombre": "Qhapaq Ñan",
+          "costo": 2,
+          "danio": 50
+        },
+        {
+          "nombre": "Administración",
+          "costo": 3,
+          "danio": 70
+        }
+      ],
+      "dato": "Unió un enorme territorio con una red de caminos y una administración centralizada en el Cusco.",
+      "oa": "OA 14",
+      "emblema": "corona",
+      "evolucionaDe": "CC-7-U4-003",
+      "conexiones": [
+        {
+          "causa": "CC-7-U4-008",
+          "texto": "Pachacútec inició la gran expansión del Imperio inca."
+        }
+      ],
+      "frase": "Caminos y administración desde el Cusco.",
+      "habilidad": {
+        "nombre": "Administración",
+        "tipo": "saberAlEntrar",
+        "n": 1
+      }
+    },
+    {
+      "id": "CC-7-U4-005",
+      "nombre": "Quipu",
+      "tipo": "acontecimiento",
+      "curso": 7,
+      "unidad": 4,
+      "efecto": {
+        "tipo": "buscarProtagonista",
+        "n": 3
+      },
+      "dato": "Sistema de cuerdas con nudos que los incas usaban para registrar cantidades.",
+      "oa": "OA 14",
+      "emblema": "pergamino",
+      "conexiones": [
+        {
+          "causa": "CC-7-U4-004",
+          "texto": "La administración inca registraba sus cuentas en quipus."
+        }
+      ],
+      "frase": "Sistema de cuerdas con nudos que los incas usaban para registrar cantidades."
+    },
+    {
+      "id": "CC-7-U4-006",
+      "nombre": "Cultivo del maíz",
+      "tipo": "acontecimiento",
+      "curso": 7,
+      "unidad": 4,
+      "efecto": {
+        "tipo": "curar",
+        "n": 30
+      },
+      "dato": "Fue la base de la alimentación en Mesoamérica y hoy lo seguimos comiendo en toda América.",
+      "oa": "OA 16",
+      "emblema": "maiz",
+      "frase": "Base de la alimentación de Mesoamérica."
+    },
+    {
+      "id": "CC-7-U4-007",
+      "nombre": "Camino del Inca",
+      "tipo": "lugar",
+      "curso": 7,
+      "unidad": 4,
+      "efecto": {
+        "tipo": "bonusDimension",
+        "dimension": "Politica",
+        "n": 10
+      },
+      "dato": "Red de caminos de miles de kilómetros que llegaba hasta la zona central del actual Chile.",
+      "oa": "OA 14",
+      "emblema": "mapa",
+      "frase": "Miles de kilómetros de caminos, hasta el actual Chile."
+    },
+    {
+      "id": "CC-7-U4-008",
+      "nombre": "Pachacútec",
+      "tipo": "personaje",
+      "curso": 7,
+      "unidad": 4,
+      "efecto": {
+        "tipo": "saberExtra",
+        "n": 1
+      },
+      "dato": "Inca que en el siglo XV transformó el Cusco y comenzó la gran expansión del Tawantinsuyu.",
+      "oa": "OA 14",
+      "emblema": "sol",
+      "frase": "Transformó el Cusco y expandió el Tawantinsuyu.",
+      "fecha": {
+        "anio": 1438,
+        "texto": "siglo XV"
+      }
+    },
+    {
+      "id": "CC-7-U4-009",
+      "nombre": "Calendario maya",
+      "tipo": "acontecimiento",
+      "curso": 7,
+      "unidad": 4,
+      "efecto": {
+        "tipo": "robar",
+        "n": 2
+      },
+      "dato": "Los mayas observaron los astros y crearon calendarios muy precisos para organizar la agricultura y las ceremonias.",
+      "oa": "OA 15",
+      "emblema": "sol",
+      "conexiones": [
+        {
+          "causa": "CC-7-U4-001",
+          "texto": "Los mayas crearon su calendario observando los astros."
+        }
+      ],
+      "frase": "Calendarios precisos para la agricultura y las ceremonias."
+    },
+    {
+      "id": "CC-7-U4-010",
+      "nombre": "Tenochtitlan",
+      "tipo": "lugar",
+      "curso": 7,
+      "unidad": 4,
+      "efecto": {
+        "tipo": "bonusDimension",
+        "dimension": "Territorio",
+        "n": 10
+      },
+      "dato": "Capital de los mexicas, fundada en 1325 sobre un islote del lago Texcoco y unida a tierra firme por calzadas.",
+      "oa": "OA 13",
+      "emblema": "piramide",
+      "frase": "Capital mexica fundada en 1325 sobre un islote del lago Texcoco."
+    },
+    {
+      "id": "CC-7-U4-011",
+      "nombre": "Moctezuma II",
+      "tipo": "personaje",
+      "curso": 7,
+      "unidad": 4,
+      "efecto": {
+        "tipo": "saberExtra",
+        "n": 1
+      },
+      "dato": "Gobernante mexica de Tenochtitlan cuando llegaron los españoles a México, en 1519.",
+      "oa": "OA 13",
+      "emblema": "corona",
+      "conexiones": [
+        {
+          "causa": "CC-7-U4-010",
+          "texto": "Moctezuma gobernaba desde Tenochtitlan, la capital mexica."
+        }
+      ],
+      "frase": "Gobernaba Tenochtitlan cuando llegaron los españoles (1519).",
+      "fecha": {
+        "anio": 1519,
+        "texto": "1519"
+      }
+    },
+    {
+      "id": "CC-7-U4-012",
+      "nombre": "Imperio mexica",
+      "tipo": "protagonista",
+      "dimension": "Politica",
+      "resistencia": 120,
+      "retirada": 2,
+      "acciones": [
+        {
+          "nombre": "Triple Alianza",
+          "costo": 2,
+          "danio": 50,
+          "efecto": {
+            "tipo": "robar",
+            "n": 1
+          }
+        },
+        {
+          "nombre": "Tributo imperial",
+          "costo": 3,
+          "danio": 80,
+          "efecto": {
+            "tipo": "quitarSaber",
+            "n": 1
+          }
+        }
+      ],
+      "dato": "En el siglo XV, desde Tenochtitlan, los mexicas dominaron el centro de México y cobraban tributo a muchos pueblos.",
+      "frase": "Desde Tenochtitlan dominaron el centro de México.",
+      "emblema": "piramide",
+      "habilidad": {
+        "tipo": "legado",
+        "nombre": "Herencia mexica",
+        "n": 1
+      },
+      "evolucionaDe": "CC-7-U4-002",
+      "fecha": {
+        "anio": 1428,
+        "texto": "siglo XV"
+      },
+      "curso": 7,
+      "unidad": 4,
+      "oa": "OA 13"
     }
-   ],
-   "frase": "Gobernaba Tenochtitlan cuando llegaron los españoles (1519).",
-   "fecha": {
-    "anio": 1519,
-    "texto": "1519"
-   }
-  }
- ]
+  ]
 }
