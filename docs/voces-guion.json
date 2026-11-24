@@ -604,6 +604,485 @@
      "texto": "Trabajo colaborativo. Marco para la Buena Enseñanza 2021 · Dominio D: Responsabilidades profesionales. Estándar 12: Compromiso con el mejoramiento continuo de la comunidad escolar."
     }
    ]
+  },
+  {
+   "id": "N22",
+   "historiador": "Un cronista de Indias del siglo XVI",
+   "voz": "Charon",
+   "lineas": [
+    {
+     "clave": "CC-5-U1-010",
+     "texto": "Diego de Almagro. Encabezó la primera expedición española a Chile entre 1535 y 1536. Cruzó los Andes y el desierto, y volvió al Perú sin oro.",
+     "leer": "Diego de Almagro. Encabezó la primera expedición española a Chile entre 1535 y 1536. Cruzó los Andes y el desierto, y volvió al Perú sin oro."
+    },
+    {
+     "clave": "CC-8-U2-008",
+     "texto": "Antonio de Montesinos. Fraile dominico que en 1511, en La Española, denunció en un sermón los abusos contra los indígenas.",
+     "leer": "Antonio de Montesinos. Fraile dominico que en 1511, en La Española, denunció en un sermón los abusos contra los indígenas."
+    },
+    {
+     "clave": "CC-8-U2-009",
+     "texto": "Leyes Nuevas. En 1542 la Corona dictó leyes para proteger a los indígenas y limitar las encomiendas.",
+     "leer": "Leyes Nuevas. En 1542 la Corona dictó leyes para proteger a los indígenas y limitar las encomiendas."
+    },
+    {
+     "clave": "CC-8-U2-010",
+     "texto": "Debate de Valladolid. Entre 1550 y 1551, Bartolomé de las Casas y Juan Ginés de Sepúlveda discutieron ante la Corona sobre los derechos de los indígenas.",
+     "leer": "<throat-clearing> Debate de Valladolid. Entre 1550 y 1551, Bartolomé de las Casas y Juan Ginés de Sepúlveda discutieron ante la Corona sobre los derechos de los indígenas."
+    },
+    {
+     "clave": "CC-8-U2-011",
+     "texto": "Juan Ginés de Sepúlveda. Humanista español que en Valladolid defendió la conquista. Sus ideas fueron criticadas por Bartolomé de las Casas.",
+     "leer": "Juan Ginés de Sepúlveda. Humanista español que en Valladolid defendió la conquista. Sus ideas fueron criticadas por Bartolomé de las Casas."
+    },
+    {
+     "clave": "CC-8-U2-012",
+     "texto": "Frailes dominicos. Orden religiosa a la que pertenecían Montesinos y Bartolomé de las Casas. Sus frailes denunciaron los abusos de la conquista.",
+     "leer": "Frailes dominicos. Orden religiosa a la que pertenecían Montesinos y Bartolomé de las Casas. Sus frailes denunciaron los abusos de la conquista."
+    }
+   ]
+  },
+  {
+   "id": "N23",
+   "historiador": "Una guardiana de la memoria oral",
+   "voz": "Gacrux",
+   "lineas": [
+    {
+     "clave": "CC-5-U1-011",
+     "texto": "Michimalonco. Lonko del valle del Mapocho. En 1541 dirigió el ataque que destruyó gran parte de la recién fundada Santiago.",
+     "leer": "Michimalonco. Lonko del valle del Mapocho. En 1541 dirigió el ataque que destruyó gran parte de la recién fundada Santiago."
+    },
+    {
+     "clave": "CC-5-U1-012",
+     "texto": "Diaguitas del Tawantinsuyu. Hacia el siglo quince, los diaguitas fueron incorporados al Imperio inca y mezclaron sus diseños con los del Cusco.",
+     "leer": "Diaguitas del Tawantinsuyu. Hacia el siglo quince, los diaguitas fueron incorporados al Imperio inca y mezclaron sus diseños con los del Cusco."
+    },
+    {
+     "clave": "CC-5-U2-011",
+     "texto": "Caupolicán. Toqui mapuche elegido, según la tradición, tras sostener un tronco por días. Lideró la resistencia hasta su muerte en 1558.",
+     "leer": "<exhales> Caupolicán. Toqui mapuche elegido, según la tradición, tras sostener un tronco por días. Lideró la resistencia hasta su muerte en 1558."
+    },
+    {
+     "clave": "CC-5-U2-012",
+     "texto": "Batalla de Curalaba. En 1598 los mapuche vencieron al gobernador Óñez de Loyola. Después cayeron las ciudades españolas al sur del Biobío.",
+     "leer": "<breath> Batalla de Curalaba. En 1598 los mapuche vencieron al gobernador Óñez de Loyola. Después cayeron las ciudades españolas al sur del Biobío."
+    },
+    {
+     "clave": "CC-6-U4-009",
+     "texto": "Comunidades aymaras de hoy. Las comunidades aymaras mantienen su lengua y celebran el Machaq Mara, el año nuevo andino, cada 21 de junio.",
+     "leer": "Comunidades aymaras de hoy. Las comunidades aymaras mantienen su lengua y celebran el Machaq Mara, el año nuevo andino, cada 21 de junio."
+    }
+   ]
+  },
+  {
+   "id": "N24",
+   "historiador": "Un escribano de la Real Audiencia",
+   "voz": "Schedar",
+   "lineas": [
+    {
+     "clave": "CC-5-U2-008",
+     "texto": "Encomienda. Sistema colonial en que la Corona entregaba indígenas a un español, que cobraba su trabajo o tributo a cambio de cristianizarlos.",
+     "leer": "Encomienda. Sistema colonial en que la Corona entregaba indígenas a un español, que cobraba su trabajo o tributo a cambio de cristianizarlos."
+    },
+    {
+     "clave": "CC-5-U2-009",
+     "texto": "Real Audiencia. Tribunal de la Corona que juzgaba y aconsejaba al gobernador. Se instaló en Santiago en 1609.",
+     "leer": "Real Audiencia. Tribunal de la Corona que juzgaba y aconsejaba al gobernador. Se instaló en Santiago en 1609."
+    },
+    {
+     "clave": "CC-5-U2-010",
+     "texto": "Fuertes del Biobío. Tras Curalaba, los españoles levantaron una línea de fuertes a lo largo del río Biobío, que marcó la frontera durante la Colonia.",
+     "leer": "Fuertes del Biobío. Tras Curalaba, los españoles levantaron una línea de fuertes a lo largo del río Biobío, que marcó la frontera durante la Colonia."
+    },
+    {
+     "clave": "CC-5-U2-013",
+     "texto": "Comercio libre. En 1778 la Corona permitió que más puertos americanos comerciaran entre sí y con España: terminó el monopolio de unos pocos.",
+     "leer": "Comercio libre. En 1778 la Corona permitió que más puertos americanos comerciaran entre sí y con España: terminó el monopolio de unos pocos."
+    }
+   ]
+  },
+  {
+   "id": "N25",
+   "historiador": "Una naturalista viajera del siglo XIX",
+   "voz": "Zephyr",
+   "lineas": [
+    {
+     "clave": "CC-5-U3-007",
+     "texto": "Desierto de Atacama. Es el desierto no polar más árido del mundo. Guarda minerales como el cobre y el salitre.",
+     "leer": "<exhales> Desierto de Atacama. Es el desierto no polar más árido del mundo. Guarda minerales como el cobre y el salitre."
+    },
+    {
+     "clave": "CC-5-U3-008",
+     "texto": "Altiplano. Meseta a más de 3.500 metros en el extremo norte. Sus pueblos crían llamas y alpacas y celebran fiestas con música andina.",
+     "leer": "Altiplano. Meseta a más de 3.500 metros en el extremo norte. Sus pueblos crían llamas y alpacas y celebran fiestas con música andina."
+    },
+    {
+     "clave": "CC-5-U3-009",
+     "texto": "Campos de Hielo. Campos de Hielo Sur es una de las mayores reservas de agua dulce del planeta, entre Aysén y Magallanes.",
+     "leer": "<breath> Campos de Hielo. Campos de Hielo Sur es una de las mayores reservas de agua dulce del planeta, entre Aysén y Magallanes."
+    },
+    {
+     "clave": "CC-5-U3-010",
+     "texto": "Gran minería del cobre. En el siglo veinte se explotaron grandes yacimientos como Chuquicamata, una de las minas a rajo abierto más grandes del mundo.",
+     "leer": "Gran minería del cobre. En el siglo veinte se explotaron grandes yacimientos como Chuquicamata, una de las minas a rajo abierto más grandes del mundo."
+    },
+    {
+     "clave": "CC-5-U3-011",
+     "texto": "Ignacio Domeyko. Científico polaco que recorrió Chile estudiando sus minerales y su geografía. Fue rector de la Universidad de Chile.",
+     "leer": "Ignacio Domeyko. Científico polaco que recorrió Chile estudiando sus minerales y su geografía. Fue rector de la Universidad de Chile."
+    },
+    {
+     "clave": "CC-5-U3-012",
+     "texto": "Chiloé. Archipiélago de la zona sur con palafitos, mingas e iglesias de madera que son Patrimonio de la Humanidad.",
+     "leer": "Chiloé. Archipiélago de la zona sur con palafitos, mingas e iglesias de madera que son Patrimonio de la Humanidad."
+    }
+   ]
+  },
+  {
+   "id": "N26",
+   "historiador": "Un cuentacuentos del campo chileno",
+   "voz": "Achird",
+   "lineas": [
+    {
+     "clave": "CC-6-U4-008",
+     "texto": "Región de Magallanes. La región más austral de Chile. Vive de la ganadería de ovejas, el turismo y la energía.",
+     "leer": "Región de Magallanes. La región más austral de Chile. Vive de la ganadería de ovejas, el turismo y la energía."
+    },
+    {
+     "clave": "CC-8-U4-006",
+     "texto": "Agroindustria. Hoy el Valle Central produce frutas y vinos que se procesan y exportan a todo el mundo.",
+     "leer": "Agroindustria. Hoy el Valle Central produce frutas y vinos que se procesan y exportan a todo el mundo."
+    },
+    {
+     "clave": "CC-8-U4-007",
+     "texto": "Cultura huasa. Tradiciones del campo de la zona central: el rodeo, la cueca, las ramadas y la vestimenta del huaso.",
+     "leer": "Cultura huasa. Tradiciones del campo de la zona central: el rodeo, la cueca, las ramadas y la vestimenta del huaso."
+    }
+   ]
+  },
+  {
+   "id": "N27",
+   "historiador": "Una profesora de Formación Ciudadana de hoy",
+   "voz": "Autonoe",
+   "lineas": [
+    {
+     "clave": "CC-5-U4-007",
+     "texto": "Derechos del niño. La Convención sobre los Derechos del Niño reconoce derechos a toda persona menor de 18 años. Chile la ratificó en 1990.",
+     "leer": "Derechos del niño. La Convención sobre los Derechos del Niño reconoce derechos a toda persona menor de 18 años. Chile la ratificó en 1990."
+    },
+    {
+     "clave": "CC-5-U4-008",
+     "texto": "Junta de vecinos. Organización de los vecinos de un barrio que se reúne para mejorar su entorno y representar sus necesidades ante el municipio.",
+     "leer": "Junta de vecinos. Organización de los vecinos de un barrio que se reúne para mejorar su entorno y representar sus necesidades ante el municipio."
+    },
+    {
+     "clave": "CC-5-U4-009",
+     "texto": "Bomberos voluntarios. En Chile, los bomberos son voluntarios: no reciben sueldo por apagar incendios y rescatar personas.",
+     "leer": "Bomberos voluntarios. En Chile, los bomberos son voluntarios: no reciben sueldo por apagar incendios y rescatar personas."
+    },
+    {
+     "clave": "CC-5-U4-010",
+     "texto": "Defensoría de la Niñez. Institución creada en 2018 para promover y proteger los derechos de niños, niñas y adolescentes en Chile.",
+     "leer": "Defensoría de la Niñez. Institución creada en 2018 para promover y proteger los derechos de niños, niñas y adolescentes en Chile."
+    },
+    {
+     "clave": "CC-5-U4-011",
+     "texto": "Elecciones democráticas. En una democracia, la ciudadanía elige a sus autoridades con voto secreto, libre e informado.",
+     "leer": "Elecciones democráticas. En una democracia, la ciudadanía elige a sus autoridades con voto secreto, libre e informado."
+    },
+    {
+     "clave": "CC-6-U4-007",
+     "texto": "Gobierno regional. Cada región de Chile tiene un gobierno regional que decide proyectos para su territorio, como caminos y hospitales.",
+     "leer": "Gobierno regional. Cada región de Chile tiene un gobierno regional que decide proyectos para su territorio, como caminos y hospitales."
+    }
+   ]
+  },
+  {
+   "id": "N28",
+   "historiador": "El redactor de La Aurora de Chile (1812)",
+   "voz": "Fenrir",
+   "lineas": [
+    {
+     "clave": "CC-6-U1-011",
+     "texto": "Manuel Rodríguez. Guerrillero patriota que durante la Reconquista se disfrazaba para burlar a los realistas y organizar la resistencia.",
+     "leer": "Manuel Rodríguez. Guerrillero patriota que durante la Reconquista se disfrazaba para burlar a los realistas y organizar la resistencia."
+    },
+    {
+     "clave": "CC-6-U1-012",
+     "texto": "Mariano Osorio. Militar español enviado desde el Perú. En 1814 venció a los patriotas en Rancagua y comenzó la Reconquista.",
+     "leer": "Mariano Osorio. Militar español enviado desde el Perú. En 1814 venció a los patriotas en Rancagua y comenzó la Reconquista."
+    },
+    {
+     "clave": "CC-6-U1-013",
+     "texto": "Batalla de Rancagua. En octubre de 1814 el ejército realista derrotó a los patriotas en Rancagua. Muchos patriotas huyeron a Mendoza.",
+     "leer": "Batalla de Rancagua. En octubre de 1814 el ejército realista derrotó a los patriotas en Rancagua. Muchos patriotas huyeron a Mendoza."
+    },
+    {
+     "clave": "CC-6-U1-014",
+     "texto": "Regimiento Talavera. Regimiento español llegado en 1814. Durante la Reconquista fue el símbolo del control realista sobre Chile.",
+     "leer": "Regimiento Talavera. Regimiento español llegado en 1814. Durante la Reconquista fue el símbolo del control realista sobre Chile."
+    },
+    {
+     "clave": "CC-6-U1-015",
+     "texto": "Expedición Libertadora del Perú. En 1820 zarpó desde Valparaíso una escuadra con el ejército de San Martín para liberar el Perú, último bastión realista.",
+     "leer": "Expedición Libertadora del Perú. En 1820 zarpó desde Valparaíso una escuadra con el ejército de San Martín para liberar el Perú, último bastión realista."
+    }
+   ]
+  },
+  {
+   "id": "N29",
+   "historiador": "Un cronista de un diario de Valparaíso del siglo XIX",
+   "voz": "Orus",
+   "lineas": [
+    {
+     "clave": "CC-6-U2-008",
+     "texto": "Diego Portales. Ministro que impulsó un gobierno fuerte y ordenado. Sus ideas inspiraron la Constitución de 1833.",
+     "leer": "Diego Portales. Ministro que impulsó un gobierno fuerte y ordenado. Sus ideas inspiraron la Constitución de 1833."
+    },
+    {
+     "clave": "CC-6-U2-009",
+     "texto": "Batalla de Lircay. En 1830 los conservadores, llamados pelucones, vencieron a los liberales o pipiolos y gobernaron por tres décadas.",
+     "leer": "Batalla de Lircay. En 1830 los conservadores, llamados pelucones, vencieron a los liberales o pipiolos y gobernaron por tres décadas."
+    },
+    {
+     "clave": "CC-6-U2-010",
+     "texto": "Pipiolos. Así se llamaba a los liberales de la década de 1820. Promovieron la Constitución liberal de 1828.",
+     "leer": "Pipiolos. Así se llamaba a los liberales de la década de 1820. Promovieron la Constitución liberal de 1828."
+    },
+    {
+     "clave": "CC-6-U2-011",
+     "texto": "Francisco Bilbao. Escritor que fundó en 1850 la Sociedad de la Igualdad, que defendía la participación de artesanos y obreros.",
+     "leer": "Francisco Bilbao. Escritor que fundó en 1850 la Sociedad de la Igualdad, que defendía la participación de artesanos y obreros."
+    },
+    {
+     "clave": "CC-6-U2-012",
+     "texto": "Pampinos. Trabajadores de las oficinas salitreras. Vivían en campamentos del desierto con largas jornadas y pago en fichas.",
+     "leer": "Pampinos. Trabajadores de las oficinas salitreras. Vivían en campamentos del desierto con largas jornadas y pago en fichas."
+    },
+    {
+     "clave": "CC-6-U2-013",
+     "texto": "John Thomas North. Empresario británico que reunió muchas oficinas salitreras y ferrocarriles. Lo llamaron el rey del salitre.",
+     "leer": "John Thomas North. Empresario británico que reunió muchas oficinas salitreras y ferrocarriles. Lo llamaron el rey del salitre."
+    }
+   ]
+  },
+  {
+   "id": "N30",
+   "historiador": "Un periodista obrero de 1910",
+   "voz": "Iapetus",
+   "lineas": [
+    {
+     "clave": "CC-6-U3-007",
+     "texto": "Mancomunales. Organizaciones de trabajadores del norte que, desde 1900, se ayudaban en enfermedades y accidentes y defendían sus derechos.",
+     "leer": "Mancomunales. Organizaciones de trabajadores del norte que, desde 1900, se ayudaban en enfermedades y accidentes y defendían sus derechos."
+    },
+    {
+     "clave": "CC-6-U3-008",
+     "texto": "Luis Emilio Recabarren. Tipógrafo y dirigente obrero. Fundó periódicos y organizaciones de trabajadores a comienzos del siglo veinte.",
+     "leer": "Luis Emilio Recabarren. Tipógrafo y dirigente obrero. Fundó periódicos y organizaciones de trabajadores a comienzos del siglo veinte."
+    },
+    {
+     "clave": "CC-6-U3-009",
+     "texto": "República parlamentaria. Entre 1891 y 1925 el Congreso tuvo más poder que el Presidente, y los ministros cambiaban muy seguido.",
+     "leer": "República parlamentaria. Entre 1891 y 1925 el Congreso tuvo más poder que el Presidente, y los ministros cambiaban muy seguido."
+    },
+    {
+     "clave": "CC-6-U3-010",
+     "texto": "Mineros del carbón. En Lota y Coronel se extraía carbón desde galerías bajo el mar. Fue una de las industrias más duras del siglo veinte.",
+     "leer": "Mineros del carbón. En Lota y Coronel se extraía carbón desde galerías bajo el mar. Fue una de las industrias más duras del siglo veinte."
+    },
+    {
+     "clave": "CC-6-U3-011",
+     "texto": "Educación pública. En el siglo veinte el Estado abrió escuelas y liceos públicos en todo el país, y más niños y niñas pudieron estudiar.",
+     "leer": "Educación pública. En el siglo veinte el Estado abrió escuelas y liceos públicos en todo el país, y más niños y niñas pudieron estudiar."
+    }
+   ]
+  },
+  {
+   "id": "N31",
+   "historiador": "Una locutora de radio de los años cincuenta",
+   "voz": "Callirrhoe",
+   "lineas": [
+    {
+     "clave": "CC-8-U4-008",
+     "texto": "Violeta Parra. Cantautora y artista que recorrió los campos de Chile recopilando canciones y tradiciones populares.",
+     "leer": "<humming> Violeta Parra. Cantautora y artista que recorrió los campos de Chile recopilando canciones y tradiciones populares."
+    },
+    {
+     "clave": "CC-8-U4-009",
+     "texto": "Área metropolitana. Las grandes ciudades crecen hasta unirse con sus vecinas. En la región Metropolitana vive cerca del 40 por ciento de los chilenos.",
+     "leer": "Área metropolitana. Las grandes ciudades crecen hasta unirse con sus vecinas. En la región Metropolitana vive cerca del 40 por ciento de los chilenos."
+    },
+    {
+     "clave": "CC-8-U4-010",
+     "texto": "Metro de Santiago. Inaugurado en 1975, el metro conecta la capital bajo tierra y lo usan millones de personas cada semana.",
+     "leer": "<chuckle> Metro de Santiago. Inaugurado en 1975, el metro conecta la capital bajo tierra y lo usan millones de personas cada semana."
+    },
+    {
+     "clave": "CC-8-U4-011",
+     "texto": "Migración campo-ciudad. En el siglo veinte muchas familias dejaron el campo para buscar trabajo en las ciudades, que crecieron rápidamente.",
+     "leer": "Migración campo-ciudad. En el siglo veinte muchas familias dejaron el campo para buscar trabajo en las ciudades, que crecieron rápidamente."
+    }
+   ]
+  },
+  {
+   "id": "N32",
+   "historiador": "Un escriba del antiguo Oriente",
+   "voz": "Algenib",
+   "lineas": [
+    {
+     "clave": "CC-7-U1-007",
+     "texto": "Faraón. Gobernante del antiguo Egipto, considerado un dios. Dirigía el Estado, el ejército y las grandes obras.",
+     "leer": "Faraón. Gobernante del antiguo Egipto, considerado un dios. Dirigía el Estado, el ejército y las grandes obras."
+    },
+    {
+     "clave": "CC-7-U1-008",
+     "texto": "Río Nilo. Sus crecidas anuales dejaban un limo fértil en las orillas. Sin el Nilo, Egipto habría sido solo desierto.",
+     "leer": "Río Nilo. Sus crecidas anuales dejaban un limo fértil en las orillas. Sin el Nilo, Egipto habría sido solo desierto."
+    },
+    {
+     "clave": "CC-7-U1-009",
+     "texto": "Escritura jeroglífica. Los egipcios escribían con signos que representaban objetos y sonidos. Los escribas registraban leyes, cuentas y relatos.",
+     "leer": "Escritura jeroglífica. Los egipcios escribían con signos que representaban objetos y sonidos. Los escribas registraban leyes, cuentas y relatos."
+    },
+    {
+     "clave": "CC-7-U1-010",
+     "texto": "Babilonios. El rey Hammurabi unificó Mesopotamia desde Babilonia, una de las ciudades más grandes de su tiempo.",
+     "leer": "Babilonios. El rey Hammurabi unificó Mesopotamia desde Babilonia, una de las ciudades más grandes de su tiempo."
+    },
+    {
+     "clave": "CC-7-U1-011",
+     "texto": "Código de Hammurabi. Hacia 1750 antes de Cristo, Hammurabi hizo grabar sus leyes en una estela de piedra, a la vista de todos.",
+     "leer": "Código de Hammurabi. Hacia 1750 antes de Cristo, Hammurabi hizo grabar sus leyes en una estela de piedra, a la vista de todos."
+    },
+    {
+     "clave": "CC-7-U1-012",
+     "texto": "Zigurat. Templo de ladrillo en forma de torre escalonada, en el centro de las ciudades de Mesopotamia.",
+     "leer": "Zigurat. Templo de ladrillo en forma de torre escalonada, en el centro de las ciudades de Mesopotamia."
+    }
+   ]
+  },
+  {
+   "id": "N33",
+   "historiador": "Un filósofo del ágora de Atenas",
+   "voz": "Sadaltager",
+   "lineas": [
+    {
+     "clave": "CC-7-U2-009",
+     "texto": "Esparta. Ciudad griega que educaba a sus jóvenes para la guerra desde la infancia. Su ejército era el más temido de Grecia.",
+     "leer": "Esparta. Ciudad griega que educaba a sus jóvenes para la guerra desde la infancia. Su ejército era el más temido de Grecia."
+    },
+    {
+     "clave": "CC-7-U2-010",
+     "texto": "Democracia ateniense. En el siglo cinco antes de Cristo, los ciudadanos de Atenas decidían las leyes en la Asamblea. Mujeres, extranjeros y esclavos no votaban.",
+     "leer": "Democracia ateniense. En el siglo cinco antes de Cristo, los ciudadanos de Atenas decidían las leyes en la Asamblea. Mujeres, extranjeros y esclavos no votaban."
+    }
+   ]
+  },
+  {
+   "id": "N34",
+   "historiador": "Un historiador romano",
+   "voz": "Rasalgethi",
+   "lineas": [
+    {
+     "clave": "CC-7-U2-011",
+     "texto": "Julio César. General romano que conquistó la Galia y concentró el poder en Roma. Fue asesinado en el Senado en el 44 antes de Cristo",
+     "leer": "Julio César. General romano que conquistó la Galia y concentró el poder en Roma. <short pause> Fue asesinado en el Senado en el 44 antes de Cristo"
+    }
+   ]
+  },
+  {
+   "id": "N35",
+   "historiador": "Un monje cronista medieval",
+   "voz": "Umbriel",
+   "lineas": [
+    {
+     "clave": "CC-7-U3-009",
+     "texto": "Gremios. Asociaciones de artesanos de un mismo oficio. Fijaban precios y calidad, y formaban a aprendices y oficiales.",
+     "leer": "Gremios. Asociaciones de artesanos de un mismo oficio. Fijaban precios y calidad, y formaban a aprendices y oficiales."
+    },
+    {
+     "clave": "CC-7-U3-010",
+     "texto": "Caballeros medievales. Guerreros a caballo al servicio de un señor. Seguían un código de honor llamado caballería.",
+     "leer": "Caballeros medievales. Guerreros a caballo al servicio de un señor. Seguían un código de honor llamado caballería."
+    },
+    {
+     "clave": "CC-7-U3-011",
+     "texto": "Peste negra. Entre 1347 y 1351 una epidemia de peste recorrió Europa y murió cerca de un tercio de su población.",
+     "leer": "<sigh> Peste negra. Entre 1347 y 1351 una epidemia de peste recorrió Europa y murió cerca de un tercio de su población."
+    },
+    {
+     "clave": "CC-7-U3-012",
+     "texto": "Ferias medievales. Grandes mercados periódicos, como los de Champaña, donde se reunían comerciantes de toda Europa.",
+     "leer": "Ferias medievales. Grandes mercados periódicos, como los de Champaña, donde se reunían comerciantes de toda Europa."
+    }
+   ]
+  },
+  {
+   "id": "N36",
+   "historiador": "Un tlacuilo, pintor de códices mexica",
+   "voz": "Alnilam",
+   "lineas": [
+    {
+     "clave": "CC-7-U4-012",
+     "texto": "Imperio mexica. En el siglo quince, desde Tenochtitlan, los mexicas dominaron el centro de México y cobraban tributo a muchos pueblos.",
+     "leer": "Imperio mexica. En el siglo quince, desde Tenochtitlan, los mexicas dominaron el centro de México y cobraban tributo a muchos pueblos."
+    }
+   ]
+  },
+  {
+   "id": "N37",
+   "historiador": "Una cronista de la corte real",
+   "voz": "Pulcherrima",
+   "lineas": [
+    {
+     "clave": "CC-8-U1-010",
+     "texto": "Felipe segundo. Rey de España en el siglo dieciséis. Gobernó un imperio tan extenso que se decía que en él nunca se ponía el sol.",
+     "leer": "<throat-clearing> Felipe segundo. Rey de España en el siglo dieciséis. Gobernó un imperio tan extenso que se decía que en él nunca se ponía el sol."
+    },
+    {
+     "clave": "CC-8-U1-011",
+     "texto": "Ejército permanente. Los reyes absolutos mantuvieron ejércitos pagados todo el año, y no solo en tiempos de guerra.",
+     "leer": "Ejército permanente. Los reyes absolutos mantuvieron ejércitos pagados todo el año, y no solo en tiempos de guerra."
+    },
+    {
+     "clave": "CC-8-U1-012",
+     "texto": "Derecho divino de los reyes. Idea según la cual el poder del rey venía directamente de Dios, por lo que nadie podía juzgarlo.",
+     "leer": "Derecho divino de los reyes. Idea según la cual el poder del rey venía directamente de Dios, por lo que nadie podía juzgarlo."
+    },
+    {
+     "clave": "CC-8-U1-013",
+     "texto": "Compañías comerciales. En el siglo diecisiete nacieron grandes compañías, como la holandesa de las Indias Orientales, que comerciaban por todo el mundo.",
+     "leer": "Compañías comerciales. En el siglo diecisiete nacieron grandes compañías, como la holandesa de las Indias Orientales, que comerciaban por todo el mundo."
+    }
+   ]
+  },
+  {
+   "id": "N38",
+   "historiador": "Una redactora de la Enciclopedia",
+   "voz": "Leda",
+   "lineas": [
+    {
+     "clave": "CC-8-U3-008",
+     "texto": "Voltaire. Escritor francés de la Ilustración. Con ironía, criticó la intolerancia y los abusos del poder.",
+     "leer": "<chuckle> Voltaire. Escritor francés de la Ilustración. Con ironía, criticó la intolerancia y los abusos del poder."
+    },
+    {
+     "clave": "CC-8-U3-009",
+     "texto": "Mary Wollstonecraft. Escritora inglesa que en 1792 defendió que las mujeres tenían derecho a la misma educación que los hombres.",
+     "leer": "Mary Wollstonecraft. Escritora inglesa que en 1792 defendió que las mujeres tenían derecho a la misma educación que los hombres."
+    },
+    {
+     "clave": "CC-8-U3-010",
+     "texto": "Toma de la Bastilla. El 14 de julio de 1789 el pueblo de París tomó la Bastilla, una prisión símbolo del poder del rey.",
+     "leer": "<breath> Toma de la Bastilla. El 14 de julio de 1789 el pueblo de París tomó la Bastilla, una prisión símbolo del poder del rey."
+    },
+    {
+     "clave": "CC-8-U3-011",
+     "texto": "Revolución francesa. Desde 1789, Francia terminó con el poder absoluto del rey y proclamó los derechos de las personas.",
+     "leer": "Revolución francesa. Desde 1789, Francia terminó con el poder absoluto del rey y proclamó los derechos de las personas."
+    }
+   ]
   }
  ],
  "cronista": [
