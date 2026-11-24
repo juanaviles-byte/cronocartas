@@ -625,6 +625,366 @@
    "desde": 63.79,
    "hasta": 78.33
   },
+  "CC-5-U1-010": {
+   "ruta": "audio/narrador/N22.ogg",
+   "desde": 0.25,
+   "hasta": 15.209
+  },
+  "CC-8-U2-008": {
+   "ruta": "audio/narrador/N22.ogg",
+   "desde": 16.95,
+   "hasta": 26.359
+  },
+  "CC-8-U2-009": {
+   "ruta": "audio/narrador/N22.ogg",
+   "desde": 28.15,
+   "hasta": 36.16
+  },
+  "CC-8-U2-010": {
+   "ruta": "audio/narrador/N22.ogg",
+   "desde": 36.9,
+   "hasta": 49.7
+  },
+  "CC-8-U2-011": {
+   "ruta": "audio/narrador/N22.ogg",
+   "desde": 50.79,
+   "hasta": 59.343
+  },
+  "CC-8-U2-012": {
+   "ruta": "audio/narrador/N22.ogg",
+   "desde": 60.47,
+   "hasta": 69.65
+  },
+  "CC-5-U1-011": {
+   "ruta": "audio/narrador/N23.ogg",
+   "desde": 0.23,
+   "hasta": 12.167
+  },
+  "CC-5-U1-012": {
+   "ruta": "audio/narrador/N23.ogg",
+   "desde": 14.39,
+   "hasta": 25.448
+  },
+  "CC-5-U2-011": {
+   "ruta": "audio/narrador/N23.ogg",
+   "desde": 27.33,
+   "hasta": 41.147
+  },
+  "CC-5-U2-012": {
+   "ruta": "audio/narrador/N23.ogg",
+   "desde": 42.29,
+   "hasta": 54.474
+  },
+  "CC-6-U4-009": {
+   "ruta": "audio/narrador/N23.ogg",
+   "desde": 56.35,
+   "hasta": 66.97
+  },
+  "CC-5-U2-008": {
+   "ruta": "audio/narrador/N24.ogg",
+   "desde": 0.21,
+   "hasta": 10.421
+  },
+  "CC-5-U2-009": {
+   "ruta": "audio/narrador/N24.ogg",
+   "desde": 11.25,
+   "hasta": 20.582
+  },
+  "CC-5-U2-010": {
+   "ruta": "audio/narrador/N24.ogg",
+   "desde": 21.57,
+   "hasta": 31.769
+  },
+  "CC-5-U2-013": {
+   "ruta": "audio/narrador/N24.ogg",
+   "desde": 32.67,
+   "hasta": 44.05
+  },
+  "CC-5-U3-007": {
+   "ruta": "audio/narrador/N25.ogg",
+   "desde": 0.11,
+   "hasta": 9.93
+  },
+  "CC-5-U3-008": {
+   "ruta": "audio/narrador/N25.ogg",
+   "desde": 11.25,
+   "hasta": 22.162
+  },
+  "CC-5-U3-009": {
+   "ruta": "audio/narrador/N25.ogg",
+   "desde": 23.73,
+   "hasta": 31.628
+  },
+  "CC-5-U3-010": {
+   "ruta": "audio/narrador/N25.ogg",
+   "desde": 32.91,
+   "hasta": 42.597
+  },
+  "CC-5-U3-011": {
+   "ruta": "audio/narrador/N25.ogg",
+   "desde": 43.63,
+   "hasta": 51.649
+  },
+  "CC-5-U3-012": {
+   "ruta": "audio/narrador/N25.ogg",
+   "desde": 52.73,
+   "hasta": 60.61
+  },
+  "CC-6-U4-008": {
+   "ruta": "audio/narrador/N26.ogg",
+   "desde": 0.09,
+   "hasta": 9.209
+  },
+  "CC-8-U4-006": {
+   "ruta": "audio/narrador/N26.ogg",
+   "desde": 10.73,
+   "hasta": 18.738
+  },
+  "CC-8-U4-007": {
+   "ruta": "audio/narrador/N26.ogg",
+   "desde": 19.93,
+   "hasta": 29.51
+  },
+  "CC-5-U4-007": {
+   "ruta": "audio/narrador/N27.ogg",
+   "desde": 0.15,
+   "hasta": 10.804
+  },
+  "CC-5-U4-008": {
+   "ruta": "audio/narrador/N27.ogg",
+   "desde": 11.75,
+   "hasta": 19.96
+  },
+  "CC-5-U4-009": {
+   "ruta": "audio/narrador/N27.ogg",
+   "desde": 20.67,
+   "hasta": 28.777
+  },
+  "CC-5-U4-010": {
+   "ruta": "audio/narrador/N27.ogg",
+   "desde": 29.65,
+   "hasta": 38.449
+  },
+  "CC-5-U4-011": {
+   "ruta": "audio/narrador/N27.ogg",
+   "desde": 39.21,
+   "hasta": 47.152
+  },
+  "CC-6-U4-007": {
+   "ruta": "audio/narrador/N27.ogg",
+   "desde": 47.79,
+   "hasta": 56.03
+  },
+  "CC-6-U1-011": {
+   "ruta": "audio/narrador/N28.ogg",
+   "desde": 0.15,
+   "hasta": 7.697
+  },
+  "CC-6-U1-012": {
+   "ruta": "audio/narrador/N28.ogg",
+   "desde": 8.57,
+   "hasta": 16.797
+  },
+  "CC-6-U1-013": {
+   "ruta": "audio/narrador/N28.ogg",
+   "desde": 17.75,
+   "hasta": 26.565
+  },
+  "CC-6-U1-014": {
+   "ruta": "audio/narrador/N28.ogg",
+   "desde": 27.43,
+   "hasta": 35.957
+  },
+  "CC-6-U1-015": {
+   "ruta": "audio/narrador/N28.ogg",
+   "desde": 36.91,
+   "hasta": 46.41
+  },
+  "CC-6-U2-008": {
+   "ruta": "audio/narrador/N29.ogg",
+   "desde": 0.15,
+   "hasta": 8.991
+  },
+  "CC-6-U2-009": {
+   "ruta": "audio/narrador/N29.ogg",
+   "desde": 10.71,
+   "hasta": 21.106
+  },
+  "CC-6-U2-010": {
+   "ruta": "audio/narrador/N29.ogg",
+   "desde": 22.35,
+   "hasta": 31.045
+  },
+  "CC-6-U2-011": {
+   "ruta": "audio/narrador/N29.ogg",
+   "desde": 33.03,
+   "hasta": 41.693
+  },
+  "CC-6-U2-012": {
+   "ruta": "audio/narrador/N29.ogg",
+   "desde": 43.25,
+   "hasta": 51.454
+  },
+  "CC-6-U2-013": {
+   "ruta": "audio/narrador/N29.ogg",
+   "desde": 52.57,
+   "hasta": 60.53
+  },
+  "CC-6-U3-007": {
+   "ruta": "audio/narrador/N30.ogg",
+   "desde": 0.25,
+   "hasta": 10.276
+  },
+  "CC-6-U3-008": {
+   "ruta": "audio/narrador/N30.ogg",
+   "desde": 11.75,
+   "hasta": 20.545
+  },
+  "CC-6-U3-009": {
+   "ruta": "audio/narrador/N30.ogg",
+   "desde": 21.91,
+   "hasta": 32.96
+  },
+  "CC-6-U3-010": {
+   "ruta": "audio/narrador/N30.ogg",
+   "desde": 34.57,
+   "hasta": 43.673
+  },
+  "CC-6-U3-011": {
+   "ruta": "audio/narrador/N30.ogg",
+   "desde": 45.15,
+   "hasta": 53.99
+  },
+  "CC-8-U4-008": {
+   "ruta": "audio/narrador/N31.ogg",
+   "desde": 0.15,
+   "hasta": 9.634
+  },
+  "CC-8-U4-009": {
+   "ruta": "audio/narrador/N31.ogg",
+   "desde": 10.57,
+   "hasta": 21.19
+  },
+  "CC-8-U4-010": {
+   "ruta": "audio/narrador/N31.ogg",
+   "desde": 22.09,
+   "hasta": 32.777
+  },
+  "CC-8-U4-011": {
+   "ruta": "audio/narrador/N31.ogg",
+   "desde": 33.61,
+   "hasta": 43.27
+  },
+  "CC-7-U1-007": {
+   "ruta": "audio/narrador/N32.ogg",
+   "desde": 0.17,
+   "hasta": 12.229
+  },
+  "CC-7-U1-008": {
+   "ruta": "audio/narrador/N32.ogg",
+   "desde": 14.31,
+   "hasta": 24.568
+  },
+  "CC-7-U1-009": {
+   "ruta": "audio/narrador/N32.ogg",
+   "desde": 26.03,
+   "hasta": 38.032
+  },
+  "CC-7-U1-010": {
+   "ruta": "audio/narrador/N32.ogg",
+   "desde": 39.63,
+   "hasta": 47.688
+  },
+  "CC-7-U1-011": {
+   "ruta": "audio/narrador/N32.ogg",
+   "desde": 49.19,
+   "hasta": 59.873
+  },
+  "CC-7-U1-012": {
+   "ruta": "audio/narrador/N32.ogg",
+   "desde": 61.31,
+   "hasta": 69.11
+  },
+  "CC-7-U2-009": {
+   "ruta": "audio/narrador/N33.ogg",
+   "desde": 0.19,
+   "hasta": 8.897
+  },
+  "CC-7-U2-010": {
+   "ruta": "audio/narrador/N33.ogg",
+   "desde": 10.17,
+   "hasta": 21.31
+  },
+  "CC-7-U2-011": {
+   "ruta": "audio/narrador/N34.ogg",
+   "desde": 0.15,
+   "hasta": 12.75
+  },
+  "CC-7-U3-009": {
+   "ruta": "audio/narrador/N35.ogg",
+   "desde": 0.25,
+   "hasta": 10.021
+  },
+  "CC-7-U3-010": {
+   "ruta": "audio/narrador/N35.ogg",
+   "desde": 11.77,
+   "hasta": 19.928
+  },
+  "CC-7-U3-011": {
+   "ruta": "audio/narrador/N35.ogg",
+   "desde": 21.83,
+   "hasta": 33.437
+  },
+  "CC-7-U3-012": {
+   "ruta": "audio/narrador/N35.ogg",
+   "desde": 35.85,
+   "hasta": 43.71
+  },
+  "CC-7-U4-012": {
+   "ruta": "audio/narrador/N36.ogg",
+   "desde": 0.19,
+   "hasta": 12.09
+  },
+  "CC-8-U1-010": {
+   "ruta": "audio/narrador/N37.ogg",
+   "desde": 0.29,
+   "hasta": 12.458
+  },
+  "CC-8-U1-011": {
+   "ruta": "audio/narrador/N37.ogg",
+   "desde": 13.55,
+   "hasta": 21.485
+  },
+  "CC-8-U1-012": {
+   "ruta": "audio/narrador/N37.ogg",
+   "desde": 22.45,
+   "hasta": 31.183
+  },
+  "CC-8-U1-013": {
+   "ruta": "audio/narrador/N37.ogg",
+   "desde": 32.13,
+   "hasta": 41.59
+  },
+  "CC-8-U3-008": {
+   "ruta": "audio/narrador/N38.ogg",
+   "desde": 0.0,
+   "hasta": 8.257
+  },
+  "CC-8-U3-009": {
+   "ruta": "audio/narrador/N38.ogg",
+   "desde": 10.23,
+   "hasta": 19.354
+  },
+  "CC-8-U3-010": {
+   "ruta": "audio/narrador/N38.ogg",
+   "desde": 20.11,
+   "hasta": 30.128
+  },
+  "CC-8-U3-011": {
+   "ruta": "audio/narrador/N38.ogg",
+   "desde": 30.91,
+   "hasta": 40.45
+  },
   "FM-001": {
    "ruta": "audio/narrador/FN01.ogg",
    "desde": 0.23,
