@@ -1,7 +1,7 @@
 // Service worker de Cronocartas: guarda la app en la tablet para jugar sin internet.
 // Al publicar una mejora, sube VERSION y agrega aquí los archivos nuevos
 // (la prueba tests/sw.test.js avisa si falta alguno).
-const VERSION = 'cc-v101';
+const VERSION = 'cc-v102';
 const ARCHIVOS = [
   "./",
   "audio/ambientes/CC-5-U1-007.ogg",
@@ -567,7 +567,7 @@ const HUELLAS = {
   "audio/sfx/efectos.ogg": "e77b492179ab",
   "audio/sfx/motivos.ogg": "aa1403569e39",
   "audio/tema/inicio.ogg": "d2c8c512d3d7",
-  "css/estilos.css": "e09ddb8a4f5a",
+  "css/estilos.css": "a382c5c94313",
   "data/ambientes.json": "b59e779a954c",
   "data/arte.json": "6d56ff970f5e",
   "data/aula.json": "fc7ae5835722",
@@ -584,8 +584,8 @@ const HUELLAS = {
   "data/sfx.json": "067cdb389add",
   "data/tableros.json": "d182f09106b7",
   "data/voces.json": "65d8f313a1b8",
-  "icons/icon-192.png": "76cdd66e861f",
-  "icons/icon-512.png": "bb1ee868b2c1",
+  "icons/icon-192.png": "23c471aca266",
+  "icons/icon-512.png": "22464837f80f",
   "img/cartas/CC-5-U1-001.webp": "14ed883d9829",
   "img/cartas/CC-5-U1-002.webp": "cc264ce0f75a",
   "img/cartas/CC-5-U1-003.webp": "1b4a72237d3b",
@@ -900,7 +900,7 @@ const HUELLAS = {
   "img/iconos/aula.webp": "c69d8d2649bd",
   "img/iconos/lugar.webp": "78a231dd14f7",
   "img/iconos/personaje.webp": "58bd8f2de5f6",
-  "img/logo.webp": "9e4b4c085042",
+  "img/logo.webp": "cd614ab87712",
   "img/marcos/BosqueNoche.webp": "e1445b2ddb96",
   "img/marcos/CieloViento.webp": "e20a8aee0bf8",
   "img/marcos/Cultura.webp": "18ab60373b6e",
@@ -956,7 +956,7 @@ const HUELLAS = {
   "js/temas-inicio.js": "39c9b4337f81",
   "js/torneo.js": "b56f306f0b06",
   "js/ui/ambiente.js": "d42499ed6353",
-  "js/ui/app.js": "74f5de8d05b2",
+  "js/ui/app.js": "e86ed4e18f70",
   "js/ui/arrastre.js": "16846e259ca8",
   "js/ui/arte.js": "c0defa2b8427",
   "js/ui/banco.js": "73df652d2bdf",

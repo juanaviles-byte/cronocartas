@@ -25,6 +25,11 @@ let eleccion = { modo: 'caraacara', cursoA: 7, cursoB: 7, tablero: 'azar', refor
 let partidaPendiente = null;   // la deja lista el torneo antes de ir a #mesa
 // Tema del inicio (época: fondo y cartas): uno al azar cada vez que se abre el juego; se mantiene mientras siga abierto.
 const TEMA = elegirTema();
+// El color del tema (marco y gema) vale para todos los menús: la clase va en <html>.
+if (typeof document !== 'undefined') {
+  document.documentElement.classList.add(`tema-${TEMA.tema.id}`);
+  document.documentElement.style.setProperty('--fondo-tema', `url("${new URL(TEMA.fondo, location.href).href}")`);
+}
 
 // replaceChildren llegó en Chrome 86; las tablets pueden traer uno más antiguo.
 const vaciarYPoner = (padre, hijo) => { padre.textContent = ''; padre.appendChild(hijo); };
@@ -41,7 +46,7 @@ const vistas = {
     const principal = h('section', 'inicio-principal');
     principal.innerHTML = `
       <header class="portada">
-        <h1 class="marca"><img src="img/logo.webp" alt="Cronocartas: Duelo de Historia" width="1400" height="325"></h1>
+        <h1 class="marca"><img src="img/logo.webp" alt="Cronocartas: Duelo de Historia" width="1400" height="973"></h1>
         <p class="lema">Para 5° a 8° básico</p>
       </header>`;
     const menu = h('nav', 'menu-principal');
@@ -112,12 +117,31 @@ const vistas = {
   },
 
   async jugar() {
+    const ICONO_OPCION = {
+      caraacara: '<path d="M8 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM16 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM2.5 19c0-3.3 2.5-5.5 5.5-5.5s5.5 2.2 5.5 5.5zM12.6 14.6c1-.7 2.1-1.1 3.4-1.1 3 0 5.5 2.2 5.5 5.5h-6.2c-.2-1.7-1.2-3.2-2.7-4.4z"/>',
+      ia: '<path d="M4 5h16a1 1 0 0 1 1 1v10H3V6a1 1 0 0 1 1-1zm1 2v7h14V7zM1.5 17.5h21l-1.2 2H2.7z"/>',
+      curso: '<path d="M7.2 4.6l9.6-1.4 1.6 11.8-9.6 1.4zM4 6.6l2.6-.4 1.7 12 7.4-1.1.2 1.6-9.6 1.4z"/>',
+      libre: '<path d="M4 5.5l7-2 2.8 9.8-7 2zM13.6 4.2l6.8 2.6-3.6 9.5-2.2-.9 2.6-6.9-3.9-1.5zM7.4 16.4l5.1-1.5.8 2.8 3.7-.8.5 2.4-6.2 1.3z"/>',
+      duelo: '<path d="M4 3l7.5 7.5-1.6 1.6L2.4 4.6 2.6 3zM20 3l1.4 1.6L13.9 12l-1.6-1.6zM6.3 13.5l1.4 1.4-1.6 1.6 1.4 1.4 1.6-1.6 1.4 1.4-3.3 3.3-1.4-1.4L3.4 21 2 19.6l2.4-2.4L3 15.8zM17.7 13.5L21 16.8l-1.4 1.4 2.4 2.4-1.4 1.4-2.4-2.4-1.4 1.4-3.3-3.3 1.4-1.4 1.6 1.6 1.4-1.4-1.6-1.6z"/>',
+    };
+    const conIcono = (clave, texto) => ICONO_OPCION[clave] ? `<svg class="icono-opcion" viewBox="0 0 24 24" width="26" height="26" aria-hidden="true" fill="currentColor">${ICONO_OPCION[clave]}</svg>${texto}` : texto;
     const [tableros, duelos] = await Promise.all([cargarTableros(), cargarDuelos()]);
     const ajustes = almacen.leer(CLAVES.ajustes, {}) || {};
-    const v = h('div', 'pantalla preparar');
-    v.appendChild(volver());
-    v.appendChild(h('h1', '', 'Nueva partida'));
-    const grupo = titulo => { const g = h('div', 'grupo'); g.appendChild(h('h2', '', titulo)); v.appendChild(g); return g; };
+    const v = h('div', `pantalla preparar tema-${TEMA.tema.id}`);
+    // Cabecera: volver, título, pestañas y el logo; debajo, dos columnas (opciones y tablero) que se desplazan cada una por su cuenta.
+    const cabecera = h('header', 'preparar-cabecera');
+    const titulos = h('div', 'preparar-titulos');
+    titulos.appendChild(volver());
+    titulos.appendChild(h('h1', '', 'Nueva partida'));
+    cabecera.appendChild(titulos);
+    cabecera.appendChild(h('img', 'preparar-logo'));
+    cabecera.lastChild.src = 'img/logo.webp'; cabecera.lastChild.alt = ''; cabecera.lastChild.width = 1400; cabecera.lastChild.height = 973;
+    v.appendChild(cabecera);
+    const cuerpo = h('div', 'preparar-cuerpo');
+    const izq = h('div', 'preparar-col preparar-opciones');
+    const der = h('div', 'preparar-col preparar-tablero');
+    cuerpo.append(izq, der);
+    const grupo = (titulo, donde = izq, clase = '') => { const g = h('section', `grupo${clase ? ' ' + clase : ''}`); g.appendChild(h('h2', '', titulo)); donde.appendChild(g); return g; };
     // Categoría: los cursos de Historia o las expansiones.
     const pestanas = h('div', 'pestanas');
     pestanas.setAttribute('role', 'tablist');
@@ -132,14 +156,16 @@ const vistas = {
       };
       pestanas.appendChild(b);
     }
-    v.appendChild(pestanas);
+    titulos.appendChild(pestanas);
+    v.appendChild(cuerpo);
     const col = eleccion.coleccion ? coleccion(eleccion.coleccion) : null;
     if (eleccion.coleccion && !col) eleccion.coleccion = null;
     const exp = col ? await fetch(col.archivo).then(r => r.json()).catch(() => null) : null;
     const opciones = (lista, actual, alElegir, clase = 'opciones') => {
       const fila = h('div', clase);
       for (const [valor, t, d] of lista) {
-        const b = h('button', `opcion${actual === valor ? ' elegida' : ''}`, `<b>${t}</b>${d ? `<span>${d}</span>` : ''}`);
+        const b = h('button', `opcion${actual === valor ? ' elegida' : ''}${ICONO_OPCION[valor] && clase === 'opciones' ? ' con-icono' : ''}`,
+          clase === 'opciones' ? conIcono(valor, `<b>${t}</b>${d ? `<span>${d}</span>` : ''}`) : `<b>${t}</b>${d ? `<span>${d}</span>` : ''}`);
         b.onclick = () => { alElegir(valor); render(); };
         fila.appendChild(b);
       }
@@ -204,12 +230,12 @@ const vistas = {
     if (eleccion.mazo === 'duelo') {
       const delCurso = col ? ((exp && exp.duelos) || []) : duelos.filter(d => d.curso === eleccion.cursoA);
       if (!delCurso.some(d => d.id === eleccion.duelo)) { eleccion.duelo = delCurso.length ? delCurso[0].id : null; eleccion.bandoA = null; }
-      const gd = grupo('Duelo');
+      const gd = grupo('Duelo', der);
       gd.appendChild(opciones(delCurso.map(d => [d.id, esc(d.nombre), d.bandos.map(b => esc(b.nombre)).join(' vs. ')]), eleccion.duelo, id => { eleccion.duelo = id; eleccion.bandoA = null; }));
       const d = delCurso.find(x => x.id === eleccion.duelo);
       if (d) {
         if (!d.bandos.some(b => b.id === eleccion.bandoA)) eleccion.bandoA = d.bandos[0].id;
-        const gb = grupo(eleccion.modo === 'ia' ? 'Tu bando' : 'Bando del Jugador 1');
+        const gb = grupo(eleccion.modo === 'ia' ? 'Tu bando' : 'Bando del Jugador 1', der);
         const fila = h('div', 'opciones bandos');
         for (const b of d.bandos) {
           const el = h('button', `opcion bando-opcion${eleccion.bandoA === b.id ? ' elegida' : ''}`, `<b>${esc(b.nombre)}</b><span>${esc(b.lema)}</span>`);
@@ -227,7 +253,7 @@ const vistas = {
       } else { listo = false; gd.appendChild(h('p', 'nota', col ? 'Esta expansión todavía no tiene duelos.' : 'Este curso todavía no tiene duelos temáticos.')); }
     } else if (!col && (cursoDeMesa || cruzados)) {
       // Tablero: uno por unidad del curso (en el modo libre, los de todos los cursos), o sorpresa.
-      const grupoT = grupo('Tablero');
+      const grupoT = grupo('Tablero', der, 'grupo-tableros');
       const grilla = h('div', 'tableros');
       const sorpresa = h('button', `opcion-tablero sorpresa${eleccion.tablero === 'azar' ? ' elegida' : ''}`, `<b>Sorpresa</b><small>${cruzados ? 'Un tablero al azar entre todos' : 'Un tablero al azar del curso'}</small>`);
       sorpresa.onclick = () => { eleccion.tablero = 'azar'; eleccion.reforzar = false; render(); };
@@ -239,6 +265,8 @@ const vistas = {
         grilla.appendChild(b);
       }
       grupoT.appendChild(grilla);
+      der.classList.add('con-tableros');
+      arrastrable(grilla);
       if (eleccion.tablero !== 'azar' && !cruzados) {
         const t = tableros.find(x => x.id === eleccion.tablero);
         const l = h('label', 'interruptor', `<input type="checkbox"${eleccion.reforzar ? ' checked' : ''}><span>Reforzar la unidad ${t ? t.unidad : ''}<small>El mazo incluye todas las cartas de esa unidad, ideal para repasar antes de una prueba.</small></span>`);
@@ -280,6 +308,7 @@ const vistas = {
       + (eleccion.modo === 'caraacara' ? '<small>Pongan la tablet en horizontal, entre los dos jugadores.</small>' : '')));
     barra.appendChild(empezar);
     v.appendChild(barra);
+    if (!der.childNodes.length) v.classList.add('una-columna');
     return v;
   },
 
@@ -473,4 +502,25 @@ if (typeof document !== 'undefined') {
     const b = ev.target.closest && ev.target.closest('button, .opcion, [role="tab"]');
     if (b && !b.disabled && !b.classList.contains('boton-sonido')) sonidos.toque();
   }, true);
+}
+
+// Desplazar arrastrando con el mouse (en pantallas táctiles el dedo ya desplaza): la lista se mueve sola, sin mover la página.
+// Si hubo arrastre, el clic que viene al soltar no elige nada.
+function arrastrable(el) {
+  let ini = null, movio = false;
+  el.addEventListener('pointerdown', e => {
+    if (e.pointerType !== 'mouse' || e.button !== 0) return;
+    ini = { x: e.clientX, y: e.clientY, l: el.scrollLeft, t: el.scrollTop, id: e.pointerId }; movio = false;
+  });
+  el.addEventListener('pointermove', e => {
+    if (!ini) return;
+    const dx = e.clientX - ini.x, dy = e.clientY - ini.y;
+    if (!movio && Math.abs(dx) + Math.abs(dy) < 6) return;
+    if (!movio) { movio = true; el.classList.add('arrastrando'); try { el.setPointerCapture(ini.id); } catch (_) { /* sin captura: sigue igual */ } }
+    el.scrollLeft = ini.l - dx; el.scrollTop = ini.t - dy;
+  });
+  const soltar = () => { if (ini) { ini = null; el.classList.remove('arrastrando'); } };
+  el.addEventListener('pointerup', soltar);
+  el.addEventListener('pointercancel', soltar);
+  el.addEventListener('click', e => { if (movio) { e.stopPropagation(); e.preventDefault(); movio = false; } }, true);
 }

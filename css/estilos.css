@@ -1669,13 +1669,13 @@ body:not([data-vista="mesa"]) { background: radial-gradient(ellipse at 20% 0%, #
 /* ---------- Inicio forjado v2: los controles del menú llevan el mismo marco forjado que las cartas ----------
    Cada tema del inicio toma el marco (y la gema) de una dimensión: el filete es la imagen del marco en
    border-image (9 cortes), la cara es la gema oscurecida. Cambia con el tema, que sale al azar al abrir. */
-.pantalla.inicio { --marco-menu: url("../img/marcos/Economia.webp"); --gema: #916522; --gema-claro: #d7a243; --gema-hondo: #2a1c08; }
-.pantalla.inicio.tema-antiguedad { --marco-menu: url("../img/marcos/Economia.webp"); --gema: #916522; --gema-claro: #e0ad4c; --gema-hondo: #2a1c08; }
-.pantalla.inicio.tema-medieval { --marco-menu: url("../img/marcos/Politica.webp"); --gema: #822424; --gema-claro: #e0544f; --gema-hondo: #260909; }
-.pantalla.inicio.tema-colonia { --marco-menu: url("../img/marcos/Territorio.webp"); --gema: #388058; --gema-claro: #66c086; --gema-hondo: #0b2217; }
-.pantalla.inicio.tema-republica { --marco-menu: url("../img/marcos/Sociedad.webp"); --gema: #0a529e; --gema-claro: #4a9be6; --gema-hondo: #061a33; }
-.pantalla.inicio.tema-ilustracion { --marco-menu: url("../img/marcos/Cultura.webp"); --gema: #6b3278; --gema-claro: #b36ac2; --gema-hondo: #1f0d24; }
-.pantalla.inicio.tema-leyendas { --marco-menu: url("../img/marcos/Mar.webp"); --gema: #0c819d; --gema-claro: #3cc0e4; --gema-hondo: #04232c; }
+:root { --marco-menu: url("../img/marcos/Economia.webp"); --gema: #916522; --gema-claro: #d7a243; --gema-hondo: #2a1c08; }
+.tema-antiguedad { --marco-menu: url("../img/marcos/Economia.webp"); --gema: #916522; --gema-claro: #e0ad4c; --gema-hondo: #2a1c08; }
+.tema-medieval { --marco-menu: url("../img/marcos/Politica.webp"); --gema: #822424; --gema-claro: #e0544f; --gema-hondo: #260909; }
+.tema-colonia { --marco-menu: url("../img/marcos/Territorio.webp"); --gema: #388058; --gema-claro: #66c086; --gema-hondo: #0b2217; }
+.tema-republica { --marco-menu: url("../img/marcos/Sociedad.webp"); --gema: #0a529e; --gema-claro: #4a9be6; --gema-hondo: #061a33; }
+.tema-ilustracion { --marco-menu: url("../img/marcos/Cultura.webp"); --gema: #6b3278; --gema-claro: #b36ac2; --gema-hondo: #1f0d24; }
+.tema-leyendas { --marco-menu: url("../img/marcos/Mar.webp"); --gema: #0c819d; --gema-claro: #3cc0e4; --gema-hondo: #04232c; }
 .inicio .menu-principal .boton-principal.grande, .ficha-menu, .inicio .pastilla, .globo-novedades {
   border-style: solid; border-color: transparent; border-radius: 0; box-shadow: none; background-clip: padding-box;
   border-image-source: var(--marco-menu); border-image-repeat: round stretch; }
@@ -1720,3 +1720,138 @@ body:not([data-vista="mesa"]) { background: radial-gradient(ellipse at 20% 0%, #
 .myl-disco, .carta-mini .m-disco { box-shadow: none; }
 .myl-disco { left: calc(var(--u) * .3); top: calc(var(--u) * .3); width: calc(var(--u) * 2.95); height: calc(var(--u) * 2.95); filter: drop-shadow(0 .12em .25em rgba(0,0,0,.7)); }
 .myl-pie .icono-tipo.medallon { filter: drop-shadow(0 .05em .08em rgba(0,0,0,.6)); }
+
+/* ---------- Nueva partida forjada: el mismo tema (fondo, marco y gema) que el inicio ----------
+   Horizontal: cabecera, dos columnas que se desplazan cada una por su cuenta (opciones | tablero) y la barra de Empezar.
+   Vertical: una columna; los tableros, en una tira que se arrastra de lado sin mover la página. */
+body[data-vista="jugar"] { background: #090d12; }
+.pantalla.preparar { max-width: none; margin: 0; position: relative; isolation: isolate; display: flex; flex-direction: column; gap: 10px;
+  padding: max(14px, var(--safe-area-inset-top, env(safe-area-inset-top, 0px))) max(18px, env(safe-area-inset-right, 0px)) 0 max(18px, env(safe-area-inset-left, 0px)); }
+.pantalla.preparar::before { content: ""; position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: -1; pointer-events: none;
+  background: linear-gradient(180deg, rgba(8,11,15,.55) 0%, rgba(8,11,15,.86) 26%, rgba(8,11,15,.93) 100%), var(--fondo-tema, none) center / cover no-repeat; }
+.preparar-cabecera { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; flex: none; }
+.preparar-titulos { min-width: 0; }
+.preparar-titulos .boton-volver, .preparar-titulos > button:first-child { margin: 0 0 2px; }
+.pantalla.preparar h1 { margin: 0; font-family: var(--serif); font-weight: 700; font-size: clamp(1.6rem, 3.4vw, 2.4rem); color: #F7EFDC; text-shadow: 0 2px 6px rgba(0,0,0,.7); }
+.preparar .pestanas { margin: 6px 0 0; border-bottom: 0; }
+.preparar .pestana { padding: 6px 14px 8px; opacity: .75; }
+.preparar .pestana.activa { color: var(--gema-claro); border-bottom-color: var(--gema-claro); opacity: 1; }
+.preparar-logo { height: clamp(64px, 13vh, 132px); width: auto; flex: none; filter: drop-shadow(0 4px 12px rgba(0,0,0,.6)); }
+.preparar-cuerpo { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; }
+.preparar-col { min-width: 0; display: flex; flex-direction: column; gap: 10px; }
+.preparar-col:empty { display: none; }
+/* Paneles de cada grupo: losa oscura con el marco del tema. */
+.preparar .grupo { border: 9px solid transparent; border-image: var(--marco-menu) 60 / 9px round stretch; background-clip: padding-box;
+  background: linear-gradient(180deg, rgba(14,18,24,.9), rgba(8,10,14,.92)) padding-box; padding: 6px 8px 10px; }
+.pantalla.preparar .grupo h2 { margin: 0 0 8px; font-family: var(--serif); font-size: 1.15rem; font-weight: 700; letter-spacing: 0; text-transform: none; color: #F7EFDC; }
+.preparar .opciones { gap: 8px; }
+.preparar .opcion { min-height: 60px; min-width: 0; flex: 1 1 140px; padding: 6px 10px; border-radius: 0; color: #fff; text-align: center;
+  border: 7px solid transparent; border-image: var(--marco-menu) 60 / 7px round stretch;
+  background: linear-gradient(180deg, var(--gema-hondo), #0b0d11) padding-box; box-shadow: none; transition: box-shadow .15s ease, filter .15s ease; }
+.preparar .opcion b { font-size: 1rem; font-weight: 800; }
+.preparar .opcion span { display: block; color: rgba(236,240,240,.75); font-size: .78rem; line-height: 1.2; }
+.preparar .opcion:hover { filter: brightness(1.15); }
+.preparar .opcion.elegida { background: radial-gradient(100% 90% at 50% 0%, var(--gema-claro), rgba(0,0,0,0) 75%), linear-gradient(180deg, var(--gema), var(--gema-hondo)) padding-box;
+  box-shadow: 0 0 0 1px rgba(255,255,255,.18), 0 0 16px var(--gema-claro); border: 7px solid transparent; color: #fff; }
+.preparar .opcion.elegida b::before { content: "✓ "; color: #fff; }
+.preparar .opcion.elegida span { color: rgba(255,255,255,.9); }
+.preparar .opcion.con-icono { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px; }
+.preparar .icono-opcion { color: var(--gema-claro); filter: drop-shadow(0 1px 0 rgba(0,0,0,.8)); }
+.preparar .opcion.elegida .icono-opcion { color: #fff; }
+.preparar .opciones.cursos .opcion { flex: 1 1 64px; min-height: 56px;
+  background: linear-gradient(180deg, var(--color-curso, #333), #0b0d11 85%) padding-box; }
+.preparar .opciones.cursos .opcion::after { display: none; }
+.preparar .opciones.cursos .opcion.elegida { box-shadow: 0 0 0 1px rgba(255,255,255,.25), 0 0 16px var(--color-curso, var(--gema-claro)); filter: brightness(1.15); }
+.preparar .opciones.cursos .etiqueta { flex-basis: 100%; color: rgba(247,239,220,.8); font-weight: 700; font-size: .85rem; }
+/* Tableros: tarjetas con imagen dentro del marco. */
+.preparar .tableros { gap: 8px; }
+.preparar .opcion-tablero { min-height: 110px; border-radius: 0; border: 8px solid transparent; border-image: var(--marco-menu) 60 / 8px round stretch;
+  background-origin: padding-box; background-clip: padding-box; background-size: cover; background-position: center; box-shadow: none; }
+.preparar .opcion-tablero.elegida { box-shadow: 0 0 0 1px rgba(255,255,255,.25), 0 0 18px var(--gema-claro); }
+.preparar .opcion-tablero.elegida b::before { content: "✓ "; }
+.preparar .opcion-tablero b { font-family: var(--serif); font-size: 1rem; text-shadow: 0 1px 3px #000; }
+.preparar .opcion-tablero.sorpresa { background: radial-gradient(100% 80% at 50% 10%, var(--gema), rgba(0,0,0,0) 75%), linear-gradient(180deg, var(--gema-hondo), #0b0d11); background-clip: padding-box;
+  display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+.preparar .opcion-tablero.sorpresa::before { display: none; }
+.preparar .opcion-tablero.sorpresa b::after { content: ""; display: block; width: 34px; height: 34px; margin: 0 auto 4px; order: -1;
+  background: no-repeat center / contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect x='3' y='3' width='18' height='18' rx='4' fill='%23f3ead3'/%3E%3Cg fill='%2321160a'%3E%3Ccircle cx='8' cy='8' r='1.7'/%3E%3Ccircle cx='16' cy='8' r='1.7'/%3E%3Ccircle cx='12' cy='12' r='1.7'/%3E%3Ccircle cx='8' cy='16' r='1.7'/%3E%3Ccircle cx='16' cy='16' r='1.7'/%3E%3C/g%3E%3C/svg%3E"); }
+.preparar .tableros.arrastrando { cursor: grabbing; }
+.preparar .tableros.arrastrando .opcion-tablero { pointer-events: none; }
+.preparar .interruptor { margin-top: 4px; color: #F7EFDC; }
+.preparar .interruptor input { accent-color: var(--gema-claro); }
+.preparar .interruptor small { color: rgba(236,240,240,.72); }
+/* Barra de Empezar: losa a todo el ancho; Empezar con el marco grande y la gema. */
+.pantalla.preparar .barra-empezar { position: sticky; bottom: 0; margin: 0 calc(-1 * max(18px, env(safe-area-inset-right, 0px))) 0 calc(-1 * max(18px, env(safe-area-inset-left, 0px)));
+  padding: 10px max(18px, env(safe-area-inset-right, 0px)) max(10px, env(safe-area-inset-bottom, 0px)) max(18px, env(safe-area-inset-left, 0px));
+  background: linear-gradient(180deg, rgba(8,11,15,.7), rgba(8,11,15,.97) 30%); backdrop-filter: none; border-top: 1px solid rgba(255,255,255,.08); }
+.preparar .barra-empezar .boton-principal.grande { min-width: 210px; min-height: 58px; border: 12px solid transparent; border-image: var(--marco-menu) 64 / 12px round stretch; border-radius: 0;
+  color: #FFF6E0; font-family: var(--serif); font-size: 1.35rem; font-weight: 800; text-shadow: 0 2px 0 rgba(0,0,0,.55); box-shadow: none;
+  background: radial-gradient(120% 150% at 50% 0%, var(--gema-claro), rgba(0,0,0,0) 62%), linear-gradient(180deg, var(--gema), var(--gema-hondo)) padding-box; }
+.preparar .barra-empezar .boton-principal.grande::before { content: "▶"; font-size: .8em; margin-right: 10px; }
+.preparar .barra-empezar .boton-principal.grande:disabled { filter: grayscale(.8) brightness(.7); }
+.preparar .resumen-eleccion span + span::before { color: var(--gema-claro); }
+
+/* Vertical (celulares y tablets): una columna con la página entera desplazable; tableros en tira horizontal. */
+@media (orientation: portrait), (max-width: 639px) {
+  .pantalla.preparar { min-height: 100vh; min-height: 100dvh; }
+  .preparar .tableros { display: grid; grid-auto-flow: column; grid-template-columns: none; grid-auto-columns: minmax(160px, 44%); overflow-x: auto; overflow-y: hidden;
+    overscroll-behavior-x: contain; scroll-snap-type: x proximity; padding-bottom: 4px; touch-action: pan-x pan-y; }
+  .preparar .opcion-tablero { scroll-snap-align: start; }
+}
+@media (orientation: portrait) and (min-width: 600px) { .preparar .tableros { grid-auto-columns: minmax(170px, 31%); } }
+@media (max-width: 420px) {
+  .preparar-logo { height: 54px; }
+  .preparar .opcion { flex-basis: 120px; }
+  .preparar .opciones.cursos .opcion { flex-basis: 56px; }
+}
+
+/* Horizontal: dos columnas de alto fijo; cada una (y la lista de tableros) se desplaza por su cuenta. */
+@media (orientation: landscape) and (min-width: 640px) {
+  .pantalla.preparar { height: 100vh; height: 100dvh; min-height: 0; overflow: hidden; }
+  .preparar-cuerpo { flex: 1; min-height: 0; grid-template-columns: minmax(0, 1fr) minmax(0, 1.12fr); }
+  .una-columna .preparar-cuerpo { grid-template-columns: minmax(0, 760px); justify-content: center; }
+  .preparar-col { min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding-right: 2px; scrollbar-width: thin; }
+  .preparar-tablero.con-tableros { overflow: hidden; }
+  .preparar-tablero .grupo-tableros { flex: 1; min-height: 0; display: flex; flex-direction: column; }
+  .preparar-tablero .grupo:not(.grupo-tableros) { flex: none; }
+  .preparar .tableros { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; grid-template-columns: repeat(auto-fill, minmax(min(190px, 100%), 1fr)); align-content: start; scrollbar-width: thin; touch-action: pan-y; }
+  .preparar .barra-empezar { flex: none; }
+}
+@media (orientation: landscape) and (min-width: 640px) and (max-height: 560px) {
+  .pantalla.preparar { gap: 6px; padding-top: max(8px, env(safe-area-inset-top, 0px)); }
+  .preparar-logo { height: 52px; }
+  .pantalla.preparar h1 { font-size: 1.35rem; }
+  .preparar .pestana { padding: 2px 12px 4px; }
+  .preparar .opcion { min-height: 48px; padding: 2px 8px; }
+  .preparar .opcion span { display: none; }
+  .preparar .icono-opcion { width: 20px; height: 20px; }
+  .preparar .opcion-tablero { min-height: 84px; }
+  .preparar .opcion-tablero small { display: none; }
+  .preparar .barra-empezar { padding-top: 6px; padding-bottom: max(6px, env(safe-area-inset-bottom, 0px)); }
+  .preparar .barra-empezar .boton-principal.grande { min-height: 46px; font-size: 1.1rem; }
+  .resumen-eleccion small { display: none; }
+}
+.preparar .opcion.elegida, .preparar .opciones.cursos .opcion.elegida { border: 7px solid transparent; border-image: var(--marco-menu) 60 / 7px round stretch; }
+.preparar .opciones.cursos .opcion { text-align: center; }
+@media (orientation: portrait) and (min-width: 600px) { .preparar .opcion-tablero { min-height: 150px; } }
+@media (orientation: landscape) and (min-width: 640px) and (max-height: 560px) {
+  .preparar-titulos { display: flex; align-items: center; flex-wrap: wrap; column-gap: 14px; }
+  .preparar-titulos .pestanas { margin: 0; }
+  .preparar-logo { height: 40px; }
+  .preparar-cabecera { align-items: center; }
+  .preparar .tableros { grid-template-columns: repeat(auto-fill, minmax(min(130px, 100%), 1fr)); }
+  .preparar .opcion-tablero { min-height: 72px; }
+  .preparar .opcion-tablero.sorpresa b::after { width: 22px; height: 22px; }
+  .pantalla.preparar .grupo h2 { font-size: 1rem; margin-bottom: 4px; }
+  .preparar .grupo { padding: 2px 6px 6px; }
+}
+/* Logo 1 (más alto que el anterior): se mide por alto para que el menú quepa. */
+.inicio .portada .marca img { width: auto; max-width: 100%; height: clamp(120px, 27vh, 250px); }
+@media (max-width: 420px) { .inicio .portada .marca img { height: clamp(110px, 22vh, 190px); margin: 0 auto; } }
+@media (max-height: 520px) and (orientation: landscape) { .inicio .portada .marca img { height: 26vh; max-width: none; } }
+@media (max-width: 420px) { .inicio .portada .marca img { height: clamp(96px, 18vh, 170px); } }
+@media (max-height: 520px) and (orientation: landscape) { .inicio .portada .marca img { height: 21vh; } }
+@media (max-width: 420px) and (max-height: 780px) { .inicio .portada .marca img { height: 15vh; } }
+@media (max-height: 380px) and (orientation: landscape) { .inicio .portada .marca img { height: 18vh; } }
+@media (max-height: 780px) and (max-width: 420px), (max-height: 420px) and (orientation: landscape) { .pantalla.inicio { padding-bottom: max(12px, env(safe-area-inset-bottom, 0px)); } }
+@media (max-height: 380px) and (orientation: landscape) { .inicio .portada .marca img { height: 15vh; } .pantalla.inicio { padding-top: 10px; } }
