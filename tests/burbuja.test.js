@@ -68,3 +68,11 @@ test('ya no existe el globo acoplado a la barra central', () => {
 test('La Cronista dibuja una burbuja-cronista', () => {
   assert.match(mesa, /['`]burbuja-cronista/);
 });
+
+// En el tutorial la burbuja lleva la clase «entrenador»: ningún estilo de esa clase puede moverla,
+// o se sale de la pantalla en el celular (quedaba 150 px corrida a la izquierda).
+test('ningún estilo de .entrenador desplaza la burbuja del tutorial', () => {
+  const css = readFileSync(new URL('../css/estilos.css', import.meta.url), 'utf8');
+  const reglas = [...css.matchAll(/(^|\n)\s*\.entrenador\s*\{([^}]*)\}/g)].map(m => m[2]);
+  for (const r of reglas) assert.doesNotMatch(r, /transform|position|left|width/);
+});
