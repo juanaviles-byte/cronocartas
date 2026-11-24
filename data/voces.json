@@ -1403,6 +1403,91 @@
    "ruta": "audio/personajes/personajes.ogg",
    "desde": 127.9398,
    "hasta": 134.4156
+  },
+  "CC-5-U1-010": {
+   "ruta": "audio/personajes/personajes.ogg",
+   "desde": 134.6656,
+   "hasta": 140.4326
+  },
+  "CC-5-U1-011": {
+   "ruta": "audio/personajes/personajes.ogg",
+   "desde": 140.6826,
+   "hasta": 145.8608
+  },
+  "CC-5-U2-011": {
+   "ruta": "audio/personajes/personajes.ogg",
+   "desde": 146.1108,
+   "hasta": 153.0829
+  },
+  "CC-5-U3-011": {
+   "ruta": "audio/personajes/personajes.ogg",
+   "desde": 153.3329,
+   "hasta": 159.2729
+  },
+  "CC-6-U1-011": {
+   "ruta": "audio/personajes/personajes.ogg",
+   "desde": 159.5229,
+   "hasta": 164.3865
+  },
+  "CC-6-U1-012": {
+   "ruta": "audio/personajes/personajes.ogg",
+   "desde": 164.6365,
+   "hasta": 170.8115
+  },
+  "CC-6-U2-008": {
+   "ruta": "audio/personajes/personajes.ogg",
+   "desde": 171.0615,
+   "hasta": 174.763
+  },
+  "CC-6-U2-011": {
+   "ruta": "audio/personajes/personajes.ogg",
+   "desde": 175.013,
+   "hasta": 181.808
+  },
+  "CC-6-U2-013": {
+   "ruta": "audio/personajes/personajes.ogg",
+   "desde": 182.058,
+   "hasta": 187.6801
+  },
+  "CC-6-U3-008": {
+   "ruta": "audio/personajes/personajes.ogg",
+   "desde": 187.9301,
+   "hasta": 193.6536
+  },
+  "CC-7-U2-011": {
+   "ruta": "audio/personajes/personajes.ogg",
+   "desde": 193.9036,
+   "hasta": 197.5631
+  },
+  "CC-8-U1-010": {
+   "ruta": "audio/personajes/personajes.ogg",
+   "desde": 197.8131,
+   "hasta": 204.4515
+  },
+  "CC-8-U2-008": {
+   "ruta": "audio/personajes/personajes.ogg",
+   "desde": 204.7015,
+   "hasta": 211.0616
+  },
+  "CC-8-U2-011": {
+   "ruta": "audio/personajes/personajes.ogg",
+   "desde": 211.3116,
+   "hasta": 216.7196
+  },
+  "CC-8-U3-008": {
+   "ruta": "audio/personajes/personajes.ogg",
+   "desde": 216.9696,
+   "hasta": 222.8224
+  },
+  "CC-8-U3-009": {
+   "ruta": "audio/personajes/personajes.ogg",
+   "desde": 223.0724,
+   "hasta": 227.7588
+  },
+  "CC-8-U4-008": {
+   "ruta": "audio/personajes/personajes.ogg",
+   "desde": 228.0088,
+   "hasta": 234.7467
   }
  }
 }

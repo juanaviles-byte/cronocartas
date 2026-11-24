@@ -1,7 +1,7 @@
 // Service worker de Cronocartas: guarda la app en la tablet para jugar sin internet.
 // Al publicar una mejora, sube VERSION y agrega aquí los archivos nuevos
 // (la prueba tests/sw.test.js avisa si falta alguno).
-const VERSION = 'cc-v87';
+const VERSION = 'cc-v88';
 const ARCHIVOS = [
   "./",
   "audio/ambientes/CC-5-U1-007.ogg",
@@ -483,7 +483,7 @@ const HUELLAS = {
   "audio/ambientes/FM-039.ogg": "d7b0624b9bc9",
   "audio/ambientes/FM-040.ogg": "6bcd33246294",
   "audio/ambientes/FM-ME00.ogg": "8b87294c1df8",
-  "audio/cronista/cronista.ogg": "5a3a9665c07f",
+  "audio/cronista/cronista.ogg": "6987d94a2643",
   "audio/narrador/FN01.ogg": "c4b8fe320f57",
   "audio/narrador/FN02.ogg": "a536eab54380",
   "audio/narrador/FN03.ogg": "b4097f94d081",
@@ -529,9 +529,9 @@ const HUELLAS = {
   "audio/narrador/N36.ogg": "5df82ac44309",
   "audio/narrador/N37.ogg": "136fffe7cbb2",
   "audio/narrador/N38.ogg": "a8262a987616",
-  "audio/personajes/personajes.ogg": "85effc681a6b",
-  "audio/sfx/efectos.ogg": "164d69be8677",
-  "audio/sfx/motivos.ogg": "694f4a97c1a3",
+  "audio/personajes/personajes.ogg": "07c6a826292c",
+  "audio/sfx/efectos.ogg": "e77b492179ab",
+  "audio/sfx/motivos.ogg": "aa1403569e39",
   "audio/tema/inicio.ogg": "d2c8c512d3d7",
   "css/estilos.css": "025e46bccfbd",
   "data/ambientes.json": "b59e779a954c",
@@ -548,7 +548,7 @@ const HUELLAS = {
   "data/mazo-8.json": "c4c1120de99f",
   "data/sfx.json": "067cdb389add",
   "data/tableros.json": "d182f09106b7",
-  "data/voces.json": "85d0ce2e4443",
+  "data/voces.json": "65d8f313a1b8",
   "icons/icon-192.png": "76cdd66e861f",
   "icons/icon-512.png": "bb1ee868b2c1",
   "img/cartas/CC-5-U1-001.webp": "14ed883d9829",
@@ -829,15 +829,15 @@ const HUELLAS = {
   "img/duelos/D-FM-2.webp": "d5e84b5b120a",
   "img/escenarios/CC-5-U1-007.webp": "341a62cd15ae",
   "img/escenarios/CC-5-U3-006.webp": "e2bcd8c6bc78",
-  "img/escenarios/CC-5-U3-007.webp": "7011a08cd5fb",
+  "img/escenarios/CC-5-U3-007.webp": "fcf15a3b304c",
   "img/escenarios/CC-5-U4-006.webp": "f998f4417ba3",
   "img/escenarios/CC-6-U1-007.webp": "ff7b1953e39a",
   "img/escenarios/CC-6-U2-007.webp": "ebf12f81a388",
   "img/escenarios/CC-6-U4-006.webp": "e6a8b9becaf0",
   "img/escenarios/CC-7-U1-006.webp": "0f43b945686c",
-  "img/escenarios/CC-7-U1-008.webp": "5f8c6df82e03",
+  "img/escenarios/CC-7-U1-008.webp": "f377d525cb0d",
   "img/escenarios/CC-7-U2-007.webp": "64cd173cba0f",
-  "img/escenarios/CC-7-U3-012.webp": "3eee358ebfcd",
+  "img/escenarios/CC-7-U3-012.webp": "b493feb777c2",
   "img/escenarios/CC-7-U4-007.webp": "9126a868d16d",
   "img/escenarios/CC-7-U4-010.webp": "bbf8c53c239f",
   "img/escenarios/CC-8-U1-009.webp": "a0008b8e8568",
