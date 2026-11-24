@@ -1,24 +1,27 @@
 # Rediseño visual: prompts para elegir por número (RV)
 
-Objetivo: que el logo, los menús y el diseño de las cartas se vean **menos anacrónicos y más orgánicos**.
+Objetivo: que el logo, los menús y el **acabado** de las cartas se vean menos anacrónicos y más orgánicos.
 
-- **Menos anacrónico:** que no parezca una antigüedad falsa. Nada de latón ni reloj de arena metálico, ni pergamino envejecido, ni marcos dorados recargados.
-- **Más orgánico:** formas suaves y algo irregulares, materiales naturales (papel de algodón, acuarela, grabado, cerámica, tejido, madera), líneas que fluyen y colores sacados de la naturaleza de Chile.
+- **Lo que se mantiene en las cartas:** la disposición de la información, que ya funciona. Va la ilustración arriba y el nombre vertical a la izquierda. Arriba a la izquierda está el disco del tipo, arriba a la derecha la resistencia, y el sello del curso queda en el borde de la ilustración. Abajo van el recuadro de texto con las acciones y el pie.
+- **Lo que cambia:** el marco, el sello de resistencia, el recuadro de descripción, la banda del nombre, el disco del tipo, las monedas de costo, el sello del curso y el pie. Hoy son cajas planas con un borde de un solo color. Se busca un acabado de juego de cartas digital actual: piezas con relieve y volumen, con curvas que abrazan la ilustración y materiales que se sienten reales (como la referencia de las cinco cartas que enviaste).
 
 Cada prompt pide **una sola imagen con varias propuestas numeradas**. Tú me dices el número que eliges y lo llevo al juego.
 
 ## Cómo usarlo
 
 1. Abre una conversación nueva de ChatGPT, pega el **prompt maestro** y espera "Listo".
-2. Pega primero **RV-1 Dirección**. Elige un número y anótalo.
-3. Pega **RV-2 Logo**, **RV-3 Inicio** y **RV-4 Carta**. En cada uno, reemplaza `[N]` por el número que elegiste en RV-1. Así todas las propuestas siguen esa misma dirección.
-4. Envíame cada imagen con su código (por ejemplo "RV-3, me quedo con el 2"). También puedes mezclar: "logo 4 con los colores del 1".
-5. Si falta un número o dos propuestas se parecen mucho, pide: "Repite RV-2: 6 propuestas numeradas del 1 al 6, todas distintas entre sí".
+2. Pega **RV-1 Dirección** y elige un número. Esa dirección guía todo lo demás.
+3. Para **RV-4** y **RV-5**, adjunta dos imágenes junto con el texto:
+   - **cartas-actuales.jpg** (te la envío junto a este documento): son las cartas tal como están hoy, para que respete la disposición.
+   - Tu imagen de referencia de las cinco cartas (las de «Displacer»): para mostrar el nivel de acabado que buscas.
+4. En RV-2, RV-3, RV-4 y RV-5, reemplaza `[N]` por el número que elegiste en RV-1 (y en RV-5, `[M]` por el de RV-4).
+5. Envíame cada imagen con su código (por ejemplo «RV-4, el 3»). También puedes mezclar: «marco del 3 con el sello de resistencia del 5».
+6. Si falta un número o dos propuestas se parecen mucho, pide: «Repite RV-4: 6 propuestas numeradas del 1 al 6, todas distintas entre sí».
 
 ## Prompt maestro
 
 ```
-Vas a proponer el rediseño visual de "Cronocartas: Duelo de Historia", un juego de cartas digital de Historia para estudiantes chilenos de 10 a 14 años (5° a 8° básico). Se juega en tablets y celulares Android de una escuela pública de Mostazal, Chile. Te enviaré pedidos con un código (RV-1, RV-2, RV-3, RV-4). Para cada pedido genera UNA sola imagen que muestre VARIAS propuestas distintas, numeradas, para que yo elija por número.
+Vas a proponer el rediseño visual de "Cronocartas: Duelo de Historia", un juego de cartas digital de Historia para estudiantes chilenos de 10 a 14 años (5° a 8° básico). Se juega en tablets y celulares Android de una escuela pública de Mostazal, Chile. Te enviaré pedidos con un código (RV-1 a RV-5). Para cada pedido genera UNA sola imagen que muestre VARIAS propuestas distintas, numeradas, para que yo elija por número.
 
 REGLAS DE LA IMAGEN
 - Fondo blanco liso. Las propuestas van en una grilla, separadas por líneas blancas de unos 16 píxeles, todas del mismo tamaño.
@@ -27,11 +30,11 @@ REGLAS DE LA IMAGEN
 - Sin marcas de agua, sin firmas y sin texto fuera de los diseños, salvo los números.
 
 DIRECCIÓN GENERAL (vale para todo)
-- Menos anacrónico: NO usar latón, bronce ni engranajes steampunk; NO relojes de arena metálicos; NO pergamino quemado o envejecido; NO marcos dorados recargados con volutas; NO brillos 3D, neón ni efectos de videojuego genérico.
-- Más orgánico: formas suaves, bordes algo irregulares hechos a mano, líneas que fluyen como ríos o vetas de madera, capas de papel recortado, texturas sutiles de papel de algodón, acuarela, grabado, cerámica, tejido o madera.
-- Contemporáneo y cálido, como un buen libro ilustrado actual o un museo moderno de historia. Debe sentirse hecho a mano, pero limpio y fácil de leer.
-- Colores de la naturaleza de Chile: ocres del desierto, verdes del bosque del sur, azules del mar y del cielo de cordillera, rojos de tierra y greda. Buen contraste para leer en una tablet.
-- Tipografía moderna y legible (humanista o serif contemporánea). Nada de letras góticas ni de imitación antigua.
+- Acabado de juego de cartas digital actual y bien terminado: piezas con relieve, volumen y luz suave; bordes con curvas que abrazan la ilustración en vez de cajas rectangulares planas.
+- Orgánico: formas que parecen talladas, modeladas o tejidas, y materiales que se sienten reales (piedra tallada, madera, greda y cerámica, metal trabajado con pátina, cuero, tela). Pequeñas imperfecciones hechas a mano, nunca plástico brillante.
+- Menos anacrónico: nada de "antiguo de mentira". Sin pergamino quemado, sin letras góticas, sin engranajes steampunk ni reloj de arena metálico, sin volutas recargadas que tapen la información.
+- Colores de la naturaleza de Chile: ocres del desierto, verdes del bosque del sur, azules del mar y de la cordillera, rojos de tierra y greda. Buen contraste para leer en una tablet.
+- Tipografía moderna y legible (humanista o serif contemporánea).
 - Ninguna persona real reconocible, nada de violencia gráfica y ningún personaje de otras marcas, juegos o películas.
 
 CONTENIDO DEL JUEGO (para que los diseños tengan sentido)
@@ -45,14 +48,14 @@ Cuando hayas leído esto, responde solo "Listo" y espera el primer pedido.
 ## RV-1 Dirección (6 propuestas)
 
 ```
-RV-1 Dirección. Imagen horizontal de 1536 × 1024 píxeles con 6 propuestas de dirección de arte en una grilla de 3 columnas y 2 filas, numeradas del 1 al 6. Cada propuesta es una lámina de estilo que muestra, en pequeño y juntos: una paleta de 5 colores en círculos, una muestra de tipografía con la palabra "Cronocartas", un botón redondeado que dice "Jugar", el marco de una carta vacía y una textura de fondo.
+RV-1 Dirección. Imagen horizontal de 1536 × 1024 píxeles con 6 propuestas de dirección de arte en una grilla de 3 columnas y 2 filas, numeradas del 1 al 6. Cada propuesta es una lámina de estilo que muestra, en pequeño y juntos: una paleta de 5 colores en círculos, una muestra de tipografía con la palabra "Cronocartas", un botón redondeado que dice "Jugar", el borde de una carta vacía y un sello redondo con el número 80.
 Las 6 direcciones deben ser distintas entre sí:
-1. Papel recortado en capas, con sombras suaves, como un libro ilustrado moderno.
-2. Acuarela y tinta, con trazos sueltos y manchas de color que se funden.
-3. Grabado en madera (xilografía) contemporáneo, con líneas talladas y pocos colores planos.
-4. Textil andino y greda: patrones tejidos geométricos suaves y colores de tierra cocida.
-5. Cartografía viva: curvas de nivel, ríos y caminos dibujados como líneas que fluyen.
-6. Museo moderno: fondos lisos y cálidos, mucho aire, ilustraciones con textura de papel y tipografía grande.
+1. Piedra tallada y bronce con pátina verde, como un relieve de museo.
+2. Madera tallada y cuero cosido a mano, cálida y natural.
+3. Greda y cerámica esmaltada, con colores de tierra cocida y pequeños relieves.
+4. Plata trabajada con gemas pulidas, elegante y luminosa (como un juego de cartas de colección actual).
+5. Papel recortado en capas con sombras suaves, como un libro ilustrado moderno.
+6. Textil andino: bordes tejidos con patrones geométricos suaves y colores de tinte natural.
 ```
 
 ## RV-2 Logo (6 propuestas)
@@ -61,7 +64,7 @@ Las 6 direcciones deben ser distintas entre sí:
 RV-2 Logo, en la dirección [N] de RV-1. Imagen horizontal de 1536 × 1024 píxeles con 6 propuestas de logo en una grilla de 3 columnas y 2 filas, numeradas del 1 al 6.
 - Cada propuesta muestra dos cosas en su recuadro: arriba, el logo completo con el nombre "CRONOCARTAS" y debajo, más pequeño, "Duelo de Historia"; abajo, el ícono de la app solo (sin texto), dentro de un cuadrado de esquinas redondeadas, como se vería en el celular.
 - El nombre debe estar escrito exactamente así: CRONOCARTAS. Debe poder leerse bien en tamaño pequeño.
-- Cada símbolo combina la idea del tiempo con las cartas, sin reloj de arena metálico. Ideas para variar: cartas en abanico que forman una línea de tiempo; un camino o río que atraviesa una carta; anillos de crecimiento de un árbol (el tiempo) dentro de una carta; dos cartas que se cruzan (el duelo); una espiral de capas de papel; un sol o una luna sobre una cordillera dentro de una carta.
+- Cada símbolo combina la idea del tiempo con las cartas, sin reloj de arena metálico. Ideas para variar: cartas en abanico que forman una línea de tiempo; un camino o río que atraviesa una carta; anillos de crecimiento de un árbol (el tiempo) dentro de una carta; dos cartas que se cruzan (el duelo); una espiral de capas; un sol o una luna sobre una cordillera dentro de una carta.
 - Las 6 propuestas usan símbolos distintos. Fondo claro dentro de cada recuadro.
 ```
 
@@ -76,21 +79,44 @@ RV-3 Menú de inicio, en la dirección [N] de RV-1. Imagen horizontal de 1536 ×
 - Arriba a la derecha, un botón redondo de novedades con el dibujo de una carta y un círculo rojo con el número 1.
 - Al costado derecho, tres cartas del juego en abanico (con ilustraciones de paisajes históricos, sin caras reconocibles).
 - De fondo, un paisaje histórico suave, apagado para que el menú se lea bien.
-Varía entre las 4 propuestas la ubicación del menú (izquierda, centro o abajo), la forma de los botones y cómo se integran el fondo y las cartas. Todo debe verse fácil de tocar con el dedo, con botones grandes.
+Mantén el menú a la izquierda y las cartas a la derecha, como hoy. Varía entre las 4 propuestas el material y la forma de los botones, el marco del menú y cómo se integran el fondo y las cartas. Todo debe verse fácil de tocar con el dedo, con botones grandes.
 ```
 
-## RV-4 Diseño de la carta (6 propuestas)
+## RV-4 Acabado de la carta (6 propuestas)
+
+Adjunta **cartas-actuales.jpg** y tu imagen de referencia.
 
 ```
-RV-4 Diseño de la carta, en la dirección [N] de RV-1. Imagen horizontal de 1536 × 1024 píxeles con 6 propuestas en una grilla de 3 columnas y 2 filas, numeradas del 1 al 6. Cada propuesta muestra la MISMA carta, vertical, en proporción 5:7, con el mismo contenido, para comparar solo el diseño:
-- Nombre: "Esparta". Tipo: "Protagonista". Dimensión: Sociedad (con su ícono). Curso: "7°".
-- Resistencia: 80, en un círculo o sello bien visible en la esquina superior.
-- Una sola ilustración: soldados griegos con escudos redondos en formación frente a una ciudad de piedra, vistos de lejos y sin caras reconocibles, ni sangre ni violencia.
-- Una frase corta en cursiva sobre la ilustración: "Educaba a sus jóvenes para la guerra desde niños."
-- Habilidad: "Escudos. Cuando recibe un ataque, el atacante recibe 10 de daño."
-- Dos acciones, cada una con su costo en monedas pequeñas a la izquierda y su daño a la derecha: "●● Falange — 40" (debajo, pequeño: "su próximo ataque hace −10") y "●●● Agogé — 70".
-- Pie de carta, muy pequeño: "Débil ante Economía · Retirada ●●" a la izquierda y "CC-7-U2-009 · OA 6" a la derecha.
-Varía entre las 6 propuestas el marco (desde casi sin marco hasta un borde orgánico hecho a mano), dónde va el nombre (arriba, vertical al costado o sobre la ilustración), cómo se ve la resistencia y cómo se separan la ilustración y el texto. En todas, el texto debe leerse con claridad aunque la carta se vea pequeña en una tablet.
+RV-4 Acabado de la carta, en la dirección [N] de RV-1. Te adjunto dos imágenes: la primera son las cartas del juego tal como son hoy; la segunda es una referencia del nivel de acabado que busco (solo como referencia de calidad y de cómo el marco, el sello de vida y el recuadro de texto tienen relieve; no copies sus figuras, colores ni textos).
+Imagen horizontal de 1536 × 1024 píxeles con 6 propuestas en una grilla de 3 columnas y 2 filas, numeradas del 1 al 6. Cada propuesta es la MISMA carta "Esparta" de la primera imagen (la de la izquierda, de borde azul), con la MISMA ilustración y los MISMOS textos.
+MANTÉN EXACTAMENTE la disposición de la carta actual: ilustración arriba ocupando casi dos tercios; nombre "Esparta" escrito en vertical en el borde izquierdo de la ilustración; disco redondo del tipo (ícono de Sociedad) arriba a la izquierda con la palabra "Sociedad" debajo; sello redondo con la resistencia "80" arriba a la derecha; frase en cursiva sobre la parte baja de la ilustración; sello pequeño "7°" en el borde entre la ilustración y el texto, a la derecha; recuadro de texto abajo con la habilidad "Escudos" y las dos acciones (monedas de costo a la izquierda, nombre al medio y daño a la derecha: Falange 40 y Agogé 70); pie oscuro con "Débil ×2 · Retirada" a la izquierda y "OA 6" a la derecha.
+CAMBIA SOLO EL ACABADO de estas piezas, y en cada propuesta de forma distinta:
+- El marco: con relieve, grosor y esquinas trabajadas que abracen la ilustración (no un borde plano de un color).
+- La banda donde va el nombre vertical.
+- El disco del tipo y el sello del curso.
+- El sello de la resistencia: más grande, con volumen, como una pieza tallada, un escudo o una gema.
+- El recuadro de descripción: una placa con borde y textura sutil, que se lea muy bien.
+- Las monedas de costo y la línea de cada acción.
+- El pie de la carta.
+El texto de la carta debe leerse con claridad aunque la carta se vea pequeña en una tablet.
+```
+
+## RV-5 Familia de cartas (9 cartas con el acabado elegido)
+
+Adjunta **cartas-actuales.jpg** y, si quieres, la imagen de RV-4.
+
+```
+RV-5 Familia de cartas, con el acabado [M] de RV-4 y la dirección [N] de RV-1. Te adjunto las cartas actuales del juego. Imagen horizontal de 1536 × 1024 píxeles con 9 cartas en una grilla de 5 arriba y 4 abajo, numeradas del 1 al 9, todas con la misma disposición y el mismo acabado, cambiando solo el color y el material del marco según su tipo:
+1. Protagonista de Política (rojo).
+2. Protagonista de Economía (amarillo ocre).
+3. Protagonista de Sociedad (azul).
+4. Protagonista de Cultura (morado).
+5. Protagonista de Territorio (verde).
+6. Personaje (café).
+7. Acontecimiento (gris pizarra).
+8. Lugar (verde azulado).
+9. Aula (azul marino).
+Usa las ilustraciones y textos de las cartas adjuntas cuando correspondan (Julio César para el Personaje, Invención de la escritura para el Acontecimiento, Río Nilo para el Lugar y Ambiente respetuoso para el Aula); para los Protagonistas que no están, usa paisajes históricos sin caras reconocibles. Los Personajes, Acontecimientos, Lugares y Aulas no llevan sello de resistencia ni acciones: solo el recuadro con su efecto.
 ```
 
 ## Después de elegir
@@ -99,4 +125,4 @@ Con los números que elijas, cambio en el juego:
 
 - El logo, el ícono de la app y la pantalla de carga.
 - El inicio y los menús: botones, fichas, panel de novedades y la pantalla «Nueva partida».
-- El marco de todas las cartas (Protagonista, Personaje, Acontecimiento, Lugar y Aula), sus íconos de tipo y dimensión, y los sellos de resistencia y costo.
+- El acabado de todas las cartas: marco, banda del nombre, disco del tipo, sello de resistencia, recuadro de descripción, monedas de costo, sello del curso y pie, en las versiones grande y pequeña. La disposición no cambia.
