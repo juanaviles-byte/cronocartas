@@ -1715,3 +1715,8 @@ body:not([data-vista="mesa"]) { background: radial-gradient(ellipse at 20% 0%, #
   .inicio .menu-principal .boton-principal.grande { border-width: 11px; border-image-width: 11px; }
   .ficha-menu { border-width: 8px; border-image-width: 8px; padding: 2px 8px; }
 }
+/* Medallones de tipo: traen su propio anillo de acero, así que el disco no lleva aros extra. */
+.myl-disco img, .carta-mini .m-disco img { display: block; width: 100%; height: 100%; }
+.myl-disco, .carta-mini .m-disco { box-shadow: none; }
+.myl-disco { left: calc(var(--u) * .3); top: calc(var(--u) * .3); width: calc(var(--u) * 2.95); height: calc(var(--u) * 2.95); filter: drop-shadow(0 .12em .25em rgba(0,0,0,.7)); }
+.myl-pie .icono-tipo.medallon { filter: drop-shadow(0 .05em .08em rgba(0,0,0,.6)); }
