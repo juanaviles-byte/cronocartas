@@ -875,9 +875,10 @@ button:disabled { opacity: .35; cursor: default; }
 
 /* ---------- Celular vertical: girar ---------- */
 .girar-aviso { display: none; }
+/* Solo cara a cara: contra la tablet el celular se juega en vertical (vista del jugador). */
 @media (orientation: portrait) and (max-width: 600px) {
-  .mesa > :not(.girar-aviso):not(.escena-lugar) { visibility: hidden; }
-  .girar-aviso { display: flex; position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 60; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
+  .mesa:not(.vista-jugador) > :not(.girar-aviso):not(.escena-lugar) { visibility: hidden; }
+  .mesa:not(.vista-jugador) > .girar-aviso { display: flex; position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 60; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
     background: rgba(10,14,24,.92); color: var(--perg, #F3EAD3); text-align: center; padding: 24px; }
   .girar-aviso svg { color: var(--oro, #E9C46A); animation: girar-tel 2.4s ease-in-out infinite; }
   .girar-aviso b { font-size: 1.3rem; font-family: var(--serif); color: var(--oro, #E9C46A); }
@@ -1203,6 +1204,60 @@ body:not([data-vista="mesa"]) { background: radial-gradient(ellipse at 20% 0%, #
   .mesa.vista-jugador .lado-A .controles { justify-content: flex-end; align-self: stretch; max-width: none; gap: 10px; }
   .mesa.vista-jugador .lado-A .controles .botonera { flex-wrap: nowrap; }
   .mesa.vista-jugador .centro .placa-lugar { width: 46vw; }
+}
+
+/* Celular en vertical (contra la tablet): como Marvel Snap. Cada mitad se ordena en una grilla
+   para que la reserva no quede detrás del activo y las pilas se puedan tocar. */
+@media (orientation: portrait) and (max-width: 600px) {
+  .mesa.vista-jugador .lado { padding: 4px 8px; }
+  .mesa.vista-jugador .ala { display: contents; }
+  .mesa.vista-jugador .campo { display: grid; column-gap: 8px; row-gap: 6px; justify-items: center; align-items: center; }
+  .mesa.vista-jugador .marcador { min-width: 0; max-width: 100%; padding: 5px 8px 5px 10px; }
+  .mesa.vista-jugador .marcador .nombre-jugador { font-size: .95rem; }
+
+  /* Rival: una sola fila, placa · activo · reserva. */
+  .mesa.vista-jugador .lado-B .campo { grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); grid-template-areas: "marc activo res"; }
+  .mesa.vista-jugador .lado-B .marcador { grid-area: marc; justify-self: start; }
+  .mesa.vista-jugador .lado-B .zona-activo { grid-area: activo; }
+  .mesa.vista-jugador .lado-B .reserva { grid-area: res; justify-self: end; padding: 5px; gap: 4px; }
+  .mesa.vista-jugador .lado-B .zona-activo .carta-mini { --ch: min(calc(var(--lado) * .7), 30vw); }
+  .mesa.vista-jugador .lado-B .zona-activo .hueco { height: min(calc(var(--lado) * .7), 30vw); width: calc(min(calc(var(--lado) * .7), 30vw) * .72); }
+  .mesa.vista-jugador .lado-B .reserva .carta-mini { --ch: min(calc(var(--lado) * .34), 12vw); }
+  .mesa.vista-jugador .lado-B .reserva .hueco { height: min(calc(var(--lado) * .34), 12vw); width: calc(min(calc(var(--lado) * .34), 12vw) * .72); }
+
+  /* Jugador: placa · activo · acciones arriba; la reserva y las pilas en una fila debajo. */
+  /* Jugador: placa · activo · pilas; debajo las acciones a todo el ancho y luego la reserva. */
+  .mesa.vista-jugador .lado-A .campo { flex: 0 0 auto; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    grid-template-areas: "marc activo pil" "acc acc acc" "res res res"; }
+  .mesa.vista-jugador .lado-A .marcador { grid-area: marc; justify-self: start; align-self: start; }
+  .mesa.vista-jugador .lado-A .zona-activo { grid-area: activo; }
+  .mesa.vista-jugador .lado-A .acciones-activo { grid-area: acc; width: 100%; flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 6px; }
+  .mesa.vista-jugador .lado-A .acciones-activo:empty { display: none; }
+  .mesa.vista-jugador .lado-A .boton-accion { flex: 1 1 0; min-width: 0; max-width: 50%; }
+  .mesa.vista-jugador .lado-A .reserva { grid-area: res; padding: 6px; gap: 6px; }
+  .mesa.vista-jugador .lado-A .pilas { grid-area: pil; justify-self: end; flex-direction: column; align-items: center; gap: 8px; }
+  .mesa.vista-jugador .lado-A .zona-activo .carta-mini { --ch: min(calc(var(--lado) * .4), 38vw); }
+  .mesa.vista-jugador .lado-A .zona-activo .hueco { height: min(calc(var(--lado) * .4), 38vw); width: calc(min(calc(var(--lado) * .4), 38vw) * .72); }
+  .mesa.vista-jugador .lado-A .reserva .carta-mini { --ch: min(calc(var(--lado) * .2), 19vw); }
+  .mesa.vista-jugador .lado-A .reserva .hueco { height: min(calc(var(--lado) * .2), 19vw); width: calc(min(calc(var(--lado) * .2), 19vw) * .72); }
+  /* Mazo y descarte: al menos 44 px de ancho para tocarlos con el dedo. */
+  .mesa.vista-jugador .lado-A .pila-mazo { width: 46px; height: 64px; }
+  .mesa.vista-jugador .lado-A .pila-descarte .carta-mini { --ch: 64px; }
+  .mesa.vista-jugador .lado-A .pila-descarte .hueco { height: 64px; width: 46px; }
+  .mesa.vista-jugador .lado-A .fila-mano { margin-top: auto; }
+  .mesa.vista-jugador .lado-A .mano .carta-mini { --ch: min(calc(var(--lado) * .22), 25vw); }
+  /* Franja central: turno · Lugar · sonido, Cronista y menú (el menú como ícono). */
+  .mesa.vista-jugador .centro { grid-template-columns: auto minmax(0, 1fr) auto auto auto; column-gap: 4px; padding: 0 6px; }
+  .mesa.vista-jugador .centro > .aviso-turno { grid-column: 1; max-width: 62px; font-size: .74rem; line-height: 1.1; align-self: center; margin: 0; }
+  .mesa.vista-jugador .centro .lugar-en-juego { grid-column: 2; max-width: none; width: 100%; }
+  .mesa.vista-jugador .centro .placa-lugar { width: 100%; }
+  .mesa.vista-jugador .centro > .registro { display: none; }
+  .mesa.vista-jugador .centro > .boton-sonido { grid-column: 3; margin: 0; }
+  .mesa.vista-jugador .centro > .boton-guia { grid-column: 4; margin: 0; }
+  .mesa.vista-jugador .centro > .boton-menu { grid-column: 5; margin: 0; width: 44px; padding: 0; font-size: 0; position: relative; }
+  .mesa.vista-jugador .centro > .boton-menu::before { content: ''; position: absolute; left: 12px; right: 12px; top: 50%; height: 14px; margin-top: -7px;
+    background: linear-gradient(currentColor, currentColor) top / 100% 2px no-repeat, linear-gradient(currentColor, currentColor) center / 100% 2px no-repeat,
+      linear-gradient(currentColor, currentColor) bottom / 100% 2px no-repeat; }
 }
 
 .mesa.vista-jugador .boton-deshacer, .mesa.vista-jugador .controles .boton-secundario, .mesa.vista-jugador .controles .boton-principal { min-height: 44px; }

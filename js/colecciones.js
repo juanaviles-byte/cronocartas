@@ -8,6 +8,7 @@ export const COLECCIONES = [
   {
     id: 'fin-del-mundo',
     nombre: 'Leyendas del Fin del Mundo',
+    corto: 'Fin del Mundo',   // en botones angostos (modo libre)
     sigla: 'FM',
     descripcion: 'Mitología de Chile: seres del mar, la tierra, el cielo y el bosque.',
     archivo: 'data/exp-fin-del-mundo.json',

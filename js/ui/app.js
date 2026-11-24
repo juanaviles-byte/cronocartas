@@ -11,7 +11,7 @@ import { sonidos, precargarSonidos } from './sonido.js';
 import { ambiente } from './ambiente.js';
 import { almacen, CLAVES } from '../almacen.js';
 import { esc } from '../html.js';
-import { CURSOS, mazosDePartida } from '../eleccion.js';
+import { CURSOS, MAZOS_LIBRES, mazosDePartida } from '../eleccion.js';
 import { modoEscuelaActivo } from '../rendimiento.js';
 
 const app = document.getElementById('app');
@@ -148,10 +148,12 @@ const vistas = {
 
     grupo('¿Con qué mazos?').appendChild(opciones(col
       ? [['curso', 'Mazo completo', 'Todas las cartas de la expansión'], ['duelo', 'Duelo temático', 'Cada jugador, una fuerza']]
-      : [['curso', 'Mazo del curso', 'Cartas de las 4 unidades'], ['libre', 'Modo libre', 'Cada jugador, su curso: 5° contra 8°'], ['duelo', 'Duelo temático', 'Cada jugador, un bando histórico']],
+      : [['curso', 'Mazo del curso', 'Cartas de las 4 unidades'], ['libre', 'Modo libre', 'Cada jugador, su mazo: un curso o una expansión'], ['duelo', 'Duelo temático', 'Cada jugador, un bando histórico']],
       eleccion.mazo, m => {
         // Al entrar al modo libre, la tablet parte con un mazo al azar; cara a cara, con el mismo curso.
         if (m === 'libre' && eleccion.mazo !== 'libre') eleccion.cursoB = eleccion.modo === 'ia' ? 'azar' : eleccion.cursoA;
+        // Fuera del modo libre solo hay cursos: si se había elegido una expansión, se vuelve a un curso.
+        if (m !== 'libre') { if (!CURSOS.includes(eleccion.cursoA)) eleccion.cursoA = CURSOS.includes(eleccion.cursoB) ? eleccion.cursoB : 7; eleccion.cursoB = eleccion.cursoA; }
         eleccion.mazo = m;
       }));
 
@@ -162,9 +164,13 @@ const vistas = {
     for (const [k, etiqueta] of filas) {
       const fila = h('div', 'opciones cursos');
       if (etiqueta) fila.appendChild(h('span', 'etiqueta', etiqueta));
-      for (const c of CURSOS) {
-        const b = h('button', `opcion curso-${c}${eleccion[k] === c ? ' elegida' : ''}`, `<b>${c}°</b><span>básico</span>`);
-        b.onclick = () => { eleccion[k] = c; if (!cruzados) eleccion.cursoB = c; if (k === 'cursoA') { eleccion.tablero = 'azar'; eleccion.reforzar = false; eleccion.duelo = null; eleccion.bandoA = null; } render(); };
+      // En el modo libre, las expansiones son un mazo más junto a los cursos.
+      for (const c of cruzados ? MAZOS_LIBRES : CURSOS) {
+        const ex = coleccion(c);
+        const b = h('button', `opcion ${ex ? 'mazo-expansion' : `curso-${c}`}${eleccion[k] === c ? ' elegida' : ''}`,
+          ex ? `<b>${esc(ex.sigla)}</b><span>${esc(ex.corto || ex.nombre)}</span>` : `<b>${c}°</b><span>básico</span>`);
+        if (ex) { b.title = 'Expansión: ' + ex.nombre; b.setAttribute('aria-label', 'Expansión ' + ex.nombre); }
+        b.onclick = () => { eleccion[k] = c; if (!cruzados) eleccion.cursoB = c; if (k === 'cursoA' || ex) { eleccion.tablero = 'azar'; eleccion.reforzar = false; eleccion.duelo = null; eleccion.bandoA = null; } render(); };
         fila.appendChild(b);
       }
       if (k === 'cursoB' && eleccion.modo === 'ia') {
@@ -176,6 +182,9 @@ const vistas = {
     }
     }
 
+    // Modo libre: el tablero sale del curso que haya en juego; con dos expansiones no hay tablero ni línea de tiempo.
+    const cursoDeMesa = CURSOS.includes(eleccion.cursoA) ? eleccion.cursoA : CURSOS.includes(eleccion.cursoB) ? eleccion.cursoB : null;
+    const nombreMazo = m => m === 'azar' ? 'un mazo al azar' : coleccion(m) ? coleccion(m).nombre : `${m}°`;
     let listo = true;
     if (eleccion.mazo === 'duelo') {
       const delCurso = col ? ((exp && exp.duelos) || []) : duelos.filter(d => d.curso === eleccion.cursoA);
@@ -201,14 +210,14 @@ const vistas = {
           gb.appendChild(arte);
         }
       } else { listo = false; gd.appendChild(h('p', 'nota', col ? 'Esta expansión todavía no tiene duelos.' : 'Este curso todavía no tiene duelos temáticos.')); }
-    } else if (!col) {
+    } else if (!col && cursoDeMesa) {
       // Tablero: uno por unidad del curso, o sorpresa.
       const grupoT = grupo('Tablero');
       const grilla = h('div', 'tableros');
       const sorpresa = h('button', `opcion-tablero sorpresa${eleccion.tablero === 'azar' ? ' elegida' : ''}`, '<b>Sorpresa</b><small>Un tablero al azar del curso</small>');
       sorpresa.onclick = () => { eleccion.tablero = 'azar'; eleccion.reforzar = false; render(); };
       grilla.appendChild(sorpresa);
-      for (const t of tableros.filter(t => t.curso === eleccion.cursoA)) {
+      for (const t of tableros.filter(t => t.curso === cursoDeMesa)) {
         const b = h('button', `opcion-tablero${eleccion.tablero === t.id ? ' elegida' : ''}`, `<b>U${t.unidad} · ${esc(t.nombre)}</b><small>${esc(t.textoRegla)}</small>`);
         b.style.backgroundImage = `url("${t.imagen}")`;
         b.onclick = () => { eleccion.tablero = t.id; render(); };
@@ -223,7 +232,7 @@ const vistas = {
       }
     }
 
-    if (!col) {   // Las expansiones no tienen fechas: sin línea de tiempo.
+    if (!col && cursoDeMesa) {   // Las expansiones no tienen fechas: sin línea de tiempo.
       const gl = grupo('Reglas extra');
       const ll = h('label', 'interruptor', `<input type="checkbox"${eleccion.linea ? ' checked' : ''}><span>Línea de tiempo<small>Los Personajes y Acontecimientos con fecha se ordenan en una línea de tiempo. Si los ubicas bien, ganas +1 de Saber.</small></span>`);
       ll.querySelector('input').onchange = ev => { eleccion.linea = ev.target.checked; };
@@ -247,7 +256,7 @@ const vistas = {
     const dueloSel = eleccion.mazo === 'duelo' ? duelos2.find(d => d.id === eleccion.duelo) : null;
     const resumen = [
       eleccion.modo === 'ia' ? 'Contra la tablet' : 'Cara a cara',
-      col ? col.nombre : cruzados ? `${eleccion.cursoA}° contra ${eleccion.cursoB === 'azar' ? 'un curso al azar' : `${eleccion.cursoB}°`}` : `${eleccion.cursoA}° básico`,
+      col ? col.nombre : cruzados ? `${nombreMazo(eleccion.cursoA)} contra ${nombreMazo(eleccion.cursoB)}` : `${eleccion.cursoA}° básico`,
       dueloSel ? dueloSel.nombre : col ? 'Mazo completo' : cruzados ? 'Modo libre' : 'Mazo del curso',
     ];
     const barra = h('div', 'barra-empezar');

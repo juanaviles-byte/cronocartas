@@ -29,7 +29,11 @@ test('el flujo usa Node 22, JDK 21 y Capacitor 8, y publica el APK con nombre fi
 
 test('cada APK se firma con la misma llave, para poder actualizar sin desinstalar', () => {
   assert.ok(existsSync('apk/debug.keystore'));
-  assert.match(flujo, /apk\/debug\.keystore ~\/\.android\/debug\.keystore/);
+  // La llave se declara en build.gradle (copiarla a ~/.android no bastaba) y el flujo revisa su huella.
+  assert.match(flujo, /storeFile file\("\$\{rootDir\}\/\.\.\/apk\/debug\.keystore"\)/);
+  assert.match(flujo, /debug \{ signingConfig signingConfigs\.fija \}/);
+  assert.match(flujo, /"\$APKSIGNER" verify --print-certs/);
+  assert.match(flujo, /SHA-256 digest: 66dc7accaee90f7274e29d916bcd47095ceb8fb6c3fd924b7ab7a2f655dff0c0/);
 });
 
 test('los íconos y la pantalla de carga de Android están listos para cada densidad', () => {

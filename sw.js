@@ -1,7 +1,7 @@
 // Service worker de Cronocartas: guarda la app en la tablet para jugar sin internet.
 // Al publicar una mejora, sube VERSION y agrega aquí los archivos nuevos
 // (la prueba tests/sw.test.js avisa si falta alguno).
-const VERSION = 'cc-v78';
+const VERSION = 'cc-v79';
 const ARCHIVOS = [
   "./",
   "audio/ambientes/CC-5-U1-007.ogg",
@@ -544,7 +544,7 @@ const HUELLAS = {
   "audio/sfx/viaje.ogg": "aab7115984b2",
   "audio/sfx/victoria.ogg": "a4a5c41a13af",
   "audio/tema/inicio.ogg": "d2c8c512d3d7",
-  "css/estilos.css": "5d8ba162523e",
+  "css/estilos.css": "5d4ee71ae2d7",
   "data/ambientes.json": "963d06be0a1d",
   "data/arte.json": "305fc8be9797",
   "data/aula.json": "9c4641e855c6",
@@ -806,10 +806,10 @@ const HUELLAS = {
   "js/album.js": "0a9ec778ed95",
   "js/almacen.js": "c2c1488254ce",
   "js/balance.js": "82364d9baea3",
-  "js/colecciones.js": "325b84a5b77b",
+  "js/colecciones.js": "c92c8f263bda",
   "js/compartir.js": "c24b3ac46534",
   "js/ediciones.js": "fc3fd392a3c0",
-  "js/eleccion.js": "2b4cd9e25095",
+  "js/eleccion.js": "5a525ec758ea",
   "js/fechas.js": "130bf8774d10",
   "js/html.js": "221379633092",
   "js/ia.js": "998dd5656539",
@@ -821,7 +821,7 @@ const HUELLAS = {
   "js/rng.js": "a0cb6ba3f25e",
   "js/torneo.js": "b56f306f0b06",
   "js/ui/ambiente.js": "d42499ed6353",
-  "js/ui/app.js": "acf53868ad10",
+  "js/ui/app.js": "cd88bb84bf2a",
   "js/ui/arrastre.js": "3f7dac42c935",
   "js/ui/arte.js": "d522c5ce9e73",
   "js/ui/banco.js": "73df652d2bdf",
@@ -836,7 +836,7 @@ const HUELLAS = {
   "js/ui/editor.js": "efdd01cbbe7b",
   "js/ui/efectos.js": "061784a3eba9",
   "js/ui/guia.js": "c9e972efcd9f",
-  "js/ui/mesa.js": "4a482ec0702e",
+  "js/ui/mesa.js": "7b4d82391fbd",
   "js/ui/sonido.js": "fe2c462d22fa",
   "js/ui/tiempo.js": "bc9280b1562f",
   "js/ui/torneo.js": "306ece57a0cc",

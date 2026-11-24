@@ -70,6 +70,9 @@ export async function montarMesa(contenedor, opciones) {
     linea: opciones.modo === 'tutorial' ? false : opciones.linea !== false,
     duelo: opciones.duelo || null,
     coleccion: opciones.coleccion || null,   // expansión (js/colecciones.js); null en los cursos
+    // Modo libre: el mazo de cada jugador puede ser una expansión aunque la partida sea de cursos.
+    coleccionA: (!opciones.coleccion && coleccion(opciones.coleccionA)) ? opciones.coleccionA : null,
+    coleccionB: (!opciones.coleccion && coleccion(opciones.coleccionB)) ? opciones.coleccionB : null,
     bandoA: opciones.bandoA || null,
     nombres: opciones.nombres || null,
     torneo: opciones.torneo || null,
@@ -84,6 +87,9 @@ export async function montarMesa(contenedor, opciones) {
   // Expansión: un solo mazo para los dos jugadores, sin tableros ni línea de tiempo (sus cartas no tienen fecha).
   const colec = config.coleccion ? coleccion(config.coleccion) : null;
   if (colec) { config.linea = false; config.reforzar = false; config.tablero = null; }
+  // Modo libre con dos expansiones: tampoco hay tablero ni línea de tiempo.
+  const sinCurso = !!(colec || (config.coleccionA && config.coleccionB));
+  if (sinCurso) { config.linea = false; config.reforzar = false; config.tablero = null; }
   const datosCol = colec ? await cargarColeccionCompleta(colec.id) : null;
   const duelo = config.duelo ? (colec ? datosCol.duelos : await cargarDuelos()).find(d => d.id === config.duelo) || null : null;
   if (duelo && !colec) { config.cursoA = duelo.curso; config.cursoB = duelo.curso; config.tablero = duelo.tablero; }
@@ -91,15 +97,19 @@ export async function montarMesa(contenedor, opciones) {
     const a = duelo.bandos.find(b => b.id === config.bandoA) || duelo.bandos[0];
     return { A: a, B: duelo.bandos.find(b => b !== a) };
   })() : null;
-  const [datosA, datosB, tableros, epocas, dorsos] = await Promise.all([colec ? datosCol : cargarCursoCompleto(config.cursoA), colec ? datosCol : cargarCursoCompleto(config.cursoB), cargarTableros(), cargarEpocas(), cargarDorsos(), ambientesListos]);
-  const unidadesDe = { [config.cursoA]: datosA.unidades, [config.cursoB]: datosB.unidades };
+  const datosDe = j => colec ? datosCol : config[`coleccion${j}`] ? cargarColeccionCompleta(config[`coleccion${j}`]) : cargarCursoCompleto(config[`curso${j}`]);
+  const [datosA, datosB, tableros, epocas, dorsos] = await Promise.all([datosDe('A'), datosDe('B'), cargarTableros(), cargarEpocas(), cargarDorsos(), ambientesListos]);
+  // Unidades por curso (para el álbum); el lado de una expansión no aporta unidades.
+  const unidadesDe = {};
+  if (colec || !config.coleccionA) unidadesDe[config.cursoA] = datosA.unidades;
+  if (colec || !config.coleccionB) unidadesDe[config.cursoB] = datosB.unidades;
 
   let estado = opciones.estado;
   if (!estado) {
     const rng = crearRng(config.semilla);
     // Tablero: el elegido o uno al azar del curso.
-    const delCurso = colec ? [] : tableros.filter(t => t.curso === config.cursoA);
-    let tablero = colec ? null : tableros.find(t => t.id === config.tablero);
+    const delCurso = sinCurso ? [] : tableros.filter(t => t.curso === config.cursoA);
+    let tablero = sinCurso ? null : tableros.find(t => t.id === config.tablero);
     if (!tablero && delCurso.length) tablero = delCurso[Math.floor(rng.siguiente() * delCurso.length)];
     config.tablero = tablero ? tablero.id : null;
     const foco = config.reforzar && tablero ? { unidad: tablero.unidad } : {};
@@ -117,7 +127,8 @@ export async function montarMesa(contenedor, opciones) {
   for (const j of ['A', 'B']) {
     const yo = estado.jugadores[j];
     const todas = [...yo.mano, ...yo.mazo, ...yo.descarte, ...(yo.activo ? [yo.activo] : []), ...yo.reserva].map(x => x.carta);
-    const ruta = dorsoDeMazo(dorsos, todas, bandoDe ? bandoDe[j].id : null, colec ? colec.dorso : undefined);
+    const colecLado = colec || coleccion(config[`coleccion${j}`]);
+    const ruta = dorsoDeMazo(dorsos, todas, bandoDe ? bandoDe[j].id : null, colecLado ? colecLado.dorso : undefined);
     dorsoHtml[j] = ruta ? `<img class="dorso-img" src="${esc(ruta)}" alt="" draggable="false">` : DORSO;
   }
   const tableroActual = () => tableros.find(t => t.id === (estado.tablero && estado.tablero.id)) || null;
@@ -138,7 +149,8 @@ export async function montarMesa(contenedor, opciones) {
 
   // Álbum: cartas vistas boca arriba en esta partida.
   const album = crearAlbum(almacen);
-  const cartasAlbum = [...datosA.cartas, ...(config.cursoB !== config.cursoA ? datosB.cartas : []), ...datosA.aula];
+  const mismoMazo = config.cursoB === config.cursoA && config.coleccionA === config.coleccionB;
+  const cartasAlbum = [...datosA.cartas, ...(mismoMazo ? [] : datosB.cartas), ...(config.coleccionA ? datosB.aula : datosA.aula)];
   const nuevasPartida = new Set();
   const insigniasPartida = [];
   function registrarAlbum() {
@@ -198,7 +210,7 @@ export async function montarMesa(contenedor, opciones) {
     raiz.appendChild(lado('B'));
     raiz.appendChild(centro());
     raiz.appendChild(lado('A'));
-    // En un celular vertical la mesa no cabe: se pide girarlo (el CSS lo muestra solo en ese caso).
+    // Cara a cara en un celular vertical no cabe: se pide girarlo (el CSS lo muestra solo en ese caso).
     raiz.appendChild(h('div', 'girar-aviso', '<svg viewBox="0 0 48 48" width="64" height="64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="15" y="6" width="18" height="30" rx="3"/><path d="M38 30a14 14 0 0 1-14 12M38 30l-4-2M38 30l2 4"/></svg><b>Gira el teléfono</b><span>La mesa se juega en horizontal.</span>'));
     if (config.modo === 'tutorial') entrenador();
     animarMovimientos();
@@ -522,6 +534,7 @@ export async function montarMesa(contenedor, opciones) {
       c.appendChild(cr);
     }
     const menu = h('button', 'boton-menu', 'Menú');
+    menu.setAttribute('aria-label', 'Menú');
     menu.onclick = abrirMenu;
     c.appendChild(menu);
     return c;

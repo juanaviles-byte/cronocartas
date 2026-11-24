@@ -139,7 +139,8 @@ test('dorsos de la expansión: uno por bando y uno general que reemplaza al de H
 test('la mesa y la carta usan los datos de la colección (sin línea de tiempo, etiqueta y sigla propias)', () => {
   const mesa = readFileSync('js/ui/mesa.js', 'utf8');
   assert.match(mesa, /if \(colec\) \{ config\.linea = false;/);
-  assert.match(mesa, /dorsoDeMazo\(dorsos, todas, bandoDe \? bandoDe\[j\]\.id : null, colec \? colec\.dorso : undefined\)/);
+  assert.match(mesa, /const colecLado = colec \|\| coleccion\(config\[`coleccion\$\{j\}`\]\);/);
+  assert.match(mesa, /dorsoDeMazo\(dorsos, todas, bandoDe \? bandoDe\[j\]\.id : null, colecLado \? colecLado\.dorso : undefined\)/);
   assert.match(mesa, /tableroActual\(\) \|\| fondoColeccion/);
   const carta = readFileSync('js/ui/carta.js', 'utf8');
   assert.match(carta, /col \? col\.etiquetaDato : 'Dato histórico'/);
