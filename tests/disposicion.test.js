@@ -14,3 +14,9 @@ test('cara a cara (también en el torneo) usa la mesa dividida', () => {
 test('la mesa marca la vista del jugador con una clase', () => {
   assert.match(readFileSync('js/ui/mesa.js', 'utf8'), /classList\.toggle\('vista-jugador', disposicionDeMesa\(config\) === 'jugador'\)/);
 });
+
+test('en la vista del jugador, el Saber del turno es un orbe que se toca o se arrastra a un Protagonista', () => {
+  const mesa = readFileSync('js/ui/mesa.js', 'utf8');
+  assert.match(mesa, /'orbe-saber'/);
+  assert.match(mesa, /hacerArrastrable\(orbe,[\s\S]{0,400}asignarSaber/);
+});

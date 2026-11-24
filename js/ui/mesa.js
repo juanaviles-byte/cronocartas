@@ -336,6 +336,15 @@ export async function montarMesa(contenedor, opciones) {
       });
     });
 
+    // El orbe de Saber (vista del jugador) se suelta sobre un Protagonista propio.
+    const orbe = lado.querySelector('.orbe-saber');
+    if (orbe) hacerArrastrable(orbe, {
+      girado: girado(j),
+      objetivos: () => validas().filter(v => v.tipo === 'asignarSaber')
+        .map(v => ({ el: lado.querySelector(`.campo [data-uid="${CSS.escape(v.destino)}"]`), accion: v })).filter(o => o.el),
+      alSoltar: accion => jugar(accion),
+    });
+
     lado.querySelectorAll('.reserva [data-uid]').forEach(el => {
       hacerArrastrable(el, {
         girado: girado(j),
@@ -677,7 +686,19 @@ export async function montarMesa(contenedor, opciones) {
     if (estado.fase !== 'turno' && botonera.children.length) controles.appendChild(botonera);
     if (esMiTurno && humano) {
       const validas = jugadasValidas(estado);
-      if (estado.fase === 'turno' && yo.saberPendiente > 0) controles.appendChild(h('div', 'pista pista-saber', `<span class="pip"></span> Ganaste 1 de Saber este turno: toca un Protagonista para dárselo`));
+      if (estado.fase === 'turno' && yo.saberPendiente > 0) {
+        if (disposicionDeMesa(config) === 'jugador') {
+          // Vista del jugador: el Saber del turno es un orbe que se arrastra (o se toca) hasta un Protagonista.
+          const orbe = h('button', 'orbe-saber', '<span class="pip"></span><b>+1</b>');
+          orbe.setAttribute('aria-label', 'Saber de este turno: arrástralo o toca un Protagonista para dárselo');
+          orbe.onclick = () => {
+            const sugerida = validas.find(v => v.tipo === 'asignarSaber' && yo.activo && v.destino === yo.activo.uid) || validas.find(v => v.tipo === 'asignarSaber');
+            hablar(j, { clave: 'saber', expresion: 'explica', jugada: sugerida,
+              texto: 'Cada turno ganas 1 de <b>Saber</b>. Arrástralo hasta un Protagonista, o tócalo: las acciones necesitan Saber.' }, { auto: true });
+          };
+          controles.appendChild(orbe);
+        } else controles.appendChild(h('div', 'pista pista-saber', `<span class="pip"></span> Ganaste 1 de Saber este turno: toca un Protagonista para dárselo`));
+      }
       if (estado.fase === 'preparacion') {
         const listo = validas.find(v => v.tipo === 'listo');
         // Desactivado, el botón dice qué falta en vez de solo apagarse.

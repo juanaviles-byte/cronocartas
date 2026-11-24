@@ -1106,3 +1106,13 @@ body:not([data-vista="mesa"]) { background: radial-gradient(ellipse at 20% 0%, #
 .modo-escuela .mano .carta-mini.sugerida { animation: none; box-shadow: 0 0 0 4px #7FD1FF; }
 .modo-escuela .carta-mini.pide-saber, .modo-escuela .pista-saber { animation: none; box-shadow: 0 0 0 3px #E9C46A; }
 .modo-escuela .aura { animation: none; }
+
+/* Orbe de Saber (vista del jugador): el Saber del turno, para arrastrar hasta un Protagonista. */
+.orbe-saber { position: relative; width: 56px; height: 56px; border-radius: 50%; display: grid; place-items: center; padding: 0; color: #17264F;
+  background: radial-gradient(circle at 35% 30%, #FFF3C4, #E9C46A 55%, #B9850F); border: 2px solid #FFF3C4;
+  box-shadow: 0 0 0 3px rgba(23,38,79,.6), 0 0 18px 4px rgba(233,196,106,.55); touch-action: none; animation: orbe-late 2.2s ease-in-out infinite; }
+.orbe-saber .pip { display: none; }
+.orbe-saber b { font-family: var(--serif, Georgia, serif); font-size: 1.15rem; }
+@keyframes orbe-late { 50% { transform: scale(1.07); } }
+.modo-escuela .orbe-saber { animation: none; }
+@media (prefers-reduced-motion: reduce) { .orbe-saber { animation: none; } }
