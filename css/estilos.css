@@ -1116,3 +1116,68 @@ body:not([data-vista="mesa"]) { background: radial-gradient(ellipse at 20% 0%, #
 @keyframes orbe-late { 50% { transform: scale(1.07); } }
 .modo-escuela .orbe-saber { animation: none; }
 @media (prefers-reduced-motion: reduce) { .orbe-saber { animation: none; } }
+
+/* ---------- Vista del jugador (contra la tablet) ----------
+   Un eje de arriba abajo: el rival, compacto; el Lugar, ancho, al centro; tu lado, grande; tu mano abajo.
+   Sin rótulos: el detalle aparece al tocar. La mesa dividida (cara a cara) no cambia. */
+.mesa.vista-jugador { --centro: 64px; }
+.mesa.vista-jugador .lado-B { --lado: calc((100vh - var(--centro)) * .34); height: var(--lado); background: none; box-shadow: none; }
+.mesa.vista-jugador .lado-A { --lado: calc((100vh - var(--centro)) * .66); height: var(--lado); }
+/* Rival: sin mano, sin acciones ni pilas a la vista; su activo y su reserva, centrados. */
+.mesa.vista-jugador .lado-B .fila-mano, .mesa.vista-jugador .lado-B .acciones-activo, .mesa.vista-jugador .lado-B .pilas { display: none; }
+.mesa.vista-jugador .lado-B .campo { flex: 1 1 auto; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); }
+.mesa.vista-jugador .lado-B .zona-activo .carta-mini { --ch: calc(var(--lado) * .74); }
+.mesa.vista-jugador .lado-B .zona-activo .hueco { height: calc(var(--lado) * .74); width: calc(var(--lado) * .74 * .72); }
+.mesa.vista-jugador .lado-B .reserva .carta-mini { --ch: calc(var(--lado) * .5); }
+.mesa.vista-jugador .lado-B .reserva .hueco { height: calc(var(--lado) * .5); width: calc(var(--lado) * .5 * .72); }
+.mesa.vista-jugador .lado-B .marcador { cursor: pointer; }
+/* Sin rótulos en la mesa: huecos y pilas se entienden por su forma (cada uno conserva su aria-label). */
+.mesa.vista-jugador .hueco span, .mesa.vista-jugador .pila small, .mesa.vista-jugador .saber-activo, .mesa.vista-jugador .boton-accion small { display: none; }
+.mesa.vista-jugador .lado-A .cuentas { display: none; }
+.mesa.vista-jugador .cuentas { display: flex; align-items: center; gap: 4px; font-weight: 700; }
+.icono-mano { width: 12px; height: 16px; border-radius: 2px; background: var(--noche, #17264F); border: 1px solid var(--bronce, #C9A24A); box-shadow: 3px -2px 0 -1px var(--bronce, #C9A24A); }
+.mesa.vista-jugador .linea-mini { min-height: 44px; }
+/* Centro: la franja del Lugar, ancha y al medio; el turno a la izquierda; sonido, guía y menú a la derecha. */
+.mesa.vista-jugador .centro { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: center; }
+.mesa.vista-jugador .centro .lugar-en-juego { order: 0; grid-column: 2; grid-row: 1; }
+.mesa.vista-jugador .centro .placa-lugar { width: 44vw; height: calc(var(--centro) + 10px); margin: -5px 0; }
+.mesa.vista-jugador .centro > .aviso-turno, .mesa.vista-jugador .centro > .tablero-en-juego, .mesa.vista-jugador .centro > .registro { grid-column: 1; grid-row: 1; justify-self: start; }
+.mesa.vista-jugador .centro > .tablero-en-juego { display: none; }
+.mesa.vista-jugador .centro > .registro { align-self: end; margin-bottom: 4px; max-width: 100%; font-size: .78rem; opacity: .85; }
+.mesa.vista-jugador .centro > .aviso-turno { align-self: start; margin-top: 6px; }
+.mesa.vista-jugador .centro > .boton-sonido, .mesa.vista-jugador .centro > .boton-guia, .mesa.vista-jugador .centro > .boton-menu { grid-row: 1; }
+.mesa.vista-jugador .centro > .boton-sonido { grid-column: 3; justify-self: end; margin-right: 112px; }
+.mesa.vista-jugador .centro > .boton-guia { grid-column: 3; justify-self: end; margin-right: 60px; }
+.mesa.vista-jugador .centro > .boton-menu { grid-column: 3; justify-self: end; }
+/* Tu lado: el activo es la carta más grande; la mano no empuja los botones fuera de la pantalla. */
+.mesa.vista-jugador .lado-A .campo { flex: 0 0 58%; }
+.mesa.vista-jugador .lado-A .zona-activo .carta-mini { --ch: calc(var(--lado) * .54); }
+.mesa.vista-jugador .lado-A .zona-activo .hueco { height: calc(var(--lado) * .54); width: calc(var(--lado) * .54 * .72); }
+.mesa.vista-jugador .lado-A .reserva .carta-mini { --ch: calc(var(--lado) * .34); }
+.mesa.vista-jugador .lado-A .reserva .hueco { height: calc(var(--lado) * .34); width: calc(var(--lado) * .34 * .72); }
+.mesa.vista-jugador .lado-A .mano { min-width: 0; }
+.mesa.vista-jugador .lado-A .mano .carta-mini { --ch: calc(var(--lado) * .34); }
+.mesa.vista-jugador .lado-A .controles { flex-direction: row; align-items: center; flex-wrap: nowrap; min-width: 0; }
+.mesa.vista-jugador .lado-A .controles .pista { display: none; }
+.mesa.vista-jugador .boton-accion { min-height: 44px; }
+.mesa.vista-jugador .lado.activo-turno { background: none; box-shadow: none; }
+/* Celular horizontal */
+@media (max-height: 520px) and (orientation: landscape) {
+  .mesa.vista-jugador { --centro: 46px; }
+  .mesa.vista-jugador .lado-B { --lado: calc((100vh - var(--centro)) * .32); }
+  .mesa.vista-jugador .lado-A { --lado: calc((100vh - var(--centro)) * .68); }
+  .mesa.vista-jugador .lado { padding: 2px 10px; }
+  .mesa.vista-jugador .boton-accion, .mesa.vista-jugador .controles .boton-principal, .mesa.vista-jugador .controles .boton-secundario,
+  .mesa.vista-jugador .boton-deshacer, .mesa.vista-jugador .boton-menu, .mesa.vista-jugador .boton-cronista { min-height: 44px; }
+  .mesa.vista-jugador .boton-cronista img { width: 36px; height: 36px; }
+  .mesa.vista-jugador .lado-A .mano .carta-mini { --ch: calc(var(--lado) * .38); }
+  .mesa.vista-jugador .centro > .registro { display: none; }
+  .mesa.vista-jugador .centro > .aviso-turno { align-self: center; margin: 0; font-size: .86rem; }
+  .mesa.vista-jugador .orbe-saber { width: 46px; height: 46px; }
+}
+
+/* Mano con muchas cartas: se solapan lo justo para caber completas (--n la pone mesa.js). */
+.mesa.vista-jugador .lado-A .mano:not(.oculta) { padding-left: 12px; }
+.mesa.vista-jugador .lado-A .mano:not(.oculta) > .carta-mini + .carta-mini { margin-left: calc(var(--solape, 0px) * -1); }
+.mesa.vista-jugador .linea-mini .t { display: none; }
+.mesa.vista-jugador .linea-mini { min-width: 44px; justify-content: center; }

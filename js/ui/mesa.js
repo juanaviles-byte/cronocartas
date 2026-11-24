@@ -129,6 +129,7 @@ export async function montarMesa(contenedor, opciones) {
   let caidas = [];               // cartas caídas, para el resumen final
   let temporizador = null;
   const raiz = h('div', `mesa modo-${config.modo}`);
+  const vistaJugador = disposicionDeMesa(config) === 'jugador';
   raiz.classList.toggle('vista-jugador', disposicionDeMesa(config) === 'jugador');
   contenedor.innerHTML = '';
   contenedor.appendChild(raiz);
@@ -202,6 +203,7 @@ export async function montarMesa(contenedor, opciones) {
     if (config.modo === 'tutorial') entrenador();
     animarMovimientos();
     hitosAntes = { A: estado.jugadores.A.hitos, B: estado.jugadores.B.hitos };
+    if (vistaJugador) solaparMano(raiz.querySelector('.lado-A .mano:not(.oculta)'));
     raiz.querySelectorAll('.mano').forEach(m => m.classList.toggle('desplazable', m.scrollWidth > m.clientWidth + 2));
     marcarSaber();
     registrarAlbum();
@@ -411,6 +413,15 @@ export async function montarMesa(contenedor, opciones) {
   }
   let fondoListo = false;
 
+  // Vista del jugador: si la mano no cabe, las cartas se solapan lo justo para verse todas (como un abanico en la mano).
+  function solaparMano(m) {
+    if (!m || m.children.length < 2) return;
+    m.style.removeProperty('--solape');
+    const cartas = [...m.children], ancho = cartas[0].getBoundingClientRect().width;
+    const sobra = cartas.length * (ancho + 6) - (m.clientWidth - 24);
+    if (sobra > 0) m.style.setProperty('--solape', `${Math.ceil(sobra / (cartas.length - 1)) + 6}px`);
+  }
+
   // Viaje de un escenario a otro: arena sobre el anterior + cartel con el contador de años.
   function viajar(desde, hasta) {
     const quieto = sinMovimiento();
@@ -603,6 +614,7 @@ export async function montarMesa(contenedor, opciones) {
         const impreso = efectivo !== a.danio ? `<s class="impreso">${esc(a.danio)}</s>` : '';
         const b = h('button', `boton-accion${falta ? ' sin-saber' : ''}${ventaja ? ' con-ventaja' : ''}`, `<span class="costo">${costo}</span><span class="an">${esc(a.nombre)}${nota}</span><b>${impreso}${esc(efectivo)}${marca}</b>`);
         if (efectivo !== a.danio) b.title = `La carta dice ${a.danio}; en esta mesa hace ${efectivo}: ${motivo}.`;
+        else if (nota) b.title = nota.replace(/<[^>]+>/g, '');   // en la vista del jugador la nota no se ve en el botón
         b.disabled = !ok;
         b.onclick = () => jugar({ tipo: 'accion', indice });
         acciones.appendChild(b);
@@ -626,10 +638,13 @@ export async function montarMesa(contenedor, opciones) {
       ${bandoDe ? `<div class="bando" style="--bando:${bandoDe[j].color}">${esc(bandoDe[j].nombre)}</div>` : ''}
       <div class="nombre-jugador">${nombres[j]}</div>
       <div class="hitos" title="Hitos">${[...Array(estado.hitosParaGanar)].map((_, i) => `<i class="${i < yo.hitos ? 'si' : ''}${i < yo.hitos && i >= hitosAntes[j] ? ' nuevo' : ''}"></i>`).join('')}</div>
-      <div class="cuentas">Mano ${yo.mano.length}</div>`;
+      <div class="cuentas">${vistaJugador ? `<span class="icono-mano" aria-hidden="true"></span><span class="n-mano" aria-label="${yo.mano.length} cartas en la mano">${yo.mano.length}</span>` : `Mano ${yo.mano.length}`}</div>`;
+    // Vista del jugador: tocar el marcador del rival abre su descarte (sus pilas no se dibujan).
+    if (vistaJugador && j === 'B') { marcador.setAttribute('role', 'button'); marcador.tabIndex = 0; marcador.setAttribute('aria-label', `Ver el descarte de ${nombres[j]}`); marcador.onclick = () => verDescarte(j); }
     if (estado.lineaTiempo) {
       const n = (yo.linea || []).length;
-      const bl = h('button', 'linea-mini', `<span class="reloj"></span> Línea de tiempo · ${n}`);
+      const bl = h('button', 'linea-mini', `<span class="reloj"></span> <span class="t">Línea de tiempo · </span>${n}`);
+      bl.setAttribute('aria-label', `Línea de tiempo: ${n} hechos`);
       bl.onclick = () => verLinea(j);
       marcador.appendChild(bl);
     }
@@ -1401,10 +1416,15 @@ export async function montarMesa(contenedor, opciones) {
     }, 700);
   }
 
+  // Al girar la tablet o cambiar el tamaño de la ventana, la mano vuelve a calcular cuánto se solapa.
+  const alCambiarTamano = () => { if (vivo && vistaJugador) solaparMano(raiz.querySelector('.lado-A .mano:not(.oculta)')); };
+  addEventListener('resize', alCambiarTamano);
+
   function destruir() {
     ambiente.poner(null);
     vivo = false;
     clearTimeout(temporizador);
+    removeEventListener('resize', alCambiarTamano);
   }
 
   const api = { destruir, get estado() { return estado; } };
