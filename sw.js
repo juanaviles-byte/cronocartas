@@ -1,7 +1,7 @@
 // Service worker de Cronocartas: guarda la app en la tablet para jugar sin internet.
 // Al publicar una mejora, sube VERSION y agrega aquí los archivos nuevos
 // (la prueba tests/sw.test.js avisa si falta alguno).
-const VERSION = 'cc-v103';
+const VERSION = 'cc-v104';
 const ARCHIVOS = [
   "./",
   "audio/ambientes/CC-5-U1-007.ogg",
@@ -92,6 +92,7 @@ const ARCHIVOS = [
   "data/sfx.json",
   "data/tableros.json",
   "data/voces.json",
+  "icons/apple-touch-icon.png",
   "icons/icon-192.png",
   "icons/icon-512.png",
   "img/cartas/CC-5-U1-001.webp",
@@ -453,6 +454,7 @@ const ARCHIVOS = [
   "js/html.js",
   "js/ia.js",
   "js/imagenes.js",
+  "js/instalar-ios.js",
   "js/mazos.js",
   "js/moneda.js",
   "js/motivos.js",
@@ -495,7 +497,7 @@ const ARCHIVOS = [
 
 // Huella de cada archivo: si no cambió, la actualización lo copia en vez de descargarlo.
 const HUELLAS = {
-  "./": "1bcd1ded0bb4",
+  "./": "9d6ec4fc64f6",
   "audio/ambientes/CC-5-U1-007.ogg": "215cad63eabe",
   "audio/ambientes/CC-5-U3-006.ogg": "3aa26a6a4117",
   "audio/ambientes/CC-5-U4-006.ogg": "03ea6fadb03d",
@@ -567,7 +569,7 @@ const HUELLAS = {
   "audio/sfx/efectos.ogg": "e77b492179ab",
   "audio/sfx/motivos.ogg": "aa1403569e39",
   "audio/tema/inicio.ogg": "d2c8c512d3d7",
-  "css/estilos.css": "06cac9039048",
+  "css/estilos.css": "70b1d86db5f2",
   "data/ambientes.json": "b59e779a954c",
   "data/arte.json": "6d56ff970f5e",
   "data/aula.json": "fc7ae5835722",
@@ -584,6 +586,7 @@ const HUELLAS = {
   "data/sfx.json": "067cdb389add",
   "data/tableros.json": "d182f09106b7",
   "data/voces.json": "65d8f313a1b8",
+  "icons/apple-touch-icon.png": "945717397f20",
   "icons/icon-192.png": "23c471aca266",
   "icons/icon-512.png": "22464837f80f",
   "img/cartas/CC-5-U1-001.webp": "14ed883d9829",
@@ -932,10 +935,10 @@ const HUELLAS = {
   "img/tableros/T-8-2.jpg": "ac591b0265c2",
   "img/tableros/T-8-3.jpg": "6cbf752bdebf",
   "img/tableros/T-8-4.jpg": "d396096dd97c",
-  "index.html": "1bcd1ded0bb4",
+  "index.html": "9d6ec4fc64f6",
   "js/actualizacion.js": "f617194a35d9",
   "js/album.js": "0a9ec778ed95",
-  "js/almacen.js": "ec3954c50c96",
+  "js/almacen.js": "89ecc1ad1cc4",
   "js/balance.js": "82364d9baea3",
   "js/colecciones.js": "97eb07a59de7",
   "js/compartir.js": "c24b3ac46534",
@@ -945,6 +948,7 @@ const HUELLAS = {
   "js/html.js": "221379633092",
   "js/ia.js": "09277dc4e42d",
   "js/imagenes.js": "961856ee87a8",
+  "js/instalar-ios.js": "64379cf2cb1c",
   "js/mazos.js": "c3b6ce7898cb",
   "js/moneda.js": "9a99f5134574",
   "js/motivos.js": "6f0736832e94",
@@ -956,7 +960,7 @@ const HUELLAS = {
   "js/temas-inicio.js": "39c9b4337f81",
   "js/torneo.js": "b56f306f0b06",
   "js/ui/ambiente.js": "d42499ed6353",
-  "js/ui/app.js": "e86ed4e18f70",
+  "js/ui/app.js": "c80f6a8a22ae",
   "js/ui/arrastre.js": "16846e259ca8",
   "js/ui/arte.js": "c0defa2b8427",
   "js/ui/banco.js": "73df652d2bdf",

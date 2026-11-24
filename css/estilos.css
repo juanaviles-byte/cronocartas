@@ -1958,3 +1958,12 @@ body[data-vista="jugar"] { background: #090d12; }
 .mesa .lado .zona-activo, .mesa .activo-turno .zona-activo { background: none; border-color: transparent; outline: 0; }
 .mesa .placa-lugar.hueco-lugar { background: rgba(8,12,20,.55); }
 .mesa .centro .lugar-en-juego .placa-lugar.hueco-lugar, .mesa.vista-jugador .centro .lugar-en-juego .placa-lugar.hueco-lugar { background: rgba(8,12,20,.5); }
+/* Ayuda para instalar en iPhone y iPad (solo en Safari, hasta que se cierra). */
+.ayuda-ios { position: fixed; left: 50%; bottom: max(12px, env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); z-index: 20; width: min(92vw, 460px);
+  display: flex; align-items: center; gap: 8px; padding: 10px 6px 10px 14px; border-radius: 12px; background: rgba(10,15,24,.95); color: #F3EAD3;
+  border: 1.5px solid #C9A24A; box-shadow: 0 8px 24px rgba(0,0,0,.55); font-size: .9rem; line-height: 1.35; }
+.ayuda-ios p { margin: 0; }
+.ayuda-ios b { color: #F2D27E; }
+.ios-compartir { display: inline-block; width: 1.1em; height: 1.1em; vertical-align: -.15em; background: no-repeat center / contain
+  url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234DA3FF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3v12M8 7l4-4 4 4M6 11H5v10h14V11h-1'/%3E%3C/svg%3E"); }
+.ayuda-ios-cerrar { flex: none; width: 44px; height: 44px; border: 0; background: none; color: #F3EAD3; font-size: 1.6rem; line-height: 1; }

@@ -2,7 +2,7 @@
 // Si el almacenamiento falla (lleno o bloqueado), el juego sigue funcionando.
 
 export const CLAVES = { banco: 'cc.banco', ajustes: 'cc.ajustes', partida: 'cc.partida', pin: 'cc.pin', ediciones: 'cc.ediciones',
-  album: 'cc.album', torneo: 'cc.torneo', novedades: 'cc.novedades' };
+  album: 'cc.album', torneo: 'cc.torneo', novedades: 'cc.novedades', ayudaIOS: 'cc.ayuda-ios' };
 
 export function crearAlmacen(storage) {
   const memoria = new Map();

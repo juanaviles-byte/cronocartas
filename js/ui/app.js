@@ -16,6 +16,7 @@ import { CURSOS, MAZOS_LIBRES, mazosDePartida, tablerosDisponibles } from '../el
 import { modoEscuelaActivo } from '../rendimiento.js';
 import { globoNovedades } from './novedades.js';
 import { elegirTema, cartasDelTema } from '../temas-inicio.js';
+import { mostrarAyudaIOS, estadoDelEquipo } from '../instalar-ios.js';
 
 const app = document.getElementById('app');
 // Modo escuela (perfil liviano): lo elige el docente o se activa solo en la tablet del colegio.
@@ -96,6 +97,15 @@ const vistas = {
     v.appendChild(principal);
     // Novedades: un globo con una carta, arriba a la derecha (actualizaciones y noticias).
     v.appendChild(globoNovedades(almacen));
+    // iPhone y iPad: cómo instalar el juego desde Safari (una vez; se cierra con la ×).
+    if (mostrarAyudaIOS({ ...estadoDelEquipo(), cerrada: !!almacen.leer(CLAVES.ayudaIOS, false) })) {
+      const ayuda = h('aside', 'ayuda-ios', '<p><b>Instálalo en tu iPhone o iPad:</b> toca <span class="ios-compartir" aria-label="Compartir"></span> Compartir y luego «Agregar a pantalla de inicio». Así funciona sin internet.</p>');
+      const cerrar = h('button', 'ayuda-ios-cerrar', '×');
+      cerrar.setAttribute('aria-label', 'Cerrar');
+      cerrar.onclick = () => { almacen.guardar(CLAVES.ayudaIOS, true); ayuda.remove(); };
+      ayuda.appendChild(cerrar);
+      v.appendChild(ayuda);
+    }
 
     // Tres cartas de verdad, en abanico: lo más característico del juego.
     const abanico = h('div', 'inicio-abanico');
