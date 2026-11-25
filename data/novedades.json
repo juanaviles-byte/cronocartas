@@ -42,6 +42,24 @@
       ]
     },
     {
+      "id": "imagenes-2026-11-25",
+      "fecha": "2026-11-25",
+      "tipo": "actualizacion",
+      "version": "cc-v110",
+      "titulo": "Escenarios, tableros y marcos más nítidos",
+      "resumen": "Los escenarios de los Lugares, los tableros y los marcos de las cartas se ven más definidos, sobre todo en pantallas grandes.",
+      "secciones": [
+        {
+          "titulo": "Imágenes",
+          "puntos": [
+            "Los 22 escenarios de los Lugares ahora tienen más resolución, ampliados con inteligencia artificial, y se ven nítidos también en pantallas grandes.",
+            "Los 16 tableros y los 13 marcos de las cartas se ampliaron con el mismo método: bordes de metal más limpios y texturas sin manchas.",
+            "El logo del inicio también se ve más definido."
+          ]
+        }
+      ]
+    },
+    {
       "id": "bitacora-2026-11",
       "fecha": "2026-11-24",
       "tipo": "actualizacion",
