@@ -16,3 +16,11 @@ export function marcarLeidas(novedades, almacen) {
   for (const n of novedades || []) if (v.indexOf(n.id) < 0) v.push(n.id);
   almacen.guardar(CLAVES.novedades, v);
 }
+
+// Una por una: se marca leída al abrirla desde la lista del panel.
+export const esLeida = (novedad, almacen) => vistas(almacen).indexOf(novedad.id) >= 0;
+
+export function marcarLeida(novedad, almacen) {
+  const v = vistas(almacen);
+  if (v.indexOf(novedad.id) < 0) { v.push(novedad.id); almacen.guardar(CLAVES.novedades, v); }
+}

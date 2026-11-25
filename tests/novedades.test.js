@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { noLeidas, marcarLeidas } from '../js/novedades.js';
+import { noLeidas, marcarLeidas, esLeida, marcarLeida } from '../js/novedades.js';
 
 // Novedades: un globo con una carta en el inicio abre las actualizaciones y noticias (data/novedades.json).
 const N = JSON.parse(readFileSync('data/novedades.json', 'utf8'));
@@ -29,6 +29,35 @@ test('no leídas: las que no están en la lista guardada; marcar las deja en cer
   marcarLeidas(N.novedades, almacen);
   assert.equal(noLeidas(N.novedades, almacen), 0);
   assert.equal(noLeidas([...N.novedades, { id: 'otra' }], almacen), 1, 'una novedad nueva vuelve a encender el globo');
+});
+
+test('cada novedad se marca leída por separado, al abrirla desde la lista', () => {
+  const guardado = new Map();
+  const almacen = { leer: (k, d) => (guardado.has(k) ? guardado.get(k) : d), guardar: (k, v) => guardado.set(k, v) };
+  const [a, b] = N.novedades;
+  assert.equal(esLeida(a, almacen), false);
+  marcarLeida(a, almacen);
+  assert.equal(esLeida(a, almacen), true);
+  assert.equal(esLeida(b, almacen), false);
+  assert.equal(noLeidas(N.novedades, almacen), N.novedades.length - 1);
+  marcarLeida(a, almacen);
+  assert.equal(noLeidas(N.novedades, almacen), N.novedades.length - 1, 'marcar dos veces no cuenta doble');
+});
+
+test('la bitácora del 25 de noviembre va primera y no anuncia como jugable la expansión oculta', () => {
+  const [b] = N.novedades;
+  assert.equal(b.id, 'bitacora-2026-11-25');
+  assert.ok(b.secciones.length >= 3);
+  const texto = JSON.stringify(b);
+  assert.match(texto, /mapa/i);
+  assert.doesNotMatch(texto, /Zeus|Thor|tipograf/i);
+});
+
+test('el panel muestra la lista de novedades y abre cada una al tocarla', () => {
+  const ui = readFileSync('js/ui/novedades.js', 'utf8');
+  assert.match(ui, /lista-novedades/);
+  assert.match(ui, /marcarLeida\(/);
+  assert.match(ui, /Volver/);
 });
 
 test('el inicio trae el globo de novedades y funciona sin internet', () => {

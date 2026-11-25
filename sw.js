@@ -1,7 +1,7 @@
 // Service worker de Cronocartas: guarda la app en la tablet para jugar sin internet.
 // Al publicar una mejora, sube VERSION y agrega aquí los archivos nuevos
 // (la prueba tests/sw.test.js avisa si falta alguno).
-const VERSION = 'cc-v108';
+const VERSION = 'cc-v109';
 const ARCHIVOS = [
   "./",
   "audio/ambientes/CC-5-U1-007.ogg",
@@ -589,7 +589,7 @@ const HUELLAS = {
   "audio/sfx/efectos.ogg": "ee25ceb61328",
   "audio/sfx/motivos.ogg": "e3acbd654157",
   "audio/tema/inicio.ogg": "d2c8c512d3d7",
-  "css/estilos.css": "d5d2fab7c418",
+  "css/estilos.css": "877285763518",
   "css/fuentes/oc-asgard.woff": "dabaf160b192",
   "css/fuentes/oc-cristiana.woff": "9c753a35a7e0",
   "css/fuentes/oc-india.woff": "ec2fb3d54329",
@@ -611,7 +611,7 @@ const HUELLAS = {
   "data/mazo-6.json": "791854f78e79",
   "data/mazo-7.json": "bf5872ae13b6",
   "data/mazo-8.json": "ce90cec3a5ed",
-  "data/novedades.json": "1d82ae961ee3",
+  "data/novedades.json": "4e20489b5df2",
   "data/sfx.json": "56b7daa3e26b",
   "data/tableros.json": "d182f09106b7",
   "data/voces.json": "65d8f313a1b8",
@@ -993,7 +993,7 @@ const HUELLAS = {
   "js/moneda.js": "9a99f5134574",
   "js/motivos.js": "c2223547f425",
   "js/motor.js": "52f1ecc3c2ee",
-  "js/novedades.js": "09c2a3f6a736",
+  "js/novedades.js": "b20b2c2f8797",
   "js/pin.js": "5827e158c752",
   "js/rendimiento.js": "b0e6af5309f8",
   "js/rng.js": "a0cb6ba3f25e",
@@ -1018,7 +1018,7 @@ const HUELLAS = {
   "js/ui/invocacion-dimension.js": "7bf26afa3a57",
   "js/ui/invocacion-motivo.js": "208441c6bbab",
   "js/ui/mesa.js": "7f23dd54a388",
-  "js/ui/novedades.js": "262f5a29318f",
+  "js/ui/novedades.js": "61f16e2f62a5",
   "js/ui/repaso.js": "951601cefd6c",
   "js/ui/sonido.js": "0a4e419d5937",
   "js/ui/sorteo.js": "133c335e525c",

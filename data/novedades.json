@@ -1,6 +1,47 @@
 {
   "novedades": [
     {
+      "id": "bitacora-2026-11-25",
+      "fecha": "2026-11-25",
+      "tipo": "actualizacion",
+      "version": "cc-v109",
+      "titulo": "Bitácora · 25 de noviembre: geografía y equilibrio",
+      "resumen": "Un minijuego de geografía en el modo libre, 5° y Fin del Mundo más fuertes, un duelo de la Conquista más parejo y novedades más ordenadas.",
+      "secciones": [
+        {
+          "titulo": "Minijuego de geografía",
+          "puntos": [
+            "En el modo libre, las cartas de Fin del Mundo ahora se sitúan en el mapa de Chile: ¿de dónde viene esta leyenda? Si aciertas, tu activo gana +1 de Saber.",
+            "Funciona con los Personajes, Acontecimientos y Lugares de la expansión. Si una leyenda se cuenta en varias zonas, cualquiera de ellas vale.",
+            "La opción ahora se llama «Línea de tiempo y mapa»: las cartas de curso van a la línea de tiempo, y las de la expansión, al mapa.",
+            "En el marcador, el botón «Mapa» muestra dónde quedó cada carta que situaste.",
+            "Los mapas están hechos con datos geográficos reales, así que las costas son las verdaderas, y funcionan sin internet."
+          ]
+        },
+        {
+          "titulo": "Equilibrio",
+          "puntos": [
+            "Todos los Protagonistas de 5° básico y de Fin del Mundo tienen +10 de resistencia: en el modo libre ya no quedan atrás de los otros mazos.",
+            "Duelo «La Conquista de Chile»: Pedro de Valdivia también da +10 de daño, Diego de Almagro da +1 de Saber y Fundación de ciudades cura 20. Ahora cada bando gana cerca de la mitad de las partidas.",
+            "Probamos los cambios con miles de partidas entre todos los mazos: en el modo libre, todos ganan entre el 44 % y el 54 % de las veces."
+          ]
+        },
+        {
+          "titulo": "Novedades más ordenadas",
+          "puntos": [
+            "Este panel ahora muestra la lista de novedades: toca una para leerla y vuelve a la lista con «Volver».",
+            "Las que todavía no lees llevan la marca «Nueva», y el globo cuenta solo esas."
+          ]
+        },
+        {
+          "titulo": "Lo que viene",
+          "puntos": [
+            "Se acerca una nueva expansión con mitos de todo el mundo. Pronto te contaremos más."
+          ]
+        }
+      ]
+    },
+    {
       "id": "bitacora-2026-11",
       "fecha": "2026-11-24",
       "tipo": "actualizacion",

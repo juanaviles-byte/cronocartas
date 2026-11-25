@@ -1,6 +1,7 @@
-// Globo de novedades del inicio: una carta con aviso; al tocarlo se abre el panel con las actualizaciones y noticias.
+// Globo de novedades del inicio: una carta con aviso; al tocarlo se abre el panel con la lista de novedades.
+// Cada una se abre al tocarla (y recién ahí cuenta como leída); «Volver» regresa a la lista.
 import { esc } from '../html.js';
-import { noLeidas, marcarLeidas } from '../novedades.js';
+import { noLeidas, esLeida, marcarLeida } from '../novedades.js';
 
 const h = (tag, cls, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; };
 const MESES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
@@ -26,11 +27,11 @@ export function globoNovedades(almacen) {
   };
   fetch('data/novedades.json').then(r => (r.ok ? r.json() : { novedades: [] })).catch(() => ({ novedades: [] }))
     .then(d => { novedades = (d && d.novedades) || []; pintar(); });
-  b.onclick = () => { abrir(novedades); marcarLeidas(novedades, almacen); pintar(); };
+  b.onclick = () => abrir(novedades, almacen, pintar);
   return b;
 }
 
-function abrir(novedades) {
+function abrir(novedades, almacen, alLeer) {
   const capa = h('div', 'capa capa-novedades');
   const panel = h('div', 'panel-novedades');
   panel.setAttribute('role', 'dialog');
@@ -39,23 +40,45 @@ function abrir(novedades) {
   const cerrar = h('button', 'cerrar-novedades', '<span aria-hidden="true">×</span>');
   cerrar.setAttribute('aria-label', 'Cerrar novedades');
   cab.appendChild(cerrar);
-  panel.appendChild(cab);
-  if (!novedades.length) panel.appendChild(h('p', 'nota', 'Todavía no hay novedades.'));
-  novedades.forEach((n, i) => {
-    // La más reciente aparece abierta; las demás se abren al tocarlas.
-    const d = h('details', `novedad tipo-${esc(n.tipo)}`);
-    if (i === 0) d.open = true;
-    const s = h('summary', '', `<span class="novedad-meta"><b>${esc(TIPO[n.tipo] || 'Novedad')}</b> · ${fechaLarga(n.fecha)}</span>`
-      + `<span class="novedad-titulo">${esc(n.titulo)}</span><span class="novedad-resumen">${esc(n.resumen)}</span>`);
-    d.appendChild(s);
+  const cuerpo = h('div', 'cuerpo-novedades');
+  panel.append(cab, cuerpo);
+  const meta = n => `<span class="novedad-meta"><b>${esc(TIPO[n.tipo] || 'Novedad')}</b> · ${fechaLarga(n.fecha)}</span>`;
+
+  // La lista: una fila por novedad, con su marca si todavía no se lee.
+  const lista = () => {
+    cuerpo.innerHTML = '';
+    if (!novedades.length) { cuerpo.appendChild(h('p', 'nota', 'Todavía no hay novedades.')); return; }
+    const ul = h('div', 'lista-novedades');
+    novedades.forEach(n => {
+      const nueva = !esLeida(n, almacen);
+      const fila = h('button', `fila-novedad${nueva ? ' nueva' : ''}`, `${meta(n)}<span class="novedad-titulo">${esc(n.titulo)}</span>`
+        + `<span class="novedad-resumen">${esc(n.resumen)}</span>${nueva ? '<span class="marca-nueva">Nueva</span>' : ''}<span class="flecha-novedad" aria-hidden="true">›</span>`);
+      fila.onclick = () => detalle(n);
+      ul.appendChild(fila);
+    });
+    cuerpo.appendChild(ul);
+  };
+
+  // Una novedad abierta, con todos sus puntos.
+  const detalle = n => {
+    marcarLeida(n, almacen);
+    if (alLeer) alLeer();
+    cuerpo.innerHTML = '';
+    const volver = h('button', 'volver-novedades', '<span aria-hidden="true">‹</span> Volver');
+    volver.onclick = () => { lista(); volver.blur(); };
+    const art = h('article', `novedad tipo-${esc(n.tipo)}`, `${meta(n)}<h3 class="novedad-titulo">${esc(n.titulo)}</h3><p class="novedad-resumen">${esc(n.resumen)}</p>`);
     for (const sec of n.secciones || []) {
-      d.appendChild(h('h3', '', esc(sec.titulo)));
+      art.appendChild(h('h4', '', esc(sec.titulo)));
       const ul = h('ul');
       for (const p of sec.puntos) ul.appendChild(h('li', '', esc(p)));
-      d.appendChild(ul);
+      art.appendChild(ul);
     }
-    panel.appendChild(d);
-  });
+    cuerpo.append(volver, art);
+    panel.scrollTop = 0;
+    volver.focus();
+  };
+
+  lista();
   capa.appendChild(panel);
   const fin = () => { capa.remove(); document.removeEventListener('keydown', tecla); };
   const tecla = ev => { if (ev.key === 'Escape') fin(); };
