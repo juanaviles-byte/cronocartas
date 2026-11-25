@@ -120,3 +120,20 @@ test('cada efecto del Ocaso se explica en la carta', async () => {
   assert.match(textoEfecto(X.cartas.find(c => c.id === 'OC-036').efecto), /^Cae la noche/);
   assert.match(textoEfecto(X.cartas.find(c => c.id === 'OC-042').efecto), /^Llega el día/);
 });
+
+test('cada carta tiene su arquetipo, y cada arquetipo su tipografía incluida en el juego', () => {
+  const ARQ = ['olimpo', 'asgard', 'nilo', 'quinto-sol', 'yokai', 'jade', 'cristiana', 'india'];
+  const css = readFileSync('css/estilos.css', 'utf8');
+  for (const c of X.cartas) assert.ok(ARQ.includes(c.arquetipo), `${c.id}: arquetipo «${c.arquetipo}»`);
+  for (const c of prot) assert.equal(c.arquetipo, { QuintoSol: 'quinto-sol' }[c.dimension] || c.dimension.toLowerCase(), c.id);
+  for (const a of ARQ) {
+    assert.ok(existsSync(`css/fuentes/oc-${a}.woff`), `falta css/fuentes/oc-${a}.woff`);
+    assert.ok(css.includes(`url("fuentes/oc-${a}.woff")`), `falta el @font-face de ${a}`);
+    assert.ok(css.includes(`.arq-${a} { --letra-arq:`), `falta la letra de ${a}`);
+  }
+});
+
+test('solo las cartas de la expansión cambian de tipografía', () => {
+  for (const n of [5, 6, 7, 8]) for (const c of JSON.parse(readFileSync(`data/mazo-${n}.json`, 'utf8')).cartas) assert.equal(c.arquetipo, undefined, c.id);
+  for (const c of JSON.parse(readFileSync('data/exp-fin-del-mundo.json', 'utf8')).cartas) assert.equal(c.arquetipo, undefined, c.id);
+});

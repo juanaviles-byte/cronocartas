@@ -129,15 +129,18 @@ function aplicarTema(el, carta) {
 const MARCOS = typeof location !== 'undefined' ? new URL('img/marcos/', location.href).href : 'img/marcos/';
 
 // Cartas de una expansión: su colección y su fuerza (Lugar: la que favorece; Personaje: presencia
-// sagrada; Acontecimiento: relato). El CSS dibuja con eso los marcos propios de cada fuerza.
+// sagrada; Acontecimiento: relato). El CSS dibuja con eso los marcos propios de cada fuerza,
+// y con el arquetipo (si lo trae) usa la tipografía de esa cultura.
 function clasesColeccion(c) {
   if (!c.coleccion) return '';
   const f = c.tipo === 'protagonista' ? c.dimension : c.tipo === 'lugar' ? c.efecto && c.efecto.dimension : c.tipo === 'personaje' ? 'sagrado' : 'relato';
-  return ` col-${c.coleccion} fuerza-${f}`;
+  return ` col-${c.coleccion} fuerza-${f}${c.arquetipo ? ` arq-${c.arquetipo}` : ''}`;
 }
 
 // Clases de tamaño según el largo del texto: así nada se monta sobre nada.
-const claseNombre = n => (n.length <= 14 ? 'n1' : n.length <= 20 ? 'n2' : n.length <= 26 ? 'n3' : 'n4');
+// Las letras de cada arquetipo de la expansión son más anchas o más angostas: el largo se corrige.
+const ANCHO_ARQ = { cristiana: 1.3, yokai: 1.2, nilo: 1.2, 'quinto-sol': 1.1, india: 1.1 };
+const claseNombre = (n, arq) => { const l = n.length * (ANCHO_ARQ[arq] || 1); return l <= 14 ? 'n1' : l <= 20 ? 'n2' : l <= 26 ? 'n3' : 'n4'; };
 const claseCategoria = t => (t.length <= 10 ? 'k1' : 'k2');
 const fraseDe = c => c.frase || (c.dato && c.dato.length > 80 ? c.dato.slice(0, 77).replace(/\s+\S*$/, '') + '…' : c.dato || '');
 const ICONO_PERSONAJE_DERECHA = '1×';
@@ -190,7 +193,7 @@ export function renderCarta(carta, { tamano = 'normal', instancia = null, unidad
   const claseTexto = renglones >= 5 ? 'tx4' : largoTexto <= 90 ? 'tx1' : largoTexto <= 120 ? 'tx2' : 'tx3';
 
   const unidad = carta.unidad && unidades ? unidades[carta.unidad - 1] : null;
-  const claseN = claseNombre(carta.nombre);   // n1–n4 según el largo del nombre
+  const claseN = claseNombre(carta.nombre, carta.arquetipo);   // n1–n4 según el largo del nombre
   const col = carta.coleccion ? coleccion(carta.coleccion) : null;   // carta de una expansión
   const refPie = carta.oa || (carta.mbe ? 'MBE ' + carta.mbe.dominio + '·' + carta.mbe.estandar : '') || carta.zona || '';
   const pie = esProt

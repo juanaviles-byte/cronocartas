@@ -1,7 +1,7 @@
 // Service worker de Cronocartas: guarda la app en la tablet para jugar sin internet.
 // Al publicar una mejora, sube VERSION y agrega aquí los archivos nuevos
 // (la prueba tests/sw.test.js avisa si falta alguno).
-const VERSION = 'cc-v106';
+const VERSION = 'cc-v107';
 const ARCHIVOS = [
   "./",
   "audio/ambientes/CC-5-U1-007.ogg",
@@ -76,6 +76,14 @@ const ARCHIVOS = [
   "audio/sfx/motivos.ogg",
   "audio/tema/inicio.ogg",
   "css/estilos.css",
+  "css/fuentes/oc-asgard.woff",
+  "css/fuentes/oc-cristiana.woff",
+  "css/fuentes/oc-india.woff",
+  "css/fuentes/oc-jade.woff",
+  "css/fuentes/oc-nilo.woff",
+  "css/fuentes/oc-olimpo.woff",
+  "css/fuentes/oc-quinto-sol.woff",
+  "css/fuentes/oc-yokai.woff",
   "data/ambientes.json",
   "data/arte.json",
   "data/aula.json",
@@ -578,7 +586,15 @@ const HUELLAS = {
   "audio/sfx/efectos.ogg": "ee25ceb61328",
   "audio/sfx/motivos.ogg": "e3acbd654157",
   "audio/tema/inicio.ogg": "d2c8c512d3d7",
-  "css/estilos.css": "cae79c1f75f2",
+  "css/estilos.css": "da17ced63c96",
+  "css/fuentes/oc-asgard.woff": "dabaf160b192",
+  "css/fuentes/oc-cristiana.woff": "9c753a35a7e0",
+  "css/fuentes/oc-india.woff": "ec2fb3d54329",
+  "css/fuentes/oc-jade.woff": "59dd8c912575",
+  "css/fuentes/oc-nilo.woff": "db791627b51a",
+  "css/fuentes/oc-olimpo.woff": "9ab08e162682",
+  "css/fuentes/oc-quinto-sol.woff": "bc961567e765",
+  "css/fuentes/oc-yokai.woff": "d27a643117a3",
   "data/ambientes.json": "b59e779a954c",
   "data/arte.json": "6d56ff970f5e",
   "data/aula.json": "fc7ae5835722",
@@ -587,7 +603,7 @@ const HUELLAS = {
   "data/epocas.json": "77553582d691",
   "data/escenarios.json": "8e7359167c6d",
   "data/exp-fin-del-mundo.json": "684f306dc55e",
-  "data/exp-ocaso-de-los-dioses.json": "3d697d8c9c5a",
+  "data/exp-ocaso-de-los-dioses.json": "7c9f6453327f",
   "data/mazo-5.json": "226aa9fd660b",
   "data/mazo-6.json": "791854f78e79",
   "data/mazo-7.json": "bf5872ae13b6",
@@ -983,7 +999,7 @@ const HUELLAS = {
   "js/ui/arte.js": "5499a160edcf",
   "js/ui/banco.js": "73df652d2bdf",
   "js/ui/burbuja.js": "0a7143ac6ed0",
-  "js/ui/carta.js": "a78fd50087a9",
+  "js/ui/carta.js": "ec1dc13a7112",
   "js/ui/confirmar.js": "3014d88399ba",
   "js/ui/datos.js": "bff1d9d77672",
   "js/ui/director.js": "74ca55789b88",

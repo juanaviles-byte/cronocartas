@@ -1997,3 +1997,33 @@ body[data-vista="jugar"] { background: #090d12; }
 .escena-lugar::before { transition: filter 1.2s ease; }
 .mesa.de-noche .escena-lugar::before { filter: brightness(.55) saturate(.8) hue-rotate(-18deg); }
 .mesa.de-noche .escena-lugar::after { background: linear-gradient(rgba(14,22,60,.32), rgba(8,12,34,.45)); }
+
+/* El Ocaso de los Dioses: cada arquetipo escribe sus nombres con una letra de su cultura
+   (fuentes libres OFL, recortadas y guardadas en css/fuentes para jugar sin internet). */
+@font-face { font-family: "OC Olimpo"; src: url("fuentes/oc-olimpo.woff") format("woff"); font-display: swap; }
+@font-face { font-family: "OC Asgard"; src: url("fuentes/oc-asgard.woff") format("woff"); font-display: swap; }
+@font-face { font-family: "OC Nilo"; src: url("fuentes/oc-nilo.woff") format("woff"); font-display: swap; }
+@font-face { font-family: "OC Quinto Sol"; src: url("fuentes/oc-quinto-sol.woff") format("woff"); font-display: swap; }
+@font-face { font-family: "OC Yokai"; src: url("fuentes/oc-yokai.woff") format("woff"); font-display: swap; }
+@font-face { font-family: "OC Jade"; src: url("fuentes/oc-jade.woff") format("woff"); font-display: swap; }
+@font-face { font-family: "OC Cristiana"; src: url("fuentes/oc-cristiana.woff") format("woff"); font-display: swap; }
+@font-face { font-family: "OC India"; src: url("fuentes/oc-india.woff") format("woff"); font-display: swap; }
+.arq-olimpo { --letra-arq: "OC Olimpo"; --escala-arq: 1; --peso-arq: 700; }
+.arq-asgard { --letra-arq: "OC Asgard"; --escala-arq: 1.12; --peso-arq: 400; }
+.arq-nilo { --letra-arq: "OC Nilo"; --escala-arq: 1.05; --peso-arq: 400; }
+.arq-quinto-sol { --letra-arq: "OC Quinto Sol"; --escala-arq: .8; --peso-arq: 400; }
+.arq-yokai { --letra-arq: "OC Yokai"; --escala-arq: 1.08; --peso-arq: 400; }
+.arq-jade { --letra-arq: "OC Jade"; --escala-arq: 1.34; --peso-arq: 400; }
+.arq-cristiana { --letra-arq: "OC Cristiana"; --escala-arq: 1.02; --peso-arq: 400; }
+.arq-india { --letra-arq: "OC India"; --escala-arq: 1; --peso-arq: 400; }
+.carta[class*=" arq-"] .myl-nombre span, .carta[class*=" arq-"] .m-nombre, .carta[class*=" arq-"] .t-an {
+  font-family: var(--letra-arq), var(--serif, Georgia, serif); font-weight: var(--peso-arq); letter-spacing: 0; }
+.carta[class*=" arq-"] .myl-nombre span { font-size: calc(1.45em * var(--escala-arq)); }
+.carta[class*=" arq-"] .myl-nombre.n2 span { font-size: calc(1.15em * var(--escala-arq)); }
+.carta[class*=" arq-"] .myl-nombre.n3 span { font-size: calc(.95em * var(--escala-arq)); }
+.carta[class*=" arq-"] .myl-nombre.n4 span { font-size: calc(.8em * var(--escala-arq)); }
+.carta[class*=" arq-"] .t-an { font-size: calc(1em * var(--escala-acc, 1)); }
+.carta[class*=" arq-"] .t-an small { font-family: var(--fuente); font-weight: 400; font-size: calc(.78em / var(--escala-acc, 1)); }
+.carta-mini[class*=" arq-"] .m-nombre { font-size: calc(1em * var(--escala-arq)); }
+.arq-quinto-sol { --escala-acc: .85; } .arq-jade { --escala-acc: 1.1; } .arq-cristiana { --escala-acc: .95; }
+.carta-mini.arq-jade .m-nombre { font-size: 1.15em; }

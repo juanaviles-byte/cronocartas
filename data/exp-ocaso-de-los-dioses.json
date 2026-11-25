@@ -172,7 +172,8 @@
    "emblema": "templo",
    "zona": "Antigua Grecia",
    "frase": "El que reina desde la cumbre.",
-   "dato": "Para los antiguos griegos, era el rey de los dioses del Olimpo y señor del cielo. Lanzaba rayos y vigilaba que se cumplieran los juramentos."
+   "dato": "Para los antiguos griegos, era el rey de los dioses del Olimpo y señor del cielo. Lanzaba rayos y vigilaba que se cumplieran los juramentos.",
+   "arquetipo": "olimpo"
   },
   {
    "id": "OC-002",
@@ -198,7 +199,8 @@
    "emblema": "urna",
    "zona": "Antigua Grecia",
    "frase": "Guardián del mundo de abajo.",
-   "dato": "Dios griego del inframundo, hermano de Zeus y Poseidón. No era malvado: cuidaba que se respetaran las reglas de su reino. Su yelmo lo volvía invisible."
+   "dato": "Dios griego del inframundo, hermano de Zeus y Poseidón. No era malvado: cuidaba que se respetaran las reglas de su reino. Su yelmo lo volvía invisible.",
+   "arquetipo": "olimpo"
   },
   {
    "id": "OC-003",
@@ -224,7 +226,8 @@
    "emblema": "ola",
    "zona": "Antigua Grecia",
    "frase": "Cuando golpea, tiembla la tierra.",
-   "dato": "Dios griego del mar. Con su tridente levantaba olas y, según contaban, causaba los terremotos. En las novelas de Percy Jackson es el padre del protagonista."
+   "dato": "Dios griego del mar. Con su tridente levantaba olas y, según contaban, causaba los terremotos. En las novelas de Percy Jackson es el padre del protagonista.",
+   "arquetipo": "olimpo"
   },
   {
    "id": "OC-004",
@@ -250,7 +253,8 @@
    "emblema": "escudo",
    "zona": "Antigua Grecia",
    "frase": "La sabiduría también se defiende.",
-   "dato": "Diosa griega de la sabiduría y la estrategia, protectora de la ciudad de Atenas. Llevaba la Égida, un escudo que la protegía."
+   "dato": "Diosa griega de la sabiduría y la estrategia, protectora de la ciudad de Atenas. Llevaba la Égida, un escudo que la protegía.",
+   "arquetipo": "olimpo"
   },
   {
    "id": "OC-005",
@@ -275,7 +279,8 @@
    "emblema": "columna",
    "zona": "Antigua Grecia",
    "frase": "Mejor no mirarla de frente.",
-   "dato": "En el mito griego, una gorgona con serpientes por cabello cuya mirada convertía en piedra. Por eso en esta carta solo aparece su sombra."
+   "dato": "En el mito griego, una gorgona con serpientes por cabello cuya mirada convertía en piedra. Por eso en esta carta solo aparece su sombra.",
+   "arquetipo": "olimpo"
   },
   {
    "id": "OC-006",
@@ -301,7 +306,8 @@
    "emblema": "escudo",
    "zona": "Pueblos nórdicos",
    "frase": "Su martillo siempre vuelve.",
-   "dato": "Dios nórdico del trueno y protector de los humanos. Su martillo, Mjölnir, volvía a su mano después de cada lanzamiento."
+   "dato": "Dios nórdico del trueno y protector de los humanos. Su martillo, Mjölnir, volvía a su mano después de cada lanzamiento.",
+   "arquetipo": "asgard"
   },
   {
    "id": "OC-007",
@@ -327,7 +333,8 @@
    "emblema": "corona",
    "zona": "Pueblos nórdicos",
    "frase": "Dio un ojo por saber más.",
-   "dato": "El dios principal de los pueblos nórdicos. Según el mito, entregó un ojo para beber del pozo de la sabiduría. Dos cuervos le traían noticias del mundo."
+   "dato": "El dios principal de los pueblos nórdicos. Según el mito, entregó un ojo para beber del pozo de la sabiduría. Dos cuervos le traían noticias del mundo.",
+   "arquetipo": "asgard"
   },
   {
    "id": "OC-008",
@@ -353,7 +360,8 @@
    "emblema": "pluma",
    "zona": "Pueblos nórdicos",
    "frase": "Guía a las valquirias.",
-   "dato": "Diosa nórdica del amor, la magia y la guerra. Tenía un manto de plumas de halcón para volar, y su carro lo tiraban gatos."
+   "dato": "Diosa nórdica del amor, la magia y la guerra. Tenía un manto de plumas de halcón para volar, y su carro lo tiraban gatos.",
+   "arquetipo": "asgard"
   },
   {
    "id": "OC-009",
@@ -378,7 +386,8 @@
    "emblema": "estrella",
    "zona": "Pueblos nórdicos",
    "frase": "Nunca es lo que parece.",
-   "dato": "El embaucador de los mitos nórdicos. Cambiaba de forma, ayudaba a los dioses o los metía en problemas, y en el Ragnarök se pone del otro lado."
+   "dato": "El embaucador de los mitos nórdicos. Cambiaba de forma, ayudaba a los dioses o los metía en problemas, y en el Ragnarök se pone del otro lado.",
+   "arquetipo": "asgard"
   },
   {
    "id": "OC-010",
@@ -404,7 +413,8 @@
    "emblema": "montana",
    "zona": "Pueblos nórdicos",
    "frase": "Oye crecer la hierba.",
-   "dato": "El guardián del puente Bifröst. Los mitos dicen que veía y oía a enormes distancias, y que su cuerno anunciará el Ragnarök."
+   "dato": "El guardián del puente Bifröst. Los mitos dicen que veía y oía a enormes distancias, y que su cuerno anunciará el Ragnarök.",
+   "arquetipo": "asgard"
   },
   {
    "id": "OC-011",
@@ -430,7 +440,8 @@
    "emblema": "sol",
    "zona": "Antiguo Egipto",
    "frase": "Cada mañana vuelve a salir.",
-   "dato": "El dios del sol del antiguo Egipto. Los egipcios contaban que cruzaba el cielo en una barca de día y el mundo de los muertos de noche."
+   "dato": "El dios del sol del antiguo Egipto. Los egipcios contaban que cruzaba el cielo en una barca de día y el mundo de los muertos de noche.",
+   "arquetipo": "nilo"
   },
   {
    "id": "OC-012",
@@ -456,7 +467,8 @@
    "emblema": "balanza",
    "zona": "Antiguo Egipto",
    "frase": "Cuida el camino de los que se van.",
-   "dato": "Dios egipcio con cabeza de chacal, protector de las tumbas. Guiaba a los difuntos y vigilaba la balanza del juicio."
+   "dato": "Dios egipcio con cabeza de chacal, protector de las tumbas. Guiaba a los difuntos y vigilaba la balanza del juicio.",
+   "arquetipo": "nilo"
   },
   {
    "id": "OC-013",
@@ -482,7 +494,8 @@
    "emblema": "piramide",
    "zona": "Antiguo Egipto",
    "frase": "El halcón que todo lo ve.",
-   "dato": "Dios egipcio con cabeza de halcón, hijo de Isis y Osiris. Su ojo se volvió un símbolo de protección y salud."
+   "dato": "Dios egipcio con cabeza de halcón, hijo de Isis y Osiris. Su ojo se volvió un símbolo de protección y salud.",
+   "arquetipo": "nilo"
   },
   {
    "id": "OC-014",
@@ -508,7 +521,8 @@
    "emblema": "pluma",
    "zona": "Antiguo Egipto",
    "frase": "Su magia devolvía la vida.",
-   "dato": "Diosa egipcia de la magia y la sanación. El mito cuenta que reunió las partes de Osiris para devolverlo a la vida."
+   "dato": "Diosa egipcia de la magia y la sanación. El mito cuenta que reunió las partes de Osiris para devolverlo a la vida.",
+   "arquetipo": "nilo"
   },
   {
    "id": "OC-015",
@@ -533,7 +547,8 @@
    "emblema": "casa",
    "zona": "Antiguo Egipto",
    "frase": "Protectora de la casa.",
-   "dato": "Diosa egipcia con forma de gata, protectora del hogar y las familias. Con el tiempo también se la asoció con la luna."
+   "dato": "Diosa egipcia con forma de gata, protectora del hogar y las familias. Con el tiempo también se la asoció con la luna.",
+   "arquetipo": "nilo"
   },
   {
    "id": "OC-016",
@@ -559,7 +574,8 @@
    "emblema": "pluma",
    "zona": "Mexicas y mayas",
    "frase": "La serpiente con plumas de quetzal.",
-   "dato": "Para los pueblos de Mesoamérica, la serpiente emplumada se asociaba al viento, al saber y a la creación. El mito mexica cuenta que dio el maíz a los humanos."
+   "dato": "Para los pueblos de Mesoamérica, la serpiente emplumada se asociaba al viento, al saber y a la creación. El mito mexica cuenta que dio el maíz a los humanos.",
+   "arquetipo": "quinto-sol"
   },
   {
    "id": "OC-017",
@@ -585,7 +601,8 @@
    "emblema": "estrella",
    "zona": "Mexicas y mayas",
    "frase": "Su espejo muestra lo oculto.",
-   "dato": "Dios mexica de la noche y de los cambios, con un espejo de obsidiana humeante. En los mitos, él y Quetzalcóatl son las dos caras de la creación."
+   "dato": "Dios mexica de la noche y de los cambios, con un espejo de obsidiana humeante. En los mitos, él y Quetzalcóatl son las dos caras de la creación.",
+   "arquetipo": "quinto-sol"
   },
   {
    "id": "OC-018",
@@ -611,7 +628,8 @@
    "emblema": "medalla",
    "zona": "Mayas k’iche’",
    "frase": "Ganaron con ingenio.",
-   "dato": "En el Popol Vuh, libro de los mayas k’iche’, Hunahpú e Ixbalanqué vencen a los señores de Xibalbá con astucia y el juego de pelota. Al final se vuelven el sol y la luna."
+   "dato": "En el Popol Vuh, libro de los mayas k’iche’, Hunahpú e Ixbalanqué vencen a los señores de Xibalbá con astucia y el juego de pelota. Al final se vuelven el sol y la luna.",
+   "arquetipo": "quinto-sol"
   },
   {
    "id": "OC-019",
@@ -637,7 +655,8 @@
    "emblema": "estrella",
    "zona": "Mayas",
    "frase": "Teje bajo la luna.",
-   "dato": "Diosa maya de la luna, el tejido y la medicina, protectora de las madres y las parteras. Su santuario estaba en la isla de Cozumel."
+   "dato": "Diosa maya de la luna, el tejido y la medicina, protectora de las madres y las parteras. Su santuario estaba en la isla de Cozumel.",
+   "arquetipo": "quinto-sol"
   },
   {
    "id": "OC-020",
@@ -663,7 +682,8 @@
    "emblema": "libro",
    "zona": "Mayas",
    "frase": "Dio a los mayas la escritura.",
-   "dato": "Uno de los dioses principales de los mayas, asociado al cielo y a la sabiduría. La tradición le atribuye la escritura y el calendario."
+   "dato": "Uno de los dioses principales de los mayas, asociado al cielo y a la sabiduría. La tradición le atribuye la escritura y el calendario.",
+   "arquetipo": "quinto-sol"
   },
   {
    "id": "OC-021",
@@ -689,7 +709,8 @@
    "emblema": "montana",
    "zona": "Japón",
    "frase": "Ocho cabezas, ocho colas.",
-   "dato": "La gran serpiente de los relatos japoneses más antiguos. Fue vencida con astucia: la hicieron dormir antes de enfrentarla."
+   "dato": "La gran serpiente de los relatos japoneses más antiguos. Fue vencida con astucia: la hicieron dormir antes de enfrentarla.",
+   "arquetipo": "yokai"
   },
   {
    "id": "OC-022",
@@ -715,7 +736,8 @@
    "emblema": "estrella",
    "zona": "Japón",
    "frase": "Cuantas más colas, más sabe.",
-   "dato": "En el folclore de Japón, los zorros sabios ganan colas con los años. Con nueve, su magia es enorme, y sus llamas azules alumbran la noche."
+   "dato": "En el folclore de Japón, los zorros sabios ganan colas con los años. Con nueve, su magia es enorme, y sus llamas azules alumbran la noche.",
+   "arquetipo": "yokai"
   },
   {
    "id": "OC-023",
@@ -741,7 +763,8 @@
    "emblema": "montana",
    "zona": "Japón",
    "frase": "Maestro de la montaña.",
-   "dato": "Espíritus de las montañas japonesas, con alas y nariz larga. Una leyenda cuenta que enseñaron esgrima al joven guerrero Minamoto no Yoshitsune."
+   "dato": "Espíritus de las montañas japonesas, con alas y nariz larga. Una leyenda cuenta que enseñaron esgrima al joven guerrero Minamoto no Yoshitsune.",
+   "arquetipo": "yokai"
   },
   {
    "id": "OC-024",
@@ -767,7 +790,8 @@
    "emblema": "ola",
    "zona": "Japón",
    "frase": "Nunca derrames su agua.",
-   "dato": "Criatura de los ríos japoneses, con caparazón y un plato de agua en la cabeza. Si hace una reverencia, pierde el agua y su fuerza."
+   "dato": "Criatura de los ríos japoneses, con caparazón y un plato de agua en la cabeza. Si hace una reverencia, pierde el agua y su fuerza.",
+   "arquetipo": "yokai"
   },
   {
    "id": "OC-025",
@@ -793,7 +817,8 @@
    "emblema": "arbol",
    "zona": "Japón",
    "frase": "El niño que nació de un durazno.",
-   "dato": "Cuento popular japonés. Momotarō viaja con un perro, un mono y un faisán, y juntos vencen a los ogros de una isla."
+   "dato": "Cuento popular japonés. Momotarō viaja con un perro, un mono y un faisán, y juntos vencen a los ogros de una isla.",
+   "arquetipo": "yokai"
   },
   {
    "id": "OC-026",
@@ -819,7 +844,8 @@
    "emblema": "corona",
    "zona": "China",
    "frase": "El Rey Mono.",
-   "dato": "Protagonista de Viaje al Oeste, novela china del siglo XVI. Tiene un bastón que cambia de tamaño y domina 72 transformaciones."
+   "dato": "Protagonista de Viaje al Oeste, novela china del siglo XVI. Tiene un bastón que cambia de tamaño y domina 72 transformaciones.",
+   "arquetipo": "jade"
   },
   {
    "id": "OC-027",
@@ -845,7 +871,8 @@
    "emblema": "ola",
    "zona": "China",
    "frase": "Trae la lluvia a los campos.",
-   "dato": "En China, el dragón es un ser bondadoso que gobierna las aguas, los ríos y la lluvia, y simboliza la buena fortuna."
+   "dato": "En China, el dragón es un ser bondadoso que gobierna las aguas, los ríos y la lluvia, y simboliza la buena fortuna.",
+   "arquetipo": "jade"
   },
   {
    "id": "OC-028",
@@ -871,7 +898,8 @@
    "emblema": "sol",
    "zona": "China",
    "frase": "El arquero que salvó la Tierra.",
-   "dato": "El mito chino cuenta que salieron diez soles a la vez y que el arquero Hou Yi derribó nueve para que la Tierra no se quemara."
+   "dato": "El mito chino cuenta que salieron diez soles a la vez y que el arquero Hou Yi derribó nueve para que la Tierra no se quemara.",
+   "arquetipo": "jade"
   },
   {
    "id": "OC-029",
@@ -897,7 +925,8 @@
    "emblema": "campana",
    "zona": "China",
    "frase": "Le teme al rojo y al ruido.",
-   "dato": "Bestia de las leyendas chinas que aparecía en Año Nuevo. Por eso, según la tradición, se adorna con rojo y se lanzan petardos."
+   "dato": "Bestia de las leyendas chinas que aparecía en Año Nuevo. Por eso, según la tradición, se adorna con rojo y se lanzan petardos.",
+   "arquetipo": "jade"
   },
   {
    "id": "OC-030",
@@ -922,7 +951,8 @@
    "emblema": "estrella",
    "zona": "China",
    "frase": "Vive en la luna.",
-   "dato": "Según el mito chino, bebió el elixir de la inmortalidad y subió a vivir a la luna junto a un conejo de jade. Se la recuerda en la Fiesta de Medio Otoño."
+   "dato": "Según el mito chino, bebió el elixir de la inmortalidad y subió a vivir a la luna junto a un conejo de jade. Se la recuerda en la Fiesta de Medio Otoño.",
+   "arquetipo": "jade"
   },
   {
    "id": "OC-031",
@@ -937,7 +967,8 @@
    "zona": "Tradición cristiana",
    "frase": "Hermano sol, hermana luna.",
    "dato": "Fraile italiano del siglo XIII que vivió con sencillez y cuidó a pobres y enfermos. Se lo recuerda por su amor a los animales y a la naturaleza.",
-   "etiquetaDato": "Quién fue"
+   "etiquetaDato": "Quién fue",
+   "arquetipo": "cristiana"
   },
   {
    "id": "OC-032",
@@ -952,7 +983,8 @@
    "zona": "Tradición cristiana",
    "frase": "Regalos en secreto.",
    "dato": "Obispo del siglo IV en Mira, en la actual Turquía. Se cuenta que daba regalos sin que nadie lo supiera. De su historia nació el Viejito Pascuero.",
-   "etiquetaDato": "Quién fue"
+   "etiquetaDato": "Quién fue",
+   "arquetipo": "cristiana"
   },
   {
    "id": "OC-033",
@@ -973,7 +1005,8 @@
    "zona": "Tradición cristiana",
    "frase": "Música, plantas y estrellas.",
    "dato": "Abadesa alemana del siglo XII. Compuso música, escribió sobre plantas y medicina, y fue una de las sabias más importantes de la Edad Media.",
-   "etiquetaDato": "Quién fue"
+   "etiquetaDato": "Quién fue",
+   "arquetipo": "cristiana"
   },
   {
    "id": "OC-034",
@@ -988,7 +1021,8 @@
    "zona": "India",
    "frase": "Nunca se rindió.",
    "dato": "Heroína de un relato del Mahabharata, el gran poema épico de la India. Siguió a la muerte y, con inteligencia y constancia, logró que le devolviera a su esposo.",
-   "etiquetaDato": "Quién fue"
+   "etiquetaDato": "Quién fue",
+   "arquetipo": "india"
   },
   {
    "id": "OC-035",
@@ -1002,7 +1036,8 @@
    "emblema": "barco",
    "zona": "Antigua Grecia",
    "frase": "Diez años para volver a casa.",
-   "dato": "Poema griego atribuido a Homero. Odiseo tarda diez años en volver a Ítaca tras la guerra de Troya y enfrenta cíclopes, sirenas y tormentas."
+   "dato": "Poema griego atribuido a Homero. Odiseo tarda diez años en volver a Ítaca tras la guerra de Troya y enfrenta cíclopes, sirenas y tormentas.",
+   "arquetipo": "olimpo"
   },
   {
    "id": "OC-036",
@@ -1022,7 +1057,8 @@
    "emblema": "volcan",
    "zona": "Pueblos nórdicos",
    "frase": "El ocaso de los dioses.",
-   "dato": "En los mitos nórdicos, el fin del mundo de los dioses. Tras un largo invierno, dioses y gigantes se enfrentan, y después la tierra vuelve a nacer, verde y nueva."
+   "dato": "En los mitos nórdicos, el fin del mundo de los dioses. Tras un largo invierno, dioses y gigantes se enfrentan, y después la tierra vuelve a nacer, verde y nueva.",
+   "arquetipo": "asgard"
   },
   {
    "id": "OC-037",
@@ -1036,7 +1072,8 @@
    "emblema": "balanza",
    "zona": "Antiguo Egipto",
    "frase": "Un corazón tan liviano como una pluma.",
-   "dato": "Los antiguos egipcios creían que, al morir, el corazón se pesaba contra la pluma de Maat, la verdad. Si era justo, la persona seguía a una nueva vida."
+   "dato": "Los antiguos egipcios creían que, al morir, el corazón se pesaba contra la pluma de Maat, la verdad. Si era justo, la persona seguía a una nueva vida.",
+   "arquetipo": "nilo"
   },
   {
    "id": "OC-038",
@@ -1056,7 +1093,8 @@
    "emblema": "sol",
    "zona": "Mexicas",
    "frase": "Este es el quinto mundo.",
-   "dato": "Los mexicas contaban que el mundo había tenido cuatro soles, o eras, antes del actual. Según el relato, el quinto nació en Teotihuacan."
+   "dato": "Los mexicas contaban que el mundo había tenido cuatro soles, o eras, antes del actual. Según el relato, el quinto nació en Teotihuacan.",
+   "arquetipo": "quinto-sol"
   },
   {
    "id": "OC-039",
@@ -1076,7 +1114,8 @@
    "emblema": "estrella",
    "zona": "Japón",
    "frase": "De noche, mejor quedarse en casa.",
-   "dato": "En el folclore japonés, ciertas noches los yōkai desfilan por las calles. Muchos pintores antiguos lo dibujaron en largos rollos de papel."
+   "dato": "En el folclore japonés, ciertas noches los yōkai desfilan por las calles. Muchos pintores antiguos lo dibujaron en largos rollos de papel.",
+   "arquetipo": "yokai"
   },
   {
    "id": "OC-040",
@@ -1090,7 +1129,8 @@
    "emblema": "mapa",
    "zona": "China",
    "frase": "Un camino lleno de aventuras.",
-   "dato": "Novela china del siglo XVI. El monje Xuanzang viaja a la India en busca de libros, protegido por Sun Wukong y otros compañeros."
+   "dato": "Novela china del siglo XVI. El monje Xuanzang viaja a la India en busca de libros, protegido por Sun Wukong y otros compañeros.",
+   "arquetipo": "jade"
   },
   {
    "id": "OC-041",
@@ -1104,7 +1144,8 @@
    "zona": "Tradición cristiana",
    "frase": "Gracias a ellos conocemos los mitos.",
    "dato": "En los monasterios medievales, los monjes copiaban libros a mano. Así se conservaron muchas obras griegas y romanas, entre ellas relatos de sus dioses.",
-   "etiquetaDato": "Qué es"
+   "etiquetaDato": "Qué es",
+   "arquetipo": "cristiana"
   },
   {
    "id": "OC-042",
@@ -1125,7 +1166,8 @@
    "zona": "India",
    "frase": "Mil lámparas contra la noche.",
    "dato": "Una de las fiestas más importantes de la India. Se encienden lámparas de aceite, las diyas, por el triunfo de la luz sobre la oscuridad. La celebran hindúes, jainistas y sijs.",
-   "etiquetaDato": "Qué es"
+   "etiquetaDato": "Qué es",
+   "arquetipo": "india"
   },
   {
    "id": "OC-043",
@@ -1145,7 +1187,8 @@
    "zona": "India",
    "frase": "El astuto sabe cuándo retirarse.",
    "dato": "Colección de fábulas de la antigua India en que animales astutos enseñan a pensar y a elegir bien. Muchas viajaron hasta Europa.",
-   "etiquetaDato": "Qué es"
+   "etiquetaDato": "Qué es",
+   "arquetipo": "india"
   },
   {
    "id": "OC-044",
@@ -1160,7 +1203,8 @@
    "emblema": "montana",
    "zona": "Grecia",
    "frase": "Donde vivían los dioses.",
-   "dato": "La montaña más alta de Grecia, de casi 2.920 metros. Los griegos imaginaban en su cumbre, entre las nubes, el palacio de sus dioses."
+   "dato": "La montaña más alta de Grecia, de casi 2.920 metros. Los griegos imaginaban en su cumbre, entre las nubes, el palacio de sus dioses.",
+   "arquetipo": "olimpo"
   },
   {
    "id": "OC-045",
@@ -1175,7 +1219,8 @@
    "emblema": "mapa",
    "zona": "Pueblos nórdicos",
    "frase": "Un arcoíris que une mundos.",
-   "dato": "En los mitos nórdicos, un puente de arcoíris unía Asgard, el mundo de los dioses, con Midgard, el de los humanos. Heimdall lo vigilaba."
+   "dato": "En los mitos nórdicos, un puente de arcoíris unía Asgard, el mundo de los dioses, con Midgard, el de los humanos. Heimdall lo vigilaba.",
+   "arquetipo": "asgard"
   },
   {
    "id": "OC-046",
@@ -1190,7 +1235,8 @@
    "emblema": "piramide",
    "zona": "Egipto",
    "frase": "Más de 4.000 años de pie.",
-   "dato": "Tumbas de los faraones construidas en Egipto hace unos 4.500 años. La Gran Pirámide es la única maravilla del mundo antiguo que sigue en pie."
+   "dato": "Tumbas de los faraones construidas en Egipto hace unos 4.500 años. La Gran Pirámide es la única maravilla del mundo antiguo que sigue en pie.",
+   "arquetipo": "nilo"
   },
   {
    "id": "OC-047",
@@ -1205,7 +1251,8 @@
    "emblema": "piramide",
    "zona": "México",
    "frase": "La ciudad donde nacen los dioses.",
-   "dato": "Gran ciudad de México con las pirámides del Sol y de la Luna. Los mexicas la encontraron abandonada, le pusieron ese nombre y contaban que allí nació el Quinto Sol."
+   "dato": "Gran ciudad de México con las pirámides del Sol y de la Luna. Los mexicas la encontraron abandonada, le pusieron ese nombre y contaban que allí nació el Quinto Sol.",
+   "arquetipo": "quinto-sol"
   },
   {
    "id": "OC-048",
@@ -1220,7 +1267,8 @@
    "emblema": "volcan",
    "zona": "Japón",
    "frase": "El volcán más alto de Japón.",
-   "dato": "Volcán de 3.776 metros, símbolo de Japón y retratado por pintores y poetas durante siglos. Es Patrimonio de la Humanidad."
+   "dato": "Volcán de 3.776 metros, símbolo de Japón y retratado por pintores y poetas durante siglos. Es Patrimonio de la Humanidad.",
+   "arquetipo": "yokai"
   },
   {
    "id": "OC-049",
@@ -1235,7 +1283,8 @@
    "emblema": "montana",
    "zona": "China",
    "frase": "El hogar de los inmortales.",
-   "dato": "En los mitos chinos, en estas montañas vivía la Reina Madre del Oeste, que cuidaba un jardín de duraznos de la inmortalidad."
+   "dato": "En los mitos chinos, en estas montañas vivía la Reina Madre del Oeste, que cuidaba un jardín de duraznos de la inmortalidad.",
+   "arquetipo": "jade"
   }
  ]
 }
