@@ -1,0 +1,114 @@
+{
+ "nota": "Cuadros de cada collage, en orden (fila de arriba de izquierda a derecha, luego la de abajo). Un destino que empieza con @ es un arte suelto; uno con # queda en fuentes/ocaso para decidir su uso. Los recortes están en fuentes/ocaso/cortes/img/… y se copian a img/ al programar la expansión (sw.js exige que todo img/ esté en caché).",
+ "collages": [
+  {
+   "id": "OK01",
+   "cartas": [
+    "OC-001",
+    "OC-002",
+    "OC-003",
+    "OC-004",
+    "OC-005",
+    "OC-044"
+   ]
+  },
+  {
+   "id": "OK02",
+   "cartas": [
+    "OC-006",
+    "OC-007",
+    "OC-008",
+    "OC-009",
+    "OC-010",
+    "OC-045"
+   ]
+  },
+  {
+   "id": "OK03",
+   "cartas": [
+    "OC-011",
+    "OC-012",
+    "OC-013",
+    "OC-014",
+    "OC-015",
+    "OC-046"
+   ]
+  },
+  {
+   "id": "OK04",
+   "cartas": [
+    "OC-016",
+    "OC-017",
+    "OC-018",
+    "OC-019",
+    "OC-020",
+    "OC-047"
+   ]
+  },
+  {
+   "id": "OK05",
+   "cartas": [
+    "OC-021",
+    "OC-022",
+    "OC-023",
+    "OC-024",
+    "OC-025",
+    "OC-048"
+   ]
+  },
+  {
+   "id": "OK06",
+   "cartas": [
+    "OC-026",
+    "OC-027",
+    "OC-028",
+    "OC-029",
+    "OC-030",
+    "OC-049"
+   ]
+  },
+  {
+   "id": "OK07",
+   "cartas": [
+    "OC-031",
+    "OC-032",
+    "OC-033",
+    "OC-034",
+    "OC-041",
+    "OC-042"
+   ]
+  },
+  {
+   "id": "OK08",
+   "cartas": [
+    "OC-035",
+    "OC-036",
+    "OC-037",
+    "OC-038",
+    "OC-039",
+    "OC-040"
+   ]
+  },
+  {
+   "id": "OK09",
+   "cartas": [
+    "OC-043",
+    "@img/duelos/D-OC-1.webp",
+    "@img/duelos/D-OC-2.webp",
+    "@img/duelos/D-OC-3.webp",
+    "#menu-1",
+    "#menu-2"
+   ]
+  }
+ ],
+ "dorsos": [
+  "OC-general",
+  "OC-olimpo",
+  "OC-asgard",
+  "OC-nilo",
+  "OC-quinto-sol",
+  "OC-yokai",
+  "OC-jade",
+  "OC-tradiciones"
+ ]
+}
