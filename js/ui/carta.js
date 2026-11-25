@@ -62,12 +62,13 @@ export function textoEfecto(ef) {
     case 'bonusDimension': return `Mientras esté en juego, los Protagonistas de ${nombreDim(ef.dimension)} hacen +${ef.n} de daño.`;
     case 'curaDimension': return `Mientras esté en juego, el activo de ${nombreDim(ef.dimension)} recupera ${ef.n} al inicio de su turno.`;
     case 'escudoDimension': return `Mientras esté en juego, los Protagonistas de ${nombreDim(ef.dimension)} reciben ${ef.n} menos de daño.`;
-    case 'recuperar': return 'Toma a tu mano la última carta de tu descarte.';
+    case 'recuperar': return 'Toma a tu mano la última carta de tu descarte (que no sea otra que recupera).';
     case 'asedio': return `Cada Protagonista de la reserva rival recibe ${ef.n} de daño (sin bajar de 10).`;
     case 'debilitar': return `El próximo ataque del activo rival hace ${ef.n} menos de daño.`;
     case 'quitarSaber': return `El activo rival pierde ${ef.n || 1} de Saber.`;
     case 'saberReserva': return `Cada Protagonista de tu reserva recibe ${ef.n || 1} de Saber.`;
     case 'epidemia': return `Todos los Protagonistas en juego, tuyos y del rival, reciben ${ef.n} de daño (sin bajar de 10).`;
+    case 'ciclo': return ef.a === 'noche' ? 'Cae la noche: las cartas de sombra hacen +10 de daño.' : 'Llega el día: las cartas de luz hacen +10 de daño.';
     default: return '';
   }
 }
@@ -223,7 +224,7 @@ export function renderCarta(carta, { tamano = 'normal', instancia = null, unidad
   envoltura.appendChild(el);
   const ficha = document.createElement('div');
   ficha.className = 'ficha-dato';
-  ficha.innerHTML = `<small>${esc(col ? col.etiquetaDato : 'Dato histórico')}</small><p>${esc(carta.dato)}</p>
+  ficha.innerHTML = `<small>${esc(carta.etiquetaDato || (col ? col.etiquetaDato : 'Dato histórico'))}</small><p>${esc(carta.dato)}</p>
     <div class="ficha-ref">${col ? `${esc(carta.zona || '')} · ${esc(col.nombre)}` : ''}${carta.curso ? `${esc(carta.curso)}° básico` : ''}${unidad ? ` · Unidad ${esc(carta.unidad)}: ${esc(unidad)}` : ''}${carta.oa ? ` · ${esc(carta.oa)}` : ''}${carta.mbe ? `Marco para la Buena Enseñanza · Dominio ${esc(carta.mbe.dominio)} · Estándar ${esc(carta.mbe.estandar)}: ${esc(carta.mbe.nombre)}` : ''}</div>`;
   envoltura.appendChild(ficha);
   return envoltura;

@@ -95,15 +95,15 @@ No hay una encuesta representativa de las preferencias mitológicas de estudiant
 
 ### Los seis panteones y su ronda de ventajas
 
-Cada fuerza le gana a la siguiente (×2 de daño). La ronda cierra en un círculo y cada duelo enfrenta a dos fuerzas vecinas:
+Cada fuerza le gana a la siguiente (×2 de daño). La ronda cierra en un círculo. *Corregido el 25-11-2026 tras simular:* en la primera versión los rivales de cada Duelo eran vecinos en la ronda, así que uno de los dos hacía doble daño al otro. Ahora quedan opuestos, como en «Fin del Mundo»:
 
 | Fuerza | Le gana a | Por qué |
 |---|---|---|
-| **Olimpo** (Grecia) | Asgard | El sol del Egeo derrite el hielo del norte. |
-| **Asgard** (nórdicos) | Nilo | El Gran Invierno del Ragnarök oscurece hasta el sol de Ra. |
-| **Nilo** (Egipto) | Quinto Sol | La arena del desierto avanza sobre la selva. |
-| **Quinto Sol** (mexicas y mayas) | Tierra de Yōkai | El sol que nace disipa a los espíritus de la noche. |
-| **Tierra de Yōkai** (Japón) | Reino de Jade | Los espíritus burlones enredan a la ordenada corte del cielo. |
+| **Olimpo** (Grecia) | Nilo | Los barcos griegos llegan a las costas del Nilo. |
+| **Nilo** (Egipto) | Tierra de Yōkai | El sol de Ra disipa a los espíritus de la noche. |
+| **Tierra de Yōkai** (Japón) | Asgard | Los espíritus burlones enredan a los gigantes del norte. |
+| **Asgard** (nórdicos) | Quinto Sol | El gran invierno apaga el quinto sol. |
+| **Quinto Sol** (mexicas y mayas) | Reino de Jade | El viento de la serpiente emplumada dispersa las nubes del dragón. |
 | **Reino de Jade** (China) | Olimpo | Las nubes del dragón cubren la cumbre del Olimpo. |
 
 ### El ciclo de día y noche

@@ -1,6 +1,6 @@
 # El Ocaso de los Dioses · Lista de cartas (49)
 
-*Versión 2: con luz y sombra, Medusa y la tradición hindú.* El diseño general está en `docs/superpowers/specs/2026-11-24-ocaso-de-los-dioses-design.md`.
+*Versión 3: con luz y sombra, Medusa y la tradición hindú; ajustada con simulaciones (25-11-2026).* El diseño general está en `docs/superpowers/specs/2026-11-24-ocaso-de-los-dioses-design.md`.
 
 **Cómo leer las tablas:**
 - **Asp.:** aspecto. ☀ es luz: +10 de daño de día. ☾ es sombra: +10 de noche.
@@ -134,7 +134,7 @@ Son personas, relatos y fiestas de dos tradiciones que hoy se practican. Nunca a
 | OC-034 | **Savitri** | Hindú | Personaje | Tu activo recupera 30. (curar 30) |
 | OC-041 | **Los monjes copistas** | Cristiana | Acontecimiento | Toma a tu mano la última carta de tu descarte. (recuperar) |
 | OC-042 | **Diwali, la fiesta de las luces** | Hindú | Acontecimiento | Llega el día. +1 de Saber a tu activo. (ciclo día, saberExtra 1) |
-| OC-043 | **Las fábulas del Panchatantra** | India | Acontecimiento | Cambia tu activo por uno de tu reserva sin pagar retirada. (retiroGratis) |
+| OC-043 | **Las fábulas del Panchatantra** | India | Acontecimiento | Cambia tu activo por uno de tu reserva sin pagar retirada y roba 1 carta. (retiroGratis, robar 1) |
 
 - **San Francisco de Asís:** «Hermano sol, hermana luna.» Quién fue: fraile italiano del siglo XIII que vivió con sencillez y cuidó a pobres y enfermos. Se lo recuerda por su amor a los animales y a la naturaleza; una leyenda cuenta que hizo las paces con un lobo.
 - **San Nicolás de Mira:** «Regalos en secreto.» Quién fue: obispo del siglo IV en Mira, en la actual Turquía. Se cuenta que daba regalos sin que nadie lo supiera. De su historia nació la figura del Viejito Pascuero.
@@ -188,14 +188,14 @@ Los marcados con 🌙 o ☀ cambian el ciclo de inmediato. Desde ahí, el ciclo 
 
 | Duelo | Bando | Núcleo (10 cartas) |
 |---|---|---|
-| **El Trueno contra el Rayo** (D-OC-1) | Olimpo | OC-001 a 005, OC-044, OC-035, OC-032, OC-033, OC-041 |
+| **El Trueno contra el Rayo** (D-OC-1) | Olimpo | OC-001 a 005, OC-044, OC-035, OC-034, OC-033, OC-041 |
 | | Asgard | OC-006 a 010, OC-045, OC-036, OC-031, OC-034, OC-043 |
-| **Los Hijos del Sol** (D-OC-2) | Nilo | OC-011 a 015, OC-046, OC-037, OC-031, OC-033, OC-042 |
-| | Quinto Sol | OC-016 a 020, OC-047, OC-038, OC-032, OC-034, OC-041 |
+| **Los Hijos del Sol** (D-OC-2) | Nilo | OC-011 a 015, OC-046, OC-037, OC-031, OC-032, OC-042 |
+| | Quinto Sol | OC-016 a 020, OC-047, OC-038, OC-033, OC-034, OC-041 |
 | **El Día y la Noche** (D-OC-3) | Tierra de Yōkai | OC-021 a 025, OC-048, OC-039, OC-031, OC-032, OC-043 |
-| | Reino de Jade | OC-026 a 030, OC-049, OC-040, OC-034, OC-033, OC-042 |
+| | Reino de Jade | OC-026 a 030, OC-049, OC-040, OC-032, OC-033, OC-042 |
 
-Cada personaje de las tradiciones vivas está en tres núcleos y cada acontecimiento en dos. Diwali va con Nilo y con Jade.
+Cada personaje de las tradiciones vivas está en tres núcleos y cada acontecimiento en dos. Diwali va con Nilo y con Jade. *El reparto se ajustó el 25-11-2026 con las simulaciones; ver `bitacora-simulaciones.md`.*
 
 Textos de portada:
 - **El Trueno contra el Rayo:** «Zeus y Thor: dos dioses del cielo, una sola tormenta.»

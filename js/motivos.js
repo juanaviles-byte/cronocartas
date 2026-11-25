@@ -54,9 +54,21 @@ export const MOTIVO_DE_CARTA = {
 
 export const MOTIVOS = [...new Set(Object.values(MOTIVO_DE_CARTA))].sort();
 
+// El Ocaso de los Dioses: cada carta entra con el motivo de su panteón; los relatos, con el del panteón del que
+// vienen; las tradiciones vivas (Monjes, Diwali, Panchatantra), con lámparas. Los Personajes entran diciendo su frase.
+const MOTIVO_FUERZA = { Olimpo: 'olimpo', Asgard: 'asgard', Nilo: 'nilo', QuintoSol: 'quintosol', Yokai: 'yokai', Jade: 'jade' };
+const MOTIVO_RELATO = { 'OC-035': 'olimpo', 'OC-036': 'asgard', 'OC-037': 'nilo', 'OC-038': 'quintosol', 'OC-039': 'yokai', 'OC-040': 'jade' };
+export const MOTIVOS_OCASO = [...Object.values(MOTIVO_FUERZA), 'tradicion'];
+function motivoOcaso(carta) {
+  const f = carta.tipo === 'lugar' ? carta.efecto && carta.efecto.dimension : carta.dimension;
+  return MOTIVO_FUERZA[f] || MOTIVO_RELATO[carta.id] || 'tradicion';
+}
+
 // El motivo de una carta, o null. Las cartas Aula (buenas prácticas de la sala de clases) entran como «escuela».
 export function motivoDeCarta(carta) {
-  if (!carta || carta.coleccion || carta.tipo === 'personaje') return null;
+  if (!carta || carta.tipo === 'personaje') return null;
+  if (carta.coleccion === 'ocaso-de-los-dioses') return motivoOcaso(carta);
+  if (carta.coleccion) return null;
   if (carta.tipo === 'aula') return 'escuela';
   return MOTIVO_DE_CARTA[carta.id] || null;
 }

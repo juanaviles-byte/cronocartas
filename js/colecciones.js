@@ -42,7 +42,40 @@ export const COLECCIONES = [
     // (Mar contra Tierra y Fuego; Cielo y Viento contra Bosque y Noche) quedan opuestos: ninguno tiene ventaja.
     ventaja: { Mar: 'CieloViento', CieloViento: 'TierraFuego', TierraFuego: 'BosqueNoche', BosqueNoche: 'Mar' },
   },
+  {
+    id: 'ocaso-de-los-dioses',
+    nombre: 'El Ocaso de los Dioses',
+    corto: 'Ocaso',
+    sigla: 'OC',
+    descripcion: 'Seis mitologías del mundo entre la luz y la sombra.',
+    archivo: 'data/exp-ocaso-de-los-dioses.json',
+    fondo: 'img/escenarios/OC-OE00.webp',
+    dorso: 'img/dorsos/OC-general.webp',
+    etiquetaDato: 'De dónde viene',
+    ciclo: true,      // día y noche: la luz pega +10 de día y la sombra de noche (lo activa el motor al ver cartas con aspecto)
+    oculta: true,     // fuera de los menús hasta que su arte esté en img/ (sw.js exige caché de todo img/)
+    fuerzas: {
+      Olimpo: { nombre: 'Olimpo', tema: { base: '#2E5C9A', claro: '#BFD4EE', oscuro: '#16305A', papel: '#EEF3FA', icono: 'columna' },
+        frase: 'Los barcos griegos llegan a las costas del Nilo' },
+      Nilo: { nombre: 'Nilo', tema: { base: '#C8962E', claro: '#F2DDA6', oscuro: '#6E4D0E', papel: '#FBF3E0', icono: 'piramide' },
+        frase: 'El sol de Ra disipa a los espíritus de la noche' },
+      Yokai: { nombre: 'Tierra de Yōkai', tema: { base: '#B23A48', claro: '#F2B9C0', oscuro: '#5C1520', papel: '#FBEAEC', icono: 'montana' },
+        frase: 'Los espíritus burlones enredan a los gigantes del norte' },
+      Asgard: { nombre: 'Asgard', tema: { base: '#5E6B7A', claro: '#CDD5DE', oscuro: '#2A323C', papel: '#F0F2F5', icono: 'escudo' },
+        frase: 'El gran invierno apaga el quinto sol' },
+      QuintoSol: { nombre: 'Quinto Sol', tema: { base: '#1E8A7A', claro: '#AEE3D9', oscuro: '#0C4A41', papel: '#E6F6F3', icono: 'sol' },
+        frase: 'El viento de la serpiente emplumada dispersa las nubes del dragón' },
+      Jade: { nombre: 'Reino de Jade', tema: { base: '#2F8F4E', claro: '#B6E2C2', oscuro: '#13492A', papel: '#E8F6EC', icono: 'arbol' },
+        frase: 'Las nubes del dragón cubren la cumbre del Olimpo' },
+    },
+    // Ronda: Olimpo → Nilo → Yōkai → Asgard → Quinto Sol → Jade → Olimpo. Los rivales de cada Duelo
+    // (Olimpo y Asgard, Nilo y Quinto Sol, Yōkai y Jade) quedan opuestos: ninguno tiene ventaja sobre el otro.
+    ventaja: { Olimpo: 'Nilo', Nilo: 'Yokai', Yokai: 'Asgard', Asgard: 'QuintoSol', QuintoSol: 'Jade', Jade: 'Olimpo' },
+  },
 ];
+
+// Las que se ofrecen en los menús (una colección «oculta» existe para el motor y las pruebas, pero aún no se juega).
+export const COLECCIONES_VISIBLES = COLECCIONES.filter(c => !c.oculta);
 
 export const coleccion = id => COLECCIONES.find(c => c.id === id) || null;
 

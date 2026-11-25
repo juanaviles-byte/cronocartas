@@ -6,7 +6,7 @@ import { renderCarta, textoParaLeer, registrarImagenes } from './carta.js';
 import { botonEscucharCarta, detener } from './voz.js';
 import { cargarCursoCompleto } from './datos.js';
 import { confirmar } from './confirmar.js';
-import { COLECCIONES, coleccion } from '../colecciones.js';
+import { COLECCIONES_VISIBLES as COLECCIONES, coleccion } from '../colecciones.js';
 import { sonidos, precargarSonidos } from './sonido.js';
 import { ambiente } from './ambiente.js';
 import { almacen, CLAVES } from '../almacen.js';

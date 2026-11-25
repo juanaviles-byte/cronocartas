@@ -48,7 +48,7 @@ test('las ventajas y dimensiones de Historia no cambian', () => {
   assert.deepEqual(DIMENSIONES, ['Politica', 'Economia', 'Sociedad', 'Cultura', 'Territorio']);
   assert.equal(VENTAJA.Politica, 'Economia');
   assert.equal(VENTAJA.Territorio, 'Politica');
-  assert.deepEqual(TODAS_DIMENSIONES, [...DIMENSIONES, 'Mar', 'TierraFuego', 'CieloViento', 'BosqueNoche']);
+  assert.deepEqual(TODAS_DIMENSIONES, [...DIMENSIONES, 'Mar', 'TierraFuego', 'CieloViento', 'BosqueNoche', 'Olimpo', 'Nilo', 'Yokai', 'Asgard', 'QuintoSol', 'Jade']);
 });
 
 test('una carta con fuerza válida pasa la validación y una inventada no', () => {

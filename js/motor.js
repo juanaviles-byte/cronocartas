@@ -75,7 +75,9 @@ export function crearPartida({ mazoA, mazoB, semilla, hitosParaGanar = 3, tabler
       jugadores[j].mazo.push(jugadores[j].mano.shift());
     }
   }
-  return { fase: 'preparacion', turno: 'A', numeroTurno: 0, jugadores, lugar: null,
+  // Ciclo de día y noche: solo si algún mazo trae cartas de luz o de sombra (El Ocaso de los Dioses).
+  const ciclo = [mazoA, mazoB].some(m => m.some(c => c.aspecto)) ? 'dia' : null;
+  return { fase: 'preparacion', turno: 'A', numeroTurno: 0, jugadores, lugar: null, ciclo,
     ganador: null, hitosParaGanar, rng: rng.estado, tablero: tablero ? { id: tablero.id, regla: tablero.regla || null } : null, lineaTiempo: !!lineaTiempo,
     primero: primero === 'B' ? 'B' : 'A' };
 }
@@ -136,6 +138,10 @@ export function jugadasValidas(e) {
   return js;
 }
 
+// Ciclo de día y noche: de día la luz pega +10; de noche, la sombra.
+export const BONUS_CICLO = 10;
+export const favorecidoPorCiclo = (e, carta) => !!(e.ciclo && carta && carta.aspecto && (carta.aspecto === 'luz') === (e.ciclo === 'dia'));
+
 // Un ataque de este costo o más es «potente»: después, la carta descansa un turno (ver jugadasValidas).
 export const COSTO_POTENTE = 3;
 
@@ -183,6 +189,9 @@ function alEntrar(e, j, inst) {
 }
 
 const listaEfectos = ef => (Array.isArray(ef) ? ef : ef ? [ef] : []);
+// «Recuperar» trae la última carta del descarte que no recupere a su vez (con dos copias se jugarían sin fin).
+const recupera = c => listaEfectos(c.carta.efecto).some(x => x && x.tipo === 'recuperar');
+const recuperable = yo => { for (let i = yo.descarte.length - 1; i >= 0; i--) if (!recupera(yo.descarte[i])) return i; return -1; };
 
 // Normaliza las búsquedas: buscarProtagonista es buscar con cartaTipo 'protagonista'.
 export function busquedaDe(ef) {
@@ -233,7 +242,7 @@ function principalAplicable(e, j, ef) {
     case 'curar': return yo.activo.danio > 0;
     case 'robar': case 'buscarProtagonista': return yo.mazo.length > 0;
     case 'robarPorReserva': return yo.reserva.length > 0 && yo.mazo.length > 0;
-    case 'recuperar': return yo.descarte.length > 0;
+    case 'recuperar': return recuperable(yo) >= 0;
     case 'asedio': return e.jugadores[rival(j)].reserva.some(r => vidaDe(r) > MINIMO_ASEDIO);
     case 'debilitar': return !!e.jugadores[rival(j)].activo;
     case 'quitarSaber': { const o = e.jugadores[rival(j)].activo; return !!o && o.saber > 0; }
@@ -385,7 +394,8 @@ function aplicarEfecto(e, j, ef, ev, eleccion) {
   const yo = e.jugadores[j], otro = e.jugadores[rival(j)];
   switch (ef.tipo) {
     case 'recuperar': {
-      const c = yo.descarte.pop();
+      const k = recuperable(yo);
+      const c = k >= 0 ? yo.descarte.splice(k, 1)[0] : null;
       if (c) { yo.mano.push(c); ev.push({ tipo: 'recuperar', jugador: j, carta: c.carta }); }
       break;
     }
@@ -394,6 +404,7 @@ function aplicarEfecto(e, j, ef, ev, eleccion) {
     case 'debilitar': if (otro.activo) otro.activo.debil = (otro.activo.debil || 0) + ef.n; break;
     case 'quitarSaber': if (otro.activo) otro.activo.saber = Math.max(0, otro.activo.saber - (ef.n || 1)); break;
     case 'saberReserva': for (const r of yo.reserva) r.saber += ef.n || 1; break;
+    case 'ciclo': if (e.ciclo !== ef.a) { e.ciclo = ef.a; ev.push({ tipo: 'ciclo', a: ef.a, jugador: j }); } break;
     case 'saberExtra': yo.activo.saber += ef.n || 1; break;
     case 'curarTodos': for (const p of enMesa(yo)) p.danio = Math.max(0, p.danio - ef.n); break;
     case 'moverSaberTodo': {
@@ -463,6 +474,7 @@ export function desgloseDanio(e, j, indice) {
   if (fr) suma('reserva', fr.n * yo.reserva.length);
   const al = habilidad(atk, 'alianza');
   if (al) suma('alianza', al.n * yo.reserva.filter(r => r.carta.dimension === atk.carta.dimension).length);
+  if (favorecidoPorCiclo(e, atk.carta)) suma('ciclo', BONUS_CICLO);
   if (VENTAJA[atk.carta.dimension] === def.carta.dimension) pasos.push({ fuente: 'ventaja', por: 2 });
   let total = base;
   for (const p of pasos) total = p.por ? total * p.por : total + p.valor;
@@ -557,6 +569,11 @@ function terminarTurno(e, ev) {
 function iniciarTurno(e, ev) {
   const yo = e.jugadores[e.turno];
   if (e.numeroTurno === 0) e.numeroTurno = 1;
+  // Cada ronda (cuando el turno vuelve a quien partió) el día pasa a noche y la noche a día.
+  if (e.ciclo && e.numeroTurno > 1 && e.turno === (e.primero || 'A')) {
+    e.ciclo = e.ciclo === 'dia' ? 'noche' : 'dia';
+    ev.push({ tipo: 'ciclo', a: e.ciclo });
+  }
   for (const p of enMesa(yo)) { p.protegido = false; p.descansa = !!p.atacoFuerte; p.atacoFuerte = false; }
   yo.aulaUsada = false;
   yo.aulaCuenta = 0;

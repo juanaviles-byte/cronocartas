@@ -1,6 +1,6 @@
 // Rival automático con tres niveles:
 // Aprendiz (a veces se equivoca), Historiador (reglas simples) y Erudito (simula cada jugada y elige la mejor).
-import { jugadasValidas, aplicarJugada, danioDeAccion, efectoEfectivo } from './motor.js';
+import { jugadasValidas, aplicarJugada, danioDeAccion, efectoEfectivo, favorecidoPorCiclo } from './motor.js';
 import { rngDesdeEstado } from './rng.js';
 
 export const NIVELES = [
@@ -99,7 +99,14 @@ function historiador(estado, jugador, js) {
   // 2. Bajar protagonistas a la reserva (deja un espacio si ya hay 2).
   const bajar = deTipo('bajar');
   if (bajar.length && yo.reserva.length < 2) return bajar[0];
-  // 3. Saber al activo.
+  // 3. Saber al activo. Si este turno conviene cambiar de activo gratis (Panchatantra, Magallanes), primero el
+  // cambio: el Saber se queda con quien está en la mesa, y dárselo al que sale sería perderlo.
+  const cambio = deTipo('jugar').filter(j => j.eleccion && (() => { const c = carta(j.uid); return c && [].concat(c.efecto).some(x => x && x.tipo === 'retiroGratis'); })());
+  if (cambio.length && yo.activo.danio * 2 >= yo.activo.carta.resistencia) {
+    const vidaR = j => { const r = yo.reserva.find(x => x.uid === j.eleccion); return r ? r.carta.resistencia - r.danio + 15 * r.saber : -1; };
+    const mejor = cambio.reduce((m, j) => (vidaR(j) > vidaR(m) ? j : m));
+    if (vidaR(mejor) > yo.activo.carta.resistencia - yo.activo.danio + 15 * yo.activo.saber) return mejor;
+  }
   const saber = deTipo('asignarSaber').find(j => j.destino === yo.activo.uid);
   if (saber) return saber;
   // 4. Lugar favorable (bonifica la dimensión del activo) si no hay otro lugar propio.
@@ -109,20 +116,30 @@ function historiador(estado, jugador, js) {
   });
   if (lugar) return lugar;
   // 5. Aula o acontecimiento útil.
-  const util = deTipo('jugar').find(j => {
-    const c = carta(j.uid);
-    if (c.tipo === 'lugar') return false;
-    // Con respaldo, cuenta el efecto que de verdad se aplicará ahora.
-    const ef = efectoEfectivo(estado, jugador, Array.isArray(c.efecto) ? c.efecto[0] : c.efecto);
+  // Ciclo: cuánto favorece una fase a mi activo frente al del rival.
+  const favor = fase => {
+    const f = c => (c && favorecidoPorCiclo({ ciclo: fase }, c) ? 1 : 0);
+    return f(yo.activo && yo.activo.carta) - f(otro.activo && otro.activo.carta);
+  };
+  const sirve = (ef, solo) => {
     const t = ef && ef.tipo;
     if (t === 'curar') return yo.activo.danio >= 20;
     if (t === 'curarTodos') return [yo.activo, ...yo.reserva].some(p => p.danio >= 20);
-    if (t === 'retiroGratis') return yo.activo.danio * 2 >= yo.activo.carta.resistencia;
+    if (t === 'retiroGratis') return false;   // lo decide el paso 3 (antes de dar el Saber)
     if (t === 'epidemia') return enMesa(otro).length >= enMesa(yo).length;
+    // Relatos de día o de noche: solo si la nueva fase me conviene (o, si traen otro efecto, si no me perjudica).
+    if (t === 'ciclo') return !estado.ciclo || ef.a === estado.ciclo ? !solo : solo ? favor(ef.a) > favor(estado.ciclo) : favor(ef.a) >= favor(estado.ciclo);
     // Quitar el Lugar: si es del rival o favorece a su activo (nunca el propio que conviene).
     if (t === 'anularLugar') return !!(estado.lugar && otro.activo) && (estado.lugar.duenio === (jugador === 'A' ? 'B' : 'A') ||
       !!(estado.lugar.carta.efecto && estado.lugar.carta.efecto.dimension === otro.activo.carta.dimension));
     return true;
+  };
+  const util = deTipo('jugar').find(j => {
+    const c = carta(j.uid);
+    if (c.tipo === 'lugar') return false;
+    // Con respaldo, cuenta el efecto que de verdad se aplicará ahora.
+    const lista = Array.isArray(c.efecto) ? c.efecto : [efectoEfectivo(estado, jugador, c.efecto)];
+    return lista.every(ef => sirve(ef, lista.length === 1));
   });
   if (util) {
     // Si hay que elegir: en una búsqueda, la carta de mayor valor; al cambiar de activo, el más sano.

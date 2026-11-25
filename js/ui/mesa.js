@@ -228,6 +228,7 @@ export async function montarMesa(contenedor, opciones) {
     if (!vivo) return quitarPrevia();
     quitarPrevia();
     raiz.innerHTML = '';
+    raiz.classList.toggle('de-noche', estado.ciclo === 'noche');   // ciclo de día y noche (El Ocaso de los Dioses)
     pintarFondo();
     raiz.appendChild(lado('B'));
     raiz.appendChild(centro());
@@ -1032,7 +1033,7 @@ export async function montarMesa(contenedor, opciones) {
   // Texto del desglose: "−10 Castillo feudal · ×2 ventaja".
   function textoDesglose(dsg) {
     const t = tableroActual(), l = estado.lugar && estado.lugar.carta;
-    const nombre = { lugar: l ? l.nombre : 'Lugar', tablero: t ? t.nombre : 'tablero', bonus: 'carta jugada', reserva: 'por tu reserva', resistente: 'el rival resiste', alianza: 'por tus aliados', debilitado: 'debilitado' };
+    const nombre = { lugar: l ? l.nombre : 'Lugar', tablero: t ? t.nombre : 'tablero', bonus: 'carta jugada', reserva: 'por tu reserva', resistente: 'el rival resiste', alianza: 'por tus aliados', debilitado: 'debilitado', ciclo: estado.ciclo === 'noche' ? 'de noche' : 'de día' };
     // Texto plano: quien lo inserta en HTML lo pasa por esc().
     return dsg.pasos.map(p => (p.por ? '×' + p.por + ' ventaja' : (p.valor > 0 ? '+' : '−') + Math.abs(p.valor) + ' ' + nombre[p.fuente])).join(' · ');
   }
@@ -1175,6 +1176,11 @@ export async function montarMesa(contenedor, opciones) {
         if (ev.correcto) sonidos.conexion();
         if (!(contraIA && ev.jugador === 'B')) avisoLinea(ev);
         registrar(`${nombres[ev.jugador]} ubicó <b>${esc(ev.hecho.nombre)}</b> (${esc(ev.hecho.texto)}): ${ev.correcto ? '¡bien ubicada! +1 Saber' : 'quedó en su lugar correcto'}`);
+      }
+      if (ev.tipo === 'ciclo') {
+        sonidos.ciclo(ev.a);
+        raiz.classList.toggle('de-noche', ev.a === 'noche');
+        registrar(ev.a === 'noche' ? '<b>Cae la noche</b>: las cartas de sombra hacen +10 de daño' : '<b>Llega el día</b>: las cartas de luz hacen +10 de daño');
       }
       if (ev.tipo === 'refuerzo') registrar(`<b>${esc(ev.carta.nombre)}</b> entra de refuerzo con +1 de Saber`);
       if (ev.tipo === 'conexion') { sonidos.conexion(); avisoConexion(ev); registrar(`¡Conexión histórica! <b>${esc(ev.causa.nombre)}</b> → <b>${esc(ev.efecto.nombre)}</b>: +1 Saber`); }
@@ -1382,7 +1388,7 @@ export async function montarMesa(contenedor, opciones) {
     return new Promise(resolve => {
       const c = h('div', 'sabias');
       const deCol = carta.coleccion ? coleccion(carta.coleccion) : null;
-      c.innerHTML = `<div class="titulo-sabias">${esc(deCol ? deCol.etiquetaDato : '¿Sabías que…?')}</div>`;
+      c.innerHTML = `<div class="titulo-sabias">${esc(carta.etiquetaDato || (deCol ? deCol.etiquetaDato : '¿Sabías que…?'))}</div>`;
       const fila = h('div', 'sabias-fila');
       fila.appendChild(renderCarta(carta, { tamano: 'mini' }));
       fila.appendChild(h('div', 'sabias-texto', `<b>${esc(carta.nombre)}</b>${carta.zona ? `<small class="zona">${esc(carta.zona)}</small>` : ''}<p>${esc(carta.dato)}</p><small>${nombres[ganador]} gana un Hito</small>`));

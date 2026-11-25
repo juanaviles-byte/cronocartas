@@ -156,6 +156,8 @@ export const sonidos = {
   protegido: () => efecto('proteger'),
   curar: () => efecto('curar'),
   caida: () => { efecto('caida'); vibrar([40, 30, 40]); },
+  // Ciclo de día y noche (El Ocaso de los Dioses): amanece o anochece.
+  ciclo: a => efecto(a === 'noche' ? 'ciclo_noche' : 'ciclo_dia'),
   // Partida
   saber: () => efecto('saber', { variar: 0.06 }),
   conexion: () => efecto('conexion'),

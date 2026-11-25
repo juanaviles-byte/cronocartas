@@ -52,7 +52,17 @@ const I = {
   edificio: s('0 0 120 90', '<rect x="10" y="20" width="40" height="70"/><rect x="56" y="36" width="54" height="54"/>' + [26, 40, 54, 68].map(y => `<rect x="18" y="${y}" width="8" height="8" fill="#FFE9A8"/><rect x="34" y="${y}" width="8" height="8" fill="#FFE9A8"/>`).join('') + '<path d="M2 88h116" stroke-width="4"/>'),
   tipo: s('0 0 36 36', '<rect x="2" y="2" width="32" height="32" rx="3"/><text x="18" y="27" text-anchor="middle" font-family="Georgia, serif" font-weight="700" font-size="24" fill="#1B2647">A</text>'),
   voluta: s('0 0 60 60', '<path d="M30 54C10 54 4 36 14 26s26-4 24 8-14 10-16 2 6-10 10-6" fill="none" stroke-width="5" stroke-linecap="round"/><path d="M30 54c20 0 26-18 16-28" fill="none" stroke-width="5" stroke-linecap="round"/>'),
+  // El Ocaso de los Dioses
+  rayo: s('0 0 50 80', '<path d="M30 2L6 44h16l-8 34 30-46H28l10-30z"/>'),
+  martillo: s('0 0 70 80', '<path d="M4 6h62l-4 24H8z"/><rect x="29" y="30" width="12" height="38"/><rect x="25" y="66" width="20" height="10" rx="3"/>'),
+  ojo: s('0 0 90 60', '<path d="M4 26C18 10 34 4 48 4s28 6 38 18c-12 12-24 18-38 18S16 36 4 26z" fill="none" stroke-width="5"/><circle cx="47" cy="22" r="9"/><path d="M38 40h7l-5 18h-6z"/><path d="M54 40c6 8 14 10 21 8l3 5c-9 3-20 1-28-10z"/>'),
+  serpiente: s('0 0 120 50', '<path d="M4 36c14-20 28-20 40-8s26 12 38-4 22-10 30 0" fill="none" stroke-width="8" stroke-linecap="round"/><circle cx="110" cy="22" r="7"/><path d="M106 14l-4-12 8 8 4-10 2 12 8-6-6 12z"/>'),
+  zorro: s('0 0 60 60', '<path d="M30 58L10 26 6 2l16 14h16L54 2l-4 24z"/><path d="M20 30l8 4-8 2zM40 30l-8 4 8 2z" fill="#2A2017"/>'),
+  dragon: s('0 0 140 60', '<path d="M6 40c16 14 34 14 44 0s26-20 40-6 30 10 42-8" fill="none" stroke-width="9" stroke-linecap="round"/><path d="M122 18l14-8-4 12 6 4-12 4z"/><path d="M30 44l-4 10M54 34l-2 10M78 28l2 10M100 34l4 8" stroke-width="3"/>'),
+  diya: s('0 0 60 50', '<path d="M30 4c4 8 8 12 8 18a8 8 0 0 1-16 0c0-6 4-10 8-18z" fill="#FFE08A"/><path d="M4 30h52c-2 10-12 18-26 18S6 40 4 30z"/>'),
+  luna: s('0 0 50 50', '<path d="M34 4a22 22 0 1 0 12 30A18 18 0 1 1 34 4z"/>'),
 };
+
 
 // Capas de cada motivo. c: color; n: cuántas piezas; t: tamaño relativo; y: altura (0 arriba, 1 abajo).
 export const DEF_MOTIVOS = {
@@ -94,6 +104,14 @@ export const DEF_MOTIVOS = {
   justicia: [{ p: 'pulso', c: '#E9C46A' }, { p: 'baja', i: 'balanza', c: '#E9C46A', t: 0.48 }, { p: 'lluvia', i: 'pergamino', c: '#E8DFC8', n: 6, t: 0.06 }],
   rio: [{ p: 'ondas', c: '#4FA3D1' }, { p: 'alza', items: [['espiga', 0.1, 0.5, 0.13], ['espiga', 0.2, 0.56, 0.11], ['espiga', 0.8, 0.56, 0.11], ['espiga', 0.9, 0.5, 0.13]], c: '#9BCB6B' }],
   peste: [{ p: 'sube', i: 'humo', c: '#7D7A75', n: 10, t: 0.12 }, { p: 'vaiven', i: 'campana', c: '#8A8172', t: 0.4 }],
+  // El Ocaso de los Dioses: un motivo por panteón y otro para las tradiciones vivas.
+  olimpo: [{ p: 'pulso', c: '#BFD4EE' }, { p: 'golpe', i: 'rayo', c: '#FFE08A', t: 0.42 }, { p: 'lluvia', i: 'chispa', c: '#FFF1C4', n: 10, t: 0.035 }],
+  asgard: [{ p: 'golpe', i: 'martillo', c: '#C9D2DC', t: 0.46, gira: true }, { p: 'sube', i: 'chispa', c: '#9FD3FF', n: 12, t: 0.035, desde: 0.4 }],
+  nilo: [{ p: 'alza', items: [['sol', 0.5, 0.08, 0.36], ['piramide', 0.5, 0.64, 1.0]], c: '#E0B867' }, { p: 'baja', i: 'ojo', c: '#F4C542', t: 0.4 }],
+  quintosol: [{ p: 'cruza', i: 'serpiente', c: '#3FB59F', t: 0.55, y: 0.5 }, { p: 'lluvia', i: 'pluma', c: '#7CD3B6', n: 10, t: 0.06 }],
+  yokai: [{ p: 'ronda', i: 'llama', c: '#7FB8FF', n: 9, t: 0.06 }, { p: 'golpe', i: 'zorro', c: '#F2E8DA', t: 0.4 }],
+  jade: [{ p: 'cruza', i: 'dragon', c: '#4FBF7A', t: 0.6, y: 0.45 }, { p: 'sube', i: 'humo', c: '#F3F7F0', n: 8, t: 0.1 }],
+  tradicion: [{ p: 'pulso', c: '#FFE6A8' }, { p: 'ronda', i: 'diya', c: '#FFC864', n: 10, t: 0.06 }],
 };
 
 const SIGNOS = ['α', 'Ω', 'Σ', 'A', 'Ж', '文', 'ب', 'Ψ', 'π', 'ℵ'];

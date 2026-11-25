@@ -1,5 +1,5 @@
 // Qué mazo usa cada jugador según lo elegido en «Nueva partida».
-import { COLECCIONES } from './colecciones.js';
+import { COLECCIONES_VISIBLES as COLECCIONES } from './colecciones.js';
 
 export const CURSOS = [5, 6, 7, 8];
 // En el modo libre, cada jugador elige un curso o una expansión.

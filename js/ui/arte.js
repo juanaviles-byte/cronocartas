@@ -85,7 +85,7 @@ export function temaCarta(carta) {
 // Ícono redondo de un tipo o dimensión (como el símbolo de energía de un TCG).
 // Medallones dibujados (img/iconos/<clave>.webp, ver gen/iconos.py): anillo de acero, esmalte del tipo y símbolo en relieve.
 const MEDALLONES = new Set(['Politica', 'Economia', 'Sociedad', 'Cultura', 'Territorio', 'personaje', 'acontecimiento', 'lugar', 'aula',
-  'Mar', 'TierraFuego', 'CieloViento', 'BosqueNoche']);
+  'Mar', 'TierraFuego', 'CieloViento', 'BosqueNoche', 'Olimpo', 'Asgard', 'Nilo', 'QuintoSol', 'Yokai', 'Jade']);
 
 export function iconoTipo(clave, tam = 22) {
   if (MEDALLONES.has(clave)) return `<img class="icono-tipo medallon" src="img/iconos/${clave}.webp" width="${tam}" height="${tam}" alt="" draggable="false">`;

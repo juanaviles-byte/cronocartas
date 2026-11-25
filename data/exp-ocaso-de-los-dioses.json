@@ -1,0 +1,1241 @@
+{
+ "coleccion": "ocaso-de-los-dioses",
+ "nombre": "El Ocaso de los Dioses",
+ "duelos": [
+  {
+   "id": "D-OC-1",
+   "coleccion": "ocaso-de-los-dioses",
+   "nombre": "El Trueno contra el Rayo",
+   "soloNucleo": true,
+   "arte": "img/duelos/D-OC-1.webp",
+   "texto": "Zeus y Thor: dos dioses del cielo, una sola tormenta.",
+   "bandos": [
+    {
+     "id": "oc-olimpo",
+     "nombre": "Olimpo",
+     "lema": "La cumbre del cielo",
+     "color": "#2E5C9A",
+     "emblema": "templo",
+     "nucleo": [
+      "Zeus",
+      "Hades",
+      "Poseidón",
+      "Atenea",
+      "Medusa",
+      "El monte Olimpo",
+      "La Odisea",
+      "Savitri",
+      "Hildegarda de Bingen",
+      "Los monjes copistas"
+     ]
+    },
+    {
+     "id": "oc-asgard",
+     "nombre": "Asgard",
+     "lema": "El martillo del norte",
+     "color": "#5E6B7A",
+     "emblema": "escudo",
+     "nucleo": [
+      "Thor",
+      "Odín",
+      "Freya",
+      "Loki",
+      "Heimdall",
+      "El puente Bifröst",
+      "El Ragnarök",
+      "San Francisco de Asís",
+      "Savitri",
+      "Las fábulas del Panchatantra"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "D-OC-2",
+   "coleccion": "ocaso-de-los-dioses",
+   "nombre": "Los Hijos del Sol",
+   "soloNucleo": true,
+   "arte": "img/duelos/D-OC-2.webp",
+   "texto": "Ra navega el cielo de Egipto; Quetzalcóatl sopla el viento de Mesoamérica.",
+   "bandos": [
+    {
+     "id": "oc-nilo",
+     "nombre": "Nilo",
+     "lema": "La barca del sol",
+     "color": "#C8962E",
+     "emblema": "piramide",
+     "nucleo": [
+      "Ra",
+      "Anubis",
+      "Horus",
+      "Isis",
+      "Bastet",
+      "Las pirámides de Guiza",
+      "El juicio de Osiris",
+      "San Francisco de Asís",
+      "San Nicolás de Mira",
+      "Diwali, la fiesta de las luces"
+     ]
+    },
+    {
+     "id": "oc-quinto-sol",
+     "nombre": "Quinto Sol",
+     "lema": "La serpiente emplumada",
+     "color": "#1E8A7A",
+     "emblema": "sol",
+     "nucleo": [
+      "Quetzalcóatl",
+      "Tezcatlipoca",
+      "Los Gemelos Héroes",
+      "Ixchel",
+      "Itzamná",
+      "Teotihuacan",
+      "La leyenda de los Cinco Soles",
+      "Hildegarda de Bingen",
+      "Savitri",
+      "Los monjes copistas"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "D-OC-3",
+   "coleccion": "ocaso-de-los-dioses",
+   "nombre": "El Día y la Noche",
+   "soloNucleo": true,
+   "arte": "img/duelos/D-OC-3.webp",
+   "texto": "Sun Wukong salta de día; Orochi despierta de noche. ¿Quién domina el ocaso?",
+   "bandos": [
+    {
+     "id": "oc-yokai",
+     "nombre": "Tierra de Yōkai",
+     "lema": "Lo que despierta de noche",
+     "color": "#B23A48",
+     "emblema": "montana",
+     "nucleo": [
+      "Yamata no Orochi",
+      "La Kitsune de nueve colas",
+      "El Tengu",
+      "El Kappa",
+      "Momotarō",
+      "El monte Fuji",
+      "El desfile de los cien yōkai",
+      "San Francisco de Asís",
+      "San Nicolás de Mira",
+      "Las fábulas del Panchatantra"
+     ]
+    },
+    {
+     "id": "oc-jade",
+     "nombre": "Reino de Jade",
+     "lema": "La corte del cielo",
+     "color": "#2F8F4E",
+     "emblema": "arbol",
+     "nucleo": [
+      "Sun Wukong",
+      "Long, el dragón de la lluvia",
+      "Hou Yi",
+      "Nian",
+      "Chang'e",
+      "Las montañas Kunlun",
+      "El Viaje al Oeste",
+      "San Nicolás de Mira",
+      "Hildegarda de Bingen",
+      "Diwali, la fiesta de las luces"
+     ]
+    }
+   ]
+  }
+ ],
+ "cartas": [
+  {
+   "id": "OC-001",
+   "nombre": "Zeus",
+   "tipo": "protagonista",
+   "coleccion": "ocaso-de-los-dioses",
+   "dimension": "Olimpo",
+   "aspecto": "luz",
+   "resistencia": 110,
+   "retirada": 2,
+   "acciones": [
+    {
+     "nombre": "Rayo",
+     "costo": 2,
+     "danio": 40
+    },
+    {
+     "nombre": "Tormenta del Olimpo",
+     "costo": 3,
+     "danio": 70
+    }
+   ],
+   "emblema": "templo",
+   "zona": "Antigua Grecia",
+   "frase": "El que reina desde la cumbre.",
+   "dato": "Para los antiguos griegos, era el rey de los dioses del Olimpo y señor del cielo. Lanzaba rayos y vigilaba que se cumplieran los juramentos."
+  },
+  {
+   "id": "OC-002",
+   "nombre": "Hades",
+   "tipo": "protagonista",
+   "coleccion": "ocaso-de-los-dioses",
+   "dimension": "Olimpo",
+   "aspecto": "sombra",
+   "resistencia": 90,
+   "retirada": 2,
+   "acciones": [
+    {
+     "nombre": "Yelmo de sombras",
+     "costo": 2,
+     "danio": 40
+    },
+    {
+     "nombre": "Reino subterráneo",
+     "costo": 3,
+     "danio": 60
+    }
+   ],
+   "emblema": "urna",
+   "zona": "Antigua Grecia",
+   "frase": "Guardián del mundo de abajo.",
+   "dato": "Dios griego del inframundo, hermano de Zeus y Poseidón. No era malvado: cuidaba que se respetaran las reglas de su reino. Su yelmo lo volvía invisible."
+  },
+  {
+   "id": "OC-003",
+   "nombre": "Poseidón",
+   "tipo": "protagonista",
+   "coleccion": "ocaso-de-los-dioses",
+   "dimension": "Olimpo",
+   "aspecto": "luz",
+   "resistencia": 80,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Tridente",
+     "costo": 1,
+     "danio": 20
+    },
+    {
+     "nombre": "Maremoto",
+     "costo": 2,
+     "danio": 50
+    }
+   ],
+   "emblema": "ola",
+   "zona": "Antigua Grecia",
+   "frase": "Cuando golpea, tiembla la tierra.",
+   "dato": "Dios griego del mar. Con su tridente levantaba olas y, según contaban, causaba los terremotos. En las novelas de Percy Jackson es el padre del protagonista."
+  },
+  {
+   "id": "OC-004",
+   "nombre": "Atenea",
+   "tipo": "protagonista",
+   "coleccion": "ocaso-de-los-dioses",
+   "dimension": "Olimpo",
+   "aspecto": "luz",
+   "resistencia": 70,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Lanza de Atenea",
+     "costo": 2,
+     "danio": 40
+    }
+   ],
+   "habilidad": {
+    "nombre": "La Égida",
+    "tipo": "contraataque",
+    "n": 20
+   },
+   "emblema": "escudo",
+   "zona": "Antigua Grecia",
+   "frase": "La sabiduría también se defiende.",
+   "dato": "Diosa griega de la sabiduría y la estrategia, protectora de la ciudad de Atenas. Llevaba la Égida, un escudo que la protegía."
+  },
+  {
+   "id": "OC-005",
+   "nombre": "Medusa",
+   "tipo": "protagonista",
+   "coleccion": "ocaso-de-los-dioses",
+   "dimension": "Olimpo",
+   "aspecto": "sombra",
+   "resistencia": 60,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Mirada de piedra",
+     "costo": 1,
+     "danio": 20,
+     "efecto": {
+      "tipo": "debilitar",
+      "n": 10
+     }
+    }
+   ],
+   "emblema": "columna",
+   "zona": "Antigua Grecia",
+   "frase": "Mejor no mirarla de frente.",
+   "dato": "En el mito griego, una gorgona con serpientes por cabello cuya mirada convertía en piedra. Por eso en esta carta solo aparece su sombra."
+  },
+  {
+   "id": "OC-006",
+   "nombre": "Thor",
+   "tipo": "protagonista",
+   "coleccion": "ocaso-de-los-dioses",
+   "dimension": "Asgard",
+   "aspecto": "luz",
+   "resistencia": 110,
+   "retirada": 2,
+   "acciones": [
+    {
+     "nombre": "Mjölnir",
+     "costo": 2,
+     "danio": 40
+    },
+    {
+     "nombre": "Trueno de Asgard",
+     "costo": 3,
+     "danio": 70
+    }
+   ],
+   "emblema": "escudo",
+   "zona": "Pueblos nórdicos",
+   "frase": "Su martillo siempre vuelve.",
+   "dato": "Dios nórdico del trueno y protector de los humanos. Su martillo, Mjölnir, volvía a su mano después de cada lanzamiento."
+  },
+  {
+   "id": "OC-007",
+   "nombre": "Odín",
+   "tipo": "protagonista",
+   "coleccion": "ocaso-de-los-dioses",
+   "dimension": "Asgard",
+   "aspecto": "sombra",
+   "resistencia": 90,
+   "retirada": 2,
+   "acciones": [
+    {
+     "nombre": "Lanza Gungnir",
+     "costo": 2,
+     "danio": 40
+    },
+    {
+     "nombre": "Cuervos del saber",
+     "costo": 3,
+     "danio": 60
+    }
+   ],
+   "emblema": "corona",
+   "zona": "Pueblos nórdicos",
+   "frase": "Dio un ojo por saber más.",
+   "dato": "El dios principal de los pueblos nórdicos. Según el mito, entregó un ojo para beber del pozo de la sabiduría. Dos cuervos le traían noticias del mundo."
+  },
+  {
+   "id": "OC-008",
+   "nombre": "Freya",
+   "tipo": "protagonista",
+   "coleccion": "ocaso-de-los-dioses",
+   "dimension": "Asgard",
+   "aspecto": "luz",
+   "resistencia": 80,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Plumas de halcón",
+     "costo": 1,
+     "danio": 20
+    },
+    {
+     "nombre": "Carga de valquirias",
+     "costo": 2,
+     "danio": 50
+    }
+   ],
+   "emblema": "pluma",
+   "zona": "Pueblos nórdicos",
+   "frase": "Guía a las valquirias.",
+   "dato": "Diosa nórdica del amor, la magia y la guerra. Tenía un manto de plumas de halcón para volar, y su carro lo tiraban gatos."
+  },
+  {
+   "id": "OC-009",
+   "nombre": "Loki",
+   "tipo": "protagonista",
+   "coleccion": "ocaso-de-los-dioses",
+   "dimension": "Asgard",
+   "aspecto": "sombra",
+   "resistencia": 70,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Engaño",
+     "costo": 2,
+     "danio": 40
+    }
+   ],
+   "habilidad": {
+    "nombre": "Cambia de forma",
+    "tipo": "tenaz"
+   },
+   "emblema": "estrella",
+   "zona": "Pueblos nórdicos",
+   "frase": "Nunca es lo que parece.",
+   "dato": "El embaucador de los mitos nórdicos. Cambiaba de forma, ayudaba a los dioses o los metía en problemas, y en el Ragnarök se pone del otro lado."
+  },
+  {
+   "id": "OC-010",
+   "nombre": "Heimdall",
+   "tipo": "protagonista",
+   "coleccion": "ocaso-de-los-dioses",
+   "dimension": "Asgard",
+   "aspecto": "luz",
+   "resistencia": 60,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Cuerno Gjallarhorn",
+     "costo": 1,
+     "danio": 20
+    }
+   ],
+   "habilidad": {
+    "nombre": "Vigía del puente",
+    "tipo": "resistente",
+    "n": 10
+   },
+   "emblema": "montana",
+   "zona": "Pueblos nórdicos",
+   "frase": "Oye crecer la hierba.",
+   "dato": "El guardián del puente Bifröst. Los mitos dicen que veía y oía a enormes distancias, y que su cuerno anunciará el Ragnarök."
+  },
+  {
+   "id": "OC-011",
+   "nombre": "Ra",
+   "tipo": "protagonista",
+   "coleccion": "ocaso-de-los-dioses",
+   "dimension": "Nilo",
+   "aspecto": "luz",
+   "resistencia": 110,
+   "retirada": 2,
+   "acciones": [
+    {
+     "nombre": "Rayo de sol",
+     "costo": 2,
+     "danio": 40
+    },
+    {
+     "nombre": "La barca solar",
+     "costo": 3,
+     "danio": 70
+    }
+   ],
+   "emblema": "sol",
+   "zona": "Antiguo Egipto",
+   "frase": "Cada mañana vuelve a salir.",
+   "dato": "El dios del sol del antiguo Egipto. Los egipcios contaban que cruzaba el cielo en una barca de día y el mundo de los muertos de noche."
+  },
+  {
+   "id": "OC-012",
+   "nombre": "Anubis",
+   "tipo": "protagonista",
+   "coleccion": "ocaso-de-los-dioses",
+   "dimension": "Nilo",
+   "aspecto": "sombra",
+   "resistencia": 90,
+   "retirada": 2,
+   "acciones": [
+    {
+     "nombre": "Guardián nocturno",
+     "costo": 2,
+     "danio": 40
+    },
+    {
+     "nombre": "La balanza",
+     "costo": 3,
+     "danio": 60
+    }
+   ],
+   "emblema": "balanza",
+   "zona": "Antiguo Egipto",
+   "frase": "Cuida el camino de los que se van.",
+   "dato": "Dios egipcio con cabeza de chacal, protector de las tumbas. Guiaba a los difuntos y vigilaba la balanza del juicio."
+  },
+  {
+   "id": "OC-013",
+   "nombre": "Horus",
+   "tipo": "protagonista",
+   "coleccion": "ocaso-de-los-dioses",
+   "dimension": "Nilo",
+   "aspecto": "luz",
+   "resistencia": 80,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Vuelo de halcón",
+     "costo": 1,
+     "danio": 20
+    },
+    {
+     "nombre": "El ojo de Horus",
+     "costo": 2,
+     "danio": 50
+    }
+   ],
+   "emblema": "piramide",
+   "zona": "Antiguo Egipto",
+   "frase": "El halcón que todo lo ve.",
+   "dato": "Dios egipcio con cabeza de halcón, hijo de Isis y Osiris. Su ojo se volvió un símbolo de protección y salud."
+  },
+  {
+   "id": "OC-014",
+   "nombre": "Isis",
+   "tipo": "protagonista",
+   "coleccion": "ocaso-de-los-dioses",
+   "dimension": "Nilo",
+   "aspecto": "luz",
+   "resistencia": 70,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Magia de Isis",
+     "costo": 2,
+     "danio": 40
+    }
+   ],
+   "habilidad": {
+    "nombre": "Gran sanadora",
+    "tipo": "sanador",
+    "n": 10
+   },
+   "emblema": "pluma",
+   "zona": "Antiguo Egipto",
+   "frase": "Su magia devolvía la vida.",
+   "dato": "Diosa egipcia de la magia y la sanación. El mito cuenta que reunió las partes de Osiris para devolverlo a la vida."
+  },
+  {
+   "id": "OC-015",
+   "nombre": "Bastet",
+   "tipo": "protagonista",
+   "coleccion": "ocaso-de-los-dioses",
+   "dimension": "Nilo",
+   "aspecto": "sombra",
+   "resistencia": 60,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Zarpazo",
+     "costo": 1,
+     "danio": 20
+    }
+   ],
+   "habilidad": {
+    "nombre": "Ojos en la noche",
+    "tipo": "inspirador"
+   },
+   "emblema": "casa",
+   "zona": "Antiguo Egipto",
+   "frase": "Protectora de la casa.",
+   "dato": "Diosa egipcia con forma de gata, protectora del hogar y las familias. Con el tiempo también se la asoció con la luna."
+  },
+  {
+   "id": "OC-016",
+   "nombre": "Quetzalcóatl",
+   "tipo": "protagonista",
+   "coleccion": "ocaso-de-los-dioses",
+   "dimension": "QuintoSol",
+   "aspecto": "luz",
+   "resistencia": 110,
+   "retirada": 2,
+   "acciones": [
+    {
+     "nombre": "Viento de plumas",
+     "costo": 2,
+     "danio": 40
+    },
+    {
+     "nombre": "Serpiente emplumada",
+     "costo": 3,
+     "danio": 70
+    }
+   ],
+   "emblema": "pluma",
+   "zona": "Mexicas y mayas",
+   "frase": "La serpiente con plumas de quetzal.",
+   "dato": "Para los pueblos de Mesoamérica, la serpiente emplumada se asociaba al viento, al saber y a la creación. El mito mexica cuenta que dio el maíz a los humanos."
+  },
+  {
+   "id": "OC-017",
+   "nombre": "Tezcatlipoca",
+   "tipo": "protagonista",
+   "coleccion": "ocaso-de-los-dioses",
+   "dimension": "QuintoSol",
+   "aspecto": "sombra",
+   "resistencia": 90,
+   "retirada": 2,
+   "acciones": [
+    {
+     "nombre": "Espejo humeante",
+     "costo": 2,
+     "danio": 40
+    },
+    {
+     "nombre": "Noche del jaguar",
+     "costo": 3,
+     "danio": 60
+    }
+   ],
+   "emblema": "estrella",
+   "zona": "Mexicas y mayas",
+   "frase": "Su espejo muestra lo oculto.",
+   "dato": "Dios mexica de la noche y de los cambios, con un espejo de obsidiana humeante. En los mitos, él y Quetzalcóatl son las dos caras de la creación."
+  },
+  {
+   "id": "OC-018",
+   "nombre": "Los Gemelos Héroes",
+   "tipo": "protagonista",
+   "coleccion": "ocaso-de-los-dioses",
+   "dimension": "QuintoSol",
+   "aspecto": "luz",
+   "resistencia": 80,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Pelota de hule",
+     "costo": 1,
+     "danio": 20
+    },
+    {
+     "nombre": "Cerbatana",
+     "costo": 2,
+     "danio": 50
+    }
+   ],
+   "emblema": "medalla",
+   "zona": "Mayas k’iche’",
+   "frase": "Ganaron con ingenio.",
+   "dato": "En el Popol Vuh, libro de los mayas k’iche’, Hunahpú e Ixbalanqué vencen a los señores de Xibalbá con astucia y el juego de pelota. Al final se vuelven el sol y la luna."
+  },
+  {
+   "id": "OC-019",
+   "nombre": "Ixchel",
+   "tipo": "protagonista",
+   "coleccion": "ocaso-de-los-dioses",
+   "dimension": "QuintoSol",
+   "aspecto": "sombra",
+   "resistencia": 70,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Luz de luna",
+     "costo": 2,
+     "danio": 40
+    }
+   ],
+   "habilidad": {
+    "nombre": "Tejedora",
+    "tipo": "legado",
+    "n": 1
+   },
+   "emblema": "estrella",
+   "zona": "Mayas",
+   "frase": "Teje bajo la luna.",
+   "dato": "Diosa maya de la luna, el tejido y la medicina, protectora de las madres y las parteras. Su santuario estaba en la isla de Cozumel."
+  },
+  {
+   "id": "OC-020",
+   "nombre": "Itzamná",
+   "tipo": "protagonista",
+   "coleccion": "ocaso-de-los-dioses",
+   "dimension": "QuintoSol",
+   "aspecto": "luz",
+   "resistencia": 60,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Glifo luminoso",
+     "costo": 1,
+     "danio": 20
+    }
+   ],
+   "habilidad": {
+    "nombre": "Inventor de la escritura",
+    "tipo": "saberAlEntrar",
+    "n": 1
+   },
+   "emblema": "libro",
+   "zona": "Mayas",
+   "frase": "Dio a los mayas la escritura.",
+   "dato": "Uno de los dioses principales de los mayas, asociado al cielo y a la sabiduría. La tradición le atribuye la escritura y el calendario."
+  },
+  {
+   "id": "OC-021",
+   "nombre": "Yamata no Orochi",
+   "tipo": "protagonista",
+   "coleccion": "ocaso-de-los-dioses",
+   "dimension": "Yokai",
+   "aspecto": "sombra",
+   "resistencia": 110,
+   "retirada": 2,
+   "acciones": [
+    {
+     "nombre": "Ocho cabezas",
+     "costo": 2,
+     "danio": 40
+    },
+    {
+     "nombre": "Tormenta de escamas",
+     "costo": 3,
+     "danio": 70
+    }
+   ],
+   "emblema": "montana",
+   "zona": "Japón",
+   "frase": "Ocho cabezas, ocho colas.",
+   "dato": "La gran serpiente de los relatos japoneses más antiguos. Fue vencida con astucia: la hicieron dormir antes de enfrentarla."
+  },
+  {
+   "id": "OC-022",
+   "nombre": "La Kitsune de nueve colas",
+   "tipo": "protagonista",
+   "coleccion": "ocaso-de-los-dioses",
+   "dimension": "Yokai",
+   "aspecto": "sombra",
+   "resistencia": 90,
+   "retirada": 2,
+   "acciones": [
+    {
+     "nombre": "Fuego de zorro",
+     "costo": 2,
+     "danio": 40
+    },
+    {
+     "nombre": "Nueve colas",
+     "costo": 3,
+     "danio": 60
+    }
+   ],
+   "emblema": "estrella",
+   "zona": "Japón",
+   "frase": "Cuantas más colas, más sabe.",
+   "dato": "En el folclore de Japón, los zorros sabios ganan colas con los años. Con nueve, su magia es enorme, y sus llamas azules alumbran la noche."
+  },
+  {
+   "id": "OC-023",
+   "nombre": "El Tengu",
+   "tipo": "protagonista",
+   "coleccion": "ocaso-de-los-dioses",
+   "dimension": "Yokai",
+   "aspecto": "luz",
+   "resistencia": 80,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Abanico de plumas",
+     "costo": 1,
+     "danio": 20
+    },
+    {
+     "nombre": "Ráfaga de montaña",
+     "costo": 2,
+     "danio": 50
+    }
+   ],
+   "emblema": "montana",
+   "zona": "Japón",
+   "frase": "Maestro de la montaña.",
+   "dato": "Espíritus de las montañas japonesas, con alas y nariz larga. Una leyenda cuenta que enseñaron esgrima al joven guerrero Minamoto no Yoshitsune."
+  },
+  {
+   "id": "OC-024",
+   "nombre": "El Kappa",
+   "tipo": "protagonista",
+   "coleccion": "ocaso-de-los-dioses",
+   "dimension": "Yokai",
+   "aspecto": "luz",
+   "resistencia": 70,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Remolino",
+     "costo": 2,
+     "danio": 40
+    }
+   ],
+   "habilidad": {
+    "nombre": "Caparazón",
+    "tipo": "resistente",
+    "n": 10
+   },
+   "emblema": "ola",
+   "zona": "Japón",
+   "frase": "Nunca derrames su agua.",
+   "dato": "Criatura de los ríos japoneses, con caparazón y un plato de agua en la cabeza. Si hace una reverencia, pierde el agua y su fuerza."
+  },
+  {
+   "id": "OC-025",
+   "nombre": "Momotarō",
+   "tipo": "protagonista",
+   "coleccion": "ocaso-de-los-dioses",
+   "dimension": "Yokai",
+   "aspecto": "luz",
+   "resistencia": 60,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Espada del durazno",
+     "costo": 1,
+     "danio": 20
+    }
+   ],
+   "habilidad": {
+    "nombre": "Perro, mono y faisán",
+    "tipo": "alianza",
+    "n": 10
+   },
+   "emblema": "arbol",
+   "zona": "Japón",
+   "frase": "El niño que nació de un durazno.",
+   "dato": "Cuento popular japonés. Momotarō viaja con un perro, un mono y un faisán, y juntos vencen a los ogros de una isla."
+  },
+  {
+   "id": "OC-026",
+   "nombre": "Sun Wukong",
+   "tipo": "protagonista",
+   "coleccion": "ocaso-de-los-dioses",
+   "dimension": "Jade",
+   "aspecto": "luz",
+   "resistencia": 110,
+   "retirada": 2,
+   "acciones": [
+    {
+     "nombre": "Bastón mágico",
+     "costo": 2,
+     "danio": 40
+    },
+    {
+     "nombre": "72 transformaciones",
+     "costo": 3,
+     "danio": 70
+    }
+   ],
+   "emblema": "corona",
+   "zona": "China",
+   "frase": "El Rey Mono.",
+   "dato": "Protagonista de Viaje al Oeste, novela china del siglo XVI. Tiene un bastón que cambia de tamaño y domina 72 transformaciones."
+  },
+  {
+   "id": "OC-027",
+   "nombre": "Long, el dragón de la lluvia",
+   "tipo": "protagonista",
+   "coleccion": "ocaso-de-los-dioses",
+   "dimension": "Jade",
+   "aspecto": "luz",
+   "resistencia": 90,
+   "retirada": 2,
+   "acciones": [
+    {
+     "nombre": "Lluvia del dragón",
+     "costo": 2,
+     "danio": 40
+    },
+    {
+     "nombre": "Perla de fuego",
+     "costo": 3,
+     "danio": 60
+    }
+   ],
+   "emblema": "ola",
+   "zona": "China",
+   "frase": "Trae la lluvia a los campos.",
+   "dato": "En China, el dragón es un ser bondadoso que gobierna las aguas, los ríos y la lluvia, y simboliza la buena fortuna."
+  },
+  {
+   "id": "OC-028",
+   "nombre": "Hou Yi",
+   "tipo": "protagonista",
+   "coleccion": "ocaso-de-los-dioses",
+   "dimension": "Jade",
+   "aspecto": "luz",
+   "resistencia": 80,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Flecha certera",
+     "costo": 1,
+     "danio": 20
+    },
+    {
+     "nombre": "Lluvia de flechas",
+     "costo": 2,
+     "danio": 50
+    }
+   ],
+   "emblema": "sol",
+   "zona": "China",
+   "frase": "El arquero que salvó la Tierra.",
+   "dato": "El mito chino cuenta que salieron diez soles a la vez y que el arquero Hou Yi derribó nueve para que la Tierra no se quemara."
+  },
+  {
+   "id": "OC-029",
+   "nombre": "Nian",
+   "tipo": "protagonista",
+   "coleccion": "ocaso-de-los-dioses",
+   "dimension": "Jade",
+   "aspecto": "sombra",
+   "resistencia": 70,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Rugido de Año Nuevo",
+     "costo": 2,
+     "danio": 40
+    }
+   ],
+   "habilidad": {
+    "nombre": "Bestia del invierno",
+    "tipo": "fuerzaReserva",
+    "n": 10
+   },
+   "emblema": "campana",
+   "zona": "China",
+   "frase": "Le teme al rojo y al ruido.",
+   "dato": "Bestia de las leyendas chinas que aparecía en Año Nuevo. Por eso, según la tradición, se adorna con rojo y se lanzan petardos."
+  },
+  {
+   "id": "OC-030",
+   "nombre": "Chang'e",
+   "tipo": "protagonista",
+   "coleccion": "ocaso-de-los-dioses",
+   "dimension": "Jade",
+   "aspecto": "sombra",
+   "resistencia": 60,
+   "retirada": 1,
+   "acciones": [
+    {
+     "nombre": "Rayo de luna",
+     "costo": 1,
+     "danio": 20
+    }
+   ],
+   "habilidad": {
+    "nombre": "Desde la luna",
+    "tipo": "inspirador"
+   },
+   "emblema": "estrella",
+   "zona": "China",
+   "frase": "Vive en la luna.",
+   "dato": "Según el mito chino, bebió el elixir de la inmortalidad y subió a vivir a la luna junto a un conejo de jade. Se la recuerda en la Fiesta de Medio Otoño."
+  },
+  {
+   "id": "OC-031",
+   "nombre": "San Francisco de Asís",
+   "tipo": "personaje",
+   "coleccion": "ocaso-de-los-dioses",
+   "efecto": {
+    "tipo": "curarTodos",
+    "n": 20
+   },
+   "emblema": "arbol",
+   "zona": "Tradición cristiana",
+   "frase": "Hermano sol, hermana luna.",
+   "dato": "Fraile italiano del siglo XIII que vivió con sencillez y cuidó a pobres y enfermos. Se lo recuerda por su amor a los animales y a la naturaleza.",
+   "etiquetaDato": "Quién fue"
+  },
+  {
+   "id": "OC-032",
+   "nombre": "San Nicolás de Mira",
+   "tipo": "personaje",
+   "coleccion": "ocaso-de-los-dioses",
+   "efecto": {
+    "tipo": "robar",
+    "n": 2
+   },
+   "emblema": "medalla",
+   "zona": "Tradición cristiana",
+   "frase": "Regalos en secreto.",
+   "dato": "Obispo del siglo IV en Mira, en la actual Turquía. Se cuenta que daba regalos sin que nadie lo supiera. De su historia nació el Viejito Pascuero.",
+   "etiquetaDato": "Quién fue"
+  },
+  {
+   "id": "OC-033",
+   "nombre": "Hildegarda de Bingen",
+   "tipo": "personaje",
+   "coleccion": "ocaso-de-los-dioses",
+   "efecto": [
+    {
+     "tipo": "saberExtra",
+     "n": 1
+    },
+    {
+     "tipo": "robar",
+     "n": 1
+    }
+   ],
+   "emblema": "libro",
+   "zona": "Tradición cristiana",
+   "frase": "Música, plantas y estrellas.",
+   "dato": "Abadesa alemana del siglo XII. Compuso música, escribió sobre plantas y medicina, y fue una de las sabias más importantes de la Edad Media.",
+   "etiquetaDato": "Quién fue"
+  },
+  {
+   "id": "OC-034",
+   "nombre": "Savitri",
+   "tipo": "personaje",
+   "coleccion": "ocaso-de-los-dioses",
+   "efecto": {
+    "tipo": "curar",
+    "n": 30
+   },
+   "emblema": "arbol",
+   "zona": "India",
+   "frase": "Nunca se rindió.",
+   "dato": "Heroína de un relato del Mahabharata, el gran poema épico de la India. Siguió a la muerte y, con inteligencia y constancia, logró que le devolviera a su esposo.",
+   "etiquetaDato": "Quién fue"
+  },
+  {
+   "id": "OC-035",
+   "nombre": "La Odisea",
+   "tipo": "acontecimiento",
+   "coleccion": "ocaso-de-los-dioses",
+   "efecto": {
+    "tipo": "buscarProtagonista",
+    "n": 4
+   },
+   "emblema": "barco",
+   "zona": "Antigua Grecia",
+   "frase": "Diez años para volver a casa.",
+   "dato": "Poema griego atribuido a Homero. Odiseo tarda diez años en volver a Ítaca tras la guerra de Troya y enfrenta cíclopes, sirenas y tormentas."
+  },
+  {
+   "id": "OC-036",
+   "nombre": "El Ragnarök",
+   "tipo": "acontecimiento",
+   "coleccion": "ocaso-de-los-dioses",
+   "efecto": [
+    {
+     "tipo": "ciclo",
+     "a": "noche"
+    },
+    {
+     "tipo": "epidemia",
+     "n": 20
+    }
+   ],
+   "emblema": "volcan",
+   "zona": "Pueblos nórdicos",
+   "frase": "El ocaso de los dioses.",
+   "dato": "En los mitos nórdicos, el fin del mundo de los dioses. Tras un largo invierno, dioses y gigantes se enfrentan, y después la tierra vuelve a nacer, verde y nueva."
+  },
+  {
+   "id": "OC-037",
+   "nombre": "El juicio de Osiris",
+   "tipo": "acontecimiento",
+   "coleccion": "ocaso-de-los-dioses",
+   "efecto": {
+    "tipo": "curar",
+    "n": 30
+   },
+   "emblema": "balanza",
+   "zona": "Antiguo Egipto",
+   "frase": "Un corazón tan liviano como una pluma.",
+   "dato": "Los antiguos egipcios creían que, al morir, el corazón se pesaba contra la pluma de Maat, la verdad. Si era justo, la persona seguía a una nueva vida."
+  },
+  {
+   "id": "OC-038",
+   "nombre": "La leyenda de los Cinco Soles",
+   "tipo": "acontecimiento",
+   "coleccion": "ocaso-de-los-dioses",
+   "efecto": [
+    {
+     "tipo": "ciclo",
+     "a": "dia"
+    },
+    {
+     "tipo": "saberReserva",
+     "n": 1
+    }
+   ],
+   "emblema": "sol",
+   "zona": "Mexicas",
+   "frase": "Este es el quinto mundo.",
+   "dato": "Los mexicas contaban que el mundo había tenido cuatro soles, o eras, antes del actual. Según el relato, el quinto nació en Teotihuacan."
+  },
+  {
+   "id": "OC-039",
+   "nombre": "El desfile de los cien yōkai",
+   "tipo": "acontecimiento",
+   "coleccion": "ocaso-de-los-dioses",
+   "efecto": [
+    {
+     "tipo": "ciclo",
+     "a": "noche"
+    },
+    {
+     "tipo": "debilitar",
+     "n": 20
+    }
+   ],
+   "emblema": "estrella",
+   "zona": "Japón",
+   "frase": "De noche, mejor quedarse en casa.",
+   "dato": "En el folclore japonés, ciertas noches los yōkai desfilan por las calles. Muchos pintores antiguos lo dibujaron en largos rollos de papel."
+  },
+  {
+   "id": "OC-040",
+   "nombre": "El Viaje al Oeste",
+   "tipo": "acontecimiento",
+   "coleccion": "ocaso-de-los-dioses",
+   "efecto": {
+    "tipo": "robar",
+    "n": 2
+   },
+   "emblema": "mapa",
+   "zona": "China",
+   "frase": "Un camino lleno de aventuras.",
+   "dato": "Novela china del siglo XVI. El monje Xuanzang viaja a la India en busca de libros, protegido por Sun Wukong y otros compañeros."
+  },
+  {
+   "id": "OC-041",
+   "nombre": "Los monjes copistas",
+   "tipo": "acontecimiento",
+   "coleccion": "ocaso-de-los-dioses",
+   "efecto": {
+    "tipo": "recuperar"
+   },
+   "emblema": "pergamino",
+   "zona": "Tradición cristiana",
+   "frase": "Gracias a ellos conocemos los mitos.",
+   "dato": "En los monasterios medievales, los monjes copiaban libros a mano. Así se conservaron muchas obras griegas y romanas, entre ellas relatos de sus dioses.",
+   "etiquetaDato": "Qué es"
+  },
+  {
+   "id": "OC-042",
+   "nombre": "Diwali, la fiesta de las luces",
+   "tipo": "acontecimiento",
+   "coleccion": "ocaso-de-los-dioses",
+   "efecto": [
+    {
+     "tipo": "ciclo",
+     "a": "dia"
+    },
+    {
+     "tipo": "saberExtra",
+     "n": 1
+    }
+   ],
+   "emblema": "sol",
+   "zona": "India",
+   "frase": "Mil lámparas contra la noche.",
+   "dato": "Una de las fiestas más importantes de la India. Se encienden lámparas de aceite, las diyas, por el triunfo de la luz sobre la oscuridad. La celebran hindúes, jainistas y sijs.",
+   "etiquetaDato": "Qué es"
+  },
+  {
+   "id": "OC-043",
+   "nombre": "Las fábulas del Panchatantra",
+   "tipo": "acontecimiento",
+   "coleccion": "ocaso-de-los-dioses",
+   "efecto": [
+    {
+     "tipo": "retiroGratis"
+    },
+    {
+     "tipo": "robar",
+     "n": 1
+    }
+   ],
+   "emblema": "libro",
+   "zona": "India",
+   "frase": "El astuto sabe cuándo retirarse.",
+   "dato": "Colección de fábulas de la antigua India en que animales astutos enseñan a pensar y a elegir bien. Muchas viajaron hasta Europa.",
+   "etiquetaDato": "Qué es"
+  },
+  {
+   "id": "OC-044",
+   "nombre": "El monte Olimpo",
+   "tipo": "lugar",
+   "coleccion": "ocaso-de-los-dioses",
+   "efecto": {
+    "tipo": "bonusDimension",
+    "dimension": "Olimpo",
+    "n": 10
+   },
+   "emblema": "montana",
+   "zona": "Grecia",
+   "frase": "Donde vivían los dioses.",
+   "dato": "La montaña más alta de Grecia, de casi 2.920 metros. Los griegos imaginaban en su cumbre, entre las nubes, el palacio de sus dioses."
+  },
+  {
+   "id": "OC-045",
+   "nombre": "El puente Bifröst",
+   "tipo": "lugar",
+   "coleccion": "ocaso-de-los-dioses",
+   "efecto": {
+    "tipo": "escudoDimension",
+    "dimension": "Asgard",
+    "n": 10
+   },
+   "emblema": "mapa",
+   "zona": "Pueblos nórdicos",
+   "frase": "Un arcoíris que une mundos.",
+   "dato": "En los mitos nórdicos, un puente de arcoíris unía Asgard, el mundo de los dioses, con Midgard, el de los humanos. Heimdall lo vigilaba."
+  },
+  {
+   "id": "OC-046",
+   "nombre": "Las pirámides de Guiza",
+   "tipo": "lugar",
+   "coleccion": "ocaso-de-los-dioses",
+   "efecto": {
+    "tipo": "curaDimension",
+    "dimension": "Nilo",
+    "n": 10
+   },
+   "emblema": "piramide",
+   "zona": "Egipto",
+   "frase": "Más de 4.000 años de pie.",
+   "dato": "Tumbas de los faraones construidas en Egipto hace unos 4.500 años. La Gran Pirámide es la única maravilla del mundo antiguo que sigue en pie."
+  },
+  {
+   "id": "OC-047",
+   "nombre": "Teotihuacan",
+   "tipo": "lugar",
+   "coleccion": "ocaso-de-los-dioses",
+   "efecto": {
+    "tipo": "bonusDimension",
+    "dimension": "QuintoSol",
+    "n": 10
+   },
+   "emblema": "piramide",
+   "zona": "México",
+   "frase": "La ciudad donde nacen los dioses.",
+   "dato": "Gran ciudad de México con las pirámides del Sol y de la Luna. Los mexicas la encontraron abandonada, le pusieron ese nombre y contaban que allí nació el Quinto Sol."
+  },
+  {
+   "id": "OC-048",
+   "nombre": "El monte Fuji",
+   "tipo": "lugar",
+   "coleccion": "ocaso-de-los-dioses",
+   "efecto": {
+    "tipo": "escudoDimension",
+    "dimension": "Yokai",
+    "n": 10
+   },
+   "emblema": "volcan",
+   "zona": "Japón",
+   "frase": "El volcán más alto de Japón.",
+   "dato": "Volcán de 3.776 metros, símbolo de Japón y retratado por pintores y poetas durante siglos. Es Patrimonio de la Humanidad."
+  },
+  {
+   "id": "OC-049",
+   "nombre": "Las montañas Kunlun",
+   "tipo": "lugar",
+   "coleccion": "ocaso-de-los-dioses",
+   "efecto": {
+    "tipo": "curaDimension",
+    "dimension": "Jade",
+    "n": 10
+   },
+   "emblema": "montana",
+   "zona": "China",
+   "frase": "El hogar de los inmortales.",
+   "dato": "En los mitos chinos, en estas montañas vivía la Reina Madre del Oeste, que cuidaba un jardín de duraznos de la inmortalidad."
+  }
+ ]
+}

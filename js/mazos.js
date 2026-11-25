@@ -8,7 +8,7 @@ export const COMPOSICION = { protagonista: 11, personaje: 3, acontecimiento: 3, 
 export const TIPOS = ['protagonista', 'personaje', 'acontecimiento', 'lugar', 'aula'];
 export const EFECTOS = ['robar', 'curar', 'proteger', 'bonusDanio', 'moverSaber', 'anularLugar', 'robarPorReserva', 'buscarProtagonista',
   'buscar', 'retiroGratis', 'saberExtra', 'curarTodos', 'moverSaberTodo',
-  'recuperar', 'asedio', 'debilitar', 'quitarSaber', 'saberReserva', 'epidemia'];
+  'recuperar', 'asedio', 'debilitar', 'quitarSaber', 'saberReserva', 'epidemia', 'ciclo'];
 export const EFECTOS_LUGAR = ['bonusDimension', 'curaDimension', 'escudoDimension'];
 const TIPOS_BUSQUEDA = ['protagonista', 'lugar', 'acontecimiento', 'cualquiera'];
 
@@ -21,6 +21,7 @@ function efectoValido(ef) {
     if (!r || Array.isArray(r) || r.respaldo !== undefined || ['buscar', 'buscarProtagonista', 'retiroGratis'].includes(r.tipo) || !efectoValido(r)) return false;
   }
   if (ef.tipo === 'buscar' && !TIPOS_BUSQUEDA.includes(ef.cartaTipo)) return false;
+  if (ef.tipo === 'ciclo' && !['dia', 'noche'].includes(ef.a)) return false;
   if (ef.dimension && !TODAS_DIMENSIONES.includes(ef.dimension)) return false;
   return true;
 }
@@ -55,6 +56,7 @@ export function validarCarta(c) {
       if (a.efecto && [].concat(a.efecto).some(x => x && x.tipo === 'proteger')) e.push(`${id}: una acción no puede proteger`);
     }
   }
+  if (c.aspecto !== undefined && (c.tipo !== 'protagonista' || !['luz', 'sombra'].includes(c.aspecto))) e.push(`${id}: aspecto inválido (luz o sombra, solo en Protagonistas)`);
   if (c.habilidad && (!HABILIDADES.includes(c.habilidad.tipo) || !c.habilidad.nombre)) e.push(`${id}: habilidad desconocida`);
   if (c.conexiones && (!Array.isArray(c.conexiones) || c.conexiones.some(x => !x || typeof x.causa !== 'string' || typeof x.texto !== 'string'))) {
     e.push(`${id}: conexiones mal formadas`);

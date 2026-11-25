@@ -31,7 +31,7 @@ test('en modo libre, dos expansiones también pueden enfrentarse', () => {
 });
 
 test('la lista de mazos del modo libre trae los cuatro cursos y cada expansión', () => {
-  assert.deepEqual(MAZOS_LIBRES, [5, 6, 7, 8, ...COLECCIONES.map(c => c.id)]);
+  assert.deepEqual(MAZOS_LIBRES, [5, 6, 7, 8, ...COLECCIONES.filter(c => !c.oculta).map(c => c.id)]);
 });
 
 test('en modo libre no se refuerza una unidad: los cursos no comparten unidades', () => {
