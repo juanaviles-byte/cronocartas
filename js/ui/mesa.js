@@ -537,7 +537,8 @@ export async function montarMesa(contenedor, opciones) {
       : estado.fase === 'preparacion' ? `${nombres[estado.turno]}: prepara tu mesa`
       : estado.fase === 'promover' ? `${nombres[estado.turno]}: elige un nuevo activo`
       : (contraIA && estado.turno === 'A') ? 'Tu turno' : `Turno de ${nombres[estado.turno]}`;
-    c.appendChild(h('div', `aviso-turno turno-${estado.turno}`, turno));
+    // «Tu turno» (contra la tablet, en tu turno de juego) va en la placa con laureles; los demás avisos, en texto.
+    c.appendChild(h('div', `aviso-turno turno-${estado.turno}${turno === 'Tu turno' ? ' es-tu-turno' : ''}`, turno));
     // Vista del jugador: «Pasar turno» también va en la franja central. En el celular vertical es el que se ve,
     // porque abajo suelen estar los botones del sistema (atrás, inicio) encima de la pantalla.
     if (vistaJugador && estado.fase === 'turno' && estado.turno === 'A') {

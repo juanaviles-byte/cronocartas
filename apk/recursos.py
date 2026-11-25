@@ -8,7 +8,8 @@ DENS = {'mdpi': 1, 'hdpi': 1.5, 'xhdpi': 2, 'xxhdpi': 3, 'xxxhdpi': 4}
 SPLASH = {'mdpi': (320, 480), 'hdpi': (480, 800), 'xhdpi': (720, 1280), 'xxhdpi': (960, 1600), 'xxxhdpi': (1280, 1920)}
 RES = 'apk/res'
 
-icono = Image.open('apk/icono.png').convert('RGB')
+icono_rgba = Image.open('apk/icono.png').convert('RGBA')   # ficha con esquinas redondeadas (transparentes)
+icono = Image.new('RGB', icono_rgba.size, FONDO); icono.paste(icono_rgba, (0, 0), icono_rgba)
 logo = Image.open('apk/logo.png').convert('RGBA')
 logo = logo.crop(logo.getbbox())
 
@@ -27,7 +28,9 @@ for d, f in DENS.items():
     guardar(icono.resize((n, n), Image.LANCZOS), f'{RES}/mipmap-{d}/ic_launcher.png')
     guardar(redondo(icono.resize((n, n), Image.LANCZOS)), f'{RES}/mipmap-{d}/ic_launcher_round.png')
     m = round(108 * f)                     # ícono adaptable: capa de 108 dp (se ven los 72 dp del centro)
-    guardar(icono.resize((m, m), Image.LANCZOS), f'{RES}/mipmap-{d}/ic_launcher_foreground.png')
+    capa = Image.new('RGBA', (m, m), (0, 0, 0, 0)); t = round(70 * f)   # la ficha entera cabe en la zona visible
+    capa.alpha_composite(icono_rgba.resize((t, t), Image.LANCZOS), ((m - t) // 2, (m - t) // 2))
+    guardar(capa, f'{RES}/mipmap-{d}/ic_launcher_foreground.png')
 
 def splash(w, h):
     img = Image.new('RGB', (w, h), FONDO)
