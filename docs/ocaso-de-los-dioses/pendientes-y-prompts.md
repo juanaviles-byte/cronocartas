@@ -21,8 +21,8 @@ Estado al 25 de noviembre de 2026. La expansión ya funciona en el motor, pero e
 | # | Parte | Quién | Cómo |
 |---|---|---|---|
 | A | 8 marcos vacíos, uno por arquetipo | Tú, con IA de imágenes | Prompts de la sección 3 |
-| B | Voz del narrador para las 49 cartas | Tú, en AI Studio | 8 bloques de la sección 4 |
-| C | 2 frases nuevas de La Cronista (día y noche) | Tú, en AI Studio | Sección 5 |
+| B | Narradores aventureros para las 49 cartas | Tú, en AI Studio | 7 bloques de la sección 4, uno por arquetipo |
+| C | Volver a grabar a La Cronista con más vida (26 frases, 2 nuevas) | Tú, en AI Studio | Sección 5 |
 | D | 7 ambientes sonoros | Tú, en Freesound | Búsquedas de la sección 6 |
 | E | Tema musical propio del Ocaso | Tú (opcional) | Prompt de la sección 7 |
 | F | Mapas del minijuego de geografía | Yo | Desde datos de dominio público (sección 8) |
@@ -30,6 +30,7 @@ Estado al 25 de noviembre de 2026. La expansión ya funciona en el motor, pero e
 | H | Pasar el arte cortado a `img/`, recortar los marcos y mostrar la colección | Yo | Cuando lleguen A y B |
 | I | Ajustar el Ocaso en el modo libre (hoy 42 %) | Yo | Antes de lanzarlo |
 | J | Novedades y anuncio en el menú | Yo | Al final |
+| K | Tipografía propia de cada arquetipo (solo en la expansión) | Yo | Fuentes libres (OFL) incluidas en el juego, para que funcionen sin internet |
 
 **Orden recomendado:** 2 → A → B → D → C → E. Lo mío (F a J) avanza en paralelo.
 
@@ -120,65 +121,92 @@ OM7 · orla de manuscrito iluminado medieval sobre fondo de oro: hojas de acanto
 OM8 · oro y esmalte magenta, turquesa y naranja, al estilo de la ornamentación tradicional de la India: una gran flor de loto abierta en el centro del borde superior, arcos lobulados en las esquinas y guirnaldas de flores pequeñas a lo largo de los lados.
 ```
 
-## 4. Voz del narrador (B)
+## 4. Narradores aventureros (B)
 
-El narrador lee el nombre y el dato de cada carta, como en los cursos y en «Fin del Mundo». Usa la misma voz del narrador de siempre.
+En el Ocaso no narra la voz de los cursos. **Cada arquetipo tiene su aventurero o aventurera**, alguien de esa tierra que cuenta sus mitos como quien los escuchó desde niño.
+
+**Cómo se marca el origen:**
+- por lo que cuenta y cómo lo cuenta;
+- por cómo dice los nombres de su idioma.
+
+**Lo que no se hace:** imitar acentos al hablar español, ni hacer voces de estereotipo. Hablan español latinoamericano neutro.
+
+Son **7 bloques**, uno por arquetipo. Cada uno trae sus 5 protagonistas, su Lugar y su relato; el séptimo reúne las tradiciones vivas. La correspondencia carta por carta está en `narrador.json`.
 
 ### Cómo usarlo
 
-1. En AI Studio, generación de voz, un solo hablante, la voz del narrador.
-2. En **instrucciones de estilo** pega el estilo de abajo. En el texto pega **un bloque** completo.
-3. Guarda cada archivo con el nombre del bloque: `ON01.wav` … `ON08.wav`.
-4. Escucha que lea todas las frases, en orden y con pausa entre ellas. Si se salta una, vuelve a generar ese bloque.
+1. En AI Studio, generación de voz, un solo hablante, con **la voz sugerida en cada bloque**. Si no te convence, prueba otra; lo importante es no cambiarla después dentro del mismo bloque.
+2. En **instrucciones de estilo** pega el estilo del bloque.
+3. En el texto pega el bloque completo. **Expresiones:** donde dice `<gasp>`, `<whispers>`, etc., borra esa marca, escribe `<` en ese mismo lugar y elige la expresión del menú. Si alguna no aparece, elige la más parecida o déjala sin expresión.
+4. Guarda cada archivo con el nombre del bloque: `ON01.wav` … `ON07.wav`.
+5. Escucha que lea todas las frases, en orden, con pausa entre ellas y los nombres bien dichos. Si se salta una o pronuncia mal un nombre, vuelve a generar el bloque.
 
-Son **8 bloques** con las 49 cartas, en el mismo orden que los collages OK01–OK08. Las fábulas del Panchatantra van al final de ON08. La correspondencia carta por carta está en `narrador.json`.
+### ON01 · Olimpo · voz sugerida: Algenib
 
-### Estilo del narrador
-
-```
-Narrador de documental para niños y niñas de 10 a 14 años, ahora contando mitos y tradiciones de distintas culturas del mundo. Voz masculina grave, cálida y clara, en español latinoamericano neutro, sin imitar acentos de otros países. Ritmo pausado y tono de quien cuenta un relato antiguo, con asombro y respeto, sin dramatizar de más ni asustar. Lee los nombres propios (griegos, nórdicos, egipcios, nahuas, japoneses, chinos y sánscritos) con calma y claridad, tal como están escritos. Lee cada párrafo por separado y deja un silencio de dos segundos entre un párrafo y el siguiente.
-```
-
-### Bloques
-
-### ON01
+Estilo:
 
 ```
-Zeus. Para los antiguos griegos, era el rey de los dioses del Olimpo y señor del cielo. Lanzaba rayos y vigilaba que se cumplieran los juramentos.
+Eres Nikos, un caminante griego de unos cincuenta años que creció en un pueblo de pastores a los pies del monte Olimpo y ha subido sus senderos toda la vida. Cuentas los mitos de tu tierra a niños y niñas de 10 a 14 años, sentado en una piedra del camino, con voz grave y algo rasposa, cálida y orgullosa. Te asombras con Zeus, bajas la voz con Hades y Medusa, y hablas de la Odisea con nostalgia de viajero. Habla en español latinoamericano neutro y claro: no imites el acento de otro idioma ni hagas voces de estereotipo; lo que muestra de dónde eres es lo que cuentas y cómo lo vives. Di los nombres propios de tu tierra como se pronuncian en su idioma, con naturalidad y sin exagerar. Ritmo pausado, de relato. Lee cada párrafo por separado y deja un silencio de dos segundos entre un párrafo y el siguiente. Pronunciación: Zeus, Hades, Poseidón, Atenea y Égida se dicen como en español. Odiseo e Ítaca con acento en la «i»: O-di-SE-o, Í-ta-ca.
+```
 
-Hades. Dios griego del inframundo, hermano de Zeus y Poseidón. No era malvado: cuidaba que se respetaran las reglas de su reino. Su yelmo lo volvía invisible.
+Texto:
+
+```
+<gasp> Zeus. Para los antiguos griegos, era el rey de los dioses del Olimpo y señor del cielo. Lanzaba rayos y vigilaba que se cumplieran los juramentos.
+
+<whispers> Hades. Dios griego del inframundo, hermano de Zeus y Poseidón. No era malvado: cuidaba que se respetaran las reglas de su reino. Su yelmo lo volvía invisible.
 
 Poseidón. Dios griego del mar. Con su tridente levantaba olas y, según contaban, causaba los terremotos. En las novelas de Percy Jackson es el padre del protagonista.
 
 Atenea. Diosa griega de la sabiduría y la estrategia, protectora de la ciudad de Atenas. Llevaba la Égida, un escudo que la protegía.
 
-Medusa. En el mito griego, una gorgona con serpientes por cabello cuya mirada convertía en piedra. Por eso en esta carta solo aparece su sombra.
+<whispers> Medusa. En el mito griego, una gorgona con serpientes por cabello cuya mirada convertía en piedra. Por eso en esta carta solo aparece su sombra.
 
-El monte Olimpo. La montaña más alta de Grecia, de casi 2.920 metros. Los griegos imaginaban en su cumbre, entre las nubes, el palacio de sus dioses.
+El monte Olimpo. La montaña más alta de Grecia, de casi dos mil novecientos veinte metros. Los griegos imaginaban en su cumbre, entre las nubes, el palacio de sus dioses.
+
+<sigh> La Odisea. Poema griego atribuido a Homero. Odiseo tarda diez años en volver a Ítaca tras la guerra de Troya y enfrenta cíclopes, sirenas y tormentas.
 ```
 
-### ON02
+### ON02 · Asgard · voz sugerida: Alnilam
+
+Estilo:
 
 ```
-Thor. Dios nórdico del trueno y protector de los humanos. Su martillo, Mjölnir, volvía a su mano después de cada lanzamiento.
+Eres Sigrid, una navegante de los fiordos de Noruega, de unos treinta y cinco años, que ha cruzado mares helados bajo auroras boreales. Cuentas los mitos de tu tierra a niños y niñas de 10 a 14 años, de pie en la proa, con voz firme, clara y llena de energía. Celebras a Thor, te ríes con las travesuras de Loki y hablas del Ragnarök en voz baja, como quien cuenta algo muy antiguo. Habla en español latinoamericano neutro y claro: no imites el acento de otro idioma ni hagas voces de estereotipo; lo que muestra de dónde eres es lo que cuentas y cómo lo vives. Di los nombres propios de tu tierra como se pronuncian en su idioma, con naturalidad y sin exagerar. Ritmo pausado, de relato. Lee cada párrafo por separado y deja un silencio de dos segundos entre un párrafo y el siguiente. Pronunciación: Pronuncia Mjölnir como «MIÓL-nir», Bifröst como «BÍF-rost», Ragnarök como «RAG-na-rok», Asgard como «ÁS-gard», Midgard como «MID-gard», Odín con acento en la «i» y Freya como «FRÉI-a».
+```
+
+Texto:
+
+```
+<cheer> Thor. Dios nórdico del trueno y protector de los humanos. Su martillo, Mjölnir, volvía a su mano después de cada lanzamiento.
 
 Odín. El dios principal de los pueblos nórdicos. Según el mito, entregó un ojo para beber del pozo de la sabiduría. Dos cuervos le traían noticias del mundo.
 
 Freya. Diosa nórdica del amor, la magia y la guerra. Tenía un manto de plumas de halcón para volar, y su carro lo tiraban gatos.
 
-Loki. El embaucador de los mitos nórdicos. Cambiaba de forma, ayudaba a los dioses o los metía en problemas, y en el Ragnarök se pone del otro lado.
+<chuckle> Loki. El embaucador de los mitos nórdicos. Cambiaba de forma, ayudaba a los dioses o los metía en problemas, y en el Ragnarök se pone del otro lado.
 
 Heimdall. El guardián del puente Bifröst. Los mitos dicen que veía y oía a enormes distancias, y que su cuerno anunciará el Ragnarök.
 
-El puente Bifröst. En los mitos nórdicos, un puente de arcoíris unía Asgard, el mundo de los dioses, con Midgard, el de los humanos. Heimdall lo vigilaba.
+<gasp> El puente Bifröst. En los mitos nórdicos, un puente de arcoíris unía Asgard, el mundo de los dioses, con Midgard, el de los humanos. Heimdall lo vigilaba.
+
+<whispers> El Ragnarök. En los mitos nórdicos, el fin del mundo de los dioses. Tras un largo invierno, dioses y gigantes se enfrentan, y después la tierra vuelve a nacer, verde y nueva.
 ```
 
-### ON03
+### ON03 · Nilo · voz sugerida: Gacrux
+
+Estilo:
 
 ```
-Ra. El dios del sol del antiguo Egipto. Los egipcios contaban que cruzaba el cielo en una barca de día y el mundo de los muertos de noche.
+Eres Nefer, una barquera del río Nilo de unos cuarenta y cinco años, que ha navegado entre Asuán y El Cairo viendo templos y pirámides desde el agua. Cuentas los mitos de tu tierra a niños y niñas de 10 a 14 años mientras la barca avanza despacio, con voz madura, serena y misteriosa. Te asombras con Ra, susurras con Anubis y el juicio de Osiris, y hablas de las pirámides con respeto. Habla en español latinoamericano neutro y claro: no imites el acento de otro idioma ni hagas voces de estereotipo; lo que muestra de dónde eres es lo que cuentas y cómo lo vives. Di los nombres propios de tu tierra como se pronuncian en su idioma, con naturalidad y sin exagerar. Ritmo pausado, de relato. Lee cada párrafo por separado y deja un silencio de dos segundos entre un párrafo y el siguiente. Pronunciación: Ra, Anubis, Horus, Isis, Osiris y Maat se dicen como en español; Bastet con acento al final, «bas-TET»; Guiza como «GUI-sa».
+```
 
-Anubis. Dios egipcio con cabeza de chacal, protector de las tumbas. Guiaba a los difuntos y vigilaba la balanza del juicio.
+Texto:
+
+```
+<gasp> Ra. El dios del sol del antiguo Egipto. Los egipcios contaban que cruzaba el cielo en una barca de día y el mundo de los muertos de noche.
+
+<whispers> Anubis. Dios egipcio con cabeza de chacal, protector de las tumbas. Guiaba a los difuntos y vigilaba la balanza del juicio.
 
 Horus. Dios egipcio con cabeza de halcón, hijo de Isis y Osiris. Su ojo se volvió un símbolo de protección y salud.
 
@@ -186,103 +214,290 @@ Isis. Diosa egipcia de la magia y la sanación. El mito cuenta que reunió las p
 
 Bastet. Diosa egipcia con forma de gata, protectora del hogar y las familias. Con el tiempo también se la asoció con la luna.
 
-Las pirámides de Guiza. Tumbas de los faraones construidas en Egipto hace unos 4.500 años. La Gran Pirámide es la única maravilla del mundo antiguo que sigue en pie.
+<sigh> Las pirámides de Guiza. Tumbas de los faraones construidas en Egipto hace unos cuatro mil quinientos años. La Gran Pirámide es la única maravilla del mundo antiguo que sigue en pie.
+
+<whispers> El juicio de Osiris. Los antiguos egipcios creían que, al morir, el corazón se pesaba contra la pluma de Maat, la verdad. Si era justo, la persona seguía a una nueva vida.
 ```
 
-### ON04
+### ON04 · Quinto Sol · voz sugerida: Iapetus
+
+Estilo:
 
 ```
-Quetzalcóatl. Para los pueblos de Mesoamérica, la serpiente emplumada se asociaba al viento, al saber y a la creación. El mito mexica cuenta que dio el maíz a los humanos.
+Eres Tonatiuh, un caminante del valle de Teotihuacan, en México, de unos veinticinco años, que conoce cada piedra de las pirámides del Sol y de la Luna y ha recorrido las selvas mayas. Cuentas los mitos de tu tierra a niños y niñas de 10 a 14 años, con voz clara, joven y entusiasta. Te maravillas con Quetzalcóatl y el Quinto Sol, bajas la voz con Tezcatlipoca y te ríes con la astucia de los Gemelos. Habla en español latinoamericano neutro y claro: no imites el acento de otro idioma ni hagas voces de estereotipo; lo que muestra de dónde eres es lo que cuentas y cómo lo vives. Di los nombres propios de tu tierra como se pronuncian en su idioma, con naturalidad y sin exagerar. Ritmo pausado, de relato. Lee cada párrafo por separado y deja un silencio de dos segundos entre un párrafo y el siguiente. Pronunciación: Quetzalcóatl: «ket-sal-KÓ-atl». Tezcatlipoca: «tes-ka-tli-PÓ-ka». Ixchel: «ish-CHÉL». Itzamná: «its-am-NÁ». Hunahpú: «u-na-PÚ». Ixbalanqué: «ish-ba-lan-KÉ». Xibalbá: «shi-bal-BÁ». En k’iche’ marca el pequeño corte de la voz: «ki-CHÉ».
+```
 
-Tezcatlipoca. Dios mexica de la noche y de los cambios, con un espejo de obsidiana humeante. En los mitos, él y Quetzalcóatl son las dos caras de la creación.
+Texto:
 
-Los Gemelos Héroes. En el Popol Vuh, libro de los mayas k’iche’, Hunahpú e Ixbalanqué vencen a los señores de Xibalbá con astucia y el juego de pelota. Al final se vuelven el sol y la luna.
+```
+<gasp> Quetzalcóatl. Para los pueblos de Mesoamérica, la serpiente emplumada se asociaba al viento, al saber y a la creación. El mito mexica cuenta que dio el maíz a los humanos.
+
+<whispers> Tezcatlipoca. Dios mexica de la noche y de los cambios, con un espejo de obsidiana humeante. En los mitos, él y Quetzalcóatl son las dos caras de la creación.
+
+<chuckle> Los Gemelos Héroes. En el Popol Vuh, libro de los mayas k’iche’, Hunahpú e Ixbalanqué vencen a los señores de Xibalbá con astucia y el juego de pelota. Al final se vuelven el sol y la luna.
 
 Ixchel. Diosa maya de la luna, el tejido y la medicina, protectora de las madres y las parteras. Su santuario estaba en la isla de Cozumel.
 
 Itzamná. Uno de los dioses principales de los mayas, asociado al cielo y a la sabiduría. La tradición le atribuye la escritura y el calendario.
 
 Teotihuacan. Gran ciudad de México con las pirámides del Sol y de la Luna. Los mexicas la encontraron abandonada, le pusieron ese nombre y contaban que allí nació el Quinto Sol.
+
+<gasp> La leyenda de los Cinco Soles. Los mexicas contaban que el mundo había tenido cuatro soles, o eras, antes del actual. Según el relato, el quinto nació en Teotihuacan.
 ```
 
-### ON05
+### ON05 · Yōkai · voz sugerida: Leda
+
+Estilo:
 
 ```
-Yamata no Orochi. La gran serpiente de los relatos japoneses más antiguos. Fue vencida con astucia: la hicieron dormir antes de enfrentarla.
+Eres Aiko, una joven peregrina japonesa de unos veinte años que ha caminado por los bosques y templos que rodean el monte Fuji. Cuentas los relatos de tu tierra a niños y niñas de 10 a 14 años, con voz juvenil, curiosa y traviesa. Te asombras con la Kitsune, susurras cuando pasan los yōkai, te ríes con el Kappa y celebras a Momotarō. Habla en español latinoamericano neutro y claro: no imites el acento de otro idioma ni hagas voces de estereotipo; lo que muestra de dónde eres es lo que cuentas y cómo lo vives. Di los nombres propios de tu tierra como se pronuncian en su idioma, con naturalidad y sin exagerar. Ritmo pausado, de relato. Lee cada párrafo por separado y deja un silencio de dos segundos entre un párrafo y el siguiente. Pronunciación: Yamata no Orochi: «ya-MA-ta no o-RO-chi». Kitsune: «KI-tsu-ne». Tengu: «TEN-gu». Kappa: «KAP-pa». Momotarō con la última «o» larga. Yōkai: «YOO-kai», con la primera «o» larga. Minamoto no Yoshitsune: «mi-na-MO-to no yo-SHI-tsu-ne».
+```
 
-La Kitsune de nueve colas. En el folclore de Japón, los zorros sabios ganan colas con los años. Con nueve, su magia es enorme, y sus llamas azules alumbran la noche.
+Texto:
+
+```
+<whispers> Yamata no Orochi. La gran serpiente de los relatos japoneses más antiguos. Fue vencida con astucia: la hicieron dormir antes de enfrentarla.
+
+<gasp> La Kitsune de nueve colas. En el folclore de Japón, los zorros sabios ganan colas con los años. Con nueve, su magia es enorme, y sus llamas azules alumbran la noche.
 
 El Tengu. Espíritus de las montañas japonesas, con alas y nariz larga. Una leyenda cuenta que enseñaron esgrima al joven guerrero Minamoto no Yoshitsune.
 
-El Kappa. Criatura de los ríos japoneses, con caparazón y un plato de agua en la cabeza. Si hace una reverencia, pierde el agua y su fuerza.
+<chuckle> El Kappa. Criatura de los ríos japoneses, con caparazón y un plato de agua en la cabeza. Si hace una reverencia, pierde el agua y su fuerza.
 
-Momotarō. Cuento popular japonés. Momotarō viaja con un perro, un mono y un faisán, y juntos vencen a los ogros de una isla.
+<cheer> Momotarō. Cuento popular japonés. Momotarō viaja con un perro, un mono y un faisán, y juntos vencen a los ogros de una isla.
 
-El monte Fuji. Volcán de 3.776 metros, símbolo de Japón y retratado por pintores y poetas durante siglos. Es Patrimonio de la Humanidad.
+<sigh> El monte Fuji. Volcán de tres mil setecientos setenta y seis metros, símbolo de Japón y retratado por pintores y poetas durante siglos. Es Patrimonio de la Humanidad.
+
+<whispers> El desfile de los cien yōkai. En el folclore japonés, ciertas noches los yōkai desfilan por las calles. Muchos pintores antiguos lo dibujaron en largos rollos de papel.
 ```
 
-### ON06
+### ON06 · Jade · voz sugerida: Vindemiatrix
+
+Estilo:
 
 ```
-Sun Wukong. Protagonista de Viaje al Oeste, novela china del siglo XVI. Tiene un bastón que cambia de tamaño y domina 72 transformaciones.
+Eres Mei, una viajera de unos treinta y cinco años que ha recorrido las montañas Kunlun y los caminos de las antiguas caravanas de China. Cuentas los mitos de tu tierra a niños y niñas de 10 a 14 años, junto a un fuego y con una taza de té, con voz suave, amable y sabia. Te ríes con las travesuras de Sun Wukong, te asombras con el dragón de la lluvia y hablas de Chang'e con ternura. Habla en español latinoamericano neutro y claro: no imites el acento de otro idioma ni hagas voces de estereotipo; lo que muestra de dónde eres es lo que cuentas y cómo lo vives. Di los nombres propios de tu tierra como se pronuncian en su idioma, con naturalidad y sin exagerar. Ritmo pausado, de relato. Lee cada párrafo por separado y deja un silencio de dos segundos entre un párrafo y el siguiente. Pronunciación: Sun Wukong: «sun u-KONG». Hou Yi: «JOU yi». Nian: «NIÉN». Chang'e: «CHANG-é». Kunlun: «KUN-lun». Xuanzang: «SHUÉN-tsang».
+```
 
-Long, el dragón de la lluvia. En China, el dragón es un ser bondadoso que gobierna las aguas, los ríos y la lluvia, y simboliza la buena fortuna.
+Texto:
+
+```
+<laugh> Sun Wukong. Protagonista de Viaje al Oeste, novela china del siglo dieciséis. Tiene un bastón que cambia de tamaño y domina setenta y dos transformaciones.
+
+<gasp> Long, el dragón de la lluvia. En China, el dragón es un ser bondadoso que gobierna las aguas, los ríos y la lluvia, y simboliza la buena fortuna.
 
 Hou Yi. El mito chino cuenta que salieron diez soles a la vez y que el arquero Hou Yi derribó nueve para que la Tierra no se quemara.
 
-Nian. Bestia de las leyendas chinas que aparecía en Año Nuevo. Por eso, según la tradición, se adorna con rojo y se lanzan petardos.
+<chuckle> Nian. Bestia de las leyendas chinas que aparecía en Año Nuevo. Por eso, según la tradición, se adorna con rojo y se lanzan petardos.
 
-Chang'e. Según el mito chino, bebió el elixir de la inmortalidad y subió a vivir a la luna junto a un conejo de jade. Se la recuerda en la Fiesta de Medio Otoño.
+<sigh> Chang'e. Según el mito chino, bebió el elixir de la inmortalidad y subió a vivir a la luna junto a un conejo de jade. Se la recuerda en la Fiesta de Medio Otoño.
 
-Las montañas Kunlun. En los mitos chinos, en estas montañas vivía la Reina Madre del Oeste, que cuidaba un jardín de duraznos de la inmortalidad.
+<whispers> Las montañas Kunlun. En los mitos chinos, en estas montañas vivía la Reina Madre del Oeste, que cuidaba un jardín de duraznos de la inmortalidad.
+
+El Viaje al Oeste. Novela china del siglo dieciséis. El monje Xuanzang viaja a la India en busca de libros, protegido por Sun Wukong y otros compañeros.
 ```
 
-### ON07
+### ON07 · Tradiciones vivas · voz sugerida: Sadaltager
+
+Estilo:
 
 ```
-San Francisco de Asís. Fraile italiano del siglo XIII que vivió con sencillez y cuidó a pobres y enfermos. Se lo recuerda por su amor a los animales y a la naturaleza.
+Eres Tomás, un peregrino de unos sesenta años que ha caminado desde los monasterios de Europa hasta las ciudades de la India, guardando en su libreta las historias de cada lugar. Cuentas estas tradiciones a niños y niñas de 10 a 14 años con voz sabia, pausada y cariñosa, con el respeto de quien habla de algo que muchas personas viven hoy. Te alegras con Diwali, sonríes con San Nicolás y te asombras con la valentía de Savitri. Habla en español latinoamericano neutro y claro: no imites el acento de otro idioma ni hagas voces de estereotipo; lo que muestra de dónde eres es lo que cuentas y cómo lo vives. Di los nombres propios de tu tierra como se pronuncian en su idioma, con naturalidad y sin exagerar. Ritmo pausado, de relato. Lee cada párrafo por separado y deja un silencio de dos segundos entre un párrafo y el siguiente. Pronunciación: Asís con acento al final. Hildegarda de Bingen: «BIN-guen». Savitri: «SA-vi-tri». Mahabharata: «ma-ja-BA-ra-ta». Diwali: «di-UA-li». Diyas: «DI-yas». Panchatantra: «pan-cha-TAN-tra». Jainistas y sijs como en español.
+```
 
-San Nicolás de Mira. Obispo del siglo IV en Mira, en la actual Turquía. Se cuenta que daba regalos sin que nadie lo supiera. De su historia nació el Viejito Pascuero.
+Texto:
 
-Hildegarda de Bingen. Abadesa alemana del siglo XII. Compuso música, escribió sobre plantas y medicina, y fue una de las sabias más importantes de la Edad Media.
+```
+<sigh> San Francisco de Asís. Fraile italiano del siglo trece que vivió con sencillez y cuidó a pobres y enfermos. Se lo recuerda por su amor a los animales y a la naturaleza.
 
-Savitri. Heroína de un relato del Mahabharata, el gran poema épico de la India. Siguió a la muerte y, con inteligencia y constancia, logró que le devolviera a su esposo.
+<chuckle> San Nicolás de Mira. Obispo del siglo cuatro en Mira, en la actual Turquía. Se cuenta que daba regalos sin que nadie lo supiera. De su historia nació el Viejito Pascuero.
+
+Hildegarda de Bingen. Abadesa alemana del siglo doce. Compuso música, escribió sobre plantas y medicina, y fue una de las sabias más importantes de la Edad Media.
 
 Los monjes copistas. En los monasterios medievales, los monjes copiaban libros a mano. Así se conservaron muchas obras griegas y romanas, entre ellas relatos de sus dioses.
 
-Diwali, la fiesta de las luces. Una de las fiestas más importantes de la India. Se encienden lámparas de aceite, las diyas, por el triunfo de la luz sobre la oscuridad. La celebran hindúes, jainistas y sijs.
+<gasp> Savitri. Heroína de un relato del Mahabharata, el gran poema épico de la India. Siguió a la muerte y, con inteligencia y constancia, logró que le devolviera a su esposo.
+
+<cheer> Diwali, la fiesta de las luces. Una de las fiestas más importantes de la India. Se encienden lámparas de aceite, las diyas, por el triunfo de la luz sobre la oscuridad. La celebran hindúes, jainistas y sijs.
+
+<chuckle> Las fábulas del Panchatantra. Colección de fábulas de la antigua India en que animales astutos enseñan a pensar y a elegir bien. Muchas viajaron hasta Europa.
 ```
 
-### ON08
+## 5. La Cronista, con más vida (C)
+
+Se vuelven a grabar **todas** las frases de La Cronista (C01–C24), más dos nuevas para el día y la noche (C25 y C26). El texto de cada frase queda igual, porque es el mismo que aparece en su globo; lo que cambia es la actuación.
+
+### Cómo usarlo
+
+1. En AI Studio, generación de voz, un solo hablante, con la misma voz de La Cronista de siempre.
+2. Pega el estilo nuevo en **instrucciones de estilo**.
+3. Pega **una frase por audio**. Donde dice `<cheer>`, `<gasp>`, etc., borra la marca, escribe `<` en ese lugar y elige la expresión del menú. Si una no aparece, usa la más parecida.
+4. Junto a cada frase va una nota de cómo decirla. Si la primera toma sale plana, puedes agregar esa nota al final del estilo.
+5. Guarda cada audio con su número: `C01.wav` … `C26.wav`.
+
+### Estilo nuevo
 
 ```
-La Odisea. Poema griego atribuido a Homero. Odiseo tarda diez años en volver a Ítaca tras la guerra de Troya y enfrenta cíclopes, sirenas y tormentas.
-
-El Ragnarök. En los mitos nórdicos, el fin del mundo de los dioses. Tras un largo invierno, dioses y gigantes se enfrentan, y después la tierra vuelve a nacer, verde y nueva.
-
-El juicio de Osiris. Los antiguos egipcios creían que, al morir, el corazón se pesaba contra la pluma de Maat, la verdad. Si era justo, la persona seguía a una nueva vida.
-
-La leyenda de los Cinco Soles. Los mexicas contaban que el mundo había tenido cuatro soles, o eras, antes del actual. Según el relato, el quinto nació en Teotihuacan.
-
-El desfile de los cien yōkai. En el folclore japonés, ciertas noches los yōkai desfilan por las calles. Muchos pintores antiguos lo dibujaron en largos rollos de papel.
-
-El Viaje al Oeste. Novela china del siglo XVI. El monje Xuanzang viaja a la India en busca de libros, protegido por Sun Wukong y otros compañeros.
-
-Las fábulas del Panchatantra. Colección de fábulas de la antigua India en que animales astutos enseñan a pensar y a elegir bien. Muchas viajaron hasta Europa.
+La Cronista: mujer latinoamericana de unos treinta años, guía de un juego de cartas de Historia para niños y niñas de 10 a 14 años, que adora la historia y lo demuestra. Habla en español latinoamericano neutro, cercana y cómplice, como una guía de museo muy simpática que juega junto a los niños. Sonríe al hablar y se nota. Varía mucho la entonación: se sorprende de verdad, celebra con alegría los logros, baja la voz para dar pistas o advertencias y vuelve a subirla para animar. Energía alta pero sin gritar, ritmo ágil y muy claro, con pequeñas pausas antes de lo importante. Nunca suena a locutora leyendo: suena a alguien que está mirando la partida en ese momento.
 ```
 
-## 5. Dos frases nuevas de La Cronista (C)
+### Frases
 
-Se graban con la voz y el estilo de La Cronista de siempre (`docs/voces-guion.md`), **una por audio**:
+**C01** · acogedora, invitando a empezar
 
-- `C25.wav`
-  ```
-  ¡Cae la noche! Mientras dure, las cartas de sombra hacen diez puntos más de daño.
-  ```
-- `C26.wav`
-  ```
-  ¡Llega el día! Ahora son las cartas de luz las que hacen diez puntos más de daño.
-  ```
+```
+<chuckle> Elige un Protagonista de tu mano y ponlo como activo: es quien combate. Conviene uno con buena resistencia.
+```
+
+**C02** · cómplice, la última frase como advertencia seria pero cariñosa
+
+```
+Pon Protagonistas en tu reserva, hasta tres. <whispers> Si tu activo cae y no tienes reserva, pierdes la partida.
+```
+
+**C03** · un segundo de pena y enseguida ánimo
+
+```
+<sigh> Tu activo cayó. Elige quién de tu reserva pasa al frente: mira su resistencia y contra quién tiene ventaja.
+```
+
+**C04** · emocionada, como quien anuncia un juego
+
+```
+<cheer> ¡Línea de tiempo! Pon la carta en su lugar: lo más antiguo va a la izquierda. <chuckle> Si aciertas, tu activo gana uno de Saber.
+```
+
+**C05** · clara y paciente, como un buen consejo
+
+```
+Cada turno ganas uno de Saber. Toca un Protagonista para dárselo: las acciones necesitan Saber, <chuckle> y no se pierde al atacar.
+```
+
+**C06** · tranquila, con una sonrisa: todavía no hay prisa
+
+```
+<chuckle> En el primer turno de la partida no se puede atacar. Prepara tu mesa: baja Protagonistas o juega cartas, y luego pasa el turno.
+```
+
+**C07** · alarma breve y luego un consejo rápido
+
+```
+<gasp> ¡Ojo! El activo rival tiene ventaja sobre el tuyo: te hará el doble de daño. Podrías retirar a tu activo.
+```
+
+**C08** · entusiasta, contagiando confianza
+
+```
+<cheer> ¡Tu activo tiene ventaja! <chuckle> Contra este rival, sus acciones hacen el doble de daño.
+```
+
+**C09** · asombro, como quien descubre algo
+
+```
+<gasp> ¡Puedes evolucionar! Una Etapa dos muestra cómo algo cambió en la historia, y es más fuerte. Toca la carta que brilla en tu mano.
+```
+
+**C10** · curiosa, contando un dato interesante
+
+```
+Tienes un Personaje: una persona real de la historia. <chuckle> Su efecto ocurre al instante, y puedes jugar solo uno por turno.
+```
+
+**C11** · como quien abre un telón
+
+```
+Tienes un Lugar: cambia el escenario y da una ventaja mientras esté en juego. <whispers> Si el rival juega otro, el tuyo se va.
+```
+
+**C12** · orgullosa, como profesora que presenta a su curso
+
+```
+<chuckle> Las cartas Aula muestran buenas prácticas de una sala de clases. Te ayudan, y puedes jugar una por turno.
+```
+
+**C13** · urgente pero sin asustar
+
+```
+<gasp> ¡Cuidado! Tu activo puede caer en el próximo ataque. Retirarlo cuesta Saber, pero salva al Protagonista.
+```
+
+**C14** · animando a pasar a la acción
+
+```
+<cheer> Ya puedes usar una acción: los botones junto a tu activo. Al atacar se termina tu turno, así que primero juega tus cartas.
+```
+
+**C15** · admirada, felicitando a quien pensó bien
+
+```
+<gasp> ¡Una conexión entre causa y consecuencia! <cheer> Por entender cómo se relacionan los hechos, tu activo gana uno de Saber.
+```
+
+**C16** · celebración grande
+
+```
+<cheer> ¡Ganaste un Hito por derrotar a un Protagonista rival! <chuckle> Los Hitos son los puntos: el primero en reunir los necesarios gana.
+```
+
+**C17** · orgullosa y cálida
+
+```
+<laugh> ¡Muy bien ubicada en tu línea de tiempo! Ordenar los hechos en el tiempo es pensar como historiador.
+```
+
+**C18** · comprensiva, y luego decidida
+
+```
+<sigh> Perdiste un Protagonista y el rival gana un Hito. Elige bien quién sigue: busca a quien tenga ventaja.
+```
+
+**C19** · en secreto, como contando un truco
+
+```
+<whispers> Te doy una pista: mira lo que brilla en la mesa.
+```
+
+**C20** · pensativa, dando tiempo para pensar
+
+```
+<whispers> Piensa en las fechas que ya tienes en tu línea. Lo más antiguo va a la izquierda.
+```
+
+**C21** · intrigada, invitando a observar
+
+```
+<whispers> Ahora juega el rival. <chuckle> Mira qué hace: así también se aprende.
+```
+
+**C22** · amable y práctica
+
+```
+Juega cartas de tu mano, <chuckle> las que brillan se pueden usar, o toca Pasar turno.
+```
+
+**C23** · fiesta: risa y felicitación
+
+```
+<laugh> ¡Ya sabes jugar! Gana quien consigue tres Hitos, derrotando Protagonistas. <cheer> Sigue jugando o vuelve al menú.
+```
+
+**C24** · expectante, bajando la voz
+
+```
+<whispers> Ahora juega la tablet. Mira con atención.
+```
+
+**C25** · misterio: la luz se apaga
+
+```
+<whispers> ¡Cae la noche! Mientras dure, las cartas de sombra hacen diez puntos más de daño.
+```
+
+**C26** · alegría: sale el sol
+
+```
+<cheer> ¡Llega el día! Ahora son las cartas de luz las que hacen diez puntos más de daño.
+```
 
 ## 6. Ambientes sonoros (D)
 

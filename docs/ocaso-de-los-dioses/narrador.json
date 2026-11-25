@@ -2,6 +2,7 @@
  "narrador": [
   {
    "id": "ON01",
+   "arquetipo": "Olimpo",
    "lineas": [
     {
      "clave": "OC-001",
@@ -25,12 +26,17 @@
     },
     {
      "clave": "OC-044",
-     "texto": "El monte Olimpo. La montaña más alta de Grecia, de casi 2.920 metros. Los griegos imaginaban en su cumbre, entre las nubes, el palacio de sus dioses."
+     "texto": "El monte Olimpo. La montaña más alta de Grecia, de casi dos mil novecientos veinte metros. Los griegos imaginaban en su cumbre, entre las nubes, el palacio de sus dioses."
+    },
+    {
+     "clave": "OC-035",
+     "texto": "La Odisea. Poema griego atribuido a Homero. Odiseo tarda diez años en volver a Ítaca tras la guerra de Troya y enfrenta cíclopes, sirenas y tormentas."
     }
    ]
   },
   {
    "id": "ON02",
+   "arquetipo": "Asgard",
    "lineas": [
     {
      "clave": "OC-006",
@@ -55,11 +61,16 @@
     {
      "clave": "OC-045",
      "texto": "El puente Bifröst. En los mitos nórdicos, un puente de arcoíris unía Asgard, el mundo de los dioses, con Midgard, el de los humanos. Heimdall lo vigilaba."
+    },
+    {
+     "clave": "OC-036",
+     "texto": "El Ragnarök. En los mitos nórdicos, el fin del mundo de los dioses. Tras un largo invierno, dioses y gigantes se enfrentan, y después la tierra vuelve a nacer, verde y nueva."
     }
    ]
   },
   {
    "id": "ON03",
+   "arquetipo": "Nilo",
    "lineas": [
     {
      "clave": "OC-011",
@@ -83,12 +94,17 @@
     },
     {
      "clave": "OC-046",
-     "texto": "Las pirámides de Guiza. Tumbas de los faraones construidas en Egipto hace unos 4.500 años. La Gran Pirámide es la única maravilla del mundo antiguo que sigue en pie."
+     "texto": "Las pirámides de Guiza. Tumbas de los faraones construidas en Egipto hace unos cuatro mil quinientos años. La Gran Pirámide es la única maravilla del mundo antiguo que sigue en pie."
+    },
+    {
+     "clave": "OC-037",
+     "texto": "El juicio de Osiris. Los antiguos egipcios creían que, al morir, el corazón se pesaba contra la pluma de Maat, la verdad. Si era justo, la persona seguía a una nueva vida."
     }
    ]
   },
   {
    "id": "ON04",
+   "arquetipo": "Quinto Sol",
    "lineas": [
     {
      "clave": "OC-016",
@@ -113,11 +129,16 @@
     {
      "clave": "OC-047",
      "texto": "Teotihuacan. Gran ciudad de México con las pirámides del Sol y de la Luna. Los mexicas la encontraron abandonada, le pusieron ese nombre y contaban que allí nació el Quinto Sol."
+    },
+    {
+     "clave": "OC-038",
+     "texto": "La leyenda de los Cinco Soles. Los mexicas contaban que el mundo había tenido cuatro soles, o eras, antes del actual. Según el relato, el quinto nació en Teotihuacan."
     }
    ]
   },
   {
    "id": "ON05",
+   "arquetipo": "Yōkai",
    "lineas": [
     {
      "clave": "OC-021",
@@ -141,16 +162,21 @@
     },
     {
      "clave": "OC-048",
-     "texto": "El monte Fuji. Volcán de 3.776 metros, símbolo de Japón y retratado por pintores y poetas durante siglos. Es Patrimonio de la Humanidad."
+     "texto": "El monte Fuji. Volcán de tres mil setecientos setenta y seis metros, símbolo de Japón y retratado por pintores y poetas durante siglos. Es Patrimonio de la Humanidad."
+    },
+    {
+     "clave": "OC-039",
+     "texto": "El desfile de los cien yōkai. En el folclore japonés, ciertas noches los yōkai desfilan por las calles. Muchos pintores antiguos lo dibujaron en largos rollos de papel."
     }
    ]
   },
   {
    "id": "ON06",
+   "arquetipo": "Jade",
    "lineas": [
     {
      "clave": "OC-026",
-     "texto": "Sun Wukong. Protagonista de Viaje al Oeste, novela china del siglo XVI. Tiene un bastón que cambia de tamaño y domina 72 transformaciones."
+     "texto": "Sun Wukong. Protagonista de Viaje al Oeste, novela china del siglo dieciséis. Tiene un bastón que cambia de tamaño y domina setenta y dos transformaciones."
     },
     {
      "clave": "OC-027",
@@ -171,64 +197,40 @@
     {
      "clave": "OC-049",
      "texto": "Las montañas Kunlun. En los mitos chinos, en estas montañas vivía la Reina Madre del Oeste, que cuidaba un jardín de duraznos de la inmortalidad."
+    },
+    {
+     "clave": "OC-040",
+     "texto": "El Viaje al Oeste. Novela china del siglo dieciséis. El monje Xuanzang viaja a la India en busca de libros, protegido por Sun Wukong y otros compañeros."
     }
    ]
   },
   {
    "id": "ON07",
+   "arquetipo": "Tradiciones vivas",
    "lineas": [
     {
      "clave": "OC-031",
-     "texto": "San Francisco de Asís. Fraile italiano del siglo XIII que vivió con sencillez y cuidó a pobres y enfermos. Se lo recuerda por su amor a los animales y a la naturaleza."
+     "texto": "San Francisco de Asís. Fraile italiano del siglo trece que vivió con sencillez y cuidó a pobres y enfermos. Se lo recuerda por su amor a los animales y a la naturaleza."
     },
     {
      "clave": "OC-032",
-     "texto": "San Nicolás de Mira. Obispo del siglo IV en Mira, en la actual Turquía. Se cuenta que daba regalos sin que nadie lo supiera. De su historia nació el Viejito Pascuero."
+     "texto": "San Nicolás de Mira. Obispo del siglo cuatro en Mira, en la actual Turquía. Se cuenta que daba regalos sin que nadie lo supiera. De su historia nació el Viejito Pascuero."
     },
     {
      "clave": "OC-033",
-     "texto": "Hildegarda de Bingen. Abadesa alemana del siglo XII. Compuso música, escribió sobre plantas y medicina, y fue una de las sabias más importantes de la Edad Media."
-    },
-    {
-     "clave": "OC-034",
-     "texto": "Savitri. Heroína de un relato del Mahabharata, el gran poema épico de la India. Siguió a la muerte y, con inteligencia y constancia, logró que le devolviera a su esposo."
+     "texto": "Hildegarda de Bingen. Abadesa alemana del siglo doce. Compuso música, escribió sobre plantas y medicina, y fue una de las sabias más importantes de la Edad Media."
     },
     {
      "clave": "OC-041",
      "texto": "Los monjes copistas. En los monasterios medievales, los monjes copiaban libros a mano. Así se conservaron muchas obras griegas y romanas, entre ellas relatos de sus dioses."
     },
     {
+     "clave": "OC-034",
+     "texto": "Savitri. Heroína de un relato del Mahabharata, el gran poema épico de la India. Siguió a la muerte y, con inteligencia y constancia, logró que le devolviera a su esposo."
+    },
+    {
      "clave": "OC-042",
      "texto": "Diwali, la fiesta de las luces. Una de las fiestas más importantes de la India. Se encienden lámparas de aceite, las diyas, por el triunfo de la luz sobre la oscuridad. La celebran hindúes, jainistas y sijs."
-    }
-   ]
-  },
-  {
-   "id": "ON08",
-   "lineas": [
-    {
-     "clave": "OC-035",
-     "texto": "La Odisea. Poema griego atribuido a Homero. Odiseo tarda diez años en volver a Ítaca tras la guerra de Troya y enfrenta cíclopes, sirenas y tormentas."
-    },
-    {
-     "clave": "OC-036",
-     "texto": "El Ragnarök. En los mitos nórdicos, el fin del mundo de los dioses. Tras un largo invierno, dioses y gigantes se enfrentan, y después la tierra vuelve a nacer, verde y nueva."
-    },
-    {
-     "clave": "OC-037",
-     "texto": "El juicio de Osiris. Los antiguos egipcios creían que, al morir, el corazón se pesaba contra la pluma de Maat, la verdad. Si era justo, la persona seguía a una nueva vida."
-    },
-    {
-     "clave": "OC-038",
-     "texto": "La leyenda de los Cinco Soles. Los mexicas contaban que el mundo había tenido cuatro soles, o eras, antes del actual. Según el relato, el quinto nació en Teotihuacan."
-    },
-    {
-     "clave": "OC-039",
-     "texto": "El desfile de los cien yōkai. En el folclore japonés, ciertas noches los yōkai desfilan por las calles. Muchos pintores antiguos lo dibujaron en largos rollos de papel."
-    },
-    {
-     "clave": "OC-040",
-     "texto": "El Viaje al Oeste. Novela china del siglo XVI. El monje Xuanzang viaja a la India en busca de libros, protegido por Sun Wukong y otros compañeros."
     },
     {
      "clave": "OC-043",
