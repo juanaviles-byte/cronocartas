@@ -1,11 +1,11 @@
 # El Ocaso de los Dioses · Prompts de arte
 
-Segunda expansión de Cronocartas: mitologías del mundo y la tradición cristiana. Esta guía trae los prompts para todas sus imágenes:
+Segunda expansión de Cronocartas: mitologías del mundo, con su luz y su sombra, y dos tradiciones vivas (cristiana e hindú). Esta guía trae los prompts para todas sus imágenes:
 
 | Qué | Código | Imágenes | Para qué |
 |---|---|---|---|
-| Ilustraciones de cartas | OK01–OK09 | 9 collages de 6 cuadros | 48 cartas, 3 portadas de duelo y 3 ilustraciones para el menú |
-| Dorsos | OD | 1 collage de 8 cuadros | dorso general, uno por panteón y uno de La Luz |
+| Ilustraciones de cartas | OK01–OK09 | 9 collages de 6 cuadros | 49 cartas, 3 portadas de duelo y 2 ilustraciones para el menú |
+| Dorsos | OD | 1 collage de 8 cuadros | dorso general, uno por panteón y uno de las tradiciones vivas |
 | Escenarios | OE00–OE06 | 7 imágenes | fondo general y uno por cada Lugar |
 
 Son 17 generaciones. Cada parte tiene su **prompt maestro**: se pega una vez al comienzo de la conversación y luego se envían sus bloques.
@@ -19,7 +19,7 @@ Son 17 generaciones. Cada parte tiene su **prompt maestro**: se pega una vez al 
 3. Antes de enviarla, revisa:
    - que la cuadrícula esté completa;
    - que no haya texto;
-   - que en los cuadros de La Luz no aparezcan figuras divinas ni ángeles.
+   - que en los cuadros de tradiciones vivas no aparezcan divinidades, ángeles ni escenas de culto.
 4. Si el estilo empieza a cambiar, abre una conversación nueva y vuelve a pegar el prompt maestro.
 
 ---
@@ -51,12 +51,18 @@ Cada cuadro indica entre corchetes su panteón. Usa su paleta y su ambiente:
 · [Quinto Sol] Paleta: verde jade, turquesa, rojo cinabrio y oro. Ambiente: selva, pirámides escalonadas, plumas de quetzal. Inspiración en el arte mexica y maya, con respeto.
 · [Yōkai] Paleta: rojo laca, negro tinta, violeta y blanco papel. Ambiente: bosques de bambú, montañas con niebla, faroles de papel. Inspiración en los grabados japoneses antiguos.
 · [Jade] Paleta: rojo imperial, verde jade, oro y blanco nube. Ambiente: montañas de piedra entre nubes, ríos, pagodas lejanas. Inspiración en la pintura china de paisaje.
-· [La Luz] Paleta: oro cálido, azul ultramar, rojo vino y pergamino. Ambiente: luz de vitral y de manuscrito iluminado medieval. Escenas tranquilas de personas que cuidan, estudian o caminan.
+· [Tradición cristiana] Paleta: oro cálido, azul ultramar, rojo vino y pergamino. Ambiente: luz de vitral y de manuscrito iluminado medieval.
+· [Tradición hindú] Paleta: azafrán, magenta, turquesa y oro. Ambiente: luz de lámparas de aceite (diyas), estilo inspirado en la pintura en miniatura de la India.
 
-LA LUZ (solo en los cuadros marcados [La Luz])
-- Son personas reales o de la tradición cristiana (santos de la Antigüedad y la Edad Media), vestidas con fidelidad a su época, retratadas con dignidad y en escenas de cuidado, estudio o viaje.
-- NUNCA dibujes a Dios, a Jesús, a la Virgen María ni a ángeles. Ninguna figura divina, ningún milagro.
-- Sin rayos de luz desde el cielo dirigidos a la persona y sin escenas de culto. La luz es la del atardecer o la de una ventana.
+LUZ Y SOMBRA (en los cuadros de los panteones)
+Cada cuadro de panteón trae además (luz) o (sombra):
+· (luz): el personaje recibe de frente la luz cálida y dorada del sol que se pone.
+· (sombra): el personaje está del lado azul del crepúsculo, con la luna saliendo y luces frías. La sombra no es maldad: misterio, noche y calma. Nunca expresiones malvadas.
+
+TRADICIONES VIVAS (solo en los cuadros marcados [Tradición cristiana] o [Tradición hindú])
+- Son personas reales o de relatos de tradiciones que hoy se practican, vestidas con fidelidad a su época y región, retratadas con dignidad, en escenas de cuidado, estudio, celebración o viaje.
+- NUNCA dibujes divinidades: ni Dios, Jesús, la Virgen María o ángeles, ni dioses hindúes (Shiva, Vishnu, Ganesha, Krishna, Kali, Hanuman, etc.), ni sus estatuas o imágenes en el fondo.
+- Sin milagros, sin rayos de luz desde el cielo dirigidos a la persona y sin escenas de culto. La luz es la del atardecer, una ventana o lámparas.
 
 PERSONAS Y PUEBLOS
 - Los pueblos se representan con fidelidad y dignidad, nunca como villanos ni como caricaturas.
@@ -82,11 +88,11 @@ No expliques nada: entrega solo la imagen. Si entendiste, responde "Listo" y esp
 
 ```
 Collage OK01 (3 columnas × 2 filas).
-1. [Olimpo] Zeus: un dios maduro de barba blanca y mirada serena, con túnica blanca y manto azul, de pie sobre una cumbre entre nubes doradas, sosteniendo un rayo luminoso en alto. Contexto: rey de los dioses griegos y señor del cielo.
-2. [Olimpo] Poseidón: un dios de barba oscura y ondulada, con un tridente de bronce, que se alza desde un mar picado al atardecer mientras la costa rocosa tiembla. Contexto: dios griego del mar y de los terremotos.
-3. [Olimpo] Heracles: un héroe joven y fuerte con piel de león sobre los hombros y una maza de madera, de pie frente a la entrada de una cueva al atardecer. Contexto: el héroe de los doce trabajos.
-4. [Olimpo] Atenea: una diosa guerrera con casco de bronce de penacho alto, lanza y un gran escudo redondo dorado (la Égida), con un búho posado en su hombro, frente a un templo de columnas. Contexto: diosa de la sabiduría y protectora de Atenas.
-5. [Olimpo] Hermes: un dios joven y ágil con sandalias aladas y un sombrero de viaje con alas pequeñas, corriendo sobre las nubes con un bastón de mensajero. Contexto: el mensajero de los dioses griegos.
+1. [Olimpo] (luz) Zeus: un dios maduro de barba blanca y mirada serena, con túnica blanca y manto azul, de pie sobre una cumbre entre nubes doradas, sosteniendo un rayo luminoso en alto. Contexto: rey de los dioses griegos y señor del cielo.
+2. [Olimpo] (sombra) Hades: un dios sereno de barba oscura y manto negro con bordes de oro, sentado en un trono de piedra en una caverna enorme iluminada por un río de luz azul, con un yelmo en la mano y un gran perro de tres cabezas tranquilo echado a sus pies. Contexto: dios griego del mundo subterráneo, hermano de Zeus. No es malvado: es el guardián de las reglas de su reino.
+3. [Olimpo] (luz) Poseidón: un dios de barba oscura y ondulada, con un tridente de bronce, que se alza desde un mar picado al atardecer mientras la costa rocosa tiembla. Contexto: dios griego del mar y de los terremotos.
+4. [Olimpo] (luz) Atenea: una diosa guerrera con casco de bronce de penacho alto, lanza y un gran escudo redondo dorado (la Égida), con un búho posado en su hombro, frente a un templo de columnas. Contexto: diosa de la sabiduría y protectora de Atenas.
+5. [Olimpo] (sombra) Medusa: dentro de un templo griego en ruinas al atardecer, la estatua de mármol de un guerrero con escudo, detenido en pleno paso. Sobre la pared de piedra detrás de la estatua se proyecta, nítida y grande, la sombra de una mujer cuyo cabello son serpientes. Ella NO aparece: solo su sombra. Contexto: la gorgona cuya mirada convertía en piedra.
 6. [Olimpo] El monte Olimpo: la cumbre rocosa de una gran montaña griega que sobresale de un mar de nubes doradas, con un palacio de mármol blanco y columnas apenas visible en lo alto. Contexto: la montaña donde, según los griegos, vivían sus dioses.
 ```
 
@@ -94,11 +100,11 @@ Collage OK01 (3 columnas × 2 filas).
 
 ```
 Collage OK02 (3 columnas × 2 filas).
-1. [Asgard] Thor: un dios robusto de barba pelirroja trenzada y armadura de cuero y metal, que levanta un martillo corto de cabeza cuadrada mientras un relámpago cae sobre un fiordo nevado. Contexto: dios nórdico del trueno y protector de los humanos.
-2. [Asgard] Odín: un anciano sabio de barba gris y un solo ojo, con un parche, capa azul oscuro y sombrero de ala ancha, apoyado en una lanza, con dos cuervos negros volando a su alrededor. Contexto: el dios principal de los nórdicos, que dio un ojo por la sabiduría.
-3. [Asgard] Freya: una diosa de cabello rubio trenzado, con un manto de plumas de halcón y armadura ligera, en un carro tirado por dos grandes gatos grises bajo una aurora. Contexto: diosa nórdica del amor, la magia y la guerra.
-4. [Asgard] Loki: un dios delgado de sonrisa astuta y ojos verdes, con capa verde oscuro, cuya sombra en la nieve tiene forma de zorro. Contexto: el embaucador de los mitos nórdicos, que cambiaba de forma.
-5. [Asgard] Heimdall: un guardián alto con armadura dorada que sopla un gran cuerno curvo, de pie al inicio de un puente de arcoíris que se pierde en las nubes. Contexto: el vigía de los dioses, que veía y oía a enormes distancias.
+1. [Asgard] (luz) Thor: un dios robusto de barba pelirroja trenzada y armadura de cuero y metal, que levanta un martillo corto de cabeza cuadrada mientras un relámpago cae sobre un fiordo nevado. Contexto: dios nórdico del trueno y protector de los humanos.
+2. [Asgard] (sombra) Odín: un anciano sabio de barba gris y un solo ojo, con un parche, capa azul oscuro y sombrero de ala ancha, apoyado en una lanza, con dos cuervos negros volando a su alrededor. Contexto: el dios principal de los nórdicos, que dio un ojo por la sabiduría y recorría el mundo de incógnito.
+3. [Asgard] (luz) Freya: una diosa de cabello rubio trenzado, con un manto de plumas de halcón y armadura ligera, en un carro tirado por dos grandes gatos grises bajo una aurora. Contexto: diosa nórdica del amor, la magia y la guerra.
+4. [Asgard] (sombra) Loki: un dios delgado de sonrisa astuta y ojos verdes, con capa verde oscuro, cuya sombra en la nieve tiene forma de zorro. Contexto: el embaucador de los mitos nórdicos, que cambiaba de forma.
+5. [Asgard] (luz) Heimdall: un guardián alto con armadura dorada que sopla un gran cuerno curvo, de pie al inicio de un puente de arcoíris que se pierde en las nubes. Contexto: el vigía de los dioses, que veía y oía a enormes distancias.
 6. [Asgard] El puente Bifröst: un puente de arcoíris luminoso que se arquea desde un fiordo nevado hasta una ciudad dorada en las nubes, bajo un cielo de aurora y atardecer. Contexto: el puente que une el mundo de los dioses con el de los humanos.
 ```
 
@@ -106,11 +112,11 @@ Collage OK02 (3 columnas × 2 filas).
 
 ```
 Collage OK03 (3 columnas × 2 filas).
-1. [Nilo] Ra: un dios con cabeza de halcón coronada por un gran disco solar dorado, de pie en una barca de oro que navega por un río de luz al atardecer. Contexto: el dios del sol del antiguo Egipto.
-2. [Nilo] Anubis: un dios con cabeza de chacal negro y collar de oro y lapislázuli, que sostiene una balanza dorada a la entrada de un templo iluminado por antorchas. Contexto: protector de las tumbas y guía de los difuntos.
-3. [Nilo] Horus: un dios con cabeza de halcón y armadura de oro, con las alas abiertas sobre el río Nilo y un gran ojo pintado y luminoso detrás de él. Contexto: el dios halcón, cuyo ojo es símbolo de protección.
-4. [Nilo] Isis: una diosa con alas de colores extendidas como un abrazo, vestido blanco y tocado de oro, cuyas manos irradian una luz verde y sanadora. Contexto: diosa de la magia y la sanación.
-5. [Nilo] Bastet: una elegante gata negra con aros y collar de oro, sentada en el umbral de una casa egipcia al atardecer, junto a una lámpara de aceite. Contexto: diosa gata protectora del hogar.
+1. [Nilo] (luz) Ra: un dios con cabeza de halcón coronada por un gran disco solar dorado, de pie en una barca de oro que navega por un río de luz al atardecer. Contexto: el dios del sol del antiguo Egipto.
+2. [Nilo] (sombra) Anubis: un dios con cabeza de chacal negro y collar de oro y lapislázuli, que sostiene una balanza dorada a la entrada de un templo iluminado por antorchas. Contexto: protector de las tumbas y guía de los difuntos.
+3. [Nilo] (luz) Horus: un dios con cabeza de halcón y armadura de oro, con las alas abiertas sobre el río Nilo y un gran ojo pintado y luminoso detrás de él. Contexto: el dios halcón, cuyo ojo es símbolo de protección.
+4. [Nilo] (luz) Isis: una diosa con alas de colores extendidas como un abrazo, vestido blanco y tocado de oro, cuyas manos irradian una luz verde y sanadora. Contexto: diosa de la magia y la sanación.
+5. [Nilo] (sombra) Bastet: una elegante gata negra con aros y collar de oro, sentada en el umbral de una casa egipcia con la luna saliendo, junto a una lámpara de aceite. Contexto: diosa gata protectora del hogar.
 6. [Nilo] Las pirámides de Guiza: las tres grandes pirámides y la Esfinge al atardecer, con el sol hundiéndose detrás y una caravana pequeña a lo lejos. Contexto: tumbas de los faraones, de hace unos 4.500 años.
 ```
 
@@ -118,11 +124,11 @@ Collage OK03 (3 columnas × 2 filas).
 
 ```
 Collage OK04 (3 columnas × 2 filas).
-1. [Quinto Sol] Quetzalcóatl: una colosal serpiente cubierta de plumas verdes y turquesa de quetzal, que se enrosca en el cielo sobre una pirámide escalonada, con el viento agitando la selva. Contexto: la serpiente emplumada de Mesoamérica, asociada al viento y al saber.
-2. [Quinto Sol] Tláloc: un dios de la lluvia con anteojeras redondas y colmillos, adornado de jade y conchas, de pie sobre una montaña de la que caen nubes de lluvia sobre campos de maíz. Contexto: dios mexica de la lluvia.
-3. [Quinto Sol] Los Gemelos Héroes: dos jóvenes mayas con atuendos de jugadores de pelota y cerbatanas, en una cancha de juego de pelota de piedra al atardecer, con una pelota de hule en el aire. Contexto: Hunahpú e Ixbalanqué, héroes del Popol Vuh.
-4. [Quinto Sol] Tezcatlipoca: un dios con franjas negras pintadas en el rostro y un espejo de obsidiana que humea en lugar de un pie, rodeado de una bruma oscura iluminada por el último sol. Contexto: dios mexica de la noche y los cambios.
-5. [Quinto Sol] Itzamná: un anciano sabio maya de rostro amable, con un tocado de flores y plumas, que dibuja glifos luminosos en el aire frente a un códice abierto, con el cielo estrellado comenzando. Contexto: dios maya al que se atribuye la escritura y el calendario.
+1. [Quinto Sol] (luz) Quetzalcóatl: una colosal serpiente cubierta de plumas verdes y turquesa de quetzal, que se enrosca en el cielo dorado sobre una pirámide escalonada, con el viento agitando la selva. Contexto: la serpiente emplumada de Mesoamérica, asociada al viento y al saber.
+2. [Quinto Sol] (sombra) Tezcatlipoca: un dios con franjas negras pintadas en el rostro, piel de jaguar sobre los hombros y un espejo de obsidiana que humea, de pie en la selva con la luna saliendo detrás. Contexto: dios mexica de la noche y de los cambios; con Quetzalcóatl, las dos caras de la creación.
+3. [Quinto Sol] (luz) Los Gemelos Héroes: dos jóvenes mayas con atuendos de jugadores de pelota y cerbatanas, en una cancha de juego de pelota de piedra al atardecer, con una pelota de hule en el aire. Contexto: Hunahpú e Ixbalanqué, héroes del Popol Vuh.
+4. [Quinto Sol] (sombra) Ixchel: una diosa maya madura y serena con tocado de tela y una media luna en el pelo, tejiendo en un telar de cintura bajo una luna enorme, junto al mar de una isla. Contexto: diosa maya de la luna, el tejido y la medicina.
+5. [Quinto Sol] (luz) Itzamná: un anciano sabio maya de rostro amable, con un tocado de flores y plumas, que dibuja glifos luminosos en el aire frente a un códice abierto. Contexto: dios maya al que se atribuye la escritura y el calendario.
 6. [Quinto Sol] Teotihuacan: la Calzada de los Muertos con la Pirámide del Sol y la Pirámide de la Luna al atardecer, con montañas detrás y el sol poniéndose entre ellas. Contexto: la ciudad donde, según los mexicas, nació el Quinto Sol.
 ```
 
@@ -130,11 +136,11 @@ Collage OK04 (3 columnas × 2 filas).
 
 ```
 Collage OK05 (3 columnas × 2 filas).
-1. [Yōkai] Yamata no Orochi: una enorme serpiente de ocho cabezas y ocho colas, de escamas rojas y ojos como faroles, enroscada entre montañas con niebla bajo un cielo violeta. Contexto: la gran serpiente de los relatos japoneses más antiguos.
-2. [Yōkai] La Kitsune de nueve colas: un zorro blanco y dorado con nueve colas que se abren como un abanico, rodeado de pequeñas llamas azules flotantes (kitsunebi), en un bosque de bambú. Contexto: el zorro mágico más sabio del folclore japonés.
-3. [Yōkai] El Tengu: un espíritu de la montaña con alas de cuervo, nariz larga y roja y túnica de monje de montaña, que agita un abanico de plumas sobre un pico con pinos. Contexto: espíritu guardián de las montañas japonesas.
-4. [Yōkai] El Kappa: una criatura verde y simpática del tamaño de un niño, con caparazón de tortuga y un plato de agua sobre la cabeza, sentada en la orilla de un río junto a pepinos. Contexto: criatura de los ríos japoneses.
-5. [Yōkai] Momotarō: un niño valiente con una cinta en la frente y una espada corta, junto a un perro, un mono y un faisán, mirando el mar desde una colina hacia una isla lejana. Contexto: el niño que nació de un durazno, héroe de un cuento popular.
+1. [Yōkai] (sombra) Yamata no Orochi: una enorme serpiente de ocho cabezas y ocho colas, de escamas rojas y ojos como faroles, enroscada entre montañas con niebla bajo un cielo violeta. Contexto: la gran serpiente de los relatos japoneses más antiguos.
+2. [Yōkai] (sombra) La Kitsune de nueve colas: un zorro blanco y dorado con nueve colas que se abren como un abanico, rodeado de pequeñas llamas azules flotantes (kitsunebi), en un bosque de bambú. Contexto: el zorro mágico más sabio del folclore japonés.
+3. [Yōkai] (luz) El Tengu: un espíritu de la montaña con alas de cuervo, nariz larga y roja y túnica de monje de montaña, que agita un abanico de plumas sobre un pico con pinos. Contexto: espíritu guardián de las montañas japonesas.
+4. [Yōkai] (luz) El Kappa: una criatura verde y simpática del tamaño de un niño, con caparazón de tortuga y un plato de agua sobre la cabeza, sentada en la orilla de un río junto a pepinos. Contexto: criatura de los ríos japoneses.
+5. [Yōkai] (luz) Momotarō: un niño valiente con una cinta en la frente y una espada corta, junto a un perro, un mono y un faisán, mirando el mar desde una colina hacia una isla lejana. Contexto: el niño que nació de un durazno, héroe de un cuento popular.
 6. [Yōkai] El monte Fuji: el volcán nevado de forma perfecta al atardecer, reflejado en un lago, con ramas de árboles en primer plano y faroles de papel encendidos en la orilla. Contexto: el volcán más alto de Japón.
 ```
 
@@ -142,24 +148,24 @@ Collage OK05 (3 columnas × 2 filas).
 
 ```
 Collage OK06 (3 columnas × 2 filas).
-1. [Jade] Sun Wukong: un rey mono de pelaje dorado, con armadura ligera, capa roja y un bastón largo rojo y dorado, de pie sobre una nube en movimiento entre picos de montaña. Contexto: el Rey Mono de la novela china Viaje al Oeste. Diseño original, distinto al de cualquier videojuego.
-2. [Jade] Long, el dragón de la lluvia: un largo dragón chino de escamas verdes y doradas, con bigotes y melena, que serpentea entre las nubes dejando caer lluvia sobre arrozales en terrazas. Contexto: en China, el dragón es un ser bondadoso que trae la lluvia.
-3. [Jade] Hou Yi: un arquero de armadura roja que tensa un gran arco sobre una montaña, apuntando a un cielo con varios soles; uno de ellos ya se apaga en el horizonte. Contexto: el arquero que derribó nueve soles para salvar la Tierra.
-4. [Jade] Nian: una bestia grande y peluda con un cuerno y melena de león, que retrocede ante faroles rojos y adornos de papel rojo de una aldea en Año Nuevo. Contexto: bestia de las leyendas chinas que le teme al rojo y al ruido.
-5. [Jade] El Qilin: un animal mítico parecido a un ciervo, con escamas doradas, melena de fuego suave y un cuerno, que camina sobre la hierba sin doblarla, entre flores y niebla. Contexto: animal chino de buen augurio que no daña a ningún ser vivo.
+1. [Jade] (luz) Sun Wukong: un rey mono de pelaje dorado, con armadura ligera, capa roja y un bastón largo rojo y dorado, de pie sobre una nube en movimiento entre picos de montaña. Contexto: el Rey Mono de la novela china Viaje al Oeste. Diseño original, distinto al de cualquier videojuego.
+2. [Jade] (luz) Long, el dragón de la lluvia: un largo dragón chino de escamas verdes y doradas, con bigotes y melena, que serpentea entre nubes doradas dejando caer lluvia sobre arrozales en terrazas. Contexto: en China, el dragón es un ser bondadoso que trae la lluvia.
+3. [Jade] (luz) Hou Yi: un arquero de armadura roja que tensa un gran arco sobre una montaña, apuntando a un cielo con varios soles; uno de ellos ya se apaga en el horizonte. Contexto: el arquero que derribó nueve soles para salvar la Tierra.
+4. [Jade] (sombra) Nian: una bestia grande y peluda con un cuerno y melena de león, que retrocede en una noche de invierno ante faroles rojos y adornos de papel rojo de una aldea en Año Nuevo. Contexto: bestia de las leyendas chinas que le teme al rojo y al ruido.
+5. [Jade] (sombra) Chang'e: una mujer joven con vestido de seda blanco y celeste y cintas que flotan, de pie sobre la luna llena junto a un conejo blanco, mirando la Tierra a lo lejos. Contexto: según el mito chino, vive en la luna; es la esposa de Hou Yi.
 6. [Jade] Las montañas Kunlun: picos de piedra muy altos entre nubes, con un jardín de duraznos en flor en una terraza y un palacio lejano, al atardecer. Contexto: en los mitos chinos, hogar de los inmortales.
 ```
 
-### OK07 · La Luz
+### OK07 · Tradiciones vivas
 
 ```
 Collage OK07 (3 columnas × 2 filas).
-1. [La Luz] San Francisco de Asís: un fraile joven con hábito marrón sencillo y cordón en la cintura, sentado en un campo de Italia al atardecer, rodeado de pájaros y con un lobo gris tranquilo echado a su lado. Contexto: fraile del siglo XIII recordado por su cariño por los animales y la naturaleza.
-2. [La Luz] San Martín de Tours: un soldado romano a caballo, con casco y capa roja, que corta su capa con la espada para entregar la mitad a un hombre que tiene frío, junto a la puerta de una ciudad en invierno. Contexto: soldado romano del siglo IV que compartió su capa.
-3. [La Luz] San Nicolás de Mira: un obispo anciano de barba blanca, con capa roja y bastón, que deja en silencio una bolsa de monedas en la ventana de una casa de piedra al anochecer. Contexto: obispo del siglo IV que daba regalos en secreto; de su historia nació el Viejito Pascuero.
-4. [La Luz] Hildegarda de Bingen: una abadesa medieval con hábito y velo blancos y negros, que escribe en un libro grande junto a una ventana, rodeada de hierbas medicinales, partituras y un astrolabio. Contexto: sabia alemana del siglo XII, compositora y estudiosa de las plantas.
-5. [La Luz] Los monjes copistas: monjes en un scriptorium de piedra, copiando con plumas libros iluminados a la luz de una gran ventana; en una página se ven ilustraciones de templos y dioses griegos, sin texto legible. Contexto: gracias a sus copias se conservaron muchas obras antiguas.
-6. [La Luz] El Camino de Santiago: peregrinos con bastón y capa caminando por un sendero de piedra entre colinas verdes, hacia una catedral lejana al atardecer. Contexto: ruta de peregrinación medieval hacia Santiago de Compostela.
+1. [Tradición cristiana] San Francisco de Asís: un fraile joven con hábito marrón sencillo y cordón en la cintura, sentado en un campo de Italia al atardecer, rodeado de pájaros y con un lobo gris tranquilo echado a su lado. Contexto: fraile del siglo XIII recordado por su cariño por los animales y la naturaleza.
+2. [Tradición cristiana] San Nicolás de Mira: un obispo anciano de barba blanca, con capa roja y bastón, que deja en silencio una bolsa de monedas en la ventana de una casa de piedra al anochecer. Contexto: obispo del siglo IV que daba regalos en secreto; de su historia nació el Viejito Pascuero.
+3. [Tradición cristiana] Hildegarda de Bingen: una abadesa medieval con hábito y velo blancos y negros, que escribe en un libro grande junto a una ventana, rodeada de hierbas medicinales, partituras y un astrolabio. Contexto: sabia alemana del siglo XII, compositora y estudiosa de las plantas.
+4. [Tradición hindú] Savitri: una mujer joven de la India antigua, con sari de color azafrán, de pie con determinación en un bosque al atardecer, junto a su esposo que descansa bajo un gran árbol baniano. Una larga sombra fría se aleja por el sendero. Sin dioses ni figuras divinas. Contexto: heroína del Mahabharata que, con inteligencia y constancia, recuperó la vida de su esposo.
+5. [Tradición cristiana] Los monjes copistas: monjes en un scriptorium de piedra, copiando con plumas libros iluminados a la luz de una gran ventana; en una página se ven ilustraciones de templos y dioses griegos, sin texto legible. Contexto: gracias a sus copias se conservaron muchas obras antiguas.
+6. [Tradición hindú] Diwali, la fiesta de las luces: escalinatas junto a un río al anochecer, cubiertas de cientos de pequeñas lámparas de aceite de barro (diyas) encendidas, con dibujos de colores en el suelo (rangoli) y familias celebrando. Sin imágenes de dioses ni altares. Contexto: la fiesta de la India que celebra el triunfo de la luz sobre la oscuridad.
 ```
 
 ### OK08 · Relatos de los panteones
@@ -174,23 +180,23 @@ Collage OK08 (3 columnas × 2 filas).
 6. [Jade] El Viaje al Oeste: un monje joven sobre un caballo blanco, acompañado por un mono con bastón, un cerdo con rastrillo y un hombre grande con un bastón, recorriendo un camino de montaña al atardecer. Contexto: la novela china del viaje en busca de libros sagrados.
 ```
 
-### OK09 · Portadas de los duelos y menú
+### OK09 · Panchatantra, portadas de los duelos y menú
 
 ```
 Collage OK09 (3 columnas × 2 filas).
-1. [Olimpo] Portada del duelo «El Trueno contra el Rayo»: Zeus y Thor frente a frente sobre dos montañas, cada uno con su rayo, y un único relámpago que une sus cielos al atardecer.
-2. [Nilo] Portada del duelo «Los Hijos del Sol»: a la izquierda, la barca dorada de Ra sobre el Nilo; a la derecha, la serpiente emplumada sobre una pirámide maya; en el centro, un mismo sol gigante.
-3. [Jade] Portada del duelo «El Dragón y el Zorro»: un dragón chino verde y una kitsune blanca de nueve colas, girando uno alrededor del otro en el cielo, entre nubes rojas y doradas.
-4. [La Luz] Ilustración para el menú: un gran atardecer sobre el mar, con siluetas de montañas que recuerdan el Olimpo, un fiordo, pirámides y pagodas a lo largo del horizonte, en una sola costa imaginaria.
-5. [Asgard] Ilustración para el menú: un árbol gigantesco del mundo cuyas ramas tocan el cielo violeta del atardecer y cuyas raíces se hunden en el mar.
-6. [Quinto Sol] Ilustración para el menú: un códice antiguo abierto sobre una mesa de piedra, del que salen pequeñas luces con forma de dioses de distintos pueblos, sin rostros definidos.
+1. [Tradición hindú] Las fábulas del Panchatantra: al estilo de la pintura en miniatura de la India, una tortuga que vuela colgada de un palo que sostienen dos gansos, sobre un lago con un cuervo y un conejo que miran desde la orilla al atardecer. Sin personas ni dioses. Contexto: fábulas de animales de la antigua India que enseñan a pensar.
+2. [Olimpo] Portada del duelo «El Trueno contra el Rayo»: Zeus y Thor frente a frente sobre dos montañas, cada uno con su rayo, y un único relámpago que une sus cielos al atardecer.
+3. [Nilo] Portada del duelo «Los Hijos del Sol»: a la izquierda, la barca dorada de Ra sobre el Nilo; a la derecha, la serpiente emplumada sobre una pirámide maya; en el centro, un mismo sol gigante.
+4. [Jade] Portada del duelo «El Día y la Noche»: el cielo partido en dos por una diagonal: a la izquierda, de día, Sun Wukong sobre una nube dorada; a la derecha, de noche, la gran serpiente de ocho cabezas bajo la luna, entre nubes violetas.
+5. [Olimpo] Ilustración para el menú: un gran atardecer sobre el mar, con siluetas de montañas que recuerdan el Olimpo, un fiordo, pirámides y pagodas a lo largo del horizonte, en una sola costa imaginaria; la mitad del cielo es día y la otra mitad, noche estrellada.
+6. [Asgard] Ilustración para el menú: un árbol gigantesco del mundo cuyas ramas tocan el cielo violeta del atardecer y cuyas raíces se hunden en el mar, con un sol a un lado y una luna al otro.
 ```
 
 ---
 
 # 2. Dorsos (OD)
 
-Un solo collage de 8 dorsos: el general de la expansión, uno por panteón y uno de La Luz.
+Un solo collage de 8 dorsos: el general de la expansión, uno por panteón y uno de las tradiciones vivas.
 
 ## Prompt maestro
 
@@ -223,14 +229,14 @@ No expliques nada: entrega solo la imagen. Si entendiste, responde "Listo" y esp
 
 ```
 Dorsos OD (4 columnas × 2 filas).
-1. El Ocaso de los Dioses (dorso general). Fondo y paleta: violeta de crepúsculo con un sol dorado que se pone. Material del marco y del medallón: bronce envejecido con oro. Emblema: un sol a medio ocultar en el horizonte, con seis rayos largos, uno por panteón. Patrón de fondo: líneas de horizonte y estrellas que empiezan a aparecer.
+1. El Ocaso de los Dioses (dorso general). Fondo y paleta: violeta de crepúsculo con un sol dorado que se pone. Material del marco y del medallón: bronce envejecido con oro. Emblema: un sol a medio ocultar en el horizonte y una luna creciente sobre él, con seis rayos largos, uno por panteón. Patrón de fondo: líneas de horizonte y estrellas que empiezan a aparecer.
 2. Olimpo. Fondo y paleta: azul Egeo y blanco mármol. Material: mármol con oro. Emblema: un rayo dentro de una corona de laurel. Patrón de fondo: greca griega.
 3. Asgard. Fondo y paleta: azul hielo y gris acero. Material: hierro con plata. Emblema: un martillo corto de cabeza cuadrada sobre un nudo entrelazado. Patrón de fondo: nudos nórdicos entrelazados (sin runas).
 4. Nilo. Fondo y paleta: lapislázuli y oro. Material: oro con incrustaciones de turquesa. Emblema: el ojo de Horus sobre un sol con alas. Patrón de fondo: flores de loto y papiros.
 5. Quinto Sol. Fondo y paleta: verde jade y rojo cinabrio. Material: jade tallado con oro. Emblema: una serpiente emplumada que forma un círculo. Patrón de fondo: grecas escalonadas mesoamericanas.
 6. Yōkai. Fondo y paleta: rojo laca y negro tinta. Material: laca japonesa con hoja de oro. Emblema: una cabeza de zorro con nueve colas en abanico. Patrón de fondo: olas y nubes al estilo de los grabados japoneses.
 7. Jade. Fondo y paleta: rojo imperial y verde jade. Material: jade y oro. Emblema: un dragón enroscado alrededor de una perla. Patrón de fondo: nubes en espiral chinas.
-8. La Luz. Fondo y paleta: azul ultramar y oro cálido. Material: oro y vitral. Emblema: un libro abierto del que sale una luz suave, bajo un arco de vitral con flores. Patrón de fondo: rosetón de vitral geométrico (sin cruces ni figuras).
+8. Tradiciones vivas. Fondo y paleta: azul ultramar, azafrán y oro cálido. Material: oro y vitral. Emblema: un libro abierto con una pequeña lámpara de aceite encendida encima. Patrón de fondo: un rosetón geométrico que mezcla vitral y rangoli (sin cruces, sin figuras, sin símbolos religiosos).
 ```
 
 ---
