@@ -80,7 +80,7 @@ for (const c of TODAS.filter(x => x.efecto && x.tipo !== 'protagonista')) {
         case 'robar': assert.ok(n.includes(ef.n), `dice ${n} y roba ${ef.n}`); manoEsperada += ef.n; break;
         case 'robarPorReserva': manoEsperada += yo0.reserva.length; break;
         case 'saberExtra': assert.ok(n.includes(ef.n || 1), `el texto no dice ${ef.n || 1}`); assert.equal(yo.activo.saber - yo0.activo.saber, ef.n || 1); break;
-        case 'curar': assert.equal(yo0.activo.danio - yo.activo.danio, Math.min(n[0], yo0.activo.danio), `dice ${n[0]}`); break;
+        case 'curar': assert.ok(n.includes(ef.n), `el texto no dice ${ef.n}`); assert.equal(yo0.activo.danio - yo.activo.danio, Math.min(ef.n, yo0.activo.danio), `cura ${ef.n}`); break;
         case 'curarTodos': assert.equal(yo0.reserva[0].danio - yo.reserva[0].danio, Math.min(n[0], yo0.reserva[0].danio)); break;
         case 'proteger': {
           const enB = { ...r.estado, turno: 'B' };

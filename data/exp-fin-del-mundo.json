@@ -8,7 +8,7 @@
    "tipo": "protagonista",
    "coleccion": "fin-del-mundo",
    "dimension": "Mar",
-   "resistencia": 110,
+   "resistencia": 120,
    "retirada": 2,
    "acciones": [
     {
@@ -33,7 +33,7 @@
    "tipo": "protagonista",
    "coleccion": "fin-del-mundo",
    "dimension": "Mar",
-   "resistencia": 80,
+   "resistencia": 90,
    "retirada": 1,
    "acciones": [
     {
@@ -58,7 +58,7 @@
    "tipo": "protagonista",
    "coleccion": "fin-del-mundo",
    "dimension": "Mar",
-   "resistencia": 90,
+   "resistencia": 100,
    "retirada": 2,
    "acciones": [
     {
@@ -83,7 +83,7 @@
    "tipo": "protagonista",
    "coleccion": "fin-del-mundo",
    "dimension": "Mar",
-   "resistencia": 80,
+   "resistencia": 90,
    "retirada": 1,
    "acciones": [
     {
@@ -108,7 +108,7 @@
    "tipo": "protagonista",
    "coleccion": "fin-del-mundo",
    "dimension": "Mar",
-   "resistencia": 80,
+   "resistencia": 90,
    "retirada": 1,
    "acciones": [
     {
@@ -133,7 +133,7 @@
    "tipo": "protagonista",
    "coleccion": "fin-del-mundo",
    "dimension": "Mar",
-   "resistencia": 70,
+   "resistencia": 80,
    "retirada": 1,
    "acciones": [
     {
@@ -158,7 +158,7 @@
    "tipo": "protagonista",
    "coleccion": "fin-del-mundo",
    "dimension": "TierraFuego",
-   "resistencia": 100,
+   "resistencia": 110,
    "retirada": 2,
    "acciones": [
     {
@@ -183,7 +183,7 @@
    "tipo": "protagonista",
    "coleccion": "fin-del-mundo",
    "dimension": "TierraFuego",
-   "resistencia": 90,
+   "resistencia": 100,
    "retirada": 2,
    "acciones": [
     {
@@ -208,7 +208,7 @@
    "tipo": "protagonista",
    "coleccion": "fin-del-mundo",
    "dimension": "TierraFuego",
-   "resistencia": 80,
+   "resistencia": 90,
    "retirada": 1,
    "acciones": [
     {
@@ -233,7 +233,7 @@
    "tipo": "protagonista",
    "coleccion": "fin-del-mundo",
    "dimension": "TierraFuego",
-   "resistencia": 70,
+   "resistencia": 80,
    "retirada": 1,
    "acciones": [
     {
@@ -258,7 +258,7 @@
    "tipo": "protagonista",
    "coleccion": "fin-del-mundo",
    "dimension": "TierraFuego",
-   "resistencia": 70,
+   "resistencia": 80,
    "retirada": 1,
    "acciones": [
     {
@@ -283,7 +283,7 @@
    "tipo": "protagonista",
    "coleccion": "fin-del-mundo",
    "dimension": "TierraFuego",
-   "resistencia": 60,
+   "resistencia": 70,
    "retirada": 1,
    "acciones": [
     {
@@ -308,7 +308,7 @@
    "tipo": "protagonista",
    "coleccion": "fin-del-mundo",
    "dimension": "CieloViento",
-   "resistencia": 90,
+   "resistencia": 100,
    "retirada": 2,
    "acciones": [
     {
@@ -333,7 +333,7 @@
    "tipo": "protagonista",
    "coleccion": "fin-del-mundo",
    "dimension": "CieloViento",
-   "resistencia": 80,
+   "resistencia": 90,
    "retirada": 1,
    "acciones": [
     {
@@ -358,7 +358,7 @@
    "tipo": "protagonista",
    "coleccion": "fin-del-mundo",
    "dimension": "CieloViento",
-   "resistencia": 80,
+   "resistencia": 90,
    "retirada": 1,
    "acciones": [
     {
@@ -383,7 +383,7 @@
    "tipo": "protagonista",
    "coleccion": "fin-del-mundo",
    "dimension": "CieloViento",
-   "resistencia": 80,
+   "resistencia": 90,
    "retirada": 1,
    "acciones": [
     {
@@ -407,7 +407,7 @@
    "tipo": "protagonista",
    "coleccion": "fin-del-mundo",
    "dimension": "CieloViento",
-   "resistencia": 110,
+   "resistencia": 120,
    "retirada": 2,
    "acciones": [
     {
@@ -432,7 +432,7 @@
    "tipo": "protagonista",
    "coleccion": "fin-del-mundo",
    "dimension": "CieloViento",
-   "resistencia": 80,
+   "resistencia": 90,
    "retirada": 1,
    "acciones": [
     {
@@ -457,7 +457,7 @@
    "tipo": "protagonista",
    "coleccion": "fin-del-mundo",
    "dimension": "BosqueNoche",
-   "resistencia": 70,
+   "resistencia": 80,
    "retirada": 1,
    "acciones": [
     {
@@ -482,7 +482,7 @@
    "tipo": "protagonista",
    "coleccion": "fin-del-mundo",
    "dimension": "BosqueNoche",
-   "resistencia": 90,
+   "resistencia": 100,
    "retirada": 2,
    "acciones": [
     {
@@ -507,7 +507,7 @@
    "tipo": "protagonista",
    "coleccion": "fin-del-mundo",
    "dimension": "BosqueNoche",
-   "resistencia": 80,
+   "resistencia": 90,
    "retirada": 1,
    "acciones": [
     {
@@ -532,7 +532,7 @@
    "tipo": "protagonista",
    "coleccion": "fin-del-mundo",
    "dimension": "BosqueNoche",
-   "resistencia": 60,
+   "resistencia": 70,
    "retirada": 1,
    "acciones": [
     {
@@ -557,7 +557,7 @@
    "tipo": "protagonista",
    "coleccion": "fin-del-mundo",
    "dimension": "BosqueNoche",
-   "resistencia": 70,
+   "resistencia": 80,
    "retirada": 1,
    "acciones": [
     {
@@ -582,7 +582,7 @@
    "tipo": "protagonista",
    "coleccion": "fin-del-mundo",
    "dimension": "BosqueNoche",
-   "resistencia": 100,
+   "resistencia": 110,
    "retirada": 2,
    "acciones": [
     {

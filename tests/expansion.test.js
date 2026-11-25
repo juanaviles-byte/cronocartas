@@ -47,7 +47,7 @@ test('las presencias sagradas son Personajes con efecto de apoyo y dato con resp
 
 test('el balance de la expansión está dentro de los rangos de los cursos', () => {
   for (const c of X.cartas.filter(c => c.tipo === 'protagonista')) {
-    assert.ok(c.resistencia >= 60 && c.resistencia <= 110, `${c.id}: resistencia`);
+    assert.ok(c.resistencia >= 60 && c.resistencia <= 120, `${c.id}: resistencia`);
     assert.ok([1, 2].includes(c.retirada), `${c.id}: retirada`);
     for (const a of c.acciones) {
       assert.ok(a.nombre.length <= 22, `${c.id}: nombre de acción largo`);

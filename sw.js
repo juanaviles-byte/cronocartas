@@ -1,7 +1,7 @@
 // Service worker de Cronocartas: guarda la app en la tablet para jugar sin internet.
 // Al publicar una mejora, sube VERSION y agrega aquí los archivos nuevos
 // (la prueba tests/sw.test.js avisa si falta alguno).
-const VERSION = 'cc-v105';
+const VERSION = 'cc-v106';
 const ARCHIVOS = [
   "./",
   "audio/ambientes/CC-5-U1-007.ogg",
@@ -586,9 +586,9 @@ const HUELLAS = {
   "data/duelos.json": "cfac1926b7e9",
   "data/epocas.json": "77553582d691",
   "data/escenarios.json": "8e7359167c6d",
-  "data/exp-fin-del-mundo.json": "93697f6a4c09",
+  "data/exp-fin-del-mundo.json": "684f306dc55e",
   "data/exp-ocaso-de-los-dioses.json": "3d697d8c9c5a",
-  "data/mazo-5.json": "53ab8f70a2e1",
+  "data/mazo-5.json": "226aa9fd660b",
   "data/mazo-6.json": "791854f78e79",
   "data/mazo-7.json": "bf5872ae13b6",
   "data/mazo-8.json": "ce90cec3a5ed",

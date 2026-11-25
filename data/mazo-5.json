@@ -68,10 +68,16 @@
       "tipo": "personaje",
       "curso": 5,
       "unidad": 1,
-      "efecto": {
-        "tipo": "buscarProtagonista",
-        "n": 3
-      },
+      "efecto": [
+        {
+          "tipo": "buscarProtagonista",
+          "n": 3
+        },
+        {
+          "tipo": "bonusDanio",
+          "n": 10
+        }
+      ],
       "dato": "Fundó Santiago del Nuevo Extremo en 1541, a los pies del cerro Huelén, hoy cerro Santa Lucía.",
       "oa": "OA 2",
       "emblema": "escudo",
@@ -131,10 +137,16 @@
       "tipo": "acontecimiento",
       "curso": 5,
       "unidad": 1,
-      "efecto": {
-        "tipo": "buscarProtagonista",
-        "n": 3
-      },
+      "efecto": [
+        {
+          "tipo": "buscarProtagonista",
+          "n": 3
+        },
+        {
+          "tipo": "curar",
+          "n": 20
+        }
+      ],
       "dato": "Los españoles fundaron ciudades como Santiago, La Serena y Concepción para quedarse y expandirse.",
       "oa": "OA 2",
       "emblema": "casa",
@@ -173,7 +185,7 @@
       "curso": 5,
       "unidad": 1,
       "dimension": "Politica",
-      "resistencia": 80,
+      "resistencia": 90,
       "retirada": 1,
       "acciones": [
         {
@@ -204,7 +216,7 @@
       "curso": 5,
       "unidad": 1,
       "dimension": "Cultura",
-      "resistencia": 70,
+      "resistencia": 80,
       "retirada": 1,
       "acciones": [
         {
@@ -222,10 +234,16 @@
       "id": "CC-5-U1-010",
       "nombre": "Diego de Almagro",
       "tipo": "personaje",
-      "efecto": {
-        "tipo": "buscarProtagonista",
-        "n": 4
-      },
+      "efecto": [
+        {
+          "tipo": "buscarProtagonista",
+          "n": 3
+        },
+        {
+          "tipo": "saberExtra",
+          "n": 1
+        }
+      ],
       "dato": "Encabezó la primera expedición española a Chile (1535–1536). Cruzó los Andes y el desierto, y volvió al Perú sin oro.",
       "frase": "Primera expedición española a Chile, entre 1535 y 1536.",
       "emblema": "mapa",
@@ -267,7 +285,7 @@
       "nombre": "Diaguitas del Tawantinsuyu",
       "tipo": "protagonista",
       "dimension": "Cultura",
-      "resistencia": 100,
+      "resistencia": 110,
       "retirada": 2,
       "acciones": [
         {
@@ -305,7 +323,7 @@
       "curso": 5,
       "unidad": 2,
       "dimension": "Sociedad",
-      "resistencia": 60,
+      "resistencia": 70,
       "retirada": 1,
       "acciones": [
         {
@@ -326,7 +344,7 @@
       "curso": 5,
       "unidad": 2,
       "dimension": "Sociedad",
-      "resistencia": 100,
+      "resistencia": 110,
       "retirada": 2,
       "acciones": [
         {
@@ -383,7 +401,7 @@
       "curso": 5,
       "unidad": 2,
       "dimension": "Economia",
-      "resistencia": 60,
+      "resistencia": 70,
       "retirada": 1,
       "acciones": [
         {
@@ -415,7 +433,7 @@
       "curso": 5,
       "unidad": 2,
       "dimension": "Cultura",
-      "resistencia": 80,
+      "resistencia": 90,
       "retirada": 1,
       "acciones": [
         {
@@ -461,7 +479,7 @@
       "curso": 5,
       "unidad": 2,
       "dimension": "Territorio",
-      "resistencia": 80,
+      "resistencia": 90,
       "retirada": 1,
       "acciones": [
         {
@@ -485,7 +503,7 @@
       "nombre": "Encomienda",
       "tipo": "protagonista",
       "dimension": "Economia",
-      "resistencia": 80,
+      "resistencia": 90,
       "retirada": 1,
       "acciones": [
         {
@@ -515,7 +533,7 @@
       "nombre": "Real Audiencia",
       "tipo": "protagonista",
       "dimension": "Politica",
-      "resistencia": 80,
+      "resistencia": 90,
       "retirada": 1,
       "acciones": [
         {
@@ -549,7 +567,7 @@
       "nombre": "Fuertes del Biobío",
       "tipo": "protagonista",
       "dimension": "Territorio",
-      "resistencia": 80,
+      "resistencia": 90,
       "retirada": 2,
       "acciones": [
         {
@@ -634,7 +652,7 @@
       "nombre": "Comercio libre",
       "tipo": "protagonista",
       "dimension": "Economia",
-      "resistencia": 100,
+      "resistencia": 110,
       "retirada": 2,
       "acciones": [
         {
@@ -676,7 +694,7 @@
       "curso": 5,
       "unidad": 3,
       "dimension": "Territorio",
-      "resistencia": 80,
+      "resistencia": 90,
       "retirada": 1,
       "acciones": [
         {
@@ -697,7 +715,7 @@
       "curso": 5,
       "unidad": 3,
       "dimension": "Economia",
-      "resistencia": 70,
+      "resistencia": 80,
       "retirada": 1,
       "acciones": [
         {
@@ -723,7 +741,7 @@
       "curso": 5,
       "unidad": 3,
       "dimension": "Territorio",
-      "resistencia": 100,
+      "resistencia": 110,
       "retirada": 1,
       "acciones": [
         {
@@ -749,7 +767,7 @@
       "curso": 5,
       "unidad": 3,
       "dimension": "Economia",
-      "resistencia": 70,
+      "resistencia": 80,
       "retirada": 1,
       "acciones": [
         {
@@ -821,7 +839,7 @@
       "nombre": "Altiplano",
       "tipo": "protagonista",
       "dimension": "Cultura",
-      "resistencia": 80,
+      "resistencia": 90,
       "retirada": 1,
       "acciones": [
         {
@@ -851,7 +869,7 @@
       "nombre": "Campos de Hielo",
       "tipo": "protagonista",
       "dimension": "Territorio",
-      "resistencia": 110,
+      "resistencia": 120,
       "retirada": 2,
       "acciones": [
         {
@@ -880,7 +898,7 @@
       "nombre": "Gran minería del cobre",
       "tipo": "protagonista",
       "dimension": "Economia",
-      "resistencia": 110,
+      "resistencia": 120,
       "retirada": 2,
       "acciones": [
         {
@@ -938,7 +956,7 @@
       "nombre": "Chiloé",
       "tipo": "protagonista",
       "dimension": "Cultura",
-      "resistencia": 80,
+      "resistencia": 90,
       "retirada": 1,
       "acciones": [
         {
@@ -970,7 +988,7 @@
       "curso": 5,
       "unidad": 4,
       "dimension": "Sociedad",
-      "resistencia": 80,
+      "resistencia": 90,
       "retirada": 1,
       "acciones": [
         {
@@ -991,7 +1009,7 @@
       "curso": 5,
       "unidad": 4,
       "dimension": "Politica",
-      "resistencia": 60,
+      "resistencia": 70,
       "retirada": 1,
       "acciones": [
         {
@@ -1012,7 +1030,7 @@
       "curso": 5,
       "unidad": 4,
       "dimension": "Politica",
-      "resistencia": 100,
+      "resistencia": 110,
       "retirada": 2,
       "acciones": [
         {
@@ -1044,7 +1062,7 @@
       "curso": 5,
       "unidad": 4,
       "dimension": "Politica",
-      "resistencia": 80,
+      "resistencia": 90,
       "retirada": 1,
       "acciones": [
         {
@@ -1100,7 +1118,7 @@
       "nombre": "Derechos del niño",
       "tipo": "protagonista",
       "dimension": "Sociedad",
-      "resistencia": 110,
+      "resistencia": 120,
       "retirada": 2,
       "acciones": [
         {
@@ -1140,7 +1158,7 @@
       "nombre": "Junta de vecinos",
       "tipo": "protagonista",
       "dimension": "Sociedad",
-      "resistencia": 70,
+      "resistencia": 80,
       "retirada": 1,
       "acciones": [
         {
@@ -1175,7 +1193,7 @@
       "nombre": "Bomberos voluntarios",
       "tipo": "protagonista",
       "dimension": "Sociedad",
-      "resistencia": 70,
+      "resistencia": 80,
       "retirada": 1,
       "acciones": [
         {
@@ -1209,7 +1227,7 @@
       "nombre": "Defensoría de la Niñez",
       "tipo": "protagonista",
       "dimension": "Politica",
-      "resistencia": 70,
+      "resistencia": 80,
       "retirada": 1,
       "acciones": [
         {

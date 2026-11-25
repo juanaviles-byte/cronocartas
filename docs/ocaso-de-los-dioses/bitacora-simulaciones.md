@@ -139,3 +139,19 @@ Hoy el juego no ofrece panteón contra panteón fuera de los Duelos. Si algún d
 
    ¿Sigo con eso cuando estén las imágenes?
 7. **Sonidos:** los hice sin poder escucharlos; solo revisé niveles y duración. Te dejé `sonidos-ocaso.mp3` con los nueve seguidos, en este orden: Olimpo, Asgard, Nilo, Quinto Sol, Yōkai, Jade, tradiciones, amanecer y anochecer. ¿Cuál cambiarías?
+
+## 9. Lo que decidimos (25 de noviembre)
+
+- **Pregunta 3, reforzar 5° y «Fin del Mundo»:** todos los protagonistas de los dos mazos tienen +10 de resistencia.
+  - En el modo libre, 5° sube de 40 % a 50 %, y «Fin del Mundo» de 38 % a 46 %.
+  - Con +20 se pasaban (56 % y 54 %).
+  - El Ocaso queda en 42 % en el modo libre. No lo toqué: +5 no cambia nada, porque el daño va de 10 en 10, y +10 lo subía a 55 %. Se ajusta antes de lanzarlo.
+  - Duelos de «Fin del Mundo»: 52 % y 46 %.
+- **Pregunta 4, duelo «La Conquista de Chile»:**
+  - **Causa:** cambiar el núcleo no movía nada, porque el mazo lleva solo 3 personajes y 3 acontecimientos. Los conquistadores tienen cuatro personajes que solo buscan protagonistas, mientras que los pueblos originarios llevan Lautaro (+20 de daño), Caupolicán y Curalaba, que pegan directo.
+  - **Arreglo:**
+    - Pedro de Valdivia: además de buscar, da +10 de daño.
+    - Diego de Almagro: busca entre las 3 primeras cartas, en vez de 4, y da +1 de Saber.
+    - Fundación de ciudades: además de buscar, el activo recupera 20.
+  - **Resultado** (2000 partidas): 43 % → 50 %. «La Colonia» sube de 54 % a 57 %, y «Norte y Sur» queda en 52 %.
+- **Test:** `sintonia.test.js` leía el primer número del texto como lo que cura. Fallaba con cartas que buscan y curan a la vez. Ahora busca el número del efecto en el texto.
