@@ -288,7 +288,7 @@ const vistas = {
     // Las expansiones no tienen fechas: sin línea de tiempo (con un mazo al azar puede salir un curso; la mesa decide).
     if (!col && (cursoDeMesa || (cruzados && [eleccion.cursoA, eleccion.cursoB].includes('azar')))) {
       const gl = grupo('Reglas extra');
-      const ll = h('label', 'interruptor', `<input type="checkbox"${eleccion.linea ? ' checked' : ''}><span>Línea de tiempo<small>Los Personajes y Acontecimientos con fecha se ordenan en una línea de tiempo. Si los ubicas bien, ganas +1 de Saber.</small></span>`);
+      const ll = h('label', 'interruptor', `<input type="checkbox"${eleccion.linea ? ' checked' : ''}><span>Línea de tiempo y mapa<small>Los Personajes y Acontecimientos con fecha se ordenan en una línea de tiempo. Las cartas de las expansiones se sitúan en el mapa. Si aciertas, ganas +1 de Saber.</small></span>`);
       ll.querySelector('input').onchange = ev => { eleccion.linea = ev.target.checked; };
       gl.appendChild(ll);
     }

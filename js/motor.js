@@ -3,6 +3,7 @@
 // de eventos ocurridos. No sabe nada de la pantalla, así que el mismo motor
 // sirve para jugar en una tablet, contra la IA o, en el futuro, en línea.
 import { rngDesdeEstado, barajar } from './rng.js';
+import { preguntaDe } from './geografia.js';
 import { FUERZAS, VENTAJA_FUERZAS } from './colecciones.js';
 import { rangoDeFecha } from './fechas.js';
 
@@ -32,7 +33,7 @@ const esBase = c => c.tipo === 'protagonista' && !c.evolucionaDe;
 function nuevoJugador() {
   return { mazo: [], mano: [], activo: null, reserva: [], descarte: [], hitos: 0,
     saberPendiente: 0, aulaUsada: false, personajeUsado: false, retiroUsado: false, listo: false,
-    linea: [], porUbicar: null, aciertos: 0 };
+    linea: [], porUbicar: null, aciertos: 0, mapa: [], porSituar: null };
 }
 
 function robar(jug, n = 1) {
@@ -100,6 +101,8 @@ export function jugadasValidas(e) {
 
   // Línea de tiempo: hasta ubicar la carta, solo se puede elegir el hueco.
   if (yo.porUbicar) return Array.from({ length: (yo.linea || []).length + 1 }, (_, posicion) => ({ tipo: 'ubicar', posicion }));
+  // Geografía: hasta situar la carta, solo se puede elegir dónde.
+  if (yo.porSituar) return yo.porSituar.opciones.map((_, opcion) => ({ tipo: 'situar', opcion }));
 
   const js = [];
   for (const c of yo.mano) {
@@ -162,6 +165,16 @@ function entrarALinea(e, j, carta, ev) {
   const hecho = { id: carta.id, nombre: carta.nombre, anio: carta.fecha.anio, texto: carta.fecha.texto, desde, hasta };
   if (!yo.linea.length) { yo.linea.push(hecho); ev.push({ tipo: 'linea', jugador: j, hecho, automatico: true }); }
   else yo.porUbicar = hecho;
+}
+
+// Geografía: con la línea de tiempo encendida, las cartas de expansión con origen (no tienen fecha)
+// se sitúan en el mapa de su expansión, o eligiendo entre alternativas. Acertar da +1 Saber.
+function entrarAlMapa(e, j, carta) {
+  if (!e.lineaTiempo || carta.fecha || !carta.origen) return;
+  const rng = rngDesdeEstado(e.rng);
+  const p = preguntaDe(carta, () => rng.siguiente());
+  e.rng = rng.estado;
+  if (p) e.jugadores[j].porSituar = p;
 }
 
 // Conexión causa → consecuencia: si la causa está en tu mesa, tu descarte o es el Lugar en juego,
@@ -329,6 +342,7 @@ export function aplicarJugada(estadoEntrada, jugada) {
         if (e.lugar) e.jugadores[e.lugar.duenio || j].descarte.push({ uid: e.lugar.uid, carta: e.lugar.carta });
         e.lugar = { uid: c.uid, carta: c.carta, duenio: j };
         ev.push({ tipo: 'lugar', jugador: j, carta: c.carta });
+        entrarAlMapa(e, j, c.carta);
       } else {
         revisarConexion(e, j, c.carta, ev);
         if (c.carta.tipo === 'aula') { yo.aulaCuenta = (yo.aulaCuenta || 0) + 1; yo.aulaUsada = true; }
@@ -341,6 +355,7 @@ export function aplicarJugada(estadoEntrada, jugada) {
         yo.descarte.push(c);
         ev.push({ tipo: 'efecto', jugador: j, carta: c.carta });
         entrarALinea(e, j, c.carta, ev);
+        entrarAlMapa(e, j, c.carta);
       }
       break;
     }
@@ -358,6 +373,17 @@ export function aplicarJugada(estadoEntrada, jugada) {
       yo.porUbicar = null;
       if (correcto) { yo.aciertos = (yo.aciertos || 0) + 1; if (yo.activo) yo.activo.saber += 1; }
       ev.push({ tipo: 'ubicar', jugador: j, hecho, correcto, posicion: jugada.posicion, posicionCorrecta: correcto ? jugada.posicion : posicionCorrecta });
+      break;
+    }
+    case 'situar': {
+      const p = yo.porSituar;
+      const elegida = p.opciones[jugada.opcion];
+      const correcto = p.correctas.includes(elegida);
+      yo.porSituar = null;
+      yo.mapa = yo.mapa || [];
+      yo.mapa.push({ id: p.id, nombre: p.nombre, mapa: p.mapa, correctas: p.correctas, correcto });
+      if (correcto) { yo.aciertos = (yo.aciertos || 0) + 1; if (yo.activo) yo.activo.saber += 1; }
+      ev.push({ tipo: 'situar', jugador: j, id: p.id, nombre: p.nombre, mapa: p.mapa, elegida, correctas: p.correctas, correcto });
       break;
     }
     case 'retirar': {
@@ -595,7 +621,7 @@ function iniciarTurno(e, ev) {
 // Deshacer: una jugada se puede revertir si no terminó el turno y no reveló información nueva
 // (no robó ni buscó en el mazo, no ubicó en la línea de tiempo, no atacó).
 export function jugadaReversible(antes, despues, jugada) {
-  if (['accion', 'pasar', 'ubicar', 'promover'].includes(jugada.tipo)) return false;
+  if (['accion', 'pasar', 'ubicar', 'situar', 'promover'].includes(jugada.tipo)) return false;
   if (despues.turno !== antes.turno || despues.fase !== antes.fase) return false;
   const j = antes.turno;
   return despues.jugadores[j].mazo.length === antes.jugadores[j].mazo.length;

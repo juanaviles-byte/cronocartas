@@ -613,7 +613,13 @@
    "emblema": "sol",
    "zona": "Pueblo mapuche",
    "frase": "La fuerza que sostiene la vida.",
-   "dato": "Para el pueblo mapuche, Ngenechen es la fuerza que da y sostiene la vida. Por respeto no se dibuja: su presencia se muestra en la luz y la tierra."
+   "dato": "Para el pueblo mapuche, Ngenechen es la fuerza que da y sostiene la vida. Por respeto no se dibuja: su presencia se muestra en la luz y la tierra.",
+   "origen": {
+    "mapa": "chile",
+    "zonas": [
+     "araucania"
+    ]
+   }
   },
   {
    "id": "FM-026",
@@ -628,7 +634,13 @@
    "emblema": "volcan",
    "zona": "Pueblo mapuche",
    "frase": "La fuerza de los volcanes y el trueno.",
-   "dato": "Para el pueblo mapuche, el Pillán es una fuerza de los antepasados ligada a los volcanes y al trueno. Por respeto no se dibuja: se muestra en el volcán."
+   "dato": "Para el pueblo mapuche, el Pillán es una fuerza de los antepasados ligada a los volcanes y al trueno. Por respeto no se dibuja: se muestra en el volcán.",
+   "origen": {
+    "mapa": "chile",
+    "zonas": [
+     "araucania"
+    ]
+   }
   },
   {
    "id": "FM-027",
@@ -642,7 +654,13 @@
    "emblema": "pluma",
    "zona": "Pueblo rapanui",
    "frase": "El creador del mundo rapanui.",
-   "dato": "Para el pueblo rapanui, Make Make es el creador del mundo, unido a las aves marinas. Por respeto no se dibuja: se muestra en el cielo y el mar de la isla."
+   "dato": "Para el pueblo rapanui, Make Make es el creador del mundo, unido a las aves marinas. Por respeto no se dibuja: se muestra en el cielo y el mar de la isla.",
+   "origen": {
+    "mapa": "chile",
+    "zonas": [
+     "rapanui"
+    ]
+   }
   },
   {
    "id": "FM-028",
@@ -656,7 +674,14 @@
    "emblema": "maiz",
    "zona": "Pueblos andinos",
    "frase": "La madre tierra de los Andes.",
-   "dato": "Para los pueblos andinos, la Pachamama es la madre tierra que alimenta y protege. Por respeto no se dibuja: se muestra en los cultivos y los cerros."
+   "dato": "Para los pueblos andinos, la Pachamama es la madre tierra que alimenta y protege. Por respeto no se dibuja: se muestra en los cultivos y los cerros.",
+   "origen": {
+    "mapa": "chile",
+    "zonas": [
+     "norte",
+     "atacama"
+    ]
+   }
   },
   {
    "id": "FM-029",
@@ -670,7 +695,13 @@
    "emblema": "montana",
    "zona": "Pueblo aymara",
    "frase": "Los espíritus protectores de los cerros.",
-   "dato": "Para el pueblo aymara, los Achachilas son los espíritus de los cerros, protectores del pueblo y de su territorio. Por respeto no se dibujan: se muestran en las cumbres."
+   "dato": "Para el pueblo aymara, los Achachilas son los espíritus de los cerros, protectores del pueblo y de su territorio. Por respeto no se dibujan: se muestran en las cumbres.",
+   "origen": {
+    "mapa": "chile",
+    "zonas": [
+     "norte"
+    ]
+   }
   },
   {
    "id": "FM-030",
@@ -690,7 +721,13 @@
    "emblema": "estrella",
    "zona": "Pueblo selk'nam",
    "frase": "El ser sin forma más allá de las estrellas.",
-   "dato": "Para el pueblo selk'nam, Temáukel es el ser supremo, sin forma, que vive más allá de las estrellas. Por respeto no se dibuja: se muestra en el cielo del sur."
+   "dato": "Para el pueblo selk'nam, Temáukel es el ser supremo, sin forma, que vive más allá de las estrellas. Por respeto no se dibuja: se muestra en el cielo del sur.",
+   "origen": {
+    "mapa": "chile",
+    "zonas": [
+     "fuego"
+    ]
+   }
   },
   {
    "id": "FM-031",
@@ -704,7 +741,14 @@
    "emblema": "ola",
    "zona": "Mapuche y Chiloé",
    "frase": "Las aguas suben; los cerros, también.",
-   "dato": "Según el relato mapuche-huilliche, Caicai Vilú hizo subir el mar y Tentén Vilú elevó los cerros. Quienes subieron a lo alto se salvaron."
+   "dato": "Según el relato mapuche-huilliche, Caicai Vilú hizo subir el mar y Tentén Vilú elevó los cerros. Quienes subieron a lo alto se salvaron.",
+   "origen": {
+    "mapa": "chile",
+    "zonas": [
+     "araucania",
+     "chiloe"
+    ]
+   }
   },
   {
    "id": "FM-032",
@@ -718,7 +762,13 @@
    "emblema": "pluma",
    "zona": "Rapa Nui",
    "frase": "La carrera por el primer huevo del manutara.",
-   "dato": "Competencia rapanui: jóvenes nadaban hasta el islote Motu Nui en busca del primer huevo del manutara, un ave marina. Su patrocinador se convertía en el Tangata Manu del año."
+   "dato": "Competencia rapanui: jóvenes nadaban hasta el islote Motu Nui en busca del primer huevo del manutara, un ave marina. Su patrocinador se convertía en el Tangata Manu del año.",
+   "origen": {
+    "mapa": "chile",
+    "zonas": [
+     "rapanui"
+    ]
+   }
   },
   {
    "id": "FM-033",
@@ -732,7 +782,14 @@
    "emblema": "estrella",
    "zona": "Zona central y Chiloé",
    "frase": "La noche larga de las historias y la suerte.",
-   "dato": "En la noche del 23 al 24 de junio, una de las más largas del año, en el campo y en Chiloé se cuentan historias, se buscan tesoros y se prueba la suerte."
+   "dato": "En la noche del 23 al 24 de junio, una de las más largas del año, en el campo y en Chiloé se cuentan historias, se buscan tesoros y se prueba la suerte.",
+   "origen": {
+    "mapa": "chile",
+    "zonas": [
+     "central",
+     "chiloe"
+    ]
+   }
   },
   {
    "id": "FM-034",
@@ -753,7 +810,13 @@
    "emblema": "mapa",
    "zona": "Pueblo selk'nam",
    "frase": "El antepasado que ordenó la tierra.",
-   "dato": "En los relatos selk'nam, Kenos fue el primer antepasado: ordenó la tierra fueguina, dio nombre a los lugares y repartió los territorios."
+   "dato": "En los relatos selk'nam, Kenos fue el primer antepasado: ordenó la tierra fueguina, dio nombre a los lugares y repartió los territorios.",
+   "origen": {
+    "mapa": "chile",
+    "zonas": [
+     "fuego"
+    ]
+   }
   },
   {
    "id": "FM-035",
@@ -767,7 +830,13 @@
    "emblema": "ola",
    "zona": "Chiloé",
    "frase": "La danza que llena las redes.",
-   "dato": "Cuando la Pincoya danza mirando al mar, según los relatos chilotes, la marea trae peces y mariscos en abundancia para las familias de la costa."
+   "dato": "Cuando la Pincoya danza mirando al mar, según los relatos chilotes, la marea trae peces y mariscos en abundancia para las familias de la costa.",
+   "origen": {
+    "mapa": "chile",
+    "zonas": [
+     "chiloe"
+    ]
+   }
   },
   {
    "id": "FM-036",
@@ -781,7 +850,13 @@
    "emblema": "volcan",
    "zona": "Pueblo mapuche",
    "frase": "Cuando el volcán despierta, tiembla la tierra.",
-   "dato": "Los relatos mapuche explicaban las erupciones como el enojo de los seres que viven dentro de los volcanes, como el Cherufe."
+   "dato": "Los relatos mapuche explicaban las erupciones como el enojo de los seres que viven dentro de los volcanes, como el Cherufe.",
+   "origen": {
+    "mapa": "chile",
+    "zonas": [
+     "araucania"
+    ]
+   }
   },
   {
    "id": "FM-037",
@@ -796,7 +871,13 @@
    "emblema": "barco",
    "zona": "Chiloé",
    "frase": "Canales donde navegan los relatos.",
-   "dato": "Canales e islas entre Chiloé y el continente. Aquí nacieron muchos relatos del mar chilote: la Pincoya, la Sirena, el Millalobo y el Caleuche."
+   "dato": "Canales e islas entre Chiloé y el continente. Aquí nacieron muchos relatos del mar chilote: la Pincoya, la Sirena, el Millalobo y el Caleuche.",
+   "origen": {
+    "mapa": "chile",
+    "zonas": [
+     "chiloe"
+    ]
+   }
   },
   {
    "id": "FM-038",
@@ -811,7 +892,13 @@
    "emblema": "volcan",
    "zona": "Araucanía",
    "frase": "La casa del Pillán.",
-   "dato": "Nombre mapuche del volcán Villarrica: «casa del Pillán». Es uno de los volcanes más activos de Chile."
+   "dato": "Nombre mapuche del volcán Villarrica: «casa del Pillán». Es uno de los volcanes más activos de Chile.",
+   "origen": {
+    "mapa": "chile",
+    "zonas": [
+     "araucania"
+    ]
+   }
   },
   {
    "id": "FM-039",
@@ -826,7 +913,14 @@
    "emblema": "estrella",
    "zona": "Norte Grande",
    "frase": "Bajo el cielo más estrellado de Chile.",
-   "dato": "Uno de los desiertos más secos del mundo y uno de los mejores cielos para ver estrellas. Allí los mineros contaban historias del Alicanto."
+   "dato": "Uno de los desiertos más secos del mundo y uno de los mejores cielos para ver estrellas. Allí los mineros contaban historias del Alicanto.",
+   "origen": {
+    "mapa": "chile",
+    "zonas": [
+     "norte",
+     "atacama"
+    ]
+   }
   },
   {
    "id": "FM-040",
@@ -841,7 +935,14 @@
    "emblema": "arbol",
    "zona": "Sur de Chile",
    "frase": "Alerces, helechos y sombras con historias.",
-   "dato": "Bosque lluvioso del sur de Chile, con alerces milenarios, helechos y copihues. En sus sombras se cuentan historias de duendes y seres de la noche."
+   "dato": "Bosque lluvioso del sur de Chile, con alerces milenarios, helechos y copihues. En sus sombras se cuentan historias de duendes y seres de la noche.",
+   "origen": {
+    "mapa": "chile",
+    "zonas": [
+     "araucania",
+     "chiloe"
+    ]
+   }
   }
  ],
  "duelos": [

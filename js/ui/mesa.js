@@ -18,6 +18,7 @@ import { FUERZAS, coleccion } from '../colecciones.js';
 import { tablerosDisponibles, mazosDePartida } from '../eleccion.js';
 import { dimensionDeInvocacion } from './invocacion-dimension.js';
 import { motivoDeCarta } from '../motivos.js';
+import { MAPAS, nombreZona } from '../geografia.js';
 import { sorteoInicial } from './sorteo.js';
 import { hacerArrastrable, ultimaSoltada } from './arrastre.js';
 import { repasarMano } from './repaso.js';
@@ -244,6 +245,7 @@ export async function montarMesa(contenedor, opciones) {
     registrarAlbum();
     activarArrastre();
     revisarUbicar();
+    revisarSituar();
     guiaProactiva();
     dibujarGlobo();
     programarIA();
@@ -691,7 +693,13 @@ export async function montarMesa(contenedor, opciones) {
       <div class="cuentas">${vistaJugador ? `<span class="icono-mano" aria-hidden="true"></span><span class="n-mano" aria-label="${yo.mano.length} cartas en la mano">${yo.mano.length}</span>` : `Mano ${yo.mano.length}`}</div>`;
     // Vista del jugador: tocar el marcador del rival abre su descarte (sus pilas no se dibujan).
     if (vistaJugador && j === 'B') { marcador.setAttribute('role', 'button'); marcador.tabIndex = 0; marcador.setAttribute('aria-label', `Ver el descarte de ${nombres[j]}`); marcador.onclick = () => verDescarte(j); }
-    if (estado.lineaTiempo) {
+    if (estado.lineaTiempo && (yo.mapa || []).length) {
+      const n = yo.mapa.length;
+      const bm = h('button', 'linea-mini mapa-mini', `<span class="globo-mapa"></span> <span class="t">Mapa · </span>${n}`);
+      bm.setAttribute('aria-label', `Mapa: ${n} cartas situadas`);
+      bm.onclick = () => verMapa(j);
+      marcador.appendChild(bm);
+    } else if (estado.lineaTiempo) {
       const n = (yo.linea || []).length;
       const bl = h('button', 'linea-mini', `<span class="reloj"></span> <span class="t">Línea de tiempo · </span>${n}`);
       bl.setAttribute('aria-label', `Línea de tiempo: ${n} hechos`);
@@ -1177,6 +1185,11 @@ export async function montarMesa(contenedor, opciones) {
         if (!(contraIA && ev.jugador === 'B')) avisoLinea(ev);
         registrar(`${nombres[ev.jugador]} ubicó <b>${esc(ev.hecho.nombre)}</b> (${esc(ev.hecho.texto)}): ${ev.correcto ? '¡bien ubicada! +1 Saber' : 'quedó en su lugar correcto'}`);
       }
+      if (ev.tipo === 'situar') {
+        if (ev.correcto) sonidos.conexion();
+        if (!(contraIA && ev.jugador === 'B')) avisoSituar(ev);
+        registrar(`${nombres[ev.jugador]} situó <b>${esc(ev.nombre)}</b>: ${ev.correcto ? '¡bien situada! +1 Saber' : `era ${esc(textoCorrectas(ev))}`}`);
+      }
       if (ev.tipo === 'ciclo') {
         sonidos.ciclo(ev.a);
         raiz.classList.toggle('de-noche', ev.a === 'noche');
@@ -1300,6 +1313,79 @@ export async function montarMesa(contenedor, opciones) {
     if (!(yo.linea || []).length) fila.appendChild(h('p', 'nota', 'Todavía vacía. Los Personajes y Acontecimientos con fecha entran aquí al jugarlos.'));
     for (const x of yo.linea || []) fila.appendChild(h('div', 'hito-linea', `<b>${esc(x.texto)}</b><span>${esc(x.nombre)}</span>`));
     panel.appendChild(fila);
+    panel.appendChild(h('p', 'nota', `Aciertos: ${yo.aciertos || 0}`));
+    const cerrar = h('button', 'boton-secundario', 'Cerrar');
+    cerrar.onclick = () => capa.remove();
+    panel.appendChild(cerrar);
+    capa.appendChild(panel);
+    capa.onclick = ev => { if (ev.target === capa) capa.remove(); };
+    raiz.appendChild(capa);
+  }
+
+  // ---------- Geografía ----------
+  const textoCorrectas = p => p.correctas.map(z => (p.mapa ? nombreZona(p.mapa, z) : z)).join(' o ');
+
+  // Mapa con botones sobre cada zona (marcadas: las que se muestran con su nombre y color).
+  function dibujarMapa(mapa, { alElegir = null, marcas = [] } = {}) {
+    const m = MAPAS[mapa];
+    const caja = h('div', `mapa-juego mapa-${mapa}${alElegir ? '' : ' solo-ver'}`);
+    caja.style.setProperty('--prop', m.proporcion);
+    caja.appendChild(h('img', 'mapa-fondo'));
+    caja.firstChild.src = m.imagen; caja.firstChild.alt = '';
+    m.zonas.forEach((z, i) => {
+      const marca = marcas.find(x => x.zona === z.id);
+      const b = h(alElegir ? 'button' : 'div', `zona-mapa${z.x > 70 ? ' izq' : ''}${marca ? ` ${marca.clase}` : ''}`, `<i></i>${marca && marca.etiqueta ? `<span>${marca.etiqueta}</span>` : ''}`);
+      b.style.left = `${z.x}%`; b.style.top = `${z.y}%`;
+      if (alElegir) { b.setAttribute('aria-label', z.nombre); b.onclick = () => alElegir(i); }
+      caja.appendChild(b);
+    });
+    return caja;
+  }
+
+  function revisarSituar() {
+    const j = estado.turno, yo = estado.jugadores[j];
+    if (ocupado || estado.fase !== 'turno' || !yo.porSituar || (contraIA && j === 'B') || raiz.querySelector('.capa-linea')) return;
+    const p = yo.porSituar;
+    const capa = h('div', `capa capa-linea capa-mapa${girado(j) ? ' girado' : ''}`);
+    const panel = h('div', 'panel-linea panel-mapa');
+    panel.appendChild(h('div', 'titulo-linea', '<span class="globo-mapa"></span> ¿De dónde viene?'));
+    panel.appendChild(h('p', 'pregunta-linea', `${esc(p.texto)} Si aciertas, tu activo gana +1 de Saber.`));
+    const elegir = i => { capa.remove(); jugar({ tipo: 'situar', opcion: i }); };
+    if (p.mapa) panel.appendChild(dibujarMapa(p.mapa, { alElegir: elegir }));
+    else {
+      const fila = h('div', 'opciones-mapa');
+      p.opciones.forEach((o, i) => { const b = h('button', 'opcion-mapa', esc(o)); b.onclick = () => elegir(i); fila.appendChild(b); });
+      panel.appendChild(fila);
+    }
+    capa.appendChild(panel);
+    raiz.appendChild(capa);
+  }
+
+  function avisoSituar(ev) {
+    const a = h('div', `aviso-conexion aviso-linea${ev.correcto ? '' : ' casi'}${girado(ev.jugador) ? ' girado' : ''}`,
+      `<div class="titulo">${ev.correcto ? '¡Bien situada!' : 'Casi…'}</div><div class="cadena">${esc(ev.nombre)}<span>·</span>${esc(textoCorrectas(ev))}</div>` +
+      (ev.correcto ? '<div class="premio">+1 Saber para tu activo</div>' : ''));
+    raiz.appendChild(a);
+    setTimeout(() => a.remove(), 2700);
+  }
+
+  function verMapa(j) {
+    const yo = estado.jugadores[j];
+    const capa = h('div', `capa capa-linea capa-mapa${girado(j) ? ' girado' : ''}`);
+    const panel = h('div', 'panel-linea panel-mapa');
+    panel.appendChild(h('div', 'titulo-linea', `<span class="globo-mapa"></span> ${contraIA && j === 'A' ? 'Tu mapa' : `Mapa de ${nombres[j]}`}`));
+    const lista = yo.mapa || [];
+    const mapa = (lista.find(x => x.mapa) || {}).mapa;
+    if (mapa) {
+      const marcas = [];
+      for (const z of MAPAS[mapa].zonas) {
+        const aqui = lista.filter(x => x.mapa === mapa && x.correctas[0] === z.id);
+        if (aqui.length) marcas.push({ zona: z.id, clase: 'marcada', etiqueta: aqui.map(x => esc(x.nombre)).join('<br>') });
+      }
+      panel.appendChild(dibujarMapa(mapa, { marcas }));
+    }
+    const otras = lista.filter(x => !x.mapa);
+    if (otras.length) panel.appendChild(h('p', 'nota', otras.map(x => `${esc(x.nombre)}: ${esc(x.correctas[0])}`).join(' · ')));
     panel.appendChild(h('p', 'nota', `Aciertos: ${yo.aciertos || 0}`));
     const cerrar = h('button', 'boton-secundario', 'Cerrar');
     cerrar.onclick = () => capa.remove();

@@ -2027,3 +2027,31 @@ body[data-vista="jugar"] { background: #090d12; }
 .carta-mini[class*=" arq-"] .m-nombre { font-size: calc(1em * var(--escala-arq)); }
 .arq-quinto-sol { --escala-acc: .85; } .arq-jade { --escala-acc: 1.1; } .arq-cristiana { --escala-acc: .95; }
 .carta-mini.arq-jade .m-nombre { font-size: 1.15em; }
+
+/* Minijuego de geografía: el mapa con un botón (de 44 px al tacto) sobre cada zona. */
+.globo-mapa { display: inline-block; width: 1.05em; height: 1.05em; border-radius: 50%; border: 2px solid currentColor; position: relative; vertical-align: -.15em; }
+.globo-mapa::before { content: ''; position: absolute; top: -2px; bottom: -2px; left: 25%; right: 25%; border: 1.5px solid currentColor; border-top: 0; border-bottom: 0; border-radius: 50%; }
+.panel-mapa { width: min(96vw, 980px); gap: 8px; }
+.mapa-juego { position: relative; width: 100%; aspect-ratio: var(--prop); max-height: 62vh; margin: 0 auto; border-radius: 12px; overflow: hidden; box-shadow: inset 0 0 0 2px #c9b78b; }
+/* Chrome 74 no tiene aspect-ratio: el relleno superior hace de proporción. */
+@supports not (aspect-ratio: 1) { .mapa-juego { height: 0; padding-top: calc(100% / var(--prop)); } }
+.mapa-chile { width: auto; height: min(62vh, 460px); max-width: 100%; }
+@supports not (aspect-ratio: 1) { .mapa-chile { width: calc(min(62vh, 460px) * var(--prop)); height: min(62vh, 460px); padding-top: 0; } }
+.mapa-fondo { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: block; }
+.zona-mapa { position: absolute; width: 44px; height: 44px; margin: -22px 0 0 -22px; padding: 0; border: 0; background: none; display: flex; align-items: center; justify-content: center; }
+.zona-mapa i { width: 22px; height: 22px; border-radius: 50%; background: #E9C46A; border: 3px solid #2a2017; box-shadow: 0 0 0 3px rgba(233,196,106,.45), 0 2px 6px rgba(0,0,0,.6); }
+button.zona-mapa i { animation: zona-late 1.6s ease-in-out infinite; }
+button.zona-mapa:active i { background: #fff; transform: scale(1.2); }
+@keyframes zona-late { 50% { box-shadow: 0 0 0 7px rgba(233,196,106,.25), 0 2px 6px rgba(0,0,0,.6); } }
+@media (prefers-reduced-motion: reduce) { button.zona-mapa i { animation: none; } }
+.zona-mapa span { position: absolute; left: 30px; top: 50%; transform: translateY(-50%); white-space: nowrap; background: rgba(246,241,227,.95); color: #2a2017;
+  border-radius: 8px; padding: 2px 6px; font-size: .72rem; font-weight: 700; line-height: 1.2; box-shadow: 0 1px 4px rgba(0,0,0,.4); }
+.zona-mapa.marcada i { background: #6fcf7a; }
+.opciones-mapa { display: flex; flex-wrap: wrap; gap: 10px; padding: 6px 0; }
+.opcion-mapa { flex: 1 1 160px; min-height: 56px; border-radius: 12px; border: 3px solid #c08a1e; background: rgba(233,196,106,.15); color: #6b4e12; font-weight: 900; font-size: 1.05rem; }
+.opcion-mapa:active { background: rgba(233,196,106,.5); }
+.zona-mapa.izq span { left: auto; right: 30px; }
+.mapa-juego.solo-ver { overflow: visible; }
+.mapa-juego.solo-ver .mapa-fondo { border-radius: 12px; }
+.mapa-juego.solo-ver .zona-mapa:not(.marcada) i { width: 12px; height: 12px; border-width: 2px; opacity: .6; box-shadow: none; }
+.mapa-juego.solo-ver .zona-mapa.marcada { z-index: 1; }

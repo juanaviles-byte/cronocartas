@@ -25,12 +25,12 @@ Estado al 25 de noviembre de 2026. La expansión ya funciona en el motor, pero e
 | C | Volver a grabar a La Cronista con más vida (26 frases, 2 nuevas) | Tú, en AI Studio | Sección 5 |
 | D | 7 ambientes sonoros | Tú, en Freesound | Búsquedas de la sección 6 |
 | E | Tema musical propio del Ocaso | Tú (opcional) | Prompt de la sección 7 |
-| F | Mapas del minijuego de geografía | Yo | Desde datos de dominio público (sección 8) |
+| F | Minijuego de geografía con mapas | Hecho | Mapas de Natural Earth (dominio público), en el modo libre |
 | G | Ícono de sol y luna en cada carta y en la franja central | Yo | Dibujado por código |
 | H | Pasar el arte cortado a `img/`, recortar los marcos y mostrar la colección | Yo | Cuando lleguen A y B |
 | I | Ajustar el Ocaso en el modo libre (hoy 42 %) | Yo | Antes de lanzarlo |
 | J | Novedades y anuncio en el menú | Yo | Al final |
-| K | Tipografía propia de cada arquetipo (solo en la expansión) | Yo | Fuentes libres (OFL) incluidas en el juego, para que funcionen sin internet |
+| K | Tipografía propia de cada arquetipo (solo en la expansión) | Hecho | Fuentes libres (OFL) incluidas en el juego, para que funcionen sin internet |
 
 **Orden recomendado:** 2 → A → B → D → C → E. Lo mío (F a J) avanza en paralelo.
 
@@ -530,13 +530,10 @@ Pieza instrumental de 75 segundos para el menú de un juego de cartas educativo 
 
 Guárdalo como `tema-ocaso.wav`. Si no lo haces, el Ocaso usa el tema de siempre y no pasa nada.
 
-## 8. Mapas del minijuego de geografía (F)
+## 8. Minijuego de geografía (F, hecho)
 
-Los mapas **no conviene pedirlos a una IA de imágenes**. Inventan costas, islas y fronteras, y en un juego de ubicar en el mapa eso sería un error de contenido.
+En el modo libre, con «Línea de tiempo y mapa» encendida, los Personajes, Acontecimientos y Lugares de las expansiones se sitúan en el mapa: el mundo para el Ocaso y Chile para «Fin del Mundo». Si se acierta, el activo gana +1 de Saber. Las cartas de la tradición cristiana se preguntan con 3 alternativas.
 
-Los dibujo yo, por código, a partir de datos geográficos de dominio público (Natural Earth), con el estilo del juego:
+Los mapas están dibujados por código con datos de Natural Earth (dominio público), así que no hay que generar nada.
 
-- **Ocaso:** mapamundi con las zonas de cada panteón: Grecia, Escandinavia, Egipto, el centro de México, Japón, China e India.
-- **«Fin del Mundo»:** mapa de Chile con sus zonas: Norte Grande, Atacama, zona central, Araucanía, Chiloé, Patagonia, Tierra del Fuego y Rapa Nui.
-
-Para eso necesito el archivo de datos. Te pediré permiso para descargarlo, o te pasaré el enlace para que lo descargues y me lo adjuntes, cuando apruebes el diseño del minijuego.
+El diseño está en `docs/superpowers/specs/2026-11-25-minijuego-geografia-design.md`.

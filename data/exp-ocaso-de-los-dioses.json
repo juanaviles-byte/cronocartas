@@ -968,7 +968,15 @@
    "frase": "Hermano sol, hermana luna.",
    "dato": "Fraile italiano del siglo XIII que vivió con sencillez y cuidó a pobres y enfermos. Se lo recuerda por su amor a los animales y a la naturaleza.",
    "etiquetaDato": "Quién fue",
-   "arquetipo": "cristiana"
+   "arquetipo": "cristiana",
+   "origen": {
+    "pregunta": "¿En qué país actual vivió San Francisco de Asís?",
+    "respuesta": "Italia",
+    "otras": [
+     "Alemania",
+     "Turquía"
+    ]
+   }
   },
   {
    "id": "OC-032",
@@ -984,7 +992,15 @@
    "frase": "Regalos en secreto.",
    "dato": "Obispo del siglo IV en Mira, en la actual Turquía. Se cuenta que daba regalos sin que nadie lo supiera. De su historia nació el Viejito Pascuero.",
    "etiquetaDato": "Quién fue",
-   "arquetipo": "cristiana"
+   "arquetipo": "cristiana",
+   "origen": {
+    "pregunta": "¿En qué país actual estaba Mira, la ciudad de San Nicolás?",
+    "respuesta": "Turquía",
+    "otras": [
+     "Italia",
+     "Alemania"
+    ]
+   }
   },
   {
    "id": "OC-033",
@@ -1006,7 +1022,15 @@
    "frase": "Música, plantas y estrellas.",
    "dato": "Abadesa alemana del siglo XII. Compuso música, escribió sobre plantas y medicina, y fue una de las sabias más importantes de la Edad Media.",
    "etiquetaDato": "Quién fue",
-   "arquetipo": "cristiana"
+   "arquetipo": "cristiana",
+   "origen": {
+    "pregunta": "¿En qué país actual vivió Hildegarda de Bingen?",
+    "respuesta": "Alemania",
+    "otras": [
+     "Italia",
+     "Turquía"
+    ]
+   }
   },
   {
    "id": "OC-034",
@@ -1022,7 +1046,13 @@
    "frase": "Nunca se rindió.",
    "dato": "Heroína de un relato del Mahabharata, el gran poema épico de la India. Siguió a la muerte y, con inteligencia y constancia, logró que le devolviera a su esposo.",
    "etiquetaDato": "Quién fue",
-   "arquetipo": "india"
+   "arquetipo": "india",
+   "origen": {
+    "mapa": "mundo",
+    "zonas": [
+     "india"
+    ]
+   }
   },
   {
    "id": "OC-035",
@@ -1037,7 +1067,13 @@
    "zona": "Antigua Grecia",
    "frase": "Diez años para volver a casa.",
    "dato": "Poema griego atribuido a Homero. Odiseo tarda diez años en volver a Ítaca tras la guerra de Troya y enfrenta cíclopes, sirenas y tormentas.",
-   "arquetipo": "olimpo"
+   "arquetipo": "olimpo",
+   "origen": {
+    "mapa": "mundo",
+    "zonas": [
+     "grecia"
+    ]
+   }
   },
   {
    "id": "OC-036",
@@ -1058,7 +1094,13 @@
    "zona": "Pueblos nórdicos",
    "frase": "El ocaso de los dioses.",
    "dato": "En los mitos nórdicos, el fin del mundo de los dioses. Tras un largo invierno, dioses y gigantes se enfrentan, y después la tierra vuelve a nacer, verde y nueva.",
-   "arquetipo": "asgard"
+   "arquetipo": "asgard",
+   "origen": {
+    "mapa": "mundo",
+    "zonas": [
+     "escandinavia"
+    ]
+   }
   },
   {
    "id": "OC-037",
@@ -1073,7 +1115,13 @@
    "zona": "Antiguo Egipto",
    "frase": "Un corazón tan liviano como una pluma.",
    "dato": "Los antiguos egipcios creían que, al morir, el corazón se pesaba contra la pluma de Maat, la verdad. Si era justo, la persona seguía a una nueva vida.",
-   "arquetipo": "nilo"
+   "arquetipo": "nilo",
+   "origen": {
+    "mapa": "mundo",
+    "zonas": [
+     "egipto"
+    ]
+   }
   },
   {
    "id": "OC-038",
@@ -1094,7 +1142,13 @@
    "zona": "Mexicas",
    "frase": "Este es el quinto mundo.",
    "dato": "Los mexicas contaban que el mundo había tenido cuatro soles, o eras, antes del actual. Según el relato, el quinto nació en Teotihuacan.",
-   "arquetipo": "quinto-sol"
+   "arquetipo": "quinto-sol",
+   "origen": {
+    "mapa": "mundo",
+    "zonas": [
+     "mesoamerica"
+    ]
+   }
   },
   {
    "id": "OC-039",
@@ -1115,7 +1169,13 @@
    "zona": "Japón",
    "frase": "De noche, mejor quedarse en casa.",
    "dato": "En el folclore japonés, ciertas noches los yōkai desfilan por las calles. Muchos pintores antiguos lo dibujaron en largos rollos de papel.",
-   "arquetipo": "yokai"
+   "arquetipo": "yokai",
+   "origen": {
+    "mapa": "mundo",
+    "zonas": [
+     "japon"
+    ]
+   }
   },
   {
    "id": "OC-040",
@@ -1130,7 +1190,13 @@
    "zona": "China",
    "frase": "Un camino lleno de aventuras.",
    "dato": "Novela china del siglo XVI. El monje Xuanzang viaja a la India en busca de libros, protegido por Sun Wukong y otros compañeros.",
-   "arquetipo": "jade"
+   "arquetipo": "jade",
+   "origen": {
+    "mapa": "mundo",
+    "zonas": [
+     "china"
+    ]
+   }
   },
   {
    "id": "OC-041",
@@ -1145,7 +1211,15 @@
    "frase": "Gracias a ellos conocemos los mitos.",
    "dato": "En los monasterios medievales, los monjes copiaban libros a mano. Así se conservaron muchas obras griegas y romanas, entre ellas relatos de sus dioses.",
    "etiquetaDato": "Qué es",
-   "arquetipo": "cristiana"
+   "arquetipo": "cristiana",
+   "origen": {
+    "pregunta": "¿Dónde estaban los monasterios de los monjes copistas?",
+    "respuesta": "En Europa",
+    "otras": [
+     "En China",
+     "En Mesoamérica"
+    ]
+   }
   },
   {
    "id": "OC-042",
@@ -1167,7 +1241,13 @@
    "frase": "Mil lámparas contra la noche.",
    "dato": "Una de las fiestas más importantes de la India. Se encienden lámparas de aceite, las diyas, por el triunfo de la luz sobre la oscuridad. La celebran hindúes, jainistas y sijs.",
    "etiquetaDato": "Qué es",
-   "arquetipo": "india"
+   "arquetipo": "india",
+   "origen": {
+    "mapa": "mundo",
+    "zonas": [
+     "india"
+    ]
+   }
   },
   {
    "id": "OC-043",
@@ -1188,7 +1268,13 @@
    "frase": "El astuto sabe cuándo retirarse.",
    "dato": "Colección de fábulas de la antigua India en que animales astutos enseñan a pensar y a elegir bien. Muchas viajaron hasta Europa.",
    "etiquetaDato": "Qué es",
-   "arquetipo": "india"
+   "arquetipo": "india",
+   "origen": {
+    "mapa": "mundo",
+    "zonas": [
+     "india"
+    ]
+   }
   },
   {
    "id": "OC-044",
@@ -1204,7 +1290,13 @@
    "zona": "Grecia",
    "frase": "Donde vivían los dioses.",
    "dato": "La montaña más alta de Grecia, de casi 2.920 metros. Los griegos imaginaban en su cumbre, entre las nubes, el palacio de sus dioses.",
-   "arquetipo": "olimpo"
+   "arquetipo": "olimpo",
+   "origen": {
+    "mapa": "mundo",
+    "zonas": [
+     "grecia"
+    ]
+   }
   },
   {
    "id": "OC-045",
@@ -1220,7 +1312,13 @@
    "zona": "Pueblos nórdicos",
    "frase": "Un arcoíris que une mundos.",
    "dato": "En los mitos nórdicos, un puente de arcoíris unía Asgard, el mundo de los dioses, con Midgard, el de los humanos. Heimdall lo vigilaba.",
-   "arquetipo": "asgard"
+   "arquetipo": "asgard",
+   "origen": {
+    "mapa": "mundo",
+    "zonas": [
+     "escandinavia"
+    ]
+   }
   },
   {
    "id": "OC-046",
@@ -1236,7 +1334,13 @@
    "zona": "Egipto",
    "frase": "Más de 4.000 años de pie.",
    "dato": "Tumbas de los faraones construidas en Egipto hace unos 4.500 años. La Gran Pirámide es la única maravilla del mundo antiguo que sigue en pie.",
-   "arquetipo": "nilo"
+   "arquetipo": "nilo",
+   "origen": {
+    "mapa": "mundo",
+    "zonas": [
+     "egipto"
+    ]
+   }
   },
   {
    "id": "OC-047",
@@ -1252,7 +1356,13 @@
    "zona": "México",
    "frase": "La ciudad donde nacen los dioses.",
    "dato": "Gran ciudad de México con las pirámides del Sol y de la Luna. Los mexicas la encontraron abandonada, le pusieron ese nombre y contaban que allí nació el Quinto Sol.",
-   "arquetipo": "quinto-sol"
+   "arquetipo": "quinto-sol",
+   "origen": {
+    "mapa": "mundo",
+    "zonas": [
+     "mesoamerica"
+    ]
+   }
   },
   {
    "id": "OC-048",
@@ -1268,7 +1378,13 @@
    "zona": "Japón",
    "frase": "El volcán más alto de Japón.",
    "dato": "Volcán de 3.776 metros, símbolo de Japón y retratado por pintores y poetas durante siglos. Es Patrimonio de la Humanidad.",
-   "arquetipo": "yokai"
+   "arquetipo": "yokai",
+   "origen": {
+    "mapa": "mundo",
+    "zonas": [
+     "japon"
+    ]
+   }
   },
   {
    "id": "OC-049",
@@ -1284,7 +1400,13 @@
    "zona": "China",
    "frase": "El hogar de los inmortales.",
    "dato": "En los mitos chinos, en estas montañas vivía la Reina Madre del Oeste, que cuidaba un jardín de duraznos de la inmortalidad.",
-   "arquetipo": "jade"
+   "arquetipo": "jade",
+   "origen": {
+    "mapa": "mundo",
+    "zonas": [
+     "china"
+    ]
+   }
   }
  ]
 }

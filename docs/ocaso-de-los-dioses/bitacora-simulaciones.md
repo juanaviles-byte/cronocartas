@@ -155,3 +155,36 @@ Hoy el juego no ofrece panteón contra panteón fuera de los Duelos. Si algún d
     - Fundación de ciudades: además de buscar, el activo recupera 20.
   - **Resultado** (2000 partidas): 43 % → 50 %. «La Colonia» sube de 54 % a 57 %, y «Norte y Sur» queda en 52 %.
 - **Test:** `sintonia.test.js` leía el primer número del texto como lo que cura. Fallaba con cartas que buscan y curan a la vez. Ahora busca el número del efecto en el texto.
+
+## 10. Ventaja de quien parte en «El Trueno contra el Rayo» (25 de noviembre)
+
+Se probó si alguna carta, por sí sola, causa la ventaja. Con 1000 partidas por prueba:
+
+| Prueba | Historiador | Erudito |
+|---|---|---|
+| Hoy | 58 % | 64 % |
+| +10 de resistencia a Olimpo y Asgard | 56 % | 66 % |
+| Sin habilidades (Atenea, Loki, Heimdall) | — | 64 % |
+| Asgard con más luz o más sombra | 59 % | 61–64 % |
+| La Odisea también trae el día | 58 % | 63 % |
+| Sin ciclo de día y noche | — | 58 % |
+| Otro paquete de apoyo para Asgard (San Nicolás, Hildegarda, Diwali) | 54 % | 56 % |
+
+**Lectura:**
+- La ventaja no viene de una carta. Viene de que los dos mazos son espejos, con las mismas resistencias, los mismos costos y los mismos aspectos.
+- En un espejo, quien derriba primero gana el 71 % de las veces, y quien parte derriba primero el 70 %.
+- El ciclo suma unos 5 puntos con la tablet Erudita.
+- Cambiar el paquete de apoyo de Asgard baja la ventaja a 54–56 %. Pero desequilibra el duelo: Olimpo queda en 39–45 %, y para compensarlo habría que reforzar a Olimpo.
+
+**Minijuego de geografía en el modo libre:** los mazos completos quedan más parejos:
+
+| Mazo | Antes | Ahora |
+|---|---|---|
+| 5° | 50 % | 47 % |
+| 6° | 59 % | 54 % |
+| 7° | 48 % | 44 % |
+| 8° | 55 % | 51 % |
+| Fin del Mundo | 46 % | 52 % |
+| Ocaso | 42 % | 51 % |
+
+La distancia entre el mazo más fuerte y el más débil baja de 17 a 10 puntos.

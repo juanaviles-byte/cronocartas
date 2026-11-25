@@ -23,6 +23,7 @@ export function elegirJugada(estado, jugador, { nivel = 'historiador' } = {}) {
     }
   }
   if (js[0].tipo === 'ubicar') return ubicarBien(estado.jugadores[jugador]);
+  if (js[0].tipo === 'situar') { const p = estado.jugadores[jugador].porSituar; return { tipo: 'situar', opcion: Math.max(0, p.opciones.findIndex(o => p.correctas.includes(o))) }; }
   if (nivel === 'erudito' && estado.fase === 'turno') return erudito(estado, jugador, js);
   return historiador(estado, jugador, js);
 }
